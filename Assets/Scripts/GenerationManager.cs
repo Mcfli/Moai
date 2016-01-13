@@ -41,10 +41,21 @@ public class GenerationManager : MonoBehaviour {
                 Vector2 this_chunk = new Vector2(x, y);
                 if (!loaded_chunks.Contains(this_chunk))
                 {
-                    // generate_chunk(x,y);
+                    generateChunk(x,y);
                     loaded_chunks.Add(this_chunk);
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// STUB
+    /// Generates a chunk from (noise function), using CreatePlane
+    /// </summary>
+    /// <param name="chunk_x"></param>
+    /// <param name="chunk_y"></param>
+    void generateChunk(int chunk_x, int chunk_y)
+    {
+        // Implement here
     }
 }
