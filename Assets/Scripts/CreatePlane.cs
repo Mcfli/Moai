@@ -15,8 +15,7 @@ public class CreatePlane : MonoBehaviour
         tex.Apply();
         renderer.material.mainTexture = tex;
         renderer.material.color = Color.green;
-        BoxCollider bc = (BoxCollider)plane.AddComponent(typeof(BoxCollider));
-        bc.center = Vector3.zero;
+		MeshCollider mc = (MeshCollider)plane.AddComponent(typeof(MeshCollider));
     }
 
     Mesh CreateMesh(float width, float height)
@@ -24,16 +23,17 @@ public class CreatePlane : MonoBehaviour
         Mesh m = new Mesh();
         m.name = "ScriptedMesh";
         m.vertices = new Vector3[] {
-         new Vector3(-width, 0.01f, -height),
-         new Vector3(width, 0.01f, -height),
-         new Vector3(width, 0.01f, height),
-         new Vector3(-width, 0.01f, height)
+       		new Vector3(-width, 0.01f, -height),
+			new Vector3(-width, 1.0f, -height/2),
+         	new Vector3(width, 0.01f, -height),
+         	new Vector3(width, 0.01f, height),
+        	new Vector3(-width, 0.01f, height)
      };
         m.uv = new Vector2[] {
-         new Vector2 (0, 0),
-         new Vector2 (0, 1),
-         new Vector2(1, 1),
-         new Vector2 (1, 0)
+         	new Vector2 (0, 0),
+         	new Vector2 (0, 1),
+         	new Vector2(1, 1),
+         	new Vector2 (1, 0)
      };
         m.triangles = new int[] { 0, 1, 2, 0, 2, 3 };
         m.RecalculateNormals();
