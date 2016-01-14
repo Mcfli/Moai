@@ -20,7 +20,7 @@ public class Grid : MonoBehaviour {
         Vector2[] uv = new Vector2[vertices.Length];
 		for (int i = 0, y = 0; y <= ySize; y++) {
 			for (int x = 0; x <= xSize; x++, i++) {
-				vertices[i] = new Vector3(x, 0, y);
+				vertices[i] = new Vector3(x, Random.value, y);
                 uv[i] = new Vector2((float)x / xSize, (float)y / ySize);
 			}
 		}
@@ -37,17 +37,21 @@ public class Grid : MonoBehaviour {
 			}
 		}
 		mesh.triangles = triangles;
-        mesh.RecalculateNormals();
+        ReCalcTriangles();
+        MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
 	}
 
-    private void OnDrawGizmos()
-    {
-        if (vertices == null) {
-            return;
+    private void ReCalcTriangles() {
+        Vector3[] oldVerts = mesh.vertices;
+        int[] triangles = mesh.triangles;
+        Vector3[] vertices = new Vector3[triangles.Length];
+        for (int i = 0; i < triangles.Length; i++){
+            vertices[i] = oldVerts[triangles[i]];
+            triangles[i] = i;
         }
-        Gizmos.color = Color.black;
-        for (int i = 0; i < vertices.Length; i++) {
-            Gizmos.DrawSphere(vertices[i],0.1f);
-        }
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
     }
 }
