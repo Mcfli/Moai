@@ -11,7 +11,7 @@ public class GenerationManager : MonoBehaviour {
     public GameObject player;
     public Grid chunkGen;
 
-    Vector2 cur_chunk;
+    public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     
 	void Awake () {
@@ -59,7 +59,7 @@ public class GenerationManager : MonoBehaviour {
 
     void unloadChunks()
     {
-        for (int i = 0; i < loaded_chunks.Count; i++)
+        for (int i = loaded_chunks.Count-1; i >= 0; i--)
         {
             Vector2 this_chunk = loaded_chunks[i];
             if (Mathf.Abs(this_chunk.x - cur_chunk.x) > chunk_load_dist ||
@@ -68,6 +68,7 @@ public class GenerationManager : MonoBehaviour {
                 string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
                 GameObject chunk = GameObject.Find(chunk_name);
                 Destroy(chunk);
+                loaded_chunks.RemoveAt(i);
             }
         }
     }
