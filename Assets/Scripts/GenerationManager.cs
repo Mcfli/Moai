@@ -4,20 +4,28 @@ using System.Collections.Generic;
 
 public class GenerationManager : MonoBehaviour {
 
-    public float chunk_size=10;
+    public float chunk_size = 10;
+    public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
-    public GameObject player;
 
-    Vector2 cur_chunk;
+    public GameObject player;
+    public Grid chunkGen;
+
+    public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     
 	void Awake () {
-        player = GameObject.FindGameObjectWithTag("player");
-	}
+        player = GameObject.FindGameObjectWithTag("Player");
+        chunkGen = gameObject.GetComponent<Grid>();
+        chunkGen.chunk_size = chunk_size;
+        chunkGen.chunk_resolution = chunk_resolution;
+        cur_chunk = new Vector2(-1, -1);
+        loaded_chunks = new List<Vector2>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
+        checkPosition();
 	}
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
@@ -28,6 +36,7 @@ public class GenerationManager : MonoBehaviour {
         if(cur_chunk != player_chunk)
         {
             cur_chunk = player_chunk;
+            unloadChunks();
             loadChunks();
         }
     }
@@ -48,6 +57,22 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
+    void unloadChunks()
+    {
+        for (int i = loaded_chunks.Count-1; i >= 0; i--)
+        {
+            Vector2 this_chunk = loaded_chunks[i];
+            if (Mathf.Abs(this_chunk.x - cur_chunk.x) > chunk_load_dist ||
+                Mathf.Abs(this_chunk.y - cur_chunk.y) > chunk_load_dist)
+            {
+                string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
+                GameObject chunk = GameObject.Find(chunk_name);
+                Destroy(chunk);
+                loaded_chunks.RemoveAt(i);
+            }
+        }
+    }
+
     /// <summary>
     /// STUB
     /// Generates a chunk from (noise function), using CreatePlane
@@ -57,5 +82,6 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
+        chunkGen.generate(chunk_x, chunk_y);
     }
 }
