@@ -82,6 +82,6 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y);
+        chunkGen.generate(chunk_x, chunk_y,10);
     }
 }

@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk_size: 10
   chunk_resolution: 10
-  chunk_load_dist: 1
+  chunk_load_dist: 5
   player: {fileID: 0}
   chunkGen: {fileID: 0}
   cur_chunk: {x: 0, y: 0}
@@ -253,18 +253,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: Wait
+  buttonName: 
   normalRotateDegreesPerSecond:
-    value: {x: 0.3, y: 0, z: 0}
+    value: {x: 0, y: 0, z: 0}
     space: 1
   pressedRotateDegreesPerSecond:
-    value: {x: 180, y: 0, z: 0}
+    value: {x: 0, y: 0, z: 0}
     space: 1
   moveUnitsPerSecond:
     value: {x: 0, y: 0, z: 0}
     space: 1
   ignoreTimescale: 0
-  maxIntensity: 1
+  maxIntensity: 0
 --- !u!1001 &1367203305
 Prefab:
   m_ObjectHideFlags: 0
@@ -359,18 +359,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: Wait
+  buttonName: 
   normalRotateDegreesPerSecond:
-    value: {x: 0.3, y: 0, z: 0}
+    value: {x: 0, y: 0, z: 0}
     space: 1
   pressedRotateDegreesPerSecond:
-    value: {x: 180, y: 0, z: 0}
+    value: {x: 0, y: 0, z: 0}
     space: 1
   moveUnitsPerSecond:
     value: {x: 0, y: 0, z: 0}
     space: 1
   ignoreTimescale: 0
-  maxIntensity: 0.25
+  maxIntensity: 0
 --- !u!108 &1694056957
 Light:
   m_ObjectHideFlags: 0

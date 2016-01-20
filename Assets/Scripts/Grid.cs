@@ -11,7 +11,7 @@ public class Grid : MonoBehaviour {
 	private void Awake () {
 	}
 
-	public void generate (int chunk_x,int chunk_y) {
+	public void generate (int chunk_x,int chunk_y, float amplitude) {
         GameObject chunk = new GameObject();
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
@@ -29,11 +29,11 @@ public class Grid : MonoBehaviour {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
                 float x = ix * chunk_size/(chunk_resolution-1);
                 float y = iy * chunk_size / (chunk_resolution-1);
-                Vector2 xypos = new Vector2(chunk.transform.position.x+x, chunk.transform.position.z+y);
-
-                Random.seed = xypos.GetHashCode();
-                vertices[iy*chunk_resolution+ix] = new Vector3(x, Random.value, y);
-			}
+                float xpos = chunk.transform.position.x + x;
+                float ypos = chunk.transform.position.z + y;
+                //vertices[iy*chunk_resolution+ix] = new Vector3(x, Random.value, y);
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude*NoiseGen.genPerlin(xpos,ypos), y);
+            }
 		}
 		mf.mesh.vertices = vertices;
 
