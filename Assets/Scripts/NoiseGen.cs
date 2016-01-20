@@ -5,7 +5,7 @@ public class NoiseGen : MonoBehaviour {
 
     public static int octaves = 2;
     public static float persistence = 0.5f;
-    public static float smoothness = 0.05f;
+    public static float smoothness = 0.02f;
 
     // Cubic interpolation
 
