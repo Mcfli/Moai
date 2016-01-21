@@ -7,10 +7,6 @@ public class GenerationManager : MonoBehaviour {
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
-    public float amplitude = 20.0f;
-    public int octaves = 2;
-    public float persistence = 0.5f;
-    public float smoothness = 0.02f;
 
     public GameObject player;
     public Grid chunkGen;
@@ -25,9 +21,6 @@ public class GenerationManager : MonoBehaviour {
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
-        NoiseGen.octaves = octaves;
-        NoiseGen.persistence = persistence;
-        NoiseGen.smoothness = smoothness;
     }
 	
 	// Update is called once per frame
@@ -89,6 +82,6 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y,amplitude);
+        chunkGen.generate(chunk_x, chunk_y,10);
     }
 }
