@@ -116,12 +116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk_size: 100
-  chunk_resolution: 50
-  chunk_load_dist: 3
-  amplitude: 80
+  chunk_resolution: 10
+  chunk_load_dist: 5
+  amplitude: 10
   octaves: 1
-  persistence: 0.25
-  smoothness: 200
+  persistence: 0.5
+  smoothness: 0.05
   player: {fileID: 0}
   chunkGen: {fileID: 0}
   cur_chunk: {x: 0, y: 0}

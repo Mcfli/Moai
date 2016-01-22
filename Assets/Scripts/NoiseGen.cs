@@ -58,8 +58,8 @@ public class NoiseGen : MonoBehaviour {
     // Generate a smoothed Perlin noise value at (x, y) 
     public static float genPerlin(float x, float y)
     {
-        float adjusted_x = x / smoothness;
-        float adjusted_y = y / smoothness;
+        float adjusted_x = x * smoothness;
+        float adjusted_y = y * smoothness;
         float total = 0;
 
         for(int i=0;i< octaves; i++)
@@ -78,20 +78,11 @@ public class NoiseGen : MonoBehaviour {
     // Generates a vector for a grid node at x,y
     private static Vector2 get2DNodeVector(int x, int y)
     {
-        //Vector2 grid_node = new Vector2(x, y);
-        int seed = hash(x, y);
-        //Debug.Log(seed);
-        UnityRandom urand = new UnityRandom(seed);
+        Vector2 grid_node = new Vector2(x, y);
+        int seed = grid_node.GetHashCode();
+        Random.seed = seed;
 
-        return urand.PointInASquare();
-    }
-
-    // Generates an int from an x and a y value
-    private static int hash(int x,int y)
-    {
-        int total = x << 16 % 3 + y % 5;
-
-        return total;
+        return new Vector2(2*Random.value - 1,2*Random.value - 1);
     }
 
 }
