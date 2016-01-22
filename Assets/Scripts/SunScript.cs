@@ -5,11 +5,12 @@ namespace UnityStandardAssets.Utility
 {
     public class SunScript : MonoBehaviour
     {
+        public string buttonName;
+        public Vector3andSpace normalRotateDegreesPerSecond;
+        public Vector3andSpace pressedRotateDegreesPerSecond;
         public Vector3andSpace moveUnitsPerSecond;
-        public Vector3andSpace rotateDegreesPerSecond;
-        public Vector3andSpace newRotateDegreesPerSecond;
-        public string button;
         public bool ignoreTimescale;
+        public float maxIntensity;
         private float m_LastRealTime;
         private bool speed;
         private Light light;
@@ -32,14 +33,14 @@ namespace UnityStandardAssets.Utility
                 m_LastRealTime = Time.realtimeSinceStartup;
             }
             transform.Translate(moveUnitsPerSecond.value * deltaTime, moveUnitsPerSecond.space);
-            if (speed) transform.Rotate(rotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
-            else transform.Rotate(newRotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
+            if (speed) transform.Rotate(pressedRotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
+            else transform.Rotate(normalRotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
 
-            if (Input.GetButton(button)) speed = true;
+            if (Input.GetButton(buttonName)) speed = true;
             else speed = false;
 
             //light.intensity = ((transform.eulerAngles.x+90)%180)/180;
-            if (transform.eulerAngles.x < 180) light.intensity = -Math.Abs(transform.eulerAngles.x - 90) / 90 + 1;
+            if (transform.eulerAngles.x < 180) light.intensity = (-Math.Abs(transform.eulerAngles.x - 90) / 90 + 1) * maxIntensity;
             else light.intensity = 0;
         }
 
