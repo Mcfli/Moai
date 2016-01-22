@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk_size: 100
-  chunk_resolution: 50
+  chunk_resolution: 4
   chunk_load_dist: 3
   amplitude: 80
   octaves: 1
@@ -216,7 +216,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -257,18 +257,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: 
+  buttonName: Wait
   normalRotateDegreesPerSecond:
-    value: {x: 0, y: 0, z: 0}
+    value: {x: 0.3, y: 0, z: 0}
     space: 1
   pressedRotateDegreesPerSecond:
-    value: {x: 0, y: 0, z: 0}
+    value: {x: 180, y: 0, z: 0}
     space: 1
   moveUnitsPerSecond:
     value: {x: 0, y: 0, z: 0}
     space: 1
   ignoreTimescale: 0
-  maxIntensity: 0
+  maxIntensity: 1
 --- !u!1001 &1367203305
 Prefab:
   m_ObjectHideFlags: 0
@@ -314,11 +314,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_WalkSpeed
-      value: 2
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RunSpeed
-      value: 4
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_JumpSpeed
@@ -331,6 +331,10 @@ Prefab:
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_MouseLook.YSensitivity
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_GravityMultiplier
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -363,18 +367,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: 
+  buttonName: Wait
   normalRotateDegreesPerSecond:
-    value: {x: 0, y: 0, z: 0}
+    value: {x: 0.3, y: 0, z: 0}
     space: 1
   pressedRotateDegreesPerSecond:
-    value: {x: 0, y: 0, z: 0}
+    value: {x: 180, y: 0, z: 0}
     space: 1
   moveUnitsPerSecond:
     value: {x: 0, y: 0, z: 0}
     space: 1
   ignoreTimescale: 0
-  maxIntensity: 0
+  maxIntensity: 0.5
 --- !u!108 &1694056957
 Light:
   m_ObjectHideFlags: 0
@@ -390,7 +394,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
