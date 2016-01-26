@@ -7,8 +7,9 @@ public class Grid : MonoBehaviour {
     public int chunk_resolution = 10;     // The number of vertices on one side if the chunk
     public Material landMaterial;
 	private Vector3[] vertices;
+    
 
-	private void Awake () {
+    private void Awake () {
 	}
 
 	public void generate (int chunk_x,int chunk_y, float amplitude) {
@@ -21,20 +22,26 @@ public class Grid : MonoBehaviour {
 		mf.mesh.name = "chunk (" + chunk_x+","+chunk_y+")";
 
         Vector3 pos = new Vector3(chunk_x * chunk_size, 0, chunk_y * chunk_size);
+
         chunk.transform.position = pos;
         
         // Generate chunk_resolution^2 vertices
 		vertices = new Vector3[(chunk_resolution*chunk_resolution)];
+        
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
                 float x = ix * chunk_size/(chunk_resolution-1);
                 float y = iy * chunk_size / (chunk_resolution-1);
                 float xpos = chunk.transform.position.x + x;
                 float ypos = chunk.transform.position.z + y;
-                //vertices[iy*chunk_resolution+ix] = new Vector3(x, Random.value, y);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude*NoiseGen.genPerlin(xpos,ypos), y);
+
+                // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos), y);
+
             }
 		}
+
+
 		mf.mesh.vertices = vertices;
 
         // Generate triangles using these vertices
@@ -69,6 +76,19 @@ public class Grid : MonoBehaviour {
         }
 		mf.mesh.triangles = triangles;
         ReCalcTriangles(mf.mesh);
+
+        // Calculate vertex colors
+
+        Color[] colors = new Color[mf.mesh.vertices.Length];
+        for (int c = 0; c < mf.mesh.vertices.Length; c++)
+        {
+            float xpos = chunk.transform.position.x + mf.mesh.vertices[c].x;
+            float ypos = chunk.transform.position.z + mf.mesh.vertices[c].z;
+
+            // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
+            colors[c] = new Color(xpos / 1000, mf.mesh.vertices[c].y / 10, ypos / 1000);
+        }
+        mf.mesh.colors = colors;
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
 	}
 
@@ -76,12 +96,17 @@ public class Grid : MonoBehaviour {
         Vector3[] oldVerts = mesh.vertices;
         int[] triangles = mesh.triangles;
         Vector3[] vertices = new Vector3[triangles.Length];
+
+
         for (int i = 0; i < triangles.Length; i++){
             vertices[i] = oldVerts[triangles[i]];
+            
             triangles[i] = i;
+            
         }
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
     }
