@@ -82,13 +82,19 @@ public class Grid : MonoBehaviour {
         Color[] colors = new Color[mf.mesh.vertices.Length];
         for (int c = 0; c < mf.mesh.triangles.Length; c+=3)
         {
-            float xpos = chunk.transform.position.x + mf.mesh.vertices[c].x;
-            float ypos = chunk.transform.position.z + mf.mesh.vertices[c].z;
+            float height = (mf.mesh.vertices[c].y+ mf.mesh.vertices[c+1].y+ mf.mesh.vertices[c+2].y)/3;
 
             // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-            colors[c] = new Color(xpos / 1000, 0.25f, ypos / 1000);
-            colors[c+1] = new Color(xpos / 1000, 0.25f, ypos / 1000);
-            colors[c+2] = new Color(xpos / 1000, 0.25f, ypos / 1000);
+            Color color;
+            if (height > 80)
+                color = new Color(0.9f, 0.9f, 0.9f);
+            else if (height > -150)
+                color = new Color(0.1f,0.4f,0.2f);
+            else
+                color = new Color(0.7f, 0.7f, 0.3f);
+            colors[c] = color;
+            colors[c+1] = color;
+            colors[c+2] = color;
         }
         mf.mesh.colors = colors;
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
