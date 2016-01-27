@@ -80,13 +80,15 @@ public class Grid : MonoBehaviour {
         // Calculate vertex colors
 
         Color[] colors = new Color[mf.mesh.vertices.Length];
-        for (int c = 0; c < mf.mesh.vertices.Length; c++)
+        for (int c = 0; c < mf.mesh.triangles.Length; c+=3)
         {
             float xpos = chunk.transform.position.x + mf.mesh.vertices[c].x;
             float ypos = chunk.transform.position.z + mf.mesh.vertices[c].z;
 
             // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-            colors[c] = new Color(xpos / 1000, mf.mesh.vertices[c].y / 10, ypos / 1000);
+            colors[c] = new Color(xpos / 1000, 0.25f, ypos / 1000);
+            colors[c+1] = new Color(xpos / 1000, 0.25f, ypos / 1000);
+            colors[c+2] = new Color(xpos / 1000, 0.25f, ypos / 1000);
         }
         mf.mesh.colors = colors;
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
