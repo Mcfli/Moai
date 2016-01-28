@@ -35,6 +35,7 @@ public class GenerationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         checkPosition();
+        if (Input.GetButton("Wait")) updateChunks();
     }
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
@@ -92,6 +93,30 @@ public class GenerationManager : MonoBehaviour {
     {
         // Implement here
         chunkGen.generate(chunk_x, chunk_y,time,amplitude);
+    }
+
+    void updateChunks()
+    {
+        time += 0.05f;
+        for (int i = loaded_chunks.Count - 1; i >= 0; i--)
+        {
+            Vector2 this_chunk = loaded_chunks[i];
+            string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
+            GameObject chunk = GameObject.Find(chunk_name);
+
+            Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+            for(int j = 0; j < verts.Length; j++)
+            {
+                float x = verts[j].x;
+                float y = verts[j].z;
+                float xpos = chunk.transform.position.x + x;
+                float ypos = chunk.transform.position.z + y;
+
+                verts[j] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos, time), y);
+            }
+            chunk.GetComponent<MeshFilter>().mesh.vertices = verts;
+        }
+
     }
 
 }
