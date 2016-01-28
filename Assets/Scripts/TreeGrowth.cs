@@ -4,7 +4,6 @@ using System.Collections;
 public class TreeGrowth : MonoBehaviour {
 
 	public string buttonName;
-	public float rate;
     public float targetScale;
     public float growSpeed;
     private Vector3 v3Scale;
