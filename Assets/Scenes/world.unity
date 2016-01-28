@@ -364,8 +364,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonName: Wait
   rate: 1e-40
-  targetScale: 10.25
-  growSpeed: 0.1
+  targetScale: 10
+  growSpeed: 0.01
 --- !u!1 &1694056955
 GameObject:
   m_ObjectHideFlags: 0
