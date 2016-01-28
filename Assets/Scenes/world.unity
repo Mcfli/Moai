@@ -115,13 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9847968ac6eb35c4199fb75827fc3094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunk_size: 200
-  chunk_resolution: 4
-  chunk_load_dist: 3
-  amplitude: 160
+  chunk_size: 500
+  chunk_resolution: 3
+  chunk_load_dist: 4
+  amplitude: 2000
   octaves: 1
-  persistence: 0.125
-  smoothness: 200
+  persistence: 0.1
+  smoothness: 1000
   player: {fileID: 0}
   chunkGen: {fileID: 0}
   cur_chunk: {x: 0, y: 0}
@@ -343,6 +343,10 @@ Prefab:
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Center.y
       value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: far clip plane
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}

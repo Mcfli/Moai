@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GenerationManager : MonoBehaviour {
 
+    public float time = 0.0f;
+
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
@@ -33,7 +35,7 @@ public class GenerationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         checkPosition();
-	}
+    }
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
     void checkPosition () {
@@ -89,6 +91,7 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y,amplitude);
+        chunkGen.generate(chunk_x, chunk_y,time,amplitude);
     }
+
 }
