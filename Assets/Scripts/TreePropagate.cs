@@ -20,23 +20,13 @@ public class TreePropagate : MonoBehaviour {
         lastSpawned = Time.time;
         transform.localScale = new Vector3(1, 1, 1);
         RaycastHit hit;
-        Ray rayDown = new Ray(transform.position, Vector3.down);
-        Ray rayUp = new Ray(transform.position, Vector3.up);
-        LayerMask trees = ~(1 << 8);
-        if (Physics.Raycast(rayDown, out hit))
+        Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-            if (hit.collider != null)
             {
                 transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-            }
-        }
-        else if (Physics.Raycast(rayUp, out hit, Mathf.Infinity, trees))
-        {
-            if (hit.collider != null)
-            {
-                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-                Debug.Log("Success");
-                Debug.DrawRay(rayUp.origin,rayUp.direction,Color.white,100.0f);
             }
         }
         

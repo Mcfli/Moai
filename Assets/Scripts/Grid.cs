@@ -14,6 +14,7 @@ public class Grid : MonoBehaviour {
 
 	public void generate (int chunk_x,int chunk_y, float amplitude) {
         GameObject chunk = new GameObject();
+        chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
         mr.material = landMaterial;
