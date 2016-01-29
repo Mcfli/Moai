@@ -7,6 +7,13 @@ public class NoiseGen : MonoBehaviour {
     public static float persistence = 0.5f;
     public static float smoothness = 0.02f;
 
+    private static UnityRandom urand;
+
+    void Awake()
+    {
+        UnityRandom urand = new UnityRandom();
+    }
+
     // Cubic interpolation
 
     static float cosInterpolate(float a, float b, float x)
@@ -94,18 +101,18 @@ public class NoiseGen : MonoBehaviour {
             total += unsmoothedPerlin(adjusted_x * frequency, adjusted_y * frequency,time*frequency) * amplitude;
         }
 
-
-
         return total;
     }
 
     // Generates a vector for a grid node at x,y,z
     private static Vector2 getNodeVector(int x, int y,int z)
     {
+        Random.seed = hash(x, y, z);
+        return new Vector2(Random.value, Random.value);
         //Vector2 grid_node = new Vector2(x, y);
         int seed = hash(x, y, z);
         //Debug.Log(seed);
-        UnityRandom urand = new UnityRandom(seed);
+        //urand. = (seed);
 
         return urand.PointInASquare();
     }
