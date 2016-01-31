@@ -18,25 +18,29 @@ public class TreeManager : MonoBehaviour {
             List<GameObject> trees_in_chunk = trees[key];
             for (int i = 0; i < trees_in_chunk.Count; i++)
             {
-                Instantiate(trees_in_chunk[i]);
+                //Instantiate(trees_in_chunk[i]);
             }
         }
         
         else
         {
             trees[key] = new List<GameObject>();
+            float step_size = gen_manager.chunk_size / tree_resolution;
 
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
-            for (float i = x*gen_manager.chunk_size+50; i < x * gen_manager.chunk_size + gen_manager.chunk_size; i+= gen_manager.chunk_size/tree_resolution)
+            for (float i = x * gen_manager.chunk_size + 0.5f*step_size; i < x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size)
             {
-                for (float j = y * gen_manager.chunk_size+100; j < y * gen_manager.chunk_size + gen_manager.chunk_size; j += gen_manager.chunk_size / tree_resolution)
+                for (float j = y * gen_manager.chunk_size + 0.5f * step_size; j < y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size)
                 {
-                    
+
                     Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                    
-                    GameObject new_tree = Instantiate(prefab, new Vector3(i + 60*Random.value-30, 0, j + 60 * Random.value - 30), RandomRotation) as GameObject;
+
+                    float xpos = i + step_size * Random.value - 0.5f * step_size;
+                    float zpos = j + step_size * Random.value - 0.5f * step_size;
+
+                    GameObject new_tree = Instantiate(prefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
                     trees[key].Add(new_tree);
                 }     
             }
