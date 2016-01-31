@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NoiseGen : MonoBehaviour {
+public class NoiseGen : MonoBehaviour
+{
 
     public static int octaves = 2;
     public static float persistence = 0.5f;
@@ -25,19 +26,19 @@ public class NoiseGen : MonoBehaviour {
     }
 
     // Computes the dot product of the distance and gradient vectors.
-    static float dotGridGradient(int ix, int iy,int iz, float x, float y, float z)
+    static float dotGridGradient(int ix, int iy, int iz, float x, float y, float z)
     {
         // Compute the distance vector
         float dx = x - (float)ix;
         float dy = y - (float)iy;
         float dz = z - (float)iz;
- 
+
         // Compute the dot-product
-        return (dx* getNodeVector(ix,iy,iz).x + dy * getNodeVector(ix, iy,iz).y + dz * getNodeVector(ix, iy,iz).y);
+        return (dx * getNodeVector(ix, iy, iz).x + dy * getNodeVector(ix, iy, iz).y + dz * getNodeVector(ix, iy, iz).z);
     }
-    
+
     // Generate unsmoothed Perlin noise value at (x, y) 
-    public static float unsmoothedPerlin(float x,float y,float time)
+    public static float unsmoothedPerlin(float x, float y, float time)
     {
         // Determine grid cell coordinates
         int x0 = (x > 0.0 ? (int)x : (int)x - 1);
@@ -58,8 +59,8 @@ public class NoiseGen : MonoBehaviour {
 
         // Front plane in cube 
 
-        n0 = dotGridGradient(x0, y0, t0, x, y,time);
-        n1 = dotGridGradient(x1, y0, t0, x, y,time);
+        n0 = dotGridGradient(x0, y0, t0, x, y, time);
+        n1 = dotGridGradient(x1, y0, t0, x, y, time);
         ix0 = cosInterpolate(n0, n1, sx);
 
         n0 = dotGridGradient(x0, y1, t0, x, y, time);
@@ -93,32 +94,26 @@ public class NoiseGen : MonoBehaviour {
 
         float total = 0;
 
-        for(int i=0;i< octaves; i++)
+        for (int i = 0; i < octaves; i++)
         {
             float frequency = Mathf.Pow(2, i);
             float amplitude = Mathf.Pow(persistence, i);
 
-            total += unsmoothedPerlin(adjusted_x * frequency, adjusted_y * frequency,time*frequency) * amplitude;
+            total += unsmoothedPerlin(adjusted_x * frequency, adjusted_y * frequency, time * frequency) * amplitude;
         }
 
         return total;
     }
 
     // Generates a vector for a grid node at x,y,z
-    private static Vector2 getNodeVector(int x, int y,int z)
+    private static Vector3 getNodeVector(int x, int y, int z)
     {
         Random.seed = hash(x, y, z);
-        return new Vector2(Random.value, Random.value);
-        //Vector2 grid_node = new Vector2(x, y);
-        int seed = hash(x, y, z);
-        //Debug.Log(seed);
-        //urand. = (seed);
-
-        return urand.PointInASquare();
+        return new Vector3(2*Random.value-1, 2*Random.value-1,2 * Random.value - 1);
     }
 
     // Generates an int from an x and a y value
-    private static int hash(int x,int y, int z)
+    private static int hash(int x, int y, int z)
     {
         int total = ((x * 73856093) ^ (y * 19349663) ^ (z * 83492791)) % 263;
 
