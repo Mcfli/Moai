@@ -83,7 +83,7 @@ GameObject:
   - 64: {fileID: 6424564}
   - 114: {fileID: 11461590}
   - 114: {fileID: 11481198}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: tree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,6 +375,7 @@ MonoBehaviour:
   center: {x: 0, y: 0, z: 0}
   radius: 20
   spawnDelay: 5
+  cullRadius: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -389,6 +390,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cullRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LayerToCheck.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: LayerToCheck
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

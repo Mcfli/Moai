@@ -382,6 +382,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11481198, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+      propertyPath: LayertoCheck.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481198, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+      propertyPath: cullRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481198, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481198, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+      propertyPath: LayerToCheck
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
   m_IsPrefabParent: 0
