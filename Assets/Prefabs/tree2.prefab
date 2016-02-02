@@ -10,8 +10,7 @@ GameObject:
   - 4: {fileID: 466120}
   - 33: {fileID: 3347290}
   - 23: {fileID: 2337578}
-  - 64: {fileID: 6476640}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: tree leaf3 layer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,8 +27,7 @@ GameObject:
   - 4: {fileID: 428874}
   - 33: {fileID: 3317208}
   - 23: {fileID: 2339118}
-  - 64: {fileID: 6464382}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: tree trunk layer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,9 +44,8 @@ GameObject:
   - 4: {fileID: 403556}
   - 33: {fileID: 3337480}
   - 23: {fileID: 2320888}
-  - 64: {fileID: 6435202}
-  m_Layer: 8
-  m_Name: tree leaf2 layer4
+  m_Layer: 0
+  m_Name: leaf2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,9 +61,8 @@ GameObject:
   - 4: {fileID: 462044}
   - 33: {fileID: 3315302}
   - 23: {fileID: 2347034}
-  - 64: {fileID: 6410312}
-  m_Layer: 8
-  m_Name: tree leaf1 layer4
+  m_Layer: 0
+  m_Name: leaf1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,10 +76,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447670}
-  - 64: {fileID: 6424564}
   - 114: {fileID: 11461590}
   - 114: {fileID: 11481198}
+<<<<<<< HEAD
   m_Layer: 10
+=======
+  - 65: {fileID: 6525506}
+  m_Layer: 8
+>>>>>>> refs/remotes/origin/Tree_Populater
   m_Name: tree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0314126, y: 0, z: -2.43}
+  m_LocalPosition: {x: 174.4395, y: 736.13165, z: 71.95405}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 462044}
@@ -286,20 +286,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106420}
   m_Mesh: {fileID: 4300004, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
---- !u!64 &6410312
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157924}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
---- !u!64 &6424564
-MeshCollider:
+--- !u!65 &6525506
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -308,44 +296,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 0}
---- !u!64 &6435202
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140684}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300002, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
---- !u!64 &6464382
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123320}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300006, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
---- !u!64 &6476640
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300004, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
+  m_Size: {x: 1, y: 4.41, z: 1}
+  m_Center: {x: 0, y: 2.25, z: 0}
 --- !u!114 &11461590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -374,8 +326,12 @@ MonoBehaviour:
   prefab: {fileID: 447670}
   center: {x: 0, y: 0, z: 0}
   radius: 20
+<<<<<<< HEAD
   spawnDelay: 5
   cullRadius: 10
+=======
+  spawnDelay: 60
+>>>>>>> refs/remotes/origin/Tree_Populater
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -392,6 +348,7 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+<<<<<<< HEAD
       propertyPath: cullRadius
       value: 10
       objectReference: {fileID: 0}
@@ -406,6 +363,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 10
+=======
+      propertyPath: spawnDelay
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
+>>>>>>> refs/remotes/origin/Tree_Populater
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
