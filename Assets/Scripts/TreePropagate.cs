@@ -5,6 +5,7 @@ public class TreePropagate : MonoBehaviour {
 
     public GameObject prefab;
     public Vector3 center;
+    public float max_life = 100;
     public float radius;
     public float spawnDelay;
     public int spawnLimit;
@@ -16,9 +17,11 @@ public class TreePropagate : MonoBehaviour {
     private Vector2 squareVec;
     private int numSpawned;
     UnityRandom rand = new UnityRandom();
+    public float life;
 
     // Use this for initialization
     void Awake () {
+        life = max_life;
         Collider[] hitColiders = Physics.OverlapSphere(center, radius);
         numSpawned = 0;
         lastSpawned = Time.time;
@@ -56,14 +59,27 @@ public class TreePropagate : MonoBehaviour {
         }   
     }
 
-    // If there are too many nearby trees, destroy this one
+    // If there are too many or nearby trees for too long, destroy this one
     void Cull()
     {
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cullRadius, treeMask);
-        if (objectsInRange.Length > 1)
+        if (objectsInRange.Length > cullMaxDensity)
         {
-            done = true;
-            Destroy(gameObject);
+            life -= 0.1f;
+            if(life <= 0)
+            {
+                done = true;
+                Destroy(gameObject);
+            }
+            
+        }
+        else if (life < max_life)
+        {
+            life += 0.01f;
+        }
+        else if (life > max_life)
+        {
+            life = max_life;
         }
     }
 }
