@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 433666}
   - 65: {fileID: 6526572}
-  - 114: {fileID: 11476742}
   - 114: {fileID: 11493888}
   m_Layer: 8
   m_Name: tree1
@@ -294,20 +293,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 4.37, z: 1}
   m_Center: {x: 0, y: 2.22, z: 0}
---- !u!114 &11476742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca54b63d352d24c058fe7a180da024dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonName: Wait
-  targetScale: 10
-  growSpeed: 0.5
 --- !u!114 &11493888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,13 +304,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 110090}
-  center: {x: 0, y: 0, z: 0}
-  radius: 60
-  spawnDelay: 10
-  spawnLimit: 0
-  cullRadius: 30
-  cullMaxDensity: 4
+  seed_object: {fileID: 148458, guid: 4e454d89427b0e643a1d1af75fa2ddf3, type: 2}
+  max_life: 10
+  radius: 90
+  spawn_delay: 5
+  spawn_delay_variance: 2
+  spawn_limit: 3
+  cull_radius: 90
+  cull_max_density: 3
+  target_scale: 10
+  grow_speed: 0.01
+  grow_speed_variance: 0.009
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -343,19 +332,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: growSpeed
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: radius
-      value: 60
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawnDelay
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cullRadius
-      value: 30
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: prefab
@@ -363,7 +352,51 @@ Prefab:
       objectReference: {fileID: 110090}
     - target: {fileID: 0}
       propertyPath: cullMaxDensity
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: seed_object
+      value: 
+      objectReference: {fileID: 148458, guid: 4e454d89427b0e643a1d1af75fa2ddf3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnLimit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: max_life
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawn_delay_variance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: grow_speed_variance
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: target_scale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: grow_speed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawn_delay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawn_limit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cull_radius
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cull_max_density
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
