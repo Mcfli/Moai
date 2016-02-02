@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 433666}
   - 65: {fileID: 6526572}
-  - 114: {fileID: 11493888}
+  - 114: {fileID: 11474674}
   m_Layer: 8
   m_Name: tree1
   m_TagString: Untagged
@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24414825, y: 16.047989, z: 1.4324825}
+  m_LocalPosition: {x: 687.7904, y: 469.02182, z: 166.65666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 461518}
@@ -293,7 +293,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 4.37, z: 1}
   m_Center: {x: 0, y: 2.22, z: 0}
---- !u!114 &11493888
+--- !u!114 &11474674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -306,15 +306,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed_object: {fileID: 148458, guid: 4e454d89427b0e643a1d1af75fa2ddf3, type: 2}
   max_life: 10
-  radius: 90
-  spawn_delay: 5
-  spawn_delay_variance: 2
+  radius: 4
+  spawn_delay: 10
+  spawn_delay_variance: 5
   spawn_limit: 3
-  cull_radius: 90
-  cull_max_density: 3
+  cull_radius: 40
+  cull_max_density: 5
   target_scale: 10
-  grow_speed: 0.01
-  grow_speed_variance: 0.009
+  grow_speed: 0.1
+  grow_speed_variance: 0.09
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -392,11 +392,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
-      value: 90
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_max_density
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

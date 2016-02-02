@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TreePropagate : MonoBehaviour {
+public class Tree : MonoBehaviour {
 
     public GameObject seed_object;
     public float max_life = 100;

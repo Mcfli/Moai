@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 1
+  tree_resolution: 2
   prefab: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
   gen_manager: {fileID: 0}
 --- !u!1 &923083880
