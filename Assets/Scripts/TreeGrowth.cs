@@ -9,8 +9,9 @@ public class TreeGrowth : MonoBehaviour {
     private Vector3 v3Scale;
 
 	private void Update(){
+        Grow();
 		if(Input.GetButton(buttonName)){
-            Grow();
+            //Grow();
 		}
 		else {
 			// do not change

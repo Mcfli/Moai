@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TreeManager : MonoBehaviour {
 
     public int tree_resolution = 2;
-    public Transform prefab;
+    public GameObject prefab;
     public GenerationManager gen_manager;
 
     private Dictionary<Vector2, List<GameObject>> trees;
