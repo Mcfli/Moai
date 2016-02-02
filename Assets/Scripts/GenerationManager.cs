@@ -78,6 +78,7 @@ public class GenerationManager : MonoBehaviour {
                 string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
                 GameObject chunk = GameObject.Find(chunk_name);
                 Destroy(chunk);
+                tree_manager.unloadTrees((int)this_chunk.x, (int)this_chunk.y);
                 loaded_chunks.RemoveAt(i);
             }
         }

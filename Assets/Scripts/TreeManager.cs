@@ -13,7 +13,8 @@ public class TreeManager : MonoBehaviour {
     public void loadTrees(int x, int y)
     {
         Vector2 key = new Vector2(x, y);
-        if (trees.ContainsKey(key))
+        //if (trees.ContainsKey(key))
+        if (false)
         {
             List<GameObject> trees_in_chunk = trees[key];
             for (int i = 0; i < trees_in_chunk.Count; i++)
@@ -44,6 +45,21 @@ public class TreeManager : MonoBehaviour {
                     trees[key].Add(new_tree);
                 }     
             }
+        }
+    }
+
+    public void unloadTrees(int x, int y)
+    {
+        Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size*0.5f,0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
+        Vector3 half_extents = new Vector3(gen_manager.chunk_size,gen_manager.amplitude, gen_manager.chunk_size );
+        LayerMask tree_mask = LayerMask.GetMask("Tree");
+
+        Collider[] colliders = Physics.OverlapBox(center, half_extents,Quaternion.identity,tree_mask);
+
+        for (int i = 0;i < colliders.Length; i++)
+        {
+            GameObject tree = colliders[i].gameObject;
+            Destroy(tree);
         }
     }
 
