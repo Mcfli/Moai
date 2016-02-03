@@ -8,7 +8,18 @@ public class TreeManager : MonoBehaviour {
     public GameObject prefab;
     public GenerationManager gen_manager;
 
-    private Dictionary<Vector2, List<GameObject>> trees;
+    public static void saveTree(Vector2 chunk, GameObject tree)
+    {
+        if(trees[chunk] == null)
+        {
+            trees[chunk] = new List<GameObject>();
+        }
+        trees[chunk].Add(tree);
+    }
+
+    private static Dictionary<Vector2, List<GameObject>> trees;
+
+
 
     public void loadTrees(int x, int y)
     {
