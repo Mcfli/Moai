@@ -15,7 +15,7 @@ public class GenerationManager : MonoBehaviour {
     public float smoothness = 0.02f;
 
     public GameObject player;
-    public Grid chunkGen;
+    public ChunkGenerator chunkGen;
     public TreeManager tree_manager;
 
     public Vector2 cur_chunk;
@@ -24,7 +24,7 @@ public class GenerationManager : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
-        chunkGen = gameObject.GetComponent<Grid>();
+        chunkGen = gameObject.GetComponent<ChunkGenerator>();
         chunkGen.chunk_size = chunk_size;
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);

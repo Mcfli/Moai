@@ -116,9 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9847968ac6eb35c4199fb75827fc3094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
   chunk_size: 200
   chunk_resolution: 6
-  chunk_load_dist: 3
+  chunk_load_dist: 1
   amplitude: 150
   octaves: 1
   persistence: 0.125
@@ -183,8 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fc22e0e963a6940af5482819bf09d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunk_size: 50
-  chunk_resolution: 25
+  chunk_size: 10
+  chunk_resolution: 10
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
 --- !u!114 &188005515
 MonoBehaviour:
