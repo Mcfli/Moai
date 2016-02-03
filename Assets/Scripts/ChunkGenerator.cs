@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class Grid : MonoBehaviour {
+public class ChunkGenerator : MonoBehaviour {
 
     public float chunk_size = 10;           // The size of each chunk in world coordinates
     public int chunk_resolution = 10;     // The number of vertices on one side if the chunk
     public Material landMaterial;
 	private Vector3[] vertices;
+    
 
-	private void Awake () {
+    private void Awake () {
 	}
 
-	public void generate (int chunk_x,int chunk_y) {
+	public void generate (int chunk_x,int chunk_y,float time, float amplitude) {
         GameObject chunk = new GameObject();
+        chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
         mr.material = landMaterial;
@@ -21,20 +23,26 @@ public class Grid : MonoBehaviour {
 		mf.mesh.name = "chunk (" + chunk_x+","+chunk_y+")";
 
         Vector3 pos = new Vector3(chunk_x * chunk_size, 0, chunk_y * chunk_size);
+
         chunk.transform.position = pos;
         
         // Generate chunk_resolution^2 vertices
 		vertices = new Vector3[(chunk_resolution*chunk_resolution)];
+        
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
                 float x = ix * chunk_size/(chunk_resolution-1);
                 float y = iy * chunk_size / (chunk_resolution-1);
-                Vector2 xypos = new Vector2(chunk.transform.position.x+x, chunk.transform.position.z+y);
+                float xpos = chunk.transform.position.x + x;
+                float ypos = chunk.transform.position.z + y;
 
-                Random.seed = xypos.GetHashCode();
-                vertices[iy*chunk_resolution+ix] = new Vector3(x, Random.value, y);
-			}
+                // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos,time), y);
+
+            }
 		}
+
+
 		mf.mesh.vertices = vertices;
 
         // Generate triangles using these vertices
@@ -69,6 +77,27 @@ public class Grid : MonoBehaviour {
         }
 		mf.mesh.triangles = triangles;
         ReCalcTriangles(mf.mesh);
+
+        // Calculate vertex colors
+
+        Color[] colors = new Color[mf.mesh.vertices.Length];
+        for (int c = 0; c < mf.mesh.triangles.Length; c+=3)
+        {
+            float height = (mf.mesh.vertices[c].y+ mf.mesh.vertices[c+1].y+ mf.mesh.vertices[c+2].y)/3;
+
+            // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
+            Color color;
+            if (height > 80)
+                color = new Color(0.9f, 0.9f, 0.9f);
+            else if (height > -150)
+                color = new Color(0.1f,0.4f,0.2f);
+            else
+                color = new Color(0.7f, 0.7f, 0.3f);
+            colors[c] = color;
+            colors[c+1] = color;
+            colors[c+2] = color;
+        }
+        mf.mesh.colors = colors;
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
 	}
 
@@ -76,12 +105,17 @@ public class Grid : MonoBehaviour {
         Vector3[] oldVerts = mesh.vertices;
         int[] triangles = mesh.triangles;
         Vector3[] vertices = new Vector3[triangles.Length];
+
+
         for (int i = 0; i < triangles.Length; i++){
             vertices[i] = oldVerts[triangles[i]];
+            
             triangles[i] = i;
+            
         }
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
     }
