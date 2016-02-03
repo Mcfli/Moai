@@ -7,6 +7,7 @@ public class WeatherManager : MonoBehaviour {
     // Tuning variables
     public float update_time;
     public ParticleSystem[] particle_systems;
+    public GameObject cloud;
 
     // Internal variables
     private List<GameObject> clouds;        // holds all currently loaded clouds
@@ -17,6 +18,7 @@ public class WeatherManager : MonoBehaviour {
     {
         last_updated = Time.time;
         clouds = new List<GameObject>();
+        Globals.cur_weather = "rainy";
     }
 
     // Update is called once per frame
@@ -37,6 +39,8 @@ public class WeatherManager : MonoBehaviour {
         if (clouds.Count<target_clouds && Time.time > last_updated + update_time)
         {
             // Instantiate cloud prefab and add to cloud array
+            Instantiate(cloud);
+            last_updated = Time.time;
         }
     }
 
@@ -48,8 +52,9 @@ public class WeatherManager : MonoBehaviour {
         if (clouds.Count > target_clouds && Time.time > last_updated + update_time)
         {
             GameObject cloud = clouds[0];
-            // cloud.dissipate()
+            cloud.GetComponent<Cloud>().dissipate();
             clouds.RemoveAt(0);
+            last_updated = Time.time;
         }
     }
 
@@ -60,6 +65,7 @@ public class WeatherManager : MonoBehaviour {
         if (clouds.Count < target_clouds && Time.time > last_updated + update_time)
         {
             // Instantiate cloud prefab and add to cloud array
+            last_updated = Time.time;
         }
     }
 }

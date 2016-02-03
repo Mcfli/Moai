@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class Cloud : MonoBehaviour {
     // Access variables
+    public float placement_radius;
+    public float height_variation;
+    public float height_base;
 
     // Tuning variables
     public float max_opacity;
@@ -13,9 +16,15 @@ public class Cloud : MonoBehaviour {
     private float cur_opacity;
     public bool dissipating;
     private Renderer rend;
+    private GameObject player;
+    private Vector3 pos_offset;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        player = GameObject.FindGameObjectWithTag("Player");
+        pos_offset = new Vector3(2*Random.value*placement_radius-placement_radius,
+            height_base+2*Random.value*height_variation-height_variation,
+            2*Random.value*placement_radius - placement_radius);
         cur_opacity = 0.0f;
         dissipating = false;
         rend = GetComponent<Renderer>();
@@ -30,6 +39,7 @@ public class Cloud : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         handleOpacity();
+        moveWithPlayer();
 	}
     
     void handleOpacity()
@@ -57,4 +67,8 @@ public class Cloud : MonoBehaviour {
         }
     }
     
+    void moveWithPlayer()
+    {
+        transform.position = player.transform.position + pos_offset;
+    }
 }
