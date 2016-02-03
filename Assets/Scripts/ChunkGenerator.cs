@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class Grid : MonoBehaviour {
+public class ChunkGenerator : MonoBehaviour {
 
     public float chunk_size = 10;           // The size of each chunk in world coordinates
     public int chunk_resolution = 10;     // The number of vertices on one side if the chunk
