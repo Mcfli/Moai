@@ -16,12 +16,14 @@ public class GenerationManager : MonoBehaviour {
 
     public GameObject player;
     public Grid chunkGen;
+    public TreeManager tree_manager;
 
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     
-	void Awake () {
+	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<Grid>();
         chunkGen.chunk_size = chunk_size;
         chunkGen.chunk_resolution = chunk_resolution;
@@ -61,6 +63,7 @@ public class GenerationManager : MonoBehaviour {
                 if (!loaded_chunks.Contains(this_chunk))
                 {
                     generateChunk(x,y);
+                    tree_manager.loadTrees(x, y);
                     loaded_chunks.Add(this_chunk);
                 }
             }
@@ -78,6 +81,7 @@ public class GenerationManager : MonoBehaviour {
                 string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
                 GameObject chunk = GameObject.Find(chunk_name);
                 Destroy(chunk);
+                tree_manager.unloadTrees((int)this_chunk.x, (int)this_chunk.y);
                 loaded_chunks.RemoveAt(i);
             }
         }
