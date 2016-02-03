@@ -29,7 +29,7 @@ public class NoiseGen : MonoBehaviour {
     }
     
     // Generate unsmoothed Perlin noise value at (x, y) 
-    public static float unsmoothedPerlin(float x,float y)
+    private static float unsmoothedPerlin(float x,float y)
     {
         // Determine grid cell coordinates
         int x0 = (x > 0.0 ? (int)x : (int)x - 1);

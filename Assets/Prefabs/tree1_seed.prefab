@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2376892}
   - 54: {fileID: 5426200}
   - 114: {fileID: 11463352}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree1_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree_object: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
-  cull_radius: 50
-  life_length: 5
+  cull_radius: 30
+  life_length: 30
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -127,17 +127,21 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: life_length
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 9f93f63d068b08c459038c40fce897d8,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148458}
