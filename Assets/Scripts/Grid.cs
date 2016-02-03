@@ -12,7 +12,7 @@ public class Grid : MonoBehaviour {
     private void Awake () {
 	}
 
-	public void generate (int chunk_x,int chunk_y, float amplitude) {
+	public void generate (int chunk_x,int chunk_y,float time, float amplitude) {
         GameObject chunk = new GameObject();
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
@@ -36,7 +36,7 @@ public class Grid : MonoBehaviour {
                 float ypos = chunk.transform.position.z + y;
 
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos), y);
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos,time), y);
 
             }
 		}

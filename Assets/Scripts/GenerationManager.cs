@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class GenerationManager : MonoBehaviour {
 
+    public float time = 0.0f;
+
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
@@ -33,7 +35,8 @@ public class GenerationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         checkPosition();
-	}
+        if (Input.GetButton("Wait")) updateChunks();
+    }
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
     void checkPosition () {
@@ -89,6 +92,52 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y,amplitude);
+        chunkGen.generate(chunk_x, chunk_y,time,amplitude);
     }
+
+    void updateChunks()
+    {
+        time += 0.001f;
+        for (int i = loaded_chunks.Count - 1; i >= 0; i--)
+        {
+            Vector2 this_chunk = loaded_chunks[i];
+            string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
+            GameObject chunk = GameObject.Find(chunk_name);
+
+            Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+            for(int j = 0; j < verts.Length; j++)
+            {
+                float x = verts[j].x;
+                float y = verts[j].z;
+                float xpos = chunk.transform.position.x + x;
+                float ypos = chunk.transform.position.z + y;
+
+                verts[j] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos, time), y);
+            }
+            chunk.GetComponent<MeshFilter>().mesh.vertices = verts;
+            chunk.GetComponent<MeshCollider>().sharedMesh = chunk.GetComponent<MeshFilter>().mesh;
+
+            Color[] colors = new Color[verts.Length];
+            for (int c = 0; c < verts.Length; c += 3)
+            {
+                float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
+
+                // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
+                Color color;
+                if (height > 10)
+                    color = new Color(0.9f, 0.9f, 0.9f);
+                else if (height > -30)
+                    color = new Color(0.1f, 0.4f, 0.2f);
+                else
+                    color = new Color(0.7f, 0.7f, 0.3f);
+                colors[c] = color;
+                colors[c + 1] = color;
+                colors[c + 2] = color;
+            }
+            chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+        }
+        
+
+    }
+
 }
