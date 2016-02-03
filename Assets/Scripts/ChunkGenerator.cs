@@ -5,6 +5,7 @@ public class ChunkGenerator : MonoBehaviour {
 
     public float chunk_size = 10;           // The size of each chunk in world coordinates
     public int chunk_resolution = 10;     // The number of vertices on one side if the chunk
+    public GameObject chunk;
     public Material landMaterial;
 	private Vector3[] vertices;
     
@@ -13,7 +14,7 @@ public class ChunkGenerator : MonoBehaviour {
 	}
 
 	public void generate (int chunk_x,int chunk_y,float time, float amplitude) {
-        GameObject chunk = new GameObject();
+        chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
