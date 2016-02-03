@@ -12,31 +12,23 @@ public class TreeGrowth : MonoBehaviour {
 
 	private void Start(){
 		anim = GetComponent<Animation>();
-	}
-
-	private void Update(){
-		anim ["ArmatureAction"].speed = 0.0F
-
-
-
-
-
-
-
-			;
-		if(Input.GetButton(buttonName)){
-            Grow();
-		}
-		else {
-			// do not change
-		}
-	}
-
-    private void Grow() {
-        //v3Scale = new Vector3(targetScale, targetScale, targetScale);
-        //transform.localScale = Vector3.Lerp(transform.localScale, v3Scale, Time.deltaTime * growSpeed);
 		foreach (AnimationState state in anim) {
 			state.speed = 0.0F;
 		}
-    }
+	}
+
+	private void Update(){
+		if(Input.GetButton(buttonName)){
+			//v3Scale = new Vector3(targetScale, targetScale, targetScale);
+			//transform.localScale = Vector3.Lerp(transform.localScale, v3Scale, Time.deltaTime * growSpeed);
+			foreach (AnimationState state in anim) {
+				state.speed = 1.0F;
+			}
+		}
+		else {
+			foreach (AnimationState state in anim) {
+				state.speed = 0.0F;
+			}
+		}
+	}
 }
