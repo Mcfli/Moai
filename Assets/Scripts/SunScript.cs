@@ -10,6 +10,7 @@ namespace UnityStandardAssets.Utility
         public Vector3andSpace pressedRotateDegreesPerSecond;
         public Vector3andSpace moveUnitsPerSecond;
         public bool ignoreTimescale;
+        public float maxIntensity;
         private float m_LastRealTime;
         private bool speed;
         private Light light;
@@ -39,7 +40,7 @@ namespace UnityStandardAssets.Utility
             else speed = false;
 
             //light.intensity = ((transform.eulerAngles.x+90)%180)/180;
-            if (transform.eulerAngles.x < 180) light.intensity = -Math.Abs(transform.eulerAngles.x - 90) / 90 + 1;
+            if (transform.eulerAngles.x < 180) light.intensity = (-Math.Abs(transform.eulerAngles.x - 90) / 90 + 1) * maxIntensity;
             else light.intensity = 0;
         }
 
