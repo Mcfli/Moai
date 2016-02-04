@@ -22,9 +22,12 @@ public class Cloud : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        pos_offset = new Vector3(2*Random.value*placement_radius-placement_radius,
+        float radial_offset = 2 * Random.value * placement_radius;
+        float angle = 2*Random.value * Mathf.PI;
+
+        pos_offset = new Vector3(radial_offset*Mathf.Cos(angle),
             height_base+2*Random.value*height_variation-height_variation,
-            2*Random.value*placement_radius - placement_radius);
+            radial_offset * Mathf.Sin(angle));
         cur_opacity = 0.0f;
         dissipating = false;
         rend = GetComponent<Renderer>();
