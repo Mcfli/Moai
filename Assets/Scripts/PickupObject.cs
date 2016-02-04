@@ -4,8 +4,8 @@ using UnityEngine;
 namespace UnityStandardAssets.Utility
 {
     public class PickupObject : MonoBehaviour{
-		public string leftHand;
-		public string rightHand;
+		public string leftHand = "LeftHand";
+		public string rightHand = "RightHand";
 		GameObject hand1;
 		float hand1size;
 		GameObject hand2;
