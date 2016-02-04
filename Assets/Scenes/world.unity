@@ -285,8 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonName: Wait
-  targetScale: 0
-  growSpeed: 0
 --- !u!1001 &1367203305
 Prefab:
   m_ObjectHideFlags: 0
