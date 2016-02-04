@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree_object: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
-  cull_radius: 30
-  life_length: 30
+  cull_radius: 2
+  life_length: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -127,11 +127,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: life_length
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
-      value: 30
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Material

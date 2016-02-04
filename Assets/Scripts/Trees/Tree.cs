@@ -15,7 +15,6 @@ public class Tree : MonoBehaviour {
     public float grow_speed;
     public float grow_speed_variance;
 
-
     private LayerMask treeMask;
     private bool done = false;
     private float lastSpawned = 0.0f;
@@ -67,7 +66,7 @@ public class Tree : MonoBehaviour {
                 lastSpawned = Time.time;
                 squareVec = rand.PointInASquare();
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, 0, squareVec.y * radius + transform.position.z), RandomRotation);
+                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, transform.localScale.y, squareVec.y * radius + transform.position.z), RandomRotation);
                 numSpawned++;
                 if (spawn_limit > 0 && numSpawned >= spawn_limit)
                 {
@@ -103,6 +102,6 @@ public class Tree : MonoBehaviour {
     private void Grow()
     {
         Vector3 v3Scale = new Vector3(target_scale, target_scale, target_scale);
-        transform.localScale = Vector3.Lerp(transform.localScale, v3Scale, Time.deltaTime * grow_speed);
+        transform.localScale = Vector3.Lerp(transform.localScale, v3Scale, 0.001f * grow_speed);
     }
 }
