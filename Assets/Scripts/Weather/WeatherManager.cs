@@ -7,12 +7,21 @@ public class WeatherManager : MonoBehaviour {
     // Tuning variables
     public float update_time;
     public ParticleSystem[] particle_systems;
+    // 0 - rain
+    // 1 - snow
+    // 2 - mist
+    // 3 - sand
+    // 4 - ash
+    public ImageSpace[] image_spaces;
+
+
     public GameObject cloud;
 
     // Internal variables
     private List<GameObject> clouds;        // holds all currently loaded clouds
     private int target_clouds;
     private float last_updated;
+    private 
 
     void Awake()
     {
