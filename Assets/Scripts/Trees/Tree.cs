@@ -19,7 +19,6 @@ public class Tree : MonoBehaviour {
     public float age;
     public Quaternion saved_rotation;
 
-
     private LayerMask treeMask;
     private bool done = false;
     private float lastSpawned = 0.0f;
@@ -28,6 +27,7 @@ public class Tree : MonoBehaviour {
     UnityRandom rand = new UnityRandom();
     private float life;
     private Animation anim;
+    private float time_unloaded;
 
     public void saveTransforms()
     {
@@ -51,7 +51,9 @@ public class Tree : MonoBehaviour {
         grow_speed_variance = tree.grow_speed_variance;
         saved_position = tree.saved_position;
         saved_rotation = tree.saved_rotation;
-        age = tree.age;
+        time_unloaded = tree.time_unloaded;
+        Debug.Log(time_unloaded);
+        age = tree.age + (Globals.time) * grow_speed;
         transform.position = tree.saved_position;
         transform.rotation = tree.saved_rotation;
    
@@ -167,6 +169,7 @@ public class Tree : MonoBehaviour {
 
     private void Grow()
     {
+        time_unloaded = Globals.time;
         if (age < 1000)
             age += Globals.time_scale * grow_speed;
         foreach (AnimationState state in anim)

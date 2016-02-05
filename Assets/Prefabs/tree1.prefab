@@ -813,7 +813,7 @@ MonoBehaviour:
   cull_radius: 40
   cull_max_density: 5
   target_scale: 10
-  grow_speed: 0.01
+  grow_speed: 0.0001
   grow_speed_variance: 0
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
@@ -1049,7 +1049,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: grow_speed
-      value: 0.01
+      value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_delay
