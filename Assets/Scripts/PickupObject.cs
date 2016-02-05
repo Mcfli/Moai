@@ -13,7 +13,6 @@ namespace UnityStandardAssets.Utility
 
 		// Use this for initialization
 		void Start () {
-		
 		}
 		
 		GameObject GetMouseHoverObject(float range){
@@ -53,7 +52,6 @@ namespace UnityStandardAssets.Utility
 			hand2 = obj;
 			Physics.IgnoreCollision(hand2.GetComponent<Collider>(), GetComponent<Collider>());
 			hand2size = obj.GetComponent<Renderer>().bounds.size.magnitude;
-			
 		}
 		
 		void DropObject2(){
