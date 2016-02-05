@@ -214,10 +214,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update_time: 5
-  particle_systems: []
+  particle_prefabs:
+  - {fileID: 19887606, guid: 16acd0ab8af54da4cbbc1f2cf3dbab52, type: 2}
+  - {fileID: 19831440, guid: 253d6bd3d5333194daec8a16c1c7dc0f, type: 2}
   image_spaces:
   - {fileID: 11499924, guid: 16f191ccec3e2534c84723e85d1833b9, type: 2}
   - {fileID: 11428982, guid: dfa51224e1e58e04eb3dbeffc610e2ce, type: 2}
+  - {fileID: 11468104, guid: ccfab5984aa14344887e16b41d174687, type: 2}
   cloud: {fileID: 164752, guid: 2c4a968160698e64cb5c494594729c71, type: 2}
 --- !u!1 &838583282 stripped
 GameObject:
@@ -391,7 +394,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 0.5
     m_Bias: 0.05
@@ -432,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rot_speed: 0
+  rot_speed: 1
   maxIntensity: 1
 --- !u!1001 &1367203305
 Prefab:
@@ -540,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rot_speed: 0
+  rot_speed: 1
   maxIntensity: 0.5
 --- !u!108 &1694056957
 Light:
@@ -557,7 +560,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 0.5
     m_Bias: 0.05
