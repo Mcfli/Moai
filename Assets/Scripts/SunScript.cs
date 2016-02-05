@@ -5,18 +5,18 @@ namespace UnityStandardAssets.Utility
 {
     public class SunScript : MonoBehaviour
     {
-        public string buttonName;
-        public Vector3andSpace normalRotateDegreesPerSecond;
-        public Vector3andSpace pressedRotateDegreesPerSecond;
-        public Vector3andSpace moveUnitsPerSecond;
-        public bool ignoreTimescale;
+
+        public float rot_speed;
+
         public float maxIntensity;
         private float m_LastRealTime;
         private bool speed;
         private Light light;
+        private Vector3 rot_vector;
 
         private void Start()
         {
+            rot_vector = new Vector3(rot_speed, 0, 0);
             m_LastRealTime = Time.realtimeSinceStartup;
             speed = false;
             light = GetComponent<Light>();
@@ -26,30 +26,13 @@ namespace UnityStandardAssets.Utility
         // Update is called once per frame
         private void Update()
         {
-            float deltaTime = Time.deltaTime;
-            if (ignoreTimescale)
-            {
-                deltaTime = (Time.realtimeSinceStartup - m_LastRealTime);
-                m_LastRealTime = Time.realtimeSinceStartup;
-            }
-            transform.Translate(moveUnitsPerSecond.value * deltaTime, moveUnitsPerSecond.space);
-            if (speed) transform.Rotate(pressedRotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
-            else transform.Rotate(normalRotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
+            rot_vector = new Vector3(rot_speed*Globals.time_scale, 0, 0);
+            transform.Rotate(rot_vector * Time.deltaTime,Space.Self);
 
-            if (Input.GetButton(buttonName)) speed = true;
-            else speed = false;
-
-            //light.intensity = ((transform.eulerAngles.x+90)%180)/180;
+            // Modulate intensity
             if (transform.eulerAngles.x < 180) light.intensity = (-Math.Abs(transform.eulerAngles.x - 90) / 90 + 1) * maxIntensity;
             else light.intensity = 0;
         }
 
-
-        [Serializable]
-        public class Vector3andSpace
-        {
-            public Vector3 value;
-            public Space space = Space.Self;
-        }
     }
 }

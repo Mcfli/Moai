@@ -29,6 +29,7 @@ public class GenerationManager : MonoBehaviour {
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
+        NoiseGen.init();
         NoiseGen.octaves = octaves;
         NoiseGen.persistence = persistence;
         NoiseGen.smoothness = smoothness;
@@ -37,7 +38,7 @@ public class GenerationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         checkPosition();
-        if (Input.GetButton("Wait")) updateChunks();
+        if(Globals.time_scale > 1.0f) updateChunks();
     }
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
@@ -101,7 +102,6 @@ public class GenerationManager : MonoBehaviour {
 
     void updateChunks()
     {
-        time += 0.001f;
         for (int i = loaded_chunks.Count - 1; i >= 0; i--)
         {
             Vector2 this_chunk = loaded_chunks[i];
@@ -116,7 +116,7 @@ public class GenerationManager : MonoBehaviour {
                 float xpos = chunk.transform.position.x + x;
                 float ypos = chunk.transform.position.z + y;
 
-                verts[j] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos, time), y);
+                verts[j] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos, Globals.time), y);
             }
             chunk.GetComponent<MeshFilter>().mesh.vertices = verts;
             chunk.GetComponent<MeshCollider>().sharedMesh = chunk.GetComponent<MeshFilter>().mesh;
