@@ -61,6 +61,7 @@ public class Tree : MonoBehaviour {
         life = tree.life;
 
 
+
         
         foreach (AnimationState state in anim)
         {
@@ -101,7 +102,8 @@ public class Tree : MonoBehaviour {
         stickToGround();
         Cull();
         Grow();
-        Propogate();
+        if(age >= 0.03)
+            Propogate();
     }
 
     private void stickToGround()
@@ -175,8 +177,8 @@ public class Tree : MonoBehaviour {
         {
             //state.speed = Globals.time_scale*grow_speed;
             state.time = age;
-
         }
-        
+        //sGetComponent<Collider>().transform.localScale += new Vector3(Globals.time_scale * grow_speed, Globals.time_scale * grow_speed, Globals.time_scale * grow_speed);
+
     }
 }

@@ -15,7 +15,7 @@ public class Seed : MonoBehaviour
     void Start()
     {
         spawned_time = Globals.time;
-        tree_mask = LayerMask.GetMask("Tree", "Seed");
+        tree_mask = LayerMask.GetMask("Tree");
     }
 
     // Update is called once per frame

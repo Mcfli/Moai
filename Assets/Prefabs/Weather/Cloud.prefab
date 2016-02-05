@@ -78,7 +78,7 @@ MonoBehaviour:
   height_variation: 50
   height_base: 250
   max_opacity: 0.5
-  fade_speed: 0.1
+  fade_speed: 0.01
   dissipating: 0
 --- !u!1001 &100100000
 Prefab:
@@ -117,7 +117,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: fade_speed
-      value: 0.1
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

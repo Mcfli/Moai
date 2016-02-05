@@ -806,10 +806,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed_object: {fileID: 148458, guid: 4e454d89427b0e643a1d1af75fa2ddf3, type: 2}
   max_life: 10
-  radius: 4
-  spawn_delay: 2
-  spawn_delay_variance: 1
-  spawn_limit: 0
+  radius: 10
+  spawn_delay: 60
+  spawn_delay_variance: 30
+  spawn_limit: 3
   cull_radius: 40
   cull_max_density: 5
   target_scale: 10
@@ -1005,7 +1005,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: radius
-      value: 90
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawnDelay
@@ -1037,7 +1037,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_delay_variance
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: grow_speed_variance
@@ -1053,11 +1053,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_delay
-      value: 2
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_limit
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
