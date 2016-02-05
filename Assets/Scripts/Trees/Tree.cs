@@ -52,9 +52,28 @@ public class Tree : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        stickToGround();
         Cull();
         Grow();
         Propogate();
+    }
+
+    private void stickToGround()
+    {
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+        {
+            {
+                transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Creates seeds in a radius around this tree if it's ready to
@@ -103,6 +122,10 @@ public class Tree : MonoBehaviour {
     private void Grow()
     {
         Vector3 v3Scale = new Vector3(target_scale, target_scale, target_scale);
-        transform.localScale = Vector3.Lerp(transform.localScale, v3Scale, Time.deltaTime * grow_speed);
+
+        if (transform.localScale.x < target_scale)
+            transform.localScale += v3Scale * grow_speed * Globals.time_scale;
+        else if (transform.localScale.x > target_scale)
+            transform.localScale = v3Scale;
     }
 }
