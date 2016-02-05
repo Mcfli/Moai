@@ -15,6 +15,10 @@ public class Tree : MonoBehaviour {
     public float grow_speed;
     public float grow_speed_variance;
 
+    public Vector3 saved_position;
+    public Vector3 saved_scale;
+    public Quaternion saved_rotation;
+
 
     private LayerMask treeMask;
     private bool done = false;
@@ -23,6 +27,37 @@ public class Tree : MonoBehaviour {
     private int numSpawned;
     UnityRandom rand = new UnityRandom();
     private float life;
+    
+    public void saveTransforms()
+    {
+        saved_position = transform.position;
+        saved_scale = transform.localScale;
+        saved_rotation = transform.rotation;
+    }
+
+    // Take all data from tree and copy it to this tree
+    public void copyFrom(Tree tree)
+    {
+        seed_object = tree.seed_object;
+        max_life = tree.max_life;
+        radius = tree.radius;
+        spawn_delay = tree.spawn_delay;
+        spawn_delay_variance = tree.spawn_delay_variance;
+        spawn_limit = tree.spawn_limit;
+        cull_radius = tree.cull_radius;
+        cull_max_density = tree.cull_max_density;
+        target_scale = tree.target_scale;
+        grow_speed = tree.grow_speed;
+        grow_speed_variance = tree.grow_speed_variance;
+        saved_position = tree.saved_position;
+        saved_rotation = tree.saved_rotation;
+        transform.position = tree.saved_position;
+        transform.rotation = tree.saved_rotation;
+        transform.localScale = tree.saved_scale;
+        done = tree.done;
+        numSpawned = tree.numSpawned;
+        life = tree.life;
+    }
 
     // Use this for initialization
     void Awake () {
@@ -52,9 +87,28 @@ public class Tree : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        stickToGround();
         Cull();
         Grow();
         Propogate();
+    }
+
+    private void stickToGround()
+    {
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+        {
+            {
+                transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Creates seeds in a radius around this tree if it's ready to
@@ -87,6 +141,7 @@ public class Tree : MonoBehaviour {
             if(life <= 0)
             {
                 done = true;
+
                 Destroy(gameObject);
             }    
         }
@@ -103,6 +158,10 @@ public class Tree : MonoBehaviour {
     private void Grow()
     {
         Vector3 v3Scale = new Vector3(target_scale, target_scale, target_scale);
-        transform.localScale = Vector3.Lerp(transform.localScale, v3Scale, Time.deltaTime * grow_speed);
+
+        if (transform.localScale.x < target_scale)
+            transform.localScale += v3Scale * grow_speed * Globals.time_scale;
+        else if (transform.localScale.x > target_scale)
+            transform.localScale = v3Scale;
     }
 }

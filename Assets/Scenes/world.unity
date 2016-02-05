@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 0.93448275, b: 0.875, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientIntensity: 0.3
+  m_AmbientMode: 3
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -34,14 +34,14 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -235,7 +235,7 @@ Light:
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -274,17 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: Wait
-  normalRotateDegreesPerSecond:
-    value: {x: 0.3, y: 0, z: 0}
-    space: 1
-  pressedRotateDegreesPerSecond:
-    value: {x: 180, y: 0, z: 0}
-    space: 1
-  moveUnitsPerSecond:
-    value: {x: 0, y: 0, z: 0}
-    space: 1
-  ignoreTimescale: 0
+  rot_speed: 1
   maxIntensity: 1
 --- !u!1001 &1367203305
 Prefab:
@@ -357,6 +347,10 @@ Prefab:
       propertyPath: m_RunSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -388,17 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonName: Wait
-  normalRotateDegreesPerSecond:
-    value: {x: 0.3, y: 0, z: 0}
-    space: 1
-  pressedRotateDegreesPerSecond:
-    value: {x: 180, y: 0, z: 0}
-    space: 1
-  moveUnitsPerSecond:
-    value: {x: 0, y: 0, z: 0}
-    space: 1
-  ignoreTimescale: 0
+  rot_speed: 1
   maxIntensity: 0.5
 --- !u!108 &1694056957
 Light:
@@ -417,7 +401,7 @@ Light:
   m_Shadows:
     m_Type: 1
     m_Resolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -449,6 +433,20 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_PrefabInternal: {fileID: 1367203305}
+--- !u!114 &1837165587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837165586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9aed27220686014cb443fbf7470bd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait_speed_init: 1
+  wait_speed_max: 1e+14
+  wait_speed_growth: 10
 --- !u!114 &1837165592
 MonoBehaviour:
   m_ObjectHideFlags: 0
