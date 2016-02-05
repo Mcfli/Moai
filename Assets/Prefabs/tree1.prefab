@@ -814,7 +814,7 @@ MonoBehaviour:
   cull_max_density: 5
   target_scale: 10
   grow_speed: 0.0001
-  grow_speed_variance: 0
+  grow_speed_variance: 0.00005
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1041,7 +1041,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: grow_speed_variance
-      value: 0
+      value: 0.00005
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: target_scale
