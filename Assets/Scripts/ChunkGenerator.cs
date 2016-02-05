@@ -87,9 +87,9 @@ public class ChunkGenerator : MonoBehaviour {
 
             // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
             Color color;
-            if (height > 80)
+            if (height > 10)
                 color = new Color(0.9f, 0.9f, 0.9f);
-            else if (height > -150)
+            else if (height > -30)
                 color = new Color(0.1f,0.4f,0.2f);
             else
                 color = new Color(0.7f, 0.7f, 0.3f);

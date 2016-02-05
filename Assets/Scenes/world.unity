@@ -607,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wait_speed_init: 1
   wait_speed_max: 1e+14
-  wait_speed_growth: 10
+  wait_speed_growth: 1
 --- !u!114 &1837165592
 MonoBehaviour:
   m_ObjectHideFlags: 0
