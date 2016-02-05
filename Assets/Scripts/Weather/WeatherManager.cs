@@ -13,6 +13,8 @@ public class WeatherManager : MonoBehaviour {
     // 3 - sand
     // 4 - ash
     public ImageSpace[] image_spaces;
+    // 0 - clear day
+    // 0 - rainy day
 
 
     public GameObject cloud;
@@ -21,18 +23,31 @@ public class WeatherManager : MonoBehaviour {
     private List<GameObject> clouds;        // holds all currently loaded clouds
     private int target_clouds;
     private float last_updated;
-    private 
 
     void Awake()
     {
         last_updated = Time.time;
         clouds = new List<GameObject>();
-        Globals.cur_weather = "rainy";
+        Globals.cur_weather = "sunny";
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Switch weather
+        if (Time.time > last_updated + update_time)
+        {
+            last_updated = Time.time;
+            if (Globals.cur_weather == "rainy")
+                Globals.cur_weather = "sunny";
+            else if (Globals.cur_weather == "rainy")
+                Globals.cur_weather = "snowy";
+            else
+                Globals.cur_weather = "rainy";
+        }
+
+
+        // Handle weather
         if (Globals.cur_weather == "rainy")
             doRain();
         else if (Globals.cur_weather == "sunny")
@@ -44,7 +59,7 @@ public class WeatherManager : MonoBehaviour {
     private void doRain()
     {
         target_clouds = 20;
-        // PLACEHOLDER Fade skybox to dark skybox
+        image_spaces[1].applyToCamera();
         if (clouds.Count<target_clouds && Time.time > last_updated + update_time)
         {
             // Instantiate cloud prefab and add to cloud array
@@ -57,6 +72,7 @@ public class WeatherManager : MonoBehaviour {
     private void doSunny()
     {
         target_clouds = 0;
+        image_spaces[0].applyToCamera();
         // PLACEHOLDER Fade skybox to dark skybox
         if (clouds.Count > target_clouds && Time.time > last_updated + update_time)
         {

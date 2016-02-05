@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 460986}
   - 114: {fileID: 11499924}
   m_Layer: 0
-  m_Name: is_clear_day
+  m_Name: clear_day
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
