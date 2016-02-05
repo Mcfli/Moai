@@ -46,7 +46,6 @@ public class WeatherManager : MonoBehaviour {
                 Globals.cur_weather = "rainy";
         }
 
-
         // Handle weather
         if (Globals.cur_weather == "rainy")
             doRain();
@@ -58,13 +57,14 @@ public class WeatherManager : MonoBehaviour {
 
     private void doRain()
     {
-        target_clouds = 20;
+        target_clouds = 40;
         image_spaces[1].applyToCamera();
-        if (clouds.Count<target_clouds && Time.time > last_updated + update_time)
+        if (clouds.Count<target_clouds)
         {
             // Instantiate cloud prefab and add to cloud array
-            Instantiate(cloud);
-            last_updated = Time.time;
+            GameObject c = Instantiate(cloud);
+            clouds.Add(c);
+           // last_updated = Time.time;
         }
     }
 
@@ -74,23 +74,25 @@ public class WeatherManager : MonoBehaviour {
         target_clouds = 0;
         image_spaces[0].applyToCamera();
         // PLACEHOLDER Fade skybox to dark skybox
-        if (clouds.Count > target_clouds && Time.time > last_updated + update_time)
+        if (clouds.Count > target_clouds)
         {
             GameObject cloud = clouds[0];
             cloud.GetComponent<Cloud>().dissipate();
             clouds.RemoveAt(0);
-            last_updated = Time.time;
+            //last_updated = Time.time;
         }
     }
 
 
     private void doSnowy()
     {
-        target_clouds = 20;
-        if (clouds.Count < target_clouds && Time.time > last_updated + update_time)
+        target_clouds = 40;
+        if (clouds.Count < target_clouds)
         {
             // Instantiate cloud prefab and add to cloud array
-            last_updated = Time.time;
+            //last_updated = Time.time;
+            GameObject c = Instantiate(cloud);
+            clouds.Add(c);
         }
     }
 }

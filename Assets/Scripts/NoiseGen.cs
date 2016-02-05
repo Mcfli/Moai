@@ -14,11 +14,8 @@ public class NoiseGen : MonoBehaviour
     private static int z_o;
     private static int w_o;
 
-    private static UnityRandom urand;
-
     public static void init()
     {
-        UnityRandom urand = new UnityRandom();
         Random.seed = seed;
         x_o = Random.Range(2,int.MaxValue);
         y_o = Random.Range(2, int.MaxValue);

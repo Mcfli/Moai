@@ -52,7 +52,6 @@ public class Tree : MonoBehaviour {
         saved_position = tree.saved_position;
         saved_rotation = tree.saved_rotation;
         time_unloaded = tree.time_unloaded;
-        Debug.Log(time_unloaded);
         age = tree.age + (Globals.time) * grow_speed;
         transform.position = tree.saved_position;
         transform.rotation = tree.saved_rotation;
