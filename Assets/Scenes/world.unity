@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree_resolution: 2
-  prefab: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+  prefab: {fileID: 128488, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
   gen_manager: {fileID: 0}
 --- !u!114 &188005516
 MonoBehaviour:
