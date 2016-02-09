@@ -812,9 +812,26 @@ MonoBehaviour:
   spawn_limit: 3
   cull_radius: 40
   cull_max_density: 5
-  target_scale: 10
+  target_scale: 4.4
   grow_speed: 0.0001
   grow_speed_variance: 0.00005
+  life_span: 1000
+  height_vs_time:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0.10416667
+      value: -0.0062499996
+      inSlope: 1.268618
+      outSlope: 1.268618
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 2.1573033
+      outSlope: 2.1573033
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -992,6 +1009,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: buttonName
       value: Wait
       objectReference: {fileID: 0}
@@ -1045,7 +1066,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: target_scale
-      value: 10
+      value: 4.4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: grow_speed
@@ -1086,6 +1107,42 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CastShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: life_span
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[0].time
+      value: 0.10416667
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[0].value
+      value: 0.012499999
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[1].value
+      value: 1.01875
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[1].inSlope
+      value: 2.1573033
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[1].outSlope
+      value: 2.1573033
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[0].inSlope
+      value: 1.268618
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.data[0].outSlope
+      value: 1.268618
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
