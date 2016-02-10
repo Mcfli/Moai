@@ -162,10 +162,6 @@ Material:
         second: 313.21838
       data:
         first:
-          name: _InvFade
-        second: 0.628783
-      data:
-        first:
           name: _WaveScale
         second: 0.046289656
       data:
@@ -192,6 +188,10 @@ Material:
         first:
           name: _NormalsDisplacement
         second: 0
+      data:
+        first:
+          name: _InvFade
+        second: 0.628783
       data:
         first:
           name: _Displacement
@@ -255,15 +255,15 @@ Material:
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
-          name: _BumpMap_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
           name: _RefrColor
         second: {r: 0.5233905, g: 0.9477612, b: 0.9121496, a: 1}
       data:
         first:
           name: _Fresnel_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
+          name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
