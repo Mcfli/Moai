@@ -45,8 +45,11 @@ public class NoiseGen : MonoBehaviour
         float dy = y - (float)iy;
         float dz = z - (float)iz;
 
+        Vector3 dist = new Vector3(dx, dy, dz);
+        Vector3 node_vec = getNodeVector(ix, iy, iz);
+
         // Compute the dot-product
-        return (dx * getNodeVector(ix, iy, iz).x + dy * getNodeVector(ix, iy, iz).y + dz * getNodeVector(ix, iy, iz).z);
+        return Vector3.Dot(dist,node_vec);
     }
 
     // Generate unsmoothed Perlin noise value at (x, y) 
@@ -95,26 +98,30 @@ public class NoiseGen : MonoBehaviour
 
         value = cosInterpolate(p1, p2, st);
 
+        value += 1;
+        value *= 0.5f;
+
         return value;
     }
 
     // Generate a smoothed Perlin noise value at (x, y, time) 
-    private float genPerlin(float x, float y, float time)
+    public float genPerlin(float x, float y, float time)
     {
         float adjusted_x = x / smoothness;
         float adjusted_y = y / smoothness;
 
-        float total = 0;
+        float total = 0f;
+        float freq = 1f;
+        float amp = 1f;
 
         for (int i = 0; i < octaves; i++)
         {
-            float frequency = Mathf.Pow(2, i);
-            float amplitude = Mathf.Pow(persistence, i);
-
-            total += unsmoothedPerlin(adjusted_x * frequency, adjusted_y * frequency, time * frequency) * amplitude;
+            total += unsmoothedPerlin(adjusted_x * freq, adjusted_y * freq, time * freq) * amp;
+            freq *= 2;
+            amp *= persistence;
         }
 
-        return total;
+        return amplitude*total;
     }
 
     // Generate a 0-1 smoothed Perlin noise value at (x, y) 
@@ -170,7 +177,8 @@ public class NoiseGen : MonoBehaviour
     private Vector3 getNodeVector(int x, int y, int z)
     {
         Random.seed = hash(x, y, z);
-        return new Vector3(2*Random.value-1, 2*Random.value-1,2 * Random.value - 1);
+        return new Vector3(Mathf.RoundToInt(2*Random.value-1), Mathf.RoundToInt(2 *Random.value-1),
+            Mathf.RoundToInt(2 * Random.value - 1));
     }
 
     // Generates an int from an x and a y value

@@ -9,10 +9,6 @@ public class GenerationManager : MonoBehaviour {
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
-    public float amplitude = 20.0f;
-    public int octaves = 2;
-    public float persistence = 0.5f;
-    public float smoothness = 0.02f;
 
     public GameObject player;
     public ChunkGenerator chunkGen;
@@ -29,16 +25,12 @@ public class GenerationManager : MonoBehaviour {
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
-        NoiseGen.init();
-        NoiseGen.octaves = octaves;
-        NoiseGen.persistence = persistence;
-        NoiseGen.smoothness = smoothness;
     }
 	
 	// Update is called once per frame
 	void Update () {
         checkPosition();
-        if(Globals.time_scale > 1.0f) updateChunks();
+        //if(Globals.time_scale > 1.0f) updateChunks();
     }
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
@@ -97,7 +89,7 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y,time,amplitude);
+        chunkGen.generate(chunk_x, chunk_y,time);
     }
 
     void updateChunks()
@@ -108,37 +100,7 @@ public class GenerationManager : MonoBehaviour {
             string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
             GameObject chunk = GameObject.Find(chunk_name);
 
-            Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
-            for(int j = 0; j < verts.Length; j++)
-            {
-                float x = verts[j].x;
-                float y = verts[j].z;
-                float xpos = chunk.transform.position.x + x;
-                float ypos = chunk.transform.position.z + y;
-
-                verts[j] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos, Globals.time), y);
-            }
-            chunk.GetComponent<MeshFilter>().mesh.vertices = verts;
-            chunk.GetComponent<MeshCollider>().sharedMesh = chunk.GetComponent<MeshFilter>().mesh;
-
-            Color[] colors = new Color[verts.Length];
-            for (int c = 0; c < verts.Length; c += 3)
-            {
-                float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
-
-                // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-                Color color;
-                if (height > 10)
-                    color = new Color(0.9f, 0.9f, 0.9f);
-                else if (height > -30)
-                    color = new Color(0.1f, 0.4f, 0.2f);
-                else
-                    color = new Color(0.7f, 0.7f, 0.3f);
-                colors[c] = color;
-                colors[c + 1] = color;
-                colors[c + 2] = color;
-            }
-            chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+            chunkGen.refresh(chunk);
         }
         
 

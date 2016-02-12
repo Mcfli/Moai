@@ -17,13 +17,13 @@ public class NoiseSynth : MonoBehaviour {
         mountain_map.Init();
     }
 
-    public float height_at(float x, float y)
+    public float heightAt(float x, float y, float z)
     {
         float total = 0.0f;
 
-        float m = mountain_map.genPerlinRidged(x, y) - 3500f;
-        float b = base_map.genPerlin(x, y);
-        float w = type_map.genPerlinUnscaled(x, y);
+        float m = mountain_map.genPerlinRidged(x,y,z)-3500f;
+        float b = base_map.genPerlin(x,y,z);
+        float w = type_map.genPerlinUnscaled(x,y,z);
 
         total = select(b, m, w, 0.6f, 0.125f);
         //Debug.Log(w);
@@ -31,7 +31,7 @@ public class NoiseSynth : MonoBehaviour {
     }
 
 
-    public Color color_at(float height)
+    public Color colorAt(float height)
     {
 
         float h = height / amplitude;
@@ -49,10 +49,10 @@ public class NoiseSynth : MonoBehaviour {
 
 
 
-        float weight = i1 - i0;
+        float weight = i1 - val;
         if (weight == 0) return colors[i0];
 
-        Color color = Color.Lerp(colors[i0], colors[i1], weight);
+        Color color = Color.Lerp(colors[i1], colors[i0], weight);
 
         return color;
     }
