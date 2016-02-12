@@ -8,4 +8,5 @@ public class Globals : MonoBehaviour {
     public static float time_resolution = 0.00000000000000001f;
 
     public static string cur_weather;
+    public static float water_level;
 }
