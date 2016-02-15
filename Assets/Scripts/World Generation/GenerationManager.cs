@@ -102,8 +102,6 @@ public class GenerationManager : MonoBehaviour {
 
             chunkGen.refresh(chunk);
         }
-        
-
     }
 
 }
