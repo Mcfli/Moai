@@ -7,12 +7,20 @@ public class NoiseGen : MonoBehaviour
     public static int octaves = 2;
     public static float persistence = 0.5f;
     public static float smoothness = 0.02f;
+    public static int seed = 9647;
 
-    private static UnityRandom urand;
+    private static int x_o;
+    private static int y_o;
+    private static int z_o;
+    private static int w_o;
 
-    void Awake()
+    public static void init()
     {
-        UnityRandom urand = new UnityRandom();
+        Random.seed = seed;
+        x_o = Random.Range(2,int.MaxValue);
+        y_o = Random.Range(2, int.MaxValue);
+        z_o = Random.Range(2, int.MaxValue);
+        w_o = Random.Range(2, int.MaxValue);
     }
 
     // Cubic interpolation
@@ -115,7 +123,7 @@ public class NoiseGen : MonoBehaviour
     // Generates an int from an x and a y value
     private static int hash(int x, int y, int z)
     {
-        int total = ((x * 73856093) ^ (y * 19349663) ^ (z * 83492791)) % 263;
+        int total = ((x * x_o) ^ (y * y_o) ^ (z * z_o)) % w_o;
 
         return total;
     }

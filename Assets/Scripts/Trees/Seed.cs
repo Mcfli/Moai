@@ -14,14 +14,14 @@ public class Seed : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        spawned_time = Time.time;
+        spawned_time = Globals.time;
         tree_mask = LayerMask.GetMask("Tree", "Seed");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - spawned_time > life_length)
+        if (Globals.time - spawned_time > life_length*Globals.time_resolution)
         {
             Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, tree_mask);
             if(close_trees.Length < 1)
