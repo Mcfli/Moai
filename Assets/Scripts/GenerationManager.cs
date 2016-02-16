@@ -14,6 +14,8 @@ public class GenerationManager : MonoBehaviour {
     public float persistence = 0.5f;
     public float smoothness = 0.02f;
 
+    public GameObject[] chunk_prefabs;
+
     public GameObject player;
     public ChunkGenerator chunkGen;
     public TreeManager tree_manager;
@@ -97,7 +99,20 @@ public class GenerationManager : MonoBehaviour {
     void generateChunk(int chunk_x, int chunk_y)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y,time,amplitude);
+        if (Random.value > 0.5)
+            chunkGen.generate(chunk_x, chunk_y, time, amplitude);
+        else
+        {
+            string chunk_name = "chunk (" + chunk_x + "," + chunk_y + ")";
+            Vector3 chunk_pos = new Vector3(chunk_x*chunk_size,0,chunk_y*chunk_size);
+            GameObject prefab = chunk_prefabs[Mathf.FloorToInt(Random.value * chunk_prefabs.Length)];
+            GameObject prefab_chunk = 
+                Instantiate(prefab,chunk_pos, prefab.transform.rotation) as GameObject;
+            prefab_chunk.name = chunk_name;
+            prefab_chunk.GetComponent<PrefabChunk>().scaleToSettings(chunk_size,chunk_resolution);
+        }
+            
+
     }
 
     void updateChunks()
