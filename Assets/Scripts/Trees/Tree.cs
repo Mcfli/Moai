@@ -102,7 +102,7 @@ public class Tree : MonoBehaviour {
 	void Update () {
         stickToGround();
         Cull();
-        //Grow();
+        Grow();
         Propogate();
     }
 

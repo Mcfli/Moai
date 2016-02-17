@@ -9,6 +9,7 @@ public class GenerationManager : MonoBehaviour {
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
+    public int tree_load_dist = 1;
 
     public GameObject player;
     public ChunkGenerator chunkGen;
@@ -16,8 +17,9 @@ public class GenerationManager : MonoBehaviour {
 
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
-    
-	void Start () {
+    List<Vector2> loaded_tree_chunks;
+
+    void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
@@ -25,6 +27,7 @@ public class GenerationManager : MonoBehaviour {
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
+        loaded_tree_chunks = new List<Vector2>();
     }
 	
 	// Update is called once per frame
@@ -42,7 +45,9 @@ public class GenerationManager : MonoBehaviour {
         {
             cur_chunk = player_chunk;
             unloadChunks();
+            unloadTrees();
             loadChunks();
+            loadTrees();
         }
     }
 
@@ -56,8 +61,25 @@ public class GenerationManager : MonoBehaviour {
                 if (!loaded_chunks.Contains(this_chunk))
                 {
                     generateChunk(x,y);
-                    tree_manager.loadTrees(x, y);
+                    
                     loaded_chunks.Add(this_chunk);
+                }
+            }
+        }
+    }
+
+    void loadTrees()
+    {
+        for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
+        {
+            for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
+            {
+                Vector2 this_chunk = new Vector2(x, y);
+                if (!loaded_tree_chunks.Contains(this_chunk))
+                {
+                    generateChunk(x, y);
+                    tree_manager.loadTrees(x, y);
+                    loaded_tree_chunks.Add(this_chunk);
                 }
             }
         }
@@ -74,8 +96,21 @@ public class GenerationManager : MonoBehaviour {
                 string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
                 GameObject chunk = GameObject.Find(chunk_name);
                 Destroy(chunk);
-                tree_manager.unloadTrees((int)this_chunk.x, (int)this_chunk.y);
                 loaded_chunks.RemoveAt(i);
+            }
+        }
+    }
+
+    void unloadTrees()
+    {
+        for (int i = loaded_tree_chunks.Count - 1; i >= 0; i--)
+        {
+            Vector2 this_chunk = loaded_tree_chunks[i];
+            if (Mathf.Abs(this_chunk.x - cur_chunk.x) > tree_load_dist ||
+                Mathf.Abs(this_chunk.y - cur_chunk.y) > tree_load_dist)
+            {
+                tree_manager.unloadTrees((int)this_chunk.x, (int)this_chunk.y);
+                loaded_tree_chunks.RemoveAt(i);
             }
         }
     }

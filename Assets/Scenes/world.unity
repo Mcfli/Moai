@@ -119,9 +119,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 100
+  chunk_size: 2000
   chunk_resolution: 8
-  chunk_load_dist: 20
+  chunk_load_dist: 10
+  tree_load_dist: 1
   player: {fileID: 0}
   chunkGen: {fileID: 0}
   tree_manager: {fileID: 0}
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 1
+  tree_resolution: 8
   prefab: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
   gen_manager: {fileID: 0}
 --- !u!114 &188005516
@@ -529,8 +530,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: 0.094560765, y: -0.0865991, z: 0.008258596, w: 0.99171096}
-  m_LocalPosition: {x: 3866.4446, y: -1498.7515, z: -6783.4897}
+  m_LocalRotation: {x: -0.21828274, y: 0.70055026, z: 0.24069202, w: 0.63533413}
+  m_LocalPosition: {x: -35978.984, y: -15901.378, z: 6547.2495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -575,7 +576,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1449
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
