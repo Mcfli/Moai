@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   octaves: 5
   persistence: 0.4
-  smoothness: 2000
+  smoothness: 1000
   amplitude: 1000
   seed: 515312
 --- !u!1001 &100100000
@@ -62,6 +62,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: octaves
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: smoothness
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
