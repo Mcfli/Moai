@@ -6,13 +6,16 @@ public class ChunkGenerator : MonoBehaviour {
     public float chunk_size = 10;           // The size of each chunk in world coordinates
     public int chunk_resolution = 10;     // The number of vertices on one side if the chunk
     public Material landMaterial;
+
 	private Vector3[] vertices;
-    
+    private NoiseSynth synth;
 
     private void Awake () {
+        synth = GetComponent<NoiseSynth>();
+        synth.Init();
 	}
 
-	public void generate (int chunk_x,int chunk_y,float time, float amplitude) {
+	public void generate (int chunk_x,int chunk_y,float time) {
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
@@ -37,7 +40,7 @@ public class ChunkGenerator : MonoBehaviour {
                 float ypos = chunk.transform.position.z + y;
 
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, amplitude * NoiseGen.genPerlin(xpos, ypos,time), y);
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(xpos, ypos,Globals.time), y);
 
             }
 		}
@@ -86,13 +89,8 @@ public class ChunkGenerator : MonoBehaviour {
             float height = (mf.mesh.vertices[c].y+ mf.mesh.vertices[c+1].y+ mf.mesh.vertices[c+2].y)/3;
 
             // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-            Color color;
-            if (height > 10)
-                color = new Color(0.9f, 0.9f, 0.9f);
-            else if (height > -30)
-                color = new Color(0.1f,0.4f,0.2f);
-            else
-                color = new Color(0.7f, 0.7f, 0.3f);
+            Color color = synth.colorAt(height);
+            
             colors[c] = color;
             colors[c+1] = color;
             colors[c+2] = color;
@@ -100,6 +98,41 @@ public class ChunkGenerator : MonoBehaviour {
         mf.mesh.colors = colors;
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
 	}
+
+    public void refresh(GameObject chunk)
+    {
+        Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+        for (int j = 0; j < verts.Length; j++)
+        {
+            float x = verts[j].x;
+            float y = verts[j].z;
+            float xpos = chunk.transform.position.x + x;
+            float ypos = chunk.transform.position.z + y;
+
+            verts[j] = new Vector3(x, synth.heightAt(xpos, ypos, Globals.time), y);
+        }
+        chunk.GetComponent<MeshFilter>().mesh.vertices = verts;
+        chunk.GetComponent<MeshCollider>().sharedMesh = chunk.GetComponent<MeshFilter>().mesh;
+
+        Color[] colors = new Color[verts.Length];
+        for (int c = 0; c < verts.Length; c += 3)
+        {
+            float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
+
+            // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
+            Color color;
+            if (height > 10)
+                color = new Color(0.9f, 0.9f, 0.9f);
+            else if (height > -30)
+                color = new Color(0.1f, 0.4f, 0.2f);
+            else
+                color = new Color(0.7f, 0.7f, 0.3f);
+            colors[c] = color;
+            colors[c + 1] = color;
+            colors[c + 2] = color;
+        }
+        chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+    }
 
     private void ReCalcTriangles(Mesh mesh) {
         Vector3[] oldVerts = mesh.vertices;
@@ -119,4 +152,6 @@ public class ChunkGenerator : MonoBehaviour {
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
     }
+
+    
 }

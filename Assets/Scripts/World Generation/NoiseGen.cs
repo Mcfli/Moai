@@ -4,18 +4,22 @@ using System.Collections;
 public class NoiseGen : MonoBehaviour
 {
 
-    public static int octaves = 2;
-    public static float persistence = 0.5f;
-    public static float smoothness = 0.02f;
-    public static int seed = 9647;
+    public int octaves = 1;
+    public float persistence = 0.5f;
+    public float smoothness = 100.0f;
+    public float amplitude = 100.0f;
+    public int seed = 9647;
 
     private static int x_o;
     private static int y_o;
     private static int z_o;
     private static int w_o;
 
-    public static void init()
+    private float smoothness_inv;
+
+    public void Init()
     {
+        smoothness_inv = 1 / smoothness;
         Random.seed = seed;
         x_o = Random.Range(2,int.MaxValue);
         y_o = Random.Range(2, int.MaxValue);
@@ -25,7 +29,7 @@ public class NoiseGen : MonoBehaviour
 
     // Cubic interpolation
 
-    static float cosInterpolate(float a, float b, float x)
+    public static float cosInterpolate(float a, float b, float x)
     {
         float ft = x * Mathf.PI;
         float f = (1 - Mathf.Cos(ft)) * 0.5f;
@@ -34,19 +38,22 @@ public class NoiseGen : MonoBehaviour
     }
 
     // Computes the dot product of the distance and gradient vectors.
-    static float dotGridGradient(int ix, int iy, int iz, float x, float y, float z)
+    private float dotGridGradient(int ix, int iy, int iz, float x, float y, float z)
     {
         // Compute the distance vector
         float dx = x - (float)ix;
         float dy = y - (float)iy;
         float dz = z - (float)iz;
 
+        Vector3 dist = new Vector3(dx, dy, dz);
+        Vector3 node_vec = getNodeVector(ix, iy, iz);
+
         // Compute the dot-product
-        return (dx * getNodeVector(ix, iy, iz).x + dy * getNodeVector(ix, iy, iz).y + dz * getNodeVector(ix, iy, iz).z);
+        return Vector3.Dot(dist,node_vec);
     }
 
     // Generate unsmoothed Perlin noise value at (x, y) 
-    public static float unsmoothedPerlin(float x, float y, float time)
+    private float unsmoothedPerlin(float x, float y, float time)
     {
         // Determine grid cell coordinates
         int x0 = (x > 0.0 ? (int)x : (int)x - 1);
@@ -63,7 +70,7 @@ public class NoiseGen : MonoBehaviour
         float st = time - (float)t0;
 
         // Interpolate between grid point gradients
-        float n0, n1, ix0, ix1, ix2, ix3, p1, p2, value;
+        float n0, n1, ix0, ix1, p1, p2, value;
 
         // Front plane in cube 
 
@@ -91,37 +98,91 @@ public class NoiseGen : MonoBehaviour
 
         value = cosInterpolate(p1, p2, st);
 
+        value += 1;
+        value *= 0.5f;
+
         return value;
     }
 
     // Generate a smoothed Perlin noise value at (x, y, time) 
-    public static float genPerlin(float x, float y, float time)
+    public float genPerlin(float x, float y, float time)
     {
         float adjusted_x = x / smoothness;
         float adjusted_y = y / smoothness;
 
-        float total = 0;
+        float total = 0f;
+        float freq = 1f;
+        float amp = 1f;
 
         for (int i = 0; i < octaves; i++)
         {
-            float frequency = Mathf.Pow(2, i);
-            float amplitude = Mathf.Pow(persistence, i);
-
-            total += unsmoothedPerlin(adjusted_x * frequency, adjusted_y * frequency, time * frequency) * amplitude;
+            total += unsmoothedPerlin(adjusted_x * freq, adjusted_y * freq, time * freq) * amp;
+            freq *= 2;
+            amp *= persistence;
         }
+
+        return amplitude*total;
+    }
+
+    // Generate a 0-1 smoothed Perlin noise value at (x, y) 
+    public float genPerlinUnscaled(float x, float y, float z)
+    {
+
+        float adjusted_x = x * smoothness_inv;
+        float adjusted_y = y * smoothness_inv;
+        float adjusted_z = z * smoothness_inv;
+
+        float total = 0;
+        float freq = 1;
+
+        for (int i = 0; i < octaves; i++)
+        {
+            total += unsmoothedPerlin(adjusted_x * freq, adjusted_y * freq,adjusted_z * freq);
+            freq *= 2;
+        }
+        total /= octaves;
 
         return total;
     }
 
+
+    // Generate a craggy smoothed Perlin noise value at (x, y) 
+    // Implemented from https://dip.felk.cvut.cz/browse/pdfcache/lindao1_2007bach.pdf
+    public float genPerlinRidged(float x, float y, float z)
+    {
+        float adjusted_x = x * smoothness_inv;
+        float adjusted_y = y * smoothness_inv;
+        float adjusted_z = z * smoothness_inv;
+
+        float total = 0;
+        float lam = 2;
+        float amp = 2;
+
+        for (int i = 1; i < octaves + 1; i++)
+        {
+            amp *= persistence;
+            lam *= 0.5f;
+            float val = unsmoothedPerlin(adjusted_x / lam, adjusted_y / lam, adjusted_z / lam);
+            val = val * 2f - 1f;
+            if (val > 0) val = 1 - val;
+            else val = val + 1f;
+            total += 2 * (val + 1f) * amp;
+
+        }
+
+        return amplitude * total;
+    }
+
     // Generates a vector for a grid node at x,y,z
-    private static Vector3 getNodeVector(int x, int y, int z)
+    private Vector3 getNodeVector(int x, int y, int z)
     {
         Random.seed = hash(x, y, z);
-        return new Vector3(2*Random.value-1, 2*Random.value-1,2 * Random.value - 1);
+        return new Vector3(Mathf.RoundToInt(2*Random.value-1), Mathf.RoundToInt(2 *Random.value-1),
+            Mathf.RoundToInt(2 * Random.value - 1));
     }
 
     // Generates an int from an x and a y value
-    private static int hash(int x, int y, int z)
+    public static int hash(int x, int y, int z)
     {
         int total = ((x * x_o) ^ (y * y_o) ^ (z * z_o)) % w_o;
 

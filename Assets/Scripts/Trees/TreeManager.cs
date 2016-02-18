@@ -63,7 +63,7 @@ public class TreeManager : MonoBehaviour {
     public void unloadTrees(int x, int y)
     {
         Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size*0.5f,0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
-        Vector3 half_extents = new Vector3(gen_manager.chunk_size*0.5f,gen_manager.amplitude, gen_manager.chunk_size*0.5f );
+        Vector3 half_extents = new Vector3(gen_manager.chunk_size*0.5f,100000, gen_manager.chunk_size*0.5f );
         LayerMask tree_mask = LayerMask.GetMask("Tree");
         Vector2 chunk = new Vector2(x, y);
 

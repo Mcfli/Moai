@@ -86,9 +86,11 @@ public class Tree : MonoBehaviour {
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-            {
+
+            if (hit.point.y < Globals.water_level)
+                Destroy(gameObject);
+            else
                 transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
-            }
         }
         else
         {
