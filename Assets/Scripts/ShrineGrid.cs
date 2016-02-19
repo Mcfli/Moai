@@ -3,13 +3,8 @@ using System.Collections;
 
 public class ShrineGrid : MonoBehaviour {
 
-    int imatesssttttttttt;
-    // Use this for initialization
-    string pooopsssies;
     public bool debug;
     public bool isDone;
-
-    public int test;
 
 	// Use this for initialization
 	void Start () {
@@ -21,8 +16,8 @@ public class ShrineGrid : MonoBehaviour {
 	
 	}
 
-    void Testsssssss() { }
+    public void enablePlacementItem()
+    {
 
-    void Hello() { }
-
+    }
 }
