@@ -17,7 +17,7 @@ public class ShrineGrid : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         curState = new Dictionary<Vector2, List<GameObject>>();
-        targetState = new Dictionary<Vector2, List<GameObject>>();
+		targetState = new Dictionary<Vector2, GameObject>();
         validObjects = new List<GameObject>();
         genTargetState();
 	}
@@ -33,7 +33,7 @@ public class ShrineGrid : MonoBehaviour {
 
     public void enablePlacementItem(GameObject item)
     {
-
+		validObjects.Add (item);
     }
 
     private Vector2 realToGrid(Vector3 pos)
@@ -48,7 +48,20 @@ public class ShrineGrid : MonoBehaviour {
 
     private void checkDone()
     {
+		bool valid = false;
+		bool doneCheck = false;
 
+		GameObject tarObj;
+		foreach (Vector2 target in targetState) {
+			tarObj = targetState [target];
+			foreach (GameObject curObj in curState[target]) {
+				if (curObj == tarObj) {
+					valid = true;
+				}
+
+			
+			}
+		}
     }
 
     private void genTargetState()
