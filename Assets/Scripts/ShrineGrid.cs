@@ -4,8 +4,8 @@ using System.Collections;
 public class ShrineGrid : MonoBehaviour {
 
     int imatesssttttttttt;
-	// Use this for initialization
-
+    // Use this for initialization
+    string pooopsssies;
     public bool debug;
     public bool isDone;
 
