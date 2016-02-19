@@ -134,7 +134,7 @@ public class Tree : MonoBehaviour {
                 lastSpawned = Time.time;
                 squareVec = rand.PointInASquare();
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, 0, squareVec.y * radius + transform.position.z), RandomRotation);
+                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, transform.position.y + 10f, squareVec.y * radius + transform.position.z), RandomRotation);
                 numSpawned++;
                 if (spawn_limit > 0 && numSpawned >= spawn_limit)
                 {
