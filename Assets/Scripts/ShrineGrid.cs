@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class ShrineGrid: MonoBehaviour {
 
     public bool debug;
     public bool isDone;
+
+    public int test;
 
 	// Use this for initialization
 	void Start () {
