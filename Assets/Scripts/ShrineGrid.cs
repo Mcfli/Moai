@@ -23,4 +23,6 @@ public class ShrineGrid : MonoBehaviour {
 
     void Testsssssss() { }
 
+    void Hello() { }
+
 }
