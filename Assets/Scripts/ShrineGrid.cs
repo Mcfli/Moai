@@ -31,7 +31,7 @@ public class ShrineGrid : MonoBehaviour {
         }
 	}
 
-    public void enablePlacementItem()
+    public void enablePlacementItem(GameObject item)
     {
 
     }
