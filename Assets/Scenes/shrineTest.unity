@@ -322,6 +322,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   isDone: 0
+  size: 0
+  resolution: 0
+  maxSolItems: 0
 --- !u!64 &1411244587
 MeshCollider:
   m_ObjectHideFlags: 0
