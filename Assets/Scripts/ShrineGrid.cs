@@ -10,7 +10,7 @@ public class ShrineGrid : MonoBehaviour {
     public int resolution;
 
     private Dictionary<Vector2, List<GameObject>> curState;
-    private Dictionary<Vector2, List<GameObject>> targetState;
+    private Dictionary<Vector2, GameObject> targetState;
 
     private List<GameObject> validObjects;
 
@@ -52,8 +52,8 @@ public class ShrineGrid : MonoBehaviour {
 		bool doneCheck = false;
 
 		GameObject tarObj;
-		foreach (Vector2 target in targetState) {
-			tarObj = targetState [target];
+		foreach (var target in targetState.Keys) {
+			tarObj = targetState[target];
 			foreach (GameObject curObj in curState[target]) {
 				if (curObj == tarObj) {
 					valid = true;
