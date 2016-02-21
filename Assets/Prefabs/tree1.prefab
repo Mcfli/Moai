@@ -11,6 +11,7 @@ GameObject:
   - 111: {fileID: 11112210}
   - 114: {fileID: 11474674}
   - 65: {fileID: 6526806}
+  - 114: {fileID: 11484160}
   m_Layer: 8
   m_Name: tree1
   m_TagString: Untagged
@@ -818,6 +819,18 @@ MonoBehaviour:
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &11484160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Tree
 --- !u!137 &13740370
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1086,6 +1099,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CastShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: type
+      value: Tree
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

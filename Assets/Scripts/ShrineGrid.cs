@@ -10,24 +10,25 @@ public class ShrineGrid : MonoBehaviour {
     public int resolution;  // res X res Number of squares in the grid
     public int maxSolItems; // max items for a solution
 
-    private Dictionary<Vector2, List<GameObject>> curState;
-    private Dictionary<Vector2, GameObject> targetState;
+    private Dictionary<Vector2, List<PuzzleObject>> curState;
+    private Dictionary<Vector2, PuzzleObject> targetState;
 
     public List<GameObject> validObjects;
-    private LayerMask not_terrain;
+    private LayerMask notTerrain;
 
 	// Use this for initialization
 	void Start () {
-        curState = new Dictionary<Vector2, List<GameObject>>();
-		targetState = new Dictionary<Vector2, GameObject>();
+        curState = new Dictionary<Vector2, List<PuzzleObject>>();
+		targetState = new Dictionary<Vector2, PuzzleObject>();
         //validObjects = new List<GameObject>();
-        not_terrain = ~(LayerMask.GetMask("Terrain"));
+        notTerrain = ~(LayerMask.GetMask("Terrain"));
 
         // For testing
         
         
         genTargetState();
-	}
+        updateCurState();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,7 +37,7 @@ public class ShrineGrid : MonoBehaviour {
         if (!isDone)
         {
             updateCurState();
-            //checkDone();
+            checkDone();
         }
 	}
 
@@ -76,7 +77,7 @@ public class ShrineGrid : MonoBehaviour {
         curState.Clear();
         
         // Find all objects in our square range
-        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size*0.5f,10, size * 0.5f),Quaternion.identity,not_terrain);
+        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size*0.5f,10, size * 0.5f),Quaternion.identity,notTerrain);
         foreach(Collider collider in colliders)
         {
             GameObject go = collider.gameObject;
@@ -84,44 +85,39 @@ public class ShrineGrid : MonoBehaviour {
 
             // Init list if needed
             if (!curState.ContainsKey(gridPos)||curState[gridPos] == null)
-                curState[gridPos] = new List<GameObject>();
-            // Make sure we don't add the same object twice
-           // if (validObjects.IndexOf(go) !=-1 && curState[gridPos].IndexOf(go)==-1)
-           // {
-                curState[gridPos].Add(go);
-           // }
+                curState[gridPos] = new List<PuzzleObject>();
+            // Make sure it's a valid object, Make sure we don't add the same object twice
+            PuzzleObject po = go.GetComponent<PuzzleObject>();
+            if(po != null)
+                curState[gridPos].Add(po);
+            
         }
     }
 
     private void checkDone()
     {
-        bool found = false;
-        
-		GameObject tarObj;
-		foreach (Vector2 target in targetState.Keys)
+		PuzzleObject tarObj;
+
+        // Look at each requirement in targetState
+		foreach (Vector2 cell in targetState.Keys)
         {
-            if (!curState.ContainsKey(target)) continue;
-            found = false;
-			tarObj = targetState[target];
-            
-			foreach (GameObject curObj in curState[target]) 
-            {
-                // check if this is the target object
-				if (curObj == tarObj) 
-                {
-                    found = true;
-				}
-			}
-            // if did not find target item
-            if(found == false)
-            {
+            // If curState doesn't have anything in this cell, it can't be complete
+            if (!curState.ContainsKey(cell)) {
                 isDone = false;
                 return;
             }
+            tarObj = targetState[cell].GetComponent<PuzzleObject>();
+
+            // if we don't currently have the desired item in the cell, it can't be complete    
+            if (curState[cell].IndexOf(tarObj) == -1)
+            {
+                //Debug.Log("Some object here, but not goal");
+                isDone = false;
+                return;
+            }   
 		}
         // looped through all and did not return false, so we found all of them
         isDone = true;
-        return;
     }
 
     // Uses a random Vector2 based on the resolution size and uses a random index based on the count in validObjects to populate targetState dictionary.
@@ -134,7 +130,7 @@ public class ShrineGrid : MonoBehaviour {
             Vector2 place = new Vector2(Random.Range(0, resolution),Random.Range(0, resolution));
             int index = Random.Range(0, validObjects.Count-1);
             GameObject placeObj = validObjects[index];
-            targetState[place] = placeObj;
+            targetState[place] = placeObj.GetComponent<PuzzleObject>();
         }
     }
 

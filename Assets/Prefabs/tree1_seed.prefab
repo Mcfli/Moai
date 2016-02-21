@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2376892}
   - 54: {fileID: 5426200}
   - 114: {fileID: 11464230}
+  - 114: {fileID: 11464970}
   m_Layer: 10
   m_Name: tree1_seed
   m_TagString: Untagged
@@ -109,6 +110,18 @@ MonoBehaviour:
     m_Bits: 256
   cull_radius: 60
   life_length: 5000
+--- !u!114 &11464970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Seed
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -165,6 +178,10 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300010, guid: 8b36a9e09bdd44eae8ee7428f873ef4a, type: 3}
+    - target: {fileID: 0}
+      propertyPath: type
+      value: Seed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148458}

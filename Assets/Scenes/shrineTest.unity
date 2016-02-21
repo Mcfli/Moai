@@ -324,7 +324,7 @@ MonoBehaviour:
   isDone: 0
   size: 50
   resolution: 3
-  maxSolItems: 2
+  maxSolItems: 1
   validObjects:
   - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
 --- !u!64 &1411244587
