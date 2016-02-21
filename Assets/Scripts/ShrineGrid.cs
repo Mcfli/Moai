@@ -7,25 +7,26 @@ public class ShrineGrid : MonoBehaviour {
     public bool debug;
     public bool isDone;
     public float size;
-    public int resolution;
+    public int resolution;  // res X res Number of squares in the grid
     public int maxSolItems; // max items for a solution
 
     private Dictionary<Vector2, List<GameObject>> curState;
     private Dictionary<Vector2, GameObject> targetState;
 
     public List<GameObject> validObjects;
+    private LayerMask not_terrain;
 
 	// Use this for initialization
 	void Start () {
         curState = new Dictionary<Vector2, List<GameObject>>();
 		targetState = new Dictionary<Vector2, GameObject>();
         //validObjects = new List<GameObject>();
+        not_terrain = ~(LayerMask.GetMask("Terrain"));
 
         // For testing
         
         
         genTargetState();
-        Debug.Log(targetState.Count);
 	}
 	
 	// Update is called once per frame
@@ -35,7 +36,7 @@ public class ShrineGrid : MonoBehaviour {
         if (!isDone)
         {
             updateCurState();
-            checkDone();
+            //checkDone();
         }
 	}
 
@@ -51,10 +52,22 @@ public class ShrineGrid : MonoBehaviour {
         // Find the relative position to that corner
         Vector3 offset = pos - corner;
 
+        float squareSize = size / resolution;
+
         // Round the relative position to grid coordinates
-        int x = Mathf.FloorToInt((resolution-1f) * offset.x / size);
-        int y = Mathf.FloorToInt((resolution-1f) * offset.z / size);
+        int x = Mathf.FloorToInt(offset.x / squareSize);
+        int y = Mathf.FloorToInt(offset.z / squareSize);
         return new Vector2(x, y);
+    }
+
+    // Returns point in center of grid square
+    private Vector3 gridToReal(Vector2 grid)
+    {
+  
+        float squareSize = size / resolution;
+        Vector3 corner = transform.position - new Vector3(0.5f * size, 0, 0.5f * size);
+        Vector3 offset = new Vector3(grid.x * squareSize,0,grid.y*squareSize);
+        return corner + offset;
     }
 
     private void updateCurState()
@@ -63,7 +76,7 @@ public class ShrineGrid : MonoBehaviour {
         curState.Clear();
         
         // Find all objects in our square range
-        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size*0.5f,10, size * 0.5f));
+        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size*0.5f,10, size * 0.5f),Quaternion.identity,not_terrain);
         foreach(Collider collider in colliders)
         {
             GameObject go = collider.gameObject;
@@ -73,10 +86,10 @@ public class ShrineGrid : MonoBehaviour {
             if (!curState.ContainsKey(gridPos)||curState[gridPos] == null)
                 curState[gridPos] = new List<GameObject>();
             // Make sure we don't add the same object twice
-            if (go.tag == "Object" && curState[gridPos].IndexOf(go)==-1)
-            {
+           // if (validObjects.IndexOf(go) !=-1 && curState[gridPos].IndexOf(go)==-1)
+           // {
                 curState[gridPos].Add(go);
-            }
+           // }
         }
     }
 
@@ -133,8 +146,33 @@ public class ShrineGrid : MonoBehaviour {
         {
             for (int j = 0; j < resolution; j++)
             {
-                Debug.DrawRay(corner+new Vector3(i*stepInterval,0,j*stepInterval),Vector3.up,Color.red,10);
+                Vector2 curGrid = new Vector2(i, j);
+                Vector3 cur = gridToReal(curGrid);
+                if (targetState.ContainsKey(curGrid) && !curState.ContainsKey(curGrid))
+                    drawSquare(curGrid,Color.red);
+                else if (targetState.ContainsKey(curGrid) && curState.ContainsKey(curGrid))
+                    drawSquare(curGrid, Color.green);
+                else if (curState.ContainsKey(curGrid))
+                    drawSquare(curGrid, Color.white);
+                else
+                    drawSquare(curGrid, Color.grey);
             }
         }
+    }
+    private void drawSquare(Vector2 pos, Color color)
+    {
+        Vector3 topleft = gridToReal(pos + Vector2.up);
+        Vector3 topright= gridToReal(pos + Vector2.right + Vector2.up);
+        Vector3 botleft = gridToReal(pos);
+        Vector3 botright = gridToReal(pos + Vector2.right);
+
+        // Top
+        Debug.DrawLine(topleft,topright,color);
+        // Bottom
+        Debug.DrawLine(botleft, botright, color);
+        // Left
+        Debug.DrawLine(botleft, topleft, color);
+        // Right
+        Debug.DrawLine(botright, topright, color);
     }
 }
