@@ -18,7 +18,7 @@ public class Sky : MonoBehaviour {
 
     void Start(){
 		changeSky(1.0f, new Color(0.5f, 0.5f, 0.5f, 1.0f), new Color(0.369f, 0.349f, 0.341f, 1.0f), 1.3f, 0); //default
-		//changeSky(1.0f, new Color(1.0f, 0.0f, 0.0f, 1.0f), new Color(0.369f, 0.349f, 0.341f, 1.0f), 1.3f, 10000); //red sky
+		changeSky(1.0f, new Color(1.0f, 0.0f, 0.0f, 1.0f), new Color(0.369f, 0.349f, 0.341f, 1.0f), 1.3f, 10000); //red sky
     }
 
     void Update(){
