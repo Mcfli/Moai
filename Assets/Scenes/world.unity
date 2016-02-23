@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 2000
+  chunk_size: 500
   chunk_resolution: 8
   chunk_load_dist: 10
   tree_load_dist: 1
@@ -247,18 +247,18 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
     - time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  amplitude: 1500
+  amplitude: 1000
 --- !u!1001 &827575385
 Prefab:
   m_ObjectHideFlags: 0
