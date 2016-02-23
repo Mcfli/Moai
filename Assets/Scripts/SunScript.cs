@@ -9,17 +9,15 @@ namespace UnityStandardAssets.Utility
         public float rot_speed;
 
         public float maxIntensity;
-        private float m_LastRealTime;
-        private bool speed;
-        private Light light;
+        //private float m_LastRealTime;
+        private Light sunLight;
         private Vector3 rot_vector;
 
         private void Start()
         {
             rot_vector = new Vector3(rot_speed, 0, 0);
-            m_LastRealTime = Time.realtimeSinceStartup;
-            speed = false;
-            light = GetComponent<Light>();
+            //m_LastRealTime = Time.realtimeSinceStartup;
+            sunLight = GetComponent<Light>();
         }
 
 
@@ -30,8 +28,8 @@ namespace UnityStandardAssets.Utility
             transform.Rotate(rot_vector * Time.deltaTime,Space.Self);
 
             // Modulate intensity
-            if (transform.eulerAngles.x < 180) light.intensity = (-Math.Abs(transform.eulerAngles.x - 90) / 90 + 1) * maxIntensity;
-            else light.intensity = 0;
+            if (transform.eulerAngles.x < 180) sunLight.intensity = (-Math.Abs(transform.eulerAngles.x - 90) / 90 + 1) * maxIntensity;
+            else sunLight.intensity = 0;
         }
 
     }

@@ -31,6 +31,7 @@ public class Water : MonoBehaviour {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
         cam.backgroundColor = new Color(0, 0.4f, 0.7f, 1);
+		noSkybox = null;
     }
 
     void Update()
