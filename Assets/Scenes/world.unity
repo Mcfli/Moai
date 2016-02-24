@@ -463,6 +463,14 @@ Prefab:
       propertyPath: m_Name
       value: Water4Advanced (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: b544816461f324e56a39767fdeb5b114, type: 2}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114, type: 2}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: b544816461f324e56a39767fdeb5b114, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b544816461f324e56a39767fdeb5b114, type: 2}
@@ -738,8 +746,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: -0.04616678, y: 0.16471973, z: 0.0077190194, w: 0.9852292}
-  m_LocalPosition: {x: -7.2695484, y: 263.84097, z: -16.132782}
+  m_LocalRotation: {x: -0.22725096, y: 0.33745393, z: 0.08430901, w: 0.9096009}
+  m_LocalPosition: {x: -6627.5103, y: -12732.556, z: -5162.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -984,8 +992,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: -0.04616678, y: 0.16471973, z: 0.0077190194, w: 0.9852292}
-  m_LocalPosition: {x: -7.2695484, y: 263.5607, z: -16.132853}
+  m_LocalRotation: {x: -0.22725096, y: 0.33745393, z: 0.08430901, w: 0.9096009}
+  m_LocalPosition: {x: -6627.5103, y: -12732.833, z: -5162.4185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1122,6 +1130,14 @@ Prefab:
     - target: {fileID: 11400004, guid: b544816461f324e56a39767fdeb5b114, type: 2}
       propertyPath: clearColor.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: b544816461f324e56a39767fdeb5b114, type: 2}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114, type: 2}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: b544816461f324e56a39767fdeb5b114, type: 2}
