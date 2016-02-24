@@ -16,9 +16,8 @@ public class Tree : MonoBehaviour {
     public float grow_speed_variance;
 
     public Vector3 saved_position;
-    public Vector3 saved_scale;
+    public float age;
     public Quaternion saved_rotation;
-
 
     private LayerMask treeMask;
     private bool done = false;
@@ -27,11 +26,12 @@ public class Tree : MonoBehaviour {
     private int numSpawned;
     UnityRandom rand = new UnityRandom();
     private float life;
-    
+    private Animation anim;
+    private float time_unloaded;
+
     public void saveTransforms()
     {
         saved_position = transform.position;
-        saved_scale = transform.localScale;
         saved_rotation = transform.rotation;
     }
 
@@ -51,23 +51,34 @@ public class Tree : MonoBehaviour {
         grow_speed_variance = tree.grow_speed_variance;
         saved_position = tree.saved_position;
         saved_rotation = tree.saved_rotation;
+        time_unloaded = tree.time_unloaded;
+        age = tree.age + (Globals.time) * grow_speed;
         transform.position = tree.saved_position;
         transform.rotation = tree.saved_rotation;
-        transform.localScale = tree.saved_scale;
+   
         done = tree.done;
         numSpawned = tree.numSpawned;
         life = tree.life;
+
+
+        
+        foreach (AnimationState state in anim)
+        {
+            state.time = age;
+        }
     }
 
     // Use this for initialization
     void Awake () {
+        anim = GetComponent<Animation>();
+        
+        age = 0.0f;
         life = max_life;
         treeMask = LayerMask.GetMask("Tree");
         spawn_delay += rand.Value() * 2 * spawn_delay_variance - spawn_delay_variance;
         Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
         numSpawned = 0;
         lastSpawned = Time.time;
-        transform.localScale = new Vector3(1, 1, 1);
         grow_speed += Random.value * 2 * grow_speed_variance - grow_speed_variance;
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
@@ -75,9 +86,11 @@ public class Tree : MonoBehaviour {
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-            {
+
+            if (hit.point.y < Globals.water_level)
+                Destroy(gameObject);
+            else
                 transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
-            }
         }
         else
         {
@@ -121,7 +134,7 @@ public class Tree : MonoBehaviour {
                 lastSpawned = Time.time;
                 squareVec = rand.PointInASquare();
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, 0, squareVec.y * radius + transform.position.z), RandomRotation);
+                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, transform.position.y + 10f, squareVec.y * radius + transform.position.z), RandomRotation);
                 numSpawned++;
                 if (spawn_limit > 0 && numSpawned >= spawn_limit)
                 {
@@ -157,11 +170,15 @@ public class Tree : MonoBehaviour {
 
     private void Grow()
     {
-        Vector3 v3Scale = new Vector3(target_scale, target_scale, target_scale);
+        time_unloaded = Globals.time;
+        if (age < 1000)
+            age += Globals.time_scale * grow_speed;
+        foreach (AnimationState state in anim)
+        {
+            //state.speed = Globals.time_scale*grow_speed;
+            state.time = age;
 
-        if (transform.localScale.x < target_scale)
-            transform.localScale += v3Scale * grow_speed * Globals.time_scale;
-        else if (transform.localScale.x > target_scale)
-            transform.localScale = v3Scale;
+        }
+        
     }
 }
