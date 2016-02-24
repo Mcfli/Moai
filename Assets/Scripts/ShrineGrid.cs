@@ -114,7 +114,14 @@ public class ShrineGrid : MonoBehaviour {
                 //Debug.Log("Some object here, but not goal");
                 isDone = false;
                 return;
-            }   
+            }
+
+            // if there are other puzzle objects in the cell, it can't be complete
+            if (curState[cell].Count > 1)
+            {
+                isDone = false;
+                return;
+            }
 		}
         // looped through all and did not return false, so we found all of them
         isDone = true;
