@@ -14,6 +14,7 @@ public class GenerationManager : MonoBehaviour {
     public GameObject player;
     public ChunkGenerator chunkGen;
     public TreeManager tree_manager;
+    public WeatherManager weather_manager;
 
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
@@ -23,6 +24,7 @@ public class GenerationManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
+        weather_manager = gameObject.GetComponent<WeatherManager>();
         chunkGen.chunk_size = chunk_size;
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
@@ -48,6 +50,7 @@ public class GenerationManager : MonoBehaviour {
             unloadTrees();
             loadChunks();
             loadTrees();
+            weather_manager.moveWithPlayer();
         }
     }
 
