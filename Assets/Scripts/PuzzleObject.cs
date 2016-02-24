@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class PuzzleObject : MonoBehaviour, IEquatable<PuzzleObject>
 {
     public string type;
+    public Texture2D image;
     public bool Equals(PuzzleObject other)
     {
         return type.Equals(other.type);

@@ -9,6 +9,7 @@ public class ShrineGrid : MonoBehaviour {
     public float size;
     public int resolution;  // res X res Number of squares in the grid
     public int maxSolItems; // max items for a solution
+    public GameObject mural;
 
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
@@ -24,8 +25,8 @@ public class ShrineGrid : MonoBehaviour {
         notTerrain = ~(LayerMask.GetMask("Terrain"));
 
         // For testing
-        
-        
+
+        createMural();
         genTargetState();
         updateCurState();
     }
@@ -139,6 +140,13 @@ public class ShrineGrid : MonoBehaviour {
             GameObject placeObj = validObjects[index];
             targetState[place] = placeObj.GetComponent<PuzzleObject>();
         }
+    }
+
+    private void createMural()
+    {
+        Vector3 offset = new Vector3(Random.value * 5,0,Random.value * 5);
+        GameObject localMural = Instantiate(mural,transform.position + offset, Quaternion.identity) as GameObject;
+        localMural.GetComponent<Mural>().generateTexture(targetState);
     }
 
     private void drawGrid()
