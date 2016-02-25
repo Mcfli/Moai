@@ -28,21 +28,36 @@ public class Mural : MonoBehaviour {
         }
 
         
-
+        
         foreach (KeyValuePair<Vector2,PuzzleObject> pair in state)
         {
             
             Vector2 coord = pair.Key;
             PuzzleObject obj = pair.Value;
             Texture2D image = obj.image;
-            
+
+            // The coordinates for texturing are mirrored, so we need to flip the cord values
+            coord.x = (numSquares-1) - coord.x;
+            coord.y = (numSquares - 1) - coord.y;
+
             // Calculate where to start adding these pixels to new
-            int offset = (int)coord.x * imageRes + (int)coord.y * imageRes * numSquares;
-            Debug.Log(offset);
-            
+            int offx = (int)coord.x * imageRes;
+            int offy = (int)coord.y * imageRes * imageRes * numSquares; 
+           
+
+            Color[] pixels = image.GetPixels();
             // Add image pixels to newPixels
-            Array.Copy(image.GetPixels(),0,newPixels, offset, imageRes *imageRes);   
+            for(int i = 0; i < imageRes; i++)
+            {
+                for (int j = 0; j < imageRes; j++)
+                {
+                    Color newColor = pixels[j + i * imageRes];
+                    newPixels[j + i * numSquares * imageRes + offx + offy] = newColor;
+                }
+            }
         }
+
+
 
         muralTex.SetPixels(newPixels);
         muralTex.Apply();

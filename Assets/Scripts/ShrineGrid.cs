@@ -146,7 +146,7 @@ public class ShrineGrid : MonoBehaviour {
 
     private void createMural()
     {
-        Vector3 offset = new Vector3(Random.value * 5,0,Random.value * 5);
+        Vector3 offset = new Vector3(0,0,5);
         GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
         localMural.GetComponent<Mural>().generateTexture(targetState);
     }
