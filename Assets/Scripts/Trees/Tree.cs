@@ -17,6 +17,8 @@ public class Tree : MonoBehaviour {
     public float life_span;
     public AnimationCurve height_vs_time;
 
+    public GameObject fire;
+
     public Vector3 saved_position;
     public float age;
     public Quaternion saved_rotation;
@@ -74,6 +76,7 @@ public class Tree : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         anim = GetComponent<Animation>();
+        fire = Resources.Load("fire") as GameObject;
         
         age = 0.0f;
         life = max_life;
@@ -188,5 +191,10 @@ public class Tree : MonoBehaviour {
         GetComponent<BoxCollider>().size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
         GetComponent<BoxCollider>().center = new Vector3(0, target_scale*growth*0.5f, 0);
 
+    }
+
+    void OnMouseDown()
+    {
+        GameObject instance = (GameObject)Instantiate(fire, transform.position, Quaternion.identity);
     }
 }

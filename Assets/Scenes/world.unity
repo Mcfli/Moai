@@ -613,8 +613,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: 0.004267279, y: 0.4665033, z: 0.002249994, w: -0.88450634}
-  m_LocalPosition: {x: 590.09216, y: 603.1852, z: -425.35104}
+  m_LocalRotation: {x: 0.11234064, y: 0.87782097, z: 0.25176528, w: -0.39169413}
+  m_LocalPosition: {x: 2.990986, y: 263.42813, z: 7.6842256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -715,7 +715,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RunSpeed
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Name
@@ -724,6 +724,10 @@ Prefab:
     - target: {fileID: 2000000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: far clip plane
       value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_WalkSpeed
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -859,8 +863,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: 0.004267279, y: 0.4665033, z: 0.002249994, w: -0.88450634}
-  m_LocalPosition: {x: 590.09216, y: 602.9052, z: -425.3509}
+  m_LocalRotation: {x: 0.11234064, y: 0.87782097, z: 0.25176528, w: -0.39169413}
+  m_LocalPosition: {x: 2.990986, y: 263.14786, z: 7.684154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
