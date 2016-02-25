@@ -18,24 +18,27 @@ public class Mural : MonoBehaviour {
     // Generate mural texture based on a target state
     public void generateTexture(Dictionary<Vector2,PuzzleObject> state)
     {
-        Color[] newPixels = new Color[imageRes*imageRes];
+       
+        muralTex = new Texture2D(imageRes * numSquares, imageRes * numSquares,TextureFormat.ARGB32,false);
+        
+        Color[] newPixels = new Color[imageRes * numSquares * imageRes * numSquares];
         for(int i = 0; i< newPixels.Length; i++)
         {
             newPixels[i] = muralColor;
         }
 
-        foreach(KeyValuePair<Vector2,PuzzleObject> pair in state)
+        
+
+        foreach (KeyValuePair<Vector2,PuzzleObject> pair in state)
         {
+            
             Vector2 coord = pair.Key;
             PuzzleObject obj = pair.Value;
             Texture2D image = obj.image;
-
-            // Rescale image to correct size
-            image.Resize(imageRes,imageRes);
-            image.Apply();
-
+            
             // Calculate where to start adding these pixels to new
             int offset = (int)coord.x * imageRes + (int)coord.y * imageRes * numSquares;
+            Debug.Log(offset);
             
             // Add image pixels to newPixels
             Array.Copy(image.GetPixels(),0,newPixels, offset, imageRes *imageRes);   
@@ -43,7 +46,7 @@ public class Mural : MonoBehaviour {
 
         muralTex.SetPixels(newPixels);
         muralTex.Apply();
-        gameObject.GetComponent<Renderer>().material.mainTexture = muralTex;
+        gameObject.GetComponent<Renderer>().materials[1].mainTexture = muralTex;
     }
 
     

@@ -26,9 +26,11 @@ public class ShrineGrid : MonoBehaviour {
 
         // For testing
 
-        createMural();
+      
         genTargetState();
         updateCurState();
+
+        createMural();
     }
 	
 	// Update is called once per frame
@@ -145,7 +147,7 @@ public class ShrineGrid : MonoBehaviour {
     private void createMural()
     {
         Vector3 offset = new Vector3(Random.value * 5,0,Random.value * 5);
-        GameObject localMural = Instantiate(mural,transform.position + offset, Quaternion.identity) as GameObject;
+        GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
         localMural.GetComponent<Mural>().generateTexture(targetState);
     }
 
