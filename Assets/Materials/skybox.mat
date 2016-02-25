@@ -153,7 +153,7 @@ Material:
       data:
         first:
           name: _Intensity
-        second: 1.09
+        second: 1
       data:
         first:
           name: _Exponent
@@ -230,11 +230,11 @@ Material:
       data:
         first:
           name: _Color1
-        second: {r: 0, g: 0.73529434, b: 1, a: 0}
+        second: {r: 0.22, g: 0.6, b: 1, a: 1}
       data:
         first:
           name: _Color2
-        second: {r: 1, g: 0, b: 0, a: 0}
+        second: {r: 0.8, g: 0.592, b: 0.961, a: 1}
       data:
         first:
           name: _UpVector
@@ -242,7 +242,7 @@ Material:
       data:
         first:
           name: _Color3
-        second: {r: 1, g: 0, b: 0, a: 0}
+        second: {r: 0.867, g: 0.753, b: 0.659, a: 1}
       data:
         first:
           name: _SkyColor1
