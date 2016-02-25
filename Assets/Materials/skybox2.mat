@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: skybox
-  m_Shader: {fileID: 4800000, guid: c4d18cbad9e484771bc509c0d9d033c7, type: 3}
-  m_ShaderKeywords: _SUNDISK_SIMPLE
+  m_Name: skybox2
+  m_Shader: {fileID: 4800000, guid: 1b1032babd6d64921a50506aa07cf3b2, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 1000
   stringTagMap: {}
@@ -78,13 +78,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Cubemap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -100,22 +93,6 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Exposure
-        second: 1.3
-      data:
-        first:
-          name: _SunDisk
-        second: 1
-      data:
-        first:
-          name: _SunSize
-        second: 0.04
-      data:
-        first:
-          name: _AtmosphereThickness
-        second: 1
-      data:
-        first:
           name: _Parallax
         second: 0.02
       data:
@@ -125,7 +102,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: 0.5
       data:
         first:
           name: _BumpScale
@@ -153,11 +130,11 @@ Material:
       data:
         first:
           name: _Intensity
-        second: 1.09
+        second: 1
       data:
         first:
           name: _Exponent
-        second: 1
+        second: 3
       data:
         first:
           name: _UpVectorPitch
@@ -165,51 +142,7 @@ Material:
       data:
         first:
           name: _UpVectorYaw
-        second: 17.49
-      data:
-        first:
-          name: _Exponent1
-        second: 1
-      data:
-        first:
-          name: _Exponent2
-        second: 1
-      data:
-        first:
-          name: _YawAngle
         second: 0
-      data:
-        first:
-          name: _SkyExponent1
-        second: 8.5
-      data:
-        first:
-          name: _SkyExponent2
-        second: 3
-      data:
-        first:
-          name: _SkyIntensity
-        second: 1
-      data:
-        first:
-          name: _SunIntensity
-        second: 2
-      data:
-        first:
-          name: _SunAlpha
-        second: 584.26
-      data:
-        first:
-          name: _SunBeta
-        second: 25.7
-      data:
-        first:
-          name: _SunAzimuth
-        second: 25
-      data:
-        first:
-          name: _SunAltitude
-        second: 14
     m_Colors:
       data:
         first:
@@ -221,45 +154,13 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _SkyTint
-        second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-      data:
-        first:
-          name: _GroundColor
-        second: {r: 0.369, g: 0.349, b: 0.341, a: 1}
-      data:
-        first:
           name: _Color1
-        second: {r: 0, g: 0.73529434, b: 1, a: 0}
+        second: {r: 1, g: 1, b: 1, a: 0}
       data:
         first:
           name: _Color2
-        second: {r: 1, g: 0, b: 0, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _UpVector
-        second: {r: 0, g: 1, b: -0, a: 0}
-      data:
-        first:
-          name: _Color3
-        second: {r: 1, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: _SkyColor1
-        second: {r: 0.37, g: 0.52, b: 0.73, a: 0}
-      data:
-        first:
-          name: _SkyColor2
-        second: {r: 0.89, g: 0.96, b: 1, a: 0}
-      data:
-        first:
-          name: _SkyColor3
-        second: {r: 0.89, g: 0.89, b: 0.89, a: 0}
-      data:
-        first:
-          name: _SunColor
-        second: {r: 1, g: 0.99, b: 0.87, a: 1}
-      data:
-        first:
-          name: _SunVector
-        second: {r: 0.4100647, g: 0.2419219, b: 0.87938654, a: 0}
+        second: {r: -0, g: 1, b: 0, a: 0}
