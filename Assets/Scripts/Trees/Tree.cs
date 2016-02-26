@@ -14,6 +14,8 @@ public class Tree : MonoBehaviour {
     public float target_scale;
     public float grow_speed;
     public float grow_speed_variance;
+    public float life_span;
+    public AnimationCurve height_vs_time;
 
     public Vector3 saved_position;
     public float age;
@@ -61,6 +63,7 @@ public class Tree : MonoBehaviour {
         life = tree.life;
 
 
+
         
         foreach (AnimationState state in anim)
         {
@@ -103,7 +106,8 @@ public class Tree : MonoBehaviour {
         stickToGround();
         Cull();
         Grow();
-        Propogate();
+        if(age >= 0.03)
+            Propogate();
     }
 
     private void stickToGround()
@@ -148,7 +152,7 @@ public class Tree : MonoBehaviour {
     private void Cull()
     {
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cull_radius, treeMask);
-        if (objectsInRange.Length > cull_max_density)
+        if (age > life_span || objectsInRange.Length > cull_max_density)
         {
             life -= 1;
             if(life <= 0)
@@ -170,6 +174,7 @@ public class Tree : MonoBehaviour {
 
     private void Grow()
     {
+        float anim_progress = 0.0f;
         time_unloaded = Globals.time;
         if (age < 1000)
             age += Globals.time_scale * grow_speed;
@@ -177,8 +182,11 @@ public class Tree : MonoBehaviour {
         {
             //state.speed = Globals.time_scale*grow_speed;
             state.time = age;
-
+            anim_progress = state.time / state.length;
         }
-        
+        float growth = height_vs_time.Evaluate(anim_progress);
+        GetComponent<BoxCollider>().size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
+        GetComponent<BoxCollider>().center = new Vector3(0, target_scale*growth*0.5f, 0);
+
     }
 }

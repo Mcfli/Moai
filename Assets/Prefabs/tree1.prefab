@@ -815,6 +815,23 @@ MonoBehaviour:
   target_scale: 10
   grow_speed: 0.0001
   grow_speed_variance: 0.00005
+  life_span: 50
+  height_vs_time:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
@@ -992,6 +1009,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: height_vs_time.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: buttonName
       value: Wait
       objectReference: {fileID: 0}
@@ -1086,6 +1107,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_CastShadows
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: height_vs_time.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: life_span
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
