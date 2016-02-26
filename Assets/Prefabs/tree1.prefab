@@ -815,7 +815,11 @@ MonoBehaviour:
   target_scale: 10
   grow_speed: 0.0001
   grow_speed_variance: 0.00005
+<<<<<<< HEAD
   life_span: 50
+=======
+  life_span: 10
+>>>>>>> TreeBurning
   height_vs_time:
     serializedVersion: 2
     m_Curve:
@@ -835,6 +839,10 @@ MonoBehaviour:
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
+  pickup_obj: {fileID: 0}
+  player: {fileID: 0}
+  cul_spread: 100
+  onFire: 0
 --- !u!137 &13740370
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1114,7 +1122,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: life_span
+<<<<<<< HEAD
       value: 50
+=======
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cul_spread
+      value: 100
+>>>>>>> TreeBurning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
