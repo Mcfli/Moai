@@ -108,7 +108,7 @@ MonoBehaviour:
   cull_layer:
     serializedVersion: 2
     m_Bits: 257
-  cull_radius: 10
+  cull_radius: 5
   life_length: 5000
 --- !u!114 &11464970
 MonoBehaviour:
@@ -148,7 +148,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Material

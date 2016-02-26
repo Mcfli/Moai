@@ -8,6 +8,7 @@ public class ShrineGrid : MonoBehaviour {
     public bool isDone;
     public float size;
     public int resolution;  // res X res Number of squares in the grid
+    public int minSolItems; // max items for a solution
     public int maxSolItems; // max items for a solution
     public GameObject mural;
     public GameObject glow;
@@ -116,7 +117,7 @@ public class ShrineGrid : MonoBehaviour {
                 return;
             }
             tarObj = targetState[cell].GetComponent<PuzzleObject>();
-
+            
             // if we don't currently have the desired item in the cell, it can't be complete    
             if (curState[cell].IndexOf(tarObj) == -1)
             {
@@ -124,10 +125,13 @@ public class ShrineGrid : MonoBehaviour {
                 isDone = false;
                 return;
             }
+            bool wtf = curState[cell].Count > 1;
+            
 
             // if there are other puzzle objects in the cell, it can't be complete
-            if (curState[cell].Count > 1)
+            if (wtf)
             {
+                Debug.Log(wtf);
                 isDone = false;
                 return;
             }
@@ -141,10 +145,13 @@ public class ShrineGrid : MonoBehaviour {
     private void genTargetState()
     {
         int numItems = 0;
-        numItems = Random.Range(1, maxSolItems);
+        numItems = Random.Range(minSolItems, maxSolItems);
         for (int i = 0; i < numItems; i++)
         {
+            Vector2 centerSquare = new Vector2(Mathf.Floor(resolution/2), Mathf.Floor(resolution / 2));
             Vector2 place = new Vector2(Random.Range(0, resolution),Random.Range(0, resolution));
+            while(place == centerSquare)
+                place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
             int index = Random.Range(0, validObjects.Count-1);
             GameObject placeObj = validObjects[index];
             targetState[place] = placeObj.GetComponent<PuzzleObject>();
@@ -221,7 +228,7 @@ public class ShrineGrid : MonoBehaviour {
                 List<PuzzleObject> inCell = curState[curGrid];
                 PuzzleObject targetItem = targetState[curGrid];
 
-                if (inCell != null && inCell.Contains(targetItem))
+                if (inCell != null && inCell.Count == 1 && inCell.Contains(targetItem))
                 {
                     if (!glowGrid.ContainsKey(curGrid))
                     {
@@ -236,7 +243,7 @@ public class ShrineGrid : MonoBehaviour {
                         glowInstance.name = "Glow "+curGrid;
                     }
                 }
-                else if (inCell != null && !inCell.Contains(targetItem))
+                else if (inCell != null && (inCell.Count != 1 || !inCell.Contains(targetItem)))
                 {
                     if (!glowGrid.ContainsKey(curGrid))
                     {

@@ -270,6 +270,10 @@ Prefab:
       propertyPath: vertexPillar
       value: 
       objectReference: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
+    - target: {fileID: 11458850, guid: 678feba97db6b9044934c154b8891552, type: 2}
+      propertyPath: minSolItems
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 678feba97db6b9044934c154b8891552, type: 2}
   m_IsPrefabParent: 0
