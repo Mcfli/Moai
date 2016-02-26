@@ -811,8 +811,8 @@ MonoBehaviour:
   spawn_delay: 5
   spawn_delay_variance: 2
   spawn_limit: 0
-  cull_radius: 80
-  cull_max_density: 5
+  cull_radius: 0
+  cull_max_density: 2
   target_scale: 10
   grow_speed: 0.0001
   grow_speed_variance: 0.00005
@@ -1075,11 +1075,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_max_density
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x

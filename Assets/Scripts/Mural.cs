@@ -13,6 +13,7 @@ public class Mural : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         muralTex = new Texture2D(imageRes*numSquares,imageRes*numSquares);
+        snapToTerrain();
 	}
 
     // Generate mural texture based on a target state
@@ -26,8 +27,6 @@ public class Mural : MonoBehaviour {
         {
             newPixels[i] = muralColor;
         }
-
-        
         
         foreach (KeyValuePair<Vector2,PuzzleObject> pair in state)
         {
@@ -44,6 +43,7 @@ public class Mural : MonoBehaviour {
             int offx = (int)coord.x * imageRes;
             int offy = (int)coord.y * imageRes * imageRes * numSquares; 
            
+          
 
             Color[] pixels = image.GetPixels();
             // Add image pixels to newPixels
@@ -51,18 +51,41 @@ public class Mural : MonoBehaviour {
             {
                 for (int j = 0; j < imageRes; j++)
                 {
-                    Color newColor = pixels[j + i * imageRes];
+                    Color newColor = new Color();
+                    Color imgColor = pixels[j + i * imageRes];
+                    Color bgColor = newPixels[j + i * numSquares * imageRes + offx + offy];
+
+                    newColor.a = 1 - (1 - newColor.a) * (1 - bgColor.a);        // alpha 
+                    newColor.r = imgColor.r * imgColor.a / newColor.a + bgColor.r * bgColor.a * (1 - imgColor.a) / newColor.a; // Red
+                    newColor.g = imgColor.g * imgColor.a / newColor.a + bgColor.g * bgColor.a * (1 - imgColor.a) / newColor.a; // Green
+                    newColor.b = imgColor.b * imgColor.a / newColor.a + bgColor.b * bgColor.a * (1 - imgColor.a) / newColor.a; // Blue
                     newPixels[j + i * numSquares * imageRes + offx + offy] = newColor;
                 }
             }
         }
-
-
 
         muralTex.SetPixels(newPixels);
         muralTex.Apply();
         gameObject.GetComponent<Renderer>().materials[1].mainTexture = muralTex;
     }
 
-    
+    private void snapToTerrain()
+    {
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+        {
+
+            if (hit.point.y < Globals.water_level)
+                Destroy(gameObject);
+            else
+                transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -10,26 +10,31 @@ public class ShrineGrid : MonoBehaviour {
     public int resolution;  // res X res Number of squares in the grid
     public int maxSolItems; // max items for a solution
     public GameObject mural;
+    public GameObject glow;
 
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
 
     public List<GameObject> validObjects;
     private LayerMask notTerrain;
+    private LayerMask glowLayer;
+
+    private Dictionary<Vector2,bool> glowGrid;
 
 	// Use this for initialization
 	void Start () {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
+        glowGrid = new Dictionary<Vector2, bool>();
         //validObjects = new List<GameObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
+        glowLayer = LayerMask.GetMask("Glow");
 
-        // For testing
-
-      
+        // For testing      
         genTargetState();
         updateCurState();
 
+        snapToTerrain();
         createMural();
     }
 	
@@ -42,6 +47,7 @@ public class ShrineGrid : MonoBehaviour {
             updateCurState();
             checkDone();
         }
+        drawGlows();
 	}
 
     public void enablePlacementItem(GameObject item)
@@ -128,6 +134,7 @@ public class ShrineGrid : MonoBehaviour {
 		}
         // looped through all and did not return false, so we found all of them
         isDone = true;
+        complete();
     }
 
     // Uses a random Vector2 based on the resolution size and uses a random index based on the count in validObjects to populate targetState dictionary.
@@ -146,15 +153,13 @@ public class ShrineGrid : MonoBehaviour {
 
     private void createMural()
     {
-        Vector3 offset = new Vector3(0,0,5);
+        Vector3 offset = new Vector3(10,0,5);
         GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
         localMural.GetComponent<Mural>().generateTexture(targetState);
     }
 
     private void drawGrid()
     {
-        float stepInterval = size / (resolution-1f);
-        Vector3 corner = transform.position - new Vector3(0.5f * size, 0, 0.5f * size);
         for (int i = 0; i < resolution; i++)
         {
             for (int j = 0; j < resolution; j++)
@@ -187,5 +192,76 @@ public class ShrineGrid : MonoBehaviour {
         Debug.DrawLine(botleft, topleft, color);
         // Right
         Debug.DrawLine(botright, topright, color);
+    }
+
+    private void drawGlows()
+    {
+        for (int i = 0; i < resolution; i++)
+        {
+            for (int j = 0; j < resolution; j++)
+            {
+                Vector2 curGrid = new Vector2(i, j);
+                Vector3 cur = gridToReal(curGrid);
+
+                if (!curState.ContainsKey(curGrid)) continue;
+                if (!targetState.ContainsKey(curGrid)) continue;
+                List<PuzzleObject> inCell = curState[curGrid];
+                PuzzleObject targetItem = targetState[curGrid];
+
+                if (inCell != null && inCell.Contains(targetItem))
+                {
+                    if (!glowGrid.ContainsKey(curGrid))
+                    {
+                        glowGrid[curGrid] = false;
+                    }
+                    if(!glowGrid[curGrid])
+                    {
+                        
+                        glowGrid[curGrid] = true;
+                        GameObject glowInstance = Instantiate(glow, cur + new Vector3(size/resolution*0.5f,0, size / resolution * 0.5f),
+                            Quaternion.identity) as GameObject;
+                        glowInstance.name = "Glow "+curGrid;
+                    }
+                }
+                else if (inCell != null && !inCell.Contains(targetItem))
+                {
+                    if (!glowGrid.ContainsKey(curGrid))
+                    {
+                        glowGrid[curGrid] = false;
+                    }
+                    if (glowGrid[curGrid])
+                    {
+                        glowGrid[curGrid] = false;
+                        GameObject glowInstance = GameObject.Find("Glow " + curGrid);
+                        Destroy(glowInstance);
+                    }
+                }
+            }
+        }
+    }
+
+    private void complete()
+    {
+        GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
+    }
+
+    private void snapToTerrain()
+    {
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+        {
+
+            if (hit.point.y < Globals.water_level)
+                Destroy(gameObject);
+            else
+                transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

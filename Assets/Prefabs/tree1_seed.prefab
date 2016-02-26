@@ -108,7 +108,7 @@ MonoBehaviour:
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
-  cull_radius: 60
+  cull_radius: 10
   life_length: 5000
 --- !u!114 &11464970
 MonoBehaviour:
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Seed
+  image: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -147,7 +148,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cull_radius
-      value: 60
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Material
