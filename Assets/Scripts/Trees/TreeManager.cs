@@ -55,6 +55,7 @@ public class TreeManager : MonoBehaviour {
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
 
                     GameObject new_tree = Instantiate(prefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
+                    new_tree.GetComponent<Tree>().age = Random.value * 10.0f;
                 }     
             }
         }
