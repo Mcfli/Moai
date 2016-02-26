@@ -96,6 +96,7 @@ MonoBehaviour:
   maxSolItems: 1
   mural: {fileID: 168210, guid: 5caf8acbbe16f604f90b8c73a5f0691a, type: 2}
   glow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
+  vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
   validObjects:
   - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
 --- !u!1001 &100100000
@@ -113,6 +114,10 @@ Prefab:
       propertyPath: glow
       value: 
       objectReference: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: vertexPillar
+      value: 
+      objectReference: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106806}

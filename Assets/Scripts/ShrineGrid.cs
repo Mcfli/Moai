@@ -11,6 +11,7 @@ public class ShrineGrid : MonoBehaviour {
     public int maxSolItems; // max items for a solution
     public GameObject mural;
     public GameObject glow;
+    public GameObject vertexPillar;
 
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
@@ -34,8 +35,9 @@ public class ShrineGrid : MonoBehaviour {
         genTargetState();
         updateCurState();
 
-        snapToTerrain();
+        transform.position = snapToTerrain(transform.position);
         createMural();
+        createPillars();
     }
 	
 	// Update is called once per frame
@@ -73,7 +75,6 @@ public class ShrineGrid : MonoBehaviour {
     // Returns point in center of grid square
     private Vector3 gridToReal(Vector2 grid)
     {
-  
         float squareSize = size / resolution;
         Vector3 corner = transform.position - new Vector3(0.5f * size, 0, 0.5f * size);
         Vector3 offset = new Vector3(grid.x * squareSize,0,grid.y*squareSize);
@@ -99,7 +100,6 @@ public class ShrineGrid : MonoBehaviour {
             PuzzleObject po = go.GetComponent<PuzzleObject>();
             if(po != null)
                 curState[gridPos].Add(po);
-            
         }
     }
 
@@ -156,6 +156,19 @@ public class ShrineGrid : MonoBehaviour {
         Vector3 offset = new Vector3(10,0,5);
         GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
         localMural.GetComponent<Mural>().generateTexture(targetState);
+    }
+
+    private void createPillars()
+    {
+        for (int i = 0; i <= resolution; i++)
+        {
+            for (int j = 0; j <= resolution; j++)
+            {
+                Vector2 curGrid = new Vector2(i, j);
+                Vector3 cur = gridToReal(curGrid);
+                Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation);
+            }
+        }
     }
 
     private void drawGrid()
@@ -245,23 +258,17 @@ public class ShrineGrid : MonoBehaviour {
         GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
     }
 
-    private void snapToTerrain()
+    private Vector3 snapToTerrain(Vector3 pos)
     {
+        Vector3 ret = pos;
         RaycastHit hit;
-        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
+        Ray rayDown = new Ray(new Vector3(pos.x, 10000000, pos.z), Vector3.down);
         int terrain = LayerMask.GetMask("Terrain");
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-
-            if (hit.point.y < Globals.water_level)
-                Destroy(gameObject);
-            else
-                transform.position = new Vector3(transform.position.x, hit.point.y + 0.5f, transform.position.z);
+            ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        return ret;
     }
 }

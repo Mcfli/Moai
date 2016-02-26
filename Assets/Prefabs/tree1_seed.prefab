@@ -107,7 +107,7 @@ MonoBehaviour:
   spawn_object: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
   cull_layer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   cull_radius: 10
   life_length: 5000
 --- !u!114 &11464970
@@ -173,7 +173,7 @@ Prefab:
       objectReference: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
     - target: {fileID: 0}
       propertyPath: cull_layer.m_Bits
-      value: 256
+      value: 257
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Mesh
