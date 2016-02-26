@@ -815,7 +815,7 @@ MonoBehaviour:
   target_scale: 10
   grow_speed: 0.0001
   grow_speed_variance: 0.00005
-  life_span: 0
+  life_span: 50
   height_vs_time:
     serializedVersion: 2
     m_Curve:
@@ -1111,6 +1111,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: height_vs_time.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: life_span
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
