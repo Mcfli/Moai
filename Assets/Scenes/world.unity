@@ -100,6 +100,7 @@ GameObject:
   - 114: {fileID: 188005515}
   - 114: {fileID: 188005516}
   - 114: {fileID: 188005517}
+  - 114: {fileID: 188005518}
   m_Layer: 0
   m_Name: WorldGen
   m_TagString: Untagged
@@ -259,6 +260,23 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   amplitude: 1000
+--- !u!114 &188005518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda46a668a796684c88692efa5ef9705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeresPerDegree: 10
+  SunLight: {fileID: 923083880}
+  sunMaxIntensity: 1
+  MoonLight: {fileID: 1694056955}
+  MoonMaxIntensity: 0.5
+  horizonBufferAngle: 30
 --- !u!1 &680840916
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 680840916}
   m_LocalRotation: {x: 0.7071066, y: 0, z: 0, w: -0.70710695}
   m_LocalPosition: {x: 0, y: 0, z: 10000}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 75, y: 1, z: 75}
   m_Children: []
   m_Father: {fileID: 923083882}
   m_RootOrder: 1
@@ -360,7 +378,7 @@ Transform:
   m_GameObject: {fileID: 795434271}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: -10000}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 150, y: 1, z: 150}
   m_Children: []
   m_Father: {fileID: 923083882}
   m_RootOrder: 2
@@ -641,7 +659,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 923083882}
   - 108: {fileID: 923083881}
-  - 114: {fileID: 923083883}
   m_Layer: 0
   m_Name: SunLight
   m_TagString: Untagged
@@ -697,20 +714,6 @@ Transform:
   - {fileID: 795434272}
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &923083883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923083880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cfb2771732d5eb45b02393bd43792fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1837165586}
-  timeresPerDegree: 1
-  maxIntensity: 1
 --- !u!1 &993669099
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,8 +779,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 993669099}
-  m_LocalRotation: {x: 0.03343383, y: -0.9627662, z: 0.1410734, w: 0.22817054}
-  m_LocalPosition: {x: -83.04012, y: 218.76675, z: -130.56729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 264.85974, z: 4.9999294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -838,8 +841,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 265.14, z: 5}
+  m_LocalRotation: {x: 0.062281605, y: 0.9007744, z: 0.13780652, w: -0.40710667}
+  m_LocalPosition: {x: 568.5311, y: -1449.8801, z: 3623.7488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -936,8 +939,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1293103743}
-  m_LocalRotation: {x: 0.03343383, y: -0.9627662, z: 0.1410734, w: 0.22817054}
-  m_LocalPosition: {x: -83.04012, y: 219.04694, z: -130.56718}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 265.14, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1141,8 +1144,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 264.85974, z: 4.9999294}
+  m_LocalRotation: {x: 0.062281605, y: 0.9007744, z: 0.13780652, w: -0.40710667}
+  m_LocalPosition: {x: 568.5311, y: -1450.1627, z: 3623.7476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1192,17 +1195,6 @@ MonoBehaviour:
   wait_speed_init: 1
   wait_speed_max: 1e+14
   wait_speed_growth: 1
---- !u!114 &1837165588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1837165586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda46a668a796684c88692efa5ef9705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1837165592
 MonoBehaviour:
   m_ObjectHideFlags: 0
