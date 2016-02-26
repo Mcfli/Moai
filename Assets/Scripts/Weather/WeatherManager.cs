@@ -25,9 +25,11 @@ public class WeatherManager : MonoBehaviour {
     private float last_updated;
     private ParticleSystem rain;
     private ParticleSystem snow;
+    private GameObject player;
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         last_updated = Time.time;
         clouds = new List<GameObject>();
         Globals.cur_weather = "sunny";
@@ -111,5 +113,11 @@ public class WeatherManager : MonoBehaviour {
             GameObject c = Instantiate(cloud);
             clouds.Add(c);
         }
+    }
+
+    public void moveWithPlayer()
+    {
+        rain.transform.position = player.transform.position + new Vector3(0, 300, 0);
+        snow.transform.position = player.transform.position + new Vector3(0, 300, 0);
     }
 }

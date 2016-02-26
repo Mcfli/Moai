@@ -807,8 +807,8 @@ MonoBehaviour:
   seed_object: {fileID: 148458, guid: 4e454d89427b0e643a1d1af75fa2ddf3, type: 2}
   max_life: 10
   radius: 100
-  spawn_delay: 5
-  spawn_delay_variance: 2
+  spawn_delay: 20
+  spawn_delay_variance: 4
   spawn_limit: 0
   cull_radius: 80
   cull_max_density: 5
@@ -1058,7 +1058,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_delay_variance
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: grow_speed_variance
@@ -1074,7 +1074,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_delay
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawn_limit
