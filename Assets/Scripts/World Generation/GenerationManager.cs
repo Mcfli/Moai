@@ -15,6 +15,7 @@ public class GenerationManager : MonoBehaviour {
     public ChunkGenerator chunkGen;
     public TreeManager tree_manager;
     public WeatherManager weather_manager;
+    public List<Biome> biomes;
 
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
@@ -44,7 +45,7 @@ public class GenerationManager : MonoBehaviour {
         float player_y = player.transform.position.z; // In unity, y is vertical displacement
         Vector2 player_chunk = new Vector2(Mathf.FloorToInt(player_x/chunk_size), Mathf.FloorToInt(player_y / chunk_size));
         if(cur_chunk != player_chunk)
-        {
+        { 
             cur_chunk = player_chunk;
             unloadChunks();
             unloadTrees();
@@ -63,8 +64,7 @@ public class GenerationManager : MonoBehaviour {
                 Vector2 this_chunk = new Vector2(x, y);
                 if (!loaded_chunks.Contains(this_chunk))
                 {
-                    generateChunk(x,y);
-                    
+                    generateChunk(this_chunk);
                     loaded_chunks.Add(this_chunk);
                 }
             }
@@ -73,15 +73,17 @@ public class GenerationManager : MonoBehaviour {
 
     void loadTrees()
     {
+        
         for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
         {
             for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
             {
                 Vector2 this_chunk = new Vector2(x, y);
+                Biome curBiome = chooseBiome(this_chunk);
                 if (!loaded_tree_chunks.Contains(this_chunk))
                 {
-                    generateChunk(x, y);
-                    tree_manager.loadTrees(x, y);
+                    generateChunk(this_chunk);
+                    tree_manager.loadTrees(this_chunk);
                     loaded_tree_chunks.Add(this_chunk);
                 }
             }
@@ -118,16 +120,22 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
+    private Biome chooseBiome(Vector2 chunk)
+    {
+        //Random.seed = chunk.GetHashCode();
+        return biomes[Random.Range(0, biomes.Count)];
+    }
+
     /// <summary>
     /// STUB
     /// Generates a chunk from (noise function), using CreatePlane
     /// </summary>
     /// <param name="chunk_x"></param>
     /// <param name="chunk_y"></param>
-    void generateChunk(int chunk_x, int chunk_y)
+    void generateChunk(Vector2 chunk)
     {
         // Implement here
-        chunkGen.generate(chunk_x, chunk_y,time);
+        chunkGen.generate((int)chunk.x, (int)chunk.y,time,chooseBiome(chunk));
     }
 
     void updateChunks()

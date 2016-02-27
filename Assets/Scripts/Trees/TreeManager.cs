@@ -21,10 +21,8 @@ public class TreeManager : MonoBehaviour {
     }
 
 
-    public void loadTrees(int x, int y)
+    public void loadTrees(Vector2 key)
     {
-        Vector2 key = new Vector2(x, y);
-
         if (trees.ContainsKey(key))
         {
             List<Tree> trees_in_chunk = trees[key];
@@ -45,9 +43,9 @@ public class TreeManager : MonoBehaviour {
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
-            for (float i = x * gen_manager.chunk_size + 0.5f*step_size; i < x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size)
+            for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size)
             {
-                for (float j = y * gen_manager.chunk_size + 0.5f * step_size; j < y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size)
+                for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size)
                 {
                     Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 

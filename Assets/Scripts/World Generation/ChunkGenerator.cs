@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ChunkGenerator : MonoBehaviour {
@@ -15,7 +16,7 @@ public class ChunkGenerator : MonoBehaviour {
         synth.Init();
 	}
 
-	public void generate (int chunk_x,int chunk_y,float time) {
+	public void generate (int chunk_x,int chunk_y,float time, Biome curBiome) {
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
@@ -26,7 +27,6 @@ public class ChunkGenerator : MonoBehaviour {
 		mf.mesh.name = "chunk (" + chunk_x+","+chunk_y+")";
 
         Vector3 pos = new Vector3(chunk_x * chunk_size, 0, chunk_y * chunk_size);
-
         chunk.transform.position = pos;
         
         // Generate chunk_resolution^2 vertices
@@ -44,7 +44,6 @@ public class ChunkGenerator : MonoBehaviour {
 
             }
 		}
-
 
 		mf.mesh.vertices = vertices;
 
@@ -89,7 +88,7 @@ public class ChunkGenerator : MonoBehaviour {
             float height = (mf.mesh.vertices[c].y+ mf.mesh.vertices[c+1].y+ mf.mesh.vertices[c+2].y)/3;
 
             // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-            Color color = synth.colorAt(height);
+            Color color = curBiome.colorAt(height);
             
             colors[c] = color;
             colors[c+1] = color;
@@ -153,5 +152,6 @@ public class ChunkGenerator : MonoBehaviour {
         mesh.RecalculateNormals();
     }
 
+    
     
 }
