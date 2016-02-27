@@ -171,7 +171,12 @@ public class ShrineGrid : MonoBehaviour {
         {
             for (int j = 0; j <= resolution; j++)
             {
-                Vector2 curGrid = new Vector2(i, j);
+                // Skip non-edge points
+                if (i != 0 && i != resolution && j != 0 && j != resolution) continue;
+                // Skip the square corners
+                if ((i == 0 || i == resolution) && (j == 0 || j == resolution)) continue;
+
+                Vector2 curGrid = new Vector2(j, i);
                 Vector3 cur = gridToReal(curGrid);
                 Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation);
             }
