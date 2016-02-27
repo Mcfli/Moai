@@ -11,6 +11,7 @@ GameObject:
   - 111: {fileID: 11112210}
   - 114: {fileID: 11474674}
   - 65: {fileID: 6526806}
+  - 114: {fileID: 11416144}
   m_Layer: 8
   m_Name: tree1
   m_TagString: Untagged
@@ -793,6 +794,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &11416144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Tree
+  image: {fileID: 2800000, guid: c2b8cfeb37194ad4ab85bed6d97025aa, type: 3}
 --- !u!114 &11474674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1124,6 +1138,14 @@ Prefab:
       propertyPath: cul_spread
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: type
+      value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 2800000, guid: c2b8cfeb37194ad4ab85bed6d97025aa, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 110090}
