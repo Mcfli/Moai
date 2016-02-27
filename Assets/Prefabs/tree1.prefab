@@ -815,11 +815,7 @@ MonoBehaviour:
   target_scale: 10
   grow_speed: 0.0001
   grow_speed_variance: 0.00005
-<<<<<<< HEAD
   life_span: 50
-=======
-  life_span: 10
->>>>>>> TreeBurning
   height_vs_time:
     serializedVersion: 2
     m_Curve:
@@ -1122,15 +1118,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: life_span
-<<<<<<< HEAD
       value: 50
-=======
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cul_spread
       value: 100
->>>>>>> TreeBurning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
