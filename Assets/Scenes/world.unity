@@ -288,7 +288,7 @@ Transform:
   m_LocalScale: {x: 75, y: 1, z: 75}
   m_Children: []
   m_Father: {fileID: 1148327994}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!23 &680840918
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ Transform:
   m_LocalScale: {x: 150, y: 1, z: 149.99998}
   m_Children: []
   m_Father: {fileID: 1148327994}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!23 &795434273
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -807,8 +807,8 @@ Transform:
   m_Children:
   - {fileID: 923083882}
   - {fileID: 1694056958}
-  - {fileID: 680840917}
   - {fileID: 795434272}
+  - {fileID: 680840917}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &1154939344
