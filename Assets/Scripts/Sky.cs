@@ -8,6 +8,7 @@ public class Sky : MonoBehaviour {
 	public GameObject SunLight;
 	public GameObject MoonLight;
 	public GameObject Halo;
+	public GameObject starPrefab;
 	public float horizonBufferAngle = 0f;
 	public float sunAxisShift = 30;
 	public float daysPerYear = 100; // z axis
@@ -24,6 +25,7 @@ public class Sky : MonoBehaviour {
 	private Skybox skyGoal;
 	private Skybox skyDelta;
 	private float timeRemain;
+	private int numOfStars;
 	
 	//temp
 	private Skybox am4 = new Skybox(new Color(0.094f, 0.149f, 0.212f, 1.0f), new Color(0.129f, 0.149f, 0.271f, 1.0f), new Color(0.173f, 0.161f, 0.278f, 1.0f), 1.0f, 1.0f, 1.0f);
@@ -74,6 +76,8 @@ public class Sky : MonoBehaviour {
 	
     void Start(){
 		Halo.SetActive(false);
+		numOfStars = 0;
+		addStar();addStar();addStar();addStar();addStar();addStar(); //comment this out
     }
 
     void Update(){
@@ -140,10 +144,30 @@ public class Sky : MonoBehaviour {
 		}
 	}
 	
+	private void addStar(){ //called when shrine complete
+		numOfStars++;
+		//should put star 10000 units away from center in the nightime angles (between 210 and 330 with horizonBufferAngle of 30)
+		GameObject star = Instantiate(starPrefab, Vector3.forward * 10000, Quaternion.identity) as GameObject;
+		star.transform.SetParent(DayNightSpin.transform, false);
+		Vector3 origRot = DayNightSpin.transform.localEulerAngles;
+		DayNightSpin.transform.localEulerAngles = new Vector3(
+														DayNightSpin.transform.localEulerAngles.x + Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)),
+														DayNightSpin.transform.localEulerAngles.y + Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)),
+														DayNightSpin.transform.localEulerAngles.z);
+		star.transform.SetParent(null);
+		DayNightSpin.transform.localEulerAngles = origRot;
+		star.transform.SetParent(DayNightSpin.transform);
+		star.transform.LookAt(DayNightSpin.transform);
+	}
+	
+	public int getNumberOfStars(){
+		return numOfStars;
+	}
+	
 	//"time" is number of degrees it takes to finish changing to new sky
 	//if time is 0, change sky immediately; time should not be less than 0
 	//currently unused
-	void changeSkyByTime(Skybox s, float time){
+	private void changeSkyByTime(Skybox s, float time){
 		skyGoal = s;
 		if(time <= 0){
 			timeRemain = 0;
@@ -185,5 +209,3 @@ public class Sky : MonoBehaviour {
 		);
 	}
 }
-
-//time of day, seasons, weather, biome

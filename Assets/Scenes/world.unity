@@ -259,33 +259,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   amplitude: 1000
---- !u!1 &200110580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 200110581}
-  m_Layer: 0
-  m_Name: Stars
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &200110581
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 200110580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 742639688}
-  m_RootOrder: 4
 --- !u!1 &680840916
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +363,6 @@ Transform:
   - {fileID: 1694056958}
   - {fileID: 795434272}
   - {fileID: 680840917}
-  - {fileID: 200110581}
   m_Father: {fileID: 1148327994}
   m_RootOrder: 0
 --- !u!1 &795434271
@@ -855,6 +827,7 @@ MonoBehaviour:
   SunLight: {fileID: 923083880}
   MoonLight: {fileID: 1694056955}
   Halo: {fileID: 1734765664}
+  starPrefab: {fileID: 100008, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
   horizonBufferAngle: 30
   sunAxisShift: 30
   daysPerYear: 100
