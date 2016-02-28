@@ -4,16 +4,19 @@ using System.Collections;
 public class Sky : MonoBehaviour {
 	//attach to sky
 	public float timeresPerDegree = 10; //x axis
+	public GameObject DayNightSpin;
 	public GameObject SunLight;
 	public GameObject MoonLight;
+	public GameObject Halo;
 	public float horizonBufferAngle = 0f;
 	public float sunAxisShift = 30;
-	public float timeresPerAxisShiftDegrees = 1000000; // z axis
-	
+	public float daysPerYear = 100; // z axis
+	public float timeScaleDilation = 10000;
 	
 	//finals
 	private GameObject Player;
-	private Vector3 originalAngle;
+	private Vector3 originalSkyAngle;
+	private Vector3 originalDayNightAngle;
 	private float sunMaxIntensity; //will take intensity of light set in editor
 	private float moonMaxIntensity; //ditto above
 	
@@ -61,97 +64,105 @@ public class Sky : MonoBehaviour {
 	
 	void Awake(){ //set finals
 		Player = GameObject.FindGameObjectWithTag("Player");
-		originalAngle = transform.eulerAngles;
+		originalDayNightAngle = DayNightSpin.transform.localEulerAngles;
+		originalSkyAngle = transform.eulerAngles;
 		sunMaxIntensity = SunLight.GetComponent<Light>().intensity;
 		moonMaxIntensity = MoonLight.GetComponent<Light>().intensity;
-		//changeSkyByTime(am8, 0); //turn sky back to default color
+		//setSky(am8); //turn sky back to default color
 		RenderSettings.skybox = Object.Instantiate(RenderSettings.skybox); //comment out when debugging
 	}
 	
     void Start(){
-		//timeOfDay = Mathf.Repeat(Globals.time/Globals.time_resolution/timeresPerDegree + originalAngle.x, 360);
-		changeSkyByTime(am4, 0);
+		Halo.SetActive(false);
     }
 
     void Update(){
-		timeOfDay = Mathf.Repeat(Globals.time/Globals.time_resolution/timeresPerDegree + originalAngle.x, 360);
-		updateSunMoon();
-		//updateSky(); //disabled sky change. Setting changeSky with time of 0 will still instantly change the sky.
+		timeOfDay = Mathf.Repeat(Globals.time/Globals.time_resolution/timeresPerDegree + originalDayNightAngle.x, 360);
+		DayNightSpin.transform.localEulerAngles = new Vector3(timeOfDay, originalDayNightAngle.y, originalDayNightAngle.z); //update angle of sun/moon with timeofday - x axis
+		float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time/Globals.time_resolution, daysPerYear*360*timeresPerDegree) / (daysPerYear*360*timeresPerDegree)); //tilt of sun/moon - z axis
+		transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z+axis); //update angle of sun/moon ring with time of year
+		transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
+		if(Globals.time_scale < timeScaleDilation){ //normal day/night cycle
+			DayNightSpin.SetActive(true);
+			Halo.SetActive(false);
+			updateIntensity();
+			updateSky();
+			//updateSkyByTime(); //disabled sky change. Setting changeSky with time of 0 will still instantly change the sky.
+		}else{ //do crazy dialation thing
+			DayNightSpin.SetActive(false);
+			Halo.SetActive(true);
+			setSky(pm12);
+		}
     }
 	
-	private void updateSunMoon(){
-		transform.eulerAngles = new Vector3(timeOfDay, originalAngle.y, originalAngle.z); //update angle of sun/moon with timeofday
-		transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
-		
-		// Modulate sun/moon intensity
+	private void updateIntensity(){ // Modulate sun/moon intensity
 		if(timeOfDay > horizonBufferAngle && timeOfDay <= 180 - horizonBufferAngle){ //day
 			SunLight.GetComponent<Light>().intensity = sunMaxIntensity;
 			MoonLight.GetComponent<Light>().intensity = 0.0f;
-			if(timeOfDay <= 90){ //morning
-				float ratio = ((timeOfDay - horizonBufferAngle) / (90 - horizonBufferAngle));
-				setSky(am8 * (1 - ratio) + pm12 * ratio);
-			}else{ //afternoon
-				float ratio = ((timeOfDay - 90) / (90 - horizonBufferAngle));
-				setSky(pm12 * (1 - ratio) + pm4 * ratio);
-			}
 		}else if(timeOfDay > 180 - horizonBufferAngle && timeOfDay <= 180 + horizonBufferAngle){ //sunset
 			SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (1.0f - (timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
 			MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * ((timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
-			float ratio = ((timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
-			setSky(pm4 * (1 - ratio) + pm8 * ratio);
 		}else if(timeOfDay > 180 + horizonBufferAngle && timeOfDay <= 360 - horizonBufferAngle){ //night
 			SunLight.GetComponent<Light>().intensity = 0.0f;
 			MoonLight.GetComponent<Light>().intensity = moonMaxIntensity;
-			if(timeOfDay <= 270){ //before midnight
-				float ratio = ((timeOfDay - (180 + horizonBufferAngle)) / (90 - horizonBufferAngle));
-				setSky(pm8 * (1 - ratio) + am12 * ratio);
-			}else{ //after midnight
-				float ratio = ((timeOfDay - 270) / (90 - horizonBufferAngle));
-				setSky(am12 * (1 - ratio) + am4 * ratio);
-			}
 		}else{ //sunrise
-			float ratio;
 			if(timeOfDay <= 30){ //above horizon
 				SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (0.5f + (timeOfDay / (horizonBufferAngle * 2)));
 				MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (0.5f - (timeOfDay / (horizonBufferAngle * 2)));
-				ratio = (0.5f + (timeOfDay - 0) / (horizonBufferAngle * 2));
 			}else{ //below horizon
 				SunLight.GetComponent<Light>().intensity = sunMaxIntensity * ((timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
 				MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (1.0f - (timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
-				ratio = ((timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
 			}
+		}
+	}
+		
+	private void updateSky(){ // gradual sky color change
+		float ratio;
+		if(timeOfDay > horizonBufferAngle && timeOfDay <= 90){ //morning
+			ratio = (timeOfDay - horizonBufferAngle) / (90 - horizonBufferAngle);
+			setSky(am8 * (1 - ratio) + pm12 * ratio);
+		}else if(timeOfDay > 90 && timeOfDay <= 180 - horizonBufferAngle){ //afternoon
+			ratio = (timeOfDay - 90) / (90 - horizonBufferAngle);
+			setSky(pm12 * (1 - ratio) + pm4 * ratio);
+		}else if(timeOfDay > 180 - horizonBufferAngle && timeOfDay <= 180 + horizonBufferAngle){ //sunset
+			ratio = (timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2);
+			setSky(pm4 * (1 - ratio) + pm8 * ratio);
+		}else if(timeOfDay > 180 + horizonBufferAngle && timeOfDay <= 270){ //before midnight
+			ratio = (timeOfDay - (180 + horizonBufferAngle)) / (90 - horizonBufferAngle);
+			setSky(pm8 * (1 - ratio) + am12 * ratio);
+		}else if(timeOfDay > 270 && timeOfDay <= 360 - horizonBufferAngle){ //after midnight
+			ratio = (timeOfDay - 270) / (90 - horizonBufferAngle);
+			setSky(am12 * (1 - ratio) + am4 * ratio);
+		}else{ //sunrise
+			if(timeOfDay <= 30) ratio = 0.5f + (timeOfDay - 0) / (horizonBufferAngle * 2); //above horizon
+			else ratio = (timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2); //below horizon
 			setSky(am4 * (1 - ratio) + am8 * ratio);
 		}
 	}
 	
+	//"time" is number of degrees it takes to finish changing to new sky
+	//if time is 0, change sky immediately; time should not be less than 0
+	//currently unused
+	void changeSkyByTime(Skybox s, float time){
+		skyGoal = s;
+		if(time <= 0){
+			timeRemain = 0;
+			setSky(skyGoal);
+		}else{
+			timeRemain = time * timeresPerDegree;
+			skyDelta = s - getSky() / timeRemain;
+		}
+	}
 	
 	//unused ... FOR NOW (dun dun DUUUUUUUUN)
-	private void updateSky(){
+	private void updateSkyByTime(){
 		if(timeRemain == 0) return;
 		timeRemain -=  Globals.time_scale;
 		
 		if(timeRemain <= 0){ //catch overshooting
 			timeRemain = 0;
 			setSky(skyGoal);
-			return;
-		}
-		
-		setSky(getSky() + skyDelta * Globals.time_scale);
-	}
-	
-	//"time" is number of degrees it takes to finish changing to new sky
-	//if time is 0, change sky immediately; time should not be less than 0
-	void changeSkyByTime(Skybox s, float time){
-		skyGoal = s;
-		
-		if(time <= 0){
-			timeRemain = 0;
-			setSky(skyGoal);
-			return;
-		}
-		
-		timeRemain = time * timeresPerDegree;
-		skyDelta = s - getSky() / timeRemain;
+		}else setSky(getSky() + skyDelta * Globals.time_scale);
 	}
 
 	private void setSky(Skybox s){
@@ -163,7 +174,7 @@ public class Sky : MonoBehaviour {
 		RenderSettings.skybox.SetFloat("_Intensity", s.intensity);
 	}
 	
-	private Skybox getSky(){
+	private Skybox getSky(){ //gets current sky
 		return new Skybox(
 			RenderSettings.skybox.GetColor("_Color1"),
 			RenderSettings.skybox.GetColor("_Color2"),
