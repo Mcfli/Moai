@@ -259,17 +259,17 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   amplitude: 1000
---- !u!1 &680840916
+--- !u!1 &386901798
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 680840917}
-  - 33: {fileID: 680840920}
-  - 64: {fileID: 680840919}
-  - 23: {fileID: 680840918}
+  - 4: {fileID: 386901799}
+  - 33: {fileID: 386901802}
+  - 64: {fileID: 386901801}
+  - 23: {fileID: 386901800}
   m_Layer: 0
   m_Name: MoonPlanet
   m_TagString: Untagged
@@ -277,24 +277,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &680840917
+--- !u!4 &386901799
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680840916}
+  m_GameObject: {fileID: 386901798}
   m_LocalRotation: {x: 0.7071066, y: 0, z: 0, w: -0.70710695}
   m_LocalPosition: {x: 0, y: 0, z: 10000}
   m_LocalScale: {x: 75, y: 1, z: 75}
   m_Children: []
   m_Father: {fileID: 742639688}
   m_RootOrder: 3
---- !u!23 &680840918
+--- !u!23 &386901800
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680840916}
+  m_GameObject: {fileID: 386901798}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -315,25 +315,25 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!64 &680840919
+--- !u!64 &386901801
 MeshCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680840916}
+  m_GameObject: {fileID: 386901798}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
---- !u!33 &680840920
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &386901802
 MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680840916}
-  m_Mesh: {fileID: 4300000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
+  m_GameObject: {fileID: 386901798}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &742639687
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ Transform:
   - {fileID: 923083882}
   - {fileID: 1694056958}
   - {fileID: 795434272}
-  - {fileID: 680840917}
+  - {fileID: 386901799}
   m_Father: {fileID: 1148327994}
   m_RootOrder: 0
 --- !u!1 &795434271
@@ -827,7 +827,7 @@ MonoBehaviour:
   SunLight: {fileID: 923083880}
   MoonLight: {fileID: 1694056955}
   Halo: {fileID: 1734765664}
-  starPrefab: {fileID: 100008, guid: 4953b44c5ee3b8945aaec3458037666e, type: 3}
+  starPrefab: {fileID: 187510, guid: 1bbb852b289761d46a3335165adc4a76, type: 2}
   horizonBufferAngle: 30
   sunAxisShift: 30
   daysPerYear: 100
