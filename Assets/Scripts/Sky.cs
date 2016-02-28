@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Sky : MonoBehaviour {
 	//attach to sky
-	public float timeresPerDegree = 10;
+	public float timeresPerDegree = 10; //x axis
 	public GameObject SunLight;
 	public GameObject MoonLight;
 	public float horizonBufferAngle = 0f;
+	public float sunAxisShift = 30;
+	public float timeresPerAxisShiftDegrees = 1000000; // z axis
+	
 	
 	//finals
 	private GameObject Player;
