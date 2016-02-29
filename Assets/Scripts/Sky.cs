@@ -102,6 +102,10 @@ public class Sky : MonoBehaviour {
 			setSky(pm12);
 		}
     }
+    
+    public float getTimeOfDay(){
+        return timeOfDay;
+    }
 	
 	private void updateTransforms(){
 		DayNightSpin.transform.localEulerAngles = new Vector3(timeOfDay, originalDayNightAngle.y, originalDayNightAngle.z); //update angle of sun/moon with timeofday - x axis

@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2344074}
   - 114: {fileID: 11443216}
   m_Layer: 0
-  m_Name: Cloud
+  m_Name: temp_cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,6 +118,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: fade_speed
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: temp_cloud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
