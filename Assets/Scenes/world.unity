@@ -141,8 +141,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 101562677}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 264.85974, z: 4.9999294}
+  m_LocalRotation: {x: -0.06004877, y: 0.61744845, z: -0.0472747, w: -0.78288996}
+  m_LocalPosition: {x: -0.5632572, y: 265.63498, z: 6.8017507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -594,6 +594,33 @@ Prefab:
     - {fileID: 11400000, guid: b544816461f324e56a39767fdeb5b114, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b544816461f324e56a39767fdeb5b114, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &833261386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 833261387}
+  m_Layer: 0
+  m_Name: Stars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &833261387
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 833261386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1148327994}
+  m_RootOrder: 1
 --- !u!1 &838583282 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -865,7 +892,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &1148327992
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,11 +925,12 @@ MonoBehaviour:
   SunLight: {fileID: 923083880}
   MoonLight: {fileID: 1694056955}
   Halo: {fileID: 1734765664}
+  StarsParent: {fileID: 833261386}
   starPrefab: {fileID: 187510, guid: 1bbb852b289761d46a3335165adc4a76, type: 2}
   horizonBufferAngle: 30
-  sunAxisShift: 30
-  daysPerYear: 100
-  timeScaleDilation: 1000
+  sunAxisShift: 20
+  daysPerYear: 1000
+  timeScaleThatHaloAppears: 1000
 --- !u!4 &1148327994
 Transform:
   m_ObjectHideFlags: 0
@@ -914,6 +942,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 742639688}
+  - {fileID: 833261387}
   - {fileID: 1734765665}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -978,7 +1007,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1 &1272024987 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114, type: 2}
@@ -1071,8 +1100,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1293103743}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 265.14, z: 5}
+  m_LocalRotation: {x: -0.06004877, y: 0.61744845, z: -0.0472747, w: -0.78288996}
+  m_LocalPosition: {x: -0.5632572, y: 265.91525, z: 6.8018208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1446,7 +1475,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
       propertyPath: m_LocalScale.x
@@ -1467,6 +1496,10 @@ Prefab:
     - target: {fileID: 100000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
       propertyPath: m_Name
       value: Halo
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 1d03c6d3f4878d94ea74bef92c59175a, type: 3}
