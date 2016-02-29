@@ -72,9 +72,9 @@ public class Sky : MonoBehaviour {
 		originalSkyAngle = transform.eulerAngles;
 		sunMaxIntensity = SunLight.GetComponent<Light>().intensity;
 		moonMaxIntensity = MoonLight.GetComponent<Light>().intensity;
+		starPrefab = GameObject.Instantiate(starPrefab);
 		starPrefab.GetComponent<Renderer>().sharedMaterial = Material.Instantiate(starPrefab.GetComponent<Renderer>().sharedMaterial);
 		starAlpha = starPrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_Color").a;
-		//setSky(am8); //turn sky back to default color
 		RenderSettings.skybox = Object.Instantiate(RenderSettings.skybox); //comment out when debugging
 	}
 	

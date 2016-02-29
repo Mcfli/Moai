@@ -141,8 +141,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 101562677}
-  m_LocalRotation: {x: -0.06004877, y: 0.61744845, z: -0.0472747, w: -0.78288996}
-  m_LocalPosition: {x: -0.5632572, y: 265.63498, z: 6.8017507}
+  m_LocalRotation: {x: -0.086428516, y: -0.36360928, z: -0.033975426, w: 0.92691106}
+  m_LocalPosition: {x: 38321.05, y: -1492.2576, z: -26493.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree_resolution: 10
-  prefab: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+  prefab: {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   gen_manager: {fileID: 0}
 --- !u!114 &188005516
 MonoBehaviour:
@@ -926,7 +926,7 @@ MonoBehaviour:
   MoonLight: {fileID: 1694056955}
   Halo: {fileID: 1734765664}
   StarsParent: {fileID: 833261386}
-  starPrefab: {fileID: 187510, guid: 1bbb852b289761d46a3335165adc4a76, type: 2}
+  starPrefab: {fileID: 192926, guid: 573bf012d8a202e4086f66305f7eed00, type: 2}
   horizonBufferAngle: 30
   sunAxisShift: 20
   daysPerYear: 1000
@@ -1100,8 +1100,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1293103743}
-  m_LocalRotation: {x: -0.06004877, y: 0.61744845, z: -0.0472747, w: -0.78288996}
-  m_LocalPosition: {x: -0.5632572, y: 265.91525, z: 6.8018208}
+  m_LocalRotation: {x: -0.086428516, y: -0.36360928, z: -0.033975426, w: 0.92691106}
+  m_LocalPosition: {x: 38321.05, y: -1491.9946, z: -26493.898}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
