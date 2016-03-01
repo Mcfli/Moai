@@ -39,12 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 47
-  heatVariance: 10
+  heatAvg: 67
+  heatVariance: 30
   moistureAvg: 50
   moistureVariance: 20
-  weatherTypes:
-  - sunny
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
@@ -127,23 +125,7 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: weatherTypes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weatherTypes.Array.data[0]
-      value: sunny
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: heatVariance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: heatAvg
-      value: 47
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 131134}

@@ -19,7 +19,6 @@ public class GenerationManager : MonoBehaviour {
 
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
-    Dictionary<Vector2,Biome> chunkBiomes;
     List<Vector2> loaded_tree_chunks;
 
     void Start () {
@@ -32,7 +31,6 @@ public class GenerationManager : MonoBehaviour {
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
-        chunkBiomes = new Dictionary<Vector2, Biome>();
     }
 	
 	// Update is called once per frame
@@ -53,7 +51,6 @@ public class GenerationManager : MonoBehaviour {
             unloadTrees();
             loadChunks();
             loadTrees();
-            Globals.cur_biome = chunkBiomes[cur_chunk];
             weather_manager.moveWithPlayer();
         }
     }
@@ -129,14 +126,16 @@ public class GenerationManager : MonoBehaviour {
         return biomes[Random.Range(0, biomes.Count)];
     }
 
-
-    // Generates a chunk from (noise function), using CreatePlane
+    /// <summary>
+    /// STUB
+    /// Generates a chunk from (noise function), using CreatePlane
+    /// </summary>
+    /// <param name="chunk_x"></param>
+    /// <param name="chunk_y"></param>
     void generateChunk(Vector2 chunk)
     {
         // Implement here
-        Biome biome = chooseBiome(chunk);
-        chunkBiomes[chunk] = biome;
-        chunkGen.generate((int)chunk.x, (int)chunk.y,time,biome);
+        chunkGen.generate((int)chunk.x, (int)chunk.y,time,chooseBiome(chunk));
     }
 
     void updateChunks()

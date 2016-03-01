@@ -45,8 +45,12 @@ public class WeatherManager : MonoBehaviour {
         if (Time.time > last_updated + update_time)
         {
             last_updated = Time.time;
-            Debug.Log(Globals.cur_biome.heatAvg);
-            Globals.cur_weather = Globals.cur_biome.weatherTypes[Mathf.FloorToInt(Random.value * (Globals.cur_biome.weatherTypes.Count-1))];
+            if (Globals.cur_weather == "sunny")
+                Globals.cur_weather = "rain";
+            else if (Globals.cur_weather == "rain")
+                Globals.cur_weather = "snowy";
+            else
+                Globals.cur_weather = "sunny";
         }
 
         // Handle weather
