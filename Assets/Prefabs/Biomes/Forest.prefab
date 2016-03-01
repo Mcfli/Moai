@@ -43,6 +43,10 @@ MonoBehaviour:
   heatVariance: 30
   moistureAvg: 50
   moistureVariance: 20
+  weatherTypes:
+  - sunny
+  - rain
+  - snowy
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
@@ -126,7 +130,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[0]
+      value: sunny
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[1]
+      value: rain
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[2]
+      value: snowy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196286}
