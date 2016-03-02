@@ -80,7 +80,6 @@ public class GenerationManager : MonoBehaviour {
                 Vector2 this_chunk = new Vector2(x, y);
                 if (!loaded_tree_chunks.Contains(this_chunk))
                 {
-                    generateChunk(x, y);
                     tree_manager.loadTrees(x, y);
                     loaded_tree_chunks.Add(this_chunk);
                 }
