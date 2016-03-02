@@ -19,14 +19,12 @@ public class ShrineManager : MonoBehaviour {
 
     public void placeShrine(Vector3 chunk_pos)
     {
-        Quaternion RandomRotation = Quaternion.Euler(-90, Random.Range(0, 360), 0);
-
         for (int tries = 0; tries <= max_tries; tries++)
         {
             Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
             if (checkHeights(position))
             {
-                GameObject new_shrine = Instantiate(prefab, position, RandomRotation) as GameObject;
+                GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,0,0)) as GameObject;
                 break;
             }
         }
@@ -49,7 +47,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Top right corner raycast
         RaycastHit hitTwo;
-        Ray rayDownTwo = new Ray(new Vector3(position.x + gen_manager.chunk_size, 10000000, position.z), Vector3.down);
+        Ray rayDownTwo = new Ray(new Vector3(position.x + 25, 10000000, position.z), Vector3.down);
         float distTwo = 0.0f;
         if (Physics.Raycast(rayDownTwo, out hitTwo, Mathf.Infinity, terrain))
         {
@@ -58,7 +56,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Bottom left corner raycast
         RaycastHit hitThree;
-        Ray rayDownThree = new Ray(new Vector3(position.x, 10000000, position.z + gen_manager.chunk_size), Vector3.down);
+        Ray rayDownThree = new Ray(new Vector3(position.x, 10000000, position.z + 25), Vector3.down);
         float distThree = 0.0f;
         if (Physics.Raycast(rayDownThree, out hitThree, Mathf.Infinity, terrain))
         {
@@ -67,7 +65,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Bottom right corner raycast
         RaycastHit hitFour;
-        Ray rayDownFour = new Ray(new Vector3(position.x + gen_manager.chunk_size, 10000000, position.z + gen_manager.chunk_size), Vector3.down);
+        Ray rayDownFour = new Ray(new Vector3(position.x + 25, 10000000, position.z + 25), Vector3.down);
         float distFour = 0.0f;
         if (Physics.Raycast(rayDownFour, out hitFour, Mathf.Infinity, terrain))
         {
@@ -85,7 +83,7 @@ public class ShrineManager : MonoBehaviour {
 
         float total_diff = diff_from_avg_One + diff_from_avg_Two + diff_from_avg_Three + diff_from_avg_Four;
 
-        if (total_diff <= acceptable_heightDiff)
+        if (total_diff < acceptable_heightDiff)
         {
             acceptable = true;
         }
