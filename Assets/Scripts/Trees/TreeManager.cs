@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TreeManager : MonoBehaviour {
 
     public int tree_resolution = 2;
-    public GameObject prefab;
+    //public GameObject prefab;
     public GenerationManager gen_manager;
 
     private static Dictionary<Vector2, List<Tree>> trees;
@@ -13,7 +13,7 @@ public class TreeManager : MonoBehaviour {
     public static void saveTree(Vector2 chunk, GameObject tree)
     {
         tree.GetComponent<Tree>().saveTransforms();
-        if(trees[chunk] == null)
+        if(!trees.ContainsKey(chunk)||trees[chunk] == null)
         {
             trees[chunk] = new List<Tree>();
         }
@@ -21,16 +21,17 @@ public class TreeManager : MonoBehaviour {
     }
 
 
-    public void loadTrees(Vector2 key)
+    public void loadTrees(Vector2 key,List<GameObject> tree_types)
     {
+        if (tree_types.Count < 1) return;
         if (trees.ContainsKey(key))
         {
             List<Tree> trees_in_chunk = trees[key];
-            
             for (int i = trees_in_chunk.Count-1; i >= 0; i--)
             {
                 Tree tree = trees_in_chunk[i];
-                GameObject new_tree = Instantiate(prefab, tree.saved_position, tree.saved_rotation) as GameObject;
+                if (tree.prefab == null) continue;
+                GameObject new_tree = Instantiate(tree.prefab, tree.saved_position, tree.saved_rotation) as GameObject;
                 new_tree.GetComponent<Tree>().copyFrom(tree);
                 trees[key].Remove(tree);  
             }
@@ -51,8 +52,8 @@ public class TreeManager : MonoBehaviour {
 
                     float xpos = i + step_size * Random.value - 0.5f * step_size;
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
-
-                    GameObject new_tree = Instantiate(prefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
+                    GameObject treePrefab = tree_types[Random.Range(0, (tree_types.Count - 1))];
+                    GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
                     new_tree.GetComponent<Tree>().age = Random.value * 10.0f;
                 }     
             }

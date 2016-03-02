@@ -255,6 +255,10 @@ Material:
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
+          name: _BumpMap_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
           name: _Displacement
         second: {r: 6.6371665, g: 20.353983, b: -1, a: -0.681416}
       data:
@@ -268,10 +272,6 @@ Material:
       data:
         first:
           name: _Fresnel_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
-          name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
@@ -332,7 +332,7 @@ Material:
       data:
         first:
           name: _WorldLightDir
-        second: {r: -0.030375138, g: 0.20139052, b: 0.97903997, a: 0}
+        second: {r: -0.030375138, g: -0.20139083, b: -0.97903997, a: 0}
       data:
         first:
           name: _Foam
