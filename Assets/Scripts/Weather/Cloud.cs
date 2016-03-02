@@ -37,11 +37,11 @@ public class Cloud : MonoBehaviour {
         dissipating = false;
         rend = GetComponent<Renderer>();
         rend.material.color *= new Color (1,1,1,0.0f);
+        //rend.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
         rend.material.EnableKeyword("_EMISSION");
 	}
 
-    public void dissipate()
-    {
+    public void dissipate(){
         dissipating = true;
     }
 	
