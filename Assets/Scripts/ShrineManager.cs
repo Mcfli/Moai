@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ShrineManager : MonoBehaviour {
     public GenerationManager gen_manager;
@@ -7,9 +8,12 @@ public class ShrineManager : MonoBehaviour {
     public float acceptable_heightDiff = 0.0f;
     public int max_tries = 1;
 
+	private static Dictionary<Vector2, List<ShrineGrid>> shrines;
+
 	// Use this for initialization
 	void Start () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
+		shrines = new Dictionary<Vector2, List<ShrineGrid>>();
 	}
 	
 	// Update is called once per frame
@@ -24,7 +28,8 @@ public class ShrineManager : MonoBehaviour {
             Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
             if (checkHeights(position))
             {
-                GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,0,0)) as GameObject;
+                GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,-60,0)) as GameObject;
+				new_shrine.transform.localScale = new Vector3 (200, 200, 200);
                 break;
             }
         }
@@ -94,4 +99,52 @@ public class ShrineManager : MonoBehaviour {
 
         return acceptable;
     }
+
+	public void saveShrine(Vector2 chunk, GameObject shrine)
+	{
+		shrine.GetComponent<ShrineGrid>().saveTransforms();
+		if(shrines[chunk] == null)
+		{
+			shrines[chunk] = new List<ShrineGrid>();
+		}
+		shrines[chunk].Add(shrine.GetComponent<ShrineGrid>());
+	}
+
+	public void unloadShrines(int x, int y)
+	{
+		Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size*0.5f,0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
+		Vector3 half_extents = new Vector3(gen_manager.chunk_size*0.5f,100000, gen_manager.chunk_size*0.5f );
+		LayerMask shrine_mask = LayerMask.GetMask("Shrine");
+		Vector2 chunk = new Vector2(x, y);
+
+		Collider[] colliders = Physics.OverlapBox(center, half_extents,Quaternion.identity,shrine_mask);
+
+		for (int i = 0;i < colliders.Length; i++)
+		{
+
+			GameObject shrine = colliders[i].gameObject;
+			shrine.GetComponent<ShrineGrid>().saveTransforms();
+			saveShrine(chunk, shrine);
+
+			Destroy(shrine);
+		}
+	}
+
+	public void loadShrines(int x, int y)
+	{
+		Vector2 key = new Vector2(x, y);
+
+		if (shrines.ContainsKey(key))
+		{
+			List<ShrineGrid> shrines_in_chunk = shrines[key];
+
+			for (int i = shrines_in_chunk.Count-1; i >= 0; i--)
+			{
+				ShrineGrid shrine = shrines_in_chunk[i];
+				GameObject new_shrine = Instantiate(prefab, shrine.saved_position, shrine.saved_rotation) as GameObject;
+				shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
+				shrines[key].Remove(shrine);  
+			}
+		}
+	}
 }
