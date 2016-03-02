@@ -142,6 +142,7 @@ public class GenerationManager : MonoBehaviour {
         Biome b = chooseBiome(chunk);
         chunkBiomes[chunk] = b;
         chunkGen.generate((int)chunk.x, (int)chunk.y,time,b);
+        smoothChunkColors(chunk);
     }
 
     void updateChunks()
@@ -154,6 +155,18 @@ public class GenerationManager : MonoBehaviour {
 
             chunkGen.refresh(chunk);
         }
+    }
+
+    void smoothChunkColors(Vector2 chunk)
+    {
+        string chunk_name = "chunk (" + chunk.x + "," + chunk.y + ")";
+        GameObject chunk_obj = GameObject.Find(chunk_name);
+        Biome curBiome = chunkBiomes[chunk];
+
+        Biome up = chooseBiome(chunk + Vector2.up);
+        Biome down = chooseBiome(chunk + Vector2.down);
+
+        chunkGen.colorChunk(chunk_obj, curBiome);
     }
 
 }

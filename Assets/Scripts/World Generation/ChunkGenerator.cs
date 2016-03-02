@@ -82,21 +82,25 @@ public class ChunkGenerator : MonoBehaviour {
 
         // Calculate vertex colors
 
-        Color[] colors = new Color[mf.mesh.vertices.Length];
-        for (int c = 0; c < mf.mesh.triangles.Length; c+=3)
-        {
-            float height = (mf.mesh.vertices[c].y+ mf.mesh.vertices[c+1].y+ mf.mesh.vertices[c+2].y)/3;
-
-            // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-            Color color = curBiome.colorAt(height);
-            
-            colors[c] = color;
-            colors[c+1] = color;
-            colors[c+2] = color;
-        }
-        mf.mesh.colors = colors;
+       
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
 	}
+
+    public void colorChunk(GameObject chunk,Biome curBiome)
+    {
+        Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+        Color[] colors = new Color[verts.Length];
+        for (int c = 0; c < verts.Length; c += 3)
+        {
+            float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
+            Color color = curBiome.colorAt(height);
+
+            colors[c] = color;
+            colors[c + 1] = color;
+            colors[c + 2] = color;
+        }
+        chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+    }
 
     public void refresh(GameObject chunk)
     {
