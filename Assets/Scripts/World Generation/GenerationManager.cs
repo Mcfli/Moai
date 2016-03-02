@@ -53,8 +53,8 @@ public class GenerationManager : MonoBehaviour {
             loadChunks();
             loadTrees();
             weather_manager.moveWithPlayer();
+            shrine_manager.placeShrine(chunkToWorld(cur_chunk));
         }
-        shrine_manager.placeShrine((int) cur_chunk.x, (int) cur_chunk.y);
     }
 
     // Loads surrounding chunks within chunk_load_dist range
