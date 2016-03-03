@@ -137,9 +137,15 @@ public class GenerationManager : MonoBehaviour {
     /// <param name="chunk_y"></param>
     void generateChunk(Vector2 chunk)
     {
-        // Implement here
-        Biome b = chooseBiome(chunk);
-        chunkBiomes[chunk] = b;
+        Biome b;
+        if (chunkBiomes.ContainsKey(chunk) && chunkBiomes[chunk] != null)
+            b = chunkBiomes[chunk];
+        else
+        {
+            b = chooseBiome(chunk);
+            chunkBiomes[chunk] = b;
+        }
+            
         chunkGen.generate((int)chunk.x, (int)chunk.y,time,b);
         smoothChunkColors(chunk);
     }
@@ -153,6 +159,7 @@ public class GenerationManager : MonoBehaviour {
             GameObject chunk = GameObject.Find(chunk_name);
 
             chunkGen.refresh(chunk);
+            smoothChunkColors(new Vector2(this_chunk.x,this_chunk.y));
         }
     }
 
