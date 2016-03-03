@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
     public float wait_speed_init = 10.0f;
     public float wait_speed_max = 100.0f;
     public float wait_speed_growth = 1.0f;
+    public float faster_wait_speed_multiplier = 5.0f;
 
     private float wait_speed;
 	private bool startGroundWarp;
@@ -20,11 +21,12 @@ public class Player : MonoBehaviour {
 	void Update () {
 	    if (Input.GetButton("Wait"))
         {
-            Globals.time_scale = wait_speed;
+            if(Input.GetButton("Speed")) Globals.time_scale = wait_speed * 5;
+            else Globals.time_scale = wait_speed;
+            
             if (wait_speed < wait_speed_max)
                 wait_speed += wait_speed_growth;
-            else if (wait_speed > wait_speed_max)
-                wait_speed = wait_speed_max;
+            else wait_speed = wait_speed_max;
         }
         else
         {
