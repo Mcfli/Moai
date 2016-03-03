@@ -29,8 +29,8 @@ public class ShrineManager : MonoBehaviour {
             if (checkHeights(position))
             {
                 GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,-60,0)) as GameObject;
-				new_shrine.transform.localScale = new Vector3 (200, 200, 200);
-				shrines [chunk] = new List<ShrineGrid> ();
+                new_shrine.transform.localScale = new Vector3(200, 200, 200);
+                shrines[chunk] = new List<ShrineGrid>();
                 break;
             }
         }
@@ -44,7 +44,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Top left corner raycast
         RaycastHit hitOne;
-        Ray rayDownOne = new Ray(new Vector3(position.x, 10000000, position.z), Vector3.down);
+        Ray rayDownOne = new Ray(new Vector3(position.x - 25, 10000000, position.z - 25), Vector3.down);
         float distOne = 0.0f;
         if (Physics.Raycast(rayDownOne, out hitOne, Mathf.Infinity, terrain))
         {
@@ -53,7 +53,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Top right corner raycast
         RaycastHit hitTwo;
-        Ray rayDownTwo = new Ray(new Vector3(position.x + 25, 10000000, position.z), Vector3.down);
+        Ray rayDownTwo = new Ray(new Vector3(position.x + 25, 10000000, position.z - 25), Vector3.down);
         float distTwo = 0.0f;
         if (Physics.Raycast(rayDownTwo, out hitTwo, Mathf.Infinity, terrain))
         {
@@ -62,7 +62,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Bottom left corner raycast
         RaycastHit hitThree;
-        Ray rayDownThree = new Ray(new Vector3(position.x, 10000000, position.z + 25), Vector3.down);
+        Ray rayDownThree = new Ray(new Vector3(position.x - 25, 10000000, position.z + 25), Vector3.down);
         float distThree = 0.0f;
         if (Physics.Raycast(rayDownThree, out hitThree, Mathf.Infinity, terrain))
         {
@@ -104,7 +104,7 @@ public class ShrineManager : MonoBehaviour {
 	public void saveShrine(Vector2 chunk, GameObject shrine)
 	{
 		shrine.GetComponent<ShrineGrid>().saveTransforms();
-		if(shrines[chunk] == null)
+		if(!shrines.ContainsKey(chunk) || shrines[chunk] == null)
 		{
 			shrines[chunk] = new List<ShrineGrid>();
 		}

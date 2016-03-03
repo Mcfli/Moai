@@ -129,13 +129,10 @@ public class ShrineGrid : MonoBehaviour {
                 isDone = false;
                 return;
             }
-            bool wtf = curState[cell].Count > 1;
             
-
             // if there are other puzzle objects in the cell, it can't be complete
-            if (wtf)
+            if (curState[cell].Count > 1)
             {
-                Debug.Log(wtf);
                 isDone = false;
                 return;
             }
@@ -283,7 +280,14 @@ public class ShrineGrid : MonoBehaviour {
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-            ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
+            if (hit.point.y > Globals.water_level)
+            {
+                ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         return ret;
     }
