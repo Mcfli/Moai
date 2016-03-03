@@ -15,21 +15,25 @@ public class GenerationManager : MonoBehaviour {
     public ChunkGenerator chunkGen;
     public TreeManager tree_manager;
     public WeatherManager weather_manager;
+    public ShrineManager shrine_manager;
 
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     List<Vector2> loaded_tree_chunks;
+	List<Vector2> loaded_shrine_chunks;
 
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
         weather_manager = gameObject.GetComponent<WeatherManager>();
+        shrine_manager = gameObject.GetComponent<ShrineManager>();
         chunkGen.chunk_size = chunk_size;
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
+		loaded_shrine_chunks = new List<Vector2>();
     }
 	
 	// Update is called once per frame
@@ -48,9 +52,12 @@ public class GenerationManager : MonoBehaviour {
             cur_chunk = player_chunk;
             unloadChunks();
             unloadTrees();
+			unloadShrines();
             loadChunks();
             loadTrees();
+			loadShrines();
             weather_manager.moveWithPlayer();
+            //shrine_manager.placeShrine(chunkToWorld(cur_chunk));
         }
     }
 
@@ -80,13 +87,28 @@ public class GenerationManager : MonoBehaviour {
                 Vector2 this_chunk = new Vector2(x, y);
                 if (!loaded_tree_chunks.Contains(this_chunk))
                 {
-                    generateChunk(x, y);
                     tree_manager.loadTrees(x, y);
                     loaded_tree_chunks.Add(this_chunk);
                 }
             }
         }
     }
+
+	void loadShrines()
+	{
+		for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
+		{
+			for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
+			{
+				Vector2 this_chunk = new Vector2(x, y);
+				if (!loaded_shrine_chunks.Contains(this_chunk))
+				{
+					shrine_manager.loadShrines(x, y);
+					loaded_shrine_chunks.Add(this_chunk);
+				}
+			}
+		}
+	}
 
     void unloadChunks()
     {
@@ -118,6 +140,20 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
+	void unloadShrines()
+	{
+		for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--)
+		{
+			Vector2 this_chunk = loaded_shrine_chunks[i];
+			if (Mathf.Abs(this_chunk.x - cur_chunk.x) > tree_load_dist ||
+				Mathf.Abs(this_chunk.y - cur_chunk.y) > tree_load_dist)
+			{
+				shrine_manager.unloadShrines((int)this_chunk.x, (int)this_chunk.y);
+				loaded_shrine_chunks.RemoveAt(i);
+			}
+		}
+	}
+
     /// <summary>
     /// STUB
     /// Generates a chunk from (noise function), using CreatePlane
@@ -140,6 +176,18 @@ public class GenerationManager : MonoBehaviour {
 
             chunkGen.refresh(chunk);
         }
+    }
+
+    public Vector3 chunkToWorld(Vector2 chunk)
+    {
+        Vector3 pos = new Vector3(chunk.x * chunk_size, 0, chunk.y * chunk_size);
+        return pos;
+    }
+
+    public Vector2 worldToChunk(Vector3 pos)
+    {
+        Vector2 chunk = new Vector2(Mathf.Floor(pos.x/chunk_size), Mathf.Floor(pos.z / chunk_size));
+        return chunk;
     }
 
 }

@@ -23,6 +23,10 @@ public class ShrineGrid : MonoBehaviour {
 
     private Dictionary<Vector2,bool> glowGrid;
 
+	public Vector3 saved_position;
+	public Quaternion saved_rotation;
+	public Vector3 saved_scale;
+
 	// Use this for initialization
 	void Start () {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
@@ -125,13 +129,10 @@ public class ShrineGrid : MonoBehaviour {
                 isDone = false;
                 return;
             }
-            bool wtf = curState[cell].Count > 1;
             
-
             // if there are other puzzle objects in the cell, it can't be complete
-            if (wtf)
+            if (curState[cell].Count > 1)
             {
-                Debug.Log(wtf);
                 isDone = false;
                 return;
             }
@@ -279,8 +280,45 @@ public class ShrineGrid : MonoBehaviour {
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-            ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
+            if (hit.point.y > Globals.water_level)
+            {
+                ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         return ret;
     }
+
+	public void saveTransforms()
+	{
+		saved_position = transform.position;
+		saved_rotation = transform.rotation;
+		saved_scale = transform.localScale;
+	}
+
+	public void copyFrom(ShrineGrid shrine)
+	{
+		debug = shrine.debug;
+		isDone = shrine.isDone;
+		size = shrine.size;
+		resolution = shrine.resolution;
+		minSolItems = shrine.minSolItems;
+		maxSolItems = shrine.maxSolItems;
+		mural = shrine.mural;
+		glow = shrine.glow;
+		vertexPillar = shrine.vertexPillar;
+		curState = shrine.curState;
+		targetState = shrine.targetState;
+		validObjects = shrine.validObjects;
+		notTerrain = shrine.notTerrain;
+		glowLayer = shrine.glowLayer;
+		glowGrid = shrine.glowGrid;
+		saved_position = shrine.saved_position;
+		saved_rotation = shrine.saved_rotation;
+		saved_scale = shrine.saved_scale;
+	}
+		
 }

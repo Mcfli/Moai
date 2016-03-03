@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2321660}
   - 64: {fileID: 6492766}
   - 114: {fileID: 11458850}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,12 +93,16 @@ MonoBehaviour:
   isDone: 0
   size: 50
   resolution: 3
-  maxSolItems: 1
+  minSolItems: 1
+  maxSolItems: 5
   mural: {fileID: 168210, guid: 5caf8acbbe16f604f90b8c73a5f0691a, type: 2}
   glow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
   validObjects:
   - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+  saved_position: {x: 0, y: 0, z: 0}
+  saved_rotation: {x: 0, y: 0, z: 0, w: 0}
+  saved_scale: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
