@@ -8,11 +8,12 @@ public class Sky : MonoBehaviour {
 	public GameObject SunLight;
 	public GameObject MoonLight;
 	public GameObject Halo;
+	public GameObject StarsParent;
 	public GameObject starPrefab;
-	public float horizonBufferAngle = 0f;
-	public float sunAxisShift = 30;
+	public float horizonBufferAngle = 30;
+	public float sunAxisShift = 20;
 	public float daysPerYear = 100; // z axis
-	public float timeScaleDilation = 10000;
+	public float timeScaleThatHaloAppears = 1000;
 	
 	//finals
 	private GameObject Player;
@@ -20,6 +21,7 @@ public class Sky : MonoBehaviour {
 	private Vector3 originalDayNightAngle;
 	private float sunMaxIntensity; //will take intensity of light set in editor
 	private float moonMaxIntensity; //ditto above
+	private float starAlpha;
 	
 	private float timeOfDay; //0 for dawn, 90 for noon, 180 for dusk, 270 for midnight. Should not be or exceed 360.
 	private Skybox skyGoal;
@@ -70,7 +72,9 @@ public class Sky : MonoBehaviour {
 		originalSkyAngle = transform.eulerAngles;
 		sunMaxIntensity = SunLight.GetComponent<Light>().intensity;
 		moonMaxIntensity = MoonLight.GetComponent<Light>().intensity;
-		//setSky(am8); //turn sky back to default color
+		starPrefab = GameObject.Instantiate(starPrefab);
+		starPrefab.GetComponent<Renderer>().sharedMaterial = Material.Instantiate(starPrefab.GetComponent<Renderer>().sharedMaterial);
+		starAlpha = starPrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_Color").a;
 		RenderSettings.skybox = Object.Instantiate(RenderSettings.skybox); //comment out when debugging
 	}
 	
@@ -82,22 +86,43 @@ public class Sky : MonoBehaviour {
 
     void Update(){
 		timeOfDay = Mathf.Repeat(Globals.time/Globals.time_resolution/timeresPerDegree + originalDayNightAngle.x, 360);
-		DayNightSpin.transform.localEulerAngles = new Vector3(timeOfDay, originalDayNightAngle.y, originalDayNightAngle.z); //update angle of sun/moon with timeofday - x axis
-		float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time/Globals.time_resolution, daysPerYear*360*timeresPerDegree) / (daysPerYear*360*timeresPerDegree)); //tilt of sun/moon - z axis
-		transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z+axis); //update angle of sun/moon ring with time of year
-		transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
-		if(Globals.time_scale < timeScaleDilation){ //normal day/night cycle
+		updateTransforms();
+		if(Globals.time_scale < timeScaleThatHaloAppears){ //normal day/night cycle
 			DayNightSpin.SetActive(true);
+			StarsParent.SetActive(true);
 			Halo.SetActive(false);
 			updateIntensity();
 			updateSky();
-			//updateSkyByTime(); //disabled sky change. Setting changeSky with time of 0 will still instantly change the sky.
-		}else{ //do crazy dialation thing
+			updateStarColor();
+			//updateSkyByTime();
+		}else{ //do crazy dilation thing
 			DayNightSpin.SetActive(false);
+			StarsParent.SetActive(false);
 			Halo.SetActive(true);
 			setSky(pm12);
 		}
     }
+    
+    public float getTimeOfDay(){
+        return timeOfDay;
+    }
+	
+	private void updateTransforms(){
+		DayNightSpin.transform.localEulerAngles = new Vector3(timeOfDay, originalDayNightAngle.y, originalDayNightAngle.z); //update angle of sun/moon with timeofday - x axis
+		StarsParent.transform.localEulerAngles = new Vector3(-(Mathf.PingPong(timeOfDay, 180)-90)/90*horizonBufferAngle,0,0);
+		float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time/Globals.time_resolution, daysPerYear*360*timeresPerDegree) / (daysPerYear*360*timeresPerDegree)); //tilt of sun/moon - z axis
+		transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z+axis); //update angle of sun/moon ring with time of year
+		transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
+	}
+	
+	private void updateStarColor(){
+		Color newStarColor = starPrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_Color");
+		if(timeOfDay > 180 && timeOfDay <= 180 + horizonBufferAngle) newStarColor.a = starAlpha*(timeOfDay-180)/horizonBufferAngle; //sunset
+		else if(timeOfDay > 180 + horizonBufferAngle && timeOfDay <= 360 - horizonBufferAngle) newStarColor.a = 1; //night
+		else if(timeOfDay > 360 - horizonBufferAngle) newStarColor.a = starAlpha*(360-timeOfDay)/horizonBufferAngle; //sunrise
+		else newStarColor.a = 0; //day
+		starPrefab.GetComponent<Renderer>().sharedMaterial.SetColor("_Color", newStarColor);
+	}
 	
 	private void updateIntensity(){ // Modulate sun/moon intensity
 		if(timeOfDay > horizonBufferAngle && timeOfDay <= 180 - horizonBufferAngle){ //day
@@ -146,18 +171,14 @@ public class Sky : MonoBehaviour {
 	
 	private void addStar(){ //called when shrine complete
 		numOfStars++;
-		//should put star 10000 units away from center in the nightime angles (between 210 and 330 with horizonBufferAngle of 30)
-		GameObject star = Instantiate(starPrefab, Vector3.forward * 10000, Quaternion.identity) as GameObject;
-		star.transform.SetParent(DayNightSpin.transform, false);
-		Vector3 origRot = DayNightSpin.transform.localEulerAngles;
-		DayNightSpin.transform.localEulerAngles = new Vector3(
-														DayNightSpin.transform.localEulerAngles.x + Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)),
-														DayNightSpin.transform.localEulerAngles.y + Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)),
-														DayNightSpin.transform.localEulerAngles.z);
+		GameObject star = Instantiate(starPrefab, Vector3.up * 10000, Quaternion.identity) as GameObject;
+		star.transform.SetParent(StarsParent.transform, false);
+		Vector3 origRot = StarsParent.transform.localEulerAngles;
+		StarsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)), 0, Random.Range(-(90-sunAxisShift), (90-sunAxisShift)));
 		star.transform.SetParent(null);
-		DayNightSpin.transform.localEulerAngles = origRot;
-		star.transform.SetParent(DayNightSpin.transform);
-		star.transform.LookAt(DayNightSpin.transform);
+		StarsParent.transform.localEulerAngles = origRot;
+		star.transform.SetParent(StarsParent.transform);
+		star.transform.LookAt(StarsParent.transform);
 	}
 	
 	public int getNumberOfStars(){

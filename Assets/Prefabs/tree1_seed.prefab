@@ -170,7 +170,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: spawn_object
       value: 
-      objectReference: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+      objectReference: {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
     - target: {fileID: 0}
       propertyPath: cull_layer.m_Bits
       value: 257
