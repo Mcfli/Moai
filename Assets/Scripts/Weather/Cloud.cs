@@ -37,8 +37,6 @@ public class Cloud : MonoBehaviour {
         dissipating = false;
         rend = GetComponent<Renderer>();
         rend.material.color *= new Color (1,1,1,0.0f);
-        //rend.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-        rend.material.EnableKeyword("_EMISSION");
 	}
 
     public void dissipate(){
@@ -64,7 +62,9 @@ public class Cloud : MonoBehaviour {
             ratio = 0.5f - (SkyScript.getTimeOfDay() - 0) / (SkyScript.horizonBufferAngle * 2); //above horizon
 		else
             ratio = 1 - (SkyScript.getTimeOfDay() - (360 - SkyScript.horizonBufferAngle)) / (SkyScript.horizonBufferAngle * 2); //below horizon
+        rend.material.EnableKeyword("_EMISSION");
         rend.material.SetColor("_EmmisionColor", dayEmission * (1 - ratio) + nightEmission * ratio);
+        //Debug.Log(rend.material.GetColor("_EmmisionColor"));
     }
     
     private void handleOpacity()

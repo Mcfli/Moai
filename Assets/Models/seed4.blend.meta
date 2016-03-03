@@ -1,42 +1,15 @@
 fileFormatVersion: 2
-guid: ce95d01361d3349058c44057faf6f622
-timeCreated: 1454458399
+guid: 9a2b718525d29ae4f8e87285d2b73d0b
+timeCreated: 1456889312
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: tree_leaf1_layer_3
-    100004: tree_leaf2_layer3
-    100006: tree_leaf3_layer3
-    100008: tree_leaf4_layer3
-    100010: tree_leaf5_layer3
-    100012: tree_trunk_layer3
     400000: //RootNode
-    400002: tree_leaf1_layer_3
-    400004: tree_leaf2_layer3
-    400006: tree_leaf3_layer3
-    400008: tree_leaf4_layer3
-    400010: tree_leaf5_layer3
-    400012: tree_trunk_layer3
-    2300000: tree_leaf1_layer_3
-    2300002: tree_leaf2_layer3
-    2300004: tree_leaf3_layer3
-    2300006: tree_leaf4_layer3
-    2300008: tree_leaf5_layer3
-    2300010: tree_trunk_layer3
-    3300000: tree_leaf1_layer_3
-    3300002: tree_leaf2_layer3
-    3300004: tree_leaf3_layer3
-    3300006: tree_leaf4_layer3
-    3300008: tree_leaf5_layer3
-    3300010: tree_trunk_layer3
-    4300000: tree_leaf5_layer3
-    4300002: tree_leaf4_layer3
-    4300004: tree_leaf3_layer3
-    4300006: tree_leaf2_layer3
-    4300008: tree_leaf1_layer_3
-    4300010: tree_trunk_layer3
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Icosphere_001
     7400000: Default Take
     9500000: //RootNode
   materials:

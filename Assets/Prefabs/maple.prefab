@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed_object: {fileID: 148458, guid: 4e454d89427b0e643a1d1af75fa2ddf3, type: 2}
+  seed_object: {fileID: 172308, guid: 256c357554288014d9c0d2bb1771b693, type: 2}
   max_life: 10
   radius: 100
   spawn_delay: 20
