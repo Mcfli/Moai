@@ -77,7 +77,6 @@ public class GenerationManager : MonoBehaviour {
 
     void loadTrees()
     {
-        
         for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
         {
             for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
@@ -127,7 +126,7 @@ public class GenerationManager : MonoBehaviour {
     private Biome chooseBiome(Vector2 chunk)
     {
         Random.seed = chunk.GetHashCode();
-        return biomes[Random.Range(0, biomes.Count)];
+        return biomes[Mathf.FloorToInt(Random.value * (biomes.Count))];
     }
 
     /// <summary>
@@ -165,8 +164,10 @@ public class GenerationManager : MonoBehaviour {
 
         Biome up = chooseBiome(chunk + Vector2.up);
         Biome down = chooseBiome(chunk + Vector2.down);
+        Biome left = chooseBiome(chunk + Vector2.left);
+        Biome right = chooseBiome(chunk + Vector2.right);
 
-        chunkGen.colorChunk(chunk_obj, curBiome);
+        chunkGen.colorChunk(chunk_obj, curBiome,up,down,left,right);
     }
 
 }
