@@ -17,7 +17,7 @@ public class WeatherManager : MonoBehaviour {
     // 1 - rainy day
 
 
-    public GameObject cloud;
+    public List<GameObject> cloudPrefabs;
 
     // Internal variables
     private List<GameObject> clouds;        // holds all currently loaded clouds
@@ -26,6 +26,7 @@ public class WeatherManager : MonoBehaviour {
     private ParticleSystem rain;
     private ParticleSystem snow;
     private GameObject player;
+	private bool visible;
 
     void Awake()
     {
@@ -36,6 +37,8 @@ public class WeatherManager : MonoBehaviour {
 
         rain = Instantiate(particle_prefabs[0]);
         snow = Instantiate(particle_prefabs[1]);
+		
+		visible = true;
     }
 
     // Update is called once per frame
@@ -45,22 +48,26 @@ public class WeatherManager : MonoBehaviour {
         if (Time.time > last_updated + update_time)
         {
             last_updated = Time.time;
-            if (Globals.cur_weather == "sunny")
-                Globals.cur_weather = "rain";
-            else if (Globals.cur_weather == "rain")
-                Globals.cur_weather = "snowy";
-            else
-                Globals.cur_weather = "sunny";
+            if (Globals.cur_weather == "sunny") Globals.cur_weather = "rain";
+            else if (Globals.cur_weather == "rain") Globals.cur_weather = "snowy";
+            else Globals.cur_weather = "sunny";
         }
-
-        // Handle weather
-        if (Globals.cur_weather == "rain")
-            doRain();
-        else if (Globals.cur_weather == "sunny")
-            doSunny();
-        else
-            doSnowy();
+		
+		if(visible){
+			// Handle weather
+			if (Globals.cur_weather == "rain") doRain();
+			else if(Globals.cur_weather == "sunny") doSunny();
+			else doSnowy();
+		}else{
+            rain.gameObject.SetActive(false);
+            snow.gameObject.SetActive(false);
+        }
     }
+	
+	public void hideWeather(){visible = false;}
+	public void showWeather(){visible = true;}
+	public void toggleWeather(){visible = !visible;}
+	public bool isVisible(){return visible;}
 
     private void doRain()
     {
@@ -69,11 +76,8 @@ public class WeatherManager : MonoBehaviour {
 
         target_clouds = 40;
         image_spaces[1].applyToCamera();
-        if (clouds.Count<target_clouds)
-        {
-
-
-            GameObject c = Instantiate(cloud);
+        if (clouds.Count<target_clouds){
+            GameObject c = Instantiate(cloudPrefabs[(int)Random.Range(0,cloudPrefabs.Count-1)]);
             clouds.Add(c);
            // last_updated = Time.time;
         }
@@ -110,7 +114,7 @@ public class WeatherManager : MonoBehaviour {
         {
             // Instantiate cloud prefab and add to cloud array
             //last_updated = Time.time;
-            GameObject c = Instantiate(cloud);
+            GameObject c = Instantiate(cloudPrefabs[(int)Random.Range(0,cloudPrefabs.Count-1)]);
             clouds.Add(c);
         }
     }

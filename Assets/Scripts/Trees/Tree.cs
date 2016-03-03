@@ -20,6 +20,13 @@ public class Tree : MonoBehaviour {
     public Vector3 saved_position;
     public float age;
     public Quaternion saved_rotation;
+                                       
+
+    public PickupObject pickup_obj;
+    public GameObject player;
+    public float cul_spread;
+    public bool onFire;  
+
 
     private LayerMask treeMask;
     private bool done = false;
@@ -30,6 +37,11 @@ public class Tree : MonoBehaviour {
     private float life;
     private Animation anim;
     private float time_unloaded;
+
+                   
+    private GameObject fire;
+    private GameObject Torch;
+
 
     public void saveTransforms()
     {
@@ -74,7 +86,13 @@ public class Tree : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         anim = GetComponent<Animation>();
-        
+        fire = Resources.Load("fire") as GameObject;
+
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        pickup_obj = player.GetComponent<PickupObject>();
+
+
         age = 0.0f;
         life = max_life;
         treeMask = LayerMask.GetMask("Tree");
@@ -108,6 +126,8 @@ public class Tree : MonoBehaviour {
         Grow();
         if(age >= 0.03)
             Propogate();
+        if (onFire)
+            fireSpread();
     }
 
     private void stickToGround()
@@ -188,5 +208,46 @@ public class Tree : MonoBehaviour {
         GetComponent<BoxCollider>().size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
         GetComponent<BoxCollider>().center = new Vector3(0, target_scale*growth*0.5f, 0);
 
+    }
+
+    void OnMouseDown()
+    {
+        if (pickup_obj.gethand1())
+        {
+            if (pickup_obj.gethand1().name == "Torch")
+            {
+                if (!onFire)
+                {
+                    onFire = true;
+                }               
+                GameObject Instance = (GameObject)Instantiate(fire, transform.position, Quaternion.identity);
+            }
+        }
+        if (pickup_obj.gethand2())
+        {
+            if (pickup_obj.gethand2().name == "Torch")
+            {
+                if (!onFire)
+                {
+                    onFire = true;
+                }             
+                GameObject Instance = (GameObject)Instantiate(fire, transform.position, Quaternion.identity);
+            }
+        }
+                                                                                
+    }
+                                                     
+    void fireSpread()
+    {
+        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cul_spread, treeMask);
+        for (int i = 0; i < objectsInRange.Length; i++)
+        {
+            GameObject curtree = objectsInRange[i].gameObject;
+            if (!curtree.GetComponent<Tree>().onFire)
+            {
+                curtree.GetComponent<Tree>().onFire = true;
+                GameObject Instance = (GameObject)Instantiate(fire, curtree.transform.position, Quaternion.identity);
+            }        
+        }
     }
 }

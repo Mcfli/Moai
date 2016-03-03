@@ -91,7 +91,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0
+        second: 0.5
       data:
         first:
           name: _Parallax
@@ -132,7 +132,7 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0.347, g: 0.347, b: 0.347, a: 1}
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       data:
         first:
           name: _Color
