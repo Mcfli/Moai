@@ -20,6 +20,7 @@ public class GenerationManager : MonoBehaviour {
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     List<Vector2> loaded_tree_chunks;
+	List<Vector2> loaded_shrine_chunks;
 
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -32,6 +33,7 @@ public class GenerationManager : MonoBehaviour {
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
+		loaded_shrine_chunks = new List<Vector2>();
     }
 	
 	// Update is called once per frame
@@ -50,10 +52,12 @@ public class GenerationManager : MonoBehaviour {
             cur_chunk = player_chunk;
             unloadChunks();
             unloadTrees();
+			unloadShrines();
             loadChunks();
             loadTrees();
+			loadShrines();
             weather_manager.moveWithPlayer();
-            shrine_manager.placeShrine(chunkToWorld(cur_chunk));
+            //shrine_manager.placeShrine(chunkToWorld(cur_chunk));
         }
     }
 
@@ -90,6 +94,22 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
+	void loadShrines()
+	{
+		for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
+		{
+			for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
+			{
+				Vector2 this_chunk = new Vector2(x, y);
+				if (!loaded_shrine_chunks.Contains(this_chunk))
+				{
+					shrine_manager.loadShrines(x, y);
+					loaded_shrine_chunks.Add(this_chunk);
+				}
+			}
+		}
+	}
+
     void unloadChunks()
     {
         for (int i = loaded_chunks.Count-1; i >= 0; i--)
@@ -120,6 +140,20 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
+	void unloadShrines()
+	{
+		for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--)
+		{
+			Vector2 this_chunk = loaded_shrine_chunks[i];
+			if (Mathf.Abs(this_chunk.x - cur_chunk.x) > tree_load_dist ||
+				Mathf.Abs(this_chunk.y - cur_chunk.y) > tree_load_dist)
+			{
+				shrine_manager.unloadShrines((int)this_chunk.x, (int)this_chunk.y);
+				loaded_shrine_chunks.RemoveAt(i);
+			}
+		}
+	}
+
     /// <summary>
     /// STUB
     /// Generates a chunk from (noise function), using CreatePlane
@@ -144,13 +178,13 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
-    Vector3 chunkToWorld(Vector2 chunk)
+    public Vector3 chunkToWorld(Vector2 chunk)
     {
         Vector3 pos = new Vector3(chunk.x * chunk_size, 0, chunk.y * chunk_size);
         return pos;
     }
 
-    Vector2 worldToChunk(Vector3 pos)
+    public Vector2 worldToChunk(Vector3 pos)
     {
         Vector2 chunk = new Vector2(Mathf.Floor(pos.x/chunk_size), Mathf.Floor(pos.z / chunk_size));
         return chunk;

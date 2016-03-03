@@ -21,7 +21,7 @@ public class ShrineManager : MonoBehaviour {
 	
 	}
 
-    public void placeShrine(Vector3 chunk_pos)
+	public void placeShrine(Vector3 chunk_pos, Vector2 chunk)
     {
         for (int tries = 0; tries <= max_tries; tries++)
         {
@@ -30,6 +30,7 @@ public class ShrineManager : MonoBehaviour {
             {
                 GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,-60,0)) as GameObject;
 				new_shrine.transform.localScale = new Vector3 (200, 200, 200);
+				shrines [chunk] = new List<ShrineGrid> ();
                 break;
             }
         }
@@ -118,10 +119,8 @@ public class ShrineManager : MonoBehaviour {
 		Vector2 chunk = new Vector2(x, y);
 
 		Collider[] colliders = Physics.OverlapBox(center, half_extents,Quaternion.identity,shrine_mask);
-
 		for (int i = 0;i < colliders.Length; i++)
 		{
-
 			GameObject shrine = colliders[i].gameObject;
 			shrine.GetComponent<ShrineGrid>().saveTransforms();
 			saveShrine(chunk, shrine);
@@ -142,9 +141,13 @@ public class ShrineManager : MonoBehaviour {
 			{
 				ShrineGrid shrine = shrines_in_chunk[i];
 				GameObject new_shrine = Instantiate(prefab, shrine.saved_position, shrine.saved_rotation) as GameObject;
-				shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
+				new_shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
 				shrines[key].Remove(shrine);  
 			}
+		}
+		else
+		{
+			placeShrine(gen_manager.chunkToWorld(key), key);
 		}
 	}
 }
