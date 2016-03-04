@@ -522,7 +522,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 795434271}
+  m_GameObject: {fileID: 392729917}
   m_Enabled: 0
   serializedVersion: 6
   m_Type: 0
@@ -555,7 +555,7 @@ AudioSource:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 795434271}
+  m_GameObject: {fileID: 392729917}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
