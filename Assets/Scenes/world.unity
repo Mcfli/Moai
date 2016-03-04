@@ -351,6 +351,7 @@ MonoBehaviour:
   prefab: {fileID: 106806, guid: 678feba97db6b9044934c154b8891552, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
+  shrine_probability: 3
 --- !u!1 &386901798
 GameObject:
   m_ObjectHideFlags: 0
