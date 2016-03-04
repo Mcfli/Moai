@@ -1,20 +1,30 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityStandardAssets.Utility
-{
     public class PickupObject : MonoBehaviour{
-		public string leftHand;
-		public string rightHand;
-		GameObject hand1;
-		float hand1size;
-		GameObject hand2;
-		float hand2size;
+
+        public string leftHand;
+        public string rightHand;
+        
+		private GameObject hand1;
+		private float hand1size;
+        private GameObject hand2;
+        private float hand2size;
 
 		// Use this for initialization
 		void Start () {
-		
+
 		}
+
+        public GameObject gethand1()
+        {
+            return hand1;
+        }
+
+        public GameObject gethand2()
+        {
+            return hand2;
+        }
 		
 		GameObject GetMouseHoverObject(float range){
 			Vector3 position = gameObject.transform.position;
@@ -22,7 +32,7 @@ namespace UnityStandardAssets.Utility
 			Vector3 target = position + Camera.main.transform.forward * range;
 			if(Physics.Linecast(position,target,out raycastHit)) return raycastHit.collider.gameObject;
 			return null;
-		}
+		}                                                
 		
 		bool CanGrab(GameObject obj){
 			return obj.GetComponent<Rigidbody>() != null;
@@ -71,7 +81,7 @@ namespace UnityStandardAssets.Utility
 		void Update () {
 			//Debug.Log(GetMouseHoverObject(5)); //return what you're looking at
 			
-			if(Input.GetButtonDown(leftHand)){
+			if(Input.GetKeyDown("e")){
 				if(hand1 == null) TryGrabObject1(GetMouseHoverObject(5));
 				else DropObject1();
 			}
@@ -82,7 +92,7 @@ namespace UnityStandardAssets.Utility
 				hand1.transform.forward = Camera.main.transform.forward;
 			}
 			
-			if(Input.GetButtonDown(rightHand)){
+			if(Input.GetKeyDown("r")){
 				if(hand2 == null) TryGrabObject2(GetMouseHoverObject(5));
 				else DropObject2();
 			}
@@ -95,4 +105,4 @@ namespace UnityStandardAssets.Utility
 			
 		}
 	}
-}
+

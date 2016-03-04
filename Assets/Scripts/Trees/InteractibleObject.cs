@@ -12,23 +12,31 @@ public class InteractibleObject: MonoBehaviour
     private float spawned_time;     // Stores what the game time was when this was spawned. 
 
     // Use this for initialization
-    void Start()
-    {
+    void Start(){
         spawned_time = Globals.time;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Globals.time - spawned_time > life_length*Globals.time_resolution)
-        {
+    void Update(){
+        if (Globals.time - spawned_time > life_length*Globals.time_resolution){
             Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-            if(close_trees.Length < 1)
-            {
+            if(close_trees.Length < 1){
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                 Instantiate(spawn_object, transform.position, RandomRotation);
             }
             Destroy(gameObject);
+        }
+        
+        if(Globals.time_scale > 1){ //if fast forwarding
+            RaycastHit hit;
+            Ray rayDown = new Ray(transform.position, Vector3.down);
+            int terrain = LayerMask.GetMask("Terrain");
+            if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+                transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<Collider>().bounds.extents.y-0.1f, transform.position.z);
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }else{
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
     }
 }
