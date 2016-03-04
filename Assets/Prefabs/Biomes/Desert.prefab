@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 67
+  heatAvg: 117
   heatVariance: 30
   moistureAvg: 50
   moistureVariance: 20
@@ -105,7 +105,7 @@ MonoBehaviour:
   - {r: 0.78676474, g: 0.68949634, b: 0.48015788, a: 0}
   - {r: 0.6985294, g: 0.5440878, b: 0.13867864, a: 0}
   - {r: 0.6838235, g: 0.43859026, b: 0, a: 0}
-  amplitude: 400
+  amplitude: 1000
   color_curve:
     serializedVersion: 2
     m_Curve:

@@ -17,12 +17,17 @@ public class GenerationManager : MonoBehaviour {
     public WeatherManager weather_manager;
     public List<Biome> biomes;
 
+    public NoiseGen heatMap;
+    public NoiseGen mountainMap;
+    public NoiseGen moistureMap;
+
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     List<Vector2> loaded_tree_chunks;
     private Dictionary<Vector2, Biome> chunkBiomes;
+    private NoiseSynth noiseSynth;
 
-    void Start () {
+    void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
@@ -33,6 +38,10 @@ public class GenerationManager : MonoBehaviour {
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
         chunkBiomes = new Dictionary<Vector2, Biome>();
+        noiseSynth = GetComponent<NoiseSynth>();
+        moistureMap.Init();
+        heatMap.Init();
+        
     }
 	
 	// Update is called once per frame
@@ -125,8 +134,26 @@ public class GenerationManager : MonoBehaviour {
 
     private Biome chooseBiome(Vector2 chunk)
     {
-        Random.seed = chunk.GetHashCode();
-        return biomes[Mathf.FloorToInt(Random.value * (biomes.Count))];
+        
+        // Get the heat and moisture values at chunk coordinates
+        float heat = heatMap.genPerlin(chunk.x*chunk_size+ chunk_size * 0.5f, chunk.y* chunk_size + chunk_size * 0.5f, 0) - noiseSynth.heightAt(chunk.x * chunk_size + chunk_size*0.5f, chunk.y * chunk_size + +chunk_size * 0.5f, 0)*0.5f;
+        float moisture = moistureMap.genPerlin(chunk.x* chunk_size+1, chunk.y* chunk_size+1, 0);
+
+        // Find the most appropriate biome
+        float lowestError = 100000;
+        Biome ret = biomes[0];
+        foreach(Biome biome in biomes)
+        {
+            float heat_error = Mathf.Abs(biome.heatAvg - heat);
+            float moisture_error = Mathf.Abs(biome.moistureAvg - moisture);
+            if (heat_error + moisture_error < lowestError)
+            {
+                lowestError = heat_error + moisture_error;
+                ret = biome;
+            }
+                
+        }
+        return ret;
     }
 
     /// <summary>
