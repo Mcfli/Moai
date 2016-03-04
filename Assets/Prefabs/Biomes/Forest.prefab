@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heatAvg: 97
   heatVariance: 30
-  moistureAvg: 97
+  moistureAvg: 76
   moistureVariance: 20
   weatherTypes:
   - sunny
@@ -100,7 +100,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+  - {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   doodads: []
   colors:
   - {r: 0.54937875, g: 0.78676474, b: 0.09834559, a: 0}

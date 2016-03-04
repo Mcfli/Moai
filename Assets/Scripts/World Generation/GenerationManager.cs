@@ -171,7 +171,8 @@ public class GenerationManager : MonoBehaviour {
     {
         
         // Get the heat and moisture values at chunk coordinates
-        float heat = heatMap.genPerlin(chunk.x*chunk_size+ chunk_size * 0.5f, chunk.y* chunk_size + chunk_size * 0.5f, 0) - noiseSynth.heightAt(chunk.x * chunk_size + chunk_size*0.5f, chunk.y * chunk_size + +chunk_size * 0.5f, 0)*0.5f;
+        float heat = heatMap.genPerlin(chunk.x*chunk_size+ chunk_size * 0.5f, chunk.y* chunk_size + chunk_size * 0.5f, 0) - 
+            noiseSynth.heightAt(chunk.x * chunk_size + chunk_size*0.5f, chunk.y * chunk_size + +chunk_size * 0.5f, 0)*0.05f;
         float moisture = moistureMap.genPerlin(chunk.x* chunk_size+1, chunk.y* chunk_size+1, 0);
 
         // Find the most appropriate biome

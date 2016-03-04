@@ -42,8 +42,8 @@ MonoBehaviour:
   octaves: 1
   persistence: 0.1
   smoothness: 10000
-  amplitude: 250
-  seed: 6454345
+  amplitude: 200
+  seed: 5243
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

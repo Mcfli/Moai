@@ -182,9 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 500
-  chunk_resolution: 8
-  chunk_load_dist: 10
+  chunk_size: 250
+  chunk_resolution: 16
+  chunk_load_dist: 2
   tree_load_dist: 1
   player: {fileID: 0}
   chunkGen: {fileID: 0}
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 4
+  tree_resolution: 5
   gen_manager: {fileID: 0}
 --- !u!114 &188005516
 MonoBehaviour:
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda46a668a796684c88692efa5ef9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeresPerDegree: 10
+  timeresPerDegree: 100
   DayNightSpin: {fileID: 742639687}
   SunLight: {fileID: 923083880}
   MoonLight: {fileID: 1694056955}
@@ -1031,8 +1031,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: -0.050052818, y: 0.7051629, z: 0.050029054, w: 0.7055049}
-  m_LocalPosition: {x: -47.270706, y: 511.98657, z: 826.13074}
+  m_LocalRotation: {x: -0.2742481, y: 0.0077730757, z: 0.002215295, w: 0.96162504}
+  m_LocalPosition: {x: -0.06509138, y: 263.44012, z: 0.9742074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1411,8 +1411,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: -0.050052818, y: 0.7051629, z: 0.050029054, w: 0.7055049}
-  m_LocalPosition: {x: -47.270706, y: 511.70575, z: 826.1308}
+  m_LocalRotation: {x: -0.2742481, y: 0.0077730757, z: 0.002215295, w: 0.96162504}
+  m_LocalPosition: {x: -0.06509138, y: 263.15985, z: 0.97413594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1468,8 +1468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wait_speed_init: 10
-  wait_speed_max: 1e+30
-  wait_speed_growth: 5
+  wait_speed_max: 100
+  wait_speed_growth: 1
   faster_wait_speed_multiplier: 5
 --- !u!114 &1837165592
 MonoBehaviour:

@@ -99,12 +99,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+  - {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   doodads: []
   colors:
-  - {r: 0.69055, g: 0.7352941, b: 0.60553634, a: 0}
-  - {r: 0.34526387, g: 0.45588237, b: 0.3826453, a: 0}
-  - {r: 0.77205884, g: 0.77205884, b: 0.77205884, a: 0}
   - {r: 1, g: 1, b: 1, a: 0}
   amplitude: 2200
   color_curve:
