@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &131134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 465556}
+  - 114: {fileID: 11476116}
+  m_Layer: 0
+  m_Name: MushroomForest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &465556
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 621.1538, y: 214.96484, z: 1451.9033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11476116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heatAvg: 97
+  heatVariance: 30
+  moistureAvg: 156
+  moistureVariance: 20
+  weatherTypes:
+  - sunny
+  - rain
+  temperatureCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.50700396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.3653157
+      value: 0.98524153
+      inSlope: 0.74294335
+      outSlope: 0.74294335
+      tangentMode: 0
+    - time: 0.6373441
+      value: 0.11687136
+      inSlope: -2.144575
+      outSlope: -2.144575
+      tangentMode: 0
+    - time: 1.0044284
+      value: 0.4849079
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  precipitationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.50700396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.3653157
+      value: 0.98524153
+      inSlope: 0.74294335
+      outSlope: 0.74294335
+      tangentMode: 0
+    - time: 0.6373441
+      value: 0.11687136
+      inSlope: -2.144575
+      outSlope: -2.144575
+      tangentMode: 0
+    - time: 1.0044284
+      value: 0.4849079
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  treeTypes:
+  - {fileID: 195104, guid: 15835ee7341bce64895a94cd8814ac16, type: 2}
+  doodads: []
+  colors:
+  - {r: 0.289908, g: 0.25059474, b: 0.33088237, a: 0}
+  - {r: 0.4716024, g: 0.4227941, b: 0.625, a: 0}
+  - {r: 0.35041317, g: 0.32082614, b: 0.50735295, a: 0}
+  amplitude: 400
+  color_curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 195104, guid: 15835ee7341bce64895a94cd8814ac16, type: 2}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[0]
+      value: sunny
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[1]
+      value: rain
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 131134}
+  m_IsPrefabParent: 1

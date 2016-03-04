@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ChunkGenerator : MonoBehaviour {
@@ -15,7 +16,7 @@ public class ChunkGenerator : MonoBehaviour {
         synth.Init();
 	}
 
-	public void generate (int chunk_x,int chunk_y,float time) {
+	public void generate (int chunk_x,int chunk_y,float time, Biome curBiome) {
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
@@ -26,7 +27,6 @@ public class ChunkGenerator : MonoBehaviour {
 		mf.mesh.name = "chunk (" + chunk_x+","+chunk_y+")";
 
         Vector3 pos = new Vector3(chunk_x * chunk_size, 0, chunk_y * chunk_size);
-
         chunk.transform.position = pos;
         
         // Generate chunk_resolution^2 vertices
@@ -44,7 +44,6 @@ public class ChunkGenerator : MonoBehaviour {
 
             }
 		}
-
 
 		mf.mesh.vertices = vertices;
 
@@ -83,21 +82,77 @@ public class ChunkGenerator : MonoBehaviour {
 
         // Calculate vertex colors
 
-        Color[] colors = new Color[mf.mesh.vertices.Length];
-        for (int c = 0; c < mf.mesh.triangles.Length; c+=3)
-        {
-            float height = (mf.mesh.vertices[c].y+ mf.mesh.vertices[c+1].y+ mf.mesh.vertices[c+2].y)/3;
-
-            // colors[i] = environmentMapper.colorAtPos(xpos,vertices[c].y,ypos)
-            Color color = synth.colorAt(height);
-            
-            colors[c] = color;
-            colors[c+1] = color;
-            colors[c+2] = color;
-        }
-        mf.mesh.colors = colors;
+       
         MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
 	}
+
+    public void colorChunk(GameObject chunk,Biome curBiome,Biome up,Biome down,Biome left,Biome right)
+    {
+        Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+        Color[] colors = new Color[verts.Length];
+        for (int c = 0; c < verts.Length; c += 3)
+        {
+            float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
+            float h = verts[c].x / chunk_size;
+            float v = verts[c].z / chunk_size;
+
+            //h *= h;
+
+            Color biome_color = curBiome.colorAt(height);
+            Color left_color = left.colorAt(height);
+            Color right_color = right.colorAt(height);
+            Color up_color = up.colorAt(height);
+            Color down_color = down.colorAt(height);
+
+            Color color = biome_color;
+            Color hcolor, vcolor;
+
+            
+
+            if (h > 0.5)
+                hcolor = Color.Lerp(biome_color,right_color,2f*(h-0.5f));
+            else
+                hcolor = Color.Lerp(left_color,biome_color, 2f * h);
+            if (v > 0.5)
+                vcolor = Color.Lerp(biome_color, up_color, 2f * (v - 0.5f));
+            else
+                vcolor = Color.Lerp(down_color, biome_color, 2f * v);
+
+            float hm = Mathf.Abs(h - 0.5f);
+            float vm = Mathf.Abs(v - 0.5f);
+            float interp = Mathf.Max(v / (h + v), 0f);
+
+
+            color = Color.Lerp(hcolor, vcolor, interp);
+
+            //color = hcolor;
+
+            //Color vcolor = Color.Lerp(down_color, up_color, v);
+
+            //color = hcolor;
+            /*
+            color = Color.Lerp(color, right_color, h);
+
+            color = Color.Lerp(color, up_color, v);
+
+            color = Color.Lerp(down_color, color, v);*/
+
+            /*
+            if (v < 0.5f)
+            {
+                color = Color.Lerp(down_color, color, v);
+            }
+            else if (v > 0.5f)
+            {
+                color = Color.Lerp(color, up_color, v);
+            }
+            */
+            colors[c] = color;
+            colors[c + 1] = color;
+            colors[c + 2] = color;
+        }
+        chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+    }
 
     public void refresh(GameObject chunk)
     {
@@ -153,5 +208,6 @@ public class ChunkGenerator : MonoBehaviour {
         mesh.RecalculateNormals();
     }
 
+    
     
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TreeManager : MonoBehaviour {
 
     public int tree_resolution = 2;
-    public GameObject prefab;
+    //public GameObject prefab;
     public GenerationManager gen_manager;
 
     private static Dictionary<Vector2, List<Tree>> trees;
@@ -13,7 +13,7 @@ public class TreeManager : MonoBehaviour {
     public static void saveTree(Vector2 chunk, GameObject tree)
     {
         tree.GetComponent<Tree>().saveTransforms();
-        if(trees[chunk] == null)
+        if(!trees.ContainsKey(chunk)||trees[chunk] == null)
         {
             trees[chunk] = new List<Tree>();
         }
@@ -21,18 +21,17 @@ public class TreeManager : MonoBehaviour {
     }
 
 
-    public void loadTrees(int x, int y)
+    public void loadTrees(Vector2 key,List<GameObject> tree_types)
     {
-        Vector2 key = new Vector2(x, y);
-
+        if (tree_types.Count < 1) return;
         if (trees.ContainsKey(key))
         {
             List<Tree> trees_in_chunk = trees[key];
-            
             for (int i = trees_in_chunk.Count-1; i >= 0; i--)
             {
                 Tree tree = trees_in_chunk[i];
-                GameObject new_tree = Instantiate(prefab, tree.saved_position, tree.saved_rotation) as GameObject;
+                if (tree.prefab == null) continue;
+                GameObject new_tree = Instantiate(tree.prefab, tree.saved_position, tree.saved_rotation) as GameObject;
                 new_tree.GetComponent<Tree>().copyFrom(tree);
                 trees[key].Remove(tree);  
             }
@@ -45,16 +44,16 @@ public class TreeManager : MonoBehaviour {
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
-            for (float i = x * gen_manager.chunk_size + 0.5f*step_size; i < x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size)
+            for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size)
             {
-                for (float j = y * gen_manager.chunk_size + 0.5f * step_size; j < y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size)
+                for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size)
                 {
                     Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 
                     float xpos = i + step_size * Random.value - 0.5f * step_size;
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
-
-                    GameObject new_tree = Instantiate(prefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
+                    GameObject treePrefab = tree_types[Random.Range(0, (tree_types.Count - 1))];
+                    GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
                     new_tree.GetComponent<Tree>().age = Random.value * 10.0f;
                 }     
             }

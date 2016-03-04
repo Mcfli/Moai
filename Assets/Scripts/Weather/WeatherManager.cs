@@ -16,7 +16,6 @@ public class WeatherManager : MonoBehaviour {
     // 0 - clear day
     // 1 - rainy day
 
-
     public List<GameObject> cloudPrefabs;
 
     // Internal variables
@@ -44,23 +43,10 @@ public class WeatherManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        // Switch weather
         if (Time.time > last_updated + update_time)
         {
             last_updated = Time.time;
-            if (Globals.cur_weather == "sunny") Globals.cur_weather = "rain";
-            else if (Globals.cur_weather == "rain") Globals.cur_weather = "snowy";
-            else Globals.cur_weather = "sunny";
-        }
-		
-		if(visible){
-			// Handle weather
-			if (Globals.cur_weather == "rain") doRain();
-			else if(Globals.cur_weather == "sunny") doSunny();
-			else doSnowy();
-		}else{
-            rain.gameObject.SetActive(false);
-            snow.gameObject.SetActive(false);
+            updateWeather();
         }
     }
 	
@@ -68,6 +54,18 @@ public class WeatherManager : MonoBehaviour {
 	public void showWeather(){visible = true;}
 	public void toggleWeather(){visible = !visible;}
 	public bool isVisible(){return visible;}
+
+    public void updateWeather()
+    {
+        // Switch weather
+        if (Globals.cur_weather == null)
+        {
+            Globals.cur_weather = "sunny";
+            return;
+        }
+        Globals.cur_weather = Globals.cur_biome.weatherTypes[Random.Range(0, (Globals.cur_biome.weatherTypes.Count - 1))];
+        
+    }
 
     private void doRain()
     {
@@ -86,7 +84,6 @@ public class WeatherManager : MonoBehaviour {
 
     private void doSunny()
     {
-
         rain.gameObject.SetActive(false);
         snow.gameObject.SetActive(false);
 
@@ -101,7 +98,6 @@ public class WeatherManager : MonoBehaviour {
             //last_updated = Time.time;
         }
     }
-
 
     private void doSnowy()
     {
