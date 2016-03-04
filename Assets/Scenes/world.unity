@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 500
+  chunk_size: 512
   chunk_resolution: 8
   chunk_load_dist: 10
   tree_load_dist: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 4
+  tree_resolution: 2
   gen_manager: {fileID: 0}
 --- !u!114 &188005516
 MonoBehaviour:
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bd294ef01c1c34aac97e17eeaba320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  update_time: 5
+  update_time: 15
   particle_prefabs:
   - {fileID: 19887606, guid: 16acd0ab8af54da4cbbc1f2cf3dbab52, type: 2}
   - {fileID: 19831440, guid: 253d6bd3d5333194daec8a16c1c7dc0f, type: 2}
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda46a668a796684c88692efa5ef9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeresPerDegree: 10
+  timeresPerDegree: 100
   DayNightSpin: {fileID: 742639687}
   SunLight: {fileID: 923083880}
   MoonLight: {fileID: 1694056955}
@@ -1031,8 +1031,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: -0.050052818, y: 0.7051629, z: 0.050029054, w: 0.7055049}
-  m_LocalPosition: {x: -47.270706, y: 511.98657, z: 826.13074}
+  m_LocalRotation: {x: 0.061849773, y: 0.40765733, z: 0.027689982, w: -0.91061705}
+  m_LocalPosition: {x: 8380.783, y: -598.7348, z: -10395.499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1411,8 +1411,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: -0.050052818, y: 0.7051629, z: 0.050029054, w: 0.7055049}
-  m_LocalPosition: {x: -47.270706, y: 511.70575, z: 826.1308}
+  m_LocalRotation: {x: 0.061849773, y: 0.40765733, z: 0.027689982, w: -0.91061705}
+  m_LocalPosition: {x: 8380.783, y: -599.0083, z: -10395.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1468,8 +1468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wait_speed_init: 10
-  wait_speed_max: 1e+30
-  wait_speed_growth: 5
+  wait_speed_max: 100
+  wait_speed_growth: 1
   faster_wait_speed_multiplier: 5
 --- !u!114 &1837165592
 MonoBehaviour:

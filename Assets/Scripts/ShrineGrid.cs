@@ -164,6 +164,7 @@ public class ShrineGrid : MonoBehaviour {
         Vector3 offset = new Vector3(10,0,5);
         GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
         localMural.GetComponent<Mural>().generateTexture(targetState);
+        localMural.transform.parent = gameObject.transform;
     }
 
     private void createPillars()
@@ -179,7 +180,8 @@ public class ShrineGrid : MonoBehaviour {
 
                 Vector2 curGrid = new Vector2(j, i);
                 Vector3 cur = gridToReal(curGrid);
-                Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation);
+                GameObject pillar = Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation) as GameObject;
+                pillar.transform.parent = gameObject.transform;
             }
         }
     }
@@ -288,6 +290,10 @@ public class ShrineGrid : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
         return ret;
     }

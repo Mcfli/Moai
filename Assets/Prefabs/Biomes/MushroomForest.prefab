@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heatAvg: 97
   heatVariance: 30
-  moistureAvg: 156
+  moistureAvg: 123
   moistureVariance: 20
   weatherTypes:
   - sunny

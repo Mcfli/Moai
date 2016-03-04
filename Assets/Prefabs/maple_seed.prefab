@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11454534}
   - 114: {fileID: 11418456}
   - 135: {fileID: 13552780}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: maple_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   spawn_object: {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   cull_layer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 256
   cull_radius: 5
   life_length: 5000000
 --- !u!135 &13552780
@@ -131,7 +131,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172308}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

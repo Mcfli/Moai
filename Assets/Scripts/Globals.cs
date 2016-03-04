@@ -8,6 +8,6 @@ public class Globals : MonoBehaviour {
 	public static float time_resolution = Mathf.Pow(10, -17.0f);
 
     public static string cur_weather;
-    public static float water_level = 105;
+    public static float water_level = 5;
     public static Biome cur_biome;
 }
