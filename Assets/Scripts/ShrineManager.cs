@@ -7,6 +7,7 @@ public class ShrineManager : MonoBehaviour {
     public GameObject prefab;
     public float acceptable_heightDiff = 0.0f;
     public int max_tries = 1;
+    public int shrine_probability = 1;
 
 	private static Dictionary<Vector2, List<ShrineGrid>> shrines;
 
@@ -23,17 +24,22 @@ public class ShrineManager : MonoBehaviour {
 
 	public void placeShrine(Vector3 chunk_pos, Vector2 chunk)
     {
-        for (int tries = 0; tries <= max_tries; tries++)
+        int val = Random.Range(1, shrine_probability);
+        if (val == 1)
         {
-            Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
-            if (checkHeights(position))
+            for (int tries = 0; tries <= max_tries; tries++)
             {
-                GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,-60,0)) as GameObject;
-                new_shrine.transform.localScale = new Vector3(200, 200, 200);
-                shrines[chunk] = new List<ShrineGrid>();
-                break;
+                Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
+                if (checkHeights(position))
+                {
+                    GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,-60,0)) as GameObject;
+                    new_shrine.transform.localScale = new Vector3(200, 200, 200);
+                    shrines[chunk] = new List<ShrineGrid>();
+                    break;
+                }
             }
         }
+        
 
     }
 
