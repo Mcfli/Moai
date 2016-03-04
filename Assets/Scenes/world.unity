@@ -934,7 +934,7 @@ GameObject:
   - 114: {fileID: 1148327993}
   m_Layer: 0
   m_Name: Sky
-  m_TagString: Sky
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
