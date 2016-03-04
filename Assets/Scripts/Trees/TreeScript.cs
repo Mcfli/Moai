@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tree : MonoBehaviour {
+public class TreeScript : MonoBehaviour {
 
     public GameObject seed_object;
     public GameObject prefab;
-    public float max_life = 100;
+    public float max_health = 100;
     public float radius;
     public float spawn_delay;
     public float spawn_delay_variance;
@@ -16,46 +16,45 @@ public class Tree : MonoBehaviour {
     public float grow_speed;
     public float grow_speed_variance;
     public float life_span;
+    public float growDieAnimationRatio = 0.1f;
+    // this means the first 10% of its health will have growing animation, and the last 10% dying animation
     public AnimationCurve height_vs_time;
 
     public Vector3 saved_position;
     public float age;
     public Quaternion saved_rotation;
-                                       
 
-    public PickupObject pickup_obj;
-    public GameObject player;
     public float cul_spread;
-    public bool onFire;  
-
-
+    public bool onFire;
+    
+    public bool useNewAnimationSystem; //should be deleted when done debugging
+    
+    private GameObject player;
     private LayerMask treeMask;
     private bool done = false;
     private float lastSpawned = 0.0f;
-    private Vector2 squareVec;
     private int numSpawned;
-    UnityRandom rand = new UnityRandom();
-    private float life;
+    private float health;
     private Animation anim;
     private float time_unloaded;
+    
+    private int state; //0:growing,1:mature,2:dying
 
-                   
+
     private GameObject fire;
     private GameObject Torch;
 
 
-    public void saveTransforms()
-    {
+    public void saveTransforms(){
         saved_position = transform.position;
         saved_rotation = transform.rotation;
     }
 
     // Take all data from tree and copy it to this tree
-    public void copyFrom(Tree tree)
-    {
+    public void copyFrom(TreeScript tree){ //WTF IS THIS
         prefab = tree.prefab;
         seed_object = tree.seed_object;
-        max_life = tree.max_life;
+        max_health = tree.max_health;
         radius = tree.radius;
         spawn_delay = tree.spawn_delay;
         spawn_delay_variance = tree.spawn_delay_variance;
@@ -68,55 +67,44 @@ public class Tree : MonoBehaviour {
         saved_position = tree.saved_position;
         saved_rotation = tree.saved_rotation;
         time_unloaded = tree.time_unloaded;
-        age = tree.age + (Globals.time) * grow_speed;
         transform.position = tree.saved_position;
         transform.rotation = tree.saved_rotation;
-   
+        growDieAnimationRatio = tree.growDieAnimationRatio;
         done = tree.done;
         numSpawned = tree.numSpawned;
-        life = tree.life;
-
-
-
-        
-        foreach (AnimationState state in anim)
-        {
-            state.time = age;
-        }
+        health = tree.health;
+        age = tree.age + (Globals.time) * grow_speed;
+        //foreach (AnimationState state in anim) state.time = age;
     }
 
     // Use this for initialization
-    void Awake () {
+    void Awake(){
         anim = GetComponent<Animation>();
         fire = Resources.Load("fire") as GameObject;
-
-
         player = GameObject.FindGameObjectWithTag("Player");
-        pickup_obj = player.GetComponent<PickupObject>();
-
-
+        
         age = 0.0f;
-        life = max_life;
+        health = max_health;
         treeMask = LayerMask.GetMask("Tree");
-        spawn_delay += rand.Value() * 2 * spawn_delay_variance - spawn_delay_variance;
-        Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
+        spawn_delay += Random.value * 2 * spawn_delay_variance - spawn_delay_variance;
+        //Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
         numSpawned = 0;
         lastSpawned = Time.time;
         grow_speed += Random.value * 2 * grow_speed_variance - grow_speed_variance;
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
         int terrain = LayerMask.GetMask("Terrain");
-
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-        {
+        
+        foreach (AnimationState state in anim) state.speed = 0; //fixes twitching
+        
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
 
             if (hit.point.y < Globals.water_level)
                 Destroy(gameObject);
             else
                 transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
         }
-        else
-        {
+        else{
             Destroy(gameObject);
         }
 	}
@@ -158,9 +146,9 @@ public class Tree : MonoBehaviour {
             if (Time.time - lastSpawned > spawn_delay)
             {
                 lastSpawned = Time.time;
-                squareVec = rand.PointInASquare();
+                Vector2 randomPoint = Random.insideUnitCircle;
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                Instantiate(seed_object, new Vector3(squareVec.x * radius + transform.position.x, transform.position.y + 10f, squareVec.y * radius + transform.position.z), RandomRotation);
+                Instantiate(seed_object, new Vector3(randomPoint.x * radius + transform.position.x, transform.position.y + 10f, randomPoint.y * radius + transform.position.z), RandomRotation);
                 numSpawned++;
                 if (spawn_limit > 0 && numSpawned >= spawn_limit)
                 {
@@ -176,21 +164,21 @@ public class Tree : MonoBehaviour {
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cull_radius, treeMask);
         if (age > life_span || objectsInRange.Length > cull_max_density)
         {
-            life -= 1;
-            if(life <= 0)
+            health -= 1;
+            if(health <= 0)
             {
                 done = true;
 
                 Destroy(gameObject);
             }    
         }
-        else if (life < max_life)
+        else if (health < max_health)
         {
-            life += 0.1f;
+            health += 0.1f;
         }
-        else if (life > max_life)
+        else if (health > max_health)
         {
-            life = max_life;
+            health = max_health;
         }
     }
 
@@ -200,56 +188,64 @@ public class Tree : MonoBehaviour {
         time_unloaded = Globals.time;
         if (age < 1000)
             age += Globals.time_scale * grow_speed;
-        foreach (AnimationState state in anim)
-        {
-            //state.speed = Globals.time_scale*grow_speed;
-            state.time = age;
-            anim_progress = state.time / state.length;
+        
+        if(useNewAnimationSystem){
+            if(age/life_span < growDieAnimationRatio){//growing
+                if(!anim.IsPlaying("growing")) anim.Play("growing");
+                anim["growing"].time = anim["growing"].length * age/(life_span*growDieAnimationRatio);
+                state = 0;
+            }else if(age/life_span > 1 - growDieAnimationRatio){//dying
+                if(!anim.IsPlaying("dying")) anim.Play("dying");
+                anim["dying"].time = anim["dying"].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
+                state = 1;
+            }else{ //mature
+                if(!anim.IsPlaying("growing")) anim.Play("growing");
+                anim["growing"].time = anim["growing"].length;
+                state = 2;
+            }
+        }else{
+            foreach (AnimationState state in anim){
+                //state.speed = Globals.time_scale*grow_speed;
+                state.time = age;
+                anim_progress = state.time / state.length;
+            }
         }
         float growth = height_vs_time.Evaluate(anim_progress);
         GetComponent<BoxCollider>().size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
         GetComponent<BoxCollider>().center = new Vector3(0, target_scale*growth*0.5f, 0);
 
     }
-
-    void OnMouseDown()
-    {
-        if (pickup_obj.gethand1())
-        {
-            if (pickup_obj.gethand1().name == "Torch")
-            {
-                if (!onFire)
-                {
-                    onFire = true;
-                }               
-                GameObject Instance = (GameObject)Instantiate(fire, transform.position, Quaternion.identity);
-            }
-        }
-        if (pickup_obj.gethand2())
-        {
-            if (pickup_obj.gethand2().name == "Torch")
-            {
-                if (!onFire)
-                {
-                    onFire = true;
-                }             
-                GameObject Instance = (GameObject)Instantiate(fire, transform.position, Quaternion.identity);
-            }
-        }
-                                                                                
+    
+    private bool playerHasObject(string objName){
+        if (player.GetComponent<Player>().getHand1())
+            if (player.GetComponent<Player>().getHand1().name == objName)
+                return true;
+        if (player.GetComponent<Player>().getHand2())
+            if (player.GetComponent<Player>().getHand2().name == objName)
+                return true;
+        return false;
     }
-                                                     
-    void fireSpread()
-    {
+
+    void OnMouseDown(){
+        if (playerHasObject("Torch")){
+            if (!onFire) onFire = true;
+            /*GameObject Instance = (GameObject)*/Instantiate(fire, transform.position, Quaternion.identity);
+        }
+    }
+    
+    private void fireSpread(){
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cul_spread, treeMask);
-        for (int i = 0; i < objectsInRange.Length; i++)
-        {
+        for (int i = 0; i < objectsInRange.Length; i++){
             GameObject curtree = objectsInRange[i].gameObject;
-            if (!curtree.GetComponent<Tree>().onFire)
-            {
-                curtree.GetComponent<Tree>().onFire = true;
-                GameObject Instance = (GameObject)Instantiate(fire, curtree.transform.position, Quaternion.identity);
+            if (!curtree.GetComponent<TreeScript>().onFire){
+                curtree.GetComponent<TreeScript>().onFire = true;
+                /*GameObject Instance = (GameObject)*/Instantiate(fire, curtree.transform.position, Quaternion.identity);
             }        
         }
+    }
+    
+    public int getState(){ //0:growing,1:mature,2:dying,3:burnt
+        if(onFire) return 3;
+        else return state;
     }
 }

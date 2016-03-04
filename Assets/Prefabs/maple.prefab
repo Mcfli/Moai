@@ -801,10 +801,10 @@ Animation:
   m_GameObject: {fileID: 138294}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400002, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
+  m_Animation: {fileID: 7400006, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
   m_Animations:
-  - {fileID: 7400000, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
-  - {fileID: 7400002, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
+  - {fileID: 7400006, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
+  - {fileID: 7400006, guid: 1c4b131d262c0e44a9262749fe7a9f43, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed_object: {fileID: 172308, guid: 256c357554288014d9c0d2bb1771b693, type: 2}
   prefab: {fileID: 0}
-  max_life: 10
+  max_health: 100
   radius: 100
   spawn_delay: 20
   spawn_delay_variance: 4
@@ -846,6 +846,7 @@ MonoBehaviour:
   grow_speed: 0.0001
   grow_speed_variance: 0
   life_span: 50
+  growDieAnimationRatio: 0.1
   height_vs_time:
     serializedVersion: 2
     m_Curve:
@@ -865,10 +866,9 @@ MonoBehaviour:
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
-  pickup_obj: {fileID: 0}
-  player: {fileID: 0}
   cul_spread: 100
   onFire: 0
+  useNewAnimationSystem: 1
 --- !u!137 &13753792
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -17,7 +17,7 @@ GameObject:
   - 135: {fileID: 13552780}
   m_Layer: 10
   m_Name: maple_seed
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
