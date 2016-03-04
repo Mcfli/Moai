@@ -57,13 +57,25 @@ public class WeatherManager : MonoBehaviour {
 
     public void updateWeather()
     {
+        Globals.cur_weather = Globals.cur_biome.weatherTypes[Mathf.FloorToInt(Random.value * Globals.cur_biome.weatherTypes.Count)];
         // Switch weather
-        if (Globals.cur_weather == null)
+        if (Globals.cur_weather == "rain")
         {
-            Globals.cur_weather = "sunny";
+            doRain();
             return;
         }
-        Globals.cur_weather = Globals.cur_biome.weatherTypes[Random.Range(0, (Globals.cur_biome.weatherTypes.Count - 1))];
+        else if (Globals.cur_weather == "snowy")
+        {
+            doSnowy();
+            return;
+        }
+        else
+        {
+            doSunny();
+            return;
+        }
+       
+        
         
     }
 
@@ -72,12 +84,14 @@ public class WeatherManager : MonoBehaviour {
         rain.gameObject.SetActive(true);
         snow.gameObject.SetActive(false);
 
-        target_clouds = 40;
+        target_clouds = 100;
+
         image_spaces[1].applyToCamera();
-        if (clouds.Count<target_clouds){
-            GameObject c = Instantiate(cloudPrefabs[(int)Random.Range(0,cloudPrefabs.Count-1)]);
+        while (clouds.Count<100){
+            
+            GameObject c = Instantiate(cloudPrefabs[Mathf.FloorToInt(Random.value * (cloudPrefabs.Count - 1))]);
             clouds.Add(c);
-           // last_updated = Time.time;
+            // last_updated = Time.time;
         }
     }
 
@@ -105,13 +119,15 @@ public class WeatherManager : MonoBehaviour {
         snow.gameObject.SetActive(true);
         image_spaces[2].applyToCamera();
 
-        target_clouds = 40;
-        if (clouds.Count < target_clouds)
+        target_clouds = 140;
+        while (clouds.Count < 100)
         {
+
             // Instantiate cloud prefab and add to cloud array
             //last_updated = Time.time;
-            GameObject c = Instantiate(cloudPrefabs[(int)Random.Range(0,cloudPrefabs.Count-1)]);
+            GameObject c = Instantiate(cloudPrefabs[Mathf.FloorToInt(Random.value*(cloudPrefabs.Count-1))]);
             clouds.Add(c);
+       
         }
     }
 

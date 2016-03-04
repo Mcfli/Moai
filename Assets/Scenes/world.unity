@@ -182,9 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 250
-  chunk_resolution: 16
-  chunk_load_dist: 2
+  chunk_size: 512
+  chunk_resolution: 8
+  chunk_load_dist: 10
   tree_load_dist: 1
   player: {fileID: 0}
   chunkGen: {fileID: 0}
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 5
+  tree_resolution: 2
   gen_manager: {fileID: 0}
 --- !u!114 &188005516
 MonoBehaviour:
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bd294ef01c1c34aac97e17eeaba320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  update_time: 5
+  update_time: 15
   particle_prefabs:
   - {fileID: 19887606, guid: 16acd0ab8af54da4cbbc1f2cf3dbab52, type: 2}
   - {fileID: 19831440, guid: 253d6bd3d5333194daec8a16c1c7dc0f, type: 2}
@@ -1031,8 +1031,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: -0.2742481, y: 0.0077730757, z: 0.002215295, w: 0.96162504}
-  m_LocalPosition: {x: -0.06509138, y: 263.44012, z: 0.9742074}
+  m_LocalRotation: {x: 0.061849773, y: 0.40765733, z: 0.027689982, w: -0.91061705}
+  m_LocalPosition: {x: 8380.783, y: -598.7348, z: -10395.499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1411,8 +1411,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: -0.2742481, y: 0.0077730757, z: 0.002215295, w: 0.96162504}
-  m_LocalPosition: {x: -0.06509138, y: 263.15985, z: 0.97413594}
+  m_LocalRotation: {x: 0.061849773, y: 0.40765733, z: 0.027689982, w: -0.91061705}
+  m_LocalPosition: {x: 8380.783, y: -599.0083, z: -10395.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
