@@ -40,15 +40,11 @@ public class GenerationManager : MonoBehaviour {
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
-<<<<<<< HEAD
 		loaded_shrine_chunks = new List<Vector2>();
-=======
         chunkBiomes = new Dictionary<Vector2, Biome>();
         noiseSynth = GetComponent<NoiseSynth>();
         moistureMap.Init();
         heatMap.Init();
-        
->>>>>>> Biomes
     }
 	
 	// Update is called once per frame
