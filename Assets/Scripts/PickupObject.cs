@@ -42,7 +42,7 @@ using UnityEngine;
 			if(obj == null || !CanGrab(obj)) return;
 			hand1 = obj;
 			Physics.IgnoreCollision(hand1.GetComponent<Collider>(), GetComponent<Collider>());
-			hand1size = obj.GetComponent<Renderer>().bounds.size.magnitude;
+			hand1size = obj.GetComponentInChildren<Renderer>().bounds.size.magnitude;
 			
 		}
 		
