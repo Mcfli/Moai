@@ -32,7 +32,7 @@ public class InteractibleObject: MonoBehaviour
             Ray rayDown = new Ray(transform.position, Vector3.down);
             int terrain = LayerMask.GetMask("Terrain");
             if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-                transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<Collider>().bounds.extents.y-0.1f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<Collider>().bounds.extents.y, transform.position.z);
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
         }else{

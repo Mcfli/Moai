@@ -25,7 +25,7 @@ public class Cloud : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
-        SkyScript = GameObject.FindGameObjectWithTag("Sky").GetComponent<Sky>();
+        SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
         float radial_offset = 2 * Random.value * placement_radius;
         float angle = 2*Random.value * Mathf.PI;
         transform.eulerAngles = new Vector3(0,Random.Range(0,360),0); //random rotation
