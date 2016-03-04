@@ -127,13 +127,7 @@ public class Tree : MonoBehaviour {
         if(age >= 0.03)
             Propogate();
         if (onFire)
-        {
             fireSpread();
-            /*
-            AudioSource audio = gameObject.AddComponent<AudioSource>();
-            audio.PlayOneShot((AudioClip)Resources.Load("TreeOnFire"));
-            */
-        }
     }
 
     private void stickToGround()
