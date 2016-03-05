@@ -92,8 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe39e9ce494b6bd46a990cfb1531dcba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placement_radius: 400
+  placement_radius: 800
   height_variation: 50
+  size_variation: 0.1
   height_base: 250
   dayEmission: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   nightEmission: {r: 0.24705882, g: 0.24705882, b: 1, a: 1}

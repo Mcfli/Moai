@@ -13,10 +13,10 @@ public class Player : MonoBehaviour {
     private float wait_speed;
 	private bool startGroundWarp;
     private GameObject hand1;
-    private float hand1size;
     private GameObject hand2;
+    private float hand1size;
     private float hand2size;
-
+    
     // Use this for initialization
     void Start () {
         wait_speed = wait_speed_init;
@@ -44,28 +44,49 @@ public class Player : MonoBehaviour {
         //Inventory stuff
         //Debug.Log(GetMouseHoverObject(5)); //return what you're looking at
 			
-        if(Input.GetButton(rightHand)){
+        if(Input.GetButtonDown(rightHand)){
             if(hand1 == null) TryGrabObject1(GetMouseHoverObject(5));
             else DropObject1();
         }
         
-        if(Input.GetButton(leftHand)){
+        if(Input.GetButtonDown(leftHand)){
             if(hand2 == null) TryGrabObject2(GetMouseHoverObject(5));
             else DropObject2();
         }
         
         if(hand1 != null){
-            Vector3 newPosition = (gameObject.transform.position + Vector3.Lerp(Camera.main.transform.forward, Camera.main.transform.right, 0.3f)* hand1size);
-            hand1.transform.position = newPosition;
-            hand1.transform.forward = Camera.main.transform.forward;
+            followHand(hand1, hand1size, false);
         }
         
         if(hand2 != null){
-            Vector3 newPosition = (gameObject.transform.position + Vector3.Lerp(Camera.main.transform.forward, Camera.main.transform.right * -1, 0.3f) * hand2size);
-            hand2.transform.position = newPosition;
-            hand2.transform.forward = Camera.main.transform.forward;
+            followHand(hand2, hand2size, true);
         }
 	}
+    
+    private void followHand(GameObject obj, float size, bool isRightHand){
+        obj.transform.position = gameObject.transform.position + Vector3.Lerp(Camera.main.transform.forward, Camera.main.transform.right * ((isRightHand) ? 1 : -1), 0.3f) * size;
+        switch(obj.GetComponent<InteractableObject>().heldOrientation){
+            case InteractableObject.Orientation.forward:
+                obj.transform.forward = Camera.main.transform.forward;
+                break;
+            case InteractableObject.Orientation.backward:
+                obj.transform.forward = Camera.main.transform.forward * -1;
+                break;
+            case InteractableObject.Orientation.up:
+                obj.transform.forward = Camera.main.transform.up;
+                break;
+            case InteractableObject.Orientation.down:
+                obj.transform.forward = Camera.main.transform.up * -1;
+                break;
+            case InteractableObject.Orientation.right:
+                obj.transform.forward = Camera.main.transform.right;
+                break;
+            case InteractableObject.Orientation.left:
+                obj.transform.forward = Camera.main.transform.right * -1;;
+                break;
+            default: break;
+        }
+    }
     
 	public bool warpToGround(){
 		RaycastHit hit;
@@ -97,7 +118,6 @@ public class Player : MonoBehaviour {
         hand1 = obj;
         Physics.IgnoreCollision(hand1.GetComponent<Collider>(), GetComponent<Collider>());
         hand1size = obj.GetComponent<Renderer>().bounds.size.magnitude;
-        
     }
     
     void DropObject1(){
@@ -116,7 +136,6 @@ public class Player : MonoBehaviour {
         hand2 = obj;
         Physics.IgnoreCollision(hand2.GetComponent<Collider>(), GetComponent<Collider>());
         hand2size = obj.GetComponent<Renderer>().bounds.size.magnitude;
-        
     }
     
     void DropObject2(){

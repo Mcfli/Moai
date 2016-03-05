@@ -6,6 +6,7 @@ public class Cloud : MonoBehaviour {
     // Access variables
     public float placement_radius;
     public float height_variation;
+    public float size_variation; //ratio (0.0 - 1.0)
     public float height_base;
     [ColorUsageAttribute(false,true,0f,8f,0.125f,3f)] public Color dayEmission;
     [ColorUsageAttribute(false,true,0f,8f,0.125f,3f)] public Color nightEmission;
@@ -26,13 +27,11 @@ public class Cloud : MonoBehaviour {
     void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
         SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
-        float radial_offset = 2 * Random.value * placement_radius;
-        float angle = 2*Random.value * Mathf.PI;
+        Vector2 radial_offset = Random.insideUnitCircle * placement_radius;
         transform.eulerAngles = new Vector3(0,Random.Range(0,360),0); //random rotation
+        transform.localScale *= 1 + Random.Range(-size_variation, size_variation); //random size
 
-        pos_offset = new Vector3(radial_offset*Mathf.Cos(angle),
-            height_base+2*Random.value*height_variation-height_variation,
-            radial_offset * Mathf.Sin(angle));
+        pos_offset = new Vector3(radial_offset.x, height_base + Random.Range(-height_variation,height_variation), radial_offset.y);
         cur_opacity = 0.0f;
         dissipating = false;
         rend = GetComponent<Renderer>();

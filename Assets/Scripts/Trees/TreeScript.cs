@@ -95,7 +95,7 @@ public class TreeScript : MonoBehaviour {
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
         int terrain = LayerMask.GetMask("Terrain");
         
-        foreach (AnimationState state in anim) state.speed = 0; //fixes twitching
+        foreach (AnimationState animState in anim) animState.speed = 0; //fixes twitching
         
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
 
@@ -204,10 +204,11 @@ public class TreeScript : MonoBehaviour {
                 state = 2;
             }
         }else{
-            foreach (AnimationState state in anim){
+            state = 1;
+            foreach (AnimationState animState in anim){
                 //state.speed = Globals.time_scale*grow_speed;
-                state.time = age;
-                anim_progress = state.time / state.length;
+                animState.time = age;
+                anim_progress = animState.time / animState.length;
             }
         }
         float growth = height_vs_time.Evaluate(anim_progress);

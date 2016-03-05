@@ -130,6 +130,17 @@ public class WeatherManager : MonoBehaviour {
        
         }
     }
+    
+    private void changeClouds(int target_clouds){
+        while(clouds.Count < target_clouds){ //i want more clouds
+            GameObject c = Instantiate(cloudPrefabs[Mathf.FloorToInt(Random.value*(cloudPrefabs.Count-1))]);
+            clouds.Add(c);
+        }
+        
+        while(clouds.Count > target_clouds){ //i want less clouds
+            
+        }
+    }
 
     public void moveWithPlayer()
     {

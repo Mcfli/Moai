@@ -34,7 +34,7 @@ public class ChunkGenerator : MonoBehaviour {
         
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
-                float x = ix * chunk_size/(chunk_resolution-1);
+                float x = ix * chunk_size/(chunk_resolution-1); 
                 float y = iy * chunk_size / (chunk_resolution-1);
                 float xpos = chunk.transform.position.x + x;
                 float ypos = chunk.transform.position.z + y;
@@ -83,7 +83,7 @@ public class ChunkGenerator : MonoBehaviour {
         // Calculate vertex colors
 
        
-        MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        /*MeshCollider meshc = */chunk.AddComponent(typeof(MeshCollider)); // as MeshCollider;
 	}
 
     public void colorChunk(GameObject chunk,Biome curBiome,Biome up,Biome down,Biome left,Biome right)
@@ -118,8 +118,8 @@ public class ChunkGenerator : MonoBehaviour {
             else
                 vcolor = Color.Lerp(down_color, biome_color, 2f * v);
 
-            float hm = Mathf.Abs(h - 0.5f);
-            float vm = Mathf.Abs(v - 0.5f);
+            //float hm = Mathf.Abs(h - 0.5f);
+            //float vm = Mathf.Abs(v - 0.5f);
             float interp = Mathf.Max(v / (h + v), 0f);
 
 
