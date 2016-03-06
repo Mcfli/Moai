@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 440784}
   - 114: {fileID: 11428982}
   m_Layer: 0
-  m_Name: rainy_day
+  m_Name: Rain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

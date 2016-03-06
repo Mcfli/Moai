@@ -9,21 +9,24 @@ public class InteractableObject: MonoBehaviour
     public float cull_radius;        // How far this must be from other seeds and trees in order to grow.
     public float life_length;        // How long before the seed sprouts into a tree (or dies)
     
-    public enum Orientation{forward,backward,up,down,right,left};
-    public Orientation heldOrientation;
+    //public enum Orientation{forward,backward,up,down,right,left};
+    //public Orientation heldOrientation;
 
-    private float spawned_time;     // Stores what the game time was when this was spawned. 
+    private float lifeRemain;     // how long left before the seed dies
 
     // Use this for initialization
     void Start(){
-        spawned_time = Globals.time;
+        lifeRemain = life_length;
     }
 
     // Update is called once per frame
     void Update(){
         if(isHeld()){
+            //do nothing
         }else{
-            if (Globals.time - spawned_time > life_length*Globals.time_resolution){
+            lifeRemain -= Globals.time_scale;
+            
+            if (lifeRemain < 0){
                 Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
                 if(close_trees.Length < 1){
                     var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
@@ -48,6 +51,6 @@ public class InteractableObject: MonoBehaviour
     
     private bool isHeld(){
         Player p = Globals.Player.GetComponent<Player>();
-        return p.getHand1() == this.gameObject || p.getHand2() == this.gameObject;
+        return p.getRightObj() == this.gameObject || p.getLeftObj() == this.gameObject;
     }
 }

@@ -9,7 +9,9 @@ public class Biome : MonoBehaviour {
     public float moistureAvg;
     public float moistureVariance;
 
-    public List<string> weatherTypes;
+    public List<Weather> weatherTypes;
+    public List<float> weatherChance; //must be same size as weatherTypes
+    //sky color goes here
 
     // Curves that define a property given what time of year it is
     public AnimationCurve temperatureCurve; 
@@ -25,8 +27,7 @@ public class Biome : MonoBehaviour {
     public AnimationCurve color_curve;
 
     // Returns the vertex color for a vertex in this Biome at a given height value
-    public Color colorAt(float height)
-    {
+    public Color colorAt(float height){
         float h = height / amplitude;
         if (h > 1.000f) h = 1.000f;
         else if (h < 0f) h = 0f;
@@ -48,8 +49,7 @@ public class Biome : MonoBehaviour {
     }
     
     // Creates a new Biome whose parameters consist of a random mixing of two input Biomes' paramaters
-    public static Biome Combine(Biome a, Biome b)
-    {
+    public static Biome Combine(Biome a, Biome b){
         Biome c = new Biome();
 
         // Combine climate values

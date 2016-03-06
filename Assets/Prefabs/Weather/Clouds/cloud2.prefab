@@ -96,11 +96,10 @@ MonoBehaviour:
   height_variation: 50
   size_variation: 0.1
   height_base: 250
-  dayEmission: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  nightEmission: {r: 0.24705882, g: 0.24705882, b: 1, a: 1}
   max_opacity: 0.5
   fade_speed: 0.1
-  dissipating: 0
+  dayEmission: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  nightEmission: {r: 0.24705882, g: 0.24705882, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

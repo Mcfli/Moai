@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 621.1538, y: 214.96484, z: 1451.9033}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,8 +44,11 @@ MonoBehaviour:
   moistureAvg: 65
   moistureVariance: 20
   weatherTypes:
-  - sunny
-  - snowy
+  - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
+  - {fileID: 11431138, guid: 3dc4b1975c90d3b4b9a9dc2a3464decb, type: 2}
+  weatherChance:
+  - 0.25
+  - 0.75
   temperatureCurve:
     serializedVersion: 2
     m_Curve:

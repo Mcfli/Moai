@@ -7,16 +7,21 @@ public class Player : MonoBehaviour {
     public float wait_speed_max = 10000.0f;
     public float wait_speed_growth = 1.0f;
     public float faster_wait_speed_multiplier = 5.0f;
-    public string leftHand;
-    public string rightHand;
+    public float grabDistance = 5;
+    public float grabSphereRadius = 1;
+    public string leftHandInput;
+    public string rightHandInput;
+    public float minWarpOnWaitDist = 1;
     
     private float wait_speed;
 	private bool startGroundWarp;
-    private GameObject hand1;
-    private GameObject hand2;
-    private float hand1size;
-    private float hand2size;
-    
+    private GameObject leftObj;
+    private GameObject rightObj;
+    private float leftSize;
+    private float rightSize;
+    private Vector3 leftOrigScale;
+    private Vector3 rightOrigScale;
+
     // Use this for initialization
     void Start () {
         wait_speed = wait_speed_init;
@@ -32,6 +37,8 @@ public class Player : MonoBehaviour {
             
             if (wait_speed < wait_speed_max) wait_speed += wait_speed_growth;
             else wait_speed = wait_speed_max;
+            
+            warpToGround();
         }else{
             Globals.time_scale = 1.0f;
             wait_speed = wait_speed_init;
@@ -41,111 +48,92 @@ public class Player : MonoBehaviour {
         //warp to ground at game start
 		if(!startGroundWarp) startGroundWarp = warpToGround();
         
-        //Inventory stuff
-        //Debug.Log(GetMouseHoverObject(5)); //return what you're looking at
-			
-        if(Input.GetButtonDown(rightHand)){
-            if(hand1 == null) TryGrabObject1(GetMouseHoverObject(5));
-            else DropObject1();
+        //Holding Objects stuff
+        if(Input.GetButtonDown(leftHandInput)){
+            if(leftObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), true);
+            else DropObject(true);
+        }else if(Input.GetButtonDown(rightHandInput)){
+            if(rightObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), false);
+            else DropObject(false);
         }
         
-        if(Input.GetButtonDown(leftHand)){
-            if(hand2 == null) TryGrabObject2(GetMouseHoverObject(5));
-            else DropObject2();
-        }
-        
-        if(hand1 != null){
-            followHand(hand1, hand1size, false);
-        }
-        
-        if(hand2 != null){
-            followHand(hand2, hand2size, true);
-        }
+        if(leftObj != null) followHand(leftObj, leftSize, true);
+        if(rightObj != null) followHand(rightObj, rightSize, false);
 	}
     
-    private void followHand(GameObject obj, float size, bool isRightHand){
-        obj.transform.position = gameObject.transform.position + Vector3.Lerp(Camera.main.transform.forward, Camera.main.transform.right * ((isRightHand) ? 1 : -1), 0.3f) * size;
-        switch(obj.GetComponent<InteractableObject>().heldOrientation){
-            case InteractableObject.Orientation.forward:
-                obj.transform.forward = Camera.main.transform.forward;
-                break;
-            case InteractableObject.Orientation.backward:
-                obj.transform.forward = Camera.main.transform.forward * -1;
-                break;
-            case InteractableObject.Orientation.up:
-                obj.transform.forward = Camera.main.transform.up;
-                break;
-            case InteractableObject.Orientation.down:
-                obj.transform.forward = Camera.main.transform.up * -1;
-                break;
-            case InteractableObject.Orientation.right:
-                obj.transform.forward = Camera.main.transform.right;
-                break;
-            case InteractableObject.Orientation.left:
-                obj.transform.forward = Camera.main.transform.right * -1;;
-                break;
-            default: break;
-        }
+    private void followHand(GameObject obj, float objSize, bool isLeft){
+        Transform t = Camera.main.transform;
+        float scale = 0.5f; //temp
+        float angleAway = 0.4f; //temp
+        obj.transform.position = t.position + Vector3.up * -scale + Vector3.Lerp(t.forward, t.right * ((isLeft) ? -1 : 1), angleAway) * objSize * scale;
+        obj.transform.localScale = ((isLeft) ? leftOrigScale : rightOrigScale) * scale;
+        obj.transform.forward = Camera.main.transform.forward;
     }
     
 	public bool warpToGround(){
 		RaycastHit hit;
         Ray rayDown = new Ray(transform.position, Vector3.down);
-        int terrain = LayerMask.GetMask("Terrain");
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
-			transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<CharacterController>().height/2, transform.position.z);
-			return true;
-		}else return false;
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
+            if (transform.position.y - (hit.point.y + GetComponent<CharacterController>().height / 2) > minWarpOnWaitDist)
+                transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<CharacterController>().height / 2, transform.position.z);
+            return true;
+        }
+        else return false;
 	}
     
-    public GameObject getHand1(){return hand1;}
-    public GameObject getHand2(){return hand2;}
+    public GameObject getLeftObj(){return leftObj;}
+    public GameObject getRightObj(){return rightObj;}
     
-    private GameObject GetMouseHoverObject(float range){
-        Vector3 position = gameObject.transform.position;
+    private GameObject GetMouseHoverObject(float range, float radius){
         RaycastHit raycastHit;
-        Vector3 target = position + Camera.main.transform.forward * range;
-        if(Physics.Linecast(position,target,out raycastHit)) return raycastHit.collider.gameObject;
+        Transform t = Camera.main.transform; //camera transform
+        if(Physics.SphereCast(t.position, radius, t.forward, out raycastHit, range)) return raycastHit.collider.gameObject;
         return null;
     }                                                
     
     private bool CanGrab(GameObject obj){
         return obj.tag == "Object";
     }
-    
-    void TryGrabObject1(GameObject obj){
-        if(obj == null || !CanGrab(obj)) return;
-        hand1 = obj;
-        Physics.IgnoreCollision(hand1.GetComponent<Collider>(), GetComponent<Collider>());
-        hand1size = obj.GetComponent<Renderer>().bounds.size.magnitude;
+
+    public bool LookingAtGrabbable(){
+        if (GetMouseHoverObject(grabDistance, grabSphereRadius) == null) return false;
+        return CanGrab(GetMouseHoverObject(grabDistance, grabSphereRadius));
     }
     
-    void DropObject1(){
-        if(hand1 == null) return;
-        
-        if(hand1.GetComponent<Rigidbody>() != null){
-            hand1.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-            Physics.IgnoreCollision(hand1.GetComponent<Collider>(), GetComponent<Collider>(), false);
+    private bool TryGrabObject(GameObject obj, bool isLeft){
+        if(obj == null || !CanGrab(obj)) return false;
+        Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
+        if (isLeft) {
+            leftObj = obj;
+            leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
+            leftOrigScale = obj.transform.localScale;
+        }else {
+            rightObj = obj;
+            rightSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
+            rightOrigScale = obj.transform.localScale;
         }
-        
-        hand1 = null;
+        return true;
     }
     
-    void TryGrabObject2(GameObject obj){
-        if(obj == null || !CanGrab(obj)) return;
-        hand2 = obj;
-        Physics.IgnoreCollision(hand2.GetComponent<Collider>(), GetComponent<Collider>());
-        hand2size = obj.GetComponent<Renderer>().bounds.size.magnitude;
-    }
-    
-    void DropObject2(){
-        if(hand2 == null) return;
-        
-        if(hand2.GetComponent<Rigidbody>() != null){
-            hand2.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-            Physics.IgnoreCollision(hand2.GetComponent<Collider>(), GetComponent<Collider>(), false);
+    private bool DropObject(bool isLeft){
+        if(isLeft){
+            if(leftObj == null) return false;
+            if(leftObj.GetComponent<Rigidbody>() != null){
+                leftObj.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+                Physics.IgnoreCollision(leftObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            }
+            leftObj.transform.localScale = leftOrigScale;
+            leftObj = null;
         }
-        
-        hand2 = null;
+        else{
+            if (rightObj == null) return false;
+            if (rightObj.GetComponent<Rigidbody>() != null){
+                rightObj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                Physics.IgnoreCollision(rightObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            }
+            rightObj.transform.localScale = rightOrigScale;
+            rightObj = null;
+        }
+        return true;
     }
 }

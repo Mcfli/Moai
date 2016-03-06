@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Sky : MonoBehaviour {
 	//attach to sky
-	public float timeresPerDegree = 10; //x axis
+	public float timePerDegree = 100; //x axis
 	public GameObject DayNightSpin;
 	public GameObject SunLight;
 	public GameObject MoonLight;
@@ -23,7 +23,6 @@ public class Sky : MonoBehaviour {
 	private float moonMaxIntensity; //ditto above
 	private float starAlpha;
 	
-	private float timeOfDay; //0 for dawn, 90 for noon, 180 for dusk, 270 for midnight. Should not be or exceed 360.
 	private Skybox skyGoal;
 	private Skybox skyDelta;
 	private float timeRemain;
@@ -85,7 +84,7 @@ public class Sky : MonoBehaviour {
     }
 
     void Update(){
-		timeOfDay = Mathf.Repeat(Globals.time/Globals.time_resolution/timeresPerDegree + originalDayNightAngle.x, 360);
+		Globals.timeOfDay = Mathf.Repeat(Globals.time/Globals.time_resolution/timePerDegree + originalDayNightAngle.x, 360);
 		updateTransforms();
 		if(Globals.time_scale < timeScaleThatHaloAppears){ //normal day/night cycle
 			DayNightSpin.SetActive(true);
@@ -102,69 +101,65 @@ public class Sky : MonoBehaviour {
 			setSky(pm12);
 		}
     }
-    
-    public float getTimeOfDay(){
-        return timeOfDay;
-    }
 	
 	private void updateTransforms(){
-		DayNightSpin.transform.localEulerAngles = new Vector3(timeOfDay, originalDayNightAngle.y, originalDayNightAngle.z); //update angle of sun/moon with timeofday - x axis
-		StarsParent.transform.localEulerAngles = new Vector3(-(Mathf.PingPong(timeOfDay, 180)-90)/90*horizonBufferAngle,0,0);
-		float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time/Globals.time_resolution, daysPerYear*360*timeresPerDegree) / (daysPerYear*360*timeresPerDegree)); //tilt of sun/moon - z axis
+		DayNightSpin.transform.localEulerAngles = new Vector3(Globals.timeOfDay, originalDayNightAngle.y, originalDayNightAngle.z); //update angle of sun/moon with Globals.timeOfDay - x axis
+		StarsParent.transform.localEulerAngles = new Vector3(-(Mathf.PingPong(Globals.timeOfDay, 180)-90)/90*horizonBufferAngle,0,0);
+		float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time/Globals.time_resolution, daysPerYear*360*timePerDegree) / (daysPerYear*360*timePerDegree)); //tilt of sun/moon - z axis
 		transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z+axis); //update angle of sun/moon ring with time of year
 		transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
 	}
 	
 	private void updateStarColor(){
 		Color newStarColor = starPrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_Color");
-		if(timeOfDay > 180 && timeOfDay <= 180 + horizonBufferAngle) newStarColor.a = starAlpha*(timeOfDay-180)/horizonBufferAngle; //sunset
-		else if(timeOfDay > 180 + horizonBufferAngle && timeOfDay <= 360 - horizonBufferAngle) newStarColor.a = 1; //night
-		else if(timeOfDay > 360 - horizonBufferAngle) newStarColor.a = starAlpha*(360-timeOfDay)/horizonBufferAngle; //sunrise
+		if(Globals.timeOfDay > 180 && Globals.timeOfDay <= 180 + horizonBufferAngle) newStarColor.a = starAlpha*(Globals.timeOfDay-180)/horizonBufferAngle; //sunset
+		else if(Globals.timeOfDay > 180 + horizonBufferAngle && Globals.timeOfDay <= 360 - horizonBufferAngle) newStarColor.a = 1; //night
+		else if(Globals.timeOfDay > 360 - horizonBufferAngle) newStarColor.a = starAlpha*(360-Globals.timeOfDay)/horizonBufferAngle; //sunrise
 		else newStarColor.a = 0; //day
 		starPrefab.GetComponent<Renderer>().sharedMaterial.SetColor("_Color", newStarColor);
 	}
 	
 	private void updateIntensity(){ // Modulate sun/moon intensity
-		if(timeOfDay > horizonBufferAngle && timeOfDay <= 180 - horizonBufferAngle){ //day
+		if(Globals.timeOfDay > horizonBufferAngle && Globals.timeOfDay <= 180 - horizonBufferAngle){ //day
 			SunLight.GetComponent<Light>().intensity = sunMaxIntensity;
 			MoonLight.GetComponent<Light>().intensity = 0.0f;
-		}else if(timeOfDay > 180 - horizonBufferAngle && timeOfDay <= 180 + horizonBufferAngle){ //sunset
-			SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (1.0f - (timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
-			MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * ((timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
-		}else if(timeOfDay > 180 + horizonBufferAngle && timeOfDay <= 360 - horizonBufferAngle){ //night
+		}else if(Globals.timeOfDay > 180 - horizonBufferAngle && Globals.timeOfDay <= 180 + horizonBufferAngle){ //sunset
+			SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (1.0f - (Globals.timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
+			MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * ((Globals.timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2));
+		}else if(Globals.timeOfDay > 180 + horizonBufferAngle && Globals.timeOfDay <= 360 - horizonBufferAngle){ //night
 			SunLight.GetComponent<Light>().intensity = 0.0f;
 			MoonLight.GetComponent<Light>().intensity = moonMaxIntensity;
 		}else{ //sunrise
-			if(timeOfDay <= 30){ //above horizon
-				SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (0.5f + (timeOfDay / (horizonBufferAngle * 2)));
-				MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (0.5f - (timeOfDay / (horizonBufferAngle * 2)));
+			if(Globals.timeOfDay <= 30){ //above horizon
+				SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (0.5f + (Globals.timeOfDay / (horizonBufferAngle * 2)));
+				MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (0.5f - (Globals.timeOfDay / (horizonBufferAngle * 2)));
 			}else{ //below horizon
-				SunLight.GetComponent<Light>().intensity = sunMaxIntensity * ((timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
-				MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (1.0f - (timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
+				SunLight.GetComponent<Light>().intensity = sunMaxIntensity * ((Globals.timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
+				MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (1.0f - (Globals.timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2));
 			}
 		}
 	}
 		
 	private void updateSky(){ // gradual sky color change
 		float ratio;
-		if(timeOfDay > horizonBufferAngle && timeOfDay <= 90){ //morning
-			ratio = (timeOfDay - horizonBufferAngle) / (90 - horizonBufferAngle);
+		if(Globals.timeOfDay > horizonBufferAngle && Globals.timeOfDay <= 90){ //morning
+			ratio = (Globals.timeOfDay - horizonBufferAngle) / (90 - horizonBufferAngle);
 			setSky(am8 * (1 - ratio) + pm12 * ratio);
-		}else if(timeOfDay > 90 && timeOfDay <= 180 - horizonBufferAngle){ //afternoon
-			ratio = (timeOfDay - 90) / (90 - horizonBufferAngle);
+		}else if(Globals.timeOfDay > 90 && Globals.timeOfDay <= 180 - horizonBufferAngle){ //afternoon
+			ratio = (Globals.timeOfDay - 90) / (90 - horizonBufferAngle);
 			setSky(pm12 * (1 - ratio) + pm4 * ratio);
-		}else if(timeOfDay > 180 - horizonBufferAngle && timeOfDay <= 180 + horizonBufferAngle){ //sunset
-			ratio = (timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2);
+		}else if(Globals.timeOfDay > 180 - horizonBufferAngle && Globals.timeOfDay <= 180 + horizonBufferAngle){ //sunset
+			ratio = (Globals.timeOfDay - (180 - horizonBufferAngle)) / (horizonBufferAngle * 2);
 			setSky(pm4 * (1 - ratio) + pm8 * ratio);
-		}else if(timeOfDay > 180 + horizonBufferAngle && timeOfDay <= 270){ //before midnight
-			ratio = (timeOfDay - (180 + horizonBufferAngle)) / (90 - horizonBufferAngle);
+		}else if(Globals.timeOfDay > 180 + horizonBufferAngle && Globals.timeOfDay <= 270){ //before midnight
+			ratio = (Globals.timeOfDay - (180 + horizonBufferAngle)) / (90 - horizonBufferAngle);
 			setSky(pm8 * (1 - ratio) + am12 * ratio);
-		}else if(timeOfDay > 270 && timeOfDay <= 360 - horizonBufferAngle){ //after midnight
-			ratio = (timeOfDay - 270) / (90 - horizonBufferAngle);
+		}else if(Globals.timeOfDay > 270 && Globals.timeOfDay <= 360 - horizonBufferAngle){ //after midnight
+			ratio = (Globals.timeOfDay - 270) / (90 - horizonBufferAngle);
 			setSky(am12 * (1 - ratio) + am4 * ratio);
 		}else{ //sunrise
-			if(timeOfDay <= 30) ratio = 0.5f + (timeOfDay - 0) / (horizonBufferAngle * 2); //above horizon
-			else ratio = (timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2); //below horizon
+			if(Globals.timeOfDay <= 30) ratio = 0.5f + (Globals.timeOfDay - 0) / (horizonBufferAngle * 2); //above horizon
+			else ratio = (Globals.timeOfDay - (360 - horizonBufferAngle)) / (horizonBufferAngle * 2); //below horizon
 			setSky(am4 * (1 - ratio) + am8 * ratio);
 		}
 	}
@@ -194,7 +189,7 @@ public class Sky : MonoBehaviour {
 			timeRemain = 0;
 			setSky(skyGoal);
 		}else{
-			timeRemain = time * timeresPerDegree;
+			timeRemain = time * timePerDegree;
 			skyDelta = s - getSky() / timeRemain;
 		}
 	}

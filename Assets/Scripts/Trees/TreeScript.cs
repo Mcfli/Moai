@@ -218,11 +218,11 @@ public class TreeScript : MonoBehaviour {
     }
     
     private bool playerHasObject(string objName){
-        if (player.GetComponent<Player>().getHand1())
-            if (player.GetComponent<Player>().getHand1().name == objName)
+        if (player.GetComponent<Player>().getLeftObj())
+            if (player.GetComponent<Player>().getLeftObj().name == objName)
                 return true;
-        if (player.GetComponent<Player>().getHand2())
-            if (player.GetComponent<Player>().getHand2().name == objName)
+        if (player.GetComponent<Player>().getRightObj())
+            if (player.GetComponent<Player>().getRightObj().name == objName)
                 return true;
         return false;
     }
