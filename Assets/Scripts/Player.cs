@@ -3,15 +3,15 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    public float wait_speed_init = 10.0f;
-    public float wait_speed_max = 10000.0f;
-    public float wait_speed_growth = 1.0f;
-    public float faster_wait_speed_multiplier = 5.0f;
+    public float initialWaitSpeed = 10.0f;
+    public float maxWaitSpeed = 10000.0f;
+    public float waitSpeedGrowth = 1.0f;
+    public float sprintWaitMultiplier = 5.0f;
     public float grabDistance = 5;
     public float grabSphereRadius = 1;
     public string leftHandInput;
     public string rightHandInput;
-    public float minWarpOnWaitDist = 1;
+    public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
     
     private float wait_speed;
 	private bool startGroundWarp;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        wait_speed = wait_speed_init;
+        wait_speed = initialWaitSpeed;
 		startGroundWarp = false;
 	}
 	
@@ -35,13 +35,13 @@ public class Player : MonoBehaviour {
             if(Input.GetButton("Speed")) Globals.time_scale = wait_speed * 5;
             else Globals.time_scale = wait_speed;
             
-            if (wait_speed < wait_speed_max) wait_speed += wait_speed_growth;
-            else wait_speed = wait_speed_max;
+            if (wait_speed < maxWaitSpeed) wait_speed += waitSpeedGrowth;
+            else wait_speed = maxWaitSpeed;
             
             warpToGround();
         }else{
             Globals.time_scale = 1.0f;
-            wait_speed = wait_speed_init;
+            wait_speed = initialWaitSpeed;
         }
         Globals.time += Globals.time_resolution*Globals.time_scale;
         

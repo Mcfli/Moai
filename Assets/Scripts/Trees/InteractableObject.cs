@@ -8,11 +8,8 @@ public class InteractableObject: MonoBehaviour
     public LayerMask cull_layer;
     public float cull_radius;        // How far this must be from other seeds and trees in order to grow.
     public float life_length;        // How long before the seed sprouts into a tree (or dies)
-    
-    //public enum Orientation{forward,backward,up,down,right,left};
-    //public Orientation heldOrientation;
 
-    private float lifeRemain;     // how long left before the seed dies
+    private float lifeRemain;        // how long left before the seed dies
 
     // Use this for initialization
     void Start(){

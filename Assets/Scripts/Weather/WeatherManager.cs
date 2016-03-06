@@ -38,6 +38,9 @@ public class WeatherManager : MonoBehaviour {
             changeWeather();
         }
 
+        if (Globals.time_scale > 1) hideWeather();
+        else showWeather();
+
         //check if visiable
         if (activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
 
@@ -54,8 +57,8 @@ public class WeatherManager : MonoBehaviour {
 
     public void changeWeather(){
         if (Globals.cur_biome == null) return;
-        string originalWeatherName = "None";
-        if(Globals.cur_weather) originalWeatherName = Globals.cur_weather.weatherName;
+        Weather lastWeather = null;
+        if(Globals.cur_weather) lastWeather = Globals.cur_weather;
 
         //choose weather
         float roll = 0;
@@ -69,7 +72,7 @@ public class WeatherManager : MonoBehaviour {
         }
 
         // Switch to weather
-        if (originalWeatherName != Globals.cur_weather.weatherName) {
+        if (lastWeather != Globals.cur_weather) {
             if (activeParticleSystem) {
                 Destroy(activeParticleSystem.gameObject);
                 activeParticleSystem = null;
