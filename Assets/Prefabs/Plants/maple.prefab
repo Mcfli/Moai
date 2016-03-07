@@ -806,7 +806,7 @@ Animation:
   - {fileID: 7400006, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
   - {fileID: 7400006, guid: 1c4b131d262c0e44a9262749fe7a9f43, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
 --- !u!114 &11415324
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Tree
-  image: {fileID: 2800000, guid: c2b8cfeb37194ad4ab85bed6d97025aa, type: 3}
+  image: {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
 --- !u!114 &11468444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -834,13 +834,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed_object: {fileID: 172308, guid: 256c357554288014d9c0d2bb1771b693, type: 2}
-  prefab: {fileID: 0}
+  prefab: {fileID: 138294}
   max_health: 100
   radius: 100
   spawn_delay: 20
   spawn_delay_variance: 4
   spawn_limit: 0
-  cull_radius: 80
+  cull_radius: 10
   cull_max_density: 5
   target_scale: 10
   grow_speed: 0.0001
@@ -869,6 +869,10 @@ MonoBehaviour:
   cul_spread: 100
   onFire: 0
   useNewAnimationSystem: 1
+  puzzleIcons:
+  - {fileID: 2800000, guid: 25c236ba8ff61c9418e2222862304639, type: 3}
+  - {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
+  - {fileID: 2800000, guid: a4a6726f3901ed24dab8d0e24efd7fef, type: 3}
 --- !u!137 &13753792
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

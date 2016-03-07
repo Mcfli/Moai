@@ -64,8 +64,8 @@ public class Player : MonoBehaviour {
     private void followHand(GameObject obj, float objSize, bool isLeft){
         Transform t = Camera.main.transform;
         float scale = 0.5f; //temp
-        float angleAway = 0.4f; //temp
-        obj.transform.position = t.position + Vector3.up * -scale + Vector3.Lerp(t.forward, t.right * ((isLeft) ? -1 : 1), angleAway) * objSize * scale;
+        float angleAway = 0.5f; //temp
+        obj.transform.position = t.position + Vector3.Lerp(Vector3.Lerp(t.forward, t.right * ((isLeft) ? -1 : 1), angleAway), t.up * -1, 0.15f) * objSize*2 * scale;
         obj.transform.localScale = ((isLeft) ? leftOrigScale : rightOrigScale) * scale;
         obj.transform.forward = Camera.main.transform.forward;
     }
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour {
     }                                                
     
     private bool CanGrab(GameObject obj){
-        return obj.tag == "Object";
+        return obj.GetComponent<InteractableObject>();
     }
 
     public bool LookingAtGrabbable(){
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour {
         if(isLeft){
             if(leftObj == null) return false;
             if(leftObj.GetComponent<Rigidbody>() != null){
-                leftObj.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+                leftObj.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
                 Physics.IgnoreCollision(leftObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
             }
             leftObj.transform.localScale = leftOrigScale;

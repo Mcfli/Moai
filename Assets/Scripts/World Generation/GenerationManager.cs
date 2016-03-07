@@ -11,19 +11,18 @@ public class GenerationManager : MonoBehaviour {
     public int chunk_load_dist = 1;
     public int tree_load_dist = 1;
     
-    public ChunkGenerator chunkGen;
-    public TreeManager tree_manager;
-    public ShrineManager shrine_manager;
     public List<Biome> biomes;
-
     public NoiseGen heatMap;
     public NoiseGen mountainMap;
     public NoiseGen moistureMap;
 
-    public Vector2 cur_chunk;
-    List<Vector2> loaded_chunks;
-    List<Vector2> loaded_tree_chunks;
-	List<Vector2> loaded_shrine_chunks;
+    private ChunkGenerator chunkGen;
+    private TreeManager tree_manager;
+    private ShrineManager shrine_manager;
+    private Vector2 cur_chunk;
+    private List<Vector2> loaded_chunks;
+    private List<Vector2> loaded_tree_chunks;
+    private List<Vector2> loaded_shrine_chunks;
     private Dictionary<Vector2, Biome> chunkBiomes;
     private NoiseSynth noiseSynth;
 
@@ -84,8 +83,7 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
-    void loadTrees()
-    {
+    void loadTrees(){
         for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
         {
             for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)

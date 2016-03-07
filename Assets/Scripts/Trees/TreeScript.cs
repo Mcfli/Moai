@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TreeScript : MonoBehaviour {
 
@@ -28,6 +29,8 @@ public class TreeScript : MonoBehaviour {
     public bool onFire;
     
     public bool useNewAnimationSystem; //should be deleted when done debugging
+
+    public List<Texture2D> puzzleIcons;
     
     private GameObject player;
     private LayerMask treeMask;
@@ -39,7 +42,6 @@ public class TreeScript : MonoBehaviour {
     private float time_unloaded;
     
     private int state; //0:growing,1:mature,2:dying
-
 
     private GameObject fire;
     private GameObject Torch;
@@ -193,14 +195,17 @@ public class TreeScript : MonoBehaviour {
             if(age/life_span < growDieAnimationRatio){//growing
                 if(!anim.IsPlaying("growing")) anim.Play("growing");
                 anim["growing"].time = anim["growing"].length * age/(life_span*growDieAnimationRatio);
+                GetComponent<PuzzleObject>().image = puzzleIcons[0];
                 state = 0;
             }else if(age/life_span > 1 - growDieAnimationRatio){//dying
                 if(!anim.IsPlaying("dying")) anim.Play("dying");
                 anim["dying"].time = anim["dying"].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
+                GetComponent<PuzzleObject>().image = puzzleIcons[1];
                 state = 1;
             }else{ //mature
                 if(!anim.IsPlaying("growing")) anim.Play("growing");
                 anim["growing"].time = anim["growing"].length;
+                GetComponent<PuzzleObject>().image = puzzleIcons[2];
                 state = 2;
             }
         }else{

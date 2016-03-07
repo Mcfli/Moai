@@ -718,6 +718,7 @@ GameObject:
   - 111: {fileID: 11148416}
   - 114: {fileID: 11449090}
   - 65: {fileID: 6508292}
+  - 114: {fileID: 11466060}
   m_Layer: 8
   m_Name: mushroom_red
   m_TagString: Untagged
@@ -1528,7 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed_object: {fileID: 148576, guid: 62ab4bc087d7d0b43a8fc37d8d6b9e4f, type: 2}
+  seed_object: {fileID: 149340, guid: 6bb63408ed8863c40ade462848e944d0, type: 2}
   prefab: {fileID: 195104}
   max_health: 100
   radius: 100
@@ -1564,6 +1565,23 @@ MonoBehaviour:
   cul_spread: 0
   onFire: 0
   useNewAnimationSystem: 0
+  puzzleIcons:
+  - {fileID: 2800000, guid: 3ae5dea82c93e68428ba2bf4bd04236a, type: 3}
+  - {fileID: 2800000, guid: 57a8c0b2a7bf2ab45a64a8bba172672c, type: 3}
+  - {fileID: 2800000, guid: 732690d3bca518843bef45f0363b671f, type: 3}
+--- !u!114 &11466060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: Tree
+  image: {fileID: 2800000, guid: 57a8c0b2a7bf2ab45a64a8bba172672c, type: 3}
 --- !u!137 &13777966
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
