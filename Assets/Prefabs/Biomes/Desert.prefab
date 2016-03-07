@@ -47,6 +47,9 @@ MonoBehaviour:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
   - 1
+  SkyGradients:
+  - {fileID: 2100000, guid: 4edfa39d301eaf6408f1d67a643db749, type: 2}
+  - {fileID: 0}
   temperatureCurve:
     serializedVersion: 2
     m_Curve:

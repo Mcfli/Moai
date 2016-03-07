@@ -11,7 +11,9 @@ public class Biome : MonoBehaviour {
 
     public List<Weather> weatherTypes;
     public List<float> weatherChance; //must be same size as weatherTypes
-    //sky color goes here
+    public List<Material> SkyGradients;
+    //must be length of 6, starting from midnight color
+    //fill this with skybox materials
 
     // Curves that define a property given what time of year it is
     public AnimationCurve temperatureCurve; 

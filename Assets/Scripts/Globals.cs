@@ -5,10 +5,10 @@ public class Globals : MonoBehaviour {
 
     public static float time = 0.0f; //incremented by Player.cs
     public static float time_scale = 1.0f;
-	public static float time_resolution = Mathf.Pow(10, -17.0f);
+	public static float time_resolution = Mathf.Pow(10, -20.0f);
     public static float timeOfDay = 0;
-    //0 for dawn, 90 for noon
-    //180 for dusk, 270 for midnight
+    //0 for midnight, 90 for dawn
+    //180 for noon, 270 for dusk
     //should not be or exceed 360. incremeted by Sky.cs
 
     public static Weather cur_weather;
