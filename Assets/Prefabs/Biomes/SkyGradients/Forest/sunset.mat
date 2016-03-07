@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: midnight
+  m_Name: sunset
   m_Shader: {fileID: 4800000, guid: c4d18cbad9e484771bc509c0d9d033c7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -151,12 +151,12 @@ Material:
       data:
         first:
           name: _Color1
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0.49019608, g: 0.06666667, b: 0.61960787, a: 1}
       data:
         first:
           name: _Color2
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0.7921569, g: 0.11764706, b: 0.40784314, a: 1}
       data:
         first:
           name: _Color3
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0.93333334, g: 0.21176471, b: 0.24313726, a: 1}

@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: skybox
+  m_Name: world skybox
   m_Shader: {fileID: 4800000, guid: c4d18cbad9e484771bc509c0d9d033c7, type: 3}
   m_ShaderKeywords: _SUNDISK_SIMPLE
   m_LightmapFlags: 5

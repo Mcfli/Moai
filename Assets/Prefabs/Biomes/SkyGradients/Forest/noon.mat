@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: midnight
+  m_Name: noon
   m_Shader: {fileID: 4800000, guid: c4d18cbad9e484771bc509c0d9d033c7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -151,12 +151,12 @@ Material:
       data:
         first:
           name: _Color1
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0.6039216, g: 0.9607843, b: 1, a: 1}
       data:
         first:
           name: _Color2
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0.7294118, g: 0.972549, b: 1, a: 1}
       data:
         first:
           name: _Color3
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0.85490197, g: 0.9843137, b: 1, a: 1}
