@@ -42,7 +42,7 @@ MonoBehaviour:
   octaves: 1
   persistence: 0.1
   smoothness: 100
-  amplitude: 120
+  amplitude: 50
   seed: 100
 --- !u!1001 &100100000
 Prefab:
