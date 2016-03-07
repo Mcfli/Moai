@@ -80,12 +80,11 @@ public class ChunkGenerator : MonoBehaviour {
 		mf.mesh.triangles = triangles;
         ReCalcTriangles(mf.mesh);
 
-        // Calculate vertex colors
-
        
-        MeshCollider meshc = chunk.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        chunk.AddComponent(typeof(MeshCollider));
 	}
 
+    // Calculate vertex colors
     public void colorChunk(GameObject chunk,Biome curBiome,Biome up,Biome down,Biome left,Biome right)
     {
         Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
@@ -107,46 +106,22 @@ public class ChunkGenerator : MonoBehaviour {
             Color color = biome_color;
             Color hcolor, vcolor;
 
-            
-
             if (h > 0.5)
-                hcolor = Color.Lerp(biome_color,right_color,2f*(h-0.5f));
+                hcolor = Color.Lerp(biome_color,right_color,0.5f*(h-0.5f));
             else
-                hcolor = Color.Lerp(left_color,biome_color, 2f * h);
+                hcolor = Color.Lerp(left_color,biome_color,  0.5f*h);
             if (v > 0.5)
-                vcolor = Color.Lerp(biome_color, up_color, 2f * (v - 0.5f));
+                vcolor = Color.Lerp(biome_color, up_color, 0.5f * (v - 0.5f));
             else
-                vcolor = Color.Lerp(down_color, biome_color, 2f * v);
+                vcolor = Color.Lerp(down_color, biome_color, 0.5f * v);
 
             float hm = Mathf.Abs(h - 0.5f);
             float vm = Mathf.Abs(v - 0.5f);
-            float interp = Mathf.Max(v / (h + v), 0f);
+            float interp = Mathf.Max(vm / (hm + vm), 0f);
 
 
             color = Color.Lerp(hcolor, vcolor, interp);
 
-            //color = hcolor;
-
-            //Color vcolor = Color.Lerp(down_color, up_color, v);
-
-            //color = hcolor;
-            /*
-            color = Color.Lerp(color, right_color, h);
-
-            color = Color.Lerp(color, up_color, v);
-
-            color = Color.Lerp(down_color, color, v);*/
-
-            /*
-            if (v < 0.5f)
-            {
-                color = Color.Lerp(down_color, color, v);
-            }
-            else if (v > 0.5f)
-            {
-                color = Color.Lerp(color, up_color, v);
-            }
-            */
             colors[c] = color;
             colors[c + 1] = color;
             colors[c + 2] = color;

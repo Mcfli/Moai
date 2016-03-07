@@ -14,6 +14,8 @@ public class ShrineGrid : MonoBehaviour {
     public GameObject glow;
     public GameObject vertexPillar;
 
+    public Vector2 heatMoistureChange; // The changes the shrine has to heat/moisture map
+
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
 
@@ -271,6 +273,7 @@ public class ShrineGrid : MonoBehaviour {
     private void complete()
     {
         GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
+        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position,heatMoistureChange);
     }
 
     private Vector3 snapToTerrain(Vector3 pos)

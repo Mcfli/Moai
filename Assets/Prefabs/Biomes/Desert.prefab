@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 117
+  heatAvg: 49
   heatVariance: 30
-  moistureAvg: 50
+  moistureAvg: 5
   moistureVariance: 20
   weatherTypes:
   - sunny
@@ -100,25 +100,24 @@ MonoBehaviour:
   treeTypes: []
   doodads: []
   colors:
-  - {r: 1, g: 0.96957403, b: 0.5588235, a: 0}
-  - {r: 0.9015683, g: 0.9044118, b: 0.6982591, a: 0}
-  - {r: 0.78676474, g: 0.68949634, b: 0.48015788, a: 0}
-  - {r: 0.6985294, g: 0.5440878, b: 0.13867864, a: 0}
-  - {r: 0.6838235, g: 0.43859026, b: 0, a: 0}
+  - {r: 0.99604464, g: 1, b: 0.71323526, a: 0}
+  - {r: 1, g: 0.9670385, b: 0.52205884, a: 0}
+  - {r: 0.97647065, g: 0.85098046, b: 0.31764707, a: 0}
+  - {r: 1, g: 0.7144016, b: 0.35294116, a: 0}
   amplitude: 1000
-  color_curve:
+  colorCurve:
     serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     - time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0

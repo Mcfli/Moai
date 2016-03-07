@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public class TreeManager : MonoBehaviour {
 
-    public int tree_resolution = 2;
-    //public GameObject prefab;
-    public GenerationManager gen_manager;
 
+    private GenerationManager gen_manager;
     private static Dictionary<Vector2, List<Tree>> trees;
 
     public static void saveTree(Vector2 chunk, GameObject tree)
@@ -21,11 +19,13 @@ public class TreeManager : MonoBehaviour {
     }
 
 
-    public void loadTrees(Vector2 key,List<GameObject> tree_types)
+    public void loadTrees(Vector2 key,Biome biome)
     {
-        if (tree_types.Count < 1) return;
-        if (trees.ContainsKey(key))
+        if (biome.treeTypes.Count < 1) return;
+        if (trees.ContainsKey(key) && trees[key] != null)
         {
+            Debug.Log("Reload trees");
+           
             List<Tree> trees_in_chunk = trees[key];
             for (int i = trees_in_chunk.Count-1; i >= 0; i--)
             {
@@ -38,8 +38,9 @@ public class TreeManager : MonoBehaviour {
         }
         else
         {
+            Debug.Log("First Population");
             trees[key] = new List<Tree>();
-            float step_size = gen_manager.chunk_size / tree_resolution;
+            float step_size = gen_manager.chunk_size / biome.treeDensity;
 
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
@@ -52,12 +53,24 @@ public class TreeManager : MonoBehaviour {
 
                     float xpos = i + step_size * Random.value - 0.5f * step_size;
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
-                    GameObject treePrefab = tree_types[Random.Range(0, (tree_types.Count - 1))];
+                    GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
                     GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
                     new_tree.GetComponent<Tree>().age = Random.value * 10.0f;
                 }     
             }
         }
+    }
+    
+    // Remove the trees on chunk(x,y) from our saved tree dict and unload all of those trees
+    public void forgetTrees(int x,int y)
+    {
+
+        Vector2 chunk = new Vector2(x, y);
+        unloadTrees(x, y);
+        if (trees.ContainsKey(chunk)){
+            trees[chunk] = null;
+        }
+        
     }
 
     public void unloadTrees(int x, int y)
@@ -84,10 +97,5 @@ public class TreeManager : MonoBehaviour {
     void Start () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
         trees = new Dictionary<Vector2, List<Tree>>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

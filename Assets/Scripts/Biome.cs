@@ -19,10 +19,21 @@ public class Biome : MonoBehaviour {
     public List<GameObject> treeTypes;
     public List<GameObject> doodads;
 
+    public int treeDensity;
+    public int doodadDensity;
+
     // Terrain color
-    public Color[] colors;
+    public List<Color> colors;
     public float amplitude;
-    public AnimationCurve color_curve;
+    public AnimationCurve colorCurve;
+
+    public void Init()
+    {
+        colors = new List<Color>();
+        treeTypes = new List<GameObject>();
+        doodads = new List<GameObject>();
+        weatherTypes = new List<string>();
+    }
 
     // Returns the vertex color for a vertex in this Biome at a given height value
     public Color colorAt(float height)
@@ -31,13 +42,13 @@ public class Biome : MonoBehaviour {
         if (h > 1.000f) h = 1.000f;
         else if (h < 0f) h = 0f;
 
-        float val = (colors.Length - 1) * color_curve.Evaluate(h);
+        float val = (colors.Count - 1) * colorCurve.Evaluate(h);
 
         int i0 = Mathf.FloorToInt(val);
         int i1 = Mathf.CeilToInt(val);
 
         if (i0 < 0) i0 = 0;
-        if (i1 > colors.Length - 1) i1 = colors.Length - 1;
+        if (i1 > colors.Count - 1) i1 = colors.Count - 1;
 
         float weight = i1 - val;
         if (weight == 0) return colors[i0];
@@ -51,6 +62,7 @@ public class Biome : MonoBehaviour {
     public static Biome Combine(Biome a, Biome b)
     {
         Biome c = new Biome();
+        c.Init();
 
         // Combine climate values
         float weight = Random.Range(0.1f, 0.9f);
@@ -65,17 +77,56 @@ public class Biome : MonoBehaviour {
         c.temperatureCurve = weight < 0.5f ? a.temperatureCurve : b.temperatureCurve;
         weight = Random.Range(0.0f, 1.0f);
         c.precipitationCurve = weight < 0.5f ? a.precipitationCurve : b.precipitationCurve;
+        weight = Random.Range(0.0f, 1.0f);
+        c.colorCurve = weight < 0.5f ? a.colorCurve : b.colorCurve;
+        c.amplitude = (a.amplitude + b.amplitude) * 0.5f;
 
         // Combine trees and doodads
-        int minLen = a.treeTypes.Count < b.treeTypes.Count ? a.treeTypes.Count : b.treeTypes.Count;
-        int i;
-        for (i = 0; i < minLen; i++)
+        foreach(GameObject tree in a.treeTypes)
         {
             weight = Random.Range(0.0f, 1.0f);
-            if (weight < 0.5f) c.treeTypes.Add(a.treeTypes[i]);
-            else c.treeTypes.Add(b.treeTypes[i]);
+            if (weight > 0.5f) c.treeTypes.Add(tree);
         }
 
+        foreach (GameObject tree in b.treeTypes)
+        {
+            weight = Random.Range(0.0f, 1.0f);
+            if (weight > 0.5f) c.treeTypes.Add(tree);
+        }
+
+        // Combine colors for each biome
+        int ai = 0, bi = 0;
+
+        while(ai < a.colors.Count && bi < b.colors.Count)
+        {
+            Color chosen;
+            Color ca = Color.black,cb = Color.black;
+
+            weight = Random.Range(0.0f, 1.0f);
+
+            if (a.colors.Count < ai)
+            {
+                ca = a.colors[ai];
+                
+            }
+
+            if (b.colors.Count < bi)
+            {
+                cb = b.colors[bi];
+                
+            }
+
+            if (ca == Color.black && cb != Color.black)
+                chosen = cb;
+            else if (ca != Color.black && cb == Color.black)
+                chosen = ca;
+            else
+                chosen = weight > 0.5f ? ca : cb; 
+
+            c.colors.Add(chosen);
+            bi++;
+            ai++;
+        }
         return c;
     }
 }

@@ -39,12 +39,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 32
+  heatAvg: 0
   heatVariance: 15
-  moistureAvg: 65
+  moistureAvg: 50
   moistureVariance: 20
   weatherTypes:
-  - sunny
   - snowy
   temperatureCurve:
     serializedVersion: 2
@@ -98,25 +97,24 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes:
-  - {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
+  treeTypes: []
   doodads: []
   colors:
   - {r: 1, g: 1, b: 1, a: 0}
   amplitude: 2200
-  color_curve:
+  colorCurve:
     serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     - time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0

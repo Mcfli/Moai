@@ -182,15 +182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 512
-  chunk_resolution: 8
-  chunk_load_dist: 10
+  chunk_size: 1024
+  chunk_resolution: 16
+  chunk_load_dist: 1
   tree_load_dist: 1
-  player: {fileID: 0}
-  chunkGen: {fileID: 0}
-  tree_manager: {fileID: 0}
-  weather_manager: {fileID: 0}
-  shrine_manager: {fileID: 0}
   biomes:
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
@@ -199,7 +194,6 @@ MonoBehaviour:
   heatMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   moistureMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
-  cur_chunk: {x: 0, y: 0}
 --- !u!4 &188005511
 Transform:
   m_ObjectHideFlags: 0
@@ -270,8 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 2
-  gen_manager: {fileID: 0}
 --- !u!114 &188005516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,8 +1024,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: 0.061849773, y: 0.40765733, z: 0.027689982, w: -0.91061705}
-  m_LocalPosition: {x: 8380.783, y: -598.7348, z: -10395.499}
+  m_LocalRotation: {x: -0.015770864, y: 0.9840093, z: 0.114480235, w: 0.13554054}
+  m_LocalPosition: {x: -541.59937, y: 565.5617, z: 813.4453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1412,8 +1404,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: 0.061849773, y: 0.40765733, z: 0.027689982, w: -0.91061705}
-  m_LocalPosition: {x: 8380.783, y: -599.0083, z: -10395.5}
+  m_LocalRotation: {x: -0.015770864, y: 0.9840093, z: 0.114480235, w: 0.13554054}
+  m_LocalPosition: {x: -541.59937, y: 565.2809, z: 813.44543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
