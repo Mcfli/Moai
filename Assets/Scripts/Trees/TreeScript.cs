@@ -17,22 +17,23 @@ public class TreeScript : MonoBehaviour {
     public float grow_speed;
     public float grow_speed_variance;
     public float life_span;
-    public float growDieAnimationRatio = 0.1f;
-    // this means the first 10% of its health will have growing animation, and the last 10% dying animation
+
+    public float growDieAnimationRatio = 0.1f; //temp
+    public bool useNewAnimationSystem; //temp
+
+    public List<string> stateAnimationNames; //names of animation, leave blank if no animation
+    public List<float> stateRatios; //ratio of each state
+    public List<Texture2D> statePuzzleIcons; //puzzle icon for each state
+
     public AnimationCurve height_vs_time;
+
+    public float cul_spread;
+    public bool onFire;
 
     public Vector3 saved_position;
     public float age;
     public Quaternion saved_rotation;
 
-    public float cul_spread;
-    public bool onFire;
-    
-    public bool useNewAnimationSystem; //should be deleted when done debugging
-
-    public List<Texture2D> puzzleIcons;
-    
-    private GameObject player;
     private LayerMask treeMask;
     private bool done = false;
     private float lastSpawned = 0.0f;
@@ -83,7 +84,6 @@ public class TreeScript : MonoBehaviour {
     void Awake(){
         anim = GetComponent<Animation>();
         fire = Resources.Load("fire") as GameObject;
-        player = GameObject.FindGameObjectWithTag("Player");
         
         age = 0.0f;
         health = max_health;
@@ -195,17 +195,17 @@ public class TreeScript : MonoBehaviour {
             if(age/life_span < growDieAnimationRatio){//growing
                 if(!anim.IsPlaying("growing")) anim.Play("growing");
                 anim["growing"].time = anim["growing"].length * age/(life_span*growDieAnimationRatio);
-                GetComponent<PuzzleObject>().image = puzzleIcons[0];
+                GetComponent<PuzzleObject>().image = statePuzzleIcons[0];
                 state = 0;
             }else if(age/life_span > 1 - growDieAnimationRatio){//dying
                 if(!anim.IsPlaying("dying")) anim.Play("dying");
                 anim["dying"].time = anim["dying"].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
-                GetComponent<PuzzleObject>().image = puzzleIcons[1];
+                GetComponent<PuzzleObject>().image = statePuzzleIcons[1];
                 state = 1;
             }else{ //mature
                 if(!anim.IsPlaying("growing")) anim.Play("growing");
                 anim["growing"].time = anim["growing"].length;
-                GetComponent<PuzzleObject>().image = puzzleIcons[2];
+                GetComponent<PuzzleObject>().image = statePuzzleIcons[2];
                 state = 2;
             }
         }else{
@@ -223,11 +223,11 @@ public class TreeScript : MonoBehaviour {
     }
     
     private bool playerHasObject(string objName){
-        if (player.GetComponent<Player>().getLeftObj())
-            if (player.GetComponent<Player>().getLeftObj().name == objName)
+        if (Globals.Player.GetComponent<Player>().getLeftObj())
+            if (Globals.Player.GetComponent<Player>().getLeftObj().name == objName)
                 return true;
-        if (player.GetComponent<Player>().getRightObj())
-            if (player.GetComponent<Player>().getRightObj().name == objName)
+        if (Globals.Player.GetComponent<Player>().getRightObj())
+            if (Globals.Player.GetComponent<Player>().getRightObj().name == objName)
                 return true;
         return false;
     }

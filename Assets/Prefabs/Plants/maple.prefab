@@ -847,6 +847,13 @@ MonoBehaviour:
   grow_speed_variance: 0
   life_span: 50
   growDieAnimationRatio: 0.1
+  useNewAnimationSystem: 1
+  stateAnimationNames: []
+  stateRatios: []
+  statePuzzleIcons:
+  - {fileID: 2800000, guid: 25c236ba8ff61c9418e2222862304639, type: 3}
+  - {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
+  - {fileID: 2800000, guid: a4a6726f3901ed24dab8d0e24efd7fef, type: 3}
   height_vs_time:
     serializedVersion: 2
     m_Curve:
@@ -863,16 +870,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  cul_spread: 100
+  onFire: 0
   saved_position: {x: 0, y: 0, z: 0}
   age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
-  cul_spread: 100
-  onFire: 0
-  useNewAnimationSystem: 1
-  puzzleIcons:
-  - {fileID: 2800000, guid: 25c236ba8ff61c9418e2222862304639, type: 3}
-  - {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
-  - {fileID: 2800000, guid: a4a6726f3901ed24dab8d0e24efd7fef, type: 3}
 --- !u!137 &13753792
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
