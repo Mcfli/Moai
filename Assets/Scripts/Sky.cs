@@ -41,7 +41,7 @@ public class Sky : MonoBehaviour {
     void Start() {
         Halo.SetActive(false);
         listOfStars = new List<GameObject>();
-        addStar(); addStar(); addStar(); addStar(); addStar(); addStar(); //temp
+        for(int i = 0; i < 100; i++) addStar(); //temp
     }
 
     void Update() {
@@ -65,7 +65,7 @@ public class Sky : MonoBehaviour {
 
     private void updateTransforms() {
         DayNightSpin.transform.localEulerAngles = new Vector3(Globals.timeOfDay, 0, 0); //update angle of sun/moon with Globals.timeOfDay - x axis
-        StarsParent.transform.localEulerAngles = new Vector3((Mathf.PingPong(Globals.timeOfDay, 180) - 90) / 90 * horizonBufferAngle, 0, 0); //fix this!
+        StarsParent.transform.localEulerAngles = new Vector3(ratio(270, 90) * horizonBufferAngle * 2 - horizonBufferAngle, 0, 0);
         float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time / Globals.time_resolution, daysPerYear * 360 * timePerDegree) / (daysPerYear * 360 * timePerDegree)); //tilt of sun/moon - z axis
         transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z + axis); //update angle of sun/moon ring with time of year
         transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
@@ -135,14 +135,16 @@ public class Sky : MonoBehaviour {
         GameObject star = Instantiate(starPrefab) as GameObject;
         listOfStars.Add(star);
 		star.transform.SetParent(StarsParent.transform);
-        star.transform.localPosition = Vector3.up * -10000;
+        star.transform.localPosition = Vector3.up * 10000;
+
         Vector3 origRot = StarsParent.transform.localEulerAngles;
 		StarsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)), 0, Random.Range(-(90-sunAxisShift), (90-sunAxisShift)));
 		star.transform.SetParent(null);
         StarsParent.transform.rotation = Quaternion.identity;
         star.transform.SetParent(StarsParent.transform);
-		star.transform.LookAt(StarsParent.transform);
         StarsParent.transform.localEulerAngles = origRot;
+
+        star.transform.LookAt(StarsParent.transform);
     }
 	
 	public int getNumberOfStars(){

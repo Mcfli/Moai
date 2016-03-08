@@ -766,21 +766,21 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126374}
-  m_Mesh: {fileID: 4300004, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
+  m_Mesh: {fileID: 4300004, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
 --- !u!33 &3310716
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152590}
-  m_Mesh: {fileID: 4300006, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
+  m_Mesh: {fileID: 4300006, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
 --- !u!33 &3379036
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157372}
-  m_Mesh: {fileID: 4300002, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
 --- !u!65 &6503740
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -848,8 +848,14 @@ MonoBehaviour:
   life_span: 50
   growDieAnimationRatio: 0.1
   useNewAnimationSystem: 1
-  stateAnimationNames: []
-  stateRatios: []
+  stateAnimationNames:
+  - growing
+  - 
+  - dying
+  stateRatios:
+  - 0.1
+  - 0.8
+  - 0.1
   statePuzzleIcons:
   - {fileID: 2800000, guid: 25c236ba8ff61c9418e2222862304639, type: 3}
   - {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
@@ -904,7 +910,7 @@ SkinnedMeshRenderer:
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
-  m_Mesh: {fileID: 4300000, guid: d87b72a522727fb4fa5ab77b047cafa4, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
   m_Bones:
   - {fileID: 407666}
   - {fileID: 445814}

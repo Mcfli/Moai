@@ -9,8 +9,9 @@ public class Player : MonoBehaviour {
     public float sprintWaitMultiplier = 5.0f;
     public float grabDistance = 5;
     public float grabSphereRadius = 1;
-    public string leftHandInput;
-    public string rightHandInput;
+    public string leftHandInput = "LeftHand";
+    public string rightHandInput = "RightHand";
+    public string waitInput = "Patience";
     public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
     
     private float wait_speed;
@@ -31,8 +32,8 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    //PATIENCE IS POWER
-        if (Input.GetButton("Wait")){
-            if(Input.GetButton("Speed")) Globals.time_scale = wait_speed * 5;
+        if (Input.GetButton(waitInput)){
+            if(Input.GetButton("Sprint")) Globals.time_scale = wait_speed * 5;
             else Globals.time_scale = wait_speed;
             
             if (wait_speed < maxWaitSpeed) wait_speed += waitSpeedGrowth;
@@ -47,9 +48,9 @@ public class Player : MonoBehaviour {
         
         //warp to ground at game start
 		if(!startGroundWarp) startGroundWarp = warpToGround();
-        
+
         //Holding Objects stuff
-        if(Input.GetButtonDown(leftHandInput)){
+        if (Input.GetButtonDown(leftHandInput)){
             if(leftObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), true);
             else DropObject(true);
         }else if(Input.GetButtonDown(rightHandInput)){

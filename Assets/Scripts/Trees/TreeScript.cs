@@ -21,8 +21,8 @@ public class TreeScript : MonoBehaviour {
     public float growDieAnimationRatio = 0.1f; //temp
     public bool useNewAnimationSystem; //temp
 
-    public List<string> stateAnimationNames; //names of animation, leave blank if no animation
-    public List<float> stateRatios; //ratio of each state
+    public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
+    public List<float> stateRatios; //ratio of each state, currently unused
     public List<Texture2D> statePuzzleIcons; //puzzle icon for each state
 
     public AnimationCurve height_vs_time;
@@ -31,8 +31,8 @@ public class TreeScript : MonoBehaviour {
     public bool onFire;
 
     public Vector3 saved_position;
-    public float age;
     public Quaternion saved_rotation;
+    public float age;
 
     private LayerMask treeMask;
     private bool done = false;
@@ -43,6 +43,7 @@ public class TreeScript : MonoBehaviour {
     private float time_unloaded;
     
     private int state; //0:growing,1:mature,2:dying
+    private float ratioTotal;
 
     private GameObject fire;
     private GameObject Torch;
@@ -184,8 +185,7 @@ public class TreeScript : MonoBehaviour {
         }
     }
 
-    private void Grow()
-    {
+    private void Grow(){
         float anim_progress = 0.0f;
         time_unloaded = Globals.time;
         if (age < 1000)
