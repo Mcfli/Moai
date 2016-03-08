@@ -1093,7 +1093,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192844}
-  m_LocalRotation: {x: 0.81649953, y: -0.08765008, z: 0.12872891, w: 0.55594486}
+  m_LocalRotation: {x: 0.81649965, y: -0.08765009, z: 0.12872893, w: 0.5559449}
   m_LocalPosition: {x: 0.035915874, y: 0.072070315, z: -0.16187106}
   m_LocalScale: {x: 1.0304352, y: 1.0304352, z: 1.0304353}
   m_Children:
@@ -1509,13 +1509,13 @@ Animation:
   m_GameObject: {fileID: 195104}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400004, guid: 885d773e52fd58949a2ff56ae7ca46e8, type: 3}
+  m_Animation: {fileID: 7400000, guid: c271abcdbcf479f43828565c8bdf9205, type: 3}
   m_Animations:
   - {fileID: 7400004, guid: 885d773e52fd58949a2ff56ae7ca46e8, type: 3}
   - {fileID: 7400002, guid: 885d773e52fd58949a2ff56ae7ca46e8, type: 3}
-  - {fileID: 7400000, guid: 885d773e52fd58949a2ff56ae7ca46e8, type: 3}
+  - {fileID: 7400000, guid: c271abcdbcf479f43828565c8bdf9205, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
 --- !u!114 &11449090
@@ -1611,7 +1611,7 @@ SkinnedMeshRenderer:
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
-  m_Mesh: {fileID: 4300000, guid: 885d773e52fd58949a2ff56ae7ca46e8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: c271abcdbcf479f43828565c8bdf9205, type: 3}
   m_Bones:
   - {fileID: 467858}
   - {fileID: 433498}
@@ -1666,7 +1666,7 @@ SkinnedMeshRenderer:
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
-  m_Mesh: {fileID: 4300002, guid: 885d773e52fd58949a2ff56ae7ca46e8, type: 3}
+  m_Mesh: {fileID: 4300002, guid: c271abcdbcf479f43828565c8bdf9205, type: 3}
   m_Bones:
   - {fileID: 448326}
   - {fileID: 476788}
