@@ -193,7 +193,7 @@ public class ShrineGrid : MonoBehaviour {
             for (int j = 0; j < resolution; j++)
             {
                 Vector2 curGrid = new Vector2(i, j);
-                Vector3 cur = gridToReal(curGrid);
+                //Vector3 cur = gridToReal(curGrid);
                 if (targetState.ContainsKey(curGrid) && !curState.ContainsKey(curGrid))
                     drawSquare(curGrid,Color.red);
                 else if (targetState.ContainsKey(curGrid) && curState.ContainsKey(curGrid))
@@ -270,7 +270,7 @@ public class ShrineGrid : MonoBehaviour {
 
     private void complete()
     {
-        GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
+        /*GameObject glowInstance = */Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity); //as GameObject;
     }
 
     private Vector3 snapToTerrain(Vector3 pos)

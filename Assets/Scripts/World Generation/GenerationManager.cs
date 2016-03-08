@@ -10,30 +10,25 @@ public class GenerationManager : MonoBehaviour {
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
     public int tree_load_dist = 1;
-
-    public GameObject player;
-    public ChunkGenerator chunkGen;
-    public TreeManager tree_manager;
-    public WeatherManager weather_manager;
-    public ShrineManager shrine_manager;
+    
     public List<Biome> biomes;
-
     public NoiseGen heatMap;
     public NoiseGen mountainMap;
     public NoiseGen moistureMap;
 
-    public Vector2 cur_chunk;
-    List<Vector2> loaded_chunks;
-    List<Vector2> loaded_tree_chunks;
-	List<Vector2> loaded_shrine_chunks;
+    private ChunkGenerator chunkGen;
+    private TreeManager tree_manager;
+    private ShrineManager shrine_manager;
+    private Vector2 cur_chunk;
+    private List<Vector2> loaded_chunks;
+    private List<Vector2> loaded_tree_chunks;
+    private List<Vector2> loaded_shrine_chunks;
     private Dictionary<Vector2, Biome> chunkBiomes;
     private NoiseSynth noiseSynth;
 
     void Awake() {
-        player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
-        weather_manager = gameObject.GetComponent<WeatherManager>();
         shrine_manager = gameObject.GetComponent<ShrineManager>();
         chunkGen.chunk_size = chunk_size;
         chunkGen.chunk_resolution = chunk_resolution;
@@ -55,8 +50,8 @@ public class GenerationManager : MonoBehaviour {
 
     // Checks where player is in current chunk. If outside current chunk, set new chunk to current, and reload surrounding chunks
     void checkPosition () {
-        float player_x = player.transform.position.x;
-        float player_y = player.transform.position.z; // In unity, y is vertical displacement
+        float player_x = Globals.Player.transform.position.x;
+        float player_y = Globals.Player.transform.position.z; // In unity, y is vertical displacement
         Vector2 player_chunk = new Vector2(Mathf.FloorToInt(player_x/chunk_size), Mathf.FloorToInt(player_y / chunk_size));
         if(cur_chunk != player_chunk)
         { 
@@ -68,8 +63,6 @@ public class GenerationManager : MonoBehaviour {
             loadTrees();
 			loadShrines();
             Globals.cur_biome = chunkBiomes[cur_chunk];
-            weather_manager.updateWeather();
-            weather_manager.moveWithPlayer();
             //shrine_manager.placeShrine(chunkToWorld(cur_chunk));
         }
     }
@@ -90,8 +83,7 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
-    void loadTrees()
-    {
+    void loadTrees(){
         for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
         {
             for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)

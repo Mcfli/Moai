@@ -5,135 +5,103 @@ using System.Collections.Generic;
 public class WeatherManager : MonoBehaviour {
 
     // Tuning variables
-    public float update_time;
-    public ParticleSystem[] particle_prefabs;
-    // 0 - rain
-    // 1 - snow
-    // 2 - mist
-    // 3 - sand
-    // 4 - ash
-    public ImageSpace[] image_spaces;
-    // 0 - clear day
-    // 1 - rainy day
+    public float height = 300;
+    public float updateTime; //amount of time weather lasts (may change to same weather)
 
     public List<GameObject> cloudPrefabs;
+    public float cloudPlacementRadius;
+    public float cloudHeightVariation;
+    public float cloudSizeVariation; //ratio (0.0 - 1.0)
 
     // Internal variables
-    private List<GameObject> clouds;        // holds all currently loaded clouds
-    private int target_clouds;
-    private float last_updated;
-    private ParticleSystem rain;
-    private ParticleSystem snow;
-    private GameObject player;
-	private bool visible;
+    private float lastUpdated;
+	private bool visibleParticles;
+    private ParticleSystem activeParticleSystem;
+    private List<GameObject> clouds; // holds all currently loaded clouds
+    private Biome lastBiome;
 
-    void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        last_updated = Time.time;
+    void Awake(){
         clouds = new List<GameObject>();
-        Globals.cur_weather = "sunny";
+    }
 
-        rain = Instantiate(particle_prefabs[0]);
-        snow = Instantiate(particle_prefabs[1]);
-		
-		visible = true;
+    void Start() {
+        visibleParticles = true;
+        lastUpdated = 0;
+        changeWeather();
+        lastBiome = Globals.cur_biome;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Time.time > last_updated + update_time)
-        {
-            last_updated = Time.time;
-            updateWeather();
+    void Update(){
+        if (Globals.time > lastUpdated + updateTime * Globals.time_resolution || lastBiome != Globals.cur_biome) {
+            lastUpdated = Globals.time;
+            changeWeather();
         }
+
+        if (Globals.time_scale > 1) hideWeather();
+        else showWeather();
+
+        //check if visiable
+        if (activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
+
+        //move with player
+        transform.position = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
+
+        lastBiome = Globals.cur_biome;
     }
 	
-	public void hideWeather(){visible = false;}
-	public void showWeather(){visible = true;}
-	public void toggleWeather(){visible = !visible;}
-	public bool isVisible(){return visible;}
+	public void hideWeather(){visibleParticles = false;}
+	public void showWeather(){visibleParticles = true;}
+	public void toggleWeather(){visibleParticles = !visibleParticles;}
+	public bool isVisible(){return visibleParticles;}
 
-    public void updateWeather()
-    {
-        Globals.cur_weather = Globals.cur_biome.weatherTypes[Mathf.FloorToInt(Random.value * Globals.cur_biome.weatherTypes.Count)];
-        // Switch weather
-        if (Globals.cur_weather == "rain")
-        {
-            doRain();
-            return;
+    public void changeWeather(){
+        if (Globals.cur_biome == null) return;
+        Weather lastWeather = null;
+        if(Globals.cur_weather) lastWeather = Globals.cur_weather;
+
+        //choose weather
+        float roll = 0;
+        for(int i = 0; i < Globals.cur_biome.weatherChance.Count; i++) roll += Globals.cur_biome.weatherChance[i];
+        roll *= Random.value;
+        for(int i = 0; i < Globals.cur_biome.weatherChance.Count; i++){
+            if(roll - Globals.cur_biome.weatherChance[i] < 0) {
+                Globals.cur_weather = Globals.cur_biome.weatherTypes[i];
+                break;
+            }else roll -= Globals.cur_biome.weatherChance[i];
         }
-        else if (Globals.cur_weather == "snowy")
-        {
-            doSnowy();
-            return;
-        }
-        else
-        {
-            doSunny();
-            return;
-        }
-       
-        
-        
-    }
 
-    private void doRain()
-    {
-        rain.gameObject.SetActive(true);
-        snow.gameObject.SetActive(false);
-
-        target_clouds = 100;
-
-        image_spaces[1].applyToCamera();
-        while (clouds.Count<100){
-            
-            GameObject c = Instantiate(cloudPrefabs[Mathf.FloorToInt(Random.value * (cloudPrefabs.Count - 1))]);
-            clouds.Add(c);
-            // last_updated = Time.time;
+        // Switch to weather
+        if (lastWeather != Globals.cur_weather) {
+            if (activeParticleSystem) {
+                Destroy(activeParticleSystem.gameObject);
+                activeParticleSystem = null;
+            }
+            if (Globals.cur_weather.particleS) {
+                activeParticleSystem = Instantiate(Globals.cur_weather.particleS);
+                activeParticleSystem.transform.parent = transform;
+                activeParticleSystem.transform.localPosition = Vector3.zero;
+            }
+            Globals.cur_weather.imageSpace.applyToCamera();
+            changeClouds(Globals.cur_weather.numberOfClouds);
         }
     }
-
-
-    private void doSunny()
-    {
-        rain.gameObject.SetActive(false);
-        snow.gameObject.SetActive(false);
-
-        target_clouds = 0;
-        image_spaces[0].applyToCamera();
-        // PLACEHOLDER Fade skybox to dark skybox
-        if (clouds.Count > target_clouds)
-        {
-            GameObject cloud = clouds[0];
-            cloud.GetComponent<Cloud>().dissipate();
-            clouds.RemoveAt(0);
-            //last_updated = Time.time;
-        }
-    }
-
-    private void doSnowy()
-    {
-        rain.gameObject.SetActive(false);
-        snow.gameObject.SetActive(true);
-        image_spaces[2].applyToCamera();
-
-        target_clouds = 140;
-        while (clouds.Count < 100)
-        {
-
-            // Instantiate cloud prefab and add to cloud array
-            //last_updated = Time.time;
+    
+    private void changeClouds(int target_clouds){
+        while(clouds.Count < target_clouds){ //i want more clouds
             GameObject c = Instantiate(cloudPrefabs[Mathf.FloorToInt(Random.value*(cloudPrefabs.Count-1))]);
+            c.transform.parent = transform;
+            c.transform.localEulerAngles = new Vector3(0, Random.Range(0f, 360f), 0); //random rotation
+            c.transform.localScale *= 1 + Random.Range(-cloudSizeVariation, cloudSizeVariation); //random size
+            Vector2 radial_offset = Random.insideUnitCircle * cloudPlacementRadius;
+            c.transform.localPosition = new Vector3(radial_offset.x, Random.Range(-cloudHeightVariation, cloudHeightVariation), radial_offset.y);
             clouds.Add(c);
-       
         }
-    }
-
-    public void moveWithPlayer()
-    {
-        rain.transform.position = player.transform.position + new Vector3(0, 300, 0);
-        snow.transform.position = player.transform.position + new Vector3(0, 300, 0);
+        
+        while(clouds.Count > target_clouds) { //i want less clouds
+            GameObject c = clouds[0];
+            c.GetComponent<Cloud>().dissipate();
+            clouds.RemoveAt(0);
+        }
     }
 }
