@@ -12,6 +12,7 @@ public class Sky : MonoBehaviour {
     public GameObject Halo;
     public GameObject StarsParent;
     public GameObject starPrefab;
+    public float maxStarAlpha = 1;
     public float horizonBufferAngle = 30;
     public float sunAxisShift = 20;
     public float daysPerYear = 100; // z axis
@@ -23,27 +24,23 @@ public class Sky : MonoBehaviour {
     private Vector3 originalSkyAngle;
     private float sunMaxIntensity; //will take intensity of light set in editor
     private float moonMaxIntensity; //ditto above
-    private float starAlpha;
 
     private SkyGradient skyGoal;
     private SkyGradient skyDelta;
     private float timeRemain;
-    private int numOfStars;
+    private List<GameObject> listOfStars; //holds all stars
 
     void Awake() { //set finals
         Player = GameObject.FindGameObjectWithTag("Player");
         originalSkyAngle = transform.eulerAngles;
         sunMaxIntensity = SunLight.GetComponent<Light>().intensity;
         moonMaxIntensity = MoonLight.GetComponent<Light>().intensity;
-        starPrefab = GameObject.Instantiate(starPrefab);
-        starPrefab.GetComponent<Renderer>().sharedMaterial = Material.Instantiate(starPrefab.GetComponent<Renderer>().sharedMaterial);
-        starAlpha = starPrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_Color").a;
         RenderSettings.skybox = Object.Instantiate(RenderSettings.skybox); //comment out when debugging
     }
 
     void Start() {
         Halo.SetActive(false);
-        numOfStars = 0;
+        listOfStars = new List<GameObject>();
         addStar(); addStar(); addStar(); addStar(); addStar(); addStar(); //temp
     }
 
@@ -68,19 +65,20 @@ public class Sky : MonoBehaviour {
 
     private void updateTransforms() {
         DayNightSpin.transform.localEulerAngles = new Vector3(Globals.timeOfDay, 0, 0); //update angle of sun/moon with Globals.timeOfDay - x axis
-        StarsParent.transform.localEulerAngles = new Vector3(-(Mathf.PingPong(Globals.timeOfDay, 180) - 90) / 90 * horizonBufferAngle, 0, 0);
+        StarsParent.transform.localEulerAngles = new Vector3((Mathf.PingPong(Globals.timeOfDay, 180) - 90) / 90 * horizonBufferAngle, 0, 0); //fix this!
         float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time / Globals.time_resolution, daysPerYear * 360 * timePerDegree) / (daysPerYear * 360 * timePerDegree)); //tilt of sun/moon - z axis
         transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z + axis); //update angle of sun/moon ring with time of year
         transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
     }
 
     private void updateStarColor() {
-        Color newStarColor = starPrefab.GetComponent<Renderer>().sharedMaterial.GetColor("_Color");
-        if (Globals.timeOfDay > 180 && Globals.timeOfDay <= 180 + horizonBufferAngle) newStarColor.a = starAlpha * (Globals.timeOfDay - 180) / horizonBufferAngle; //sunset
-        else if (Globals.timeOfDay > 180 + horizonBufferAngle && Globals.timeOfDay <= 360 - horizonBufferAngle) newStarColor.a = 1; //night
-        else if (Globals.timeOfDay > 360 - horizonBufferAngle) newStarColor.a = starAlpha * (360 - Globals.timeOfDay) / horizonBufferAngle; //sunrise
-        else newStarColor.a = 0; //day
-        starPrefab.GetComponent<Renderer>().sharedMaterial.SetColor("_Color", newStarColor);
+        if (listOfStars.Count == 0) return;
+        Color newStarColor = listOfStars[0].GetComponent<Renderer>().material.GetColor("_Color");
+        if (timeIsBetween(90 - horizonBufferAngle, 90)) newStarColor.a = maxStarAlpha * (1 - ratio(90 - horizonBufferAngle, 90)); //moonset
+        else if (timeIsBetween(90, 270)) newStarColor.a = 0; //day
+        else if (timeIsBetween(270, 270 + horizonBufferAngle)) newStarColor.a = maxStarAlpha * ratio(270, 270 + horizonBufferAngle); //moonrise
+        else newStarColor.a = 1; //night
+        foreach(GameObject s in listOfStars) s.GetComponent<Renderer>().material.SetColor("_Color", newStarColor);
     }
 
     private void updateIntensity() { // Modulate sun/moon intensity
@@ -102,14 +100,6 @@ public class Sky : MonoBehaviour {
     }
 
     private void updateSky() { // gradual sky color change
-        /*SkyGradient[] gradients = { //temp
-            new SkyGradient(new Color(0.055f, 0.114f, 0.141f, 1.0f), new Color(0.086f, 0.114f, 0.208f, 1.0f), new Color(0.114f, 0.125f, 0.208f, 1.0f), 1.0f, 1.0f, 1.0f),
-            new SkyGradient(new Color(0.094f, 0.149f, 0.212f, 1.0f), new Color(0.129f, 0.149f, 0.271f, 1.0f), new Color(0.173f, 0.161f, 0.278f, 1.0f), 1.0f, 1.0f, 1.0f),
-            new SkyGradient(new Color(0.220f, 0.600f, 1.000f, 1.0f), new Color(0.800f, 0.592f, 0.961f, 1.0f), new Color(0.867f, 0.753f, 0.659f, 1.0f), 1.0f, 1.0f, 1.0f),
-            new SkyGradient(new Color(0.463f, 0.882f, 0.882f, 1.0f), new Color(0.475f, 0.882f, 1.000f, 1.0f), new Color(0.718f, 0.945f, 1.000f, 1.0f), 1.0f, 1.0f, 1.0f),
-            new SkyGradient(new Color(0.604f, 0.961f, 1.000f, 1.0f), new Color(0.729f, 0.973f, 1.000f, 1.0f), new Color(0.855f, 0.984f, 1.000f, 1.0f), 1.0f, 1.0f, 1.0f),
-            new SkyGradient(new Color(0.490f, 0.067f, 0.620f, 1.0f), new Color(0.792f, 0.118f, 0.408f, 1.0f), new Color(0.933f, 0.212f, 0.243f, 1.0f), 1.0f, 1.0f, 1.0f)
-        };*/
         float[] timeMarks = { 0, 90 - horizonBufferAngle, 90 + horizonBufferAngle, 180, 270 - horizonBufferAngle, 270 + horizonBufferAngle };
         for(int i = 0; i < timeMarks.Length; i++) {
             int j = i + 1; if (j == timeMarks.Length) j = 0;
@@ -141,22 +131,22 @@ public class Sky : MonoBehaviour {
         }
     }
 
-    // puts star in sky
-    // called when shrine complete
-    private void addStar(){
-		numOfStars++;
-		GameObject star = Instantiate(starPrefab, Vector3.up * 10000, Quaternion.identity) as GameObject;
-		star.transform.SetParent(StarsParent.transform, false);
-		Vector3 origRot = StarsParent.transform.localEulerAngles;
+    private void addStar() { // puts star in sky, called when shrine complete
+        GameObject star = Instantiate(starPrefab) as GameObject;
+        listOfStars.Add(star);
+		star.transform.SetParent(StarsParent.transform);
+        star.transform.localPosition = Vector3.up * -10000;
+        Vector3 origRot = StarsParent.transform.localEulerAngles;
 		StarsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)), 0, Random.Range(-(90-sunAxisShift), (90-sunAxisShift)));
 		star.transform.SetParent(null);
-		StarsParent.transform.localEulerAngles = origRot;
-		star.transform.SetParent(StarsParent.transform);
+        StarsParent.transform.rotation = Quaternion.identity;
+        star.transform.SetParent(StarsParent.transform);
 		star.transform.LookAt(StarsParent.transform);
-	}
+        StarsParent.transform.localEulerAngles = origRot;
+    }
 	
 	public int getNumberOfStars(){
-		return numOfStars;
+		return listOfStars.Count;
 	}
 	
 	//"time" is number of degrees it takes to finish changing to new sky
