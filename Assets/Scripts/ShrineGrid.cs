@@ -43,6 +43,7 @@ public class ShrineGrid : MonoBehaviour {
         transform.position = snapToTerrain(transform.position);
         createMural();
         createPillars();
+        killTrees();
     }
 	
 	// Update is called once per frame
@@ -183,6 +184,20 @@ public class ShrineGrid : MonoBehaviour {
                 GameObject pillar = Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation) as GameObject;
                 pillar.transform.parent = gameObject.transform;
             }
+        }
+    }
+
+    private void killTrees()
+    {
+        Vector3 half_extents = new Vector3(size, 100000, size);
+        LayerMask tree_mask = LayerMask.GetMask("Tree");
+
+        Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+
+            GameObject tree = colliders[i].gameObject;
+            Destroy(tree);
         }
     }
 
