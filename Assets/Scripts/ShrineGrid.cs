@@ -32,7 +32,6 @@ public class ShrineGrid : MonoBehaviour {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
-        //validObjects = new List<GameObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
@@ -161,10 +160,7 @@ public class ShrineGrid : MonoBehaviour {
 
     private void createMural()
     {
-        Vector3 offset = new Vector3(10,0,5);
-        GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
-        localMural.GetComponent<Mural>().generateTexture(targetState);
-        localMural.transform.parent = gameObject.transform;
+        GetComponent<Mural>().generateTexture(targetState);
     }
 
     private void createPillars()
@@ -284,7 +280,7 @@ public class ShrineGrid : MonoBehaviour {
         {
             if (hit.point.y > Globals.water_level)
             {
-                ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
+                ret = new Vector3(pos.x, hit.point.y, pos.z);
             }
             else
             {

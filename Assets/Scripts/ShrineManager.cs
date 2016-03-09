@@ -24,6 +24,7 @@ public class ShrineManager : MonoBehaviour {
 
 	public void placeShrine(Vector3 chunk_pos, Vector2 chunk)
     {
+        
         int val = Random.Range(1, shrine_probability);
         if (val == 1)
         {
@@ -32,8 +33,7 @@ public class ShrineManager : MonoBehaviour {
                 Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
                 if (checkHeights(position))
                 {
-                    GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,-60,0)) as GameObject;
-                    new_shrine.transform.localScale = new Vector3(200, 200, 200);
+                    GameObject new_shrine = Instantiate(prefab, position, Quaternion.Euler(-90,180,0)) as GameObject;
                     shrines[chunk] = new List<ShrineGrid>();
                     break;
                 }
