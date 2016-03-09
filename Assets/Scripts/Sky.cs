@@ -169,7 +169,7 @@ public class Sky : MonoBehaviour {
 		}
 	}
 	
-	private void addStar(){ //called when shrine complete
+	public void addStar(){ //called when shrine complete
 		numOfStars++;
 		GameObject star = Instantiate(starPrefab, Vector3.up * 10000, Quaternion.identity) as GameObject;
 		star.transform.SetParent(StarsParent.transform, false);

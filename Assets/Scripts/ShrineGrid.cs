@@ -274,6 +274,7 @@ public class ShrineGrid : MonoBehaviour {
     {
         GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
         GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position,heatMoistureChange);
+        GameObject.Find("Sky").GetComponent<Sky>().addStar();
     }
 
     private Vector3 snapToTerrain(Vector3 pos)
