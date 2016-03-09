@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426fa262d1468d94e824584c76868a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  octaves: 4
+  octaves: 3
   persistence: 0.4
-  smoothness: 2700
+  smoothness: 2600
   amplitude: 900
   seed: 515312
 --- !u!1001 &100100000
@@ -61,11 +61,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: octaves
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: smoothness
-      value: 1000
+      value: 2600
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: amplitude
+      value: 900
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
