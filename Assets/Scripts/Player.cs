@@ -12,8 +12,11 @@ public class Player : MonoBehaviour {
     public string leftHandInput;
     public string rightHandInput;
     public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
+    public AnimationCurve timeScaleCurve;
+    public float waitMaxTime;
     
-    private float wait_speed;
+    private float waitCurTime;
+    private float waitSpeed;
 	private bool startGroundWarp;
     private GameObject leftObj;
     private GameObject rightObj;
@@ -24,7 +27,8 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        wait_speed = initialWaitSpeed;
+        waitCurTime = 0;
+        waitSpeed = 1;
 		startGroundWarp = false;
 	}
 	
@@ -32,16 +36,28 @@ public class Player : MonoBehaviour {
 	void Update () {
 	    //PATIENCE IS POWER
         if (Input.GetButton("Wait")){
-            if(Input.GetButton("Speed")) Globals.time_scale = wait_speed * 5;
-            else Globals.time_scale = wait_speed;
+            if (Input.GetButton("Speed"))
+            {
+                Globals.time_scale = initialWaitSpeed + maxWaitSpeed * timeScaleCurve.Evaluate(waitCurTime / waitMaxTime);
+                Debug.Log(Globals.time_scale);
+                waitCurTime += Time.deltaTime;
+                waitCurTime = Mathf.Clamp(waitCurTime, 0f, waitMaxTime);
+            }
+            else
+            {
+                Globals.time_scale = waitSpeed;
+               
+            }
             
-            if (wait_speed < maxWaitSpeed) wait_speed += waitSpeedGrowth;
-            else wait_speed = maxWaitSpeed;
-            
+
+            waitSpeed += waitSpeedGrowth;
+            waitSpeed = Mathf.Clamp(waitSpeed,0f, maxWaitSpeed);
+
             warpToGround();
         }else{
             Globals.time_scale = 1.0f;
-            wait_speed = initialWaitSpeed;
+            waitCurTime = 0f;
+            waitSpeed = initialWaitSpeed;
         }
         Globals.time += Globals.time_resolution*Globals.time_scale;
         

@@ -1280,8 +1280,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154939344}
-  m_LocalRotation: {x: 0.18491712, y: 0.1357245, z: 0.025794402, w: -0.972995}
-  m_LocalPosition: {x: 16.360575, y: 589.6217, z: -49.455482}
+  m_LocalRotation: {x: -0.188534, y: 0.8041599, z: 0.3336795, w: 0.45435658}
+  m_LocalPosition: {x: -66.89003, y: 528.7684, z: 136.92786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1709,8 +1709,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1699181561}
-  m_LocalRotation: {x: 0.18491712, y: 0.1357245, z: 0.025794402, w: -0.972995}
-  m_LocalPosition: {x: 16.360575, y: 589.34143, z: -49.45534}
+  m_LocalRotation: {x: -0.188534, y: 0.8041599, z: 0.3336795, w: 0.45435658}
+  m_LocalPosition: {x: -66.89003, y: 528.48804, z: 136.92796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1774,7 +1774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialWaitSpeed: 100
-  maxWaitSpeed: 1e+14
+  maxWaitSpeed: 1e+12
   waitSpeedGrowth: 1
   sprintWaitMultiplier: 5
   grabDistance: 4
@@ -1782,6 +1782,23 @@ MonoBehaviour:
   leftHandInput: LeftHand
   rightHandInput: RightHand
   minWarpOnWaitDist: 0.5
+  timeScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  waitMaxTime: 300
 --- !u!1001 &1922851086
 Prefab:
   m_ObjectHideFlags: 0
