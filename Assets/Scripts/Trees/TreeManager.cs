@@ -23,9 +23,7 @@ public class TreeManager : MonoBehaviour {
     {
         if (biome.treeTypes.Count < 1) return;
         if (trees.ContainsKey(key) && trees[key] != null)
-        {
-            Debug.Log("Reload trees");
-           
+        {  
             List<Tree> trees_in_chunk = trees[key];
             for (int i = trees_in_chunk.Count-1; i >= 0; i--)
             {
@@ -38,7 +36,6 @@ public class TreeManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("First Population");
             trees[key] = new List<Tree>();
             float step_size = gen_manager.chunk_size / biome.treeDensity;
 

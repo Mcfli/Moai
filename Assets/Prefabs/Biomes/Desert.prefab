@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 49
+  heatAvg: 50
   heatVariance: 30
-  moistureAvg: 5
+  moistureAvg: 0
   moistureVariance: 20
   weatherTypes:
   - sunny
@@ -99,6 +99,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes: []
   doodads: []
+  treeDensity: 0
+  doodadDensity: 0
   colors:
   - {r: 0.99604464, g: 1, b: 0.71323526, a: 0}
   - {r: 1, g: 0.9670385, b: 0.52205884, a: 0}

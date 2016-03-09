@@ -10,9 +10,11 @@ public class ChunkGenerator : MonoBehaviour {
 
 	private Vector3[] vertices;
     private NoiseSynth synth;
+    private GenerationManager genManager;
 
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
+        genManager = GetComponent<GenerationManager>();
         synth.Init();
 	}
 
@@ -85,9 +87,16 @@ public class ChunkGenerator : MonoBehaviour {
 	}
 
     // Calculate vertex colors
-    public void colorChunk(GameObject chunk,Biome curBiome,Biome up,Biome down,Biome left,Biome right)
+    public void colorChunk(GameObject chunkObj)
     {
-        Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+        Vector2 chunk = genManager.worldToChunk(chunkObj.transform.position);
+        Biome curBiome = genManager.chooseBiome(chunk);
+        Biome up = genManager.chooseBiome(chunk + Vector2.up);
+        Biome down = genManager.chooseBiome(chunk + Vector2.down);
+        Biome left = genManager.chooseBiome(chunk + Vector2.left);
+        Biome right = genManager.chooseBiome(chunk + Vector2.right);
+
+        Vector3[] verts = chunkObj.GetComponent<MeshFilter>().mesh.vertices;
         Color[] colors = new Color[verts.Length];
         for (int c = 0; c < verts.Length; c += 3)
         {
@@ -95,7 +104,8 @@ public class ChunkGenerator : MonoBehaviour {
             float h = verts[c].x / chunk_size;
             float v = verts[c].z / chunk_size;
 
-            //h *= h;
+            h = Mathf.Sqrt(h);
+            v = Mathf.Sqrt(v);
 
             Color biome_color = curBiome.colorAt(height);
             Color left_color = left.colorAt(height);
@@ -126,7 +136,7 @@ public class ChunkGenerator : MonoBehaviour {
             colors[c + 1] = color;
             colors[c + 2] = color;
         }
-        chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+        chunkObj.GetComponent<MeshFilter>().mesh.colors = colors;
     }
 
     public void refresh(GameObject chunk)

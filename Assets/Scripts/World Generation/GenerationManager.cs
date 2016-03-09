@@ -198,7 +198,7 @@ public class GenerationManager : MonoBehaviour {
 		}
 	}
 	
-    private Biome chooseBiome(Vector2 chunk)
+    public Biome chooseBiome(Vector2 chunk)
     {
 
         // Get the heat and moisture values at chunk coordinates
@@ -270,13 +270,7 @@ public class GenerationManager : MonoBehaviour {
         string chunk_name = "chunk (" + chunk.x + "," + chunk.y + ")";
         GameObject chunk_obj = GameObject.Find(chunk_name);
         Biome curBiome = chooseBiome(chunk);
-
-        Biome up = chooseBiome(chunk + Vector2.up);
-        Biome down = chooseBiome(chunk + Vector2.down);
-        Biome left = chooseBiome(chunk + Vector2.left);
-        Biome right = chooseBiome(chunk + Vector2.right);
-
-        chunkGen.colorChunk(chunk_obj, curBiome,up,down,left,right);
+        chunkGen.colorChunk(chunk_obj);
     }
 
 }
