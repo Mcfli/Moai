@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106806}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 3.298071, y: 139.75272, z: 2.6707463}
+  m_LocalPosition: {x: -350.95053, y: 66.62028, z: 473.3565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,9 +44,9 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 4f5f172a5c70ab34aba7d17d7fb7f3ec, type: 2}
   - {fileID: 2100000, guid: be020d9585ff5df4a926ecc1ab3d0b50, type: 2}
-  - {fileID: 2100000, guid: a1abc598d9cdeb146bbd249237b1eb9e, type: 2}
+  - {fileID: 2100000, guid: 75ff228ac95b34845ab51fd9080e3c23, type: 2}
   - {fileID: 2100000, guid: b29a95f4317c7d04ca51fca1a553c8da, type: 2}
-  - {fileID: 2100000, guid: 71d201e7895edb0448d8dade9bcdb6b1, type: 2}
+  - {fileID: 2100000, guid: a1abc598d9cdeb146bbd249237b1eb9e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageRes: 32
   numSquares: 3
-  muralColor: {r: 0.2238322, g: 0.66176474, b: 0.66176474, a: 1}
+  muralColor: {r: 0.8602941, g: 0.77845275, b: 0.43647274, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -139,6 +139,18 @@ Prefab:
       propertyPath: vertexPillar
       value: 
       objectReference: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: muralColor.r
+      value: 0.43647274
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: muralColor.b
+      value: 0.8602941
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: muralColor.g
+      value: 0.5621577
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106806}

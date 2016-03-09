@@ -66,7 +66,7 @@ public class Mural : MonoBehaviour {
 
         muralTex.SetPixels(newPixels);
         muralTex.Apply();
-        gameObject.GetComponent<Renderer>().materials[2].mainTexture = muralTex;
+        gameObject.GetComponent<Renderer>().materials[4].mainTexture = muralTex;
     }
 
     private void snapToTerrain()
