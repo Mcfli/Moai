@@ -17,11 +17,17 @@ public class GenerationManager : MonoBehaviour {
     public WeatherManager weather_manager;
     public List<Biome> biomes;
 
+    public NoiseGen heatMap;
+    public NoiseGen mountainMap;
+    public NoiseGen moistureMap;
+
     public Vector2 cur_chunk;
     List<Vector2> loaded_chunks;
     List<Vector2> loaded_tree_chunks;
+    private Dictionary<Vector2, Biome> chunkBiomes;
+    private NoiseSynth noiseSynth;
 
-    void Start () {
+    void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
@@ -31,6 +37,11 @@ public class GenerationManager : MonoBehaviour {
         cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
+        chunkBiomes = new Dictionary<Vector2, Biome>();
+        noiseSynth = GetComponent<NoiseSynth>();
+        moistureMap.Init();
+        heatMap.Init();
+        
     }
 	
 	// Update is called once per frame
@@ -51,6 +62,8 @@ public class GenerationManager : MonoBehaviour {
             unloadTrees();
             loadChunks();
             loadTrees();
+            Globals.cur_biome = chunkBiomes[cur_chunk];
+            weather_manager.updateWeather();
             weather_manager.moveWithPlayer();
         }
     }
@@ -73,7 +86,6 @@ public class GenerationManager : MonoBehaviour {
 
     void loadTrees()
     {
-        
         for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
         {
             for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
@@ -83,7 +95,7 @@ public class GenerationManager : MonoBehaviour {
                 if (!loaded_tree_chunks.Contains(this_chunk))
                 {
                     generateChunk(this_chunk);
-                    tree_manager.loadTrees(this_chunk);
+                    tree_manager.loadTrees(this_chunk,curBiome.treeTypes);
                     loaded_tree_chunks.Add(this_chunk);
                 }
             }
@@ -122,8 +134,26 @@ public class GenerationManager : MonoBehaviour {
 
     private Biome chooseBiome(Vector2 chunk)
     {
-        //Random.seed = chunk.GetHashCode();
-        return biomes[Random.Range(0, biomes.Count)];
+        
+        // Get the heat and moisture values at chunk coordinates
+        float heat = heatMap.genPerlin(chunk.x*chunk_size+ chunk_size * 0.5f, chunk.y* chunk_size + chunk_size * 0.5f, 0) - noiseSynth.heightAt(chunk.x * chunk_size + chunk_size*0.5f, chunk.y * chunk_size + +chunk_size * 0.5f, 0)*0.5f;
+        float moisture = moistureMap.genPerlin(chunk.x* chunk_size+1, chunk.y* chunk_size+1, 0);
+
+        // Find the most appropriate biome
+        float lowestError = 100000;
+        Biome ret = biomes[0];
+        foreach(Biome biome in biomes)
+        {
+            float heat_error = Mathf.Abs(biome.heatAvg - heat);
+            float moisture_error = Mathf.Abs(biome.moistureAvg - moisture);
+            if (heat_error + moisture_error < lowestError)
+            {
+                lowestError = heat_error + moisture_error;
+                ret = biome;
+            }
+                
+        }
+        return ret;
     }
 
     /// <summary>
@@ -134,8 +164,17 @@ public class GenerationManager : MonoBehaviour {
     /// <param name="chunk_y"></param>
     void generateChunk(Vector2 chunk)
     {
-        // Implement here
-        chunkGen.generate((int)chunk.x, (int)chunk.y,time,chooseBiome(chunk));
+        Biome b;
+        if (chunkBiomes.ContainsKey(chunk) && chunkBiomes[chunk] != null)
+            b = chunkBiomes[chunk];
+        else
+        {
+            b = chooseBiome(chunk);
+            chunkBiomes[chunk] = b;
+        }
+            
+        chunkGen.generate((int)chunk.x, (int)chunk.y,time,b);
+        smoothChunkColors(chunk);
     }
 
     void updateChunks()
@@ -147,7 +186,22 @@ public class GenerationManager : MonoBehaviour {
             GameObject chunk = GameObject.Find(chunk_name);
 
             chunkGen.refresh(chunk);
+            smoothChunkColors(new Vector2(this_chunk.x,this_chunk.y));
         }
+    }
+
+    void smoothChunkColors(Vector2 chunk)
+    {
+        string chunk_name = "chunk (" + chunk.x + "," + chunk.y + ")";
+        GameObject chunk_obj = GameObject.Find(chunk_name);
+        Biome curBiome = chunkBiomes[chunk];
+
+        Biome up = chooseBiome(chunk + Vector2.up);
+        Biome down = chooseBiome(chunk + Vector2.down);
+        Biome left = chooseBiome(chunk + Vector2.left);
+        Biome right = chooseBiome(chunk + Vector2.right);
+
+        chunkGen.colorChunk(chunk_obj, curBiome,up,down,left,right);
     }
 
 }

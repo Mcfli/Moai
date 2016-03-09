@@ -39,10 +39,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 67
+  heatAvg: 117
   heatVariance: 30
   moistureAvg: 50
   moistureVariance: 20
+  weatherTypes:
+  - sunny
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
@@ -95,8 +97,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes:
-  - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+  treeTypes: []
   doodads: []
   colors:
   - {r: 1, g: 0.96957403, b: 0.5588235, a: 0}
@@ -104,7 +105,7 @@ MonoBehaviour:
   - {r: 0.78676474, g: 0.68949634, b: 0.48015788, a: 0}
   - {r: 0.6985294, g: 0.5440878, b: 0.13867864, a: 0}
   - {r: 0.6838235, g: 0.43859026, b: 0, a: 0}
-  amplitude: 400
+  amplitude: 1000
   color_curve:
     serializedVersion: 2
     m_Curve:
@@ -127,7 +128,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: treeTypes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[0]
+      value: sunny
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184656}

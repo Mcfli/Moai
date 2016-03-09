@@ -4,6 +4,7 @@ using System.Collections;
 public class Tree : MonoBehaviour {
 
     public GameObject seed_object;
+    public GameObject prefab;
     public float max_life = 100;
     public float radius;
     public float spawn_delay;
@@ -52,6 +53,7 @@ public class Tree : MonoBehaviour {
     // Take all data from tree and copy it to this tree
     public void copyFrom(Tree tree)
     {
+        prefab = tree.prefab;
         seed_object = tree.seed_object;
         max_life = tree.max_life;
         radius = tree.radius;

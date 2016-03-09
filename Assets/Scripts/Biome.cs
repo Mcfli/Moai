@@ -9,6 +9,8 @@ public class Biome : MonoBehaviour {
     public float moistureAvg;
     public float moistureVariance;
 
+    public List<string> weatherTypes;
+
     // Curves that define a property given what time of year it is
     public AnimationCurve temperatureCurve; 
     public AnimationCurve precipitationCurve;

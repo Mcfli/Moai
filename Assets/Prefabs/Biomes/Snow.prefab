@@ -1,51 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &196286
+--- !u!1 &161050
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 450788}
-  - 114: {fileID: 11487490}
+  - 4: {fileID: 476980}
+  - 114: {fileID: 11432038}
   m_Layer: 0
-  m_Name: Forest
+  m_Name: Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &450788
+--- !u!4 &476980
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196286}
+  m_GameObject: {fileID: 161050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 621.1538, y: 214.96484, z: 1451.9033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11487490
+--- !u!114 &11432038
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196286}
+  m_GameObject: {fileID: 161050}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 97
-  heatVariance: 30
-  moistureAvg: 97
+  heatAvg: 32
+  heatVariance: 15
+  moistureAvg: 65
   moistureVariance: 20
   weatherTypes:
   - sunny
-  - rain
   - snowy
   temperatureCurve:
     serializedVersion: 2
@@ -103,11 +102,11 @@ MonoBehaviour:
   - {fileID: 110090, guid: 5c2856044610eaa4c8117c1f18f64fdb, type: 2}
   doodads: []
   colors:
-  - {r: 0.54937875, g: 0.78676474, b: 0.09834559, a: 0}
-  - {r: 0.43351918, g: 0.75735295, b: 0, a: 0}
-  - {r: 0.33250505, g: 0.5808823, b: 0, a: 0}
-  - {r: 0.313311, g: 0.44852942, b: 0.3198388, a: 0}
-  amplitude: 400
+  - {r: 0.69055, g: 0.7352941, b: 0.60553634, a: 0}
+  - {r: 0.34526387, g: 0.45588237, b: 0.3826453, a: 0}
+  - {r: 0.77205884, g: 0.77205884, b: 0.77205884, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  amplitude: 2200
   color_curve:
     serializedVersion: 2
     m_Curve:
@@ -130,24 +129,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: weatherTypes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weatherTypes.Array.data[0]
-      value: sunny
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weatherTypes.Array.data[1]
-      value: rain
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weatherTypes.Array.data[2]
-      value: snowy
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 196286}
+  m_RootGameObject: {fileID: 161050}
   m_IsPrefabParent: 1

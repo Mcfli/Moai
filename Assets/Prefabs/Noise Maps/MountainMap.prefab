@@ -39,10 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426fa262d1468d94e824584c76868a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  octaves: 5
+  octaves: 4
   persistence: 0.4
-  smoothness: 1000
-  amplitude: 1000
+  smoothness: 2700
+  amplitude: 1200
   seed: 515312
 --- !u!1001 &100100000
 Prefab:
