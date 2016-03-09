@@ -843,10 +843,10 @@ MonoBehaviour:
   cull_radius: 10
   cull_max_density: 5
   target_scale: 10
-  grow_speed: 0.0001
+  grow_speed: 0.006
   grow_speed_variance: 0
   life_span: 50
-  growDieAnimationRatio: 0.1
+  growDieAnimationRatio: 0.2
   height_vs_time:
     serializedVersion: 2
     m_Curve:

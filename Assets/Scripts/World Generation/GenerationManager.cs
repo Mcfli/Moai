@@ -19,6 +19,7 @@ public class GenerationManager : MonoBehaviour {
     private ChunkGenerator chunkGen;
     private TreeManager tree_manager;
     private ShrineManager shrine_manager;
+    private WeatherManager weather_manager;
     private Vector2 cur_chunk;
     private List<Vector2> loaded_chunks;
     private List<Vector2> loaded_tree_chunks;
@@ -30,6 +31,7 @@ public class GenerationManager : MonoBehaviour {
         tree_manager = gameObject.GetComponent<TreeManager>();
         chunkGen = gameObject.GetComponent<ChunkGenerator>();
         shrine_manager = gameObject.GetComponent<ShrineManager>();
+        weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
         chunkGen.chunk_size = chunk_size;
         chunkGen.chunk_resolution = chunk_resolution;
         cur_chunk = new Vector2(-1, -1);
@@ -62,6 +64,7 @@ public class GenerationManager : MonoBehaviour {
             loadChunks();
             loadTrees();
 			loadShrines();
+            weather_manager.moveParticles();
             Globals.cur_biome = chunkBiomes[cur_chunk];
             //shrine_manager.placeShrine(chunkToWorld(cur_chunk));
         }

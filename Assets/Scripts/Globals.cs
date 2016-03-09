@@ -16,4 +16,6 @@ public class Globals : MonoBehaviour {
     public static Biome cur_biome;
 
     public static GameObject Player = GameObject.FindGameObjectWithTag("Player");
+
+    public static Player PlayerScript = Player.GetComponent<Player>();
 }

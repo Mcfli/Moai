@@ -20,6 +20,8 @@ public class WeatherManager : MonoBehaviour {
     private List<GameObject> clouds; // holds all currently loaded clouds
     private Biome lastBiome;
 
+    private Vector3 curWeatherPosition;
+
     void Awake(){
         clouds = new List<GameObject>();
     }
@@ -29,6 +31,7 @@ public class WeatherManager : MonoBehaviour {
         lastUpdated = 0;
         changeWeather();
         lastBiome = Globals.cur_biome;
+        curWeatherPosition = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -43,10 +46,8 @@ public class WeatherManager : MonoBehaviour {
 
         //check if visiable
         if (activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
-
         //move with player
         transform.position = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
-
         lastBiome = Globals.cur_biome;
     }
 	
@@ -79,8 +80,7 @@ public class WeatherManager : MonoBehaviour {
             }
             if (Globals.cur_weather.particleS) {
                 activeParticleSystem = Instantiate(Globals.cur_weather.particleS);
-                activeParticleSystem.transform.parent = transform;
-                activeParticleSystem.transform.localPosition = Vector3.zero;
+                activeParticleSystem.transform.localPosition = curWeatherPosition;
             }
             Globals.cur_weather.imageSpace.applyToCamera();
             changeClouds(Globals.cur_weather.numberOfClouds);
@@ -103,5 +103,10 @@ public class WeatherManager : MonoBehaviour {
             c.GetComponent<Cloud>().dissipate();
             clouds.RemoveAt(0);
         }
+    }
+
+    public void moveParticles()
+    {
+        curWeatherPosition = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
     }
 }

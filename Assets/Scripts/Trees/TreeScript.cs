@@ -46,6 +46,8 @@ public class TreeScript : MonoBehaviour {
     private GameObject fire;
     private GameObject Torch;
 
+    private BoxCollider bc;
+    private PuzzleObject puzzleObj;
 
     public void saveTransforms(){
         saved_position = transform.position;
@@ -95,6 +97,8 @@ public class TreeScript : MonoBehaviour {
         grow_speed += Random.value * 2 * grow_speed_variance - grow_speed_variance;
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
+        bc = GetComponent<BoxCollider>();
+        puzzleObj = GetComponent<PuzzleObject>();
         int terrain = LayerMask.GetMask("Terrain");
         
         foreach (AnimationState animState in anim) animState.speed = 0; //fixes twitching
@@ -109,17 +113,29 @@ public class TreeScript : MonoBehaviour {
         else{
             Destroy(gameObject);
         }
+
+        // Start delayed update
+        StartCoroutine("tickUpdate");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        stickToGround();
-        Cull();
-        Grow();
-        if(age >= 0.03)
-            Propogate();
-        if (onFire)
-            fireSpread();
+        
+    }
+
+    // Coroutine
+    IEnumerator tickUpdate()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+            Cull();
+            Grow();
+            if (age >= 0.03)
+                Propogate();
+            if (onFire)
+                fireSpread();
+        }
     }
 
     private void stickToGround()
@@ -195,17 +211,17 @@ public class TreeScript : MonoBehaviour {
             if(age/life_span < growDieAnimationRatio){//growing
                 if(!anim.IsPlaying("growing")) anim.Play("growing");
                 anim["growing"].time = anim["growing"].length * age/(life_span*growDieAnimationRatio);
-                GetComponent<PuzzleObject>().image = puzzleIcons[0];
+                puzzleObj.image = puzzleIcons[0];
                 state = 0;
             }else if(age/life_span > 1 - growDieAnimationRatio){//dying
                 if(!anim.IsPlaying("dying")) anim.Play("dying");
                 anim["dying"].time = anim["dying"].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
-                GetComponent<PuzzleObject>().image = puzzleIcons[1];
+                puzzleObj.image = puzzleIcons[1];
                 state = 1;
             }else{ //mature
                 if(!anim.IsPlaying("growing")) anim.Play("growing");
                 anim["growing"].time = anim["growing"].length;
-                GetComponent<PuzzleObject>().image = puzzleIcons[2];
+                puzzleObj.image = puzzleIcons[2];
                 state = 2;
             }
         }else{
@@ -217,8 +233,8 @@ public class TreeScript : MonoBehaviour {
             }
         }
         float growth = height_vs_time.Evaluate(anim_progress);
-        GetComponent<BoxCollider>().size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
-        GetComponent<BoxCollider>().center = new Vector3(0, target_scale*growth*0.5f, 0);
+        bc.size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
+        bc.center = new Vector3(0, target_scale*growth*0.5f, 0);
 
     }
     
