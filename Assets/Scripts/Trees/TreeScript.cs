@@ -23,7 +23,7 @@ public class TreeScript : MonoBehaviour {
 
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
-    public List<Texture2D> statePuzzleIcons; //puzzle icon for each state
+    public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
 
     public AnimationCurve height_vs_time;
 
@@ -193,19 +193,22 @@ public class TreeScript : MonoBehaviour {
         
         if(useNewAnimationSystem){
             if(age/life_span < growDieAnimationRatio){//growing
-                if(!anim.IsPlaying("growing")) anim.Play("growing");
-                anim["growing"].time = anim["growing"].length * age/(life_span*growDieAnimationRatio);
-                GetComponent<PuzzleObject>().image = statePuzzleIcons[0];
+                if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
+                anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length * age/(life_span*growDieAnimationRatio);
+                Object.Destroy(GetComponent<PuzzleObject>());
+                Globals.CopyComponent(gameObject, statePuzzleObjects[0]);
                 state = 0;
             }else if(age/life_span > 1 - growDieAnimationRatio){//dying
-                if(!anim.IsPlaying("dying")) anim.Play("dying");
-                anim["dying"].time = anim["dying"].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
-                GetComponent<PuzzleObject>().image = statePuzzleIcons[1];
+                if(!anim.IsPlaying(stateAnimationNames[2])) anim.Play(stateAnimationNames[2]);
+                anim[stateAnimationNames[2]].time = anim[stateAnimationNames[2]].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
+                Object.Destroy(GetComponent<PuzzleObject>());
+                Globals.CopyComponent(gameObject, statePuzzleObjects[1]);
                 state = 1;
             }else{ //mature
-                if(!anim.IsPlaying("growing")) anim.Play("growing");
-                anim["growing"].time = anim["growing"].length;
-                GetComponent<PuzzleObject>().image = statePuzzleIcons[2];
+                if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
+                anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length;
+                Object.Destroy(GetComponent<PuzzleObject>());
+                Globals.CopyComponent(gameObject, statePuzzleObjects[2]);
                 state = 2;
             }
         }else{

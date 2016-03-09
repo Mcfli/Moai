@@ -149,7 +149,6 @@ GameObject:
   - 111: {fileID: 11164116}
   - 114: {fileID: 11468444}
   - 65: {fileID: 6503740}
-  - 114: {fileID: 11415324}
   m_Layer: 8
   m_Name: maple
   m_TagString: Untagged
@@ -801,27 +800,14 @@ Animation:
   m_GameObject: {fileID: 138294}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400006, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
+  m_Animation: {fileID: 7400012, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
   m_Animations:
-  - {fileID: 7400006, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
-  - {fileID: 7400006, guid: 1c4b131d262c0e44a9262749fe7a9f43, type: 3}
+  - {fileID: 7400012, guid: 9e6936744a8c68c49903daf0abaf4c00, type: 3}
+  - {fileID: 7400008, guid: 1c4b131d262c0e44a9262749fe7a9f43, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11415324
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: Tree
-  image: {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
 --- !u!114 &11468444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -849,17 +835,17 @@ MonoBehaviour:
   growDieAnimationRatio: 0.1
   useNewAnimationSystem: 1
   stateAnimationNames:
-  - growing
+  - maple_growing
   - 
-  - dying
+  - maple_dying
   stateRatios:
   - 0.1
   - 0.8
   - 0.1
-  statePuzzleIcons:
-  - {fileID: 2800000, guid: 25c236ba8ff61c9418e2222862304639, type: 3}
-  - {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
-  - {fileID: 2800000, guid: a4a6726f3901ed24dab8d0e24efd7fef, type: 3}
+  statePuzzleObjects:
+  - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
+  - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
+  - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   height_vs_time:
     serializedVersion: 2
     m_Curve:
@@ -879,8 +865,8 @@ MonoBehaviour:
   cul_spread: 100
   onFire: 0
   saved_position: {x: 0, y: 0, z: 0}
-  age: 0
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
+  age: 0
 --- !u!137 &13753792
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

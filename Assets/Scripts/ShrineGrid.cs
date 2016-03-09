@@ -17,7 +17,7 @@ public class ShrineGrid : MonoBehaviour {
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
 
-    public List<GameObject> validObjects;
+    public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
     private LayerMask glowLayer;
 
@@ -32,7 +32,7 @@ public class ShrineGrid : MonoBehaviour {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
-        //validObjects = new List<GameObject>();
+        //validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
@@ -57,7 +57,7 @@ public class ShrineGrid : MonoBehaviour {
         drawGlows();
 	}
 
-    public void enablePlacementItem(GameObject item)
+    public void enablePlacementItem(PuzzleObject item)
     {
 		validObjects.Add(item);
     }
@@ -154,8 +154,8 @@ public class ShrineGrid : MonoBehaviour {
             while(place == centerSquare)
                 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
             int index = Random.Range(0, validObjects.Count-1);
-            GameObject placeObj = validObjects[index];
-            targetState[place] = placeObj.GetComponent<PuzzleObject>();
+            PuzzleObject placeObj = validObjects[index];
+            targetState[place] = placeObj;
         }
     }
 

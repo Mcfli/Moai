@@ -131,7 +131,7 @@ public class Sky : MonoBehaviour {
         }
     }
 
-    private void addStar() { // puts star in sky, called when shrine complete
+    public void addStar() { // puts star in sky, called when shrine complete
         GameObject star = Instantiate(starPrefab) as GameObject;
         listOfStars.Add(star);
 		star.transform.SetParent(StarsParent.transform);
