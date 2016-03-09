@@ -213,13 +213,13 @@ public class TreeScript : MonoBehaviour {
                 if(!anim.IsPlaying(stateAnimationNames[2])) anim.Play(stateAnimationNames[2]);
                 anim[stateAnimationNames[2]].time = anim[stateAnimationNames[2]].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
                 Object.Destroy(GetComponent<PuzzleObject>());
-                Globals.CopyComponent(gameObject, statePuzzleObjects[1]);
+                Globals.CopyComponent(gameObject, statePuzzleObjects[2]);
                 state = 1;
             }else{ //mature
                 if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
                 anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length;
                 Object.Destroy(GetComponent<PuzzleObject>());
-                Globals.CopyComponent(gameObject, statePuzzleObjects[2]);
+                Globals.CopyComponent(gameObject, statePuzzleObjects[1]);
                 state = 2;
             }
         }else{

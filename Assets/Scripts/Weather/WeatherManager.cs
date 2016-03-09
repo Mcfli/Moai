@@ -45,7 +45,7 @@ public class WeatherManager : MonoBehaviour {
         if (activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
 
         //move with player
-        //transform.position = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
+        transform.position = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
 
         lastBiome = Globals.cur_biome;
     }
