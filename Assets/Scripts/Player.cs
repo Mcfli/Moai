@@ -22,14 +22,31 @@ public class Player : MonoBehaviour {
     private Vector3 leftOrigScale;
     private Vector3 rightOrigScale;
 
+    //public AudioClip speedUp;
+    //AudioSource audio;
+
     // Use this for initialization
     void Start () {
         wait_speed = initialWaitSpeed;
 		startGroundWarp = false;
+        //audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        
+        //Speed Up Sound
+        /*
+        if (Input.GetButton("Wait"))
+        {
+            audio.PlayOneShot(speedUp, .2f);
+        }
+        else
+        {
+            audio.Stop();
+        }
+        */
+
 	    //PATIENCE IS POWER
         if (Input.GetButton("Wait")){
             if(Input.GetButton("Speed")) Globals.time_scale = wait_speed * 5;
