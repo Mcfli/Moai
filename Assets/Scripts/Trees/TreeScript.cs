@@ -85,7 +85,7 @@ public class TreeScript : MonoBehaviour {
     void Awake(){
         anim = GetComponent<Animation>();
         fire = Resources.Load("fire") as GameObject;
-        
+        state = -1;
         age = 0.0f;
         health = max_health;
         treeMask = LayerMask.GetMask("Tree");
@@ -203,22 +203,24 @@ public class TreeScript : MonoBehaviour {
                     state = 0;
                 }
             }*/ //do this later
-            if(age/life_span < growDieAnimationRatio){ //growing
+
+            // Change PuzzleObject if state changes
+            if(state!= 0 && age/life_span < growDieAnimationRatio){ //growing
                 if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
                 anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length * age/(life_span*growDieAnimationRatio);
-                Object.Destroy(GetComponent<PuzzleObject>());
+                Destroy(GetComponent<PuzzleObject>());
                 Globals.CopyComponent(gameObject, statePuzzleObjects[0]);
                 state = 0;
-            }else if(age/life_span > 1 - growDieAnimationRatio){ //dying
+            }else if(state != 1 && age/life_span > 1 - growDieAnimationRatio){ //dying
                 if(!anim.IsPlaying(stateAnimationNames[2])) anim.Play(stateAnimationNames[2]);
                 anim[stateAnimationNames[2]].time = anim[stateAnimationNames[2]].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
-                Object.Destroy(GetComponent<PuzzleObject>());
+                Destroy(GetComponent<PuzzleObject>());
                 Globals.CopyComponent(gameObject, statePuzzleObjects[2]);
                 state = 1;
-            }else{ //mature
+            }else if(state !=2 && age / life_span >= growDieAnimationRatio && age /life_span <= 1 - growDieAnimationRatio){ //mature
                 if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
                 anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length;
-                Object.Destroy(GetComponent<PuzzleObject>());
+                Destroy(GetComponent<PuzzleObject>());
                 Globals.CopyComponent(gameObject, statePuzzleObjects[1]);
                 state = 2;
             }
