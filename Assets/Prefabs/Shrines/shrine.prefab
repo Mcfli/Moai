@@ -103,11 +103,6 @@ MonoBehaviour:
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: d801d590ad79ea145aada103102ce24a, type: 2}
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: ce35e4d6ecbf80d4cad3880350e17d58, type: 2}
-  - {fileID: 11456332, guid: 2f6798a217161f94594325f3aa4317ee, type: 2}
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
   saved_scale: {x: 0, y: 0, z: 0}

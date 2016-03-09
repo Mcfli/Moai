@@ -47,7 +47,6 @@ public class InteractableObject: MonoBehaviour
     }
     
     private bool isHeld(){
-        Player p = Globals.Player.GetComponent<Player>();
-        return p.getRightObj() == this.gameObject || p.getLeftObj() == this.gameObject;
+        return Globals.PlayerScript.getRightObj() == this.gameObject || Globals.PlayerScript.getLeftObj() == this.gameObject;
     }
 }

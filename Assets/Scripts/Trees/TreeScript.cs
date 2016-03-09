@@ -192,13 +192,24 @@ public class TreeScript : MonoBehaviour {
             age += Globals.time_scale * grow_speed;
         
         if(useNewAnimationSystem){
-            if(age/life_span < growDieAnimationRatio){//growing
+            /*float ratioTotal = 0;
+            foreach (float f in stateRatios) ratioTotal += f;
+            for (int i = 0; i < stateAnimationNames.Count; i++) {
+                if (age / life_span < stateRatios[i] / ratioTotal) {
+                    if (!anim.IsPlaying(stateAnimationNames[i])) anim.Play(stateAnimationNames[i]);
+                    //anim[stateAnimationNames[i]].time = anim[stateAnimationNames[i]].length * age / (stateRatios[i] / ratioTotal);
+                    Object.Destroy(GetComponent<PuzzleObject>());
+                    Globals.CopyComponent(gameObject, statePuzzleObjects[0]);
+                    state = 0;
+                }
+            }*/ //do this later
+            if(age/life_span < growDieAnimationRatio){ //growing
                 if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
                 anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length * age/(life_span*growDieAnimationRatio);
                 Object.Destroy(GetComponent<PuzzleObject>());
                 Globals.CopyComponent(gameObject, statePuzzleObjects[0]);
                 state = 0;
-            }else if(age/life_span > 1 - growDieAnimationRatio){//dying
+            }else if(age/life_span > 1 - growDieAnimationRatio){ //dying
                 if(!anim.IsPlaying(stateAnimationNames[2])) anim.Play(stateAnimationNames[2]);
                 anim[stateAnimationNames[2]].time = anim[stateAnimationNames[2]].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
                 Object.Destroy(GetComponent<PuzzleObject>());
