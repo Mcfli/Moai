@@ -15,7 +15,7 @@ GameObject:
   - 75: {fileID: 7531572}
   - 114: {fileID: 11484236}
   - 114: {fileID: 11481472}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mushroom_red_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

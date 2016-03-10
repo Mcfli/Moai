@@ -52,7 +52,6 @@ public class InteractableObject: MonoBehaviour
             if (timeRemain < 0){
                 if (planted) {
                     Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-                    Debug.Log(close_trees.Length);
                     if (close_trees.Length < 5) {
                         var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                         Instantiate(spawn_object, transform.position, RandomRotation);

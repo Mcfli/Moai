@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 407880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 477272}
   - 137: {fileID: 13705222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 462452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: top_trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: mid_trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 427484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 434612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 472250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bottom_trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 495566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 444284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - 111: {fileID: 11187316}
   - 114: {fileID: 11458812}
   - 65: {fileID: 6591848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: mushroom_red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cap_bottom_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,15 +493,17 @@ MonoBehaviour:
   seed_object: {fileID: 149340, guid: 6bb63408ed8863c40ade462848e944d0, type: 2}
   prefab: {fileID: 188470}
   max_health: 100
-  radius: 100
+  minSpawnRadius: 10
+  maxSpawnRadius: 50
   spawn_delay: 20
-  spawn_delay_variance: 4
+  spawn_variance: 0.5
+  seed_cull_max_density: 2
   spawn_limit: 0
-  cull_radius: 5
+  cull_radius: 50
   cull_max_density: 5
   target_scale: 10
-  lifeSpan: 657000
-  lifeSpanVariance: 0.1
+  lifeSpan: 1314000
+  lifeSpanVariance: 0.5
   stateAnimationNames:
   - redMushroom_growing
   - 

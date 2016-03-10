@@ -7,9 +7,12 @@ public class TreeScript : MonoBehaviour {
     public GameObject seed_object;
     public GameObject prefab;
     public float max_health = 100;
-    public float radius;
+    public float minSpawnRadius;
+    public float maxSpawnRadius;
+    //public float spawn_chance;
     public float spawn_delay;
-    public float spawn_delay_variance;
+    public float spawn_variance;
+    public int seed_cull_max_density;
     public int spawn_limit;
     public float cull_radius;
     public int cull_max_density;
@@ -34,7 +37,8 @@ public class TreeScript : MonoBehaviour {
     public float age;
 
     private LayerMask treeMask;
-    private bool done = false;
+    private LayerMask treeAndSeedMask;
+    private bool donePropogating;
     private float lastSpawned = 0.0f;
     private int numSpawned;
     private float health;
@@ -64,12 +68,13 @@ public class TreeScript : MonoBehaviour {
         fire = Resources.Load("fire") as GameObject;
         state = -1;
         age = 0.0f;
+        donePropogating = false;
         health = max_health;
         treeMask = LayerMask.GetMask("Tree");
-        spawn_delay += Random.value * 2 * spawn_delay_variance - spawn_delay_variance;
+        treeAndSeedMask = LayerMask.GetMask("Tree", "Seed");
         //Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
         numSpawned = 0;
-        lastSpawned = Time.time;
+        lastSpawned = Globals.time - Random.value * spawn_delay;
         lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
@@ -124,7 +129,6 @@ public class TreeScript : MonoBehaviour {
             yield return new WaitForSeconds(1);
             stickToGround();
             Cull();
-            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]); // change puzzle element
             if (propogateDuringState[state]) Propogate();
             if (onFire) fireSpread();
         }
@@ -140,21 +144,22 @@ public class TreeScript : MonoBehaviour {
 
     // Creates seeds in a radius around this tree if it's ready to
     private void Propogate(){
-        if (!done) {
-            if (Time.time - lastSpawned > spawn_delay) {
-                lastSpawned = Time.time;
-                Vector2 randomPoint = Random.insideUnitCircle * radius + new Vector2(transform.position.x, transform.position.z);
+        if (donePropogating) return;
+        if ((Globals.time - lastSpawned) / Globals.time_resolution > spawn_delay) { // if(Random.value < spawn_chance) {
+            float randAngle = Random.Range(0, Mathf.PI * 2);
+            float randDistance = Random.Range(minSpawnRadius, maxSpawnRadius);
+            Vector2 randomPoint = new Vector2(Mathf.Cos(randAngle) * randDistance + transform.position.x, Mathf.Sin(randAngle) * randDistance + transform.position.z);
 
-                RaycastHit hit;
-                Ray rayDown = new Ray(new Vector3(randomPoint.x, 10000000, randomPoint.y), Vector3.down);
-                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-                    GameObject seed = Instantiate(seed_object);
-                    seed.GetComponent<InteractableObject>().plant(hit.point);
-                    numSpawned++;
-                    if (spawn_limit > 0 && numSpawned >= spawn_limit) {
-                        done = true;
-                    }
-                }
+            RaycastHit hit;
+            Ray rayDown = new Ray(new Vector3(randomPoint.x, 10000000, randomPoint.y), Vector3.down);
+            if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                Collider[] objectsInRange = Physics.OverlapSphere(hit.point, cull_radius, treeAndSeedMask);
+                if (objectsInRange.Length > seed_cull_max_density) return;
+                GameObject seed = Instantiate(seed_object);
+                seed.GetComponent<InteractableObject>().plant(hit.point);
+                numSpawned++;
+                lastSpawned = Globals.time + Random.Range(-spawn_variance, spawn_variance) * spawn_delay;
+                if (spawn_limit > 0 && numSpawned >= spawn_limit) donePropogating = true;
             }
         }
     }
@@ -167,7 +172,7 @@ public class TreeScript : MonoBehaviour {
             health -= 1;
             if(health <= 0)
             {
-                done = true;
+                donePropogating = true;
 
                 Destroy(gameObject);
             }    
@@ -183,7 +188,10 @@ public class TreeScript : MonoBehaviour {
     }
 
     private void Grow() { //also updates state
-        if (age / lifeSpan > (animMarks[state + 1] / ratioTotal)) state++;
+        if (age / lifeSpan > (animMarks[state + 1] / ratioTotal)) {
+            state++;
+            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
+        }
         
         //updateAnimation
         //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
