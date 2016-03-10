@@ -10,9 +10,11 @@ public class ChunkGenerator : MonoBehaviour {
 
 	private Vector3[] vertices;
     private NoiseSynth synth;
+    private GenerationManager genManager;
 
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
+        genManager = GetComponent<GenerationManager>();
         synth.Init();
 	}
 
@@ -80,15 +82,25 @@ public class ChunkGenerator : MonoBehaviour {
 		mf.mesh.triangles = triangles;
         ReCalcTriangles(mf.mesh);
 
-        // Calculate vertex colors
-
        
+<<<<<<< HEAD
         /*MeshCollider meshc = */chunk.AddComponent(typeof(MeshCollider)); // as MeshCollider;
+=======
+        chunk.AddComponent(typeof(MeshCollider));
+>>>>>>> Biome-Merging
 	}
 
-    public void colorChunk(GameObject chunk,Biome curBiome,Biome up,Biome down,Biome left,Biome right)
+    // Calculate vertex colors
+    public void colorChunk(GameObject chunkObj)
     {
-        Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+        Vector2 chunk = genManager.worldToChunk(chunkObj.transform.position);
+        Biome curBiome = genManager.chooseBiome(chunk);
+        Biome up = genManager.chooseBiome(chunk + Vector2.up);
+        Biome down = genManager.chooseBiome(chunk + Vector2.down);
+        Biome left = genManager.chooseBiome(chunk + Vector2.left);
+        Biome right = genManager.chooseBiome(chunk + Vector2.right);
+
+        Vector3[] verts = chunkObj.GetComponent<MeshFilter>().mesh.vertices;
         Color[] colors = new Color[verts.Length];
         for (int c = 0; c < verts.Length; c += 3)
         {
@@ -96,7 +108,8 @@ public class ChunkGenerator : MonoBehaviour {
             float h = verts[c].x / chunk_size;
             float v = verts[c].z / chunk_size;
 
-            //h *= h;
+            h = Mathf.Sqrt(h);
+            v = Mathf.Sqrt(v);
 
             Color biome_color = curBiome.colorAt(height);
             Color left_color = left.colorAt(height);
@@ -107,51 +120,33 @@ public class ChunkGenerator : MonoBehaviour {
             Color color = biome_color;
             Color hcolor, vcolor;
 
-            
-
             if (h > 0.5)
-                hcolor = Color.Lerp(biome_color,right_color,2f*(h-0.5f));
+                hcolor = Color.Lerp(biome_color,right_color,0.5f*(h-0.5f));
             else
-                hcolor = Color.Lerp(left_color,biome_color, 2f * h);
+                hcolor = Color.Lerp(left_color,biome_color,  0.5f*h);
             if (v > 0.5)
-                vcolor = Color.Lerp(biome_color, up_color, 2f * (v - 0.5f));
+                vcolor = Color.Lerp(biome_color, up_color, 0.5f * (v - 0.5f));
             else
-                vcolor = Color.Lerp(down_color, biome_color, 2f * v);
+                vcolor = Color.Lerp(down_color, biome_color, 0.5f * v);
 
+<<<<<<< HEAD
             //float hm = Mathf.Abs(h - 0.5f);
             //float vm = Mathf.Abs(v - 0.5f);
             float interp = Mathf.Max(v / (h + v), 0f);
+=======
+            float hm = Mathf.Abs(h - 0.5f);
+            float vm = Mathf.Abs(v - 0.5f);
+            float interp = Mathf.Max(vm / (hm + vm), 0f);
+>>>>>>> Biome-Merging
 
 
             color = Color.Lerp(hcolor, vcolor, interp);
 
-            //color = hcolor;
-
-            //Color vcolor = Color.Lerp(down_color, up_color, v);
-
-            //color = hcolor;
-            /*
-            color = Color.Lerp(color, right_color, h);
-
-            color = Color.Lerp(color, up_color, v);
-
-            color = Color.Lerp(down_color, color, v);*/
-
-            /*
-            if (v < 0.5f)
-            {
-                color = Color.Lerp(down_color, color, v);
-            }
-            else if (v > 0.5f)
-            {
-                color = Color.Lerp(color, up_color, v);
-            }
-            */
             colors[c] = color;
             colors[c + 1] = color;
             colors[c + 2] = color;
         }
-        chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+        chunkObj.GetComponent<MeshFilter>().mesh.colors = colors;
     }
 
     public void refresh(GameObject chunk)
