@@ -28,10 +28,10 @@ public class TreeManager : MonoBehaviour {
                 TreeScript tree = trees_in_chunk[i];
                 if (tree.prefab == null) continue;
                 GameObject new_tree = Instantiate(tree.prefab, tree.saved_position, tree.saved_rotation) as GameObject;
-                new_tree.GetComponent<TreeScript>().copyFrom(tree);
+                Globals.CopyComponent<TreeScript>(new_tree, tree);
                 trees[key].Remove(tree);
             }
-        }else{
+        }else{ // generate
             trees[key] = new List<TreeScript>();
             float step_size = gen_manager.chunk_size / tree_resolution;
 
@@ -46,6 +46,7 @@ public class TreeManager : MonoBehaviour {
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
                     GameObject treePrefab = tree_types[Random.Range(0, (tree_types.Count - 1))];
                     GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
+                    //Debug.Log(new_tree.GetComponent<TreeScript>());
                     new_tree.GetComponent<TreeScript>().age = Random.value * new_tree.GetComponent<TreeScript>().life_span;
                 }
             }
@@ -63,7 +64,6 @@ public class TreeManager : MonoBehaviour {
         for (int i = 0;i < colliders.Length; i++){
             
             GameObject tree = colliders[i].gameObject;
-            tree.GetComponent<TreeScript>().saveTransforms();
             saveTree(chunk, tree);
             
             Destroy(tree);

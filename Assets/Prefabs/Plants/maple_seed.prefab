@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeID: maple_seed
   spawn_object: {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   cull_layer:
     serializedVersion: 2

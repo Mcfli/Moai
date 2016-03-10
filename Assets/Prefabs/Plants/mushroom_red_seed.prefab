@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeID: mushroom_seed
   spawn_object: {fileID: 195104, guid: 15835ee7341bce64895a94cd8814ac16, type: 2}
   cull_layer:
     serializedVersion: 2
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Seed
+  ID: mushroom_seed
   image: {fileID: 2800000, guid: 8974e966d2e954d488107c45e1d08572, type: 3}
 --- !u!135 &13595864
 SphereCollider:

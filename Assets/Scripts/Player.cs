@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
         
         if(leftObj != null) followHand(leftObj, leftSize, true);
         if(rightObj != null) followHand(rightObj, rightSize, false);
-	}
+    }
     
     private void followHand(GameObject obj, float objSize, bool isLeft){
         Transform t = Camera.main.transform;
@@ -84,7 +84,14 @@ public class Player : MonoBehaviour {
     
     public GameObject getLeftObj(){return leftObj;}
     public GameObject getRightObj(){return rightObj;}
-    
+
+    public bool has(string type) {
+        if (type == "") return false;
+        if (getLeftObj()) if(leftObj.GetComponent<InteractableObject>().typeID == type) return true;
+        if (getRightObj()) if(rightObj.GetComponent<InteractableObject>().typeID == type) return true;
+        return false;
+    }
+
     private GameObject GetMouseHoverObject(float range, float radius){
         RaycastHit raycastHit;
         Transform t = Camera.main.transform; //camera transform

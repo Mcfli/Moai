@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InteractableObject: MonoBehaviour
 {
-
+    public string typeID;            // "" will always return false when comparing
     public GameObject spawn_object;
     public LayerMask cull_layer;
     public float cull_radius;        // How far this must be from other seeds and trees in order to grow.
@@ -48,5 +48,11 @@ public class InteractableObject: MonoBehaviour
     
     private bool isHeld(){
         return Globals.PlayerScript.getRightObj() == this.gameObject || Globals.PlayerScript.getLeftObj() == this.gameObject;
+    }
+
+    // use this for TYPE of InteractableObject
+    // use "==" (on the gameObject) for INSTANCE of object
+    public bool sameType(InteractableObject x) {
+        return typeID == x.typeID;
     }
 }

@@ -17,14 +17,12 @@ public class TreeScript : MonoBehaviour {
     public float grow_speed;
     public float grow_speed_variance;
     public float life_span;
-
-    public float growDieAnimationRatio = 0.1f; //temp
-    public bool useNewAnimationSystem; //temp
-
+    
+    //for grow and states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
-
+    public List<bool> propogateDuringState;
     public AnimationCurve height_vs_time;
 
     public float cul_spread;
@@ -40,10 +38,13 @@ public class TreeScript : MonoBehaviour {
     private int numSpawned;
     private float health;
     private Animation anim;
+    private BoxCollider boxCollider;
     private float time_unloaded;
     
-    private int state; //0:growing,1:mature,2:dying
+    //for grow and states
+    private int state;
     private float ratioTotal;
+    private List<float> animMarks;
 
     private GameObject fire;
     private GameObject Torch;
@@ -52,38 +53,13 @@ public class TreeScript : MonoBehaviour {
     public void saveTransforms(){
         saved_position = transform.position;
         saved_rotation = transform.rotation;
-    }
-
-    // Take all data from tree and copy it to this tree
-    public void copyFrom(TreeScript tree){ //WTF IS THIS
-        prefab = tree.prefab;
-        seed_object = tree.seed_object;
-        max_health = tree.max_health;
-        radius = tree.radius;
-        spawn_delay = tree.spawn_delay;
-        spawn_delay_variance = tree.spawn_delay_variance;
-        spawn_limit = tree.spawn_limit;
-        cull_radius = tree.cull_radius;
-        cull_max_density = tree.cull_max_density;
-        target_scale = tree.target_scale;
-        grow_speed = tree.grow_speed;
-        grow_speed_variance = tree.grow_speed_variance;
-        saved_position = tree.saved_position;
-        saved_rotation = tree.saved_rotation;
-        time_unloaded = tree.time_unloaded;
-        transform.position = tree.saved_position;
-        transform.rotation = tree.saved_rotation;
-        growDieAnimationRatio = tree.growDieAnimationRatio;
-        done = tree.done;
-        numSpawned = tree.numSpawned;
-        health = tree.health;
-        age = tree.age + (Globals.time) * grow_speed;
-        //foreach (AnimationState state in anim) state.time = age;
+        time_unloaded = Globals.time;
     }
 
     // Use this for initialization
     void Awake(){
         anim = GetComponent<Animation>();
+        boxCollider = GetComponent<BoxCollider>();
         fire = Resources.Load("fire") as GameObject;
         state = -1;
         age = 0.0f;
@@ -110,51 +86,46 @@ public class TreeScript : MonoBehaviour {
         else{
             Destroy(gameObject);
         }
-	}
+
+        // for grow and states
+        ratioTotal = 0;
+        animMarks = new List<float> { 0 };
+        foreach (float f in stateRatios) {
+            ratioTotal += f;
+            animMarks.Add(ratioTotal);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
         stickToGround();
         Cull();
         Grow();
-        if(age >= 0.03)
-            Propogate();
-        if (onFire)
-            fireSpread();
+        Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]); // change puzzle element
+        if (propogateDuringState[state]) Propogate();
+        if (onFire) fireSpread();
     }
 
-    private void stickToGround()
-    {
+    private void stickToGround(){
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
         int terrain = LayerMask.GetMask("Terrain");
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-        {
-            {
                 transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
-            }
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
     // Creates seeds in a radius around this tree if it's ready to
-    private void Propogate()
-    {
-        if (!done)
-        {
-            if (Time.time - lastSpawned > spawn_delay)
-            {
+    private void Propogate(){
+        if (!done){
+            if (Time.time - lastSpawned > spawn_delay){
                 lastSpawned = Time.time;
                 Vector2 randomPoint = Random.insideUnitCircle;
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                 Instantiate(seed_object, new Vector3(randomPoint.x * radius + transform.position.x, transform.position.y + 10f, randomPoint.y * radius + transform.position.z), RandomRotation);
                 numSpawned++;
-                if (spawn_limit > 0 && numSpawned >= spawn_limit)
-                {
+                if (spawn_limit > 0 && numSpawned >= spawn_limit){
                     done = true;
                 }
             }
@@ -162,8 +133,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     // If there are too many or nearby trees for too long, destroy this one
-    private void Cull()
-    {
+    private void Cull(){
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cull_radius, treeMask);
         if (age > life_span || objectsInRange.Length > cull_max_density)
         {
@@ -185,71 +155,39 @@ public class TreeScript : MonoBehaviour {
         }
     }
 
-    private void Grow(){
-        float anim_progress = 0.0f;
-        time_unloaded = Globals.time;
-        if (age < 1000)
-            age += Globals.time_scale * grow_speed;
-        
-        if(useNewAnimationSystem){
-            /*float ratioTotal = 0;
-            foreach (float f in stateRatios) ratioTotal += f;
-            for (int i = 0; i < stateAnimationNames.Count; i++) {
-                if (age / life_span < stateRatios[i] / ratioTotal) {
-                    if (!anim.IsPlaying(stateAnimationNames[i])) anim.Play(stateAnimationNames[i]);
-                    //anim[stateAnimationNames[i]].time = anim[stateAnimationNames[i]].length * age / (stateRatios[i] / ratioTotal);
-                    Object.Destroy(GetComponent<PuzzleObject>());
-                    Globals.CopyComponent(gameObject, statePuzzleObjects[0]);
-                    state = 0;
-                }
-            }*/ //do this later
+    private void Grow() { //also updates state
+        age += Globals.time_scale * grow_speed;
 
-            // Change PuzzleObject if state changes
-            if(state!= 0 && age/life_span < growDieAnimationRatio){ //growing
-                if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
-                anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length * age/(life_span*growDieAnimationRatio);
-                Destroy(GetComponent<PuzzleObject>());
-                Globals.CopyComponent(gameObject, statePuzzleObjects[0]);
-                state = 0;
-            }else if(state != 1 && age/life_span > 1 - growDieAnimationRatio){ //dying
-                if(!anim.IsPlaying(stateAnimationNames[2])) anim.Play(stateAnimationNames[2]);
-                anim[stateAnimationNames[2]].time = anim[stateAnimationNames[2]].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
-                Destroy(GetComponent<PuzzleObject>());
-                Globals.CopyComponent(gameObject, statePuzzleObjects[2]);
-                state = 1;
-            }else if(state !=2 && age / life_span >= growDieAnimationRatio && age /life_span <= 1 - growDieAnimationRatio){ //mature
-                if(!anim.IsPlaying(stateAnimationNames[0])) anim.Play(stateAnimationNames[0]);
-                anim[stateAnimationNames[0]].time = anim[stateAnimationNames[0]].length;
-                Destroy(GetComponent<PuzzleObject>());
-                Globals.CopyComponent(gameObject, statePuzzleObjects[1]);
-                state = 2;
-            }
-        }else{
-            state = 1;
-            foreach (AnimationState animState in anim){
-                //state.speed = Globals.time_scale*grow_speed;
-                animState.time = age;
-                anim_progress = animState.time / animState.length;
+        //updateAnimation
+        for (int i = 0; i < stateAnimationNames.Count; i++) {
+            if (age / life_span < (animMarks[i] + 1) / ratioTotal) {
+                //if blank, have it freeze at the last frame of the closest animation before it that is not blank
+                //this means that the first element in stateAnimationNames cannot be blank
+                if (stateAnimationNames[i] == "") {
+                    for (int j = i; j > 0; j--) { // look for available animation
+                        if (stateAnimationNames[j - 1] != "") {
+                            if (!anim.IsPlaying(stateAnimationNames[j - 1])) anim.Play(stateAnimationNames[j - 1]);
+                            anim[stateAnimationNames[j - 1]].time = anim[stateAnimationNames[j - 1]].length;
+                            break;
+                        }
+                    }
+                } else {
+                    if (!anim.IsPlaying(stateAnimationNames[i])) anim.Play(stateAnimationNames[i]);
+                    anim[stateAnimationNames[i]].time = anim[stateAnimationNames[i]].length * ((age / life_span) - (animMarks[i] / ratioTotal)) / stateRatios[i];
+                }
+                state = i;
+                break;
             }
         }
-        float growth = height_vs_time.Evaluate(anim_progress);
-        GetComponent<BoxCollider>().size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
-        GetComponent<BoxCollider>().center = new Vector3(0, target_scale*growth*0.5f, 0);
 
-    }
-    
-    private bool playerHasObject(string objName){
-        if (Globals.Player.GetComponent<Player>().getLeftObj())
-            if (Globals.Player.GetComponent<Player>().getLeftObj().name == objName)
-                return true;
-        if (Globals.Player.GetComponent<Player>().getRightObj())
-            if (Globals.Player.GetComponent<Player>().getRightObj().name == objName)
-                return true;
-        return false;
+        // update collision
+        float growth = height_vs_time.Evaluate(age / life_span);
+        boxCollider.size = new Vector3(0.4f + 0.6f * growth, target_scale * growth, 0.4f + 0.6f * growth);
+        boxCollider.center = new Vector3(0, target_scale * growth * 0.5f, 0);
     }
 
     void OnMouseDown(){
-        if (playerHasObject("Torch")){
+        if (Globals.PlayerScript.has("Torch")){
             if (!onFire) onFire = true;
             /*GameObject Instance = (GameObject)*/Instantiate(fire, transform.position, Quaternion.identity);
         }
@@ -259,8 +197,9 @@ public class TreeScript : MonoBehaviour {
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cul_spread, treeMask);
         for (int i = 0; i < objectsInRange.Length; i++){
             GameObject curtree = objectsInRange[i].gameObject;
-            if (!curtree.GetComponent<TreeScript>().onFire){
-                curtree.GetComponent<TreeScript>().onFire = true;
+            TreeScript curtreeScript = curtree.GetComponent<TreeScript>();
+            if (!curtreeScript.onFire){
+                curtreeScript.GetComponent<TreeScript>().onFire = true;
                 /*GameObject Instance = (GameObject)*/Instantiate(fire, curtree.transform.position, Quaternion.identity);
             }        
         }
