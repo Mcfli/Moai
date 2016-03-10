@@ -113,8 +113,8 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   doodads: []
-  treeDensity: 6
-  doodadDensity: 2
+  treeDensity: 7
+  doodadDensity: 0
   colors:
   - {r: 0.29616842, g: 0.6911765, b: 0.1067258, a: 0}
   - {r: 0.41333076, g: 0.78676474, b: 0.2661116, a: 0}

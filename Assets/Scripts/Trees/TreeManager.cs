@@ -3,17 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TreeManager : MonoBehaviour {
-<<<<<<< HEAD
     public int tree_resolution = 2;
 
     private GenerationManager gen_manager;
     private static Dictionary<Vector2, List<TreeScript>> trees;
-=======
-
-
-    private GenerationManager gen_manager;
-    private static Dictionary<Vector2, List<Tree>> trees;
->>>>>>> Biome-Merging
 
     // Use this for initialization
     void Start() {
@@ -27,40 +20,26 @@ public class TreeManager : MonoBehaviour {
         trees[chunk].Add(tree.GetComponent<TreeScript>());
     }
 
-<<<<<<< HEAD
-    public void loadTrees(Vector2 key,List<GameObject> tree_types){
-        if (tree_types.Count < 1) return;
-        if (trees.ContainsKey(key)){
-            List<TreeScript> trees_in_chunk = trees[key];
-            for (int i = trees_in_chunk.Count-1; i >= 0; i--){
-                TreeScript tree = trees_in_chunk[i];
-=======
     public void loadTrees(Vector2 key,Biome biome)
     {
         if (biome.treeTypes.Count < 1) return;
         if (trees.ContainsKey(key) && trees[key] != null)
         {  
-            List<Tree> trees_in_chunk = trees[key];
+            List<TreeScript> trees_in_chunk = trees[key];
             for (int i = trees_in_chunk.Count-1; i >= 0; i--)
             {
-                Tree tree = trees_in_chunk[i];
->>>>>>> Biome-Merging
+                TreeScript tree = trees_in_chunk[i];
                 if (tree.prefab == null) continue;
                 GameObject new_tree = Instantiate(tree.prefab, tree.saved_position, tree.saved_rotation) as GameObject;
                 new_tree.GetComponent<TreeScript>().copyFrom(tree);
                 trees[key].Remove(tree);
             }
-<<<<<<< HEAD
-        }else{
-            trees[key] = new List<TreeScript>();
-            float step_size = gen_manager.chunk_size / tree_resolution;
-=======
+
         }
         else
         {
-            trees[key] = new List<Tree>();
+            trees[key] = new List<TreeScript>();
             float step_size = gen_manager.chunk_size / biome.treeDensity;
->>>>>>> Biome-Merging
 
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
@@ -108,13 +87,4 @@ public class TreeManager : MonoBehaviour {
             Destroy(tree);
         }
     }
-<<<<<<< HEAD
-=======
-
-    // Use this for initialization
-    void Start () {
-        gen_manager = gameObject.GetComponent<GenerationManager>();
-        trees = new Dictionary<Vector2, List<Tree>>();
-	}
->>>>>>> Biome-Merging
 }

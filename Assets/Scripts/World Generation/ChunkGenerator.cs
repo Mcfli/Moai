@@ -82,12 +82,7 @@ public class ChunkGenerator : MonoBehaviour {
 		mf.mesh.triangles = triangles;
         ReCalcTriangles(mf.mesh);
 
-       
-<<<<<<< HEAD
-        /*MeshCollider meshc = */chunk.AddComponent(typeof(MeshCollider)); // as MeshCollider;
-=======
         chunk.AddComponent(typeof(MeshCollider));
->>>>>>> Biome-Merging
 	}
 
     // Calculate vertex colors
@@ -129,16 +124,9 @@ public class ChunkGenerator : MonoBehaviour {
             else
                 vcolor = Color.Lerp(down_color, biome_color, 0.5f * v);
 
-<<<<<<< HEAD
-            //float hm = Mathf.Abs(h - 0.5f);
-            //float vm = Mathf.Abs(v - 0.5f);
-            float interp = Mathf.Max(v / (h + v), 0f);
-=======
             float hm = Mathf.Abs(h - 0.5f);
             float vm = Mathf.Abs(v - 0.5f);
             float interp = Mathf.Max(vm / (hm + vm), 0f);
->>>>>>> Biome-Merging
-
 
             color = Color.Lerp(hcolor, vcolor, interp);
 

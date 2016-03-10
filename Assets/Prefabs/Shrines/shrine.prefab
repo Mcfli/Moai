@@ -101,7 +101,7 @@ MonoBehaviour:
   mural: {fileID: 168210, guid: 5caf8acbbe16f604f90b8c73a5f0691a, type: 2}
   glow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
-  heatMoistureChange: {x: 0, y: 25}
+  heatMoistureChange: {x: 0, y: 50}
   validObjects:
   - {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
   saved_position: {x: 0, y: 0, z: 0}

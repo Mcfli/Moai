@@ -36,7 +36,7 @@ public class Biome : MonoBehaviour {
         colors = new List<Color>();
         treeTypes = new List<GameObject>();
         doodads = new List<GameObject>();
-        weatherTypes = new List<string>();
+        weatherTypes = new List<Weather>();
     }
 
     // Returns the vertex color for a vertex in this Biome at a given height value

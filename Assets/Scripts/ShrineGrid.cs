@@ -283,13 +283,10 @@ public class ShrineGrid : MonoBehaviour {
 
     private void complete()
     {
-<<<<<<< HEAD
-        /*GameObject glowInstance = */Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity); //as GameObject;
-=======
+        Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity); 
         GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
         GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position,heatMoistureChange);
         GameObject.Find("Sky").GetComponent<Sky>().addStar();
->>>>>>> Biome-Merging
     }
 
     private Vector3 snapToTerrain(Vector3 pos)
@@ -303,7 +300,7 @@ public class ShrineGrid : MonoBehaviour {
         {
             if (hit.point.y > Globals.water_level)
             {
-                ret = new Vector3(pos.x, hit.point.y, pos.z);
+                ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
             }
             else
             {

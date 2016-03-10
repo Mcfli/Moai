@@ -10,27 +10,11 @@ public class GenerationManager : MonoBehaviour {
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
     public int tree_load_dist = 1;
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> Biome-Merging
     public List<Biome> biomes;
     public NoiseGen heatMap;
     public NoiseGen mountainMap;
     public NoiseGen moistureMap;
 
-<<<<<<< HEAD
-    private ChunkGenerator chunkGen;
-    private TreeManager tree_manager;
-    private ShrineManager shrine_manager;
-    private WeatherManager weather_manager;
-    private Vector2 cur_chunk;
-    private List<Vector2> loaded_chunks;
-    private List<Vector2> loaded_tree_chunks;
-    private List<Vector2> loaded_shrine_chunks;
-    private Dictionary<Vector2, Biome> chunkBiomes;
-=======
     private GameObject player;
     private ChunkGenerator chunkGen;
     private TreeManager tree_manager;
@@ -45,7 +29,6 @@ public class GenerationManager : MonoBehaviour {
     // Heat/Moisture modifiers per chunk.
     // maps chunk -> (delta_heat,delta_moisture)
     private Dictionary<Vector2, Vector2> mapChanges;
->>>>>>> Biome-Merging
     private NoiseSynth noiseSynth;
 
     void Awake() {
@@ -113,15 +96,9 @@ public class GenerationManager : MonoBehaviour {
             loadChunks();
             loadTrees();
 			loadShrines();
-<<<<<<< HEAD
             weather_manager.moveParticles();
-            Globals.cur_biome = chunkBiomes[cur_chunk];
-            //shrine_manager.placeShrine(chunkToWorld(cur_chunk));
-=======
             Globals.cur_biome = chooseBiome(cur_chunk);
-            weather_manager.updateWeather();
-            weather_manager.moveWithPlayer();
->>>>>>> Biome-Merging
+            weather_manager.changeWeather();
         }
     }
 

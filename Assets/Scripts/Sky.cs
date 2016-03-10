@@ -120,7 +120,6 @@ public class Sky : MonoBehaviour {
             }
         }
 	}
-<<<<<<< HEAD
 
     // is time between a (inclusive) and b (exclusive)?
     // a and b should be less than 360
@@ -144,11 +143,8 @@ public class Sky : MonoBehaviour {
 
     // puts star in sky
     // called when shrine complete
-    private void addStar(){
-=======
 	
 	public void addStar(){ //called when shrine complete
->>>>>>> Biome-Merging
 		numOfStars++;
 		GameObject star = Instantiate(starPrefab, Vector3.up * 10000, Quaternion.identity) as GameObject;
 		star.transform.SetParent(StarsParent.transform, false);
