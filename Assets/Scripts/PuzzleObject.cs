@@ -7,6 +7,7 @@ public class PuzzleObject : MonoBehaviour, IEquatable<PuzzleObject>
 {
     public string ID;
     public Texture2D image;
+
     public bool Equals(PuzzleObject other)
     {
         return ID.Equals(other.ID);

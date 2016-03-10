@@ -13,7 +13,10 @@ public class Player : MonoBehaviour {
     public string rightHandInput = "RightHand";
     public string waitInput = "Patience";
     public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
-    
+
+    private Collider thisCollider;
+    private CharacterController thisCharacterController;
+
     private float wait_speed;
 	private bool startGroundWarp;
     private GameObject leftObj;
@@ -22,6 +25,11 @@ public class Player : MonoBehaviour {
     private float rightSize;
     private Vector3 leftOrigScale;
     private Vector3 rightOrigScale;
+
+    void Awake() {
+        thisCollider = GetComponent<Collider>();
+        thisCharacterController = GetComponent<CharacterController>();
+    }
 
     // Use this for initialization
     void Start () {
@@ -75,8 +83,8 @@ public class Player : MonoBehaviour {
 		RaycastHit hit;
         Ray rayDown = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
-            if (transform.position.y - (hit.point.y + GetComponent<CharacterController>().height / 2) > minWarpOnWaitDist)
-                transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<CharacterController>().height / 2, transform.position.z);
+            if (transform.position.y - (hit.point.y + thisCharacterController.height / 2) > minWarpOnWaitDist)
+                transform.position = new Vector3(transform.position.x, hit.point.y + thisCharacterController.height / 2, transform.position.z);
             return true;
         }
         else return false;
@@ -110,7 +118,7 @@ public class Player : MonoBehaviour {
     
     private bool TryGrabObject(GameObject obj, bool isLeft){
         if(obj == null || !CanGrab(obj)) return false;
-        Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
         if (isLeft) {
             leftObj = obj;
             leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
@@ -125,19 +133,22 @@ public class Player : MonoBehaviour {
     
     private bool DropObject(bool isLeft){
         if(isLeft){
-            if(leftObj == null) return false;
-            if(leftObj.GetComponent<Rigidbody>() != null){
-                leftObj.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
-                Physics.IgnoreCollision(leftObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            if (leftObj == null) return false;
+            Rigidbody objRigidbody = leftObj.GetComponent<Rigidbody>();
+            Collider objCollider = leftObj.GetComponent<Collider>();
+            if (objRigidbody != null){
+                objRigidbody.velocity = objRigidbody.velocity;
+                Physics.IgnoreCollision(objCollider, thisCollider, false);
             }
             leftObj.transform.localScale = leftOrigScale;
             leftObj = null;
-        }
-        else{
+        }else{
             if (rightObj == null) return false;
-            if (rightObj.GetComponent<Rigidbody>() != null){
-                rightObj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                Physics.IgnoreCollision(rightObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            Rigidbody objRigidbody = rightObj.GetComponent<Rigidbody>();
+            Collider objCollider = rightObj.GetComponent<Collider>();
+            if (objRigidbody != null) {
+                objRigidbody.velocity = objRigidbody.velocity;
+                Physics.IgnoreCollision(objCollider, thisCollider, false);
             }
             rightObj.transform.localScale = rightOrigScale;
             rightObj = null;

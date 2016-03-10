@@ -111,7 +111,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 138294, guid: 2f5f69caf9e97054bab25dd802214ad6, type: 2}
+  - {fileID: 136664, guid: 03f1f5521b6c9874db682a84e1bc2e45, type: 2}
   doodads: []
   colors:
   - {r: 0.54937875, g: 0.78676474, b: 0.09834559, a: 0}

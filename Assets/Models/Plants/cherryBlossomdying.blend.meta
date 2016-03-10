@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9e6936744a8c68c49903daf0abaf4c00
-timeCreated: 1457078218
+guid: fdb2dad9e0001f246b6c85c5fe6f3d71
+timeCreated: 1457595965
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -64,12 +64,7 @@ ModelImporter:
     4300004: tree_leaf2_layer4
     4300006: tree_leaf3_layer4
     7400000: Default Take
-    7400002: Armature_003Action_002
-    7400004: mapleGrowing
-    7400006: growing
-    7400008: dying
-    7400010: growing_001
-    7400012: maple_growing
+    7400002: mapleDying
     9500000: //RootNode
     11100000: //RootNode
     13700000: tree_trunk_layer4

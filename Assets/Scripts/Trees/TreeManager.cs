@@ -47,7 +47,7 @@ public class TreeManager : MonoBehaviour {
                     GameObject treePrefab = tree_types[Random.Range(0, (tree_types.Count - 1))];
                     GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
                     //Debug.Log(new_tree.GetComponent<TreeScript>());
-                    new_tree.GetComponent<TreeScript>().age = Random.value * new_tree.GetComponent<TreeScript>().life_span;
+                    new_tree.GetComponent<TreeScript>().age = Random.value * new_tree.GetComponent<TreeScript>().lifeSpan;
                 }
             }
         }

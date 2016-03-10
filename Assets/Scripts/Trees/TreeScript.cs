@@ -14,22 +14,22 @@ public class TreeScript : MonoBehaviour {
     public float cull_radius;
     public int cull_max_density;
     public float target_scale;
-    public float grow_speed;
-    public float grow_speed_variance;
-    public float life_span;
+    public float lifeSpan; // base life span, will be modified by lifeSpanVariance when instantiated
+    public float lifeSpanVariance;
     
     //for grow and states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
-    public AnimationCurve height_vs_time;
+    public List<AnimationCurve> heightVSTime;
 
     public float cul_spread;
     public bool onFire;
 
     public Vector3 saved_position;
     public Quaternion saved_rotation;
+    public float time_unloaded;
     public float age;
 
     private LayerMask treeMask;
@@ -39,7 +39,6 @@ public class TreeScript : MonoBehaviour {
     private float health;
     private Animation anim;
     private BoxCollider boxCollider;
-    private float time_unloaded;
     
     //for grow and states
     private int state;
@@ -60,6 +59,7 @@ public class TreeScript : MonoBehaviour {
     void Awake(){
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
+
         fire = Resources.Load("fire") as GameObject;
         state = -1;
         age = 0.0f;
@@ -69,7 +69,7 @@ public class TreeScript : MonoBehaviour {
         //Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
         numSpawned = 0;
         lastSpawned = Time.time;
-        grow_speed += Random.value * 2 * grow_speed_variance - grow_speed_variance;
+        lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance);
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
         int terrain = LayerMask.GetMask("Terrain");
@@ -94,10 +94,21 @@ public class TreeScript : MonoBehaviour {
             ratioTotal += f;
             animMarks.Add(ratioTotal);
         }
+        for (int i = 0; i < stateAnimationNames.Count; i++)
+            if (age / lifeSpan < (animMarks[i + 1]) / ratioTotal) {
+                state = i;
+                break;
+            }
     }
 	
 	// Update is called once per frame
 	void Update () {
+        age += Globals.time_scale;
+        if (age > lifeSpan) {
+            Destroy(gameObject);
+            return;
+        }
+
         stickToGround();
         Cull();
         Grow();
@@ -135,7 +146,7 @@ public class TreeScript : MonoBehaviour {
     // If there are too many or nearby trees for too long, destroy this one
     private void Cull(){
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cull_radius, treeMask);
-        if (age > life_span || objectsInRange.Length > cull_max_density)
+        if (age > lifeSpan || objectsInRange.Length > cull_max_density)
         {
             health -= 1;
             if(health <= 0)
@@ -156,32 +167,26 @@ public class TreeScript : MonoBehaviour {
     }
 
     private void Grow() { //also updates state
-        age += Globals.time_scale * grow_speed;
-
+        if (age / lifeSpan > (animMarks[state + 1] / ratioTotal)) state++;
+        
         //updateAnimation
-        for (int i = 0; i < stateAnimationNames.Count; i++) {
-            if (age / life_span < (animMarks[i] + 1) / ratioTotal) {
-                //if blank, have it freeze at the last frame of the closest animation before it that is not blank
-                //this means that the first element in stateAnimationNames cannot be blank
-                if (stateAnimationNames[i] == "") {
-                    for (int j = i; j > 0; j--) { // look for available animation
-                        if (stateAnimationNames[j - 1] != "") {
-                            if (!anim.IsPlaying(stateAnimationNames[j - 1])) anim.Play(stateAnimationNames[j - 1]);
-                            anim[stateAnimationNames[j - 1]].time = anim[stateAnimationNames[j - 1]].length;
-                            break;
-                        }
-                    }
-                } else {
+        //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
+        //this means that the first element in stateAnimationNames cannot be blank
+        if (stateAnimationNames[state] != ""){
+            if (!anim.IsPlaying(stateAnimationNames[state])) anim.Play(stateAnimationNames[state]);
+            anim[stateAnimationNames[state]].time = anim[stateAnimationNames[state]].length * ((age / lifeSpan) - (animMarks[state] / ratioTotal)) / stateRatios[state];
+        } else {
+            for (int i = state-1; i >= 0; i--) { // look backwards for available animation
+                if (stateAnimationNames[i] != ""){
                     if (!anim.IsPlaying(stateAnimationNames[i])) anim.Play(stateAnimationNames[i]);
-                    anim[stateAnimationNames[i]].time = anim[stateAnimationNames[i]].length * ((age / life_span) - (animMarks[i] / ratioTotal)) / stateRatios[i];
+                    anim[stateAnimationNames[i]].time = anim[stateAnimationNames[i]].length;
+                    break;
                 }
-                state = i;
-                break;
             }
         }
 
         // update collision
-        float growth = height_vs_time.Evaluate(age / life_span);
+        float growth = heightVSTime[state].Evaluate(age / lifeSpan);
         boxCollider.size = new Vector3(0.4f + 0.6f * growth, target_scale * growth, 0.4f + 0.6f * growth);
         boxCollider.center = new Vector3(0, target_scale * growth * 0.5f, 0);
     }

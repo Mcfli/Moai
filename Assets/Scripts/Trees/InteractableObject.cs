@@ -32,7 +32,7 @@ public class InteractableObject: MonoBehaviour
                 Destroy(gameObject);
             }
             
-            if(Globals.time_scale > 1){ //if fast forwarding
+            if(Globals.time_scale > 1){ // if fast forwarding
                 RaycastHit hit;
                 Ray rayDown = new Ray(transform.position, Vector3.down);
                 int terrain = LayerMask.GetMask("Terrain");
