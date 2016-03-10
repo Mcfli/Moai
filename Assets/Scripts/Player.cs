@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
     public float grabSphereRadius = 1;
     public string leftHandInput = "LeftHand";
     public string rightHandInput = "RightHand";
+    public string leftHandUseInput = "LeftHandUse";
+    public string rightHandUseInput = "RightHandUse";
     public string waitInput = "Patience";
     public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
 
@@ -20,8 +22,8 @@ public class Player : MonoBehaviour {
     
     private float waitingFor;
 	private bool startGroundWarp;
-    private GameObject leftObj;
-    private GameObject rightObj;
+    private InteractableObject leftObj;
+    private InteractableObject rightObj;
     private float leftSize;
     private float rightSize;
     private Vector3 leftOrigScale;
@@ -60,18 +62,25 @@ public class Player : MonoBehaviour {
 
         //Holding Objects stuff
         if (Input.GetButtonDown(leftHandInput)){
-            if(leftObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), true);
+            if(leftObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, true);
             else DropObject(true);
-        }else if(Input.GetButtonDown(rightHandInput)){
-            if(rightObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), false);
+        }
+        if (Input.GetButtonDown(rightHandInput)){
+            if(rightObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, false);
             else DropObject(false);
         }
-        
-        if(leftObj != null) followHand(leftObj, leftSize, true);
+        if (Input.GetButtonDown(leftHandUseInput)) {
+            TryUseObject(true);
+        }
+        if (Input.GetButtonDown(rightHandUseInput)) {
+            TryUseObject(false);
+        }
+
+        if (leftObj != null) followHand(leftObj, leftSize, true);
         if(rightObj != null) followHand(rightObj, rightSize, false);
     }
     
-    private void followHand(GameObject obj, float objSize, bool isLeft){
+    private void followHand(InteractableObject obj, float objSize, bool isLeft){
         Transform t = Camera.main.transform;
         float scale = 0.5f; //temp
         float angleAway = 0.5f; //temp
@@ -91,48 +100,65 @@ public class Player : MonoBehaviour {
         else return false;
 	}
     
-    public GameObject getLeftObj(){return leftObj;}
-    public GameObject getRightObj(){return rightObj;}
+    public InteractableObject getLeftObj(){return leftObj;}
+    public InteractableObject getRightObj(){return rightObj;}
 
     public bool has(string type) {
         if (type == "") return false;
-        if (getLeftObj()) if(leftObj.GetComponent<InteractableObject>().typeID == type) return true;
-        if (getRightObj()) if(rightObj.GetComponent<InteractableObject>().typeID == type) return true;
+        if (getLeftObj()) if (leftObj.typeID == type) return true;
+        if (getRightObj()) if (rightObj.typeID == type) return true;
         return false;
     }
 
-    private GameObject GetMouseHoverObject(float range, float radius){
+    private RaycastHit GetHover() {
         RaycastHit raycastHit;
         Transform t = Camera.main.transform; //camera transform
-        if(Physics.SphereCast(t.position, radius, t.forward, out raycastHit, range)) return raycastHit.collider.gameObject;
-        return null;
-    }                                                
-    
+        Physics.SphereCast(t.position, grabSphereRadius, t.forward, out raycastHit, grabDistance);
+        return raycastHit;
+    }
+
     private bool CanGrab(GameObject obj){
         return obj.GetComponent<InteractableObject>();
     }
 
     public bool LookingAtGrabbable(){
-        if (GetMouseHoverObject(grabDistance, grabSphereRadius) == null) return false;
-        return CanGrab(GetMouseHoverObject(grabDistance, grabSphereRadius));
+        if (GetHover().collider == null) return false;
+        return CanGrab(GetHover().collider.gameObject);
+    }
+
+    public bool[] canUse() {
+        bool[] val = {false, false};
+        if (leftObj != null) val[0] = leftObj.canUse(GetHover());
+        if (rightObj != null) val[1] = rightObj.canUse(GetHover());
+        return val;
+    }
+
+    private bool TryUseObject(bool isLeft) {
+        if (isLeft) {
+            if (leftObj != null) return leftObj.tryUse(GetHover());
+        } else {
+            if (rightObj != null) return rightObj.tryUse(GetHover());
+        } return false;
     }
     
     private bool TryGrabObject(GameObject obj, bool isLeft){
         if(obj == null || !CanGrab(obj)) return false;
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
         if (isLeft) {
-            leftObj = obj;
+            leftObj = obj.GetComponent<InteractableObject>();
             leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
             leftOrigScale = obj.transform.localScale;
-        }else {
-            rightObj = obj;
+            leftObj.pickedUp();
+        }else{
+            rightObj = obj.GetComponent<InteractableObject>();
             rightSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
             rightOrigScale = obj.transform.localScale;
+            rightObj.pickedUp();
         }
         return true;
     }
     
-    private bool DropObject(bool isLeft){
+    public bool DropObject(bool isLeft){
         if(isLeft){
             if (leftObj == null) return false;
             Rigidbody objRigidbody = leftObj.GetComponent<Rigidbody>();

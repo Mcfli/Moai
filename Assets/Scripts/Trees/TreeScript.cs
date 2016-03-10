@@ -120,35 +120,40 @@ public class TreeScript : MonoBehaviour {
 
     // Coroutine is called once per second
     IEnumerator tickUpdate() {
-        yield return new WaitForSeconds(1);
-        stickToGround();
-        Cull();
-        Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]); // change puzzle element
-        if (propogateDuringState[state]) Propogate();
-        if (onFire) fireSpread();
+        while (true) {
+            yield return new WaitForSeconds(1);
+            stickToGround();
+            Cull();
+            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]); // change puzzle element
+            if (propogateDuringState[state]) Propogate();
+            if (onFire) fireSpread();
+        }
     }
 
     private void stickToGround(){
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
-        int terrain = LayerMask.GetMask("Terrain");
-
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-                transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
+            transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
         else Destroy(gameObject);
     }
 
     // Creates seeds in a radius around this tree if it's ready to
     private void Propogate(){
-        if (!done){
-            if (Time.time - lastSpawned > spawn_delay){
+        if (!done) {
+            if (Time.time - lastSpawned > spawn_delay) {
                 lastSpawned = Time.time;
-                Vector2 randomPoint = Random.insideUnitCircle;
-                var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                Instantiate(seed_object, new Vector3(randomPoint.x * radius + transform.position.x, transform.position.y + 10f, randomPoint.y * radius + transform.position.z), RandomRotation);
-                numSpawned++;
-                if (spawn_limit > 0 && numSpawned >= spawn_limit){
-                    done = true;
+                Vector2 randomPoint = Random.insideUnitCircle * radius + new Vector2(transform.position.x, transform.position.z);
+
+                RaycastHit hit;
+                Ray rayDown = new Ray(new Vector3(randomPoint.x, 10000000, randomPoint.y), Vector3.down);
+                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                    GameObject seed = Instantiate(seed_object);
+                    seed.GetComponent<InteractableObject>().plant(hit.point);
+                    numSpawned++;
+                    if (spawn_limit > 0 && numSpawned >= spawn_limit) {
+                        done = true;
+                    }
                 }
             }
         }

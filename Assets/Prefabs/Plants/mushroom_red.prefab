@@ -497,7 +497,7 @@ MonoBehaviour:
   spawn_delay: 20
   spawn_delay_variance: 4
   spawn_limit: 0
-  cull_radius: 80
+  cull_radius: 5
   cull_max_density: 5
   target_scale: 10
   lifeSpan: 657000

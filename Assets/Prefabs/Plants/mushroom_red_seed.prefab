@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149340}
   m_LocalRotation: {x: -0.000000059604645, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -273.31747, y: 1479.972, z: 435.5348}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,12 +107,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeID: mushroom_seed
-  spawn_object: {fileID: 195104, guid: 15835ee7341bce64895a94cd8814ac16, type: 2}
+  spawn_object: {fileID: 188470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   cull_layer:
     serializedVersion: 2
     m_Bits: 257
   cull_radius: 5
-  life_length: 5000
+  life_length: 300
+  growTime: 300
+  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
+  dirtMoundOffset: {x: 0, y: -0.5, z: 0}
 --- !u!114 &11484236
 MonoBehaviour:
   m_ObjectHideFlags: 1
