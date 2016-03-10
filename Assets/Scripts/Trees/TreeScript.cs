@@ -14,8 +14,8 @@ public class TreeScript : MonoBehaviour {
     public float cull_radius;
     public int cull_max_density;
     public float target_scale;
-    public float lifeSpan; // base life span, will be modified by lifeSpanVariance when instantiated
-    public float lifeSpanVariance;
+    public float lifeSpan = 657000; // base life span, in seconds, will be modified by lifeSpanVariance when instantiated
+    public float lifeSpanVariance = 0.1f; // in ratio
     
     //for grow and states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
@@ -27,6 +27,7 @@ public class TreeScript : MonoBehaviour {
     public float cul_spread;
     public bool onFire;
 
+    //save values
     public Vector3 saved_position;
     public Quaternion saved_rotation;
     public float time_unloaded;
@@ -69,7 +70,7 @@ public class TreeScript : MonoBehaviour {
         //Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
         numSpawned = 0;
         lastSpawned = Time.time;
-        lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance);
+        lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
         int terrain = LayerMask.GetMask("Terrain");
@@ -94,24 +95,34 @@ public class TreeScript : MonoBehaviour {
             ratioTotal += f;
             animMarks.Add(ratioTotal);
         }
-        for (int i = 0; i < stateAnimationNames.Count; i++)
+    }
+
+    void Start() {
+        for (int i = 0; i < stateAnimationNames.Count; i++) {
             if (age / lifeSpan < (animMarks[i + 1]) / ratioTotal) {
                 state = i;
                 break;
             }
+        }
+        StartCoroutine("tickUpdate");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        age += Globals.time_scale;
+        age += Globals.deltaTime / Globals.time_resolution;
         if (age > lifeSpan) {
             Destroy(gameObject);
             return;
         }
 
+        Grow();
+    }
+
+    // Coroutine is called once per second
+    IEnumerator tickUpdate() {
+        yield return new WaitForSeconds(1);
         stickToGround();
         Cull();
-        Grow();
         Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]); // change puzzle element
         if (propogateDuringState[state]) Propogate();
         if (onFire) fireSpread();

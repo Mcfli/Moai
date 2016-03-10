@@ -245,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &173254
 GameObject:
   m_ObjectHideFlags: 1
@@ -339,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &196394
 GameObject:
   m_ObjectHideFlags: 1
@@ -807,16 +807,16 @@ MonoBehaviour:
   cull_radius: 10
   cull_max_density: 5
   target_scale: 10
-  lifeSpan: 5000
-  lifeSpanVariance: 100
+  lifeSpan: 657000
+  lifeSpanVariance: 0.1
   stateAnimationNames:
   - mapleGrowing
   - 
   - mapleDying
   stateRatios:
-  - 0.1
-  - 0.8
-  - 0.1
+  - 0.3
+  - 0.4
+  - 0.3
   statePuzzleObjects:
   - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}

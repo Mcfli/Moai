@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Sky : MonoBehaviour {
     //attach to sky
-    public float timePerDegree = 100; //x axis
+    public float timePerDegree = 5; //x axis, in seconds (5 is 30 min day)
     public float initialTimeOfDay = 180; //noon
     public GameObject DayNightSpin;
     public GameObject SunLight;
@@ -14,8 +14,8 @@ public class Sky : MonoBehaviour {
     public GameObject starPrefab;
     public float maxStarAlpha = 1;
     public float horizonBufferAngle = 30;
-    public float sunAxisShift = 20;
-    public float daysPerYear = 100; // z axis
+    public float sunAxisShift = 20; // tilt of sun/moon rotation
+    public float daysPerYear = 365; // z axis
     public float timeScaleThatHaloAppears = 1000;
     public int skyDuringHalo = 3; //0 for midnight, 3 for noon, etc
 

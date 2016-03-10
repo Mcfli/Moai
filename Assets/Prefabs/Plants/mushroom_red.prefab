@@ -90,7 +90,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &144234
 GameObject:
   m_ObjectHideFlags: 1
@@ -471,10 +471,10 @@ Animation:
   m_GameObject: {fileID: 188470}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400004, guid: cf04bd9f0986b4141ad1e035171ea6af, type: 3}
+  m_Animation: {fileID: 7400004, guid: 7423cd35073692849b21b328850609c7, type: 3}
   m_Animations:
-  - {fileID: 7400004, guid: cf04bd9f0986b4141ad1e035171ea6af, type: 3}
-  - {fileID: 7400002, guid: cf04bd9f0986b4141ad1e035171ea6af, type: 3}
+  - {fileID: 7400004, guid: 7423cd35073692849b21b328850609c7, type: 3}
+  - {fileID: 7400002, guid: 7423cd35073692849b21b328850609c7, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -500,8 +500,8 @@ MonoBehaviour:
   cull_radius: 80
   cull_max_density: 5
   target_scale: 10
-  lifeSpan: 5000
-  lifeSpanVariance: 100
+  lifeSpan: 657000
+  lifeSpanVariance: 0.1
   stateAnimationNames:
   - redMushroom_growing
   - 
@@ -597,7 +597,7 @@ SkinnedMeshRenderer:
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
-  m_Mesh: {fileID: 4300000, guid: cf04bd9f0986b4141ad1e035171ea6af, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7423cd35073692849b21b328850609c7, type: 3}
   m_Bones:
   - {fileID: 472250}
   - {fileID: 491492}

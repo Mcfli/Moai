@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: cf04bd9f0986b4141ad1e035171ea6af
-timeCreated: 1457573718
+guid: 7423cd35073692849b21b328850609c7
+timeCreated: 1457608918
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -46,7 +46,8 @@ ModelImporter:
     7400002: redMushroom_dying
     7400004: redMushroom_growing
     9500000: //RootNode
-    11100000: //RootNode
+    11100000: Cylinder
+    11100002: //RootNode
     13700000: Cylinder
   materials:
     importMaterials: 1

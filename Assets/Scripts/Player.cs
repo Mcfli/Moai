@@ -5,7 +5,8 @@ public class Player : MonoBehaviour {
 
     public float initialWaitSpeed = 10.0f;
     public float maxWaitSpeed = 10000.0f;
-    public float waitSpeedGrowth = 1.0f;
+    public AnimationCurve waitSpeedGrowth;
+    public float timeToGetToMaxWait = 300; // 5 minutes
     public float sprintWaitMultiplier = 5.0f;
     public float grabDistance = 5;
     public float grabSphereRadius = 1;
@@ -16,8 +17,8 @@ public class Player : MonoBehaviour {
 
     private Collider thisCollider;
     private CharacterController thisCharacterController;
-
-    private float wait_speed;
+    
+    private float waitingFor;
 	private bool startGroundWarp;
     private GameObject leftObj;
     private GameObject rightObj;
@@ -33,29 +34,29 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        wait_speed = initialWaitSpeed;
 		startGroundWarp = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    //PATIENCE IS POWER
-        if (Input.GetButton(waitInput)){
-            if(Input.GetButton("Sprint")) Globals.time_scale = wait_speed * 5;
-            else Globals.time_scale = wait_speed;
-            
-            if (wait_speed < maxWaitSpeed) wait_speed += waitSpeedGrowth;
-            else wait_speed = maxWaitSpeed;
+        if (Input.GetButton(waitInput)) { //PATIENCE IS POWER
+            if (waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);
+            else Globals.time_scale = maxWaitSpeed;
+
+            if(Input.GetButton("Sprint")) waitingFor += Time.deltaTime * sprintWaitMultiplier;
+            else waitingFor += Time.deltaTime;
             
             warpToGround();
         }else{
-            Globals.time_scale = 1.0f;
-            wait_speed = initialWaitSpeed;
+            Globals.time_scale = 1;
+            waitingFor = 0;
         }
-        Globals.time += Globals.time_resolution*Globals.time_scale;
-        
+
+        Globals.deltaTime = Globals.time_resolution * Globals.time_scale * Time.deltaTime;
+        Globals.time += Globals.deltaTime;
+
         //warp to ground at game start
-		if(!startGroundWarp) startGroundWarp = warpToGround();
+        if (!startGroundWarp) startGroundWarp = warpToGround();
 
         //Holding Objects stuff
         if (Input.GetButtonDown(leftHandInput)){
