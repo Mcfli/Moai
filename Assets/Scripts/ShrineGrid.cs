@@ -43,7 +43,6 @@ public class ShrineGrid : MonoBehaviour {
         transform.position = snapToTerrain(transform.position);
         createMural();
         createPillars();
-        killTrees();
     }
 	
 	// Update is called once per frame
@@ -165,7 +164,6 @@ public class ShrineGrid : MonoBehaviour {
         Vector3 offset = new Vector3(10,0,5);
         GameObject localMural = Instantiate(mural,transform.position + offset, mural.transform.rotation) as GameObject;
         localMural.GetComponent<Mural>().generateTexture(targetState);
-        localMural.transform.parent = gameObject.transform;
     }
 
     private void createPillars()
@@ -181,23 +179,8 @@ public class ShrineGrid : MonoBehaviour {
 
                 Vector2 curGrid = new Vector2(j, i);
                 Vector3 cur = gridToReal(curGrid);
-                GameObject pillar = Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation) as GameObject;
-                pillar.transform.parent = gameObject.transform;
+                Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation);
             }
-        }
-    }
-
-    private void killTrees()
-    {
-        Vector3 half_extents = new Vector3(size, 100000, size);
-        LayerMask tree_mask = LayerMask.GetMask("Tree");
-
-        Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-
-            GameObject tree = colliders[i].gameObject;
-            Destroy(tree);
         }
     }
 
@@ -208,7 +191,7 @@ public class ShrineGrid : MonoBehaviour {
             for (int j = 0; j < resolution; j++)
             {
                 Vector2 curGrid = new Vector2(i, j);
-                //Vector3 cur = gridToReal(curGrid);
+                Vector3 cur = gridToReal(curGrid);
                 if (targetState.ContainsKey(curGrid) && !curState.ContainsKey(curGrid))
                     drawSquare(curGrid,Color.red);
                 else if (targetState.ContainsKey(curGrid) && curState.ContainsKey(curGrid))
@@ -285,7 +268,7 @@ public class ShrineGrid : MonoBehaviour {
 
     private void complete()
     {
-        /*GameObject glowInstance = */Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity); //as GameObject;
+        GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
     }
 
     private Vector3 snapToTerrain(Vector3 pos)
@@ -305,10 +288,6 @@ public class ShrineGrid : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
-        }
-        else
-        {
-            Destroy(gameObject);
         }
         return ret;
     }
