@@ -13,7 +13,7 @@ public class Mural : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         muralTex = new Texture2D(imageRes*numSquares,imageRes*numSquares);
-        snapToTerrain();
+        //snapToTerrain();
 	}
 
     // Generate mural texture based on a target state
@@ -66,7 +66,7 @@ public class Mural : MonoBehaviour {
 
         muralTex.SetPixels(newPixels);
         muralTex.Apply();
-        gameObject.GetComponent<Renderer>().materials[1].mainTexture = muralTex;
+        gameObject.GetComponent<Renderer>().materials[4].mainTexture = muralTex;
     }
 
     private void snapToTerrain()
