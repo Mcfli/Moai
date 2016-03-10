@@ -320,9 +320,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 0
-  chunk_size: 500
-  chunk_resolution: 8
-  chunk_load_dist: 10
+  chunk_size: 1000
+  chunk_resolution: 16
+  chunk_load_dist: 6
   tree_load_dist: 1
   biomes:
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
@@ -458,7 +458,7 @@ MonoBehaviour:
   prefab: {fileID: 106806, guid: 678feba97db6b9044934c154b8891552, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
-  shrine_probability: 5
+  shrine_probability: 2
 --- !u!1 &386901798
 GameObject:
   m_ObjectHideFlags: 0
