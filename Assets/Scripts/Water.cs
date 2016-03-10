@@ -14,9 +14,6 @@ public class Water : MonoBehaviour {
     private float defaultFogDensity;
     //private Material defaultSkybox;
     //private Material noSkybox;
-    private Camera cam;
-    private GameObject Player;
-    private GameObject WorldGen;
 
     void Start()
     {
@@ -26,32 +23,23 @@ public class Water : MonoBehaviour {
         defaultFog = RenderSettings.fog;
         defaultFogColor = RenderSettings.fogColor;
         defaultFogDensity = RenderSettings.fogDensity;
-        //defaultSkybox = RenderSettings.skybox;
-
-        //
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        Player = GameObject.FindGameObjectWithTag("Player");
-        WorldGen = GameObject.Find("WorldGen");
-        cam.backgroundColor = new Color(0, 0.4f, 0.7f, 1);
-		//noSkybox = null;
+        
+        Camera.main.backgroundColor = new Color(0, 0.4f, 0.7f, 1);
     }
 
-    void Update()
-    {
-        Vector3 new_pos = new Vector3(Player.transform.position.x,Globals.water_level,Player.transform.position.z);
+    void Update(){
+        Vector3 new_pos = new Vector3(Globals.Player.transform.position.x,Globals.water_level,Globals.Player.transform.position.z);
         transform.position = new_pos;
-        if (Player.transform.position.y+1.5 < transform.position.y){
+        if (Globals.Player.transform.position.y+1.5 < transform.position.y){
             RenderSettings.fog = true;
             RenderSettings.fogColor = fogColor;
             RenderSettings.fogDensity = 0.04f;
-            //RenderSettings.skybox = noSkybox;
-            WorldGen.GetComponent<WeatherManager>().hideWeather();
+            GameObject.Find("Weather").GetComponent<WeatherManager>().hideWeather();
         }else{
             RenderSettings.fog = defaultFog;
             RenderSettings.fogColor = defaultFogColor;
             RenderSettings.fogDensity = defaultFogDensity;
-            //RenderSettings.skybox = defaultSkybox;
-            WorldGen.GetComponent<WeatherManager>().showWeather();
+            GameObject.Find("Weather").GetComponent<WeatherManager>().showWeather();
         }
     }
 }

@@ -6,6 +6,7 @@ public class NoiseSynth : MonoBehaviour {
     public NoiseGen base_map;
     public NoiseGen type_map;
     public NoiseGen mountain_map;
+    public NoiseGen lake_map;
     public Color[] colors;
     public AnimationCurve color_curve;
     public float amplitude;
