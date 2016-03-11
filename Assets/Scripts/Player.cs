@@ -5,63 +5,82 @@ public class Player : MonoBehaviour {
 
     public float initialWaitSpeed = 10.0f;
     public float maxWaitSpeed = 10000.0f;
-    public float waitSpeedGrowth = 1.0f;
+    public AnimationCurve waitSpeedGrowth;
+    public float timeToGetToMaxWait = 300; // 5 minutes
     public float sprintWaitMultiplier = 5.0f;
     public float grabDistance = 5;
     public float grabSphereRadius = 1;
-    public string leftHandInput;
-    public string rightHandInput;
+    public string leftHandInput = "LeftHand";
+    public string rightHandInput = "RightHand";
+    public string leftHandUseInput = "LeftHandUse";
+    public string rightHandUseInput = "RightHandUse";
+    public string waitInput = "Patience";
     public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
+
+    private Collider thisCollider;
+    private CharacterController thisCharacterController;
     
-    private float wait_speed;
+    private float waitingFor;
 	private bool startGroundWarp;
-    private GameObject leftObj;
-    private GameObject rightObj;
+    private InteractableObject leftObj;
+    private InteractableObject rightObj;
     private float leftSize;
     private float rightSize;
     private Vector3 leftOrigScale;
     private Vector3 rightOrigScale;
 
+    void Awake() {
+        thisCollider = GetComponent<Collider>();
+        thisCharacterController = GetComponent<CharacterController>();
+    }
+
     // Use this for initialization
     void Start () {
-        wait_speed = initialWaitSpeed;
 		startGroundWarp = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    //PATIENCE IS POWER
-        if (Input.GetButton("Wait")){
-            if(Input.GetButton("Speed")) Globals.time_scale = wait_speed * 5;
-            else Globals.time_scale = wait_speed;
-            
-            if (wait_speed < maxWaitSpeed) wait_speed += waitSpeedGrowth;
-            else wait_speed = maxWaitSpeed;
+        if (Input.GetButton(waitInput)) { //PATIENCE IS POWER
+            if (waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);
+            else Globals.time_scale = maxWaitSpeed;
+
+            if(Input.GetButton("Sprint")) waitingFor += Time.deltaTime * sprintWaitMultiplier;
+            else waitingFor += Time.deltaTime;
             
             warpToGround();
         }else{
-            Globals.time_scale = 1.0f;
-            wait_speed = initialWaitSpeed;
+            Globals.time_scale = 1;
+            waitingFor = 0;
         }
-        Globals.time += Globals.time_resolution*Globals.time_scale;
-        
+
+        Globals.deltaTime = Globals.time_resolution * Globals.time_scale * Time.deltaTime;
+        Globals.time += Globals.deltaTime;
+
         //warp to ground at game start
-		if(!startGroundWarp) startGroundWarp = warpToGround();
-        
+        if (!startGroundWarp) startGroundWarp = warpToGround();
+
         //Holding Objects stuff
-        if(Input.GetButtonDown(leftHandInput)){
-            if(leftObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), true);
+        if (Input.GetButtonDown(leftHandInput)){
+            if(leftObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, true);
             else DropObject(true);
-        }else if(Input.GetButtonDown(rightHandInput)){
-            if(rightObj == null) TryGrabObject(GetMouseHoverObject(grabDistance, grabSphereRadius), false);
+        }
+        if (Input.GetButtonDown(rightHandInput)){
+            if(rightObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, false);
             else DropObject(false);
         }
-        
-        if(leftObj != null) followHand(leftObj, leftSize, true);
+        if (Input.GetButtonDown(leftHandUseInput)) {
+            TryUseObject(true);
+        }
+        if (Input.GetButtonDown(rightHandUseInput)) {
+            TryUseObject(false);
+        }
+
+        if (leftObj != null) followHand(leftObj, leftSize, true);
         if(rightObj != null) followHand(rightObj, rightSize, false);
-	}
+    }
     
-    private void followHand(GameObject obj, float objSize, bool isLeft){
+    private void followHand(InteractableObject obj, float objSize, bool isLeft){
         Transform t = Camera.main.transform;
         float scale = 0.5f; //temp
         float angleAway = 0.5f; //temp
@@ -74,62 +93,89 @@ public class Player : MonoBehaviour {
 		RaycastHit hit;
         Ray rayDown = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
-            if (transform.position.y - (hit.point.y + GetComponent<CharacterController>().height / 2) > minWarpOnWaitDist)
-                transform.position = new Vector3(transform.position.x, hit.point.y + GetComponent<CharacterController>().height / 2, transform.position.z);
+            if (transform.position.y - (hit.point.y + thisCharacterController.height / 2) > minWarpOnWaitDist)
+                transform.position = new Vector3(transform.position.x, hit.point.y + thisCharacterController.height / 2, transform.position.z);
             return true;
         }
         else return false;
 	}
     
-    public GameObject getLeftObj(){return leftObj;}
-    public GameObject getRightObj(){return rightObj;}
-    
-    private GameObject GetMouseHoverObject(float range, float radius){
+    public InteractableObject getLeftObj(){return leftObj;}
+    public InteractableObject getRightObj(){return rightObj;}
+
+    public bool has(string type) {
+        if (type == "") return false;
+        if (getLeftObj()) if (leftObj.typeID == type) return true;
+        if (getRightObj()) if (rightObj.typeID == type) return true;
+        return false;
+    }
+
+    private RaycastHit GetHover() {
         RaycastHit raycastHit;
         Transform t = Camera.main.transform; //camera transform
-        if(Physics.SphereCast(t.position, radius, t.forward, out raycastHit, range)) return raycastHit.collider.gameObject;
-        return null;
-    }                                                
-    
+        Physics.SphereCast(t.position, grabSphereRadius, t.forward, out raycastHit, grabDistance);
+        return raycastHit;
+    }
+
     private bool CanGrab(GameObject obj){
         return obj.GetComponent<InteractableObject>();
     }
 
     public bool LookingAtGrabbable(){
-        if (GetMouseHoverObject(grabDistance, grabSphereRadius) == null) return false;
-        return CanGrab(GetMouseHoverObject(grabDistance, grabSphereRadius));
+        if (GetHover().collider == null) return false;
+        return CanGrab(GetHover().collider.gameObject);
+    }
+
+    public bool[] canUse() {
+        bool[] val = {false, false};
+        if (leftObj != null) val[0] = leftObj.canUse(GetHover());
+        if (rightObj != null) val[1] = rightObj.canUse(GetHover());
+        return val;
+    }
+
+    private bool TryUseObject(bool isLeft) {
+        if (isLeft) {
+            if (leftObj != null) return leftObj.tryUse(GetHover());
+        } else {
+            if (rightObj != null) return rightObj.tryUse(GetHover());
+        } return false;
     }
     
     private bool TryGrabObject(GameObject obj, bool isLeft){
         if(obj == null || !CanGrab(obj)) return false;
-        Physics.IgnoreCollision(obj.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
         if (isLeft) {
-            leftObj = obj;
+            leftObj = obj.GetComponent<InteractableObject>();
             leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
             leftOrigScale = obj.transform.localScale;
-        }else {
-            rightObj = obj;
+            leftObj.pickedUp();
+        }else{
+            rightObj = obj.GetComponent<InteractableObject>();
             rightSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
             rightOrigScale = obj.transform.localScale;
+            rightObj.pickedUp();
         }
         return true;
     }
     
-    private bool DropObject(bool isLeft){
+    public bool DropObject(bool isLeft){
         if(isLeft){
-            if(leftObj == null) return false;
-            if(leftObj.GetComponent<Rigidbody>() != null){
-                leftObj.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
-                Physics.IgnoreCollision(leftObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            if (leftObj == null) return false;
+            Rigidbody objRigidbody = leftObj.GetComponent<Rigidbody>();
+            Collider objCollider = leftObj.GetComponent<Collider>();
+            if (objRigidbody != null){
+                objRigidbody.velocity = objRigidbody.velocity;
+                Physics.IgnoreCollision(objCollider, thisCollider, false);
             }
             leftObj.transform.localScale = leftOrigScale;
             leftObj = null;
-        }
-        else{
+        }else{
             if (rightObj == null) return false;
-            if (rightObj.GetComponent<Rigidbody>() != null){
-                rightObj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                Physics.IgnoreCollision(rightObj.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            Rigidbody objRigidbody = rightObj.GetComponent<Rigidbody>();
+            Collider objCollider = rightObj.GetComponent<Collider>();
+            if (objRigidbody != null) {
+                objRigidbody.velocity = objRigidbody.velocity;
+                Physics.IgnoreCollision(objCollider, thisCollider, false);
             }
             rightObj.transform.localScale = rightOrigScale;
             rightObj = null;

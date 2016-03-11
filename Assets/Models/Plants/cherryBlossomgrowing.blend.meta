@@ -1,17 +1,73 @@
 fileFormatVersion: 2
-guid: 9a2b718525d29ae4f8e87285d2b73d0b
-timeCreated: 1456889312
+guid: 2df88a405c5c8cd4caeff98ff9fa69f6
+timeCreated: 1457595960
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Icosphere_001
+    100000: Armature_001
+    100002: Armature_003
+    100004: Bone
+    100006: Bone_0
+    100008: Bone_001
+    100010: Bone_002
+    100012: Bone_003
+    100014: Bone_004
+    100016: Bone_005
+    100018: Bone_006
+    100020: Bone_007
+    100022: Bone_008
+    100024: Bone_009
+    100026: Bone_010
+    100028: Bone_011
+    100030: Bone_012
+    100032: Bone_013
+    100034: Bone_014
+    100036: //RootNode
+    100038: ruler
+    100040: tree_leaf1_layer4
+    100042: tree_leaf2_layer4
+    100044: tree_leaf3_layer4
+    100046: tree_trunk_layer4
+    400000: Armature_001
+    400002: Armature_003
+    400004: Bone
+    400006: Bone_0
+    400008: Bone_001
+    400010: Bone_002
+    400012: Bone_003
+    400014: Bone_004
+    400016: Bone_005
+    400018: Bone_006
+    400020: Bone_007
+    400022: Bone_008
+    400024: Bone_009
+    400026: Bone_010
+    400028: Bone_011
+    400030: Bone_012
+    400032: Bone_013
+    400034: Bone_014
+    400036: //RootNode
+    400038: ruler
+    400040: tree_leaf1_layer4
+    400042: tree_leaf2_layer4
+    400044: tree_leaf3_layer4
+    400046: tree_trunk_layer4
+    2300000: tree_leaf1_layer4
+    2300002: tree_leaf2_layer4
+    2300004: tree_leaf3_layer4
+    3300000: tree_leaf1_layer4
+    3300002: tree_leaf2_layer4
+    3300004: tree_leaf3_layer4
+    4300000: tree_trunk_layer4
+    4300002: tree_leaf1_layer4
+    4300004: tree_leaf2_layer4
+    4300006: tree_leaf3_layer4
     7400000: Default Take
+    7400002: mapleGrowing
     9500000: //RootNode
+    11100000: //RootNode
+    13700000: tree_trunk_layer4
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,7 +126,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

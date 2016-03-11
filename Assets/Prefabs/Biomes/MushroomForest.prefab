@@ -109,7 +109,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 195104, guid: 15835ee7341bce64895a94cd8814ac16, type: 2}
+  - {fileID: 188470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   doodads: []
   treeDensity: 7
   doodadDensity: 0

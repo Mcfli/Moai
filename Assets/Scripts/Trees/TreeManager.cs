@@ -6,20 +6,21 @@ public class TreeManager : MonoBehaviour {
     public int tree_resolution = 2;
 
     private GenerationManager gen_manager;
-    private static Dictionary<Vector2, List<TreeScript>> trees;
+    private static Dictionary<Vector2, List<treeStruct>> trees;
 
     // Use this for initialization
     void Start() {
         gen_manager = gameObject.GetComponent<GenerationManager>();
-        trees = new Dictionary<Vector2, List<TreeScript>>();
+        trees = new Dictionary<Vector2, List<treeStruct>>();
     }
 
-    public static void saveTree(Vector2 chunk, GameObject tree){
-        tree.GetComponent<TreeScript>().saveTransforms();
-        if(!trees.ContainsKey(chunk)||trees[chunk] == null) trees[chunk] = new List<TreeScript>();
-        trees[chunk].Add(tree.GetComponent<TreeScript>());
+    public static void saveTree(Vector2 chunk, TreeScript tree){
+        treeStruct v = new treeStruct(tree);
+        if(!trees.ContainsKey(chunk)||trees[chunk] == null) trees[chunk] = new List<treeStruct>();
+        trees[chunk].Add(v);
     }
 
+<<<<<<< HEAD
     public void loadTrees(Vector2 key,Biome biome)
     {
         if (biome.treeTypes.Count < 1) return;
@@ -29,17 +30,33 @@ public class TreeManager : MonoBehaviour {
             for (int i = trees_in_chunk.Count-1; i >= 0; i--)
             {
                 TreeScript tree = trees_in_chunk[i];
+=======
+    public void loadTrees(Vector2 key, List<GameObject> tree_types){
+        if (tree_types.Count < 1) return;
+        if (trees.ContainsKey(key)){
+            List<treeStruct> trees_in_chunk = trees[key];
+            for (int i = trees_in_chunk.Count-1; i >= 0; i--) {
+                treeStruct tree = trees_in_chunk[i];
+>>>>>>> brains2
                 if (tree.prefab == null) continue;
-                GameObject new_tree = Instantiate(tree.prefab, tree.saved_position, tree.saved_rotation) as GameObject;
-                new_tree.GetComponent<TreeScript>().copyFrom(tree);
+                GameObject new_tree = Instantiate(tree.prefab, tree.position, tree.rotation) as GameObject;
+                TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
+                new_treeScript.age = tree.age;
+                new_treeScript.lifeSpan = tree.life_span;
                 trees[key].Remove(tree);
             }
+<<<<<<< HEAD
 
         }
         else
         {
             trees[key] = new List<TreeScript>();
             float step_size = gen_manager.chunk_size / biome.treeDensity;
+=======
+        }else{ // generate
+            trees[key] = new List<treeStruct>();
+            float step_size = gen_manager.chunk_size / tree_resolution;
+>>>>>>> brains2
 
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
@@ -52,7 +69,10 @@ public class TreeManager : MonoBehaviour {
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
                     GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
                     GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
-                    new_tree.GetComponent<TreeScript>().age = Random.value * new_tree.GetComponent<TreeScript>().life_span;
+                    TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
+                    new_treeScript.lifeSpan = new_treeScript.lifeSpan * Random.Range(1- new_treeScript.lifeSpanVariance, 1+ new_treeScript.lifeSpanVariance);
+                    new_treeScript.age = Random.value * new_treeScript.lifeSpan;
+                    new_treeScript.prefab = treePrefab;
                 }
             }
         }
@@ -81,10 +101,25 @@ public class TreeManager : MonoBehaviour {
         for (int i = 0;i < colliders.Length; i++){
             
             GameObject tree = colliders[i].gameObject;
-            tree.GetComponent<TreeScript>().saveTransforms();
-            saveTree(chunk, tree);
+            saveTree(chunk, tree.GetComponent<TreeScript>());
             
             Destroy(tree);
+        }
+    }
+
+    private struct treeStruct {
+        public Vector3 position;
+        public Quaternion rotation;
+        public float age;
+        public float life_span;
+        public GameObject prefab;
+
+        public treeStruct(TreeScript t) {
+            position = t.gameObject.transform.position;
+            rotation = t.gameObject.transform.rotation;
+            age = t.age;
+            life_span = t.lifeSpan;
+            prefab = t.prefab;
         }
     }
 }

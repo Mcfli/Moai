@@ -19,7 +19,7 @@ public class ShrineGrid : MonoBehaviour {
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
 
-    public List<GameObject> validObjects;
+    public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
     private LayerMask glowLayer;
 
@@ -34,6 +34,10 @@ public class ShrineGrid : MonoBehaviour {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
+<<<<<<< HEAD
+=======
+        //validObjects = new List<PuzzleObject>();
+>>>>>>> brains2
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
@@ -55,11 +59,12 @@ public class ShrineGrid : MonoBehaviour {
         {
             updateCurState();
             checkDone();
+            drawGlows();
         }
-        drawGlows();
+        
 	}
 
-    public void enablePlacementItem(GameObject item)
+    public void enablePlacementItem(PuzzleObject item)
     {
 		validObjects.Add(item);
     }
@@ -103,7 +108,8 @@ public class ShrineGrid : MonoBehaviour {
             // Init list if needed
             if (!curState.ContainsKey(gridPos)||curState[gridPos] == null)
                 curState[gridPos] = new List<PuzzleObject>();
-            // Make sure it's a valid object, Make sure we don't add the same object twice
+
+            // Make sure it's a valid object
             PuzzleObject po = go.GetComponent<PuzzleObject>();
             if(po != null)
                 curState[gridPos].Add(po);
@@ -156,8 +162,8 @@ public class ShrineGrid : MonoBehaviour {
             while(place == centerSquare)
                 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
             int index = Random.Range(0, validObjects.Count-1);
-            GameObject placeObj = validObjects[index];
-            targetState[place] = placeObj.GetComponent<PuzzleObject>();
+            PuzzleObject placeObj = validObjects[index];
+            targetState[place] = placeObj;
         }
     }
 
@@ -237,6 +243,7 @@ public class ShrineGrid : MonoBehaviour {
 
     private void drawGlows()
     {
+        // For each grid cell
         for (int i = 0; i < resolution; i++)
         {
             for (int j = 0; j < resolution; j++)
@@ -244,38 +251,41 @@ public class ShrineGrid : MonoBehaviour {
                 Vector2 curGrid = new Vector2(i, j);
                 Vector3 cur = gridToReal(curGrid);
 
+                // If lists are empty, skip
                 if (!curState.ContainsKey(curGrid)) continue;
                 if (!targetState.ContainsKey(curGrid)) continue;
                 List<PuzzleObject> inCell = curState[curGrid];
                 PuzzleObject targetItem = targetState[curGrid];
 
+                // Add glow instances to complete cells
+
+                // if there is exactly one item in the cell and it matches the target item...
                 if (inCell != null && inCell.Count == 1 && inCell.Contains(targetItem))
                 {
-                    if (!glowGrid.ContainsKey(curGrid))
+                    // If we don't have a glow in this cell, add a glow
+                    if(!glowGrid.ContainsKey(curGrid) || !glowGrid[curGrid])
                     {
-                        glowGrid[curGrid] = false;
-                    }
-                    if(!glowGrid[curGrid])
-                    {
+                        //Debug.Log("Exactly one item" + inCell.Count + " " + inCell.Contains(targetItem));
                         
                         glowGrid[curGrid] = true;
                         GameObject glowInstance = Instantiate(glow, cur + new Vector3(size/resolution*0.5f,0, size / resolution * 0.5f),
                             Quaternion.identity) as GameObject;
-                        glowInstance.name = "Glow "+curGrid;
+                        glowInstance.name = "Glow "+gameObject.GetHashCode() + curGrid;
                     }
                 }
-                else if (inCell != null && (inCell.Count != 1 || !inCell.Contains(targetItem)))
+
+                // Remove glow instances from incomplete cells marked complete
+
+                // If there is not exactly one item in the cell or the cell doesn't contain the target and we have a glow in the cell...
+                
+                else if (inCell != null && glowGrid.ContainsKey(curGrid) && glowGrid[curGrid] && (inCell.Count != 1 || !inCell.Contains(targetItem)))
                 {
-                    if (!glowGrid.ContainsKey(curGrid))
-                    {
-                        glowGrid[curGrid] = false;
-                    }
-                    if (glowGrid[curGrid])
-                    {
-                        glowGrid[curGrid] = false;
-                        GameObject glowInstance = GameObject.Find("Glow " + curGrid);
-                        Destroy(glowInstance);
-                    }
+                    //Debug.Log("Not Exactly one item"+inCell.Count + " " + inCell.Contains(targetItem));
+                    
+                    glowGrid[curGrid] = false;
+                    GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + curGrid);
+                    Destroy(glowInstance);
+                    
                 }
             }
         }
