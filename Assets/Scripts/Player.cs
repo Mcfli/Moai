@@ -29,6 +29,9 @@ public class Player : MonoBehaviour {
     private Vector3 leftOrigScale;
     private Vector3 rightOrigScale;
 
+    public AudioClip speedUp;
+    AudioSource audio;
+
     void Awake() {
         thisCollider = GetComponent<Collider>();
         thisCharacterController = GetComponent<CharacterController>();
@@ -37,10 +40,21 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		startGroundWarp = false;
+        audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //Speed Up Sound
+        if (Input.GetButton(waitInput))
+        {
+            if (!audio.isPlaying)
+            {
+                audio.loop = true;
+                audio.PlayOneShot(speedUp, .2f);
+            }
+        }
+
         if (Input.GetButton(waitInput)) { //PATIENCE IS POWER
             if (waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);
             else Globals.time_scale = maxWaitSpeed;

@@ -139,12 +139,17 @@ public class TreeScript : MonoBehaviour {
             return;
         }
 
+        anim.enabled = false;
         if (Globals.time_scale < haloTime) {
             if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) {
+                anim.enabled = true;
                 expensiveUpdates();
                 lastAnimUpdate = Globals.time;
             }
-        }else expensiveUpdates();
+        }else{
+            anim.enabled = true;
+            expensiveUpdates();
+        }
     }
 
     // Coroutine is called once per second
