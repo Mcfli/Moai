@@ -192,11 +192,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 101562677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 0, y: 544.0597, z: 0.00011158755}
-=======
   m_LocalPosition: {x: 0, y: 544.85974, z: 0.0001121089}
->>>>>>> brains2
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -290,7 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialColor: {r: 1, g: 1, b: 1, a: 0.2509804}
   canGrabColor: {r: 0, g: 0.5, b: 1, a: 0.7490196}
-  canUseColor: {r: 0, g: 1, b: 0, a: 0.7490196}
+  canUseColor: {r: 0, g: 0, b: 1, a: 0.75}
   crosshairToggleInput: CrosshairToggle
   LeftTip: {fileID: 2009260715}
   RightTip: {fileID: 1923795458}
@@ -1401,11 +1397,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1293103743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 0, y: 544.33997, z: 0}
-=======
   m_LocalPosition: {x: 0, y: 545.14, z: 0}
->>>>>>> brains2
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1447,7 +1439,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_TagString
@@ -1535,15 +1527,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -1820,14 +1812,10 @@ MonoBehaviour:
   grabSphereRadius: 0
   leftHandInput: LeftHand
   rightHandInput: RightHand
-<<<<<<< HEAD
-  minWarpOnWaitDist: 2
-=======
   leftHandUseInput: LeftHandUse
   rightHandUseInput: RightHandUse
   waitInput: Patience
   minWarpOnWaitDist: 0.5
->>>>>>> brains2
 --- !u!1001 &1922851086
 Prefab:
   m_ObjectHideFlags: 0

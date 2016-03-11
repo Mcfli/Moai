@@ -503,7 +503,7 @@ MonoBehaviour:
   cull_max_density: 5
   target_scale: 10
   lifeSpan: 1314000
-  lifeSpanVariance: 0.5
+  lifeSpanVariance: 0.3
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: 0.8, z: 0}
   stateAnimationNames:

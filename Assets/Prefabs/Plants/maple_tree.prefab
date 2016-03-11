@@ -809,16 +809,8 @@ MonoBehaviour:
   cull_radius: 50
   cull_max_density: 5
   target_scale: 10
-<<<<<<< HEAD:Assets/Prefabs/Plants/maple.prefab
-  grow_speed: 0.006
-  grow_speed_variance: 0
-  life_span: 50
-  growDieAnimationRatio: 0.2
-  height_vs_time:
-    serializedVersion: 2
-=======
   lifeSpan: 1314000
-  lifeSpanVariance: 0.5
+  lifeSpanVariance: 0.3
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: 0.8, z: 0}
   stateAnimationNames:
@@ -836,7 +828,6 @@ MonoBehaviour:
   propogateDuringState: 000100
   heightVSTime:
   - serializedVersion: 2
->>>>>>> brains2:Assets/Prefabs/Plants/maple_tree.prefab
     m_Curve:
     - time: 0
       value: 0

@@ -35,59 +35,6 @@ public class InteractableObject: MonoBehaviour
 
     // Use this for initialization
     void Start(){
-<<<<<<< HEAD
-        lifeRemain = life_length;
-        rb = GetComponent<Rigidbody>();
-        coll = GetComponent<Collider>();
-        // Start delayed update
-        StartCoroutine("tickUpdate");
-    }
-
-    // Update is called once per frame
-    void Update(){
-        
-    }
-
-    // Coroutine
-    IEnumerator tickUpdate()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(1);
-            if (isHeld())
-            {
-                //do nothing
-            }
-            else
-            {
-                lifeRemain -= (Globals.time_scale * 60);
-
-                if (lifeRemain < 0)
-                {
-                    Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-                    if (close_trees.Length < 1)
-                    {
-                        var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                        Instantiate(spawn_object, transform.position, RandomRotation);
-                    }
-                    Destroy(gameObject);
-                }
-
-                if (Globals.time_scale > 1)
-                { //if fast forwarding
-                    RaycastHit hit;
-                    Ray rayDown = new Ray(transform.position, Vector3.down);
-                    int terrain = LayerMask.GetMask("Terrain");
-                    if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-                        transform.position = new Vector3(transform.position.x, hit.point.y + coll.bounds.extents.y, transform.position.z);
-                    rb.constraints = RigidbodyConstraints.FreezeAll;
-                    rb.velocity = Vector3.zero;
-                }
-                else
-                {
-                    rb.constraints = RigidbodyConstraints.None;
-                }
-=======
         timeRemain = life_length;
         wasHeld = false;
     }
@@ -115,7 +62,7 @@ public class InteractableObject: MonoBehaviour
                 //check if underground
                 RaycastHit hit;
                 Ray rayDown = new Ray(transform.position, Vector3.down);
-                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                if (Physics.Raycast(rayDown, out hit, 10000000, LayerMask.GetMask("Terrain"))) {
                     if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) {
                         transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
                     }
@@ -133,15 +80,11 @@ public class InteractableObject: MonoBehaviour
                 thisRigidbody.isKinematic = true;
             } else {
                 thisRigidbody.isKinematic = false;
->>>>>>> brains2
             }
         }
     }
     
     private bool isHeld(){
-<<<<<<< HEAD
-        return Globals.PlayerScript.getRightObj() == this.gameObject || Globals.PlayerScript.getLeftObj() == this.gameObject;
-=======
         return Globals.PlayerScript.getRightObj() == this || Globals.PlayerScript.getLeftObj() == this;
     }
 
@@ -186,6 +129,5 @@ public class InteractableObject: MonoBehaviour
     // use "==" (on the gameObject) for INSTANCE of object
     public bool sameType(InteractableObject x) {
         return typeID == x.typeID;
->>>>>>> brains2
     }
 }

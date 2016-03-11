@@ -17,11 +17,6 @@ public class Globals : MonoBehaviour {
     public static float water_level = 5;
     public static Biome cur_biome;
 
-<<<<<<< HEAD
-    public static GameObject Player = GameObject.FindGameObjectWithTag("Player");
-
-    public static Player PlayerScript = Player.GetComponent<Player>();
-=======
     public static GameObject Player = GameObject.Find("Player");
     public static Player PlayerScript = Player.GetComponent<Player>();
 
@@ -41,5 +36,4 @@ public class Globals : MonoBehaviour {
         }
         return component;
     }
->>>>>>> brains2
 }

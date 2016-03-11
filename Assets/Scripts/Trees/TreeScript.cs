@@ -96,30 +96,6 @@ public class TreeScript : MonoBehaviour {
         else{
             Destroy(gameObject);
         }
-
-<<<<<<< HEAD
-        // Start delayed update
-        StartCoroutine("tickUpdate");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-    }
-
-    // Coroutine
-    IEnumerator tickUpdate()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(1);
-            Cull();
-            Grow();
-            if (age >= 0.03)
-                Propogate();
-            if (onFire)
-                fireSpread();
-=======
         // for grow and states
         ratioTotal = 0;
         animMarks = new List<float> { 0 };
@@ -155,20 +131,26 @@ public class TreeScript : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
-
-        Grow();
-        if(dirtMound) dirtMound.SetActive(state == 0);
+        if(Globals.time_scale > 1)
+        {
+            Grow();
+        }
     }
 
     // Coroutine is called once per second
     IEnumerator tickUpdate() {
         while (true) {
             yield return new WaitForSeconds(1);
+            if (Globals.time_scale <= 1)
+            {
+                Grow();
+            }
             stickToGround();
             Cull();
+            updateCollision();
+            if (dirtMound) dirtMound.SetActive(state == 0);
             if (propogateDuringState[state]) Propogate();
             if (onFire) fireSpread();
->>>>>>> brains2
         }
     }
 
@@ -230,37 +212,6 @@ public class TreeScript : MonoBehaviour {
             state++;
             Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
         }
-        
-<<<<<<< HEAD
-        if(useNewAnimationSystem){
-            if(age/life_span < growDieAnimationRatio){//growing
-                if(!anim.IsPlaying("growing")) anim.Play("growing");
-                anim["growing"].time = anim["growing"].length * age/(life_span*growDieAnimationRatio);
-                puzzleObj.image = puzzleIcons[0];
-                state = 0;
-            }else if(age/life_span > 1 - growDieAnimationRatio){//dying
-                if(!anim.IsPlaying("dying")) anim.Play("dying");
-                anim["dying"].time = anim["dying"].length * (age - (1 - growDieAnimationRatio)*life_span) / (life_span*growDieAnimationRatio);
-                puzzleObj.image = puzzleIcons[1];
-                state = 1;
-            }else{ //mature
-                if(!anim.IsPlaying("growing")) anim.Play("growing");
-                anim["growing"].time = anim["growing"].length;
-                puzzleObj.image = puzzleIcons[2];
-                state = 2;
-            }
-        }else{
-            state = 1;
-            foreach (AnimationState animState in anim){
-                //state.speed = Globals.time_scale*grow_speed;
-                animState.time = age;
-                anim_progress = animState.time / animState.length;
-            }
-        }
-        float growth = height_vs_time.Evaluate(anim_progress);
-        bc.size = new Vector3(0.4f+0.6f*growth, target_scale*growth, 0.4f+0.6f*growth);
-        bc.center = new Vector3(0, target_scale*growth*0.5f, 0);
-=======
         //updateAnimation
         //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
         //this means that the first element in stateAnimationNames cannot be blank
@@ -276,8 +227,11 @@ public class TreeScript : MonoBehaviour {
                 }
             }
         }
->>>>>>> brains2
 
+    }
+
+    private void updateCollision()
+    {
         // update collision
         float growth = heightVSTime[state].Evaluate(age / lifeSpan);
         boxCollider.size = new Vector3(0.4f + 0.6f * growth, target_scale * growth, 0.4f + 0.6f * growth);

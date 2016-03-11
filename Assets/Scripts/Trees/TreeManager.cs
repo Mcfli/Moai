@@ -20,43 +20,26 @@ public class TreeManager : MonoBehaviour {
         trees[chunk].Add(v);
     }
 
-<<<<<<< HEAD
-    public void loadTrees(Vector2 key,Biome biome)
-    {
+
+    public void loadTrees(Vector2 key, Biome biome){
         if (biome.treeTypes.Count < 1) return;
-        if (trees.ContainsKey(key) && trees[key] != null)
-        {  
-            List<TreeScript> trees_in_chunk = trees[key];
-            for (int i = trees_in_chunk.Count-1; i >= 0; i--)
-            {
-                TreeScript tree = trees_in_chunk[i];
-=======
-    public void loadTrees(Vector2 key, List<GameObject> tree_types){
-        if (tree_types.Count < 1) return;
-        if (trees.ContainsKey(key)){
+        if (trees.ContainsKey(key) && trees[key] != null){
             List<treeStruct> trees_in_chunk = trees[key];
             for (int i = trees_in_chunk.Count-1; i >= 0; i--) {
                 treeStruct tree = trees_in_chunk[i];
->>>>>>> brains2
                 if (tree.prefab == null) continue;
                 GameObject new_tree = Instantiate(tree.prefab, tree.position, tree.rotation) as GameObject;
                 TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
                 new_treeScript.age = tree.age;
                 new_treeScript.lifeSpan = tree.life_span;
+                new_treeScript.prefab = tree.prefab;
                 trees[key].Remove(tree);
             }
-<<<<<<< HEAD
-
         }
         else
         {
-            trees[key] = new List<TreeScript>();
-            float step_size = gen_manager.chunk_size / biome.treeDensity;
-=======
-        }else{ // generate
             trees[key] = new List<treeStruct>();
-            float step_size = gen_manager.chunk_size / tree_resolution;
->>>>>>> brains2
+            float step_size = gen_manager.chunk_size / biome.treeDensity;
 
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point

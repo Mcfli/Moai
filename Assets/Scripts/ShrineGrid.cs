@@ -34,10 +34,6 @@ public class ShrineGrid : MonoBehaviour {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
-<<<<<<< HEAD
-=======
-        //validObjects = new List<PuzzleObject>();
->>>>>>> brains2
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 

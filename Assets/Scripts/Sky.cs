@@ -131,16 +131,6 @@ public class Sky : MonoBehaviour {
         }
     }
 
-<<<<<<< HEAD
-    // puts star in sky
-    // called when shrine complete
-	
-	public void addStar(){ //called when shrine complete
-		numOfStars++;
-		GameObject star = Instantiate(starPrefab, Vector3.up * 10000, Quaternion.identity) as GameObject;
-		star.transform.SetParent(StarsParent.transform, false);
-		Vector3 origRot = StarsParent.transform.localEulerAngles;
-=======
     public void addStar() { // puts star in sky, called when shrine complete
         GameObject star = Instantiate(starPrefab) as GameObject;
         listOfStars.Add(star);
@@ -148,7 +138,6 @@ public class Sky : MonoBehaviour {
         star.transform.localPosition = Vector3.up * 10000;
 
         Vector3 origRot = StarsParent.transform.localEulerAngles;
->>>>>>> brains2
 		StarsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)), 0, Random.Range(-(90-sunAxisShift), (90-sunAxisShift)));
 		star.transform.SetParent(null);
         StarsParent.transform.rotation = Quaternion.identity;
