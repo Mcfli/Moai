@@ -54,22 +54,32 @@ public class InteractableObject: MonoBehaviour
             if (isHeld()) {
                 wasHeld = true;
             } else if (planted) {
-                wasHeld = false;
+                if (wasHeld) { //just dropped
+                    wasHeld = false;
+                    timeRemain = growTime;
+                } 
                 if (timeRemain < 0) tryToTurnIntoTree();
             } else {
                 if (wasHeld) { //just dropped
                     wasHeld = false;
                     timeRemain = life_length;
-                    warpToGround(true);
-                }
-                if (timeRemain < 0) Destroy(gameObject);
 
-                // if fast forwarding, warp to ground
-                if (Globals.time_scale > 1) {
-                    warpToGround(false);
-                    thisRigidbody.isKinematic = true;
-                } else {
-                    thisRigidbody.isKinematic = false;
+                    //warpToGround(true);
+                    RaycastHit hit;
+                    Ray rayDown = new Ray(transform.position, Vector3.down);
+                    if (!Physics.Raycast(rayDown, out hit, transform.position.y, LayerMask.GetMask("Terrain")))
+                        if (Physics.Raycast(rayDown, out hit, 10000000, LayerMask.GetMask("Terrain")))
+                            transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
+
+                    if (timeRemain < 0) Destroy(gameObject);
+
+                    // if fast forwarding, warp to ground
+                    if (Globals.time_scale > 1) {
+                        warpToGround(false);
+                        thisRigidbody.isKinematic = true;
+                    } else {
+                        thisRigidbody.isKinematic = false;
+                    }
                 }
             }
         }

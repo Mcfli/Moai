@@ -13,7 +13,6 @@ GameObject:
   - 54: {fileID: 5481924}
   - 75: {fileID: 7547296}
   - 114: {fileID: 11454534}
-  - 114: {fileID: 11418456}
   - 135: {fileID: 13552780}
   - 114: {fileID: 11406506}
   m_Layer: 10
@@ -109,19 +108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: maple_seed
   image: {fileID: 2800000, guid: 69b7c83f540e53d429589d6d6bb59476, type: 3}
---- !u!114 &11418456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 
-  image: {fileID: 0}
 --- !u!114 &11454534
 MonoBehaviour:
   m_ObjectHideFlags: 1
