@@ -19,6 +19,7 @@ public class Globals : MonoBehaviour {
 
     public static GameObject Player = GameObject.Find("Player");
     public static Player PlayerScript = Player.GetComponent<Player>();
+    public static Sky SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component {
         System.Type type = source.GetType();

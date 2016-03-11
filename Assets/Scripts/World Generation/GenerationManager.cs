@@ -85,8 +85,7 @@ public class GenerationManager : MonoBehaviour {
         float player_x = Globals.Player.transform.position.x;
         float player_y = Globals.Player.transform.position.z; // In unity, y is vertical displacement
         Vector2 player_chunk = new Vector2(Mathf.FloorToInt(player_x/chunk_size), Mathf.FloorToInt(player_y / chunk_size));
-        if(cur_chunk != player_chunk)
-        { 
+        if(cur_chunk != player_chunk){
             cur_chunk = player_chunk;
             unloadChunks();
             unloadTrees();
@@ -96,7 +95,6 @@ public class GenerationManager : MonoBehaviour {
 			loadShrines();
             weather_manager.moveParticles();
             Globals.cur_biome = chooseBiome(cur_chunk);
-            weather_manager.changeWeather();
         }
     }
 

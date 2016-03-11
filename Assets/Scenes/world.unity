@@ -286,7 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialColor: {r: 1, g: 1, b: 1, a: 0.2509804}
   canGrabColor: {r: 0, g: 0.5, b: 1, a: 0.7490196}
-  canUseColor: {r: 0, g: 0, b: 1, a: 0.75}
+  canUseColor: {r: 0, g: 1, b: 0, a: 0.75}
   crosshairToggleInput: CrosshairToggle
   LeftTip: {fileID: 2009260715}
   RightTip: {fileID: 1923795458}

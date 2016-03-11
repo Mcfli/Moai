@@ -21,66 +21,79 @@ public class InteractableObject: MonoBehaviour
     void Awake() {
         thisRigidbody = GetComponent<Rigidbody>();
         thisCollider = GetComponent<Collider>();
-        dirtMound = Instantiate(dirtMound);
-        dirtMound.transform.SetParent(transform, false);
-        dirtMound.transform.position += dirtMoundOffset;
-        dirtMound.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
-        dirtMound.SetActive(false);
+
+        if (dirtMound) {
+            dirtMound = Instantiate(dirtMound);
+            dirtMound.transform.SetParent(transform, false);
+            dirtMound.transform.position += dirtMoundOffset;
+            dirtMound.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
+            dirtMound.SetActive(false);
+        }
         planted = false;
     }
-
-    private Rigidbody rb;
-    private Collider coll;
 
 
     // Use this for initialization
     void Start(){
         timeRemain = life_length;
         wasHeld = false;
+        StartCoroutine("tickUpdate");
     }
 
     // Update is called once per frame
     void Update() {
-        if (isHeld()){
-            wasHeld = true;
-        } else if (planted) {
-            wasHeld = false;
-            timeRemain -= Globals.deltaTime / Globals.time_resolution;
-            if (timeRemain < 0) {
-                Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-                if (close_trees.Length < 5) {
-                    var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                    Instantiate(spawn_object, transform.position, RandomRotation);
-                }
-                Destroy(gameObject);
-            }
-        } else { //just dropped
-            if (wasHeld) {
+        if(!isHeld()) timeRemain -= Globals.deltaTime / Globals.time_resolution;
+    }
+
+    
+    IEnumerator tickUpdate() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+
+            if (isHeld()) {
+                wasHeld = true;
+            } else if (planted) {
                 wasHeld = false;
-                timeRemain = life_length;
-                
-                //check if underground
-                RaycastHit hit;
-                Ray rayDown = new Ray(transform.position, Vector3.down);
-                if (Physics.Raycast(rayDown, out hit, 10000000, LayerMask.GetMask("Terrain"))) {
-                    if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) {
-                        transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
-                    }
+                if (timeRemain < 0) tryToTurnIntoTree();
+            } else {
+                if (wasHeld) { //just dropped
+                    wasHeld = false;
+                    timeRemain = life_length;
+                    warpToGround(true);
+                }
+                if (timeRemain < 0) Destroy(gameObject);
+
+                // if fast forwarding, warp to ground
+                if (Globals.time_scale > 1) {
+                    warpToGround(false);
+                    thisRigidbody.isKinematic = true;
+                } else {
+                    thisRigidbody.isKinematic = false;
                 }
             }
+        }
+    }
 
-            timeRemain -= Globals.deltaTime / Globals.time_resolution;
-            if (timeRemain < 0) Destroy(gameObject);
+    private void tryToTurnIntoTree() {
+        Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
+        if (close_trees.Length < 5) {
+            var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+            Instantiate(spawn_object, transform.position, RandomRotation);
+        }
+        Destroy(gameObject);
+    }
 
-            if (Globals.time_scale > 1) { // if fast forwarding, warp to ground
-                RaycastHit hit;
-                Ray rayDown = new Ray(transform.position, Vector3.down);
-                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
-                    transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
-                thisRigidbody.isKinematic = true;
+    private void warpToGround(bool onlyIfUnderground) {
+        RaycastHit hit;
+        Ray rayDown = new Ray(transform.position, Vector3.down);
+        if (Physics.Raycast(rayDown, out hit, 10000000, LayerMask.GetMask("Terrain"))) {
+            bool warp = false;
+            if (onlyIfUnderground){
+                if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) warp = true;
             } else {
-                thisRigidbody.isKinematic = false;
+                warp = true;
             }
+            if(warp) transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
         }
     }
     
@@ -110,17 +123,17 @@ public class InteractableObject: MonoBehaviour
         if (Globals.PlayerScript.getRightObj() == this) Globals.PlayerScript.DropObject(false);
         transform.position = place;
         thisRigidbody.isKinematic = true;
-        dirtMound.SetActive(true);
+        if(dirtMound) dirtMound.SetActive(true);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         timeRemain = growTime;
         planted = true;
         return true;
     }
 
-    private bool unplant() {
+    public bool unplant() {
         if (!planted) return false;
         thisRigidbody.isKinematic = false;
-        dirtMound.SetActive(false);
+        if (dirtMound) dirtMound.SetActive(false);
         planted = false;
         return true;
     }

@@ -20,7 +20,7 @@ public class WeatherManager : MonoBehaviour {
     private List<GameObject> clouds; // holds all currently loaded clouds
     private Biome lastBiome;
 
-    private Vector3 curWeatherPosition;
+    private Vector3 curParticlePosition;
 
     void Awake(){
         clouds = new List<GameObject>();
@@ -31,7 +31,7 @@ public class WeatherManager : MonoBehaviour {
         lastUpdated = 0;
         changeWeather();
         lastBiome = Globals.cur_biome;
-        curWeatherPosition = new Vector3(0, 0, 0);
+        curParticlePosition = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -80,7 +80,7 @@ public class WeatherManager : MonoBehaviour {
             }
             if (Globals.cur_weather.particleS) {
                 activeParticleSystem = Instantiate(Globals.cur_weather.particleS);
-                activeParticleSystem.transform.localPosition = curWeatherPosition;
+                activeParticleSystem.transform.localPosition = curParticlePosition;
             }
             Globals.cur_weather.imageSpace.applyToCamera();
             changeClouds(Globals.cur_weather.numberOfClouds);
@@ -105,8 +105,9 @@ public class WeatherManager : MonoBehaviour {
         }
     }
 
-    public void moveParticles()
-    {
-        curWeatherPosition = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
+    // moves particle system right above player
+    // called from GenerationManager, not called constantly (will not follow player directly)
+    public void moveParticles(){
+        curParticlePosition = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
     }
 }

@@ -3,108 +3,111 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TreeScript : MonoBehaviour {
-
-    public GameObject seed_object;
     public GameObject prefab;
-    public float max_health = 100;
+
+    //propogation
+    public GameObject seed_object;
     public float minSpawnRadius;
     public float maxSpawnRadius;
-    //public float spawn_chance;
     public float spawn_delay;
     public float spawn_variance;
     public int seed_cull_max_density;
     public int spawn_limit;
+
+    //culling
     public float cull_radius;
     public int cull_max_density;
-    public float target_scale;
+    public float max_health = 100;
+
+    //lifeSpan
+    public float age;
     public float lifeSpan = 657000; // base life span, in seconds, will be modified by lifeSpanVariance when instantiated
     public float lifeSpanVariance = 0.1f; // in ratio
-    public GameObject dirtMound;
-    public Vector3 dirtMoundOffset;
 
-    //for grow and states
+    //animating
+    public float target_scale;
+    public float ratioAnimUpdates = 0.01f; // in ratio
+
+    //animation, collision, states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
     public List<AnimationCurve> heightVSTime;
 
+    //fire
     public float cul_spread;
     public bool onFire;
 
-    //save values
-    public Vector3 saved_position;
-    public Quaternion saved_rotation;
-    public float age;
+    //dirtMound
+    public GameObject dirtMound;
+    public Vector3 dirtMoundOffset;
 
+    ///-------PRIVATES-------///
+
+    //References
+    private Animation anim;
+    private BoxCollider boxCollider;
     private LayerMask treeMask;
     private LayerMask treeAndSeedMask;
+
+    //propogation
     private bool donePropogating;
     private float lastSpawned = 0.0f;
     private int numSpawned;
-    private float health;
-    private Animation anim;
-    private BoxCollider boxCollider;
-    
-    //for grow and states
-    private int state;
-    private float ratioTotal;
-    private List<float> animMarks;
 
+    //culling
+    private float health;
+
+    //animation, collision, states
+    private float ratioTotal;
+    private List<float> stateMarks;
+    private float lastAnimUpdate;
+    private int state;
+    private float haloTime;
+
+    //fire
     private GameObject fire;
     private GameObject Torch;
 
-    private BoxCollider bc;
-    private PuzzleObject puzzleObj;
-
-    public void saveTransforms(){
-        saved_position = transform.position;
-        saved_rotation = transform.rotation;
-    }
-
     // Use this for initialization
     void Awake(){
+        // finals
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-
         fire = Resources.Load("fire") as GameObject;
-        state = -1;
+        treeMask = LayerMask.GetMask("Tree");
+        treeAndSeedMask = LayerMask.GetMask("Tree", "Seed");
+        lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
+        ratioTotal = 0;
+        haloTime = Globals.SkyScript.timeScaleThatHaloAppears;
+        stateMarks = new List<float> { 0 };
+        foreach (float f in stateRatios) {
+            ratioTotal += f;
+            stateMarks.Add(ratioTotal);
+        }
+
+        foreach (AnimationState animState in anim) animState.speed = 0; //fixes twitching
+
+        numSpawned = 0;
+        state = 0;
         age = 0.0f;
         donePropogating = false;
         health = max_health;
-        treeMask = LayerMask.GetMask("Tree");
-        treeAndSeedMask = LayerMask.GetMask("Tree", "Seed");
-        //Collider[] hitColiders = Physics.OverlapSphere(Vector3.zero, radius);
-        numSpawned = 0;
         lastSpawned = Globals.time - Random.value * spawn_delay;
-        lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
+
+
+        // tries to place on terrain. destroys otherwise.
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
-        bc = GetComponent<BoxCollider>();
-        puzzleObj = GetComponent<PuzzleObject>();
         int terrain = LayerMask.GetMask("Terrain");
-        
-        foreach (AnimationState animState in anim) animState.speed = 0; //fixes twitching
-        
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
-
             if (hit.point.y < Globals.water_level)
                 Destroy(gameObject);
-            else
-                transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
-        }
-        else{
-            Destroy(gameObject);
-        }
-        // for grow and states
-        ratioTotal = 0;
-        animMarks = new List<float> { 0 };
-        foreach (float f in stateRatios) {
-            ratioTotal += f;
-            animMarks.Add(ratioTotal);
-        }
+            else transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
+        }else Destroy(gameObject);
 
-        //dirtMound
+        // dirtMound
         if (dirtMound) {
             dirtMound = Instantiate(dirtMound);
             dirtMound.transform.SetParent(transform, false);
@@ -115,43 +118,54 @@ public class TreeScript : MonoBehaviour {
     }
 
     void Start() {
+        //set state
         for (int i = 0; i < stateAnimationNames.Count; i++) {
-            if (age / lifeSpan < (animMarks[i + 1]) / ratioTotal) {
+            if (age / lifeSpan < (stateMarks[i + 1]) / ratioTotal) {
                 state = i;
                 break;
             }
         }
+        //updateAnimation(); //update grow animation for the first time
+        lastAnimUpdate = Globals.time - (lifeSpan * ratioAnimUpdates * Globals.time_resolution);
         StartCoroutine("tickUpdate");
     }
 	
 	// Update is called once per frame
 	void Update () {
-        age += Globals.deltaTime / Globals.time_resolution;
-        if (age > lifeSpan) {
+        age += Globals.deltaTime / Globals.time_resolution; // update age
+        if (age > lifeSpan) { // kill if too old
             Destroy(gameObject);
             return;
         }
-        if(Globals.time_scale > 1)
-        {
-            Grow();
-        }
+
+        if (Globals.time_scale < haloTime) {
+            if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) {
+                expensiveUpdates();
+                lastAnimUpdate = Globals.time;
+            }
+        }else expensiveUpdates();
     }
 
     // Coroutine is called once per second
     IEnumerator tickUpdate() {
         while (true) {
             yield return new WaitForSeconds(1);
-            if (Globals.time_scale <= 1)
-            {
-                Grow();
-            }
+            //if (Globals.time_scale <= 1) updateAnimation();
             stickToGround();
             Cull();
-            updateCollision();
             if (dirtMound) dirtMound.SetActive(state == 0);
             if (propogateDuringState[state]) Propogate();
             if (onFire) fireSpread();
         }
+    }
+
+    private void expensiveUpdates() {
+        if (age / lifeSpan > (stateMarks[state + 1] / ratioTotal)) { //update state
+            state++;
+            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
+        }
+        updateAnimation();
+        updateCollision();
     }
 
     private void stickToGround(){
@@ -187,37 +201,19 @@ public class TreeScript : MonoBehaviour {
     // If there are too many or nearby trees for too long, destroy this one
     private void Cull(){
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cull_radius, treeMask);
-        if (age > lifeSpan || objectsInRange.Length > cull_max_density)
-        {
+        if (age > lifeSpan || objectsInRange.Length > cull_max_density){
             health -= 1;
-            if(health <= 0)
-            {
-                donePropogating = true;
-
-                Destroy(gameObject);
-            }    
-        }
-        else if (health < max_health)
-        {
-            health += 0.1f;
-        }
-        else if (health > max_health)
-        {
-            health = max_health;
-        }
+            if(health <= 0) Destroy(gameObject);
+        }else if (health < max_health) health += 0.1f;
+        else if (health > max_health) health = max_health;
     }
 
-    private void Grow() { //also updates state
-        if (age / lifeSpan > (animMarks[state + 1] / ratioTotal)) {
-            state++;
-            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
-        }
-        //updateAnimation
-        //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
-        //this means that the first element in stateAnimationNames cannot be blank
+    //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
+    //this means that the first element in stateAnimationNames cannot be blank
+    private void updateAnimation() {
         if (stateAnimationNames[state] != ""){
             if (!anim.IsPlaying(stateAnimationNames[state])) anim.Play(stateAnimationNames[state]);
-            anim[stateAnimationNames[state]].time = anim[stateAnimationNames[state]].length * ((age / lifeSpan) - (animMarks[state] / ratioTotal)) / stateRatios[state];
+            anim[stateAnimationNames[state]].time = anim[stateAnimationNames[state]].length * ((age / lifeSpan) - (stateMarks[state] / ratioTotal)) / stateRatios[state];
         } else {
             for (int i = state-1; i >= 0; i--) { // look backwards for available animation
                 if (stateAnimationNames[i] != ""){
@@ -227,11 +223,9 @@ public class TreeScript : MonoBehaviour {
                 }
             }
         }
-
     }
 
-    private void updateCollision()
-    {
+    private void updateCollision(){
         // update collision
         float growth = heightVSTime[state].Evaluate(age / lifeSpan);
         boxCollider.size = new Vector3(0.4f + 0.6f * growth, target_scale * growth, 0.4f + 0.6f * growth);
