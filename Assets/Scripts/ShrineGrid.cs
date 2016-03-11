@@ -300,7 +300,7 @@ public class ShrineGrid : MonoBehaviour {
         {
             if (hit.point.y > Globals.water_level)
             {
-                ret = new Vector3(pos.x, hit.point.y + 0.5f, pos.z);
+                ret = new Vector3(pos.x, hit.point.y + 0.1f, pos.z);
             }
             else
             {
