@@ -8,13 +8,15 @@ public class ShrineGrid : MonoBehaviour {
     public bool isDone;
     public float size;
     public int resolution;  // res X res Number of squares in the grid
-    public int minSolItems; // max items for a solution
+    public int minSolItems; // min items for a solution
     public int maxSolItems; // max items for a solution
     public GameObject mural;
     public GameObject glow;
     public GameObject vertexPillar;
 
     public Vector2 heatMoistureChange; // The changes the shrine has to heat/moisture map
+    public float heatMoistureChangeMin = 15f;
+    public float heatMoistureChangeMax = 50f;
 
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
@@ -30,14 +32,17 @@ public class ShrineGrid : MonoBehaviour {
 	public Vector3 saved_scale;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
+        validObjects = new List<GameObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
-        // For testing      
+        // For testing 
+        populateValidItems();     
         genTargetState();
         updateCurState();
 
@@ -45,10 +50,13 @@ public class ShrineGrid : MonoBehaviour {
         createMural();
         createPillars();
         killTrees();
+
+        heatMoistureChange *= Random.Range(heatMoistureChangeMin,heatMoistureChangeMax);
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (debug)
             drawGrid();
         if (!isDone)
@@ -62,6 +70,57 @@ public class ShrineGrid : MonoBehaviour {
     public void enablePlacementItem(GameObject item)
     {
 		validObjects.Add(item);
+    }
+
+    private void populateValidItems()
+    {
+        // Find all biomes within our current heat-moisture vector box
+        List<Biome> allBiomes = GameObject.Find("WorldGen").GetComponent<GenerationManager>().biomes;
+
+        // Calculate the bounding edges of our heat-moisture box
+        float moistureMin = Globals.heatMoistureVector.y > 0 ? 
+            Globals.heatMoistureOrigin.y - Globals.heatMoistureMin:
+            Globals.heatMoistureOrigin.y + Globals.heatMoistureVector.y - Globals.heatMoistureMin;
+        float moistureMax = Globals.heatMoistureVector.y > 0 ?
+            Globals.heatMoistureOrigin.y + Globals.heatMoistureVector.y + Globals.heatMoistureMin :
+            Globals.heatMoistureOrigin.y + Globals.heatMoistureMin;
+        float heatMin = Globals.heatMoistureVector.x > 0 ?
+           Globals.heatMoistureOrigin.x - Globals.heatMoistureMin :
+           Globals.heatMoistureOrigin.x + Globals.heatMoistureVector.x - Globals.heatMoistureMin;
+        float heatMax = Globals.heatMoistureVector.x > 0 ?
+            Globals.heatMoistureOrigin.x + Globals.heatMoistureVector.x + Globals.heatMoistureMin :
+            Globals.heatMoistureOrigin.x + Globals.heatMoistureMin;
+
+        // Calculate max distance
+        float maxDist = Vector2.Distance(new Vector2(heatMax, moistureMax), Globals.heatMoistureOrigin);
+       
+        foreach (Biome b in allBiomes)
+        {
+            // If the biome is in our box, add it as a valid biome
+            if(b.heatAvg <= heatMax && b.heatAvg >= heatMin &&
+                b.moistureAvg <= moistureMax && b.moistureAvg >= moistureMin)
+            {
+                float distance = Vector2.Distance(Globals.heatMoistureOrigin,new Vector2(b.heatAvg,b.moistureAvg));
+                float weight = distance / maxDist;
+                weight = Mathf.Sqrt(weight);
+
+                if (weight > Globals.heatMostureDistGuaranteed && Random.value <= weight) continue;
+
+                // Add all trees with puzzleObjects associated with the current biome
+                foreach(GameObject tree in b.treeTypes)
+                {
+                    if (tree.GetComponent<PuzzleObject>() != null)
+                        enablePlacementItem(tree);
+                }
+
+                // Add all doodads with puzzleObjects associated with the current biome
+                foreach (GameObject doodad in b.doodads)
+                {
+                    if (doodad.GetComponent<PuzzleObject>() != null)
+                        enablePlacementItem(doodad);
+                }
+            }
+        }  
     }
 
     private Vector2 realToGrid(Vector3 pos)
@@ -155,9 +214,10 @@ public class ShrineGrid : MonoBehaviour {
             Vector2 place = new Vector2(Random.Range(0, resolution),Random.Range(0, resolution));
             while(place == centerSquare)
                 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
-            int index = Random.Range(0, validObjects.Count-1);
+            int index = Random.Range(0, validObjects.Count);
             GameObject placeObj = validObjects[index];
-            targetState[place] = placeObj.GetComponent<PuzzleObject>();
+            if(placeObj.GetComponent<PuzzleObject>() != null)
+                targetState[place] = placeObj.GetComponent<PuzzleObject>();
         }
     }
 

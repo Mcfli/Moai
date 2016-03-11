@@ -1093,7 +1093,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192844}
-  m_LocalRotation: {x: 0.81649965, y: -0.08765009, z: 0.12872893, w: 0.5559449}
+  m_LocalRotation: {x: 0.81649953, y: -0.08765008, z: 0.12872891, w: 0.55594486}
   m_LocalPosition: {x: 0.035915874, y: 0.072070315, z: -0.16187106}
   m_LocalScale: {x: 1.0304352, y: 1.0304352, z: 1.0304353}
   m_Children:
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Tree
+  type: Mushroom
   image: {fileID: 2800000, guid: 57a8c0b2a7bf2ab45a64a8bba172672c, type: 3}
 --- !u!137 &13777966
 SkinnedMeshRenderer:

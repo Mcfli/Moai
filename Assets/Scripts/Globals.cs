@@ -18,4 +18,10 @@ public class Globals : MonoBehaviour {
     public static GameObject Player = GameObject.FindGameObjectWithTag("Player");
 
     public static Player PlayerScript = Player.GetComponent<Player>();
+
+    public static Vector2 heatMoistureOrigin = new Vector2(25,25);
+    public static Vector2 heatMoistureVector = Vector2.zero;
+    public static float heatMoistureMin = 50;
+    public static float heatMostureDistGuaranteed = 0.1f;  // The distance from the center point a biome is guaranteed to have puzzle
+                                                           // FindObjectsOfType added to a shrine
 }

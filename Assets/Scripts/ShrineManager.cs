@@ -24,7 +24,6 @@ public class ShrineManager : MonoBehaviour {
 
 	public void placeShrine(Vector3 chunk_pos, Vector2 chunk)
     {
-        
         int val = Random.Range(1, shrine_probability);
         if (val == 1)
         {
