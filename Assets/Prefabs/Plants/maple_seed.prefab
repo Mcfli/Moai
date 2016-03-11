@@ -144,6 +144,7 @@ MonoBehaviour:
   growTimeVariance: 0.3
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
+  fertilityChance: 0.7
 --- !u!135 &13552780
 SphereCollider:
   m_ObjectHideFlags: 1
