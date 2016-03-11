@@ -344,8 +344,7 @@ public class ShrineGrid : MonoBehaviour {
     private void complete()
     {
         // Make the shrine glow
-        Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity); 
-        GameObject glowInstance = Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity) as GameObject;
+        Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity);
         // Change the chunk
         GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position,heatMoistureChange);
         // Add a star
