@@ -29,7 +29,6 @@ public class GenerationManager : MonoBehaviour {
     // Heat/Moisture modifiers per chunk.
     // maps chunk -> (delta_heat,delta_moisture)
     private Dictionary<Vector2, Vector2> mapChanges;
-    private NoiseSynth noiseSynth;
 
     void Awake() {
         tree_manager = gameObject.GetComponent<TreeManager>();
@@ -43,7 +42,6 @@ public class GenerationManager : MonoBehaviour {
         loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
-        noiseSynth = GetComponent<NoiseSynth>();
         moistureMap.Init();
         heatMap.Init();
       
@@ -265,7 +263,6 @@ public class GenerationManager : MonoBehaviour {
     {
         string chunk_name = "chunk (" + chunk.x + "," + chunk.y + ")";
         GameObject chunk_obj = GameObject.Find(chunk_name);
-        Biome curBiome = chooseBiome(chunk);
         chunkGen.colorChunk(chunk_obj);
     }
 
