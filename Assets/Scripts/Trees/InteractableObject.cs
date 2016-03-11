@@ -9,6 +9,7 @@ public class InteractableObject: MonoBehaviour
     public float cull_radius;        // How far this must be from other seeds and trees in order to grow.
     public float life_length;        // How long before the object disappears
     public float growTime;           // How long before the seed sprouts
+    public float growTimeVariance;
     public GameObject dirtMound;     // prefab - instantiates and hides when instatiated
     public Vector3 dirtMoundOffset;
 
@@ -125,7 +126,7 @@ public class InteractableObject: MonoBehaviour
         thisRigidbody.isKinematic = true;
         if(dirtMound) dirtMound.SetActive(true);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-        timeRemain = growTime;
+        timeRemain = growTime * Random.Range(1 - growTimeVariance, 1 + growTimeVariance);
         planted = true;
         return true;
     }

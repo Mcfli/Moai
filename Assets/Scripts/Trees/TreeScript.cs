@@ -50,7 +50,7 @@ public class TreeScript : MonoBehaviour {
     private BoxCollider boxCollider;
     private LayerMask treeMask;
     private LayerMask treeAndSeedMask;
-    private Renderer thisRenderer;
+    private Renderer thisRenderer; // unused
 
     //propogation
     private bool donePropogating;
