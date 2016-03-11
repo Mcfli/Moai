@@ -23,7 +23,7 @@ public class InteractableObject: MonoBehaviour
         thisCollider = GetComponent<Collider>();
         dirtMound = Instantiate(dirtMound);
         dirtMound.transform.SetParent(transform, false);
-        dirtMound.transform.localPosition = dirtMoundOffset;
+        dirtMound.transform.position += dirtMoundOffset;
         dirtMound.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
         dirtMound.SetActive(false);
         planted = false;
@@ -38,48 +38,44 @@ public class InteractableObject: MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (isHeld()){
-            //do nothing
-            //unplant();
             wasHeld = true;
-        }else{
-            if (wasHeld) {
-                wasHeld = false;
-                if (!planted) {
-                    timeRemain = life_length;
-
-                    RaycastHit hit;
-                    Ray rayDown = new Ray(transform.position, Vector3.down);
-                    if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-                        if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) {
-                            transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
-                        }
-                    }
-                }
-                //Debug.Log(timeRemain);
-            }
-
+        } else if (planted) {
+            wasHeld = false;
             timeRemain -= Globals.deltaTime / Globals.time_resolution;
-            
-            if (timeRemain < 0){
-                if (planted) {
-                    Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-                    if (close_trees.Length < 5) {
-                        var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                        Instantiate(spawn_object, transform.position, RandomRotation);
-                    }
+            if (timeRemain < 0) {
+                Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
+                if (close_trees.Length < 5) {
+                    var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                    Instantiate(spawn_object, transform.position, RandomRotation);
                 }
                 Destroy(gameObject);
             }
-            
-            if(Globals.time_scale > 1){ // if fast forwarding
+        } else { //just dropped
+            if (wasHeld) {
+                wasHeld = false;
+                timeRemain = life_length;
+                
+                //check if underground
+                RaycastHit hit;
+                Ray rayDown = new Ray(transform.position, Vector3.down);
+                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                    if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) {
+                        transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
+                    }
+                }
+            }
+
+            timeRemain -= Globals.deltaTime / Globals.time_resolution;
+            if (timeRemain < 0) Destroy(gameObject);
+
+            if (Globals.time_scale > 1) { // if fast forwarding, warp to ground
                 RaycastHit hit;
                 Ray rayDown = new Ray(transform.position, Vector3.down);
                 if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
                     transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
-                thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-                thisRigidbody.velocity = Vector3.zero;
-            }else{
-                thisRigidbody.constraints = RigidbodyConstraints.None;
+                thisRigidbody.isKinematic = true;
+            } else {
+                thisRigidbody.isKinematic = false;
             }
         }
     }

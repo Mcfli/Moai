@@ -19,7 +19,9 @@ public class TreeScript : MonoBehaviour {
     public float target_scale;
     public float lifeSpan = 657000; // base life span, in seconds, will be modified by lifeSpanVariance when instantiated
     public float lifeSpanVariance = 0.1f; // in ratio
-    
+    public GameObject dirtMound;
+    public Vector3 dirtMoundOffset;
+
     //for grow and states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
@@ -98,6 +100,15 @@ public class TreeScript : MonoBehaviour {
             ratioTotal += f;
             animMarks.Add(ratioTotal);
         }
+
+        //dirtMound
+        if (dirtMound) {
+            dirtMound = Instantiate(dirtMound);
+            dirtMound.transform.SetParent(transform, false);
+            dirtMound.transform.position += dirtMoundOffset;
+            dirtMound.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
+            dirtMound.SetActive(false);
+        }
     }
 
     void Start() {
@@ -119,6 +130,7 @@ public class TreeScript : MonoBehaviour {
         }
 
         Grow();
+        if(dirtMound) dirtMound.SetActive(state == 0);
     }
 
     // Coroutine is called once per second
