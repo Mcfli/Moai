@@ -7,6 +7,7 @@ public class Mural : MonoBehaviour {
     public int imageRes;  // Number of pixels per side in 
     public int numSquares; // Number of cells per side
     public Color muralColor;
+    public Texture2D shrineTexture;
 
     Texture2D muralTex;
 
@@ -27,30 +28,27 @@ public class Mural : MonoBehaviour {
         {
             newPixels[i] = muralColor;
         }
-        
-        foreach (KeyValuePair<Vector2,PuzzleObject> pair in state)
-        {
-            
+
+        foreach (KeyValuePair<Vector2, PuzzleObject> pair in state) {
+
             Vector2 coord = pair.Key;
             PuzzleObject obj = pair.Value;
             Texture2D image = obj.image;
 
             // The coordinates for texturing are mirrored, so we need to flip the cord values
-            coord.x = (numSquares-1) - coord.x;
+            coord.x = (numSquares - 1) - coord.x;
             coord.y = (numSquares - 1) - coord.y;
 
             // Calculate where to start adding these pixels to new
             int offx = (int)coord.x * imageRes;
-            int offy = (int)coord.y * imageRes * imageRes * numSquares; 
-           
-          
+            int offy = (int)coord.y * imageRes * imageRes * numSquares;
+
+
 
             Color[] pixels = image.GetPixels();
             // Add image pixels to newPixels
-            for(int i = 0; i < imageRes; i++)
-            {
-                for (int j = 0; j < imageRes; j++)
-                {
+            for (int i = 0; i < imageRes; i++) {
+                for (int j = 0; j < imageRes; j++) {
                     Color newColor = new Color();
                     Color imgColor = pixels[j + i * imageRes];
                     Color bgColor = newPixels[j + i * numSquares * imageRes + offx + offy];
@@ -61,6 +59,33 @@ public class Mural : MonoBehaviour {
                     newColor.b = imgColor.b * imgColor.a / newColor.a + bgColor.b * bgColor.a * (1 - imgColor.a) / newColor.a; // Blue
                     newPixels[j + i * numSquares * imageRes + offx + offy] = newColor;
                 }
+            }
+
+
+        }
+
+
+
+        //TEMP SHRINE ICON
+        Vector2 shrineCoord = new Vector2(1,1);
+
+        // Calculate where to start adding these pixels to new
+        int shrineOffx = (int)shrineCoord.x * imageRes;
+        int shrineOffy = (int)shrineCoord.y * imageRes * imageRes * numSquares;
+
+        Color[] shrinePixels = shrineTexture.GetPixels();
+        // Add image pixels to newPixels
+        for (int i = 0; i < imageRes; i++) {
+            for (int j = 0; j < imageRes; j++) {
+                Color newColor = new Color();
+                Color imgColor = shrinePixels[j + i * imageRes];
+                Color bgColor = newPixels[j + i * numSquares * imageRes + shrineOffx + shrineOffy];
+
+                newColor.a = 1 - (1 - newColor.a) * (1 - bgColor.a);        // alpha 
+                newColor.r = imgColor.r * imgColor.a / newColor.a + bgColor.r * bgColor.a * (1 - imgColor.a) / newColor.a; // Red
+                newColor.g = imgColor.g * imgColor.a / newColor.a + bgColor.g * bgColor.a * (1 - imgColor.a) / newColor.a; // Green
+                newColor.b = imgColor.b * imgColor.a / newColor.a + bgColor.b * bgColor.a * (1 - imgColor.a) / newColor.a; // Blue
+                newPixels[j + i * numSquares * imageRes + shrineOffx + shrineOffy] = newColor;
             }
         }
 

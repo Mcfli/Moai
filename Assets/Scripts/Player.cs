@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
     private Vector3 rightOrigScale;
 
     public AudioClip speedUp;
-    AudioSource audio;
+    AudioSource audio; //unused, complains about hiding
 
     void Awake() {
         thisCollider = GetComponent<Collider>();
