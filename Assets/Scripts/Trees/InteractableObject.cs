@@ -44,7 +44,18 @@ public class InteractableObject: MonoBehaviour
         }else{
             if (wasHeld) {
                 wasHeld = false;
-                if(!planted) timeRemain = life_length;
+                if (!planted) {
+                    timeRemain = life_length;
+
+                    RaycastHit hit;
+                    Ray rayDown = new Ray(transform.position, Vector3.down);
+                    if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                        if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) {
+                            transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
+                        }
+                    }
+                }
+                //Debug.Log(timeRemain);
             }
 
             timeRemain -= Globals.deltaTime / Globals.time_resolution;
@@ -63,8 +74,7 @@ public class InteractableObject: MonoBehaviour
             if(Globals.time_scale > 1){ // if fast forwarding
                 RaycastHit hit;
                 Ray rayDown = new Ray(transform.position, Vector3.down);
-                int terrain = LayerMask.GetMask("Terrain");
-                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+                if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
                     transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
                 thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 thisRigidbody.velocity = Vector3.zero;

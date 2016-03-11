@@ -140,7 +140,7 @@ MonoBehaviour:
     m_Bits: 256
   cull_radius: 5
   life_length: 300
-  growTime: 300
+  growTime: 3600
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.5, z: 0}
 --- !u!135 &13552780
