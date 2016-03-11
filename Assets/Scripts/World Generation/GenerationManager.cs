@@ -93,7 +93,7 @@ public class GenerationManager : MonoBehaviour {
             loadChunks();
             loadTrees();
 			loadShrines();
-            weather_manager.moveParticles();
+            weather_manager.moveParticles(chunkToWorld(cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
             Globals.cur_biome = chooseBiome(cur_chunk);
         }
     }

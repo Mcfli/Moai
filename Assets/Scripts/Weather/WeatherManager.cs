@@ -107,7 +107,9 @@ public class WeatherManager : MonoBehaviour {
 
     // moves particle system right above player
     // called from GenerationManager, not called constantly (will not follow player directly)
-    public void moveParticles(){
-        curParticlePosition = new Vector3(Globals.Player.transform.position.x, height, Globals.Player.transform.position.z);
+    public void moveParticles(Vector3 chunkCenter){
+        curParticlePosition = new Vector3(chunkCenter.x, height, chunkCenter.z);
+        if (activeParticleSystem != null)
+            activeParticleSystem.transform.position = curParticlePosition;
     }
 }
