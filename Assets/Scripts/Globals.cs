@@ -20,7 +20,6 @@ public class Globals : MonoBehaviour {
     public static GameObject Player = GameObject.Find("Player");
     public static Player PlayerScript = Player.GetComponent<Player>();
 
-<<<<<<< HEAD
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component {
         System.Type type = source.GetType();
         T component = destination.GetComponent<T>();
@@ -37,11 +36,9 @@ public class Globals : MonoBehaviour {
         }
         return component;
     }
-=======
     public static Vector2 heatMoistureOrigin = new Vector2(25,25);
     public static Vector2 heatMoistureVector = Vector2.zero;
     public static float heatMoistureMin = 50;
     public static float heatMostureDistGuaranteed = 0.1f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                            // FindObjectsOfType added to a shrine
->>>>>>> Puzzle-Constraints
 }

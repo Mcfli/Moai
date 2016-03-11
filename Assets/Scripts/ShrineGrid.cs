@@ -37,7 +37,7 @@ public class ShrineGrid : MonoBehaviour {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
 		targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
-        validObjects = new List<GameObject>();
+        validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
@@ -110,15 +110,20 @@ public class ShrineGrid : MonoBehaviour {
                 // Add all trees with puzzleObjects associated with the current biome
                 foreach(GameObject tree in b.treeTypes)
                 {
-                    if (tree.GetComponent<PuzzleObject>() != null)
-                        enablePlacementItem(tree);
+                    foreach(PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
+                    {
+                        if (po != null)
+                            enablePlacementItem(po);
+                    }
+                    
                 }
 
                 // Add all doodads with puzzleObjects associated with the current biome
                 foreach (GameObject doodad in b.doodads)
                 {
-                    if (doodad.GetComponent<PuzzleObject>() != null)
-                        enablePlacementItem(doodad);
+                    PuzzleObject po = doodad.GetComponent<PuzzleObject>();
+                    if (po != null)
+                        enablePlacementItem(po);
                 }
             }
         }  
@@ -216,16 +221,10 @@ public class ShrineGrid : MonoBehaviour {
             Vector2 place = new Vector2(Random.Range(0, resolution),Random.Range(0, resolution));
             while(place == centerSquare)
                 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
-<<<<<<< HEAD
-            int index = Random.Range(0, validObjects.Count-1);
-            PuzzleObject placeObj = validObjects[index];
-            targetState[place] = placeObj;
-=======
             int index = Random.Range(0, validObjects.Count);
-            GameObject placeObj = validObjects[index];
-            if(placeObj.GetComponent<PuzzleObject>() != null)
-                targetState[place] = placeObj.GetComponent<PuzzleObject>();
->>>>>>> Puzzle-Constraints
+            PuzzleObject placeObj = validObjects[index];
+            if(placeObj != null)
+                targetState[place] = placeObj;
         }
     }
 
