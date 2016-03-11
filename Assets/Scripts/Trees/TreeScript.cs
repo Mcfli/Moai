@@ -33,7 +33,6 @@ public class TreeScript : MonoBehaviour {
     //save values
     public Vector3 saved_position;
     public Quaternion saved_rotation;
-    public float time_unloaded;
     public float age;
 
     private LayerMask treeMask;
@@ -57,7 +56,6 @@ public class TreeScript : MonoBehaviour {
     public void saveTransforms(){
         saved_position = transform.position;
         saved_rotation = transform.rotation;
-        time_unloaded = Globals.time;
     }
 
     // Use this for initialization
