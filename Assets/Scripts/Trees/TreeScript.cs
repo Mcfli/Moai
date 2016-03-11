@@ -50,6 +50,7 @@ public class TreeScript : MonoBehaviour {
     private BoxCollider boxCollider;
     private LayerMask treeMask;
     private LayerMask treeAndSeedMask;
+    private Renderer thisRenderer;
 
     //propogation
     private bool donePropogating;
@@ -60,6 +61,7 @@ public class TreeScript : MonoBehaviour {
     private float health;
 
     //animation, collision, states
+    //private bool firstAnim;
     private float ratioTotal;
     private List<float> stateMarks;
     private float lastAnimUpdate;
@@ -75,11 +77,13 @@ public class TreeScript : MonoBehaviour {
         // finals
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
+        thisRenderer = GetComponent<Renderer>();
         fire = Resources.Load("fire") as GameObject;
         treeMask = LayerMask.GetMask("Tree");
         treeAndSeedMask = LayerMask.GetMask("Tree", "Seed");
         lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
         ratioTotal = 0;
+        //firstAnim = false;
         haloTime = Globals.SkyScript.timeScaleThatHaloAppears;
         stateMarks = new List<float> { 0 };
         foreach (float f in stateRatios) {
@@ -127,7 +131,7 @@ public class TreeScript : MonoBehaviour {
             }
         }
         //updateAnimation(); //update grow animation for the first time
-        lastAnimUpdate = Globals.time - (lifeSpan * ratioAnimUpdates * Globals.time_resolution);
+        lastAnimUpdate = Globals.time;
         StartCoroutine("tickUpdate");
     }
 	
@@ -139,15 +143,23 @@ public class TreeScript : MonoBehaviour {
             return;
         }
 
-        anim.enabled = false;
+        /*if(!firstAnim){
+            if (thisRenderer.isVisible) {
+                firstAnim = true;
+                anim.enabled = true;
+                expensiveUpdates();
+            }
+        }else anim.enabled = false;*/
+
+        expensiveUpdates(); //temp
         if (Globals.time_scale < haloTime) {
             if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) {
-                anim.enabled = true;
+                //anim.enabled = true;
                 expensiveUpdates();
                 lastAnimUpdate = Globals.time;
             }
         }else{
-            anim.enabled = true;
+            //anim.enabled = true;
             expensiveUpdates();
         }
     }
