@@ -116,6 +116,7 @@ MonoBehaviour:
   colors:
   - {r: 0.53676474, g: 0.20918038, b: 0.36506534, a: 0}
   - {r: 0.5757151, g: 0.38975993, b: 0.5955882, a: 0}
+  - {r: 0.36940923, g: 0.31709558, b: 0.375, a: 0}
   amplitude: 400
   colorCurve:
     serializedVersion: 2
@@ -141,6 +142,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: colors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: weatherTypes.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -155,6 +160,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: weatherTypes.Array.data[1]
       value: rain
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[2].r
+      value: 0.36940923
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[2].g
+      value: 0.31709558
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[2].b
+      value: 0.375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

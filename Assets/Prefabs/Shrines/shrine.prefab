@@ -104,6 +104,8 @@ MonoBehaviour:
   heatMoistureChange: {x: 0, y: 1}
   heatMoistureChangeMin: 15
   heatMoistureChangeMax: 50
+  completeGlow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
+  incompleteGlow: {fileID: 199770, guid: fedda00804191d540a88071d169a7e26, type: 2}
   validObjects:
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   saved_position: {x: 0, y: 0, z: 0}
@@ -123,6 +125,7 @@ MonoBehaviour:
   imageRes: 32
   numSquares: 3
   muralColor: {r: 0.8602941, g: 0.77845275, b: 0.43647274, a: 1}
+  shrineTexture: {fileID: 2800000, guid: d64cceba75a45c94ba8ceba79427be1c, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

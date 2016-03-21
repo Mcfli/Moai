@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShrineGrid : MonoBehaviour {
+public class ShrineGrid : MonoBehaviour
+{
 
     public bool debug;
     public bool isDone;
@@ -18,6 +19,9 @@ public class ShrineGrid : MonoBehaviour {
     public float heatMoistureChangeMin = 15f;
     public float heatMoistureChangeMax = 50f;
 
+    public GameObject completeGlow;
+    public GameObject incompleteGlow;
+
     private Dictionary<Vector2, List<PuzzleObject>> curState;
     private Dictionary<Vector2, PuzzleObject> targetState;
 
@@ -25,24 +29,26 @@ public class ShrineGrid : MonoBehaviour {
     private LayerMask notTerrain;
     private LayerMask glowLayer;
 
-    private Dictionary<Vector2,bool> glowGrid;
+    private Dictionary<Vector2, bool> glowGrid;
 
-	public Vector3 saved_position;
-	public Quaternion saved_rotation;
-	public Vector3 saved_scale;
+    public Vector3 saved_position;
+    public Quaternion saved_rotation;
+    public Vector3 saved_scale;
 
-	// Use this for initialization
-	void Start ()
+    private GameObject shrineGlow;
+
+    // Use this for initialization
+    void Start()
     {
         curState = new Dictionary<Vector2, List<PuzzleObject>>();
-		targetState = new Dictionary<Vector2, PuzzleObject>();
+        targetState = new Dictionary<Vector2, PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
         validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
         // For testing 
-        populateValidItems();     
+        populateValidItems();
         genTargetState();
         updateCurState();
 
@@ -51,11 +57,12 @@ public class ShrineGrid : MonoBehaviour {
         createPillars();
         killTrees();
 
-        heatMoistureChange *= Random.Range(heatMoistureChangeMin,heatMoistureChangeMax);
+        heatMoistureChange *= Random.Range(heatMoistureChangeMin, heatMoistureChangeMax);
+        shrineGlow = Instantiate(incompleteGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (debug)
             drawGrid();
@@ -65,12 +72,12 @@ public class ShrineGrid : MonoBehaviour {
             checkDone();
             drawGlows();
         }
-        
-	}
+
+    }
 
     public void enablePlacementItem(PuzzleObject item)
     {
-		validObjects.Add(item);
+        validObjects.Add(item);
     }
 
     private void populateValidItems()
@@ -79,8 +86,8 @@ public class ShrineGrid : MonoBehaviour {
         List<Biome> allBiomes = GameObject.Find("WorldGen").GetComponent<GenerationManager>().biomes;
 
         // Calculate the bounding edges of our heat-moisture box
-        float moistureMin = Globals.heatMoistureVector.y > 0 ? 
-            Globals.heatMoistureOrigin.y - Globals.heatMoistureMin:
+        float moistureMin = Globals.heatMoistureVector.y > 0 ?
+            Globals.heatMoistureOrigin.y - Globals.heatMoistureMin :
             Globals.heatMoistureOrigin.y + Globals.heatMoistureVector.y - Globals.heatMoistureMin;
         float moistureMax = Globals.heatMoistureVector.y > 0 ?
             Globals.heatMoistureOrigin.y + Globals.heatMoistureVector.y + Globals.heatMoistureMin :
@@ -94,28 +101,28 @@ public class ShrineGrid : MonoBehaviour {
 
         // Calculate max distance
         float maxDist = Vector2.Distance(new Vector2(heatMax, moistureMax), Globals.heatMoistureOrigin);
-       
+
         foreach (Biome b in allBiomes)
         {
             // If the biome is in our box, add it as a valid biome
-            if(b.heatAvg <= heatMax && b.heatAvg >= heatMin &&
+            if (b.heatAvg <= heatMax && b.heatAvg >= heatMin &&
                 b.moistureAvg <= moistureMax && b.moistureAvg >= moistureMin)
             {
-                float distance = Vector2.Distance(Globals.heatMoistureOrigin,new Vector2(b.heatAvg,b.moistureAvg));
+                float distance = Vector2.Distance(Globals.heatMoistureOrigin, new Vector2(b.heatAvg, b.moistureAvg));
                 float weight = distance / maxDist;
                 weight = Mathf.Sqrt(weight);
 
                 if (weight > Globals.heatMostureDistGuaranteed && Random.value <= weight) continue;
 
                 // Add all trees with puzzleObjects associated with the current biome
-                foreach(GameObject tree in b.treeTypes)
+                foreach (GameObject tree in b.treeTypes)
                 {
-                    foreach(PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
+                    foreach (PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
                     {
                         if (po != null)
                             enablePlacementItem(po);
                     }
-                    
+
                 }
 
                 // Add all doodads with puzzleObjects associated with the current biome
@@ -126,7 +133,7 @@ public class ShrineGrid : MonoBehaviour {
                         enablePlacementItem(po);
                 }
             }
-        }  
+        }
     }
 
     private Vector2 realToGrid(Vector3 pos)
@@ -149,7 +156,7 @@ public class ShrineGrid : MonoBehaviour {
     {
         float squareSize = size / resolution;
         Vector3 corner = transform.position - new Vector3(0.5f * size, 0, 0.5f * size);
-        Vector3 offset = new Vector3(grid.x * squareSize,0,grid.y*squareSize);
+        Vector3 offset = new Vector3(grid.x * squareSize, 0, grid.y * squareSize);
         return corner + offset;
     }
 
@@ -157,39 +164,40 @@ public class ShrineGrid : MonoBehaviour {
     {
         // Clear old state
         curState.Clear();
-        
+
         // Find all objects in our square range
-        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size*0.5f,10, size * 0.5f),Quaternion.identity,notTerrain);
-        foreach(Collider collider in colliders)
+        Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size * 0.5f, 10, size * 0.5f), Quaternion.identity, notTerrain);
+        foreach (Collider collider in colliders)
         {
             GameObject go = collider.gameObject;
             Vector2 gridPos = realToGrid(go.transform.position);
 
             // Init list if needed
-            if (!curState.ContainsKey(gridPos)||curState[gridPos] == null)
+            if (!curState.ContainsKey(gridPos) || curState[gridPos] == null)
                 curState[gridPos] = new List<PuzzleObject>();
 
             // Make sure it's a valid object
             PuzzleObject po = go.GetComponent<PuzzleObject>();
-            if(po != null)
+            if (po != null)
                 curState[gridPos].Add(po);
         }
     }
 
     private void checkDone()
     {
-		PuzzleObject tarObj;
+        PuzzleObject tarObj;
 
         // Look at each requirement in targetState
-		foreach (Vector2 cell in targetState.Keys)
+        foreach (Vector2 cell in targetState.Keys)
         {
             // If curState doesn't have anything in this cell, it can't be complete
-            if (!curState.ContainsKey(cell)) {
+            if (!curState.ContainsKey(cell))
+            {
                 isDone = false;
                 return;
             }
             tarObj = targetState[cell].GetComponent<PuzzleObject>();
-            
+
             // if we don't currently have the desired item in the cell, it can't be complete    
             if (curState[cell].IndexOf(tarObj) == -1)
             {
@@ -197,14 +205,14 @@ public class ShrineGrid : MonoBehaviour {
                 isDone = false;
                 return;
             }
-            
+
             // if there are other puzzle objects in the cell, it can't be complete
             if (curState[cell].Count > 1)
             {
                 isDone = false;
                 return;
             }
-		}
+        }
         // looped through all and did not return false, so we found all of them
         isDone = true;
         complete();
@@ -217,13 +225,13 @@ public class ShrineGrid : MonoBehaviour {
         numItems = Random.Range(minSolItems, maxSolItems);
         for (int i = 0; i < numItems; i++)
         {
-            Vector2 centerSquare = new Vector2(Mathf.Floor(resolution/2), Mathf.Floor(resolution / 2));
-            Vector2 place = new Vector2(Random.Range(0, resolution),Random.Range(0, resolution));
-            while(place == centerSquare)
+            Vector2 centerSquare = new Vector2(Mathf.Floor(resolution / 2), Mathf.Floor(resolution / 2));
+            Vector2 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
+            while (place == centerSquare)
                 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
             int index = Random.Range(0, validObjects.Count);
             PuzzleObject placeObj = validObjects[index];
-            if(placeObj != null)
+            if (placeObj != null)
                 targetState[place] = placeObj;
         }
     }
@@ -246,7 +254,7 @@ public class ShrineGrid : MonoBehaviour {
 
                 Vector2 curGrid = new Vector2(j, i);
                 Vector3 cur = gridToReal(curGrid);
-                GameObject pillar = Instantiate(vertexPillar,snapToTerrain(cur),vertexPillar.transform.rotation) as GameObject;
+                GameObject pillar = Instantiate(vertexPillar, snapToTerrain(cur), vertexPillar.transform.rotation) as GameObject;
                 pillar.transform.parent = gameObject.transform;
             }
         }
@@ -275,7 +283,7 @@ public class ShrineGrid : MonoBehaviour {
                 Vector2 curGrid = new Vector2(i, j);
                 //Vector3 cur = gridToReal(curGrid);
                 if (targetState.ContainsKey(curGrid) && !curState.ContainsKey(curGrid))
-                    drawSquare(curGrid,Color.red);
+                    drawSquare(curGrid, Color.red);
                 else if (targetState.ContainsKey(curGrid) && curState.ContainsKey(curGrid))
                     drawSquare(curGrid, Color.green);
                 else if (curState.ContainsKey(curGrid))
@@ -288,12 +296,12 @@ public class ShrineGrid : MonoBehaviour {
     private void drawSquare(Vector2 pos, Color color)
     {
         Vector3 topleft = gridToReal(pos + Vector2.up);
-        Vector3 topright= gridToReal(pos + Vector2.right + Vector2.up);
+        Vector3 topright = gridToReal(pos + Vector2.right + Vector2.up);
         Vector3 botleft = gridToReal(pos);
         Vector3 botright = gridToReal(pos + Vector2.right);
 
         // Top
-        Debug.DrawLine(topleft,topright,color);
+        Debug.DrawLine(topleft, topright, color);
         // Bottom
         Debug.DrawLine(botleft, botright, color);
         // Left
@@ -324,29 +332,29 @@ public class ShrineGrid : MonoBehaviour {
                 if (inCell != null && inCell.Count == 1 && inCell.Contains(targetItem))
                 {
                     // If we don't have a glow in this cell, add a glow
-                    if(!glowGrid.ContainsKey(curGrid) || !glowGrid[curGrid])
+                    if (!isDone && (!glowGrid.ContainsKey(curGrid) || !glowGrid[curGrid]))
                     {
                         //Debug.Log("Exactly one item" + inCell.Count + " " + inCell.Contains(targetItem));
-                        
+
                         glowGrid[curGrid] = true;
-                        GameObject glowInstance = Instantiate(glow, cur + new Vector3(size/resolution*0.5f,0, size / resolution * 0.5f),
+                        GameObject glowInstance = Instantiate(glow, cur + new Vector3(size / resolution * 0.5f, 0, size / resolution * 0.5f),
                             Quaternion.identity) as GameObject;
-                        glowInstance.name = "Glow "+gameObject.GetHashCode() + curGrid;
+                        glowInstance.name = "Glow " + gameObject.GetHashCode() + curGrid;
                     }
                 }
 
-                // Remove glow instances from incomplete cells marked complete
+                // Remove glow instances from incomplete cells marked complete or all if the
 
                 // If there is not exactly one item in the cell or the cell doesn't contain the target and we have a glow in the cell...
-                
-                else if (inCell != null && glowGrid.ContainsKey(curGrid) && glowGrid[curGrid] && (inCell.Count != 1 || !inCell.Contains(targetItem)))
+
+                else if (isDone && inCell != null && glowGrid.ContainsKey(curGrid) && glowGrid[curGrid] && (inCell.Count != 1 || !inCell.Contains(targetItem)))
                 {
                     //Debug.Log("Not Exactly one item"+inCell.Count + " " + inCell.Contains(targetItem));
-                    
+
                     glowGrid[curGrid] = false;
                     GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + curGrid);
                     Destroy(glowInstance);
-                    
+
                 }
             }
         }
@@ -354,10 +362,12 @@ public class ShrineGrid : MonoBehaviour {
 
     private void complete()
     {
-        // Make the shrine glow
-        Instantiate(glow,transform.position+Vector3.up*10,Quaternion.identity);
+        Destroy(shrineGlow);
+        shrineGlow = Instantiate(completeGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+        // Stop the cells from glowing
+        drawGlows();
         // Change the chunk
-        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position,heatMoistureChange);
+        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, heatMoistureChange);
         // Add a star
         GameObject.Find("Sky").GetComponent<Sky>().addStar();
         // Update puzzle complexity
@@ -389,33 +399,33 @@ public class ShrineGrid : MonoBehaviour {
         return ret;
     }
 
-	public void saveTransforms()
-	{
-		saved_position = transform.position;
-		saved_rotation = transform.rotation;
-		saved_scale = transform.localScale;
-	}
+    public void saveTransforms()
+    {
+        saved_position = transform.position;
+        saved_rotation = transform.rotation;
+        saved_scale = transform.localScale;
+    }
 
-	public void copyFrom(ShrineGrid shrine)
-	{
-		debug = shrine.debug;
-		isDone = shrine.isDone;
-		size = shrine.size;
-		resolution = shrine.resolution;
-		minSolItems = shrine.minSolItems;
-		maxSolItems = shrine.maxSolItems;
-		mural = shrine.mural;
-		glow = shrine.glow;
-		vertexPillar = shrine.vertexPillar;
-		curState = shrine.curState;
-		targetState = shrine.targetState;
-		validObjects = shrine.validObjects;
-		notTerrain = shrine.notTerrain;
-		glowLayer = shrine.glowLayer;
-		glowGrid = shrine.glowGrid;
-		saved_position = shrine.saved_position;
-		saved_rotation = shrine.saved_rotation;
-		saved_scale = shrine.saved_scale;
-	}
-		
+    public void copyFrom(ShrineGrid shrine)
+    {
+        debug = shrine.debug;
+        isDone = shrine.isDone;
+        size = shrine.size;
+        resolution = shrine.resolution;
+        minSolItems = shrine.minSolItems;
+        maxSolItems = shrine.maxSolItems;
+        mural = shrine.mural;
+        glow = shrine.glow;
+        vertexPillar = shrine.vertexPillar;
+        curState = shrine.curState;
+        targetState = shrine.targetState;
+        validObjects = shrine.validObjects;
+        notTerrain = shrine.notTerrain;
+        glowLayer = shrine.glowLayer;
+        glowGrid = shrine.glowGrid;
+        saved_position = shrine.saved_position;
+        saved_rotation = shrine.saved_rotation;
+        saved_scale = shrine.saved_scale;
+    }
+
 }
