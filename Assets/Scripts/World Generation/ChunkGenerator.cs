@@ -1,27 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+//[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ChunkGenerator : MonoBehaviour {
-
-    public float chunk_size = 10;           // The size of each chunk in world coordinates
-    public int chunk_resolution = 10;     // The number of vertices on one side if the chunk
     public Material landMaterial;
+    public NoiseGen XDeviationMap;
+    public NoiseGen ZDeviationMap;
+    public float XZDeviationRatio = 0.5f;
+    
+    private GameObject TerrainParent;
 
-	private Vector3[] vertices;
+    //references
     private NoiseSynth synth;
     private GenerationManager genManager;
 
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
+        TerrainParent = new GameObject("Terrain");
+        TerrainParent.transform.parent = transform;
         synth.Init();
 	}
 
-	public void generate (int chunk_x,int chunk_y,float time, Biome curBiome) {
+	public void generate (int chunk_x, int chunk_y, float chunk_size, int chunk_resolution) {
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
+        chunk.transform.parent = TerrainParent.transform;
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
         mr.material = landMaterial;
         MeshFilter mf = chunk.AddComponent<MeshFilter>();
@@ -32,17 +37,26 @@ public class ChunkGenerator : MonoBehaviour {
         chunk.transform.position = pos;
         
         // Generate chunk_resolution^2 vertices
-		vertices = new Vector3[(chunk_resolution*chunk_resolution)];
+		Vector3[] vertices = new Vector3[(chunk_resolution*chunk_resolution)];
         
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
-                float x = ix * chunk_size/(chunk_resolution-1); 
-                float y = iy * chunk_size / (chunk_resolution-1);
+                float origx = chunk.transform.position.x + ix * chunk_size / (chunk_resolution - 1); // where the vertex would have
+                float origy = chunk.transform.position.z + iy * chunk_size / (chunk_resolution - 1); // been without XZDeviation
+                float x, y;
+                if(XZDeviationRatio == 0) {
+                    x = ix * chunk_size / (chunk_resolution - 1);
+                    y = iy * chunk_size / (chunk_resolution - 1);
+                } else {
+                    x = (ix + Mathf.Repeat(XDeviationMap.genPerlin(origx, origy, 0), XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
+                    y = (iy + Mathf.Repeat(ZDeviationMap.genPerlin(origx, origy, 0), XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
+                }
+                //x = (ix + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
+                //y = (iy + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // the deviations are different; also, the chunks don't line up
                 float xpos = chunk.transform.position.x + x;
                 float ypos = chunk.transform.position.z + y;
-
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(xpos, ypos,Globals.time), y);
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(xpos, ypos, 0), y); // replace 0 with Globals.time eventually
 
             }
 		}
@@ -53,10 +67,8 @@ public class ChunkGenerator : MonoBehaviour {
         int[] triangles = new int[(chunk_resolution-1)*(chunk_resolution-1) * 6];
         int i = 0;
         // iterate through each quad in vertices
-		for(int y = 0; y < chunk_resolution-1; y++)
-        {
-            for(int x = 0; x < chunk_resolution-1; x++)
-            {
+		for(int y = 0; y < chunk_resolution-1; y++){
+            for(int x = 0; x < chunk_resolution-1; x++){
                 // Specify quad edges as vertex indices
                 //v1 ________ v2
                 //  |        |
@@ -69,12 +81,21 @@ public class ChunkGenerator : MonoBehaviour {
                 int v4 = (x+1) + (y + 1) * chunk_resolution;
 
                 // Create two triangles from the quad
-                triangles[i] = v4;
-                triangles[i + 1] = v1;
-                triangles[i + 2] = v3;
-                triangles[i + 3] = v1;
-                triangles[i + 4] = v4;
-                triangles[i + 5] = v2;
+                if(Mathf.Repeat(x + y, 2) == 1) { //top left to bottom right
+                    triangles[i] = v4;
+                    triangles[i + 1] = v1;
+                    triangles[i + 2] = v3;
+                    triangles[i + 3] = v1;
+                    triangles[i + 4] = v4;
+                    triangles[i + 5] = v2;
+                } else { //top right to bottom left
+                    triangles[i] = v4;
+                    triangles[i + 1] = v2;
+                    triangles[i + 2] = v3;
+                    triangles[i + 3] = v2;
+                    triangles[i + 4] = v1;
+                    triangles[i + 5] = v3;
+                }
 
                 i += 6;
             }
@@ -86,7 +107,7 @@ public class ChunkGenerator : MonoBehaviour {
 	}
 
     // Calculate vertex colors
-    public void colorChunk(GameObject chunkObj)
+    public void colorChunk(GameObject chunkObj, float chunk_size)
     {
         Vector2 chunk = genManager.worldToChunk(chunkObj.transform.position);
         Biome curBiome = genManager.chooseBiome(chunk);
@@ -190,7 +211,4 @@ public class ChunkGenerator : MonoBehaviour {
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
     }
-
-    
-    
 }

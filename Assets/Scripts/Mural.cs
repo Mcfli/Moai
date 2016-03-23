@@ -22,6 +22,8 @@ public class Mural : MonoBehaviour {
     {
        
         muralTex = new Texture2D(imageRes * numSquares, imageRes * numSquares,TextureFormat.ARGB32,false);
+        muralTex.name = "Mural Texture";
+        muralTex.filterMode = FilterMode.Point;
         
         Color[] newPixels = new Color[imageRes * numSquares * imageRes * numSquares];
         for(int i = 0; i< newPixels.Length; i++)

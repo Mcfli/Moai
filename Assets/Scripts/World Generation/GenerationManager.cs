@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GenerationManager : MonoBehaviour {
-
-    public float time = 0.0f;
-
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 1;
@@ -17,10 +14,10 @@ public class GenerationManager : MonoBehaviour {
 
     private GameObject player;
     private ChunkGenerator chunkGen;
+    private WaterScript Water;
     private TreeManager tree_manager;
     private WeatherManager weather_manager;
     private ShrineManager shrine_manager;
-    private Vector2 cur_chunk;
     private List<Vector2> loaded_chunks;
     private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
@@ -31,20 +28,22 @@ public class GenerationManager : MonoBehaviour {
     private Dictionary<Vector2, Vector2> mapChanges;
 
     void Awake() {
-        tree_manager = gameObject.GetComponent<TreeManager>();
-        chunkGen = gameObject.GetComponent<ChunkGenerator>();
-        shrine_manager = gameObject.GetComponent<ShrineManager>();
+        tree_manager = GetComponent<TreeManager>();
+        chunkGen = GetComponent<ChunkGenerator>();
+        shrine_manager = GetComponent<ShrineManager>();
+        Water = GetComponent<WaterScript>();
         weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
-        chunkGen.chunk_size = chunk_size;
-        chunkGen.chunk_resolution = chunk_resolution;
-        cur_chunk = new Vector2(-1, -1);
+        Globals.cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new List<Vector2>();
         loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
         moistureMap.Init();
         heatMap.Init();
-      
+    }
+
+    void Start() {
+        checkPosition();
     }
 	
 	// Update is called once per frame
@@ -85,29 +84,27 @@ public class GenerationManager : MonoBehaviour {
         float player_x = Globals.Player.transform.position.x;
         float player_y = Globals.Player.transform.position.z; // In unity, y is vertical displacement
         Vector2 player_chunk = new Vector2(Mathf.FloorToInt(player_x/chunk_size), Mathf.FloorToInt(player_y / chunk_size));
-        if(cur_chunk != player_chunk){
-            cur_chunk = player_chunk;
+        if(Globals.cur_chunk != player_chunk){
+            Globals.cur_chunk = player_chunk;
             unloadChunks();
             unloadTrees();
 			unloadShrines();
             loadChunks();
             loadTrees();
 			loadShrines();
-            weather_manager.moveParticles(chunkToWorld(cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-            Globals.cur_biome = chooseBiome(cur_chunk);
+            weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+            Globals.cur_biome = chooseBiome(Globals.cur_chunk);
         }
     }
 
     // Loads surrounding chunks within chunk_load_dist range
     void loadChunks() {
-        for (int x = (int)cur_chunk.x - chunk_load_dist; x <= (int)cur_chunk.x + chunk_load_dist; x++)
-        {
-            for (int y = (int)cur_chunk.y - chunk_load_dist; y <= (int)cur_chunk.y + chunk_load_dist; y++)
-            {
+        for (int x = (int)Globals.cur_chunk.x - chunk_load_dist; x <= (int)Globals.cur_chunk.x + chunk_load_dist; x++){
+            for (int y = (int)Globals.cur_chunk.y - chunk_load_dist; y <= (int)Globals.cur_chunk.y + chunk_load_dist; y++){
                 Vector2 this_chunk = new Vector2(x, y);
-                if (!loaded_chunks.Contains(this_chunk))
-                {
+                if (!loaded_chunks.Contains(this_chunk)){
                     generateChunk(this_chunk);
+                    Water.generate(this_chunk);
                     loaded_chunks.Add(this_chunk);
                 }
             }
@@ -115,9 +112,9 @@ public class GenerationManager : MonoBehaviour {
     }
 
     void loadTrees(){
-        for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
+        for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++)
         {
-            for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
+            for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++)
             {
                 Vector2 this_chunk = new Vector2(x, y);
                 Biome curBiome = chooseBiome(this_chunk);
@@ -132,9 +129,9 @@ public class GenerationManager : MonoBehaviour {
 
 	void loadShrines()
 	{
-		for (int x = (int)cur_chunk.x - tree_load_dist; x <= (int)cur_chunk.x + tree_load_dist; x++)
+		for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++)
 		{
-			for (int y = (int)cur_chunk.y - tree_load_dist; y <= (int)cur_chunk.y + tree_load_dist; y++)
+			for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++)
 			{
 				Vector2 this_chunk = new Vector2(x, y);
 				if (!loaded_shrine_chunks.Contains(this_chunk))
@@ -151,12 +148,12 @@ public class GenerationManager : MonoBehaviour {
         for (int i = loaded_chunks.Count-1; i >= 0; i--)
         {
             Vector2 this_chunk = loaded_chunks[i];
-            if (Mathf.Abs(this_chunk.x - cur_chunk.x) > chunk_load_dist ||
-                Mathf.Abs(this_chunk.y - cur_chunk.y) > chunk_load_dist)
+            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > chunk_load_dist ||
+                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > chunk_load_dist)
             {
-                string chunk_name = "chunk (" + this_chunk.x + "," + this_chunk.y + ")";
-                GameObject chunk = GameObject.Find(chunk_name);
-                Destroy(chunk);
+                string coordinates = "(" + this_chunk.x + "," + this_chunk.y + ")";
+                Destroy(GameObject.Find("chunk " + coordinates));
+                Destroy(GameObject.Find("water " + coordinates));
                 loaded_chunks.RemoveAt(i);
             }
         }
@@ -167,8 +164,8 @@ public class GenerationManager : MonoBehaviour {
         for (int i = loaded_tree_chunks.Count - 1; i >= 0; i--)
         {
             Vector2 this_chunk = loaded_tree_chunks[i];
-            if (Mathf.Abs(this_chunk.x - cur_chunk.x) > tree_load_dist ||
-                Mathf.Abs(this_chunk.y - cur_chunk.y) > tree_load_dist)
+            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_load_dist ||
+                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_load_dist)
             {
                 tree_manager.unloadTrees((int)this_chunk.x, (int)this_chunk.y);
                 loaded_tree_chunks.RemoveAt(i);
@@ -181,8 +178,8 @@ public class GenerationManager : MonoBehaviour {
 		for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--)
 		{
 			Vector2 this_chunk = loaded_shrine_chunks[i];
-			if (Mathf.Abs(this_chunk.x - cur_chunk.x) > tree_load_dist ||
-				Mathf.Abs(this_chunk.y - cur_chunk.y) > tree_load_dist)
+			if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_load_dist ||
+				Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_load_dist)
 			{
 				shrine_manager.unloadShrines((int)this_chunk.x, (int)this_chunk.y);
 				loaded_shrine_chunks.RemoveAt(i);
@@ -226,9 +223,8 @@ public class GenerationManager : MonoBehaviour {
     /// </summary>
     /// <param name="chunk_x"></param>
     /// <param name="chunk_y"></param>
-    void generateChunk(Vector2 chunk)
-    { 
-        chunkGen.generate((int)chunk.x, (int)chunk.y,time,chooseBiome(chunk));
+    void generateChunk(Vector2 chunk){ 
+        chunkGen.generate((int)chunk.x, (int)chunk.y, chunk_size, chunk_resolution);
         smoothChunkColors(chunk);
     }
 
@@ -261,7 +257,7 @@ public class GenerationManager : MonoBehaviour {
     {
         string chunk_name = "chunk (" + chunk.x + "," + chunk.y + ")";
         GameObject chunk_obj = GameObject.Find(chunk_name);
-        chunkGen.colorChunk(chunk_obj);
+        chunkGen.colorChunk(chunk_obj, chunk_size);
     }
 
 }

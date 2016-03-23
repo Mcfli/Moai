@@ -9,7 +9,7 @@ public class TreeManager : MonoBehaviour {
     private static Dictionary<Vector2, List<treeStruct>> trees;
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
         gen_manager = gameObject.GetComponent<GenerationManager>();
         trees = new Dictionary<Vector2, List<treeStruct>>();
     }
