@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class NoiseGen : MonoBehaviour
 {
@@ -16,9 +16,11 @@ public class NoiseGen : MonoBehaviour
     private static int w_o;
 
     private float smoothness_inv;
+    private List<Vector3> lookupTable;
 
     public void Init()
     {
+        initializeHashTable();
         smoothness_inv = 1 / smoothness;
         Random.seed = seed;
         x_o = Random.Range(2,int.MaxValue);
@@ -27,6 +29,21 @@ public class NoiseGen : MonoBehaviour
         w_o = Random.Range(2, int.MaxValue);
     }
 
+    // Initializes the Vector permutation (<0,0,0>,<0,0,1>...etc)lookup table
+    private void initializeHashTable()
+    {
+        lookupTable = new List<Vector3>(27);
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                for (int z = -1; z <= 1; z++)
+                {
+                    lookupTable.Add(new Vector3(x,y,z));
+                }
+            }
+        }
+    }
     // Cubic interpolation
 
     public static float cosInterpolate(float a, float b, float x)
@@ -177,8 +194,7 @@ public class NoiseGen : MonoBehaviour
     private Vector3 getNodeVector(int x, int y, int z)
     {
         Random.seed = hash(x, y, z);
-        return new Vector3(Mathf.RoundToInt(2*Random.value-1), Mathf.RoundToInt(2 *Random.value-1),
-            Mathf.RoundToInt(2 * Random.value - 1));
+        return lookupTable[Random.Range(0,lookupTable.Count)];
     }
 
     // Generates an int from an x and a y value
