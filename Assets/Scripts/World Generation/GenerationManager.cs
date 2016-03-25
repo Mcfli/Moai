@@ -153,7 +153,7 @@ public class GenerationManager : MonoBehaviour {
             {
                 string coordinates = "(" + this_chunk.x + "," + this_chunk.y + ")";
                 Destroy(GameObject.Find("chunk " + coordinates));
-                Destroy(GameObject.Find("water " + coordinates));
+                Water.destroyWater(this_chunk);
                 loaded_chunks.RemoveAt(i);
             }
         }

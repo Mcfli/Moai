@@ -11,22 +11,15 @@ public class WaterScript : MonoBehaviour {
 
     //waves
     public int waveLoadDist = 1;
-    public float waveHeight = 10.0f;
-    public float waveSpeed = 1.0f;
-    public float waveLength = 1.0f;
-    public Vector2 randomHeight = new Vector2(0, 0.2f); //range
-    public Vector2 randomSpeed = new Vector2(0, 5.0f); //range
-    public NoiseGen randomHeightMap;
-    public NoiseGen randomSpeedMap;
+    public Vector3 waveHeight;
+    public Vector3 waveSpeed;
+    public Vector3 waveLength;
+    public Vector3 waveOffset;
 
     //references
     private GenerationManager genManager;
-
-    private Vector2 oldChunk;
-    private List<Mesh> animatedMeshes;
-    private List<Vector2[]> randomHeightSpeed;
-    private Vector2 curr_randomHeight; //range
-    private Vector2 curr_randomSpeed; //range
+    private Dictionary<Vector2, GameObject> waterObjects;
+    private Dictionary<Vector2, Mesh> waterMeshes;
 
     //finals
     private int chunk_resolution;
@@ -48,42 +41,34 @@ public class WaterScript : MonoBehaviour {
         WaterParent.transform.parent = transform;
         WaterParent.transform.position = new Vector3(0, Globals.water_level, 0);
 
-        animatedMeshes = new List<Mesh>();
-        randomHeightSpeed = new List<Vector2[]>();
+        waterMeshes = new Dictionary<Vector2, Mesh>();
+        waterObjects = new Dictionary<Vector2, GameObject>();
 
         // underwater effects
         defaultFog = RenderSettings.fog;
         defaultFogColor = RenderSettings.fogColor;
         defaultFogDensity = RenderSettings.fogDensity;
     }
-
-    void Start() {
-        oldChunk = Globals.cur_chunk;
-        updateAnimatedMeshes();
-    }
 	
 	// Update is called once per frame
 	void Update () {
         WaterParent.transform.position = new Vector3(0, Globals.water_level, 0);
 
-        if(oldChunk != Globals.cur_chunk || randomHeight != curr_randomHeight || randomSpeed != curr_randomSpeed) {
-            oldChunk = Globals.cur_chunk;
-            updateAnimatedMeshes();
-        }
-
-        //wave
-        for(int i = 0; i < animatedMeshes.Count; i++) {
-            Vector3[] vertices = animatedMeshes[i].vertices;
-            int chunkX = animatedMeshes[i].name[7] - '0';
-            //int chunkY = animatedMeshes[i].name[9] - '0';
-            for(int j = 0; j < vertices.Length; j++) {
-                Vector3 vertex = vertices[j];
-                vertex.y = Mathf.Sin(Globals.time / Globals.time_resolution * waveSpeed + (chunkX * chunk_size + vertex.x) * waveLength) * waveHeight;  // wave
-                vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + 10) * randomHeightSpeed[i][j].y) * randomHeightSpeed[i][j].x;           // individual
-                vertices[j] = vertex;
+        //waves
+        for(float x = Globals.cur_chunk.x - waveLoadDist; x <= Globals.cur_chunk.x + waveLoadDist; x++) {
+            for(float z = Globals.cur_chunk.y - waveLoadDist; z <= Globals.cur_chunk.y + waveLoadDist; z++) {
+                Mesh m = waterMeshes[new Vector2(x, z)];
+                Vector3[] vertices = m.vertices;
+                for(int j = 0; j < vertices.Length; j++) {
+                    Vector3 vertex = vertices[j];
+                    vertex.y  = Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.x) * waveSpeed.x + ( x      * chunk_size + vertex.x           ) * waveLength.x) * waveHeight.x;  // X
+                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.y) * waveSpeed.y + ((x + z) * chunk_size + vertex.x + vertex.z) * waveLength.y) * waveHeight.y; // D (labelled Y)
+                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.z) * waveSpeed.z + (     z  * chunk_size +            vertex.z) * waveLength.z) * waveHeight.z; // Z
+                    vertices[j] = vertex;
+                }
+                m.vertices = vertices;
+                m.RecalculateNormals();
             }
-            animatedMeshes[i].vertices = vertices;
-            animatedMeshes[i].RecalculateNormals();
         }
 
         //if underwater
@@ -100,6 +85,7 @@ public class WaterScript : MonoBehaviour {
 
     public void generate(Vector2 coordinates){
         GameObject water = new GameObject();
+        waterObjects.Add(coordinates, water);
         water.layer = LayerMask.NameToLayer("Water");
         water.name = "water (" + coordinates.x + "," + coordinates.y + ")";
         water.transform.parent = WaterParent.transform;
@@ -108,6 +94,7 @@ public class WaterScript : MonoBehaviour {
         MeshFilter mf = water.AddComponent<MeshFilter>();
         mf.mesh = new Mesh();
         mf.mesh.name = "water (" + coordinates.x + "," + coordinates.y + ")";
+        waterMeshes.Add(coordinates, mf.mesh);
 
         water.transform.localPosition = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size); //position
 
@@ -155,38 +142,13 @@ public class WaterScript : MonoBehaviour {
         mf.mesh.triangles = triangles;
 
         ReCalcTriangles(mf.mesh);
-        //mf.mesh.RecalculateBounds();
-        //mf.mesh.RecalculateNormals();
         //water.AddComponent(typeof(MeshCollider));
     }
 
-    private void updateAnimatedMeshes() {
-        curr_randomSpeed = randomSpeed;
-        curr_randomHeight = randomHeight;
-        animatedMeshes = new List<Mesh>();
-        randomHeightSpeed = new List<Vector2[]>();
-        for(float x = Globals.cur_chunk.x - waveLoadDist; x <= Globals.cur_chunk.x + waveLoadDist; x++) {
-            for(float y = Globals.cur_chunk.y - waveLoadDist; y <= Globals.cur_chunk.y + waveLoadDist; y++) {
-                Mesh m = GameObject.Find("water (" + x + "," + y + ")").GetComponent<MeshFilter>().mesh;
-                animatedMeshes.Add(m);
-                Vector2[] heightSpeed = new Vector2[m.vertexCount];
-                for(int i = 0; i < m.vertexCount; i++) {
-                    float height, speed;
-
-                    if(randomHeight.x > randomHeight.y || randomHeight.y == 0) height = 0;
-                    else if(randomHeight.x == randomHeight.y) height = randomHeight.y;
-                    else height = Mathf.Repeat(randomHeightMap.genPerlin(x * chunk_size + m.vertices[i].x, y * chunk_size + m.vertices[i].z, 0), randomHeight.y - randomHeight.x) + randomHeight.x;
-                    if(Mathf.Repeat(Mathf.Ceil((m.vertices[i].x + m.vertices[i].z) / chunk_size * (chunk_resolution - 1)) + x + y, 2) == 1) height *= -1;
-
-                    if(randomSpeed.x > randomSpeed.y || randomSpeed.y == 0) speed = 0;
-                    else if(randomSpeed.x == randomSpeed.y) speed = randomSpeed.y;
-                    else speed = Mathf.Repeat(randomSpeedMap.genPerlin(x * chunk_size + m.vertices[i].x, y * chunk_size + m.vertices[i].z, 0), randomSpeed.y - randomSpeed.x) + randomSpeed.x;
-
-                    heightSpeed[i] = new Vector2(height, speed);
-                }
-                randomHeightSpeed.Add(heightSpeed);
-            }
-        }
+    public void destroyWater(Vector2 coordinates) {
+        Destroy(waterObjects[coordinates]);
+        waterObjects.Remove(coordinates);
+        waterMeshes.Remove(coordinates);
     }
 
     private void ReCalcTriangles(Mesh mesh) {
