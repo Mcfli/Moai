@@ -10,11 +10,13 @@ public class WaterScript : MonoBehaviour {
     public float fogDensity;
 
     //waves
+    public int resolution;
     public int waveLoadDist = 1;
-    public Vector3 waveHeight;
+    public Vector3 waveHeight; // Y is actually Diagonal
     public Vector3 waveSpeed;
     public Vector3 waveLength;
     public Vector3 waveOffset;
+    public bool invertEveryOther;
 
     //references
     private GenerationManager genManager;
@@ -22,7 +24,6 @@ public class WaterScript : MonoBehaviour {
     private Dictionary<Vector2, Mesh> waterMeshes;
 
     //finals
-    private int chunk_resolution;
     private float chunk_size;
     private GameObject WaterParent;
 
@@ -34,7 +35,6 @@ public class WaterScript : MonoBehaviour {
     // Use this for initialization
     void Awake () {
         genManager = GetComponent<GenerationManager>();
-        chunk_resolution = genManager.chunk_resolution;
         chunk_size = genManager.chunk_size;
         Globals.water_level = InitialWaterLevel;
         WaterParent = new GameObject("Water");
@@ -61,9 +61,10 @@ public class WaterScript : MonoBehaviour {
                 Vector3[] vertices = m.vertices;
                 for(int j = 0; j < vertices.Length; j++) {
                     Vector3 vertex = vertices[j];
-                    vertex.y  = Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.x) * waveSpeed.x + ( x      * chunk_size + vertex.x           ) * waveLength.x) * waveHeight.x;  // X
-                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.y) * waveSpeed.y + ((x + z) * chunk_size + vertex.x + vertex.z) * waveLength.y) * waveHeight.y; // D (labelled Y)
-                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.z) * waveSpeed.z + (     z  * chunk_size +            vertex.z) * waveLength.z) * waveHeight.z; // Z
+                    vertex.y  = Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.x) * waveSpeed.x + ( x      * chunk_size + vertex.x           ) * waveLength.x) * waveHeight.x;
+                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.y) * waveSpeed.y + ((x + z) * chunk_size + vertex.x + vertex.z) * waveLength.y) * waveHeight.y;
+                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.z) * waveSpeed.z + (     z  * chunk_size +            vertex.z) * waveLength.z) * waveHeight.z;
+                    if(Mathf.Repeat(Mathf.Round((vertex.x + vertex.z) / chunk_size * (resolution-1)) + x + z, 2) == 1 && invertEveryOther) vertex.y *= -1;
                     vertices[j] = vertex;
                 }
                 m.vertices = vertices;
@@ -99,26 +100,26 @@ public class WaterScript : MonoBehaviour {
         water.transform.localPosition = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size); //position
 
         // Generate verticies
-        Vector3[] vertices = new Vector3[(chunk_resolution * chunk_resolution)];
-        for (int iy = 0; iy < chunk_resolution; iy++){
-            for (int ix = 0; ix < chunk_resolution; ix++){
-                float x = ix * chunk_size / (chunk_resolution - 1);
-                float y = iy * chunk_size / (chunk_resolution - 1);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, 0, y);
+        Vector3[] vertices = new Vector3[(resolution * resolution)];
+        for (int iy = 0; iy < resolution; iy++){
+            for (int ix = 0; ix < resolution; ix++){
+                float x = ix * chunk_size / (resolution - 1);
+                float y = iy * chunk_size / (resolution - 1);
+                vertices[iy * resolution + ix] = new Vector3(x, 0, y);
             }
         }
         mf.mesh.vertices = vertices;
 
         // Generate triangles using these vertices
-        int[] triangles = new int[(chunk_resolution - 1) * (chunk_resolution - 1) * 6];
+        int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
         int i = 0;
         // iterate through each quad in vertices
-        for (int y = 0; y < chunk_resolution - 1; y++){
-            for (int x = 0; x < chunk_resolution - 1; x++){
-                int v1 = x + y * chunk_resolution;
-                int v2 = (x + 1) + y * chunk_resolution;
-                int v3 = x + (y + 1) * chunk_resolution;
-                int v4 = (x + 1) + (y + 1) * chunk_resolution;
+        for (int y = 0; y < resolution - 1; y++){
+            for (int x = 0; x < resolution - 1; x++){
+                int v1 = x + y * resolution;
+                int v2 = (x + 1) + y * resolution;
+                int v3 = x + (y + 1) * resolution;
+                int v4 = (x + 1) + (y + 1) * resolution;
 
                 if(Mathf.Repeat(x+y,2) == 1) { //top left to bottom right
                     triangles[i] = v4;
