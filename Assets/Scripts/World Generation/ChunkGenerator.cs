@@ -5,32 +5,42 @@ using System.Collections.Generic;
 public class ChunkGenerator : MonoBehaviour {
     public Material landMaterial;
     public NoiseGen DeviationMap;
-    public float XZDeviationRatio = 0.5f;
-    
+    public float XZDeviationRatio = 0.5f; //only deviates in 1 direction (sadly)
+    public float detailHeightDeviation = 3;
+    public int detailSubDivisions = 3;
+
     private GameObject TerrainParent;
 
     //references
     private NoiseSynth synth;
     private GenerationManager genManager;
 
+    //finals
+    private float chunk_size;
+    private int chunk_resolution;
+
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
         TerrainParent = new GameObject("Terrain");
         TerrainParent.transform.parent = transform;
+        chunk_size = genManager.chunk_size;
+        chunk_resolution = genManager.chunk_resolution;
         synth.Init();
 	}
 
-	public GameObject generate (Vector2 coordinates, float chunk_size, int chunk_resolution) {
+	public GameObject generate (Vector2 coordinates) {
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + coordinates.x + "," + coordinates.y + ")";
+        ChunkMeshes chunkMeshes = chunk.AddComponent<ChunkMeshes>();
         chunk.transform.parent = TerrainParent.transform;
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
         mr.material = landMaterial;
         MeshFilter mf = chunk.AddComponent<MeshFilter>();
-		mf.mesh = new Mesh();
-		mf.mesh.name = "chunk (" + coordinates.x + ","+ coordinates.y + ")";
+
+		chunkMeshes.lowMesh = new Mesh();
+        chunkMeshes.lowMesh.name = "chunk (" + coordinates.x + ","+ coordinates.y + ") [low]";
 
         Vector3 pos = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size);
         chunk.transform.position = pos;
@@ -44,18 +54,17 @@ public class ChunkGenerator : MonoBehaviour {
                 float y = iy * chunk_size / (chunk_resolution - 1);
                 float origx = x; float origy = y;
                 if(XZDeviationRatio != 0) {
-                    x += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2, (origy + coordinates.y * chunk_size) * 2+1, 0), XZDeviationRatio); // replace 0 with Globals.time eventually
-                    y += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2+1, (origy + coordinates.y * chunk_size) * 2, 0), XZDeviationRatio); // replace 0 with Globals.time eventually
+                    x += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2, (origy + coordinates.y * chunk_size) * 2+1, 0), XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
+                    y += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2+1, (origy + coordinates.y * chunk_size) * 2, 0), XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
                     //x = (ix + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
                     //y = (iy + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // the deviations are randomized again; also, the chunks don't line up
                 }
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
                 vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0), y); // replace 0 with Globals.time eventually
-
             }
 		}
 
-		mf.mesh.vertices = vertices;
+        chunkMeshes.lowMesh.vertices = vertices;
 
         // Generate triangles using these vertices
         int[] triangles = new int[(chunk_resolution-1)*(chunk_resolution-1) * 6];
@@ -83,28 +92,39 @@ public class ChunkGenerator : MonoBehaviour {
                     triangles[i + 4] = v4;
                     triangles[i + 5] = v2;
                 } else { //top right to bottom left
-                    triangles[i] = v4;
-                    triangles[i + 1] = v2;
-                    triangles[i + 2] = v3;
-                    triangles[i + 3] = v2;
-                    triangles[i + 4] = v1;
-                    triangles[i + 5] = v3;
+                    triangles[i] = v2;
+                    triangles[i + 1] = v3;
+                    triangles[i + 2] = v4;
+                    triangles[i + 3] = v3;
+                    triangles[i + 4] = v2;
+                    triangles[i + 5] = v1;
                 }
 
                 i += 6;
             }
         }
-		mf.mesh.triangles = triangles;
-        ReCalcTriangles(mf.mesh);
+		chunkMeshes.lowMesh.triangles = triangles;
+        ReCalcTriangles(chunkMeshes.lowMesh);
 
+        chunkMeshes.highMesh = Instantiate(chunkMeshes.lowMesh);
+        chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [high]";
+        subDivide(chunkMeshes.highMesh, coordinates, detailSubDivisions);
+
+        mf.mesh = chunkMeshes.highMesh;
         chunk.AddComponent(typeof(MeshCollider));
+        mf.mesh = chunkMeshes.lowMesh;
 
         return chunk;
 	}
 
     // Calculate vertex colors
-    public void colorChunk(GameObject chunkObj, float chunk_size)
-    {
+    public void colorChunk(GameObject chunkObj, float chunk_size){
+        ChunkMeshes cm = chunkObj.GetComponent<ChunkMeshes>();
+        colorMesh(chunkObj, cm.lowMesh, chunk_size);
+        colorMesh(chunkObj, cm.highMesh, chunk_size);
+    }
+
+    public void colorMesh(GameObject chunkObj, Mesh mesh, float chunk_size) {
         Vector2 chunk = genManager.worldToChunk(chunkObj.transform.position);
         Biome curBiome = genManager.chooseBiome(chunk);
         Biome up = genManager.chooseBiome(chunk + Vector2.up);
@@ -112,10 +132,9 @@ public class ChunkGenerator : MonoBehaviour {
         Biome left = genManager.chooseBiome(chunk + Vector2.left);
         Biome right = genManager.chooseBiome(chunk + Vector2.right);
 
-        Vector3[] verts = chunkObj.GetComponent<MeshFilter>().mesh.vertices;
+        Vector3[] verts = mesh.vertices;
         Color[] colors = new Color[verts.Length];
-        for (int c = 0; c < verts.Length; c += 3)
-        {
+        for(int c = 0; c < verts.Length; c += 3) {
             float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
             float h = verts[c].x / chunk_size;
             float v = verts[c].z / chunk_size;
@@ -132,11 +151,11 @@ public class ChunkGenerator : MonoBehaviour {
             Color color = biome_color;
             Color hcolor, vcolor;
 
-            if (h > 0.5)
-                hcolor = Color.Lerp(biome_color,right_color,0.5f*(h-0.5f));
+            if(h > 0.5)
+                hcolor = Color.Lerp(biome_color, right_color, 0.5f * (h - 0.5f));
             else
-                hcolor = Color.Lerp(left_color,biome_color,  0.5f*h);
-            if (v > 0.5)
+                hcolor = Color.Lerp(left_color, biome_color, 0.5f * h);
+            if(v > 0.5)
                 vcolor = Color.Lerp(biome_color, up_color, 0.5f * (v - 0.5f));
             else
                 vcolor = Color.Lerp(down_color, biome_color, 0.5f * v);
@@ -151,12 +170,11 @@ public class ChunkGenerator : MonoBehaviour {
             colors[c + 1] = color;
             colors[c + 2] = color;
         }
-        chunkObj.GetComponent<MeshFilter>().mesh.colors = colors;
+        mesh.colors = colors;
     }
 
-    public void refresh(GameObject chunk)
-    {
-        Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
+    public void refresh(GameObject chunk){
+        /*Vector3[] verts = chunk.GetComponent<MeshFilter>().mesh.vertices;
         for (int j = 0; j < verts.Length; j++)
         {
             float x = verts[j].x;
@@ -187,24 +205,62 @@ public class ChunkGenerator : MonoBehaviour {
             colors[c + 2] = color;
         }
         chunk.GetComponent<MeshFilter>().mesh.colors = colors;
+        */
+        //update heights
+        colorChunk(chunk, chunk_size);
     }
 
     private void ReCalcTriangles(Mesh mesh) {
         Vector3[] oldVerts = mesh.vertices;
         int[] triangles = mesh.triangles;
         Vector3[] vertices = new Vector3[triangles.Length];
-
-
         for (int i = 0; i < triangles.Length; i++){
             vertices[i] = oldVerts[triangles[i]];
-            
             triangles[i] = i;
-            
         }
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+    }
+
+    //assumes no shared vertices and returns no shared vertices
+    private void subDivide(Mesh mesh, Vector2 coordinates, int numOfDivisions) {
+        if(numOfDivisions < 1) return;
+        Vector3[] oldVerts = mesh.vertices;
+        Vector3[] vertices = new Vector3[oldVerts.Length * 4];
+        int[] triangles = new int[oldVerts.Length * 4];
+
+        for(int i = 0; i < oldVerts.Length; i += 3) {
+            Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
+            hypotMid = new Vector3(hypotMid.x, hypotMid.y + Mathf.Repeat(DeviationMap.genPerlin((hypotMid.x + coordinates.x * chunk_size) * 2 + 2, (hypotMid.z + coordinates.y * chunk_size) * 2 + 2, 0), detailHeightDeviation * 2) - detailHeightDeviation, hypotMid.z);
+            Vector3 midpoint1 = Vector3.Lerp(oldVerts[i+1], oldVerts[i+2], 0.5f);
+            Vector3 midpoint2 = Vector3.Lerp(oldVerts[i+2], oldVerts[i], 0.5f);
+            vertices[i * 4    ] = hypotMid;
+            vertices[i * 4 + 1] = oldVerts[i + 1];
+            vertices[i * 4 + 2] = midpoint1;
+
+            vertices[i * 4 + 3] = oldVerts[i + 2];
+            vertices[i * 4 + 4] = hypotMid;
+            vertices[i * 4 + 5] = midpoint1;
+
+            vertices[i * 4 + 6] = hypotMid;
+            vertices[i * 4 + 7] = oldVerts[i + 2];
+            vertices[i * 4 + 8] = midpoint2;
+
+            vertices[i * 4 + 9] = oldVerts[i];
+            vertices[i * 4 +10] = hypotMid;
+            vertices[i * 4 +11] = midpoint2;
+        }
+        for(int i = 0; i < triangles.Length; i++) triangles[i] = i;
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+
+        if(numOfDivisions == 1) {
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
+        }else subDivide(mesh, coordinates, numOfDivisions - 1);
     }
 }

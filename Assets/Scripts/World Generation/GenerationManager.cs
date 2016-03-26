@@ -6,7 +6,6 @@ public class GenerationManager : MonoBehaviour {
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 6;
-    public int chunk_detail_resolution = 32;
     public int chunk_detail_dist = 1;
     public List<Biome> biomes;
     public NoiseGen heatMap;
@@ -20,7 +19,6 @@ public class GenerationManager : MonoBehaviour {
     private WeatherManager weather_manager;
     private ShrineManager shrine_manager;
     private Dictionary<Vector2, GameObject> loaded_chunks;
-    private Dictionary<Vector2, GameObject> detailed_chunks; //subset of loaded_chunks
     private Dictionary<Vector2, GameObject> loaded_water;
     private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
@@ -113,28 +111,23 @@ public class GenerationManager : MonoBehaviour {
 
     // Loads chunks within chunk_load_dist range
     // Changes chunks within chunk_detail_dist range to detailed chunk
-    void loadChunks(Vector2 oldPos, Vector2 newPos) {
+    private void loadChunks(Vector2 oldPos, Vector2 newPos) {
         for (float x = newPos.x - chunk_load_dist; x <= newPos.x + chunk_load_dist; x++){
             for (float y = newPos.y - chunk_load_dist; y <= newPos.y + chunk_load_dist; y++) {
                 Vector2 coordinates = new Vector2(x, y);
                 if(oldPos == newPos || !inLoadDistance(oldPos, coordinates, chunk_load_dist)) {
-                    GameObject newChunk = chunkGen.generate(coordinates, chunk_size, chunk_resolution);
+                    GameObject newChunk = chunkGen.generate(coordinates);
                     chunkGen.colorChunk(newChunk, chunk_size);
                     loaded_chunks.Add(coordinates, newChunk);
                     loaded_water.Add(coordinates, waterScript.generate(coordinates));
                 }
-                if(inLoadDistance(newPos, coordinates, chunk_detail_dist) && (oldPos == newPos || (!inLoadDistance(oldPos, coordinates, chunk_detail_dist)))) {
-                    Destroy(loaded_chunks[coordinates]);
-                    loaded_chunks.Remove(coordinates);
-                    GameObject newChunk = chunkGen.generate(coordinates, chunk_size, chunk_detail_resolution);
-                    chunkGen.colorChunk(newChunk, chunk_size);
-                    loaded_chunks.Add(coordinates, newChunk);
-                }
+                if(inLoadDistance(newPos, coordinates, chunk_detail_dist) && (oldPos == newPos || (!inLoadDistance(oldPos, coordinates, chunk_detail_dist))))
+                    loaded_chunks[coordinates].GetComponent<MeshFilter>().mesh = loaded_chunks[coordinates].GetComponent<ChunkMeshes>().highMesh;
             }
         }
     }
 
-    void unloadChunks(Vector2 oldPos, Vector2 newPos) {
+    private void unloadChunks(Vector2 oldPos, Vector2 newPos) {
         if(oldPos == newPos) return;
         for(float x = (int)oldPos.x - chunk_load_dist; x <= oldPos.x + chunk_load_dist; x++) {
             for(float y = oldPos.y - chunk_load_dist; y <= oldPos.y + chunk_load_dist; y++) {
@@ -147,17 +140,13 @@ public class GenerationManager : MonoBehaviour {
                     waterScript.removeMesh(coordinates);
                 }
                 if(inLoadDistance(oldPos, coordinates, chunk_detail_dist) && !inLoadDistance(newPos, coordinates, chunk_detail_dist)) {
-                    Destroy(loaded_chunks[coordinates]);
-                    loaded_chunks.Remove(coordinates);
-                    GameObject newChunk = chunkGen.generate(coordinates, chunk_size, chunk_resolution);
-                    chunkGen.colorChunk(newChunk, chunk_size);
-                    loaded_chunks.Add(coordinates, newChunk);
+                    loaded_chunks[coordinates].GetComponent<MeshFilter>().mesh = loaded_chunks[coordinates].GetComponent<ChunkMeshes>().lowMesh;
                 }
             }
         }
     }
 
-    void loadTrees(Vector2 oldPos, Vector2 newPos) {
+    private void loadTrees(Vector2 oldPos, Vector2 newPos) {
         for (int x = (int)Globals.cur_chunk.x - tree_manager.treeLoadDistance; x <= (int)Globals.cur_chunk.x + tree_manager.treeLoadDistance; x++){
             for (int y = (int)Globals.cur_chunk.y - tree_manager.treeLoadDistance; y <= (int)Globals.cur_chunk.y + tree_manager.treeLoadDistance; y++){
                 Vector2 this_chunk = new Vector2(x, y);
@@ -170,7 +159,7 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
-    void unloadTrees(Vector2 oldPos, Vector2 newPos) {
+    private void unloadTrees(Vector2 oldPos, Vector2 newPos) {
         if(oldPos == newPos) return;
         for(int i = loaded_tree_chunks.Count - 1; i >= 0; i--) {
             Vector2 this_chunk = loaded_tree_chunks[i];
@@ -182,7 +171,7 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
-    void loadShrines(Vector2 oldPos, Vector2 newPos) {
+    private void loadShrines(Vector2 oldPos, Vector2 newPos) {
 		for (int x = (int)Globals.cur_chunk.x - tree_manager.treeLoadDistance; x <= (int)Globals.cur_chunk.x + tree_manager.treeLoadDistance; x++){
 			for (int y = (int)Globals.cur_chunk.y - tree_manager.treeLoadDistance; y <= (int)Globals.cur_chunk.y + tree_manager.treeLoadDistance; y++){
 				Vector2 this_chunk = new Vector2(x, y);
@@ -195,7 +184,7 @@ public class GenerationManager : MonoBehaviour {
 		}
 	}
 
-	void unloadShrines(Vector2 oldPos, Vector2 newPos) {
+    private void unloadShrines(Vector2 oldPos, Vector2 newPos) {
         if(oldPos == newPos) return;
         for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--){
 			Vector2 this_chunk = loaded_shrine_chunks[i];
@@ -236,8 +225,7 @@ public class GenerationManager : MonoBehaviour {
         return ret;
     }
 
-    void updateChunks()
-    {
+    private void updateChunks(){
         foreach(KeyValuePair<Vector2, GameObject> chunk in loaded_chunks) {
             chunkGen.refresh(chunk.Value);
             chunkGen.colorChunk(chunk.Value, chunk_size);
