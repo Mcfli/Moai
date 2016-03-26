@@ -20,7 +20,6 @@ public class WaterScript : MonoBehaviour {
 
     //references
     private GenerationManager genManager;
-    private Dictionary<Vector2, GameObject> waterObjects;
     private Dictionary<Vector2, Mesh> waterMeshes;
 
     //finals
@@ -42,7 +41,6 @@ public class WaterScript : MonoBehaviour {
         WaterParent.transform.position = new Vector3(0, Globals.water_level, 0);
 
         waterMeshes = new Dictionary<Vector2, Mesh>();
-        waterObjects = new Dictionary<Vector2, GameObject>();
 
         // underwater effects
         defaultFog = RenderSettings.fog;
@@ -57,17 +55,9 @@ public class WaterScript : MonoBehaviour {
         //waves
         for(float x = Globals.cur_chunk.x - waveLoadDist; x <= Globals.cur_chunk.x + waveLoadDist; x++) {
             for(float z = Globals.cur_chunk.y - waveLoadDist; z <= Globals.cur_chunk.y + waveLoadDist; z++) {
-                Mesh m = waterMeshes[new Vector2(x, z)];
-                Vector3[] vertices = m.vertices;
-                for(int j = 0; j < vertices.Length; j++) {
-                    Vector3 vertex = vertices[j];
-                    vertex.y  = Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.x) * waveSpeed.x + ( x      * chunk_size + vertex.x           ) * waveLength.x) * waveHeight.x;
-                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.y) * waveSpeed.y + ((x + z) * chunk_size + vertex.x + vertex.z) * waveLength.y) * waveHeight.y;
-                    vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.z) * waveSpeed.z + (     z  * chunk_size +            vertex.z) * waveLength.z) * waveHeight.z;
-                    if(Mathf.Repeat(Mathf.Round((vertex.x + vertex.z) / chunk_size * (resolution-1)) + x + z, 2) == 1 && invertEveryOther) vertex.y *= -1;
-                    vertices[j] = vertex;
-                }
-                m.vertices = vertices;
+                Vector2 coordinates = new Vector2(x, z);
+                Mesh m = waterMeshes[coordinates];
+                updateVertices(m, coordinates);
                 m.RecalculateNormals();
             }
         }
@@ -84,9 +74,21 @@ public class WaterScript : MonoBehaviour {
         }
 	}
 
-    public void generate(Vector2 coordinates){
+    private void updateVertices(Mesh m, Vector2 chunkCoordinates) {
+        Vector3[] vertices = m.vertices;
+        for(int j = 0; j < vertices.Length; j++) {
+            Vector3 vertex = vertices[j];
+            vertex.y = Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.x) * waveSpeed.x + (chunkCoordinates.x * chunk_size + vertex.x) * waveLength.x) * waveHeight.x;
+            vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.y) * waveSpeed.y + ((chunkCoordinates.x + chunkCoordinates.y) * chunk_size + vertex.x + vertex.z) * waveLength.y) * waveHeight.y;
+            vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.z) * waveSpeed.z + (chunkCoordinates.y * chunk_size + vertex.z) * waveLength.z) * waveHeight.z;
+            if(Mathf.Repeat(Mathf.Round((vertex.x + vertex.z) / chunk_size * (resolution - 1)) + chunkCoordinates.x + chunkCoordinates.y, 2) == 1 && invertEveryOther) vertex.y *= -1;
+            vertices[j] = vertex;
+        }
+        m.vertices = vertices;
+    }
+
+    public GameObject generate(Vector2 coordinates){
         GameObject water = new GameObject();
-        waterObjects.Add(coordinates, water);
         water.layer = LayerMask.NameToLayer("Water");
         water.name = "water (" + coordinates.x + "," + coordinates.y + ")";
         water.transform.parent = WaterParent.transform;
@@ -109,6 +111,7 @@ public class WaterScript : MonoBehaviour {
             }
         }
         mf.mesh.vertices = vertices;
+        updateVertices(mf.mesh, coordinates);
 
         // Generate triangles using these vertices
         int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
@@ -144,11 +147,11 @@ public class WaterScript : MonoBehaviour {
 
         ReCalcTriangles(mf.mesh);
         //water.AddComponent(typeof(MeshCollider));
+
+        return water;
     }
 
-    public void destroyWater(Vector2 coordinates) {
-        Destroy(waterObjects[coordinates]);
-        waterObjects.Remove(coordinates);
+    public void removeMesh(Vector2 coordinates) {
         waterMeshes.Remove(coordinates);
     }
 

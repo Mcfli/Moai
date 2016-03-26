@@ -7,6 +7,8 @@ public class TimeScript : MonoBehaviour {
     public AnimationCurve waitSpeedGrowth;
     public float timeToGetToMaxWait = 300; // 5 minutes
     public float sprintWaitMultiplier = 5;
+    public float currentTimeReadOnly = 0;
+    public float currentTimeScaleReadOnly = 1;
 
     private float waitingFor;
 	
@@ -15,6 +17,8 @@ public class TimeScript : MonoBehaviour {
         //update time
         Globals.deltaTime = Globals.time_resolution * Globals.time_scale * Time.deltaTime;
         Globals.time += Globals.deltaTime;
+        currentTimeReadOnly = Globals.time / Globals.time_resolution;
+        currentTimeScaleReadOnly = Globals.time_scale;
 
         if(Input.GetButton("Patience")) { //PATIENCE IS POWER
             if(waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);

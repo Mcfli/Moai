@@ -4,8 +4,7 @@ using System.Collections.Generic;
 //[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ChunkGenerator : MonoBehaviour {
     public Material landMaterial;
-    public NoiseGen XDeviationMap;
-    public NoiseGen ZDeviationMap;
+    public NoiseGen DeviationMap;
     public float XZDeviationRatio = 0.5f;
     
     private GameObject TerrainParent;
@@ -22,18 +21,18 @@ public class ChunkGenerator : MonoBehaviour {
         synth.Init();
 	}
 
-	public void generate (int chunk_x, int chunk_y, float chunk_size, int chunk_resolution) {
+	public GameObject generate (Vector2 coordinates, float chunk_size, int chunk_resolution) {
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
-        chunk.name = "chunk (" + chunk_x + "," + chunk_y + ")";
+        chunk.name = "chunk (" + coordinates.x + "," + coordinates.y + ")";
         chunk.transform.parent = TerrainParent.transform;
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
         mr.material = landMaterial;
         MeshFilter mf = chunk.AddComponent<MeshFilter>();
 		mf.mesh = new Mesh();
-		mf.mesh.name = "chunk (" + chunk_x+","+chunk_y+")";
+		mf.mesh.name = "chunk (" + coordinates.x + ","+ coordinates.y + ")";
 
-        Vector3 pos = new Vector3(chunk_x * chunk_size, 0, chunk_y * chunk_size);
+        Vector3 pos = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size);
         chunk.transform.position = pos;
         
         // Generate chunk_resolution^2 vertices
@@ -41,22 +40,17 @@ public class ChunkGenerator : MonoBehaviour {
         
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
-                float origx = chunk.transform.position.x + ix * chunk_size / (chunk_resolution - 1); // where the vertex would have
-                float origy = chunk.transform.position.z + iy * chunk_size / (chunk_resolution - 1); // been without XZDeviation
-                float x, y;
-                if(XZDeviationRatio == 0) {
-                    x = ix * chunk_size / (chunk_resolution - 1);
-                    y = iy * chunk_size / (chunk_resolution - 1);
-                } else {
-                    x = (ix + Mathf.Repeat(XDeviationMap.genPerlin(origx, origy, 0), XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
-                    y = (iy + Mathf.Repeat(ZDeviationMap.genPerlin(origx, origy, 0), XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
+                float x = ix * chunk_size / (chunk_resolution - 1);
+                float y = iy * chunk_size / (chunk_resolution - 1);
+                float origx = x; float origy = y;
+                if(XZDeviationRatio != 0) {
+                    x += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2, (origy + coordinates.y * chunk_size) * 2+1, 0), XZDeviationRatio); // replace 0 with Globals.time eventually
+                    y += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2+1, (origy + coordinates.y * chunk_size) * 2, 0), XZDeviationRatio); // replace 0 with Globals.time eventually
+                    //x = (ix + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
+                    //y = (iy + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // the deviations are randomized again; also, the chunks don't line up
                 }
-                //x = (ix + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
-                //y = (iy + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // the deviations are different; also, the chunks don't line up
-                float xpos = chunk.transform.position.x + x;
-                float ypos = chunk.transform.position.z + y;
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(xpos, ypos, 0), y); // replace 0 with Globals.time eventually
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0), y); // replace 0 with Globals.time eventually
 
             }
 		}
@@ -104,6 +98,8 @@ public class ChunkGenerator : MonoBehaviour {
         ReCalcTriangles(mf.mesh);
 
         chunk.AddComponent(typeof(MeshCollider));
+
+        return chunk;
 	}
 
     // Calculate vertex colors
@@ -168,7 +164,7 @@ public class ChunkGenerator : MonoBehaviour {
             float xpos = chunk.transform.position.x + x;
             float ypos = chunk.transform.position.z + y;
 
-            verts[j] = new Vector3(x, synth.heightAt(xpos, ypos, Globals.time), y);
+            verts[j] = new Vector3(x, synth.heightAt(xpos, ypos, 0), y); //replace 0 with Globals.time eventually
         }
         chunk.GetComponent<MeshFilter>().mesh.vertices = verts;
         chunk.GetComponent<MeshCollider>().sharedMesh = chunk.GetComponent<MeshFilter>().mesh;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class TreeManager : MonoBehaviour {
     public int tree_resolution = 2;
+    public int treeLoadDistance = 1;
 
     private GenerationManager gen_manager;
     private static Dictionary<Vector2, List<treeStruct>> trees;
