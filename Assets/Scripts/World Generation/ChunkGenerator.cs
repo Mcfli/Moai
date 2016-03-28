@@ -27,6 +27,7 @@ public class ChunkGenerator : MonoBehaviour {
         MeshFilter mf = chunk.AddComponent<MeshFilter>();
 		mf.mesh = new Mesh();
 		mf.mesh.name = "chunk (" + chunk_x+","+chunk_y+")";
+        float squareSize = chunk_size / (chunk_resolution - 1);
 
         Vector3 pos = new Vector3(chunk_x * chunk_size, 0, chunk_y * chunk_size);
         chunk.transform.position = pos;
@@ -34,12 +35,18 @@ public class ChunkGenerator : MonoBehaviour {
         // Generate chunk_resolution^2 vertices
 		vertices = new Vector3[(chunk_resolution*chunk_resolution)];
         
+
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
-                float x = ix * chunk_size/(chunk_resolution-1); 
-                float y = iy * chunk_size / (chunk_resolution-1);
+
+                float x = ix * squareSize;
+                float y = iy * squareSize;
                 float xpos = chunk.transform.position.x + x;
                 float ypos = chunk.transform.position.z + y;
+                Random.seed = NoiseGen.hash((int)xpos, (int)ypos, (int)time);
+                x += Random.Range(-squareSize * 0.5f, squareSize * 0.5f);
+                y += Random.Range(-squareSize * 0.5f, squareSize * 0.5f);
+                
 
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
                 vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(xpos, ypos,Globals.time), y);
@@ -177,12 +184,9 @@ public class ChunkGenerator : MonoBehaviour {
         int[] triangles = mesh.triangles;
         Vector3[] vertices = new Vector3[triangles.Length];
 
-
         for (int i = 0; i < triangles.Length; i++){
             vertices[i] = oldVerts[triangles[i]];
-            
             triangles[i] = i;
-            
         }
         mesh.vertices = vertices;
         mesh.triangles = triangles;
