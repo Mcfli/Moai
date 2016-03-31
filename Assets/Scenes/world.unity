@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9847968ac6eb35c4199fb75827fc3094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunk_size: 256
+  chunk_size: 128
   chunk_resolution: 4
   chunk_load_dist: 6
   chunk_detail_dist: 1
@@ -263,7 +263,7 @@ MonoBehaviour:
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
   heatMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
-  mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
+  mountainMap: {fileID: 0}
   moistureMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
 --- !u!4 &188005511
 Transform:
@@ -291,8 +291,8 @@ MonoBehaviour:
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
   DeviationMap: {fileID: 11458368, guid: aa0342edb8686674d812c634709c2cbc, type: 2}
   XZDeviationRatio: 0.5
-  detailHeightDeviation: 3
-  detailSubDivisions: 3
+  detailHeightDeviation: 0.75
+  detailSubDivisions: 4
 --- !u!114 &188005515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree_resolution: 10
+  tree_resolution: 2
   treeLoadDistance: 1
 --- !u!114 &188005516
 MonoBehaviour:
@@ -891,6 +891,43 @@ MonoBehaviour:
     type: 3}
   colorCorrectionSelectiveShader: {fileID: 4800000, guid: e515e0f94cefc4c0db54b45cba621544,
     type: 3}
+--- !u!114 &838583288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838583282}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d8db0ec466c14429f58c68c16398a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quality: 1
+  resolution: 4
+  simpleTweakMode: 1
+  focalPoint: 17192
+  smoothness: 0.5
+  focalZDistance: 0
+  focalZStartCurve: 1
+  focalZEndCurve: 1
+  objectFocus: {fileID: 0}
+  focalSize: 0
+  bluriness: 1
+  maxBlurSpread: 1.75
+  foregroundBlurExtrude: 1.15
+  dofBlurShader: {fileID: 4800000, guid: bb4af680337344a4abad65a4e8873c50, type: 3}
+  dofShader: {fileID: 4800000, guid: 987fb0677d01f43ce8a9dbf12271e668, type: 3}
+  visualize: 0
+  bokehDestination: 1
+  bokeh: 1
+  bokehSupport: 1
+  bokehShader: {fileID: 4800000, guid: 57cdacf9b217546aaa18edf39a6151c0, type: 3}
+  bokehTexture: {fileID: 2800000, guid: fc00ec05a89da4ff695a4273715cd5ce, type: 3}
+  bokehScale: 2.4
+  bokehIntensity: 0.15
+  bokehThresholdContrast: 0.1
+  bokehThresholdLuminance: 0.55
+  bokehDownsample: 1
 --- !u!1 &923083880
 GameObject:
   m_ObjectHideFlags: 0

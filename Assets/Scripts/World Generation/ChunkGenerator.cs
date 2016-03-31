@@ -110,9 +110,9 @@ public class ChunkGenerator : MonoBehaviour {
         chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [high]";
         subDivide(chunkMeshes.highMesh, coordinates, detailSubDivisions);
 
-        mf.mesh = chunkMeshes.highMesh;
-        chunk.AddComponent(typeof(MeshCollider));
+        //mf.mesh = chunkMeshes.highMesh;
         mf.mesh = chunkMeshes.lowMesh;
+        chunk.AddComponent(typeof(MeshCollider));
 
         return chunk;
 	}
