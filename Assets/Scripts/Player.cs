@@ -77,19 +77,22 @@ public class Player : MonoBehaviour {
         //Holding Objects stuff
         if (Input.GetButtonDown(leftHandInput)){
             if(leftObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, true);
+            else if (TryUseObject(true)) { }
             else DropObject(true);
         }
         if (Input.GetButtonDown(rightHandInput)){
             if(rightObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, false);
+            else if (TryUseObject(false)) { }
             else DropObject(false);
         }
+        /*
         if (Input.GetButtonDown(leftHandUseInput)) {
             TryUseObject(true);
         }
         if (Input.GetButtonDown(rightHandUseInput)) {
             TryUseObject(false);
         }
-
+        */
         if (leftObj != null) followHand(leftObj, leftSize, true);
         if(rightObj != null) followHand(rightObj, rightSize, false);
     }
