@@ -22,8 +22,8 @@ public class ShrineGrid : MonoBehaviour
     public GameObject completeGlow;
     public GameObject incompleteGlow;
 
-    private Dictionary<Vector2, List<PuzzleObject>> curState;
-    private Dictionary<Vector2, PuzzleObject> targetState;
+    private List<PuzzleObject> curState;
+    private List<PuzzleObject> targetState;
 
     public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
@@ -40,8 +40,8 @@ public class ShrineGrid : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        curState = new Dictionary<Vector2, List<PuzzleObject>>();
-        targetState = new Dictionary<Vector2, PuzzleObject>();
+        curState = new List<PuzzleObject>();
+        targetState = new List<PuzzleObject>();
         glowGrid = new Dictionary<Vector2, bool>();
         validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
