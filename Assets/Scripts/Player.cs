@@ -10,10 +10,7 @@ public class Player : MonoBehaviour {
     public float sprintWaitMultiplier = 5.0f;
     public float grabDistance = 5;
     public float grabSphereRadius = 1;
-    public string leftHandInput = "LeftHand";
-    public string rightHandInput = "RightHand";
-    public string leftHandUseInput = "LeftHandUse";
-    public string rightHandUseInput = "RightHandUse";
+
     public string waitInput = "Patience";
     public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
 
@@ -75,25 +72,12 @@ public class Player : MonoBehaviour {
         if (!startGroundWarp) startGroundWarp = warpToGround();
 
         //Holding Objects stuff
-        if (Input.GetButtonDown(leftHandInput)){
-            if(leftObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, true);
-            else if (TryUseObject(true)) { }
-            else DropObject(true);
-        }
-        if (Input.GetButtonDown(rightHandInput)){
+        if (Input.GetButtonDown("Use")){
             if(rightObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, false);
             else if (TryUseObject(false)) { }
             else DropObject(false);
         }
-        /*
-        if (Input.GetButtonDown(leftHandUseInput)) {
-            TryUseObject(true);
-        }
-        if (Input.GetButtonDown(rightHandUseInput)) {
-            TryUseObject(false);
-        }
-        */
-        if (leftObj != null) followHand(leftObj, leftSize, true);
+
         if(rightObj != null) followHand(rightObj, rightSize, false);
     }
     
@@ -117,12 +101,11 @@ public class Player : MonoBehaviour {
         else return false;
 	}
     
-    public InteractableObject getLeftObj(){return leftObj;}
     public InteractableObject getRightObj(){return rightObj;}
 
     public bool has(string type) {
         if (type == "") return false;
-        if (getLeftObj()) if (leftObj.typeID == type) return true;
+
         if (getRightObj()) if (rightObj.typeID == type) return true;
         return false;
     }
