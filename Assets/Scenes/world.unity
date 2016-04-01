@@ -1833,10 +1833,6 @@ MonoBehaviour:
   sprintWaitMultiplier: 5
   grabDistance: 4
   grabSphereRadius: 0
-  leftHandInput: LeftHand
-  rightHandInput: RightHand
-  leftHandUseInput: LeftHandUse
-  rightHandUseInput: RightHandUse
   waitInput: Patience
   minWarpOnWaitDist: 0.5
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
