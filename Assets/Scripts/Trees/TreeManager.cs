@@ -123,6 +123,8 @@ public class TreeManager : MonoBehaviour {
         Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
         GameObject new_tree = Instantiate(prefab, pos, RandomRotation) as GameObject;
         TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
+        float scaleFactor = Random.Range(1f, 3.5f);
+        new_tree.transform.localScale = prefab.transform.localScale * scaleFactor;
         new_treeScript.lifeSpan = new_treeScript.lifeSpan * Random.Range(1 - new_treeScript.lifeSpanVariance, 1 + new_treeScript.lifeSpanVariance);
         new_treeScript.age = Random.value * new_treeScript.lifeSpan;
         new_treeScript.prefab = prefab;
@@ -132,6 +134,7 @@ public class TreeManager : MonoBehaviour {
 
     private struct treeStruct {
         public Vector3 position;
+        public Vector3 scale;
         public Quaternion rotation;
         public float age;
         public float life_span;
@@ -140,6 +143,7 @@ public class TreeManager : MonoBehaviour {
         public treeStruct(TreeScript t) {
             position = t.gameObject.transform.position;
             rotation = t.gameObject.transform.rotation;
+            scale = t.gameObject.transform.localScale;
             age = t.age;
             life_span = t.lifeSpan;
             prefab = t.prefab;
