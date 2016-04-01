@@ -68,8 +68,17 @@ public class InteractableObject: MonoBehaviour
                     RaycastHit hit;
                     Ray rayDown = new Ray(transform.position, Vector3.down);
                     if (!Physics.Raycast(rayDown, out hit, transform.position.y, LayerMask.GetMask("Terrain")))
-                        if (Physics.Raycast(rayDown, out hit, 10000000, LayerMask.GetMask("Terrain")))
-                            transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
+                    {
+                        Ray rayFromTop = new Ray(transform.position + Vector3.up * 10000000, Vector3.down);
+                        if (Physics.Raycast(rayFromTop, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
+                        {
+                            transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y * 2, transform.position.z);
+                            thisRigidbody.velocity = Vector3.zero;
+                            thisRigidbody.ResetInertiaTensor();
+                        }
+                            
+                    }
+                       
 
                     if (timeRemain < 0) Destroy(gameObject);
 
