@@ -23,7 +23,10 @@ public class Biome : MonoBehaviour {
     public List<GameObject> treeTypes;
     public List<GameObject> doodads;
 
-    public int treeDensity;
+    public int treeDensity = 2;
+    public int treeGrowthIterations = 2;
+    public float treeSpreadMin = 12f;
+    public float treeSpeadRange = 25f;
     public int doodadDensity;
 
     // Terrain color
