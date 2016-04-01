@@ -111,7 +111,10 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 188470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   doodads: []
-  treeDensity: 7
+  treeDensity: 1
+  treeGrowthIterations: 3
+  treeSpreadMin: 12
+  treeSpeadRange: 25
   doodadDensity: 0
   colors:
   - {r: 0.53676474, g: 0.20918038, b: 0.36506534, a: 0}
@@ -172,6 +175,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: colors.Array.data[2].b
       value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeDensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeGrowthIterations
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeSpreadMin
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeSpeadRange
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
