@@ -170,7 +170,8 @@ public class ShrineGrid : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             GameObject go = collider.gameObject;
-            curState.Add(go);
+            if(go.GetComponent<PuzzleObject>() != null)
+                curState.Add(go);
         }
     }
 
@@ -185,17 +186,16 @@ public class ShrineGrid : MonoBehaviour
             {
                 PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
                 if (po == null) continue;
-                else if (po == tarObj)
+                else if (po.Equals( tarObj))
                 {
                     found = true;
                 }
             }
+            Debug.Log(found);
             if (!found) {
                 isDone = false;
                 return;
             }
-
-
         }
         // looped through all and did not return false, so we found all of them
         isDone = true;
@@ -256,21 +256,33 @@ public class ShrineGrid : MonoBehaviour
 
     private void drawGrid()
     {
-        for (int i = 0; i < resolution; i++)
+        drawSquare(Color.white);
+        foreach(GameObject gameObj in curState)
         {
-            for (int j = 0; j < resolution; j++)
+            if(gameObj == null)
             {
-                Vector2 curGrid = new Vector2(i, j);
-                drawSquare(curGrid, Color.grey);
+                continue;
+            }
+            PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+            if(po != null)
+            {
+                if (targetState.Contains(po))
+                {
+                    Debug.DrawRay(gameObj.transform.position, Vector3.up, Color.green);
+                }
+                else
+                {
+                    Debug.DrawRay(gameObj.transform.position, Vector3.up, Color.white);
+                }
             }
         }
     }
-    private void drawSquare(Vector2 pos, Color color)
+    private void drawSquare(Color color)
     {
-        Vector3 topleft = gridToReal(pos + Vector2.up);
-        Vector3 topright = gridToReal(pos + Vector2.right + Vector2.up);
-        Vector3 botleft = gridToReal(pos);
-        Vector3 botright = gridToReal(pos + Vector2.right);
+        Vector3 topleft = gridToReal(Vector2.zero + 3* Vector2.up);
+        Vector3 topright = gridToReal(3 * Vector2.right + 3 * Vector2.up);
+        Vector3 botleft = gridToReal(Vector2.zero);
+        Vector3 botright = gridToReal(Vector2.zero + 3* Vector2.right);
 
         // Top
         Debug.DrawLine(topleft, topright, color);
