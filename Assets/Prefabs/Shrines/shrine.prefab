@@ -101,13 +101,12 @@ MonoBehaviour:
   mural: {fileID: 168210, guid: 5caf8acbbe16f604f90b8c73a5f0691a, type: 2}
   glow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
-  heatMoistureChange: {x: 0, y: 1}
-  heatMoistureChangeMin: 15
-  heatMoistureChangeMax: 50
+  WaterFireEarthAirChange: {x: 0, y: 0}
+  WaterFireEarthAirChangeMin: 15
+  WaterFireEarthAirChangeMax: 50
   completeGlow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   incompleteGlow: {fileID: 199770, guid: fedda00804191d540a88071d169a7e26, type: 2}
-  validObjects:
-  - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
+  validObjects: []
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
   saved_scale: {x: 0, y: 0, z: 0}

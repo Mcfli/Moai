@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 480270}
   - 114: {fileID: 11434400}
   m_Layer: 0
-  m_Name: HeatMap
+  m_Name: WaterFireMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   octaves: 1
   persistence: 0.1
-  smoothness: 1000
-  amplitude: 50
+  smoothness: 10000
+  amplitude: 1
   seed: 124124
 --- !u!1001 &100100000
 Prefab:

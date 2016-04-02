@@ -39,10 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatAvg: 50
-  heatVariance: 30
-  moistureAvg: 0
-  moistureVariance: 20
+  WaterFire: 1
+  EarthAir: 0.5
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
@@ -109,6 +107,9 @@ MonoBehaviour:
   treeTypes: []
   doodads: []
   treeDensity: 0
+  treeGrowthIterations: 2
+  treeSpreadMin: 12
+  treeSpeadRange: 25
   doodadDensity: 0
   colors:
   - {r: 0.99604464, g: 1, b: 0.71323526, a: 0}

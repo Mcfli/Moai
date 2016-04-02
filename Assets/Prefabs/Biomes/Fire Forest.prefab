@@ -1,52 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &140834
+--- !u!1 &140622
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 437264}
-  - 114: {fileID: 11450962}
+  - 4: {fileID: 419522}
+  - 114: {fileID: 11441814}
   m_Layer: 0
-  m_Name: Flower Field
+  m_Name: Fire Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &437264
+--- !u!4 &419522
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140834}
+  m_GameObject: {fileID: 140622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11450962
+--- !u!114 &11441814
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140834}
+  m_GameObject: {fileID: 140622}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.5
+  WaterFire: 1
   EarthAir: 1
   weatherTypes:
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
-  - 0.7
-  - 0.3
+  - 0.4
+  - 0.6
   SkyGradients:
   - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
   - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
@@ -109,15 +109,15 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 136664, guid: 03f1f5521b6c9874db682a84e1bc2e45, type: 2}
   doodads: []
-  treeDensity: 2
+  treeDensity: 1
   treeGrowthIterations: 3
   treeSpreadMin: 12
   treeSpeadRange: 25
   doodadDensity: 0
   colors:
-  - {r: 0.9117647, g: 0.8872806, b: 0.31509513, a: 0}
-  - {r: 0.71323526, g: 0.7009381, b: 0.2674632, a: 0}
-  - {r: 0.46323532, g: 0.44820523, b: 0.12262112, a: 0}
+  - {r: 0.20918038, g: 0.53676474, b: 0.40507585, a: 0}
+  - {r: 0.38975993, g: 0.5955882, b: 0.5113076, a: 0}
+  - {r: 0.31709558, g: 0.375, b: 0.35128984, a: 0}
   amplitude: 400
   colorCurve:
     serializedVersion: 2
@@ -144,5 +144,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 140834}
+  m_RootGameObject: {fileID: 140622}
   m_IsPrefabParent: 1

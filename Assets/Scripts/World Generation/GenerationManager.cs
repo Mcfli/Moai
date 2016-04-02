@@ -11,9 +11,9 @@ public class GenerationManager : MonoBehaviour {
     public int chunk_load_dist = 1;
     public int tree_load_dist = 1;
     public List<Biome> biomes;
-    public NoiseGen heatMap;
+    public NoiseGen WaterFireMap;
     public NoiseGen mountainMap;
-    public NoiseGen moistureMap;
+    public NoiseGen EarthAirMap;
 
     private GameObject player;
     private ChunkGenerator chunkGen;
@@ -26,8 +26,8 @@ public class GenerationManager : MonoBehaviour {
 	private List<Vector2> loaded_shrine_chunks;
     //private Dictionary<Vector2, Biome> chunkBiomes;  // keeps track of what chunk is at what biome
 
-    // Heat/Moisture modifiers per chunk.
-    // maps chunk -> (delta_heat,delta_moisture)
+    // WaterFire/EarthAir modifiers per chunk.
+    // maps chunk -> (delta_WaterFire,delta_EarthAir)
     private Dictionary<Vector2, Vector2> mapChanges;
 
     void Awake() {
@@ -42,8 +42,8 @@ public class GenerationManager : MonoBehaviour {
         loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
-        moistureMap.Init();
-        heatMap.Init();
+        EarthAirMap.Init();
+        WaterFireMap.Init();
       
     }
 	
@@ -66,7 +66,7 @@ public class GenerationManager : MonoBehaviour {
     }
     */
 
-    // Changes the heat/moisture values at chunk by heat:delta.x,moisture:delta.y
+    // Changes the WaterFire/EarthAir values at chunk by WaterFire:delta.x,EarthAir:delta.y
     public void modifyChunk(Vector3 pos, Vector2 delta)
     {
         Vector2 chunk = worldToChunk(pos);
@@ -193,14 +193,15 @@ public class GenerationManager : MonoBehaviour {
     public Biome chooseBiome(Vector2 chunk)
     {
 
-        // Get the heat and moisture values at chunk coordinates
-        float heat = heatMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0);
-        float moisture = moistureMap.genPerlin(chunk.x* chunk_size+1, chunk.y* chunk_size+1, 0);
+        // Get the WaterFire and EarthAir values at chunk coordinates
+        float WaterFire = WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
+        float EarthAir = EarthAirMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
+       
 
         if (mapChanges.ContainsKey(chunk))
         {
-            heat += mapChanges[chunk].x;
-            moisture += mapChanges[chunk].y;
+            WaterFire += mapChanges[chunk].x;
+            EarthAir += mapChanges[chunk].y;
         }
 
         // Find the most appropriate biome
@@ -208,11 +209,13 @@ public class GenerationManager : MonoBehaviour {
         Biome ret = biomes[0];
         foreach(Biome biome in biomes)
         {
-            float heat_error = Mathf.Abs(biome.heatAvg - heat);
-            float moisture_error = Mathf.Abs(biome.moistureAvg - moisture);
-            if (heat_error + moisture_error < lowestError)
+            float WaterFire_error = Mathf.Abs(biome.WaterFire - WaterFire);
+            float EarthAir_error = Mathf.Abs(biome.EarthAir - EarthAir);
+           
+            if (WaterFire_error + EarthAir_error < lowestError)
             {
-                lowestError = heat_error + moisture_error;
+//                Debug.Log(biome.WaterFire + "," + biome.EarthAir + ": " + WaterFire_error + EarthAir_error);
+                lowestError = WaterFire_error + EarthAir_error;
                 ret = biome;
             }
                 
