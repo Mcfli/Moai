@@ -326,8 +326,8 @@ public class ShrineGrid : MonoBehaviour
             {
                 GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + targetObj.GetHashCode());
                 Destroy(glowInstance);
+                completedGlows[i] = false;
             }
-
         } 
     }
 
