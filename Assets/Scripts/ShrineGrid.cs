@@ -191,7 +191,6 @@ public class ShrineGrid : MonoBehaviour
                     found = true;
                 }
             }
-            Debug.Log(found);
             if (!found) {
                 isDone = false;
                 return;
@@ -296,41 +295,40 @@ public class ShrineGrid : MonoBehaviour
 
     private void drawGlows()
     {
-        /*
+
         // Look through the items in targetState
-        for(int i = 0; i < targetState.Count; i++)
+        for (int i = 0; i < targetState.Count; i++)
         {
             PuzzleObject targetObj = targetState[i];
-            // 
-        }
+            bool targetObjComplete = false;
+            // Look through the stuff in current state to see if this item was found
 
-        for(int i = 0; i < curState.Count; i++) {
-            GameObject go = curState[i];
-            PuzzleObject po = go.GetComponent<PuzzleObject>();
-            if (po == null) continue;
-
-            // Add glow instance to item if its in the target state and not
-            else if (targetState.Contains(po) && (!completedGlows.ContainsKey(i) || completedGlows[i] == false))
+            foreach (GameObject curObj in curState)
             {
-                GameObject glowInstance = Instantiate(glow, go.transform.position,Quaternion.identity) as GameObject;
-                glowInstance.name = "Glow " + gameObject.GetHashCode() + go.GetHashCode();
-                completedGlows[i] = true;
+                PuzzleObject curPuzzleObj = curObj.GetComponent<PuzzleObject>();
+                if (curPuzzleObj == null) continue;
+                // If this object matches the one in our target state, and there isn't already a glow for that item, make a glow, 
+                // then move on to next item in target state
+                if(curPuzzleObj.Equals(targetObj))
+                {
+                    targetObjComplete = true;
+                    if(!completedGlows.ContainsKey(i) || completedGlows[i] == false)
+                    {
+                        GameObject glowInstance = Instantiate(glow, curObj.transform.position, Quaternion.identity) as GameObject;
+                        glowInstance.name = "Glow " + gameObject.GetHashCode() + targetObj.GetHashCode();
+                        completedGlows[i] = true;
+                    }
+                }
             }
 
-            // Remove glow instances from incomplete items marked complete or all if the
-
-            /*
-            else if (completedGlows[i] == true && !targetState.C)
+            // If this object has a glow on it but isn't complete, destroy the glow
+            if (completedGlows.ContainsKey(i) && completedGlows[i] == true && !targetObjComplete)
             {
-                //Debug.Log("Not Exactly one item"+inCell.Count + " " + inCell.Contains(targetItem));
-            
-                glowGrid[curGrid] = false;
-                GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + go.GetHashCode());
+                GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + targetObj.GetHashCode());
                 Destroy(glowInstance);
-            
             }
-            
-        }*/
+
+        } 
     }
 
     private void complete()
