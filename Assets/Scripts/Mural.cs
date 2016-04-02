@@ -18,7 +18,7 @@ public class Mural : MonoBehaviour {
 	}
 
     // Generate mural texture based on a target state
-    public void generateTexture(Dictionary<Vector2,PuzzleObject> state)
+    public void generateTexture(List<PuzzleObject> state)
     {
        
         muralTex = new Texture2D(imageRes * numSquares, imageRes * numSquares,TextureFormat.ARGB32,false);
@@ -29,12 +29,12 @@ public class Mural : MonoBehaviour {
             newPixels[i] = muralColor;
         }
 
-        foreach (KeyValuePair<Vector2, PuzzleObject> pair in state) {
+        Vector2 coordIndex = Vector2.zero;
 
-            Vector2 coord = pair.Key;
-            PuzzleObject obj = pair.Value;
+        foreach (PuzzleObject obj in state) {
             Texture2D image = obj.image;
 
+            Vector2 coord = coordIndex;
             // The coordinates for texturing are mirrored, so we need to flip the cord values
             coord.x = (numSquares - 1) - coord.x;
             coord.y = (numSquares - 1) - coord.y;
@@ -42,8 +42,6 @@ public class Mural : MonoBehaviour {
             // Calculate where to start adding these pixels to new
             int offx = (int)coord.x * imageRes;
             int offy = (int)coord.y * imageRes * imageRes * numSquares;
-
-
 
             Color[] pixels = image.GetPixels();
             // Add image pixels to newPixels
@@ -61,10 +59,18 @@ public class Mural : MonoBehaviour {
                 }
             }
 
-
+            // Increment picture position
+            coordIndex += Vector2.right;
+            // If too far horizontal, move to nex row
+            if (coordIndex.x > 2)
+            {
+                coordIndex.x = 0;
+                coordIndex.y += 1;
+            }
+            // If on center square, move right
+            if(coordIndex.x == 1 && coordIndex.y == 1)
+                coordIndex += Vector2.right;
         }
-
-
 
         //TEMP SHRINE ICON
         Vector2 shrineCoord = new Vector2(1,1);

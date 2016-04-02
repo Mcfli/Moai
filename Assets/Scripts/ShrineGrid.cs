@@ -22,14 +22,14 @@ public class ShrineGrid : MonoBehaviour
     public GameObject completeGlow;
     public GameObject incompleteGlow;
 
-    private List<PuzzleObject> curState;
+    private List<GameObject> curState;
     private List<PuzzleObject> targetState;
 
     public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
     private LayerMask glowLayer;
 
-    private Dictionary<Vector2, bool> glowGrid;
+    private Dictionary<int, bool> completedGlows;
 
     public Vector3 saved_position;
     public Quaternion saved_rotation;
@@ -40,9 +40,9 @@ public class ShrineGrid : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        curState = new List<PuzzleObject>();
+        curState = new List<GameObject>();
         targetState = new List<PuzzleObject>();
-        glowGrid = new Dictionary<Vector2, bool>();
+        completedGlows = new Dictionary<int, bool>();
         validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
@@ -170,48 +170,32 @@ public class ShrineGrid : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             GameObject go = collider.gameObject;
-            Vector2 gridPos = realToGrid(go.transform.position);
-
-            // Init list if needed
-            if (!curState.ContainsKey(gridPos) || curState[gridPos] == null)
-                curState[gridPos] = new List<PuzzleObject>();
-
-            // Make sure it's a valid object
-            PuzzleObject po = go.GetComponent<PuzzleObject>();
-            if (po != null)
-                curState[gridPos].Add(po);
+            curState.Add(go);
         }
     }
 
     private void checkDone()
     {
-        PuzzleObject tarObj;
-
         // Look at each requirement in targetState
-        foreach (Vector2 cell in targetState.Keys)
+        foreach (PuzzleObject tarObj in targetState)
         {
-            // If curState doesn't have anything in this cell, it can't be complete
-            if (!curState.ContainsKey(cell))
+            // if we don't currently have the desired item in the box, it can't be complete   
+            bool found = false;
+            foreach (GameObject gameObj in curState)
             {
+                PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+                if (po == null) continue;
+                else if (po == tarObj)
+                {
+                    found = true;
+                }
+            }
+            if (!found) {
                 isDone = false;
                 return;
             }
-            tarObj = targetState[cell].GetComponent<PuzzleObject>();
 
-            // if we don't currently have the desired item in the cell, it can't be complete    
-            if (curState[cell].IndexOf(tarObj) == -1)
-            {
-                //Debug.Log("Some object here, but not goal");
-                isDone = false;
-                return;
-            }
 
-            // if there are other puzzle objects in the cell, it can't be complete
-            if (curState[cell].Count > 1)
-            {
-                isDone = false;
-                return;
-            }
         }
         // looped through all and did not return false, so we found all of them
         isDone = true;
@@ -225,14 +209,10 @@ public class ShrineGrid : MonoBehaviour
         numItems = Random.Range(minSolItems, maxSolItems);
         for (int i = 0; i < numItems; i++)
         {
-            Vector2 centerSquare = new Vector2(Mathf.Floor(resolution / 2), Mathf.Floor(resolution / 2));
-            Vector2 place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
-            while (place == centerSquare)
-                place = new Vector2(Random.Range(0, resolution), Random.Range(0, resolution));
             int index = Random.Range(0, validObjects.Count);
             PuzzleObject placeObj = validObjects[index];
             if (placeObj != null)
-                targetState[place] = placeObj;
+                targetState.Add(placeObj);
         }
     }
 
@@ -281,15 +261,7 @@ public class ShrineGrid : MonoBehaviour
             for (int j = 0; j < resolution; j++)
             {
                 Vector2 curGrid = new Vector2(i, j);
-                //Vector3 cur = gridToReal(curGrid);
-                if (targetState.ContainsKey(curGrid) && !curState.ContainsKey(curGrid))
-                    drawSquare(curGrid, Color.red);
-                else if (targetState.ContainsKey(curGrid) && curState.ContainsKey(curGrid))
-                    drawSquare(curGrid, Color.green);
-                else if (curState.ContainsKey(curGrid))
-                    drawSquare(curGrid, Color.white);
-                else
-                    drawSquare(curGrid, Color.grey);
+                drawSquare(curGrid, Color.grey);
             }
         }
     }
@@ -312,52 +284,41 @@ public class ShrineGrid : MonoBehaviour
 
     private void drawGlows()
     {
-        // For each grid cell
-        for (int i = 0; i < resolution; i++)
+        /*
+        // Look through the items in targetState
+        for(int i = 0; i < targetState.Count; i++)
         {
-            for (int j = 0; j < resolution; j++)
-            {
-                Vector2 curGrid = new Vector2(i, j);
-                Vector3 cur = gridToReal(curGrid);
-
-                // If lists are empty, skip
-                if (!curState.ContainsKey(curGrid)) continue;
-                if (!targetState.ContainsKey(curGrid)) continue;
-                List<PuzzleObject> inCell = curState[curGrid];
-                PuzzleObject targetItem = targetState[curGrid];
-
-                // Add glow instances to complete cells
-
-                // if there is exactly one item in the cell and it matches the target item...
-                if (inCell != null && inCell.Count == 1 && inCell.Contains(targetItem))
-                {
-                    // If we don't have a glow in this cell, add a glow
-                    if (!isDone && (!glowGrid.ContainsKey(curGrid) || !glowGrid[curGrid]))
-                    {
-                        //Debug.Log("Exactly one item" + inCell.Count + " " + inCell.Contains(targetItem));
-
-                        glowGrid[curGrid] = true;
-                        GameObject glowInstance = Instantiate(glow, cur + new Vector3(size / resolution * 0.5f, 0, size / resolution * 0.5f),
-                            Quaternion.identity) as GameObject;
-                        glowInstance.name = "Glow " + gameObject.GetHashCode() + curGrid;
-                    }
-                }
-
-                // Remove glow instances from incomplete cells marked complete or all if the
-
-                // If there is not exactly one item in the cell or the cell doesn't contain the target and we have a glow in the cell...
-
-                else if (isDone && inCell != null && glowGrid.ContainsKey(curGrid) && glowGrid[curGrid] && (inCell.Count != 1 || !inCell.Contains(targetItem)))
-                {
-                    //Debug.Log("Not Exactly one item"+inCell.Count + " " + inCell.Contains(targetItem));
-
-                    glowGrid[curGrid] = false;
-                    GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + curGrid);
-                    Destroy(glowInstance);
-
-                }
-            }
+            PuzzleObject targetObj = targetState[i];
+            // 
         }
+
+        for(int i = 0; i < curState.Count; i++) {
+            GameObject go = curState[i];
+            PuzzleObject po = go.GetComponent<PuzzleObject>();
+            if (po == null) continue;
+
+            // Add glow instance to item if its in the target state and not
+            else if (targetState.Contains(po) && (!completedGlows.ContainsKey(i) || completedGlows[i] == false))
+            {
+                GameObject glowInstance = Instantiate(glow, go.transform.position,Quaternion.identity) as GameObject;
+                glowInstance.name = "Glow " + gameObject.GetHashCode() + go.GetHashCode();
+                completedGlows[i] = true;
+            }
+
+            // Remove glow instances from incomplete items marked complete or all if the
+
+            /*
+            else if (completedGlows[i] == true && !targetState.C)
+            {
+                //Debug.Log("Not Exactly one item"+inCell.Count + " " + inCell.Contains(targetItem));
+            
+                glowGrid[curGrid] = false;
+                GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + go.GetHashCode());
+                Destroy(glowInstance);
+            
+            }
+            
+        }*/
     }
 
     private void complete()
@@ -422,7 +383,7 @@ public class ShrineGrid : MonoBehaviour
         validObjects = shrine.validObjects;
         notTerrain = shrine.notTerrain;
         glowLayer = shrine.glowLayer;
-        glowGrid = shrine.glowGrid;
+        completedGlows = shrine.completedGlows;
         saved_position = shrine.saved_position;
         saved_rotation = shrine.saved_rotation;
         saved_scale = shrine.saved_scale;
