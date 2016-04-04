@@ -40,7 +40,7 @@ public class ChunkGenerator : MonoBehaviour {
         MeshFilter mf = chunk.AddComponent<MeshFilter>();
 
 		chunkMeshes.lowMesh = new Mesh();
-        chunkMeshes.lowMesh.name = "chunk (" + coordinates.x + ","+ coordinates.y + ") [low]";
+        chunkMeshes.lowMesh.name = "chunk (" + coordinates.x + ","+ coordinates.y + ") [l]";
 
         Vector3 pos = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size);
         chunk.transform.position = pos;
@@ -107,11 +107,13 @@ public class ChunkGenerator : MonoBehaviour {
         ReCalcTriangles(chunkMeshes.lowMesh);
 
         chunkMeshes.highMesh = Instantiate(chunkMeshes.lowMesh);
-        chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [high]";
+        chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [h]";
         subDivide(chunkMeshes.highMesh, coordinates, detailSubDivisions);
 
         //mf.mesh = chunkMeshes.highMesh;
         mf.mesh = chunkMeshes.lowMesh;
+        chunkMeshes.mf = mf;
+
         chunk.AddComponent(typeof(MeshCollider));
 
         return chunk;

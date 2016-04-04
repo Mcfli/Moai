@@ -19,6 +19,7 @@ public class GenerationManager : MonoBehaviour {
     private WeatherManager weather_manager;
     private ShrineManager shrine_manager;
     private Dictionary<Vector2, GameObject> loaded_chunks;
+    private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
     private Dictionary<Vector2, GameObject> loaded_water;
     private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
@@ -37,6 +38,7 @@ public class GenerationManager : MonoBehaviour {
         weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
         Globals.cur_chunk = new Vector2(-1, -1);
         loaded_chunks = new Dictionary<Vector2, GameObject>();
+        detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
         loaded_water = new Dictionary<Vector2, GameObject>();
         loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
@@ -47,7 +49,7 @@ public class GenerationManager : MonoBehaviour {
 
     void Start() {
         initiateChunks(Globals.cur_chunk);
-        doneLoading = loadUnload(Globals.cur_chunk, Globals.cur_chunk);
+        doneLoading = loadUnload(Globals.cur_chunk);
     }
 	
 	// Update is called once per frame
@@ -57,7 +59,7 @@ public class GenerationManager : MonoBehaviour {
             Globals.cur_chunk = current_chunk;
             doneLoading = false;
         }
-        if(!doneLoading) doneLoading = loadUnload(Globals.cur_chunk, current_chunk);
+        if(!doneLoading) doneLoading = loadUnload(Globals.cur_chunk);
     }
 
     // Merges the biome at pos with other_biome
@@ -81,20 +83,22 @@ public class GenerationManager : MonoBehaviour {
             mapChanges[chunk] = Vector2.zero;
         mapChanges[chunk] += delta;
         updateChunks();
-        unloadTrees(pos, pos);
+        unloadTrees(pos);
         tree_manager.forgetTrees((int)chunk.x, (int)chunk.y);
         tree_manager.loadTrees(chunk, chooseBiome(chunk));
     }
+    
+    private bool loadUnload(Vector2 position) {
+        bool done = true;
+        if(!unloadChunks(position)) done = false;
+        if(!unloadTrees(position)) done = false;
+        if(!unloadShrines(position)) done = false;
+        if(!loadChunks(position)) done = false;
+        if(!detailChunks(position)) done = false;
+        if(!undetailChunks(position)) done = false;
+        if(!loadTrees(position)) done = false;
+        if(!loadShrines(position)) done = false;
 
-    // will only load/unload differences
-    // if oldPos == newPos, unloads will do nothing and loads will try to load everything
-    private bool loadUnload(Vector2 oldPos, Vector2 newPos) {
-        bool done = unloadChunks(oldPos, newPos) &&
-                    unloadTrees(oldPos, newPos) &&
-                    unloadShrines(oldPos, newPos) &&
-                    loadChunks(oldPos, newPos) &&
-                    loadTrees(oldPos, newPos) &&
-                    loadShrines(oldPos, newPos);
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
         return done;
@@ -112,18 +116,40 @@ public class GenerationManager : MonoBehaviour {
     // Loads chunks within chunk_load_dist range
     // Changes chunks within chunk_detail_dist range to detailed chunk
     // returns true if all chunks are finished loading
-    private bool loadChunks(Vector2 oldPos, Vector2 newPos) {
-        for(float x = newPos.x - chunk_load_dist; x <= newPos.x + chunk_load_dist; x++) {
-            for(float y = newPos.y - chunk_load_dist; y <= newPos.y + chunk_load_dist; y++) {
+    private bool loadChunks(Vector2 position) {
+        for(float x = position.x - chunk_load_dist; x <= position.x + chunk_load_dist; x++) {
+            for(float y = position.y - chunk_load_dist; y <= position.y + chunk_load_dist; y++) {
                 Vector2 coordinates = new Vector2(x, y);
-                if(inLoadDistance(newPos, coordinates, chunk_detail_dist) && (oldPos == newPos || (!inLoadDistance(oldPos, coordinates, chunk_detail_dist))))
-                    loaded_chunks[coordinates].GetComponent<MeshFilter>().mesh = loaded_chunks[coordinates].GetComponent<ChunkMeshes>().highMesh;
-                if((oldPos == newPos || !inLoadDistance(oldPos, coordinates, chunk_load_dist)) && !loaded_chunks.ContainsKey(coordinates)) {
+                if(inLoadDistance(position, coordinates, chunk_load_dist) && !loaded_chunks.ContainsKey(coordinates)) {
                     createChunk(coordinates);
                     //return false;
                 }
             }
         }
+        return true;
+    }
+
+    private bool detailChunks(Vector2 position) {
+        for(float x = position.x - chunk_detail_dist; x <= position.x + chunk_detail_dist; x++) {
+            for(float y = position.y - chunk_detail_dist; y <= position.y + chunk_detail_dist; y++) {
+                Vector2 coordinates = new Vector2(x, y);
+                if(inLoadDistance(position, coordinates, chunk_detail_dist) && !detailed_chunks.ContainsKey(coordinates) && loaded_chunks.ContainsKey(coordinates)) {
+                    ChunkMeshes cm = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
+                    cm.mf.mesh = cm.highMesh;
+                    detailed_chunks.Add(coordinates, cm);
+                }
+            }
+        }
+        return true;
+    }
+    
+    private bool undetailChunks(Vector2 position) {
+        foreach(Vector2 coordinates in new List<Vector2>(detailed_chunks.Keys))
+            if(!inLoadDistance(position, coordinates, chunk_detail_dist) && detailed_chunks.ContainsKey(coordinates)) {
+                ChunkMeshes cm = detailed_chunks[coordinates];
+                cm.mf.mesh = cm.lowMesh;
+                detailed_chunks.Remove(coordinates);
+            }
         return true;
     }
 
@@ -134,16 +160,10 @@ public class GenerationManager : MonoBehaviour {
         loaded_water.Add(coordinates, waterScript.generate(coordinates));
     }
 
-    private bool unloadChunks(Vector2 oldPos, Vector2 newPos) {
-        if(oldPos == newPos) return true;
-        for(float x = (int)oldPos.x - chunk_load_dist; x <= oldPos.x + chunk_load_dist; x++) {
-            for(float y = oldPos.y - chunk_load_dist; y <= oldPos.y + chunk_load_dist; y++) {
-                Vector2 coordinates = new Vector2(x, y);
-                if(!inLoadDistance(newPos, coordinates, chunk_load_dist)) destroyChunk(coordinates);
-                if(inLoadDistance(oldPos, coordinates, chunk_detail_dist) && !inLoadDistance(newPos, coordinates, chunk_detail_dist))
-                    loaded_chunks[coordinates].GetComponent<MeshFilter>().mesh = loaded_chunks[coordinates].GetComponent<ChunkMeshes>().lowMesh;
-            }
-        }
+    private bool unloadChunks(Vector2 position) {
+        List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
+        foreach(Vector2 coodinates in l)
+            if(!inLoadDistance(position, coodinates, chunk_load_dist)) destroyChunk(coodinates);
         return true;
     }
 
@@ -155,7 +175,7 @@ public class GenerationManager : MonoBehaviour {
         waterScript.removeMesh(coordinates);
     }
 
-    private bool loadTrees(Vector2 oldPos, Vector2 newPos) {
+    private bool loadTrees(Vector2 position) {
         for (int x = (int)Globals.cur_chunk.x - tree_manager.treeLoadDistance; x <= (int)Globals.cur_chunk.x + tree_manager.treeLoadDistance; x++){
             for (int y = (int)Globals.cur_chunk.y - tree_manager.treeLoadDistance; y <= (int)Globals.cur_chunk.y + tree_manager.treeLoadDistance; y++){
                 Vector2 this_chunk = new Vector2(x, y);
@@ -169,8 +189,7 @@ public class GenerationManager : MonoBehaviour {
         return true;
     }
 
-    private bool unloadTrees(Vector2 oldPos, Vector2 newPos) {
-        if(oldPos == newPos) return true;
+    private bool unloadTrees(Vector2 position) {
         for(int i = loaded_tree_chunks.Count - 1; i >= 0; i--) {
             Vector2 this_chunk = loaded_tree_chunks[i];
             if(Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_manager.treeLoadDistance ||
@@ -182,7 +201,7 @@ public class GenerationManager : MonoBehaviour {
         return true;
     }
 
-    private bool loadShrines(Vector2 oldPos, Vector2 newPos) {
+    private bool loadShrines(Vector2 position) {
 		for (int x = (int)Globals.cur_chunk.x - tree_manager.treeLoadDistance; x <= (int)Globals.cur_chunk.x + tree_manager.treeLoadDistance; x++){
 			for (int y = (int)Globals.cur_chunk.y - tree_manager.treeLoadDistance; y <= (int)Globals.cur_chunk.y + tree_manager.treeLoadDistance; y++){
 				Vector2 this_chunk = new Vector2(x, y);
@@ -195,8 +214,7 @@ public class GenerationManager : MonoBehaviour {
         return true;
     }
 
-    private bool unloadShrines(Vector2 oldPos, Vector2 newPos) {
-        if(oldPos == newPos) return true;
+    private bool unloadShrines(Vector2 position) {
         for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--){
 			Vector2 this_chunk = loaded_shrine_chunks[i];
 			if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_manager.treeLoadDistance ||
