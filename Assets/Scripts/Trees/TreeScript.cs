@@ -170,7 +170,7 @@ public class TreeScript : MonoBehaviour {
             yield return new WaitForSeconds(1);
             //if (Globals.time_scale <= 1) updateAnimation();
             stickToGround();
-            Cull();
+            //Cull();
             if (dirtMound) dirtMound.SetActive(state == 0);
             if (propogateDuringState[state]) Propogate();
             if (onFire) fireSpread();
