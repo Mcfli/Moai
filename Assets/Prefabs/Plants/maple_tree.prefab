@@ -801,7 +801,7 @@ MonoBehaviour:
   seed_object: {fileID: 172308, guid: 256c357554288014d9c0d2bb1771b693, type: 2}
   minSpawnRadius: 10
   maxSpawnRadius: 50
-  spawn_delay: 20
+  spawn_delay: 1e-17
   spawn_variance: 0.5
   seed_cull_max_density: 2
   spawn_limit: 0
@@ -935,7 +935,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: spawn_delay
+      value: 1e-17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 136664}
