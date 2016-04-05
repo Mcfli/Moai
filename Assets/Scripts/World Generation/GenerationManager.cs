@@ -6,18 +6,15 @@ public class GenerationManager : MonoBehaviour {
     public float chunk_size = 10;
     public int chunk_resolution = 10;
     public int chunk_load_dist = 6;
+    public int chunk_unload_dist = 6;
     public int chunk_detail_dist = 1;
+    public float allottedLoadSeconds = 1;
     public List<Biome> biomes;
     public NoiseGen heatMap;
     public NoiseGen mountainMap;
     public NoiseGen moistureMap;
 
-    private GameObject player;
-    private ChunkGenerator chunkGen;
-    private WaterScript waterScript;
-    private TreeManager tree_manager;
-    private WeatherManager weather_manager;
-    private ShrineManager shrine_manager;
+    //lists
     private Dictionary<Vector2, GameObject> loaded_chunks;
     private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
     private Dictionary<Vector2, GameObject> loaded_water;
@@ -30,21 +27,36 @@ public class GenerationManager : MonoBehaviour {
     private Dictionary<Vector2, Vector2> mapChanges;
     private bool doneLoading = false;
 
+    //references
+    private ChunkGenerator chunkGen;
+    private WaterScript waterScript;
+    private TreeManager tree_manager;
+    private WeatherManager weather_manager;
+    private ShrineManager shrine_manager;
+
     void Awake() {
-        tree_manager = GetComponent<TreeManager>();
-        chunkGen = GetComponent<ChunkGenerator>();
-        shrine_manager = GetComponent<ShrineManager>();
-        waterScript = GetComponent<WaterScript>();
-        weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
-        Globals.cur_chunk = new Vector2(-1, -1);
+        //lists
         loaded_chunks = new Dictionary<Vector2, GameObject>();
         detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
         loaded_water = new Dictionary<Vector2, GameObject>();
         loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
+
+        //references
+        chunkGen = GetComponent<ChunkGenerator>();
+        waterScript = GetComponent<WaterScript>();
+        tree_manager = GetComponent<TreeManager>();
+        weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
+        shrine_manager = GetComponent<ShrineManager>();
+
+        Globals.cur_chunk = new Vector2(-1, -1);
+
         moistureMap.Init();
         heatMap.Init();
+
+        if(chunk_unload_dist < chunk_load_dist) chunk_unload_dist = chunk_load_dist;
+        if(chunk_detail_dist > chunk_load_dist) chunk_detail_dist = chunk_load_dist;
     }
 
     void Start() {
@@ -117,15 +129,23 @@ public class GenerationManager : MonoBehaviour {
     // Changes chunks within chunk_detail_dist range to detailed chunk
     // returns true if all chunks are finished loading
     private bool loadChunks(Vector2 position) {
+        System.DateTime endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
         for(float x = position.x - chunk_load_dist; x <= position.x + chunk_load_dist; x++) {
             for(float y = position.y - chunk_load_dist; y <= position.y + chunk_load_dist; y++) {
                 Vector2 coordinates = new Vector2(x, y);
                 if(inLoadDistance(position, coordinates, chunk_load_dist) && !loaded_chunks.ContainsKey(coordinates)) {
                     createChunk(coordinates);
-                    //return false;
+                    if(System.DateTime.Now > endTime && allottedLoadSeconds > 0) return false;
                 }
             }
         }
+        return true;
+    }
+
+    private bool unloadChunks(Vector2 position) {
+        List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
+        foreach(Vector2 coodinates in l)
+            if(!inLoadDistance(position, coodinates, chunk_unload_dist)) destroyChunk(coodinates);
         return true;
     }
 
@@ -142,7 +162,7 @@ public class GenerationManager : MonoBehaviour {
         }
         return true;
     }
-    
+
     private bool undetailChunks(Vector2 position) {
         foreach(Vector2 coordinates in new List<Vector2>(detailed_chunks.Keys))
             if(!inLoadDistance(position, coordinates, chunk_detail_dist) && detailed_chunks.ContainsKey(coordinates)) {
@@ -158,13 +178,6 @@ public class GenerationManager : MonoBehaviour {
         chunkGen.colorChunk(newChunk, chunk_size);
         loaded_chunks.Add(coordinates, newChunk);
         loaded_water.Add(coordinates, waterScript.generate(coordinates));
-    }
-
-    private bool unloadChunks(Vector2 position) {
-        List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
-        foreach(Vector2 coodinates in l)
-            if(!inLoadDistance(position, coodinates, chunk_load_dist)) destroyChunk(coodinates);
-        return true;
     }
 
     private void destroyChunk(Vector2 coordinates) {

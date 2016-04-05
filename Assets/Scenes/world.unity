@@ -257,7 +257,9 @@ MonoBehaviour:
   chunk_size: 128
   chunk_resolution: 4
   chunk_load_dist: 6
+  chunk_unload_dist: 6
   chunk_detail_dist: 1
+  allottedLoadSeconds: 1
   biomes:
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
