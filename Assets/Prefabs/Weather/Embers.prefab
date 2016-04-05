@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 420118}
   - 114: {fileID: 11428496}
   m_Layer: 0
-  m_Name: Snow 1
+  m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
