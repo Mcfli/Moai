@@ -20,7 +20,9 @@ public class WaterScript : MonoBehaviour {
 
     //references
     private GenerationManager genManager;
+
     private Dictionary<Vector2, Mesh> waterMeshes;
+    private Dictionary<Vector2, Renderer> waterRenderers;
 
     //finals
     private float chunk_size;
@@ -41,6 +43,7 @@ public class WaterScript : MonoBehaviour {
         WaterParent.transform.position = new Vector3(0, Globals.water_level, 0);
 
         waterMeshes = new Dictionary<Vector2, Mesh>();
+        waterRenderers = new Dictionary<Vector2, Renderer>();
 
         // underwater effects
         defaultFog = RenderSettings.fog;
@@ -56,9 +59,7 @@ public class WaterScript : MonoBehaviour {
         for(float x = Globals.cur_chunk.x - waveLoadDist; x <= Globals.cur_chunk.x + waveLoadDist; x++) {
             for(float z = Globals.cur_chunk.y - waveLoadDist; z <= Globals.cur_chunk.y + waveLoadDist; z++) {
                 Vector2 coordinates = new Vector2(x, z);
-                Mesh m = waterMeshes[coordinates];
-                updateVertices(m, coordinates);
-                m.RecalculateNormals();
+                if(waterRenderers[coordinates].isVisible) updateVertices(waterMeshes[coordinates], coordinates);
             }
         }
 
@@ -76,15 +77,25 @@ public class WaterScript : MonoBehaviour {
 
     private void updateVertices(Mesh m, Vector2 chunkCoordinates) {
         Vector3[] vertices = m.vertices;
-        for(int j = 0; j < vertices.Length; j++) {
-            Vector3 vertex = vertices[j];
+        Vector3[] normals = m.normals;
+        for(int i = 0; i < vertices.Length; i++) {
+            Vector3 vertex = vertices[i];
             vertex.y = Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.x) * waveSpeed.x + (chunkCoordinates.x * chunk_size + vertex.x) * waveLength.x) * waveHeight.x;
             vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.y) * waveSpeed.y + ((chunkCoordinates.x + chunkCoordinates.y) * chunk_size + vertex.x + vertex.z) * waveLength.y) * waveHeight.y;
             vertex.y += Mathf.Sin((Globals.time / Globals.time_resolution + waveOffset.z) * waveSpeed.z + (chunkCoordinates.y * chunk_size + vertex.z) * waveLength.z) * waveHeight.z;
             if(Mathf.Repeat(Mathf.Round((vertex.x + vertex.z) / chunk_size * (resolution - 1)) + chunkCoordinates.x + chunkCoordinates.y, 2) == 1 && invertEveryOther) vertex.y *= -1;
-            vertices[j] = vertex;
+            vertices[i] = vertex;
+            if(Mathf.Repeat(i, 3) == 2) {
+                Vector3 side1 = vertices[i-2] - vertices[i];
+                Vector3 side2 = vertices[i-1] - vertices[i];
+                Vector3 perp = Vector3.Cross(side1, side2);
+                normals[i] = perp.normalized;
+                normals[i-1] = perp.normalized;
+                normals[i-2] = perp.normalized;
+            }
         }
         m.vertices = vertices;
+        m.normals = normals;
     }
 
     public GameObject generate(Vector2 coordinates){
@@ -98,6 +109,7 @@ public class WaterScript : MonoBehaviour {
         mf.mesh = new Mesh();
         mf.mesh.name = "water (" + coordinates.x + "," + coordinates.y + ")";
         waterMeshes.Add(coordinates, mf.mesh);
+        waterRenderers.Add(coordinates, mr);
 
         water.transform.localPosition = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size); //position
 
@@ -111,7 +123,6 @@ public class WaterScript : MonoBehaviour {
             }
         }
         mf.mesh.vertices = vertices;
-        updateVertices(mf.mesh, coordinates);
 
         // Generate triangles using these vertices
         int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
@@ -146,13 +157,14 @@ public class WaterScript : MonoBehaviour {
         mf.mesh.triangles = triangles;
 
         ReCalcTriangles(mf.mesh);
-        //water.AddComponent(typeof(MeshCollider));
+        updateVertices(mf.mesh, coordinates);
 
         return water;
     }
 
     public void removeMesh(Vector2 coordinates) {
         waterMeshes.Remove(coordinates);
+        waterRenderers.Remove(coordinates);
     }
 
     private void ReCalcTriangles(Mesh mesh) {
