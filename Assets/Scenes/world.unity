@@ -292,15 +292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
   XZDeviationRatio: 0.5
-<<<<<<< HEAD
-  detailHeightDeviation: 0.5
-  detailSubDivisions: 4
-=======
   XZDeviationSeed: 543825
   detailDeviation: 2
   detailDeviationSeed: 854375
   detailSubdivisions: 3
->>>>>>> refs/remotes/origin/brains3
 --- !u!114 &188005515
 MonoBehaviour:
   m_ObjectHideFlags: 0

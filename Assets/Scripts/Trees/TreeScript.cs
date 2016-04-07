@@ -18,11 +18,7 @@ public class TreeScript : MonoBehaviour {
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public float maxHeight;
-    public List<AnimationCurve> heightVSTime;
-
-    //fire
-    public float cul_spread;
-    public bool onFire;
+    public List<AnimationCurve> heightVSTime; //collision
 
     //sapling
     public GameObject sapling;
@@ -33,9 +29,6 @@ public class TreeScript : MonoBehaviour {
     //References
     private Animation anim;
     private BoxCollider boxCollider;
-    private LayerMask treeMask;
-    private LayerMask treeAndSeedMask;
-    //private Renderer thisRenderer; // unused
 
     //animation, collision, states
     //private bool firstAnim;
@@ -44,18 +37,11 @@ public class TreeScript : MonoBehaviour {
     private float lastAnimUpdate;
     private int state;
 
-    //fire
-    private GameObject fire;
-    private GameObject Torch;
-
     // Use this for initialization
     void Awake(){
         // finals
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-        fire = Resources.Load("fire") as GameObject;
-        treeMask = LayerMask.GetMask("Tree");
-        treeAndSeedMask = LayerMask.GetMask("Tree", "Seed");
         lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
 
         ratioTotal = 0;
@@ -100,13 +86,13 @@ public class TreeScript : MonoBehaviour {
                 break;
             }
         }
-        
-        lastAnimUpdate = Globals.time;
-        StartCoroutine("tickUpdate");
+
+        grow();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if(sapling) sapling.SetActive(state == 0);
         age += Globals.deltaTime / Globals.time_resolution; // update age
         if (age > lifeSpan) { // kill if too old
             kill();
@@ -114,33 +100,18 @@ public class TreeScript : MonoBehaviour {
         }
         
         if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) {
-            if(age / lifeSpan > (stateMarks[state + 1] / ratioTotal)) { //update state
-                state++;
-                Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
-            }
-            updateAnimation();
-            updateCollision();
-            lastAnimUpdate = Globals.time;
+            grow();
         }
     }
 
-    // Coroutine is called once per second
-    IEnumerator tickUpdate() {
-        while (true) {
-            yield return new WaitForSeconds(1);
-            //if (Globals.time_scale <= 1) updateAnimation();
-            stickToGround();
-            if (sapling) sapling.SetActive(state == 0);
-            if (onFire) fireSpread();
+    private void grow() {
+        if(age / lifeSpan > (stateMarks[state + 1] / ratioTotal)) { //update state
+            state++;
+            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
         }
-    }
-
-    private void stickToGround(){
-        RaycastHit hit;
-        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
-            transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
-        else Destroy(gameObject);
+        updateAnimation();
+        updateCollision();
+        lastAnimUpdate = Globals.time;
     }
 
     //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
@@ -167,31 +138,11 @@ public class TreeScript : MonoBehaviour {
         boxCollider.center = new Vector3(0, maxHeight * growth * 0.5f, 0);
     }
 
-    void OnMouseDown(){
-        if (Globals.PlayerScript.has("Torch")){
-            if (!onFire) onFire = true;
-            /*GameObject Instance = (GameObject)*/Instantiate(fire, transform.position, Quaternion.identity);
-        }
-    }
-    
-    private void fireSpread(){
-        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, cul_spread, treeMask);
-        for (int i = 0; i < objectsInRange.Length; i++){
-            GameObject curtree = objectsInRange[i].gameObject;
-            TreeScript curtreeScript = curtree.GetComponent<TreeScript>();
-            if (!curtreeScript.onFire){
-                curtreeScript.GetComponent<TreeScript>().onFire = true;
-                /*GameObject Instance = (GameObject)*/Instantiate(fire, curtree.transform.position, Quaternion.identity);
-            }        
-        }
-    }
-
     private void kill() {
         Destroy(gameObject);
     }
     
     public int getState(){ //0:growing,1:mature,2:dying,3:burnt
-        if(onFire) return 3;
-        else return state;
+        return state;
     }
 }
