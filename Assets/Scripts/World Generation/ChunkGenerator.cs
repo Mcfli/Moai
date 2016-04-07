@@ -7,7 +7,7 @@ public class ChunkGenerator : MonoBehaviour {
     public float XZDeviationRatio; //only deviates positively (sadly)
     public int XZDeviationSeed;
     public float detailDeviation;
-    public int heightDeviationSeed;
+    public int detailDeviationSeed;
     public int detailSubdivisions;
 
     private GameObject TerrainParent;
@@ -241,7 +241,7 @@ public class ChunkGenerator : MonoBehaviour {
         int originalSeed = Random.seed;
         for (int i = 0; i < oldVerts.Length; i += 3) {
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
-            Random.seed = seed + heightDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
+            Random.seed = seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
             hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), hypotMid.y + Random.Range(-detailDeviation, detailDeviation), hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i+1], oldVerts[i+2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i+2], oldVerts[i], 0.5f);
