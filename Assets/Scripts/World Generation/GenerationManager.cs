@@ -18,6 +18,7 @@ public class GenerationManager : MonoBehaviour {
     private Dictionary<Vector2, GameObject> loaded_chunks;
     private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
     private Dictionary<Vector2, GameObject> loaded_water;
+    private Dictionary<Vector2, List<GameObject>> world_objects;
     private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
     //private Dictionary<Vector2, Biome> chunkBiomes;  // keeps track of what chunk is at what biome
@@ -31,7 +32,6 @@ public class GenerationManager : MonoBehaviour {
     private ChunkGenerator chunkGen;
     private WaterScript waterScript;
     private TreeManager tree_manager;
-    private WeatherManager weather_manager;
     private ShrineManager shrine_manager;
 
     void Awake() {
@@ -47,7 +47,6 @@ public class GenerationManager : MonoBehaviour {
         chunkGen = GetComponent<ChunkGenerator>();
         waterScript = GetComponent<WaterScript>();
         tree_manager = GetComponent<TreeManager>();
-        weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
         shrine_manager = GetComponent<ShrineManager>();
 
         Globals.cur_chunk = new Vector2(-1, -1);
@@ -111,7 +110,7 @@ public class GenerationManager : MonoBehaviour {
         if(!loadTrees(position)) done = false;
         if(!loadShrines(position)) done = false;
 
-        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.WeatherManagerScript.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
         return done;
     }

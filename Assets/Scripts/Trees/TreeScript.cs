@@ -11,7 +11,7 @@ public class TreeScript : MonoBehaviour {
     public float lifeSpanVariance = 0.1f; // in ratio
 
     //animating
-    public float ratioAnimUpdates = 0.01f; // in ratio
+    public float ratioAnimUpdates; // in ratio
 
     //animation, collision, states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
@@ -99,9 +99,7 @@ public class TreeScript : MonoBehaviour {
             return;
         }
         
-        if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) {
-            grow();
-        }
+        if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) grow();
     }
 
     private void grow() {

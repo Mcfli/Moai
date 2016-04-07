@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TreeManager : MonoBehaviour {
-    public int tree_resolution = 2;
     public int treeLoadDistance = 1;
 
     private GenerationManager gen_manager;
