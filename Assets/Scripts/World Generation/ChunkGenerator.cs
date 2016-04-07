@@ -4,16 +4,18 @@ using System.Collections.Generic;
 //[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ChunkGenerator : MonoBehaviour {
     public Material landMaterial;
-    public NoiseGen DeviationMap;
-    public float XZDeviationRatio = 0.5f; //only deviates in 1 direction (sadly)
+    public float XZDeviationRatio = 0.5f; //only deviates positively (sadly)
+    public int XZDeviationSeed;
     public float detailHeightDeviation = 3;
-    public int detailSubDivisions = 3;
+    public int heightDeviationSeed;
+    public int detailSubdivisions = 3;
 
     private GameObject TerrainParent;
 
     //references
     private NoiseSynth synth;
     private GenerationManager genManager;
+    private int seed;
 
     //finals
     private float chunk_size;
@@ -22,6 +24,7 @@ public class ChunkGenerator : MonoBehaviour {
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
+        seed = GetComponent<Seed>().seed;
         TerrainParent = new GameObject("Terrain");
         TerrainParent.transform.parent = transform;
         chunk_size = genManager.chunk_size;
@@ -47,22 +50,23 @@ public class ChunkGenerator : MonoBehaviour {
         
         // Generate chunk_resolution^2 vertices
 		Vector3[] vertices = new Vector3[(chunk_resolution*chunk_resolution)];
-        
+
+        int originalSeed = Random.seed;
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
                 float x = ix * chunk_size / (chunk_resolution - 1);
                 float y = iy * chunk_size / (chunk_resolution - 1);
                 float origx = x; float origy = y;
-                if(XZDeviationRatio != 0) {
-                    x += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2, (origy + coordinates.y * chunk_size) * 2+1, 0), XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
-                    y += Mathf.Repeat(DeviationMap.genPerlin((origx + coordinates.x * chunk_size) * 2+1, (origy + coordinates.y * chunk_size) * 2, 0), XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // replace 0 with Globals.time eventually
-                    //x = (ix + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
-                    //y = (iy + Random.Range(-XZDeviationRatio, XZDeviationRatio)) * chunk_size / (chunk_resolution - 1); // the deviations are randomized again; also, the chunks don't line up
+                if(XZDeviationRatio != 0){
+                    Random.seed = seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
+                    x = (ix + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
+                    y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // the deviations are randomized again; also, the chunks don't line up
                 }
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
                 vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0), y); // replace 0 with Globals.time eventually
             }
-		}
+        }
+        Random.seed = originalSeed;
 
         chunkMeshes.lowMesh.vertices = vertices;
 
@@ -108,7 +112,7 @@ public class ChunkGenerator : MonoBehaviour {
 
         chunkMeshes.highMesh = Instantiate(chunkMeshes.lowMesh);
         chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [h]";
-        subDivide(chunkMeshes.highMesh, coordinates, detailSubDivisions);
+        subDivide(chunkMeshes.highMesh, coordinates, detailSubdivisions);
 
         //mf.mesh = chunkMeshes.highMesh;
         mf.mesh = chunkMeshes.lowMesh;
@@ -234,9 +238,11 @@ public class ChunkGenerator : MonoBehaviour {
         Vector3[] vertices = new Vector3[oldVerts.Length * 4];
         int[] triangles = new int[oldVerts.Length * 4];
 
-        for(int i = 0; i < oldVerts.Length; i += 3) {
+        int originalSeed = Random.seed;
+        for (int i = 0; i < oldVerts.Length; i += 3) {
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
-            hypotMid = new Vector3(hypotMid.x, hypotMid.y + Mathf.Repeat(DeviationMap.genPerlin((hypotMid.x + coordinates.x * chunk_size) * 2 + 2, (hypotMid.z + coordinates.y * chunk_size) * 2 + 2, 0), detailHeightDeviation * 2) - detailHeightDeviation, hypotMid.z);
+            Random.seed = seed + heightDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
+            hypotMid = new Vector3(hypotMid.x, hypotMid.y + Random.Range(-detailHeightDeviation, detailHeightDeviation), hypotMid.z);
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i+1], oldVerts[i+2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i+2], oldVerts[i], 0.5f);
             vertices[i * 4    ] = hypotMid;
@@ -255,6 +261,7 @@ public class ChunkGenerator : MonoBehaviour {
             vertices[i * 4 +10] = hypotMid;
             vertices[i * 4 +11] = midpoint2;
         }
+        Random.seed = originalSeed;
         for(int i = 0; i < triangles.Length; i++) triangles[i] = i;
 
         mesh.vertices = vertices;
