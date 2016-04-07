@@ -12,12 +12,15 @@ public class InteractableObject: MonoBehaviour
     public float growTimeVariance;
     public GameObject dirtMound;     // prefab - instantiates and hides when instatiated
     public Vector3 dirtMoundOffset;
+    public float fertilityChance;    // How likely ( 0..1 ) it is that the seed will be fertile
 
     private Rigidbody thisRigidbody;
     private Collider thisCollider;
     private float timeRemain;        // how long left before the seed dies
     private bool planted;
     private bool wasHeld;
+
+    private bool isFertile;          // Whether or not the seed can produce a tree  
 
     void Awake() {
         thisRigidbody = GetComponent<Rigidbody>();
@@ -31,6 +34,7 @@ public class InteractableObject: MonoBehaviour
             dirtMound.SetActive(false);
         }
         planted = false;
+        isFertile = Random.value < fertilityChance;
     }
 
 
@@ -53,6 +57,7 @@ public class InteractableObject: MonoBehaviour
 
             if (isHeld()) {
                 wasHeld = true;
+                isFertile = true;
             } else if (planted) {
                 if (wasHeld) { //just dropped
                     wasHeld = false;
@@ -95,10 +100,14 @@ public class InteractableObject: MonoBehaviour
     }
 
     private void tryToTurnIntoTree() {
-        Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-        if (close_trees.Length < 5) {
-            var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-            Instantiate(spawn_object, transform.position, RandomRotation);
+        if (isFertile)
+        {
+            Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
+            if (close_trees.Length < 5)
+            {
+                var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                Instantiate(spawn_object, transform.position, RandomRotation);
+            }
         }
         Destroy(gameObject);
     }

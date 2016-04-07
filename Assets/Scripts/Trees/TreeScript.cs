@@ -98,7 +98,7 @@ public class TreeScript : MonoBehaviour {
         age = 0.0f;
         donePropogating = false;
         health = max_health;
-        lastSpawned = Globals.time - Random.value * spawn_delay;
+        lastSpawned = Globals.time;
 
 
         // tries to place on terrain. destroys otherwise.
@@ -170,7 +170,7 @@ public class TreeScript : MonoBehaviour {
             yield return new WaitForSeconds(1);
             //if (Globals.time_scale <= 1) updateAnimation();
             stickToGround();
-            Cull();
+            //Cull();
             if (dirtMound) dirtMound.SetActive(state == 0);
             if (propogateDuringState[state]) Propogate();
             if (onFire) fireSpread();
@@ -195,24 +195,34 @@ public class TreeScript : MonoBehaviour {
     }
 
     // Creates seeds in a radius around this tree if it's ready to
-    private void Propogate(){
+    private void Propogate()
+    {
         if (donePropogating) return;
-        if ((Globals.time - lastSpawned) / Globals.time_resolution > spawn_delay) { // if(Random.value < spawn_chance) {
-            float randAngle = Random.Range(0, Mathf.PI * 2);
-            float randDistance = Random.Range(minSpawnRadius, maxSpawnRadius);
-            Vector2 randomPoint = new Vector2(Mathf.Cos(randAngle) * randDistance + transform.position.x, Mathf.Sin(randAngle) * randDistance + transform.position.z);
+        if (Globals.time > lastSpawned + spawn_delay)
+        {
+            float iterations = (Globals.time / (lastSpawned + spawn_delay));
+            for(int i = 0; i < iterations; i++)
+                createSeed();
+        }
+    }
 
-            RaycastHit hit;
-            Ray rayDown = new Ray(new Vector3(randomPoint.x, 10000000, randomPoint.y), Vector3.down);
-            if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-                Collider[] objectsInRange = Physics.OverlapSphere(hit.point, cull_radius, treeAndSeedMask);
-                if (objectsInRange.Length > seed_cull_max_density) return;
-                GameObject seed = Instantiate(seed_object);
-                seed.GetComponent<InteractableObject>().plant(hit.point);
-                numSpawned++;
-                lastSpawned = Globals.time + Random.Range(-spawn_variance, spawn_variance) * spawn_delay;
-                if (spawn_limit > 0 && numSpawned >= spawn_limit) donePropogating = true;
-            }
+    private void createSeed()
+    {
+        float randAngle = Random.Range(0, Mathf.PI * 2);
+        float randDistance = Random.Range(minSpawnRadius, maxSpawnRadius);
+        Vector2 randomPoint = new Vector2(Mathf.Cos(randAngle) * randDistance + transform.position.x, Mathf.Sin(randAngle) * randDistance + transform.position.z);
+
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(randomPoint.x, 10000000, randomPoint.y), Vector3.down);
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
+        {
+            Collider[] objectsInRange = Physics.OverlapSphere(hit.point, cull_radius, treeAndSeedMask);
+            if (objectsInRange.Length > seed_cull_max_density) return;
+            GameObject seed = Instantiate(seed_object);
+            seed.GetComponent<InteractableObject>().plant(hit.point);
+            numSpawned++;
+            lastSpawned = Globals.time + Mathf.Max(( Random.Range(-spawn_variance, spawn_variance)) * spawn_delay,0);
+            if (spawn_limit > 0 && numSpawned >= spawn_limit) donePropogating = true;
         }
     }
 
