@@ -4,11 +4,11 @@ using System.Collections.Generic;
 //[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ChunkGenerator : MonoBehaviour {
     public Material landMaterial;
-    public float XZDeviationRatio = 0.5f; //only deviates positively (sadly)
+    public float XZDeviationRatio; //only deviates positively (sadly)
     public int XZDeviationSeed;
-    public float detailHeightDeviation = 3;
+    public float detailDeviation;
     public int heightDeviationSeed;
-    public int detailSubdivisions = 3;
+    public int detailSubdivisions;
 
     private GameObject TerrainParent;
 
@@ -59,8 +59,8 @@ public class ChunkGenerator : MonoBehaviour {
                 float origx = x; float origy = y;
                 if(XZDeviationRatio != 0){
                     Random.seed = seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
-                    x = (ix + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // problem with this is that when the chunks are regenerated,
-                    y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1); // the deviations are randomized again; also, the chunks don't line up
+                    x = (ix + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
+                    y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                 }
                 // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
                 vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0), y); // replace 0 with Globals.time eventually
@@ -114,11 +114,11 @@ public class ChunkGenerator : MonoBehaviour {
         chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [h]";
         subDivide(chunkMeshes.highMesh, coordinates, detailSubdivisions);
 
-        //mf.mesh = chunkMeshes.highMesh;
         mf.mesh = chunkMeshes.lowMesh;
         chunkMeshes.mf = mf;
 
-        chunk.AddComponent(typeof(MeshCollider));
+        MeshCollider collider = (MeshCollider)chunk.AddComponent(typeof(MeshCollider));
+        collider.sharedMesh = chunkMeshes.highMesh;
 
         return chunk;
 	}
@@ -242,7 +242,7 @@ public class ChunkGenerator : MonoBehaviour {
         for (int i = 0; i < oldVerts.Length; i += 3) {
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
             Random.seed = seed + heightDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
-            hypotMid = new Vector3(hypotMid.x, hypotMid.y + Random.Range(-detailHeightDeviation, detailHeightDeviation), hypotMid.z);
+            hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), hypotMid.y + Random.Range(-detailDeviation, detailDeviation), hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i+1], oldVerts[i+2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i+2], oldVerts[i], 0.5f);
             vertices[i * 4    ] = hypotMid;
