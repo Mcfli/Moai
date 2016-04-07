@@ -30,7 +30,8 @@ public class TreeScript : MonoBehaviour {
     //References
     private Animation anim;
     private BoxCollider boxCollider;
-    private bool firstAnim;
+    //private MeshRenderer meshRenderer;
+    //private bool animateNext;
 
     //animation, collision, states
     private float ratioTotal;
@@ -43,11 +44,12 @@ public class TreeScript : MonoBehaviour {
         // references
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
+        //meshRenderer = GetComponent<MeshRenderer>();
 
         age = 0;
         deathAge = baseLifeSpan + Random.Range(-lifeSpanVariance, lifeSpanVariance) * baseLifeSpan;
         state = 0;
-        firstAnim = false;
+        //animateNext = true;
 
         ratioTotal = 0;
         stateMarks = new List<float> { 0 };
@@ -68,6 +70,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     void Start() {
+        //anim.enabled = false;
         grow();
     }
 	
@@ -81,8 +84,11 @@ public class TreeScript : MonoBehaviour {
         }
 
         if (Globals.time > lastGrowUpdate + (deathAge * ratioAnimUpdates * Globals.time_resolution)) grow();
-        //else if (!firstAnim) firstAnim = true;
-        //else anim.enabled = false;
+
+        /*if (animateNext && meshRenderer.isVisible){
+            anim.enabled = true;
+            animateNext = false;
+        }else anim.enabled = false;*/
     }
 
     private void grow() {
@@ -90,6 +96,7 @@ public class TreeScript : MonoBehaviour {
         updateAnimation();
         updateCollision();
         lastGrowUpdate = Globals.time;
+        //animateNext = true;
     }
 
     private void updateState(){

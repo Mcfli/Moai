@@ -25,6 +25,7 @@ public class Globals : MonoBehaviour {
     public static Player PlayerScript = Player.GetComponent<Player>();
     public static Sky SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
     public static WeatherManager WeatherManagerScript = GameObject.Find("Weather").GetComponent<WeatherManager>();
+    public static GenerationManager GenerationManagerScript = GameObject.Find("WorldGen").GetComponent<GenerationManager>();
 
     // Heat & Moisture
     public static Vector2 heatMoistureOrigin = new Vector2(25,25);

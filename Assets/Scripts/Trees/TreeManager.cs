@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class TreeManager : MonoBehaviour {
     public int treeLoadDistance = 1;
 
-    private GenerationManager gen_manager;
+    private float chunk_size;
     private static Dictionary<Vector2, List<treeStruct>> trees;
 
     // Use this for initialization
     void Awake() {
-        gen_manager = gameObject.GetComponent<GenerationManager>();
         trees = new Dictionary<Vector2, List<treeStruct>>();
+        chunk_size = Globals.GenerationManagerScript.chunk_size;
     }
 
     public static void saveTree(Vector2 chunk, TreeScript tree){
@@ -38,15 +38,15 @@ public class TreeManager : MonoBehaviour {
         else
         {
             trees[key] = new List<treeStruct>();
-            float step_size = gen_manager.chunk_size / biome.treeDensity;
+            float step_size = chunk_size / biome.treeDensity;
 
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
             int terrain = LayerMask.GetMask("Terrain");
 
-            for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size){
-                for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size){
+            for (float i = key.x * chunk_size + 0.5f*step_size; i < key.x * chunk_size + chunk_size; i += step_size){
+                for (float j = key.y * chunk_size + 0.5f * step_size; j < key.y * chunk_size + chunk_size; j += step_size){
                     float xpos = i + step_size * Random.value - 0.5f * step_size;
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
 
@@ -81,8 +81,8 @@ public class TreeManager : MonoBehaviour {
     }
 
     public void unloadTrees(int x, int y){
-        Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size*0.5f,0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
-        Vector3 half_extents = new Vector3(gen_manager.chunk_size*0.5f,100000, gen_manager.chunk_size*0.5f );
+        Vector3 center = new Vector3(x * chunk_size + chunk_size*0.5f,0, y * chunk_size + chunk_size * 0.5f);
+        Vector3 half_extents = new Vector3(chunk_size*0.5f,100000, chunk_size*0.5f );
         LayerMask tree_mask = LayerMask.GetMask("Tree");
         Vector2 chunk = new Vector2(x, y);
 
