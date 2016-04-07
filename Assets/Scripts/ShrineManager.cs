@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ShrineManager : MonoBehaviour {
-    public GenerationManager gen_manager;
     public GameObject prefab;
     public float acceptable_heightDiff = 0.0f;
     public int max_tries = 1;
     public int shrine_probability = 1;
 
-	private static Dictionary<Vector2, List<ShrineGrid>> shrines;
+    private GenerationManager gen_manager;
+    private static Dictionary<Vector2, List<ShrineGrid>> shrines;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
 		shrines = new Dictionary<Vector2, List<ShrineGrid>>();
 	}

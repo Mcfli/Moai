@@ -2,22 +2,13 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-
-    public float initialWaitSpeed = 10.0f;
-    public float maxWaitSpeed = 10000.0f;
-    public AnimationCurve waitSpeedGrowth;
-    public float timeToGetToMaxWait = 300; // 5 minutes
-    public float sprintWaitMultiplier = 5.0f;
-    public float grabDistance = 5;
-    public float grabSphereRadius = 1;
-
-    public string waitInput = "Patience";
-    public float minWarpOnWaitDist = 1; // distance from ground you have to be to warp there
+    public float grabDistance = 4;
+    public float grabSphereRadius = 0;
+    public float minWarpOnWaitDist = 0.5f; // distance from ground you have to be to warp there
 
     private Collider thisCollider;
-    private CharacterController thisCharacterController;
+    private float cameraHeight;
     
-    private float waitingFor;
 	private bool startGroundWarp;
     private InteractableObject leftObj;
     private InteractableObject rightObj;
@@ -25,51 +16,34 @@ public class Player : MonoBehaviour {
     private float rightSize;
     private Vector3 leftOrigScale;
     private Vector3 rightOrigScale;
+    private bool underwater;
 
     public AudioClip speedUp;
-    AudioSource audio; //unused, complains about hiding
+    AudioSource playerAudio;
 
     void Awake() {
         thisCollider = GetComponent<Collider>();
-        thisCharacterController = GetComponent<CharacterController>();
+        cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
     }
 
     // Use this for initialization
     void Start () {
 		startGroundWarp = false;
-        audio = GetComponent<AudioSource>();
+        playerAudio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //Speed Up Sound
-        if (Input.GetButton(waitInput))
-        {
-            if (!audio.isPlaying)
-            {
-                audio.loop = true;
-                audio.PlayOneShot(speedUp, .2f);
+        //warp to ground at game start
+        if(!startGroundWarp) startGroundWarp = warpToGround();
+
+        if (Input.GetButton("Patience")) {
+            warpToGround();
+            if(!playerAudio.isPlaying) { //sound
+                playerAudio.loop = true;
+                playerAudio.PlayOneShot(speedUp, .2f);
             }
         }
-
-        if (Input.GetButton(waitInput)) { //PATIENCE IS POWER
-            if (waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);
-            else Globals.time_scale = maxWaitSpeed;
-
-            if(Input.GetButton("Sprint")) waitingFor += Time.deltaTime * sprintWaitMultiplier;
-            else waitingFor += Time.deltaTime;
-            
-            warpToGround();
-        }else{
-            Globals.time_scale = 1;
-            waitingFor = 0;
-        }
-
-        Globals.deltaTime = Globals.time_resolution * Globals.time_scale * Time.deltaTime;
-        Globals.time += Globals.deltaTime;
-
-        //warp to ground at game start
-        if (!startGroundWarp) startGroundWarp = warpToGround();
 
         //Holding Objects stuff
         if (Input.GetButtonDown("Use")){
@@ -77,9 +51,12 @@ public class Player : MonoBehaviour {
             else if (TryUseObject(false)) { }
             else DropObject(false);
         }
-
         if(rightObj != null) followHand(rightObj, rightSize, false);
+
+        underwater = Globals.Player.transform.position.y + cameraHeight < Globals.water_level;
     }
+
+    public bool isUnderwater() {return underwater;}
     
     private void followHand(InteractableObject obj, float objSize, bool isLeft){
         Transform t = Camera.main.transform;
@@ -94,8 +71,8 @@ public class Player : MonoBehaviour {
 		RaycastHit hit;
         Ray rayDown = new Ray(transform.position, Vector3.down);
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
-            if (transform.position.y - (hit.point.y + thisCharacterController.height / 2) > minWarpOnWaitDist)
-                transform.position = new Vector3(transform.position.x, hit.point.y + thisCharacterController.height / 2, transform.position.z);
+            if (transform.position.y - (hit.point.y + cameraHeight) > minWarpOnWaitDist)
+                transform.position = new Vector3(transform.position.x, hit.point.y + cameraHeight, transform.position.z);
             return true;
         }
         else return false;

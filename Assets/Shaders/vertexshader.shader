@@ -9,25 +9,27 @@ Shader "Custom/Vertex Colored" {
 		_MainTex("Base (RGB)", 2D) = "white" {}
 	}
 
-		SubShader{
+	SubShader{
 		Pass{
-		Material{
-		Shininess[_Shininess]
-		Specular[_SpecColor]
-		Emission[_Emission]
-	}
-		ColorMaterial AmbientAndDiffuse
-		Lighting On
-		SeparateSpecular On
-		SetTexture[_MainTex]{
-		Combine texture * primary, texture * primary
-	}
-		SetTexture[_MainTex]{
-		constantColor[_Color]
-		Combine previous * constant DOUBLE, previous * constant
-	}
-	}
+			Material{
+				Shininess[_Shininess]
+				Specular[_SpecColor]
+				Emission[_Emission]
+			}
+			
+			ColorMaterial AmbientAndDiffuse
+			Lighting On
+			SeparateSpecular On
+			SetTexture[_MainTex]{
+				Combine texture * primary, texture * primary
+			}
+			
+			SetTexture[_MainTex]{
+				constantColor[_Color]
+				Combine previous * constant DOUBLE, previous * constant
+			}
+		}
 	}
 
-		Fallback " VertexLit", 1
+	Fallback " VertexLit", 1
 }

@@ -20,11 +20,12 @@ public class NoiseGen : MonoBehaviour
     public void Init()
     {
         smoothness_inv = 1 / smoothness;
-        Random.seed = seed;
+        Random.seed += seed;
         x_o = Random.Range(2,int.MaxValue);
         y_o = Random.Range(2, int.MaxValue);
         z_o = Random.Range(2, int.MaxValue);
         w_o = Random.Range(2, int.MaxValue);
+        Random.seed -= seed;
     }
 
     // Cubic interpolation
@@ -176,9 +177,13 @@ public class NoiseGen : MonoBehaviour
     // Generates a vector for a grid node at x,y,z
     private Vector3 getNodeVector(int x, int y, int z)
     {
+        int origSeed = Random.seed;
         Random.seed = hash(x, y, z);
-        return new Vector3(Mathf.RoundToInt(2*Random.value-1), Mathf.RoundToInt(2 *Random.value-1),
+        Vector3 result = new Vector3(Mathf.RoundToInt(2*Random.value-1), Mathf.RoundToInt(2 *Random.value-1),
             Mathf.RoundToInt(2 * Random.value - 1));
+        Random.seed = origSeed;
+        return result;
+
     }
 
     // Generates an int from an x and a y value

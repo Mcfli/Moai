@@ -50,7 +50,7 @@ public class TreeScript : MonoBehaviour {
     private BoxCollider boxCollider;
     private LayerMask treeMask;
     private LayerMask treeAndSeedMask;
-    private Renderer thisRenderer; // unused
+    //private Renderer thisRenderer; // unused
 
     //propogation
     private bool donePropogating;
@@ -77,7 +77,7 @@ public class TreeScript : MonoBehaviour {
         // finals
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-        thisRenderer = GetComponent<Renderer>();
+        //thisRenderer = GetComponent<Renderer>();
         fire = Resources.Load("fire") as GameObject;
         treeMask = LayerMask.GetMask("Tree");
         treeAndSeedMask = LayerMask.GetMask("Tree", "Seed");
