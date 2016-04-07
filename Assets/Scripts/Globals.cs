@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Globals : MonoBehaviour {
+    public static int seed; //set by seed.cs
 
     public static float time = 0.0f; //incremented by TimeScript
     public static float time_scale = 1.0f;

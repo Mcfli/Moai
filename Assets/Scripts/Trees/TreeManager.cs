@@ -30,8 +30,7 @@ public class TreeManager : MonoBehaviour {
                 if (tree.prefab == null) continue;
                 GameObject new_tree = Instantiate(tree.prefab, tree.position, tree.rotation) as GameObject;
                 TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
-                new_treeScript.age = tree.age;
-                new_treeScript.lifeSpan = tree.life_span;
+                new_treeScript.setAge(tree.age, tree.deathAge);
                 new_treeScript.prefab = tree.prefab;
                 trees[key].Remove(tree);
             }
@@ -44,18 +43,26 @@ public class TreeManager : MonoBehaviour {
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
+            int terrain = LayerMask.GetMask("Terrain");
+
             for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size){
                 for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size){
-                    Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-
                     float xpos = i + step_size * Random.value - 0.5f * step_size;
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
-                    GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
-                    GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, 0, zpos), RandomRotation) as GameObject;
-                    TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
-                    new_treeScript.lifeSpan = new_treeScript.lifeSpan * Random.Range(1- new_treeScript.lifeSpanVariance, 1+ new_treeScript.lifeSpanVariance);
-                    new_treeScript.age = Random.value * new_treeScript.lifeSpan;
-                    new_treeScript.prefab = treePrefab;
+
+                    RaycastHit hit;
+                    Ray rayDown = new Ray(new Vector3(xpos, 10000000, zpos), Vector3.down);
+                    if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
+                        if (hit.point.y > Globals.water_level){
+                            GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
+                            Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                            GameObject new_tree = Instantiate(treePrefab, new Vector3(xpos, hit.point.y - 1, zpos), RandomRotation) as GameObject;
+                            TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
+                            float newDeathAge = new_treeScript.baseLifeSpan + Random.Range(-new_treeScript.lifeSpanVariance, new_treeScript.lifeSpanVariance) * new_treeScript.baseLifeSpan;
+                            new_treeScript.setAge(Random.value * newDeathAge, newDeathAge);
+                            new_treeScript.prefab = treePrefab;
+                        }
+                    }
                 }
             }
         }
@@ -94,14 +101,14 @@ public class TreeManager : MonoBehaviour {
         public Vector3 position;
         public Quaternion rotation;
         public float age;
-        public float life_span;
+        public float deathAge;
         public GameObject prefab;
 
         public treeStruct(TreeScript t) {
             position = t.gameObject.transform.position;
             rotation = t.gameObject.transform.rotation;
-            age = t.age;
-            life_span = t.lifeSpan;
+            age = t.getAge();
+            deathAge = t.getDeathAge();
             prefab = t.prefab;
         }
     }

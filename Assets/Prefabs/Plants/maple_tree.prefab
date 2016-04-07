@@ -798,8 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 136664}
-  age: 0
-  lifeSpan: 1314000
+  baseLifeSpan: 657000
   lifeSpanVariance: 0.3
   ratioAnimUpdates: 0.0001
   stateAnimationNames:
@@ -814,7 +813,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
-  maxHeight: 5
+  maxHeight: 4
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -850,19 +849,19 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 1
-      inSlope: -1
-      outSlope: -1
+      inSlope: -0.5
+      outSlope: -0.5
       tangentMode: 10
     - time: 1
-      value: 0
-      inSlope: -1
-      outSlope: -1
+      value: 0.5
+      inSlope: -0.5
+      outSlope: -0.5
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  sapling: {fileID: 0}
-  saplingOffset: {x: 0, y: 0, z: 0}
+  sapling: {fileID: 184690, guid: bed206811667e2c48b4e132951aa40f0, type: 2}
+  saplingOffset: {x: 0, y: 1, z: 0}
 --- !u!137 &13704194
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

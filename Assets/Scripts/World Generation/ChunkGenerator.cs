@@ -15,7 +15,6 @@ public class ChunkGenerator : MonoBehaviour {
     //references
     private NoiseSynth synth;
     private GenerationManager genManager;
-    private int seed;
 
     //finals
     private float chunk_size;
@@ -24,7 +23,6 @@ public class ChunkGenerator : MonoBehaviour {
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
-        seed = GetComponent<Seed>().seed;
         TerrainParent = new GameObject("Terrain");
         TerrainParent.transform.parent = transform;
         chunk_size = genManager.chunk_size;
@@ -58,7 +56,7 @@ public class ChunkGenerator : MonoBehaviour {
                 float y = iy * chunk_size / (chunk_resolution - 1);
                 float origx = x; float origy = y;
                 if(XZDeviationRatio != 0){
-                    Random.seed = seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
+                    Random.seed = Globals.seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
                     x = (ix + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                     y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                 }
@@ -241,7 +239,7 @@ public class ChunkGenerator : MonoBehaviour {
         int originalSeed = Random.seed;
         for (int i = 0; i < oldVerts.Length; i += 3) {
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
-            Random.seed = seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
+            Random.seed = Globals.seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
             hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), hypotMid.y + Random.Range(-detailDeviation, detailDeviation), hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i+1], oldVerts[i+2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i+2], oldVerts[i], 0.5f);

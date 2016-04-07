@@ -3,12 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TreeScript : MonoBehaviour {
+    //prefab
     public GameObject prefab;
-
-    //lifeSpan
-    public float age;
-    public float lifeSpan = 657000; // base life span, in seconds, will be modified by lifeSpanVariance when instantiated
-    public float lifeSpanVariance = 0.1f; // in ratio
+    public float baseLifeSpan = 657000; // base life span in seconds
+    public float lifeSpanVariance = 0.3f; // in ratio
 
     //animating
     public float ratioAnimUpdates; // in ratio
@@ -25,24 +23,31 @@ public class TreeScript : MonoBehaviour {
     public Vector3 saplingOffset;
 
     ///-------PRIVATES-------///
+    
+    private float age;
+    private float deathAge;
 
     //References
     private Animation anim;
     private BoxCollider boxCollider;
+    private bool firstAnim;
 
     //animation, collision, states
-    //private bool firstAnim;
     private float ratioTotal;
     private List<float> stateMarks;
-    private float lastAnimUpdate;
+    private float lastGrowUpdate;
     private int state;
 
     // Use this for initialization
     void Awake(){
-        // finals
+        // references
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-        lifeSpan += Random.Range(-lifeSpanVariance, lifeSpanVariance) * lifeSpan;
+
+        age = 0;
+        deathAge = baseLifeSpan + Random.Range(-lifeSpanVariance, lifeSpanVariance) * baseLifeSpan;
+        state = 0;
+        firstAnim = false;
 
         ratioTotal = 0;
         stateMarks = new List<float> { 0 };
@@ -52,72 +57,61 @@ public class TreeScript : MonoBehaviour {
         }
 
         foreach (AnimationState animState in anim) animState.speed = 0; //fixes twitching
-        
-        state = 0;
-        age = 0.0f;
 
-
-        // tries to place on terrain. destroys otherwise.
-        RaycastHit hit;
-        Ray rayDown = new Ray(new Vector3(transform.position.x,10000000,transform.position.z), Vector3.down);
-        int terrain = LayerMask.GetMask("Terrain");
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
-            if (hit.point.y < Globals.water_level)
-                Destroy(gameObject);
-            else transform.position = new Vector3(transform.position.x, hit.point.y - 1, transform.position.z);
-        }else Destroy(gameObject);
-
-        // pre-growth
+        // sapling
         if (sapling) {
             sapling = Instantiate(sapling);
             sapling.transform.SetParent(transform, false);
             sapling.transform.position += saplingOffset;
             sapling.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
-            sapling.SetActive(false);
         }
     }
 
     void Start() {
-        //set state
-        for (int i = 0; i < stateAnimationNames.Count; i++) {
-            if (age / lifeSpan < (stateMarks[i + 1]) / ratioTotal) {
-                state = i;
-                Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
-                break;
-            }
-        }
-
         grow();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if(sapling) sapling.SetActive(state == 0);
         age += Globals.deltaTime / Globals.time_resolution; // update age
-        if (age > lifeSpan) { // kill if too old
+
+        if (age > deathAge) { // kill if too old
             kill();
             return;
         }
-        
-        if (Globals.time > lastAnimUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) grow();
+
+        if (Globals.time > lastGrowUpdate + (deathAge * ratioAnimUpdates * Globals.time_resolution)) grow();
+        //else if (!firstAnim) firstAnim = true;
+        //else anim.enabled = false;
     }
 
     private void grow() {
-        if(age / lifeSpan > (stateMarks[state + 1] / ratioTotal)) { //update state
-            state++;
-            Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
-        }
+        updateState();
         updateAnimation();
         updateCollision();
-        lastAnimUpdate = Globals.time;
+        lastGrowUpdate = Globals.time;
+    }
+
+    private void updateState(){
+        if (age / deathAge >= stateMarks[state + 1] / ratioTotal || age / deathAge < stateMarks[state] / ratioTotal){
+            for (int i = 0; i < stateMarks.Count - 1; i++){
+                if (age / deathAge < (stateMarks[i + 1]) / ratioTotal){
+                    state = i;
+                    if (sapling) sapling.SetActive(state == 0);
+                    Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
+                    break;
+                }
+            }
+        }
     }
 
     //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
     //this means that the first element in stateAnimationNames cannot be blank
     private void updateAnimation() {
+        //anim.enabled = true;
         if (stateAnimationNames[state] != ""){
             if (!anim.IsPlaying(stateAnimationNames[state])) anim.Play(stateAnimationNames[state]);
-            anim[stateAnimationNames[state]].time = anim[stateAnimationNames[state]].length * ((age / lifeSpan) - (stateMarks[state] / ratioTotal)) / stateRatios[state];
+            anim[stateAnimationNames[state]].time = anim[stateAnimationNames[state]].length * ((age / deathAge) - (stateMarks[state] / ratioTotal)) / stateRatios[state];
         } else {
             for (int i = state-1; i >= 0; i--) { // look backwards for available animation
                 if (stateAnimationNames[i] != ""){
@@ -131,16 +125,24 @@ public class TreeScript : MonoBehaviour {
 
     private void updateCollision(){
         // update collision
-        float growth = heightVSTime[state].Evaluate(age / lifeSpan);
-        boxCollider.size = new Vector3(0.4f + 0.6f * growth, maxHeight * growth, 0.4f + 0.6f * growth);
-        boxCollider.center = new Vector3(0, maxHeight * growth * 0.5f, 0);
+        float size = heightVSTime[state].Evaluate((age / deathAge - stateMarks[state]) / stateRatios[state]);
+        boxCollider.size = new Vector3(0.4f + 0.6f * size, maxHeight * size, 0.4f + 0.6f * size);
+        boxCollider.center = new Vector3(0, maxHeight * size * 0.5f, 0);
     }
 
     private void kill() {
         Destroy(gameObject);
     }
-    
-    public int getState(){ //0:growing,1:mature,2:dying,3:burnt
-        return state;
+
+    public float getAge(){
+        return age;
+    }
+
+    public float getDeathAge(){
+        return deathAge;
+    }
+
+    public void setAge(float age, float deathAge){
+        this.age = age; this.deathAge = deathAge;
     }
 }
