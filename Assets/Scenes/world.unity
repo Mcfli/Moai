@@ -256,10 +256,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk_size: 128
   chunk_resolution: 4
-  chunk_load_dist: 6
+  chunk_load_dist: 4
   chunk_unload_dist: 6
   chunk_detail_dist: 1
-  allottedLoadSeconds: 1
+  allottedLoadSeconds: 0.5
   biomes:
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
@@ -291,10 +291,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
-  DeviationMap: {fileID: 11458368, guid: aa0342edb8686674d812c634709c2cbc, type: 2}
   XZDeviationRatio: 0.5
-  detailHeightDeviation: 0.75
-  detailSubDivisions: 4
+  XZDeviationSeed: 543825
+  detailDeviation: 2
+  heightDeviationSeed: 854375
+  detailSubdivisions: 3
 --- !u!114 &188005515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,6 +564,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
