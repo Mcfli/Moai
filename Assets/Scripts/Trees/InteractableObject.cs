@@ -54,7 +54,7 @@ public class InteractableObject: MonoBehaviour
     IEnumerator tickUpdate() {
         while (true) {
             yield return new WaitForSeconds(1);
-
+            if (timeRemain < 0) tryToTurnIntoTree();
             if (isHeld()) {
                 wasHeld = true;
                 isFertile = true;
@@ -63,7 +63,7 @@ public class InteractableObject: MonoBehaviour
                     wasHeld = false;
                     timeRemain = growTime;
                 } 
-                if (timeRemain < 0) tryToTurnIntoTree();
+                
             } else {
                 if (wasHeld) { //just dropped
                     wasHeld = false;
@@ -100,7 +100,7 @@ public class InteractableObject: MonoBehaviour
     }
 
     private void tryToTurnIntoTree() {
-        if (isFertile)
+        if (isFertile && planted)
         {
             Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
             if (close_trees.Length < 5)

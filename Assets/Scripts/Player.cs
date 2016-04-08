@@ -47,7 +47,10 @@ public class Player : MonoBehaviour {
 
         //Holding Objects stuff
         if (Input.GetButtonDown("Use")){
-            if(rightObj == null && GetHover().collider) TryGrabObject(GetHover().collider.gameObject, false);
+            if (rightObj == null && GetHover().collider && !IsTree(GetHover().collider.gameObject)) 
+                TryGrabObject(GetHover().collider.gameObject, false);
+            else if (GetHover().collider && IsTree(GetHover().collider.gameObject))
+                TryPunchTree(GetHover().collider.gameObject);
             else if (TryUseObject(false)) { }
             else DropObject(false);
         }
@@ -98,9 +101,14 @@ public class Player : MonoBehaviour {
         return obj.GetComponent<InteractableObject>();
     }
 
+    private bool IsTree(GameObject obj)
+    {
+        return obj.GetComponent<TreeScript>();
+    }
+
     public bool LookingAtGrabbable(){
         if (GetHover().collider == null) return false;
-        return CanGrab(GetHover().collider.gameObject);
+        return CanGrab(GetHover().collider.gameObject) || IsTree(GetHover().collider.gameObject);
     }
 
     public bool[] canUse() {
@@ -132,6 +140,16 @@ public class Player : MonoBehaviour {
             rightOrigScale = obj.transform.localScale;
             rightObj.pickedUp();
         }
+        return true;
+    }
+
+    private bool TryPunchTree(GameObject obj)
+    {
+        if (obj == null || !IsTree(obj)) return false;
+        TreeScript tree = obj.GetComponent<TreeScript>();
+        Vector3 offset = Vector3.Normalize(transform.position - obj.transform.position) + new Vector3(Random.value*2, Random.value * 2, Random.value*2)
+             + Vector3.up * 10*cameraHeight;
+        Instantiate(tree.seed_object,obj.transform.position + offset,Quaternion.identity);
         return true;
     }
     
