@@ -10,8 +10,12 @@
 		_ZHeightSpeedLengthOffset("Z Height Speed Length Offset", Vector) = (1,1,1,1)
 	}
 	SubShader {
+		Tags{ "RenderType" = "Fade" "Queue" = "Transparent" }
 		Pass{
-			Tags{"Queue" = "Transparent" "LightMode" = "ForwardBase"}
+			Tags{ "LightMode" = "ForwardBase" }
+			Blend SrcAlpha OneMinusSrcAlpha
+			ZWrite Off
+			
 			CGPROGRAM
 			//pragmas
 			#pragma vertex vert
@@ -72,10 +76,14 @@
 				float3 lightFinal = diffuseReflection + /*specularReflection + */UNITY_LIGHTMODEL_AMBIENT.xyz;
 
 				return float4(lightFinal * _Color.rgb, _Color.a);
+				//return float4(0.0, 1.0, 0.0, 0.3);
 			}
 
 			ENDCG
 		}
 	}
+	
+	FallBack "Standard"
 	//FallBack "Diffuse"
+	//Fallback " VertexLit", 1
 }
