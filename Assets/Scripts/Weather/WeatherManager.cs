@@ -134,13 +134,12 @@ public class WeatherManager : MonoBehaviour {
     private void moveClouds() {
         for(int i = 0; i < clouds.Count; i++) {
             clouds[i].gameObject.transform.position += new Vector3(cloudMovement.x, 0, cloudMovement.y) * Globals.time_scale;
-            Vector2 cpos = new Vector2(clouds[i].gameObject.transform.position.x, clouds[i].gameObject.transform.position.z);
-            Vector2 ppos = new Vector2(Globals.Player.transform.position.x, Globals.Player.transform.position.z);
-            if(Vector2.Distance(cpos, ppos) > cloudPlacementRadius) {
+            Vector2 cloudPos = new Vector2(clouds[i].gameObject.transform.position.x, clouds[i].gameObject.transform.position.z);
+            Vector2 playerPos = new Vector2(Globals.Player.transform.position.x, Globals.Player.transform.position.z);
+            if(Vector2.Distance(cloudPos, playerPos) > cloudPlacementRadius) {
                 clouds[i].dissipate();
                 clouds.RemoveAt(i);
-                Vector2 npos = new Vector2(cloudMovement.x + ppos.x * 2 - cpos.x, cloudMovement.y + ppos.y * 2 - cpos.y);
-                npos = Vector2.Lerp(npos, ppos, 0.05f);
+                Vector2 npos = Vector2.Lerp(playerPos * 2 - cloudPos, playerPos, 0.05f);
                 createCloud(new Vector3(npos.x, Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight, npos.y));
                 i--;
             }
