@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2321660}
   - 114: {fileID: 11458850}
   - 114: {fileID: 11486790}
-  - 65: {fileID: 6586718}
+  - 136: {fileID: 13642710}
   m_Layer: 12
   m_Name: shrine
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106806}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -350.95053, y: 66.62028, z: 473.3565}
+  m_LocalPosition: {x: 892.7221, y: 29.789822, z: 81.72149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -69,18 +69,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106806}
   m_Mesh: {fileID: 4300002, guid: 91c1ac262b5285046930f0ae6f719b3a, type: 3}
---- !u!65 &6586718
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106806}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.688093, y: 5.5992336, z: 4.8787055}
-  m_Center: {x: 0.0049299, y: -0.14506029, z: 2.4592025}
 --- !u!114 &11458850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,6 +114,19 @@ MonoBehaviour:
   numSquares: 3
   muralColor: {r: 0.8602941, g: 0.77845275, b: 0.43647274, a: 1}
   shrineTexture: {fileID: 2800000, guid: d64cceba75a45c94ba8ceba79427be1c, type: 3}
+--- !u!136 &13642710
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 7.21
+  m_Height: 12.016821
+  m_Direction: 1
+  m_Center: {x: -0.2530203, y: -0.3047478, z: 1.9403315}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
