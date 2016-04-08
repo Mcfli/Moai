@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudHeight: 300
+  cloudMovement: {x: 0.1, y: 0}
+  chanceOfCloudFade: 0.01
   particlesHeight: 500
   updateTime: 1800
   cloudPrefabs:
@@ -563,6 +565,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

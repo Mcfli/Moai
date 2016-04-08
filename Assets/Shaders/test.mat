@@ -85,6 +85,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ToonShade
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -113,7 +120,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -157,7 +164,7 @@ Material:
       data:
         first:
           name: _TimeVar
-        second: 79.1
+        second: 77
       data:
         first:
           name: _Time
@@ -166,11 +173,11 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0.54901963, b: 1, a: 1}
+        second: {r: 1, g: 0, b: 0, a: 0.547}
       data:
         first:
           name: _SpecColor
@@ -190,20 +197,36 @@ Material:
       data:
         first:
           name: _WaveHeight
-        second: {r: 2, g: 3, b: 2, a: 0}
+        second: {r: 0.1, g: 0, b: 0.1, a: 0}
       data:
         first:
           name: _WaveSpeed
-        second: {r: 4, g: 5, b: 4, a: 0}
+        second: {r: 1, g: 0, b: 1, a: 0}
       data:
         first:
           name: _WaveLength
-        second: {r: 1, g: 7, b: 1, a: 0}
+        second: {r: 1, g: 0, b: 1, a: 0}
       data:
         first:
           name: _WaveOffset
-        second: {r: 0, g: 7, b: 4, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _ChunkPosition
         second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _XHeightSpeedLengthOffset
+        second: {r: 0.01, g: 0.1, b: 0.1, a: 0}
+      data:
+        first:
+          name: _YHeightSpeedLengthOffset
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _ZHeightSpeedLengthOffset
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _RandomSeed
+        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 43758.547}

@@ -6,24 +6,20 @@ public class Cloud : MonoBehaviour {
     // Tuning variables
     public float max_opacity;
     public float fade_speed;
-    [ColorUsageAttribute(false,true,0f,8f,0.125f,3f)] public Color dayEmission;
-    [ColorUsageAttribute(false,true,0f,8f,0.125f,3f)] public Color nightEmission;
+    //[ColorUsageAttribute(false,true,0f,8f,0.125f,3f)] public Color dayEmission;
+    //[ColorUsageAttribute(false,true,0f,8f,0.125f,3f)] public Color nightEmission;
 
     // Internal variables
-    private Sky SkyScript;
+    //private Sky SkyScript;
     private Renderer rend;
     private bool dissipating;
 
     void Awake() {
-        SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
-        rend = GetComponent<Renderer>();
-    }
-
-    // Use this for initialization
-    void Start () {
+        //SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
         dissipating = false;
-        rend.material.color *= new Color (1,1,1,0.0f);
-	}
+        rend = GetComponent<Renderer>();
+        rend.material.color *= new Color(1, 1, 1, 0.0f);
+    }
 
     public void dissipate(){
         dissipating = true;
@@ -35,6 +31,21 @@ public class Cloud : MonoBehaviour {
         //updateEmission();
 	}
     
+    private void handleOpacity(){
+        if (dissipating){
+            if (rend.material.color.a - fade_speed*Globals.time_scale > 0) {
+                rend.material.color -= new Color(0, 0, 0, fade_speed*Globals.time_scale);
+            }else Destroy(gameObject);
+        }else{
+            if (rend.material.color.a < max_opacity) {
+                if (rend.material.color.a + fade_speed*Globals.time_scale > max_opacity)
+                    rend.material.color = new Color(rend.material.color.r, rend.material.color.b, rend.material.color.g, max_opacity);
+                else rend.material.color += new Color(0, 0, 0, fade_speed*Globals.time_scale);
+            }
+        }
+    }
+
+    /*
     private void updateEmission(){ //doesn't work yet
 		float ratio;
 		if(Globals.timeOfDay > SkyScript.horizonBufferAngle && Globals.timeOfDay <= 180 - SkyScript.horizonBufferAngle)
@@ -51,18 +62,5 @@ public class Cloud : MonoBehaviour {
         rend.material.SetColor("_EmmisionColor", dayEmission * (1 - ratio) + nightEmission * ratio);
         //Debug.Log(rend.material.GetColor("_EmmisionColor"));
     }
-    
-    private void handleOpacity(){
-        if (dissipating){
-            if (rend.material.color.a - fade_speed*Globals.time_scale > 0) {
-                rend.material.color -= new Color(0, 0, 0, fade_speed*Globals.time_scale);
-            }else Destroy(gameObject);
-        }else{
-            if (rend.material.color.a < max_opacity) {
-                if (rend.material.color.a + fade_speed*Globals.time_scale > max_opacity)
-                    rend.material.color = new Color(rend.material.color.r, rend.material.color.b, rend.material.color.g, max_opacity);
-                else rend.material.color += new Color(0, 0, 0, fade_speed*Globals.time_scale);
-            }
-        }
-    }
+    */
 }

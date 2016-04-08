@@ -1,19 +1,17 @@
 ﻿Shader "Custom/test" {
 	Properties{
 		_Color("Color", Color) = (1,1,1,1)
-		_SpecColor("Specular Color", Color) = (1,1,1,1)
-		_Shininess("Shininess", Float) = 10
+		//_SpecColor("Specular Color", Color) = (1,1,1,1)
+		//_Shininess("Shininess", Float) = 10
 		_TimeVar("Time", Float) = 0
-		_ChunkPosition("Chunk Position", Vector) = (0,0,0,0) // only use x and z
-		_WaveHeight("Wave Height", Vector) = (1,1,1,1) // Y is diagonal
-		_WaveSpeed("Wave Speed", Vector) = (1,1,1,1)   // W doesn't do anything
-		_WaveLength("Wave Length", Vector) = (1,1,1,1)
-		_WaveOffset("Wave Offset", Vector) = (1,1,1,1)
-		[Toggle] _Invert("Invert Every Other", Float) = 1
+		_RandomSeed("Random Seed", Vector) = (1,1,1,1)
+		_XHeightSpeedLengthOffset("X Height Speed Length Offset", Vector) = (1,1,1,1)
+		_YHeightSpeedLengthOffset("Y Height Speed Length Offset", Vector) = (1,1,1,1)
+		_ZHeightSpeedLengthOffset("Z Height Speed Length Offset", Vector) = (1,1,1,1)
 	}
 	SubShader {
 		Pass{
-			Tags{"LightMode" = "ForwardBase"}
+			Tags{"Queue" = "Transparent" "LightMode" = "ForwardBase"}
 			CGPROGRAM
 			//pragmas
 			#pragma vertex vert
@@ -21,15 +19,13 @@
 			
 			//user defined variables
 			uniform float4 _Color;
-			uniform float4 _SpecColor;
-			uniform float _Shininess;
+			//uniform float4 _SpecColor;
+			//uniform float _Shininess;
 			uniform float _TimeVar;
-			uniform float4 _ChunkPosition;
-			uniform float4 _WaveHeight;
-			uniform float4 _WaveSpeed;
-			uniform float4 _WaveLength;
-			uniform float4 _WaveOffset;
-			uniform float _Invert;
+			uniform float4 _RandomSeed;
+			uniform float4 _XHeightSpeedLengthOffset;
+			uniform float4 _YHeightSpeedLengthOffset;
+			uniform float4 _ZHeightSpeedLengthOffset;
 
 			//Unity defined variables
 			uniform float4 _LightColor0;
@@ -52,9 +48,9 @@
 				//float displacement = 5;
 				//float4 displacementDirection = float4(normalDirection.x, normalDirection.y, normalDirection.z, 0);
 				//float4 newpos = v.vertex + displacement * displacementDirection;
-				v.vertex.y =  sin((_TimeVar + _WaveOffset.x) * _WaveSpeed.x + (_ChunkPosition.x + v.vertex.x) * _WaveLength.x) * _WaveHeight.x;
-				v.vertex.y += sin((_TimeVar + _WaveOffset.y) * _WaveSpeed.y + (_ChunkPosition.x + _ChunkPosition.z + v.vertex.x + v.vertex.z) * _WaveLength.y) * _WaveHeight.y;
-				v.vertex.y += sin((_TimeVar + _WaveOffset.z) * _WaveSpeed.z + (_ChunkPosition.z + v.vertex.z) * _WaveLength.z) * _WaveHeight.z;
+				v.vertex.x += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _XHeightSpeedLengthOffset.w) * _XHeightSpeedLengthOffset.y + _XHeightSpeedLengthOffset.z) * _XHeightSpeedLengthOffset.x;
+				v.vertex.y += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _YHeightSpeedLengthOffset.w) * _YHeightSpeedLengthOffset.y + _YHeightSpeedLengthOffset.z) * _YHeightSpeedLengthOffset.x;
+				v.vertex.z += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _ZHeightSpeedLengthOffset.w) * _ZHeightSpeedLengthOffset.y + _ZHeightSpeedLengthOffset.z) * _ZHeightSpeedLengthOffset.x;
 
 				o.posWorld = mul(_Object2World, v.vertex);
 				o.normalDir = normalize(mul(float4(v.normal, 0), _World2Object).xyz);
@@ -72,10 +68,10 @@
 				float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
 				float lambert = max(0, dot(normalDirection, lightDirection));
 				float3 diffuseReflection = atten * _LightColor0.xyz * lambert;
-				float3 specularReflection = atten * _SpecColor.rgb * lambert * pow(max(0, dot(reflect(-lightDirection, normalDirection), viewDirection)), _Shininess);
-				float3 lightFinal = diffuseReflection + specularReflection + UNITY_LIGHTMODEL_AMBIENT.xyz;
+				//float3 specularReflection = atten * _SpecColor.rgb * lambert * pow(max(0, dot(reflect(-lightDirection, normalDirection), viewDirection)), _Shininess);
+				float3 lightFinal = diffuseReflection + /*specularReflection + */UNITY_LIGHTMODEL_AMBIENT.xyz;
 
-				return float4(lightFinal * _Color.rgb, 1);
+				return float4(lightFinal * _Color.rgb, _Color.a);
 			}
 
 			ENDCG
