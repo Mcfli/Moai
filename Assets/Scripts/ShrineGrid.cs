@@ -52,13 +52,15 @@ public class ShrineGrid : MonoBehaviour
         genTargetState();
         updateCurState();
 
-        transform.position = snapToTerrain(transform.position);
-        createMural();
-        createPillars();
-        killTrees();
 
         heatMoistureChange *= Random.Range(heatMoistureChangeMin, heatMoistureChangeMax);
         shrineGlow = Instantiate(incompleteGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+		shrineGlow.transform.parent = gameObject.transform;
+
+		transform.position = snapToTerrain(transform.position);
+		createMural();
+		createPillars();
+		killTrees();
     }
 
     // Update is called once per frame
@@ -358,14 +360,6 @@ public class ShrineGrid : MonoBehaviour
             {
                 ret = new Vector3(pos.x, hit.point.y + 0.1f, pos.z);
             }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            Destroy(gameObject);
         }
         return ret;
     }
