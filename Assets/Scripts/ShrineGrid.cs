@@ -179,17 +179,20 @@ public class ShrineGrid : MonoBehaviour
 
     private void checkDone()
     {
+        List<GameObject> itemsInRange = curState;
         // Look at each requirement in targetState
         foreach (PuzzleObject tarObj in targetState)
         {
             // if we don't currently have the desired item in the box, it can't be complete   
             bool found = false;
-            foreach (GameObject gameObj in curState)
+            for (int i = itemsInRange.Count-1; i > 0; i--)
             {
+                GameObject gameObj = itemsInRange[i];
                 PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
                 if (po == null) continue;
                 else if (po.Equals( tarObj))
                 {
+                    itemsInRange.RemoveAt(i);
                     found = true;
                 }
             }

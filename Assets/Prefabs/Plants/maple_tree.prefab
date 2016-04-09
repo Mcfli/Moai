@@ -801,7 +801,7 @@ MonoBehaviour:
   seed_object: {fileID: 172308, guid: 256c357554288014d9c0d2bb1771b693, type: 2}
   minSpawnRadius: 10
   maxSpawnRadius: 50
-  spawn_delay: 5e-17
+  spawn_delay: 5e-18
   spawn_variance: 0.5
   seed_cull_max_density: 2
   spawn_limit: 0
