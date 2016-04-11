@@ -46,10 +46,10 @@ public class WeatherManager : MonoBehaviour {
         visibleParticles = !(Globals.time_scale > 1 || Globals.PlayerScript.isUnderwater());
         if(activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
 
-        changeClouds();
+        changeClouds(Mathf.FloorToInt(Globals.time_scale));
         moveClouds();
-        if(Random.value < chanceOfCloudFade * Globals.time_scale) {
-            int randomCloud = (int)Mathf.Floor(Random.value * clouds.Count);
+        if(Random.value < chanceOfCloudFade * Globals.time_scale && clouds.Count > 0) {
+            int randomCloud = Random.Range(0, clouds.Count);
             clouds[randomCloud].dissipate();
             clouds.RemoveAt(randomCloud);
             createCloud();
@@ -73,7 +73,7 @@ public class WeatherManager : MonoBehaviour {
         for(int i = 0; i < Globals.cur_biome.weatherChance.Count; i++) roll += Globals.cur_biome.weatherChance[i];
         roll *= Random.value;
         for(int i = 0; i < Globals.cur_biome.weatherChance.Count; i++){
-            if(roll - Globals.cur_biome.weatherChance[i] < 0) {
+            if(roll <= Globals.cur_biome.weatherChance[i]) {
                 Globals.cur_weather = Globals.cur_biome.weatherTypes[i];
                 break;
             }else roll -= Globals.cur_biome.weatherChance[i];
@@ -94,11 +94,14 @@ public class WeatherManager : MonoBehaviour {
         }
     }
 
-    private void changeClouds() {
-        if(clouds.Count < Globals.cur_weather.numberOfClouds) createCloud(); //i want more clouds
-        else if(clouds.Count > Globals.cur_weather.numberOfClouds) { //i want less clouds
-            clouds[0].dissipate();
-            clouds.RemoveAt(0);
+    private void changeClouds(int amount) {
+        int target = (Globals.time_scale < Globals.SkyScript.timeScaleThatHaloAppears) ? Globals.cur_weather.numberOfClouds : 0;
+        for(int i = 0; i < amount; i++) {
+            if(clouds.Count < target) createCloud(); //i want more clouds
+            else if(clouds.Count > target) { //i want less clouds
+                clouds[0].dissipate();
+                clouds.RemoveAt(0);
+            } else break;
         }
     }
 
@@ -115,7 +118,7 @@ public class WeatherManager : MonoBehaviour {
 
     private Cloud createCloud() { //random everything
         Vector2 radial_offset = Random.insideUnitCircle * cloudPlacementRadius;
-        return createCloud(Mathf.FloorToInt(Random.value * (cloudPrefabs.Count - 1)),
+        return createCloud(Random.Range(0, cloudPrefabs.Count),
                            new Vector3(radial_offset.x + Globals.Player.transform.position.x,
                                        Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight,
                                        radial_offset.y + Globals.Player.transform.position.z),
@@ -125,7 +128,7 @@ public class WeatherManager : MonoBehaviour {
     }
 
     private Cloud createCloud(Vector3 location) { //random everything except location
-        return createCloud(Mathf.FloorToInt(Random.value * (cloudPrefabs.Count - 1)),
+        return createCloud(Random.Range(0, cloudPrefabs.Count),
                            location, new Vector3(0, Random.Range(0f, 360f), 0),
                            1 + Random.Range(-cloudSizeVariation, cloudSizeVariation)
                );

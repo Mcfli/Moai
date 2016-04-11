@@ -6,7 +6,7 @@
 		_MainTex("Base (RGB) Alpha (A)", 2D) = "white" {}
 		_BumpMap("Normalmap", 2D) = "bump" {}
 		[Toggle]_Animate("Animate Material", Float) = 1
-		[HideInInspector]_TimeVar("Time", Float) = 0
+		//[HideInInspector]_TimeVar("Time", Float) = 0
 		_RandomSeed("Random Seed", Vector) = (12.9898,78.233,45.5432,0.043)
 		_XHeightSpeedLengthOffset("X Height Speed Length Offset", Vector) = (0.05,1,0.1,0)
 		_YHeightSpeedLengthOffset("Y Height Speed Length Offset", Vector) = (0,0,0,0)
@@ -14,7 +14,7 @@
 	}
 
 	SubShader{
-		Tags{ "Queue" = "Geometry" "RenderType" = "Opaque" }
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
 
 		Pass{
 			Tags{ "LightMode" = "ForwardBase" }
@@ -30,6 +30,7 @@
 			#include "UnityCG.cginc"
 			#include "AutoLight.cginc"
 			
+			uniform float _Animate;
 			uniform float _TimeVar;
 			uniform float4 _RandomSeed;
 			uniform float4 _XHeightSpeedLengthOffset;
@@ -48,9 +49,9 @@
 			v2f vert(appdata_tan v){
 				v2f o;
 
-				v.vertex.x += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _XHeightSpeedLengthOffset.w) * _XHeightSpeedLengthOffset.y + _XHeightSpeedLengthOffset.z) * _XHeightSpeedLengthOffset.x;
-				v.vertex.y += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _YHeightSpeedLengthOffset.w) * _YHeightSpeedLengthOffset.y + _YHeightSpeedLengthOffset.z) * _YHeightSpeedLengthOffset.x;
-				v.vertex.z += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _ZHeightSpeedLengthOffset.w) * _ZHeightSpeedLengthOffset.y + _ZHeightSpeedLengthOffset.z) * _ZHeightSpeedLengthOffset.x;
+				v.vertex.x += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _XHeightSpeedLengthOffset.w) * _XHeightSpeedLengthOffset.y + _XHeightSpeedLengthOffset.z) * _XHeightSpeedLengthOffset.x * _Animate;
+				v.vertex.y += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _YHeightSpeedLengthOffset.w) * _YHeightSpeedLengthOffset.y + _YHeightSpeedLengthOffset.z) * _YHeightSpeedLengthOffset.x * _Animate;
+				v.vertex.z += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _ZHeightSpeedLengthOffset.w) * _ZHeightSpeedLengthOffset.y + _ZHeightSpeedLengthOffset.z) * _ZHeightSpeedLengthOffset.x * _Animate;
 
 				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.uv = v.texcoord.xy;
@@ -81,8 +82,10 @@
 				fixed diffuse = saturate(dot(normal, i.lightDir)) * _LightColor0.rgb * atten;
 				fixed3 amb = UNITY_LIGHTMODEL_AMBIENT.rgb * _Ambient;
 
+				fixed alpha = _Color.a;
+
 				fixed3 lightFinal = tex.rgb * amb + tex.rgb * diffuse + _EmissionColor;
-				return float4(lightFinal, tex.a * _Color.a);
+				return fixed4(lightFinal, alpha);
 			}
 			ENDCG
 		}
@@ -104,6 +107,7 @@
              
 			#include "UnityCG.cginc"
 
+			uniform float _Animate;
 			uniform float _TimeVar;
 			uniform float4 _RandomSeed;
 			uniform float4 _XHeightSpeedLengthOffset;
@@ -117,9 +121,9 @@
 			v2f vert(appdata_base v){
 				v2f o;
 
-				v.vertex.x += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _XHeightSpeedLengthOffset.w) * _XHeightSpeedLengthOffset.y + _XHeightSpeedLengthOffset.z) * _XHeightSpeedLengthOffset.x;
-				v.vertex.y += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _YHeightSpeedLengthOffset.w) * _YHeightSpeedLengthOffset.y + _YHeightSpeedLengthOffset.z) * _YHeightSpeedLengthOffset.x;
-				v.vertex.z += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _ZHeightSpeedLengthOffset.w) * _ZHeightSpeedLengthOffset.y + _ZHeightSpeedLengthOffset.z) * _ZHeightSpeedLengthOffset.x;
+				v.vertex.x += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _XHeightSpeedLengthOffset.w) * _XHeightSpeedLengthOffset.y + _XHeightSpeedLengthOffset.z) * _XHeightSpeedLengthOffset.x * _Animate;
+				v.vertex.y += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _YHeightSpeedLengthOffset.w) * _YHeightSpeedLengthOffset.y + _YHeightSpeedLengthOffset.z) * _YHeightSpeedLengthOffset.x * _Animate;
+				v.vertex.z += sin((_TimeVar + dot(v.vertex.xyz, _RandomSeed.xyz) * _RandomSeed.w + _ZHeightSpeedLengthOffset.w) * _ZHeightSpeedLengthOffset.y + _ZHeightSpeedLengthOffset.z) * _ZHeightSpeedLengthOffset.x * _Animate;
 
 				o.pos = v.vertex;
 

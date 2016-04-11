@@ -67,6 +67,7 @@ public class GenerationManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Shader.SetGlobalFloat("_TimeVar", Globals.time / Globals.time_resolution);
         Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
         if(Globals.cur_chunk != current_chunk) {
             Globals.cur_chunk = current_chunk;
