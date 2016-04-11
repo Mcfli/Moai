@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
 	private bool startGroundWarp;
     private InteractableObject leftObj;
     private InteractableObject rightObj;
-    private float leftSize;
+    //private float leftSize;
     private float rightSize;
     private Vector3 leftOrigScale;
     private Vector3 rightOrigScale;
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour {
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
         if (isLeft) {
             leftObj = obj.GetComponent<InteractableObject>();
-            leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
+            //leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
             leftOrigScale = obj.transform.localScale;
             leftObj.pickedUp();
         }else{

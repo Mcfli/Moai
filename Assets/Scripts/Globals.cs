@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Globals : MonoBehaviour {
+    public static int seed; //set by seed.cs
 
     public static float time = 0.0f; //incremented by TimeScript
     public static float time_scale = 1.0f;
@@ -24,6 +25,7 @@ public class Globals : MonoBehaviour {
     public static Player PlayerScript = Player.GetComponent<Player>();
     public static Sky SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
     public static WeatherManager WeatherManagerScript = GameObject.Find("Weather").GetComponent<WeatherManager>();
+    public static GenerationManager GenerationManagerScript = GameObject.Find("WorldGen").GetComponent<GenerationManager>();
 
     // Heat & Moisture
     public static Vector2 heatMoistureOrigin = new Vector2(25,25);

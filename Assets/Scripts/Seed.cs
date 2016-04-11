@@ -12,5 +12,6 @@ public class Seed : MonoBehaviour {
             Random.seed = (int)System.DateTime.Now.Ticks;
             seed = Random.seed;
         }
+        Globals.seed = seed;
     }
 }
