@@ -113,7 +113,7 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 136664, guid: 03f1f5521b6c9874db682a84e1bc2e45, type: 2}
   doodads: []
-  treeDensity: 2
+  treeDensity: 1
   treeGrowthIterations: 4
   treeSpreadMin: 24
   treeSpeadRange: 45
