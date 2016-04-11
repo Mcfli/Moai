@@ -6,27 +6,47 @@ public class NoiseSynth : MonoBehaviour {
     public NoiseGen base_map;
     public NoiseGen type_map;
     public NoiseGen mountain_map;
-    public NoiseGen lake_map;
+    public NoiseGen elevation_map;
+    public NoiseGen peak_map;
     public Color[] colors;
     public AnimationCurve color_curve;
     public float amplitude;
+
+    private float valleyHeight;
 
     public void Init()
     {
         base_map.Init();
         type_map.Init();
         mountain_map.Init();
+        elevation_map.Init();
+        peak_map.Init();
+
+        valleyHeight = -0.07f * (elevation_map.amplitude + base_map.amplitude);
     }
 
     public float heightAt(float x, float y, float z)
     {
         float total = 0.0f;
 
-        float m = mountain_map.genPerlinRidged(x,y,z)-3500f;
-        float b = base_map.genPerlin(x,y,z);
+        // Generate base value for each map
+        float p = peak_map.genPerlin(x, y, z);
+        float m = mountain_map.genPerlinRidged(x,y,z) + p - 12000;   
         float w = type_map.genPerlinUnscaled(x,y,z);
+        float e = elevation_map.genPerlin(x, y, z);
+        float b = base_map.genPerlin(x,y,z);
 
-        total = select(b, m, w, 0.6f, 0.125f);
+        // Derived characteristics
+        float falloff = Mathf.Pow(0.75f * e / elevation_map.amplitude,3);
+        float valley = Mathf.Max(valleyHeight, b);
+        float elevationFactor = e / elevation_map.amplitude;
+
+        b = Mathf.Max(b, valley);
+
+        // Select between base map and mountain map based on value from type map. Add elevation to it.
+        total = select(b, m, w, 0.5f + 0.5f*(1 - elevationFactor),0.165f ) 
+            + e - elevation_map.amplitude * 0.5f;
+        //total = m;
         //Debug.Log(w);
         return total;
     }
@@ -35,25 +55,16 @@ public class NoiseSynth : MonoBehaviour {
     public Color colorAt(float height)
     {
 
-        float h = height / amplitude;
+        float h = (height + Random.value*1500) / amplitude;
         if (h > 1.000f) h = 1.000f;
         else if (h < 0f) h = 0f;
 
         float val = (colors.Length - 1) * color_curve.Evaluate(h);
 
 
-        int i0 = Mathf.FloorToInt(val);
-        int i1 = Mathf.CeilToInt(val);
+        int i = Mathf.RoundToInt(val);
 
-        if (i0 < 0) i0 = 0;
-        if (i1 > colors.Length - 1) i1 = colors.Length - 1;
-
-
-
-        float weight = i1 - val;
-        if (weight == 0) return colors[i0];
-
-        Color color = Color.Lerp(colors[i1], colors[i0], weight);
+        Color color = colors[i];
 
         return color;
     }

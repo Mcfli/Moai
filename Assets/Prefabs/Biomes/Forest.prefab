@@ -123,21 +123,22 @@ MonoBehaviour:
   - {r: 0.32048678, g: 0.5808823, b: 0.21783087, a: 0}
   - {r: 0.026600353, g: 0.30147058, b: 0.08536569, a: 0}
   - {r: 0.15960209, g: 0.2647059, b: 0.18207255, a: 0}
-  - {r: 0.16544116, g: 0.2205882, b: 0.17723122, a: 0}
-  amplitude: 350
+  - {r: 0.2647059, g: 0.13654098, b: 0.11483564, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  amplitude: 800
   colorCurve:
     serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     - time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -150,11 +151,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: colors.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: weatherTypes.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorCurve.m_Curve.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: weatherTypes.Array.data[0]
@@ -218,43 +223,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colors.Array.data[4].r
-      value: 0.16544116
+      value: 0.2647059
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colors.Array.data[4].g
-      value: 0.2205882
+      value: 0.13654098
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colors.Array.data[4].b
-      value: 0.17723122
+      value: 0.11483564
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: amplitude
-      value: 350
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[0].inSlope
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[0].outSlope
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[0].tangentMode
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[1].inSlope
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[1].outSlope
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: treeDensity
@@ -271,6 +276,34 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: treeSpeadRange
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[5].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[5].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[5].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorCurve.m_Curve.Array.data[2].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
