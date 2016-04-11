@@ -8,6 +8,7 @@ public class TreeScript : MonoBehaviour {
     public GameObject seed_object;
     public float baseLifeSpan = 657000; // base life span in seconds
     public float lifeSpanVariance = 0.3f; // in ratio
+    public float scaleVariance = 0.25f; // in ratio
 
     //animating
     public float ratioAnimUpdates; // in ratio
@@ -46,6 +47,8 @@ public class TreeScript : MonoBehaviour {
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
         //meshRenderer = GetComponent<MeshRenderer>();
+
+        gameObject.transform.localScale += gameObject.transform.localScale * Random.Range(-scaleVariance, scaleVariance);
 
         age = 0;
         lifeSpan = baseLifeSpan + Random.Range(-lifeSpanVariance, lifeSpanVariance) * baseLifeSpan;

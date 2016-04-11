@@ -48,8 +48,9 @@ public class TreeManager : MonoBehaviour {
                 for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size){
                     //Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 
-                    Vector3 position = new Vector3(i + step_size * Random.value - 0.5f * step_size, 0, step_size * Random.value - 0.5f * step_size);
-
+                    
+                    Vector3 position = new Vector3(i + step_size * Random.value - 0.5f * step_size, 0, j + step_size * Random.value - 0.5f * step_size);
+                    
                     RaycastHit hit;
                     Ray rayDown = new Ray(new Vector3(position.x, 10000000, position.z), Vector3.down);
                     int terrain = LayerMask.GetMask("Terrain");
@@ -58,10 +59,10 @@ public class TreeManager : MonoBehaviour {
                         else position.y = hit.point.y - 1;
                     } else continue;
 
-                    GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
+                    GameObject treePrefab = biome.treeTypes[Random.Range(0, biome.treeTypes.Count)];
                     GameObject new_tree = createNewTree(treePrefab, position);
 
-                    
+
                     treesInChunk.Add(new_tree);
                 }
             }
