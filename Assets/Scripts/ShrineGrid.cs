@@ -15,9 +15,9 @@ public class ShrineGrid : MonoBehaviour
     public GameObject glow;
     public GameObject vertexPillar;
 
-    public Vector2 heatMoistureChange; // The changes the shrine has to heat/moisture map
-    public float heatMoistureChangeMin = 15f;
-    public float heatMoistureChangeMax = 50f;
+    public Vector2 WaterFireEarthAirChange; // The changes the shrine has to WaterFire/EarthAir map
+    public float WaterFireEarthAirChangeMin = 15f;
+    public float WaterFireEarthAirChangeMax = 50f;
 
     public GameObject completeGlow;
     public GameObject incompleteGlow;
@@ -53,7 +53,7 @@ public class ShrineGrid : MonoBehaviour
         updateCurState();
 
 
-        heatMoistureChange *= Random.Range(heatMoistureChangeMin, heatMoistureChangeMax);
+        WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin, WaterFireEarthAirChangeMax);
         shrineGlow = Instantiate(incompleteGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
 		shrineGlow.transform.parent = gameObject.transform;
 
@@ -84,37 +84,37 @@ public class ShrineGrid : MonoBehaviour
 
     private void populateValidItems()
     {
-        // Find all biomes within our current heat-moisture vector box
+        // Find all biomes within our current WaterFire-EarthAir vector box
         List<Biome> allBiomes = GameObject.Find("WorldGen").GetComponent<GenerationManager>().biomes;
 
-        // Calculate the bounding edges of our heat-moisture box
-        float moistureMin = Globals.heatMoistureVector.y > 0 ?
-            Globals.heatMoistureOrigin.y - Globals.heatMoistureMin :
-            Globals.heatMoistureOrigin.y + Globals.heatMoistureVector.y - Globals.heatMoistureMin;
-        float moistureMax = Globals.heatMoistureVector.y > 0 ?
-            Globals.heatMoistureOrigin.y + Globals.heatMoistureVector.y + Globals.heatMoistureMin :
-            Globals.heatMoistureOrigin.y + Globals.heatMoistureMin;
-        float heatMin = Globals.heatMoistureVector.x > 0 ?
-           Globals.heatMoistureOrigin.x - Globals.heatMoistureMin :
-           Globals.heatMoistureOrigin.x + Globals.heatMoistureVector.x - Globals.heatMoistureMin;
-        float heatMax = Globals.heatMoistureVector.x > 0 ?
-            Globals.heatMoistureOrigin.x + Globals.heatMoistureVector.x + Globals.heatMoistureMin :
-            Globals.heatMoistureOrigin.x + Globals.heatMoistureMin;
+        // Calculate the bounding edges of our WaterFire-EarthAir box
+        float EarthAirMin = Globals.WaterFireEarthAirVector.y > 0 ?
+            Globals.WaterFireEarthAirOrigin.y - Globals.WaterFireEarthAirMin :
+            Globals.WaterFireEarthAirOrigin.y + Globals.WaterFireEarthAirVector.y - Globals.WaterFireEarthAirMin;
+        float EarthAirMax = Globals.WaterFireEarthAirVector.y > 0 ?
+            Globals.WaterFireEarthAirOrigin.y + Globals.WaterFireEarthAirVector.y + Globals.WaterFireEarthAirMin :
+            Globals.WaterFireEarthAirOrigin.y + Globals.WaterFireEarthAirMin;
+        float WaterFireMin = Globals.WaterFireEarthAirVector.x > 0 ?
+           Globals.WaterFireEarthAirOrigin.x - Globals.WaterFireEarthAirMin :
+           Globals.WaterFireEarthAirOrigin.x + Globals.WaterFireEarthAirVector.x - Globals.WaterFireEarthAirMin;
+        float WaterFireMax = Globals.WaterFireEarthAirVector.x > 0 ?
+            Globals.WaterFireEarthAirOrigin.x + Globals.WaterFireEarthAirVector.x + Globals.WaterFireEarthAirMin :
+            Globals.WaterFireEarthAirOrigin.x + Globals.WaterFireEarthAirMin;
 
         // Calculate max distance
-        float maxDist = Vector2.Distance(new Vector2(heatMax, moistureMax), Globals.heatMoistureOrigin);
+        float maxDist = Vector2.Distance(new Vector2(WaterFireMax, EarthAirMax), Globals.WaterFireEarthAirOrigin);
 
         foreach (Biome b in allBiomes)
         {
             // If the biome is in our box, add it as a valid biome
-            if (b.heatAvg <= heatMax && b.heatAvg >= heatMin &&
-                b.moistureAvg <= moistureMax && b.moistureAvg >= moistureMin)
+            if (b.WaterFire <= WaterFireMax && b.WaterFire >= WaterFireMin &&
+                b.EarthAir <= EarthAirMax && b.EarthAir >= EarthAirMin)
             {
-                float distance = Vector2.Distance(Globals.heatMoistureOrigin, new Vector2(b.heatAvg, b.moistureAvg));
+                float distance = Vector2.Distance(Globals.WaterFireEarthAirOrigin, new Vector2(b.WaterFire, b.EarthAir));
                 float weight = distance / maxDist;
                 weight = Mathf.Sqrt(weight);
 
-                if (weight > Globals.heatMostureDistGuaranteed && Random.value <= weight) continue;
+                if (weight > Globals.WaterFireEarthAirDistGuaranteed && Random.value <= weight) continue;
 
                 // Add all trees with puzzleObjects associated with the current biome
                 foreach (GameObject tree in b.treeTypes)
@@ -343,11 +343,11 @@ public class ShrineGrid : MonoBehaviour
         // Stop the cells from glowing
         drawGlows();
         // Change the chunk
-        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, heatMoistureChange);
+        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
         GameObject.Find("Sky").GetComponent<Sky>().addStar();
         // Update puzzle complexity
-        Globals.heatMoistureVector += heatMoistureChange;
+        Globals.WaterFireEarthAirVector += WaterFireEarthAirChange;
     }
 
     private Vector3 snapToTerrain(Vector3 pos)

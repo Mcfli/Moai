@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public class Biome : MonoBehaviour {
     // Climate properties
-    public float heatAvg;
-    public float heatVariance;
-    public float moistureAvg;
-    public float moistureVariance;
+    public float WaterFire;
+    public float EarthAir;
 
     public List<Weather> weatherTypes;
     public List<float> weatherChance; //must be same size as weatherTypes
@@ -64,74 +62,4 @@ public class Biome : MonoBehaviour {
         return color;
     }
     
-    // Creates a new Biome whose parameters consist of a random mixing of two input Biomes' paramaters
-    public static Biome Combine(Biome a, Biome b){
-        Biome c = new Biome();
-        c.Init();
-
-        // Combine climate values
-        float weight = Random.Range(0.1f, 0.9f);
-        c.heatAvg =  weight * a.heatAvg + (1 - weight) * b.heatAvg;
-        weight = Random.Range(0.1f, 0.9f);
-        c.heatVariance = weight * a.heatVariance + (1 - weight) * b.heatVariance;
-        weight = Random.Range(0.1f, 0.9f);
-        c.moistureAvg = weight * a.moistureAvg + (1 - weight) * b.moistureAvg;
-        weight = Random.Range(0.1f, 0.9f);
-        c.moistureVariance = weight * a.moistureVariance + (1 - weight) * b.moistureVariance;
-        weight = Random.Range(0.0f, 1.0f);
-        c.temperatureCurve = weight < 0.5f ? a.temperatureCurve : b.temperatureCurve;
-        weight = Random.Range(0.0f, 1.0f);
-        c.precipitationCurve = weight < 0.5f ? a.precipitationCurve : b.precipitationCurve;
-        weight = Random.Range(0.0f, 1.0f);
-        c.colorCurve = weight < 0.5f ? a.colorCurve : b.colorCurve;
-        c.amplitude = (a.amplitude + b.amplitude) * 0.5f;
-
-        // Combine trees and doodads
-        foreach(GameObject tree in a.treeTypes)
-        {
-            weight = Random.Range(0.0f, 1.0f);
-            if (weight > 0.5f) c.treeTypes.Add(tree);
-        }
-
-        foreach (GameObject tree in b.treeTypes)
-        {
-            weight = Random.Range(0.0f, 1.0f);
-            if (weight > 0.5f) c.treeTypes.Add(tree);
-        }
-
-        // Combine colors for each biome
-        int ai = 0, bi = 0;
-
-        while(ai < a.colors.Count && bi < b.colors.Count)
-        {
-            Color chosen;
-            Color ca = Color.black,cb = Color.black;
-
-            weight = Random.Range(0.0f, 1.0f);
-
-            if (a.colors.Count < ai)
-            {
-                ca = a.colors[ai];
-                
-            }
-
-            if (b.colors.Count < bi)
-            {
-                cb = b.colors[bi];
-                
-            }
-
-            if (ca == Color.black && cb != Color.black)
-                chosen = cb;
-            else if (ca != Color.black && cb == Color.black)
-                chosen = ca;
-            else
-                chosen = weight > 0.5f ? ca : cb; 
-
-            c.colors.Add(chosen);
-            bi++;
-            ai++;
-        }
-        return c;
-    }
 }

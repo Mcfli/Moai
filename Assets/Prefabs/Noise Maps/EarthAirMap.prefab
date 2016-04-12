@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 449388}
   - 114: {fileID: 11427602}
   m_Layer: 0
-  m_Name: MoistureMap
+  m_Name: EarthAirMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   octaves: 1
   persistence: 0.1
-  smoothness: 10000
-  amplitude: 50
+  smoothness: 1000
+  amplitude: 1
   seed: 5243
 --- !u!1001 &100100000
 Prefab:
