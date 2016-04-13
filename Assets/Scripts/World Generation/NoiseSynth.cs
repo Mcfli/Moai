@@ -4,6 +4,7 @@ using System.Collections;
 public class NoiseSynth : MonoBehaviour {
 
     public NoiseGen base_map;
+    public NoiseGen hill_map;
     public NoiseGen type_map;
     public NoiseGen mountain_map;
     public NoiseGen elevation_map;
@@ -17,6 +18,7 @@ public class NoiseSynth : MonoBehaviour {
     public void Init()
     {
         base_map.Init();
+        hill_map.Init();
         type_map.Init();
         mountain_map.Init();
         elevation_map.Init();
@@ -31,20 +33,22 @@ public class NoiseSynth : MonoBehaviour {
 
         // Generate base value for each map
         float p = peak_map.genPerlin(x, y, z);
-        float m = mountain_map.genPerlinRidged(x,y,z) + p - 12000;   
+        float m = mountain_map.genPerlinRidged(x,y,z) + p - 13000;   
         float w = type_map.genPerlinUnscaled(x,y,z);
         float e = elevation_map.genPerlin(x, y, z);
         float b = base_map.genPerlin(x,y,z);
+        float h = hill_map.genPerlin(x,y,z);
 
         // Derived characteristics
-        float falloff = Mathf.Pow(0.75f * e / elevation_map.amplitude,3);
+        float elevationIndex = e / elevation_map.amplitude;
         float valley = Mathf.Max(valleyHeight, b);
-        float elevationFactor = e / elevation_map.amplitude;
+
+        b = select(b, h, 0.5f * (elevationIndex + w), 0.5f, 0.05f);
 
         b = Mathf.Max(b, valley);
 
         // Select between base map and mountain map based on value from type map. Add elevation to it.
-        total = select(b, m, w, 0.5f + 0.5f*(1 - elevationFactor),0.165f ) 
+        total = select(b, m, w, 0.68f,0.175f ) 
             + e - elevation_map.amplitude * 0.5f;
         //total = m;
         //Debug.Log(w);
