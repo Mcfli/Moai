@@ -115,9 +115,9 @@ MonoBehaviour:
   treeSpeadRange: 25
   doodadDensity: 0
   colors:
-  - {r: 0.36035964, g: 0.9117647, b: 0.31509513, a: 0}
-  - {r: 0.36883724, g: 0.7794118, b: 0.17192905, a: 0}
-  - {r: 0.22863324, g: 0.6397059, b: 0.17403765, a: 0}
+  - {r: 0.53103447, g: 1, b: 0, a: 0}
+  - {r: 0.46298176, g: 0.8088235, b: 0, a: 0}
+  - {r: 0.33843818, g: 0.6911765, b: 0, a: 0}
   amplitude: 400
   colorCurve:
     serializedVersion: 2

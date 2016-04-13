@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaterFire: 0.7
-  EarthAir: 0.5
+  EarthAir: 0.505
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:

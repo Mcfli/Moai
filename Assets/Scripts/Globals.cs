@@ -29,7 +29,7 @@ public class Globals : MonoBehaviour {
     public static Vector2 heatMoistureOrigin = new Vector2(25,25);
     public static Vector2 heatMoistureVector = Vector2.zero;
     public static float heatMoistureMin = 50;
-    public static float heatMostureDistGuaranteed = 0.1f;  // The distance from the center point a biome is guaranteed to have puzzle
+    public static float heatMostureDistGuaranteed = 50f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                            // FindObjectsOfType added to a shrine
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component{
@@ -54,6 +54,6 @@ public class Globals : MonoBehaviour {
     public static Vector2 WaterFireEarthAirOrigin = new Vector2(0.5f,0.5f);
     public static Vector2 WaterFireEarthAirVector = Vector2.zero;
     public static float WaterFireEarthAirMin = 0.5f;
-    public static float WaterFireEarthAirDistGuaranteed = 0.1f;  // The distance from the center point a biome is guaranteed to have puzzle
+    public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                            // FindObjectsOfType added to a shrine
 }

@@ -117,15 +117,16 @@ public class ShrineGrid : MonoBehaviour
                 if (weight > Globals.WaterFireEarthAirDistGuaranteed && Random.value <= weight) continue;
 
                 // Add all trees with puzzleObjects associated with the current biome
-                foreach (GameObject tree in b.treeTypes)
-                {
-                    foreach (PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
-                    {
-                        if (po != null)
-                            enablePlacementItem(po);
-                    }
+				foreach (GameObject tree in b.treeTypes)
+				{
+					foreach (PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
+					{
+						if (po != null)
+							enablePlacementItem(po);
+					}
 
-                }
+				}
+                
 
                 // Add all doodads with puzzleObjects associated with the current biome
                 foreach (GameObject doodad in b.doodads)
@@ -213,7 +214,7 @@ public class ShrineGrid : MonoBehaviour
         numItems = Random.Range(minSolItems, maxSolItems);
         for (int i = 0; i < numItems; i++)
         {
-            int index = Random.Range(0, validObjects.Count);
+            int index = Random.Range(0, validObjects.Count - 1);
             PuzzleObject placeObj = validObjects[index];
             if (placeObj != null)
                 targetState.Add(placeObj);
