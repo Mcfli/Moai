@@ -262,12 +262,12 @@ MonoBehaviour:
   allottedLoadSeconds: 0.5
   tree_load_dist: 1
   biomes:
-  - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
-  heatMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
-  mountainMap: {fileID: 0}
-  moistureMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
+  - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
+  WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
+  mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
+  EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
 --- !u!4 &188005511
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,15 +1057,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 20
+      value: -1152
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 150
+      value: 24.4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 4210.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalRotation.x
