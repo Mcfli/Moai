@@ -117,6 +117,7 @@ MonoBehaviour:
   growTimeVariance: 0.3
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
+  fertilityChance: 1
 --- !u!114 &11484236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,7 +149,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: fertilityChance
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149340}
