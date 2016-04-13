@@ -193,18 +193,19 @@ public class ShrineGrid : MonoBehaviour
                 if (po == null) continue;
                 else if (po.Equals( tarObj))
                 {
-                    itemsInRange.RemoveAt(i);
+                    //itemsInRange.RemoveAt(i);
                     found = true;
                 }
             }
             if (!found) {
-                isDone = false;
+                //isDone = false;
                 return;
             }
         }
         // looped through all and did not return false, so we found all of them
         isDone = true;
         complete();
+
     }
 
     // Uses a random Vector2 based on the resolution size and uses a random index based on the count in validObjects to populate targetState dictionary.
