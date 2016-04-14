@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bd294ef01c1c34aac97e17eeaba320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudHeight: 300
+  cloudHeight: 700
   particlesHeight: 500
   updateTime: 1800
   cloudPrefabs:
@@ -565,6 +565,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
