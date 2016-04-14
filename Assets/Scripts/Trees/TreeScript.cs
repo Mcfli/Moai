@@ -42,6 +42,7 @@ public class TreeScript : MonoBehaviour {
     private int state;
 
     // Use this for initialization
+    // will initialize with random scale and lifeSpan with age of 0
     void Awake(){
         // references
         anim = GetComponent<Animation>();
@@ -76,6 +77,18 @@ public class TreeScript : MonoBehaviour {
     void Start() {
         //anim.enabled = false;
         grow();
+        RaycastHit hit;
+        if(Physics.SphereCast(new Ray(transform.position, Vector3.down), seed_object.GetComponent<InteractableObject>().cull_radius, out hit, 0, LayerMask.GetMask("Forest"))) {
+            hit.collider.gameObject.GetComponent<ForestScript>().addTree(this);
+        } else {
+            if(!TreeManager.loadedForests.ContainsKey(Globals.GenerationManagerScript.worldToChunk(transform.position))) Destroy(this);
+            List<GameObject> types = new List<GameObject>();
+            types.Add(prefab);
+            GameObject g = new GameObject();
+            ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
+            newForest.createForest(transform.position, 100, types, 16); //radius and max trees should be pulled from biome prefab
+            TreeManager.loadedForests[Globals.GenerationManagerScript.worldToChunk(transform.position)].Add(newForest);
+        }
     }
 	
 	// Update is called once per frame
@@ -134,10 +147,28 @@ public class TreeScript : MonoBehaviour {
         }
     }
 
-    private void updateCollision(){
+    private void updateCollision() {
         // update collision
         float size = heightVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
         boxCollider.size = new Vector3(0.4f + 0.6f * size, maxHeight * size, 0.4f + 0.6f * size);
         boxCollider.center = new Vector3(0, maxHeight * size * 0.5f, 0);
+    }
+    
+    public struct treeStruct {
+        public Vector3 position;
+        public Vector3 scale;
+        public Quaternion rotation;
+        public float age;
+        public float lifeSpan;
+        public GameObject prefab;
+
+        public treeStruct(TreeScript t) {
+            position = t.transform.position;
+            rotation = t.transform.rotation;
+            scale = t.transform.localScale;
+            age = t.age;
+            lifeSpan = t.lifeSpan;
+            prefab = t.prefab;
+        }
     }
 }
