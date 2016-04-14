@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bd294ef01c1c34aac97e17eeaba320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudHeight: 300
+  cloudHeight: 700
   particlesHeight: 500
   updateTime: 1800
   cloudPrefabs:
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk_size: 500
-  chunk_resolution: 4
+  chunk_resolution: 8
   chunk_load_dist: 4
   chunk_unload_dist: 6
   chunk_detail_dist: 1
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93d7ca007a982145aabbe6c06668436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialWaterLevel: 0
+  InitialWaterLevel: -1000
   WaterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
   fogColor: {r: 0.28235295, g: 0.39215687, b: 0.52156866, a: 0}
   fogDensity: 0.04
@@ -342,9 +342,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   base_map: {fileID: 11441894, guid: 0becd2c46f9626744b0ae39320929755, type: 2}
+  hill_map: {fileID: 11496700, guid: 95a5864a330704b4e805a44e8d47492e, type: 2}
   type_map: {fileID: 11441516, guid: c07d4e0b24d0bc444bf371c2b0bb5ffa, type: 2}
   mountain_map: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
-  lake_map: {fileID: 0}
+  elevation_map: {fileID: 11483938, guid: c1b765ad54907af4eb2d4ba059c12759, type: 2}
+  peak_map: {fileID: 11467348, guid: 54b65dd4c9e6a804eb36eed4ae756157, type: 2}
   colors:
   - {r: 0.61960787, g: 0.70980394, b: 0.4745098, a: 0}
   - {r: 0.29803923, g: 0.52156866, b: 0, a: 0}
@@ -1057,15 +1059,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1152
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 24.4
+      value: 1933
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4210.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1117,7 +1119,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RunSpeed
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Name
@@ -1145,7 +1147,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_WalkSpeed
-      value: 7.5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RunstepLenghten
