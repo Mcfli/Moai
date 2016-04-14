@@ -32,8 +32,8 @@ public class TreeScript : MonoBehaviour {
     //References
     private Animation anim;
     private BoxCollider boxCollider;
-    //private MeshRenderer meshRenderer;
-    //private bool animateNext;
+    private Renderer renderer;
+    private bool animateNext;
 
     //animation, collision, states
     private float ratioTotal;
@@ -47,7 +47,7 @@ public class TreeScript : MonoBehaviour {
         // references
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-        //meshRenderer = GetComponent<MeshRenderer>();
+        renderer = GetComponent<Renderer>();
 
         gameObject.transform.localScale += gameObject.transform.localScale * Random.Range(-scaleVariance, scaleVariance);
 
