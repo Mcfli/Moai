@@ -24,6 +24,13 @@ public class WeatherManager : MonoBehaviour {
     private Biome lastBiome;
     private Vector3 curParticlePosition;
 
+    // Player for audio source
+    private GameObject camera;
+    private AudioSource cameraAudio;
+
+    // Weather audio
+    public AudioClip rainAudio;
+
     void Awake(){
         clouds = new List<Cloud>();
     }
@@ -35,6 +42,8 @@ public class WeatherManager : MonoBehaviour {
         //changeClouds(10000);
         lastBiome = Globals.cur_biome;
         curParticlePosition = new Vector3(0, 0, 0);
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraAudio = camera.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -115,6 +124,16 @@ public class WeatherManager : MonoBehaviour {
                 activeParticleSystem = Instantiate(Globals.cur_weather.particleS);
                 activeParticleSystem.transform.parent = transform;
                 activeParticleSystem.transform.position = curParticlePosition;
+                if (Globals.cur_weather.name == "Rain")
+                {
+                    cameraAudio.clip = rainAudio;
+                    cameraAudio.loop = true;
+                    cameraAudio.Play();
+                }
+                else
+                {
+                    cameraAudio.Stop();
+                }
             }
             Globals.cur_weather.imageSpace.applyToCamera();
         }

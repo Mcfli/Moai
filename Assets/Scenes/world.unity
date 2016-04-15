@@ -126,6 +126,7 @@ MonoBehaviour:
   cloudHeightVariation: 50
   cloudSizeVariation: 0.5
   particleVel: 300
+  rainAudio: {fileID: 8300000, guid: 722bb902aee3e654aa4b86ab29ab1a6d, type: 3}
 --- !u!4 &10489869
 Transform:
   m_ObjectHideFlags: 0
