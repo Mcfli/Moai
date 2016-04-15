@@ -20,7 +20,6 @@ public class WeatherManager : MonoBehaviour {
     private ParticleSystem activeParticleSystem;
     private ParticleSystem.Particle[] m_Particles;
     public float particleVel = 0.0f;
-    private float prevGrav = 0.0f;
     private List<Cloud> clouds; // holds all currently loaded clouds
     private Biome lastBiome;
     private Vector3 curParticlePosition;
@@ -116,7 +115,6 @@ public class WeatherManager : MonoBehaviour {
                 activeParticleSystem = Instantiate(Globals.cur_weather.particleS);
                 activeParticleSystem.transform.parent = transform;
                 activeParticleSystem.transform.position = curParticlePosition;
-                prevGrav = activeParticleSystem.gravityModifier;
             }
             Globals.cur_weather.imageSpace.applyToCamera();
         }

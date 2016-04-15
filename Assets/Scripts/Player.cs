@@ -22,12 +22,22 @@ public class Player : MonoBehaviour {
     AudioSource playerAudio;
 
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
+    private GameObject playerModel;
+
+    private Camera mainCamera;
+    private Vector3 playerCamPos;
+    private Quaternion playerCamRot;
+    private bool inCinematic = false;
+    public float cinematicTimeScale;
 
     void Awake() {
         thisCollider = GetComponent<Collider>();
         cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
         firstPersonCont = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
-
+        playerModel = transform.FindChild("moai").gameObject;
+        mainCamera = Camera.main;
+        playerCamPos = mainCamera.transform.localPosition;
+        playerCamRot = mainCamera.transform.localRotation;
     }
 
     // Use this for initialization
@@ -52,8 +62,21 @@ public class Player : MonoBehaviour {
                 firstPersonCont.enabled = !firstPersonCont.enabled;
             }
         }
+        if (Globals.time_scale > cinematicTimeScale)
+        {
+            playerModel.SetActive(true);
+            mainCamera.transform.localPosition = new Vector3(-100, 0, 0);
+            inCinematic = true;
+        }
         if (Globals.time_scale == 1)
         {
+            if(inCinematic)
+            {
+                inCinematic = false;
+                mainCamera.transform.localPosition = playerCamPos;
+                mainCamera.transform.localRotation = playerCamRot;
+                playerModel.SetActive(false);
+            }
             if (!firstPersonCont.enabled)
             {
                 firstPersonCont.enabled = !firstPersonCont.enabled;
