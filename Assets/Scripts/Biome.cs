@@ -19,13 +19,17 @@ public class Biome : MonoBehaviour {
 
     // Tree types
     public List<GameObject> treeTypes;
+
+    // Doodads, type and desnity. doodads[0] gives first kind of doodad and 
+    // doodadDensity[0] gives how many of that doodad to spawn
     public List<GameObject> doodads;
+    public List<int> doodadDensity;
 
     public int treeDensity = 2;
     public int treeGrowthIterations = 2;
     public float treeSpreadMin = 12f;
     public float treeSpeadRange = 25f;
-    public int doodadDensity;
+    
 
     // Terrain color
     public List<Color> colors;
