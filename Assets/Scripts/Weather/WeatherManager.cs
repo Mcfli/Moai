@@ -17,7 +17,6 @@ public class WeatherManager : MonoBehaviour {
 
     // Internal variables
     private float lastUpdated;
-	private bool visibleParticles;
     private ParticleSystem activeParticleSystem;
     private List<Cloud> clouds; // holds all currently loaded clouds
     private Biome lastBiome;
@@ -28,9 +27,10 @@ public class WeatherManager : MonoBehaviour {
     }
 
     void Start() {
-        visibleParticles = false;
         lastUpdated = 0;
         changeWeather();
+        checkIfVisibleParticles();
+        //changeClouds(10000);
         lastBiome = Globals.cur_biome;
         curParticlePosition = new Vector3(0, 0, 0);
     }
@@ -42,9 +42,7 @@ public class WeatherManager : MonoBehaviour {
             changeWeather();
         }
 
-        //check if visible
-        visibleParticles = !(Globals.time_scale > 1 || Globals.PlayerScript.isUnderwater());
-        if(activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
+        checkIfVisibleParticles();
 
         changeClouds(Mathf.FloorToInt(Globals.time_scale));
         moveClouds();
@@ -62,6 +60,12 @@ public class WeatherManager : MonoBehaviour {
 	//public void showWeather(){visibleParticles = true;}
 	//public void toggleWeather(){visibleParticles = !visibleParticles;}
 	//public bool isVisible(){return visibleParticles;}
+
+    private bool checkIfVisibleParticles() { //returns true if visible
+        bool visibleParticles = !(Globals.time_scale > 1 || Globals.PlayerScript.isUnderwater());
+        if(activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
+        return visibleParticles;
+    }
 
     public void changeWeather(){
         if (Globals.cur_biome == null) return;
