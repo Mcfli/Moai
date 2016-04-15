@@ -39,10 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59020e43812612342a1030197611b064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weatherName: Snow
   particleS: {fileID: 19831440, guid: 253d6bd3d5333194daec8a16c1c7dc0f, type: 2}
   imageSpace: {fileID: 11468104, guid: ccfab5984aa14344887e16b41d174687, type: 2}
-  numberOfClouds: 140
+  numberOfClouds: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

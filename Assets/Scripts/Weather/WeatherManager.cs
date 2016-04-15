@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WeatherManager : MonoBehaviour {
-
     // Tuning variables
     public float cloudHeight = 300;
+    public Vector2 cloudMovement;
+    public float chanceOfCloudFade;
     public float particlesHeight = 500;
     public float updateTime; //amount of time weather lasts (may change to same weather)
 
@@ -15,24 +16,21 @@ public class WeatherManager : MonoBehaviour {
     public float cloudSizeVariation; //ratio (0.0 - 1.0)
 
     // Internal variables
-    private GameObject CloudParent;
     private float lastUpdated;
-	private bool visibleParticles;
     private ParticleSystem activeParticleSystem;
-    private List<GameObject> clouds; // holds all currently loaded clouds
+    private List<Cloud> clouds; // holds all currently loaded clouds
     private Biome lastBiome;
     private Vector3 curParticlePosition;
 
     void Awake(){
-        clouds = new List<GameObject>();
-        CloudParent = new GameObject("Clouds");
-        CloudParent.transform.parent = transform;
+        clouds = new List<Cloud>();
     }
 
     void Start() {
-        visibleParticles = false;
         lastUpdated = 0;
         changeWeather();
+        checkIfVisibleParticles();
+        //changeClouds(10000);
         lastBiome = Globals.cur_biome;
         curParticlePosition = new Vector3(0, 0, 0);
     }
@@ -44,12 +42,17 @@ public class WeatherManager : MonoBehaviour {
             changeWeather();
         }
 
-        visibleParticles = !(Globals.time_scale > 1 || Globals.PlayerScript.isUnderwater());
+        checkIfVisibleParticles();
 
-        //check if visiable
-        if(activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
-        //move clouds with player
-        CloudParent.transform.position = new Vector3(Globals.Player.transform.position.x, cloudHeight, Globals.Player.transform.position.z);
+        changeClouds(Mathf.FloorToInt(Globals.time_scale));
+        moveClouds();
+        if(Random.value < chanceOfCloudFade * Globals.time_scale && clouds.Count > 0) {
+            int randomCloud = Random.Range(0, clouds.Count);
+            clouds[randomCloud].dissipate();
+            clouds.RemoveAt(randomCloud);
+            createCloud();
+        }
+
         lastBiome = Globals.cur_biome;
     }
 	
@@ -57,6 +60,12 @@ public class WeatherManager : MonoBehaviour {
 	//public void showWeather(){visibleParticles = true;}
 	//public void toggleWeather(){visibleParticles = !visibleParticles;}
 	//public bool isVisible(){return visibleParticles;}
+
+    private bool checkIfVisibleParticles() { //returns true if visible
+        bool visibleParticles = !(Globals.time_scale > 1 || Globals.PlayerScript.isUnderwater());
+        if(activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
+        return visibleParticles;
+    }
 
     public void changeWeather(){
         if (Globals.cur_biome == null) return;
@@ -68,7 +77,7 @@ public class WeatherManager : MonoBehaviour {
         for(int i = 0; i < Globals.cur_biome.weatherChance.Count; i++) roll += Globals.cur_biome.weatherChance[i];
         roll *= Random.value;
         for(int i = 0; i < Globals.cur_biome.weatherChance.Count; i++){
-            if(roll - Globals.cur_biome.weatherChance[i] < 0) {
+            if(roll <= Globals.cur_biome.weatherChance[i]) {
                 Globals.cur_weather = Globals.cur_biome.weatherTypes[i];
                 break;
             }else roll -= Globals.cur_biome.weatherChance[i];
@@ -86,25 +95,61 @@ public class WeatherManager : MonoBehaviour {
                 activeParticleSystem.transform.position = curParticlePosition;
             }
             Globals.cur_weather.imageSpace.applyToCamera();
-            changeClouds(Globals.cur_weather.numberOfClouds);
         }
     }
-    
-    private void changeClouds(int target_clouds){
-        while(clouds.Count < target_clouds){ //i want more clouds
-            GameObject c = Instantiate(cloudPrefabs[Mathf.FloorToInt(Random.value*(cloudPrefabs.Count-1))]);
-            c.transform.parent = CloudParent.transform;
-            c.transform.localEulerAngles = new Vector3(0, Random.Range(0f, 360f), 0); //random rotation
-            c.transform.localScale *= 1 + Random.Range(-cloudSizeVariation, cloudSizeVariation); //random size
-            Vector2 radial_offset = Random.insideUnitCircle * cloudPlacementRadius;
-            c.transform.localPosition = new Vector3(radial_offset.x, Random.Range(-cloudHeightVariation, cloudHeightVariation), radial_offset.y);
-            clouds.Add(c);
+
+    private void changeClouds(int amount) {
+        int target = (Globals.time_scale < Globals.SkyScript.timeScaleThatHaloAppears) ? Globals.cur_weather.numberOfClouds : 0;
+        for(int i = 0; i < amount; i++) {
+            if(clouds.Count < target) createCloud(); //i want more clouds
+            else if(clouds.Count > target) { //i want less clouds
+                clouds[0].dissipate();
+                clouds.RemoveAt(0);
+            } else break;
         }
-        
-        while(clouds.Count > target_clouds) { //i want less clouds
-            GameObject c = clouds[0];
-            c.GetComponent<Cloud>().dissipate();
-            clouds.RemoveAt(0);
+    }
+
+    private Cloud createCloud(int prefabNum, Vector3 location, Vector3 rotation, float scale) {
+        GameObject c = Instantiate(cloudPrefabs[prefabNum]);
+        c.transform.parent = transform;
+        c.transform.eulerAngles = rotation;
+        c.transform.localScale *= scale;
+        c.transform.position = location;
+        Cloud cl = c.GetComponent<Cloud>();
+        clouds.Add(cl);
+        return cl;
+    }
+
+    private Cloud createCloud() { //random everything
+        Vector2 radial_offset = Random.insideUnitCircle * cloudPlacementRadius;
+        return createCloud(Random.Range(0, cloudPrefabs.Count),
+                           new Vector3(radial_offset.x + Globals.Player.transform.position.x,
+                                       Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight,
+                                       radial_offset.y + Globals.Player.transform.position.z),
+                           new Vector3(0, Random.Range(0f, 360f), 0),
+                           1 + Random.Range(-cloudSizeVariation, cloudSizeVariation)
+               );
+    }
+
+    private Cloud createCloud(Vector3 location) { //random everything except location
+        return createCloud(Random.Range(0, cloudPrefabs.Count),
+                           location, new Vector3(0, Random.Range(0f, 360f), 0),
+                           1 + Random.Range(-cloudSizeVariation, cloudSizeVariation)
+               );
+    }
+
+    private void moveClouds() {
+        for(int i = 0; i < clouds.Count; i++) {
+            clouds[i].gameObject.transform.position += new Vector3(cloudMovement.x, 0, cloudMovement.y) * Globals.time_scale;
+            Vector2 cloudPos = new Vector2(clouds[i].gameObject.transform.position.x, clouds[i].gameObject.transform.position.z);
+            Vector2 playerPos = new Vector2(Globals.Player.transform.position.x, Globals.Player.transform.position.z);
+            if(Vector2.Distance(cloudPos, playerPos) > cloudPlacementRadius) {
+                clouds[i].dissipate();
+                clouds.RemoveAt(i);
+                Vector2 npos = Vector2.Lerp(playerPos * 2 - cloudPos, playerPos, 0.05f);
+                createCloud(new Vector3(npos.x, Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight, npos.y));
+                i--;
+            }
         }
     }
 

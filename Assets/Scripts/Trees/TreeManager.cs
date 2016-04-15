@@ -52,6 +52,7 @@ public class TreeManager : MonoBehaviour {
                     float zpos = j + step_size * Random.value - 0.5f * step_size;
                     GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
                     GameObject new_tree = createNewTree(treePrefab, new Vector3(xpos, 0, zpos));
+                    new_tree.transform.rotation = RandomRotation;
 
                     
                     treesInChunk.Add(new_tree);
@@ -80,8 +81,9 @@ public class TreeManager : MonoBehaviour {
             float theta = Random.Range(0, 2 * Mathf.PI);
             float dist = biome.treeSpreadMin + Random.Range(0, biome.treeSpeadRange);
             Vector3 offset = new Vector3(Mathf.Cos(theta) * dist, 0, Mathf.Sin(theta) * dist);
-                        Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+            Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
             GameObject new_tree = createNewTree(treePrefab,tree.transform.position + offset);
+            new_tree.transform.rotation = RandomRotation;
             if (new_tree != null) new_trees.Add(new_tree);
         }
         return new_trees;
