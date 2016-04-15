@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class TreeManager : MonoBehaviour {
     public float seedToTreeRatio = 0.5f;
     public float secondsToPropogate = 1800;
-
-    private GenerationManager gen_manager;
     public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
     public static Dictionary<Vector2, List<ForestScript>> loadedForests;
+
+    private GenerationManager gen_manager;
 
     // Use this for initialization
     void Awake() {
@@ -17,15 +17,10 @@ public class TreeManager : MonoBehaviour {
         loadedForests = new Dictionary<Vector2, List<ForestScript>>();
     }
 
-    public static void saveTree(Vector2 chunk, ForestScript forest) {
-        ForestScript.forestStruct e = forest.export();
-        if(!trees.ContainsKey(chunk)||trees[chunk] == null) trees[chunk] = new List<ForestScript.forestStruct>();
-        trees[chunk].Add(e);
-    }
-
     public void loadTrees(Vector2 key, Biome biome){
-        List<ForestScript> loaded;
         if (biome.treeTypes.Count < 1) return;
+        if(loadedForests.ContainsKey(key)) return;
+        List<ForestScript> loaded;
         if (trees.ContainsKey(key) && trees[key] != null){
             loaded = loadedForests[key];
             List<ForestScript.forestStruct> trees_in_chunk = trees[key];
@@ -40,7 +35,6 @@ public class TreeManager : MonoBehaviour {
         else
         {
             loaded = new List<ForestScript>();
-            loadedForests.Add(key, loaded);
             float step_size = gen_manager.chunk_size / biome.treeDensity;
 
             // When Advanced terrain is implemented...
@@ -52,15 +46,14 @@ public class TreeManager : MonoBehaviour {
                     
                     RaycastHit hit;
                     Ray rayDown = new Ray(new Vector3(position.x, 10000000, position.z), Vector3.down);
-                    int terrain = LayerMask.GetMask("Terrain");
-                    if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)) {
+                    if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
                         if(hit.point.y < Globals.water_level) continue;
                         else position.y = hit.point.y - 1;
                     } else continue;
 
-                    GameObject g = new GameObject();
+                    GameObject g = new GameObject("Forest");
                     ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
-                    newForest.createForest(position, 100, biome.treeTypes, 16); //radius and max trees should be pulled from biome prefab
+                    newForest.createForest(position, 50, biome.treeTypes, 16); //radius and max trees should be pulled from biome prefab
                     loaded.Add(newForest);
                 }
             }
@@ -107,20 +100,20 @@ public class TreeManager : MonoBehaviour {
     {
 
         Vector2 chunk = new Vector2(x, y);
-        unloadTrees(x, y);
+        unloadTrees(chunk);
         if (trees.ContainsKey(chunk)){
             trees[chunk] = null;
         }
         
     }
 
-    public void unloadTrees(int x, int y){
-        Vector2 chunk = new Vector2(x, y);
-
+    public void unloadTrees(Vector2 chunk){
+        trees[chunk] = new List<ForestScript.forestStruct>();
         foreach(ForestScript f in loadedForests[chunk]){
-            saveTree(chunk, f);
+            trees[chunk].Add(f.export());
             f.destroyForest();
         }
+        loadedForests.Remove(chunk);
     }
 
     /*

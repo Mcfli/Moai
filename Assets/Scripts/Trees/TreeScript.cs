@@ -32,7 +32,7 @@ public class TreeScript : MonoBehaviour {
     //References
     private Animation anim;
     private BoxCollider boxCollider;
-    private Renderer renderer;
+    private Renderer rend;
     private bool animateNext;
 
     //animation, collision, states
@@ -47,14 +47,14 @@ public class TreeScript : MonoBehaviour {
         // references
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-        renderer = GetComponent<Renderer>();
+        rend = GetComponent<Renderer>();
 
         gameObject.transform.localScale += gameObject.transform.localScale * Random.Range(-scaleVariance, scaleVariance);
 
         age = 0;
         lifeSpan = baseLifeSpan + Random.Range(-lifeSpanVariance, lifeSpanVariance) * baseLifeSpan;
         state = 0;
-        //animateNext = true;
+        animateNext = true;
 
         ratioTotal = 0;
         stateMarks = new List<float> { 0 };
@@ -75,20 +75,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     void Start() {
-        //anim.enabled = false;
         grow();
-        RaycastHit hit;
-        if(Physics.SphereCast(new Ray(transform.position, Vector3.down), seed_object.GetComponent<InteractableObject>().cull_radius, out hit, 0, LayerMask.GetMask("Forest"))) {
-            hit.collider.gameObject.GetComponent<ForestScript>().addTree(this);
-        } else {
-            if(!TreeManager.loadedForests.ContainsKey(Globals.GenerationManagerScript.worldToChunk(transform.position))) Destroy(this);
-            List<GameObject> types = new List<GameObject>();
-            types.Add(prefab);
-            GameObject g = new GameObject();
-            ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
-            newForest.createForest(transform.position, 100, types, 16); //radius and max trees should be pulled from biome prefab
-            TreeManager.loadedForests[Globals.GenerationManagerScript.worldToChunk(transform.position)].Add(newForest);
-        }
     }
 	
 	// Update is called once per frame
@@ -102,10 +89,10 @@ public class TreeScript : MonoBehaviour {
 
         if (Globals.time > lastGrowUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) grow();
 
-        /*if (animateNext && meshRenderer.isVisible){
+        if (animateNext && rend.isVisible){
             anim.enabled = true;
             animateNext = false;
-        }else anim.enabled = false;*/
+        }else anim.enabled = false;
     }
 
     private void grow() {
@@ -113,7 +100,25 @@ public class TreeScript : MonoBehaviour {
         updateAnimation();
         updateCollision();
         lastGrowUpdate = Globals.time;
-        //animateNext = true;
+        animateNext = true;
+    }
+
+    // returns true if forest found, and false if it created a forest
+    public bool findForest() {
+        RaycastHit hit;
+        if(Physics.SphereCast(new Ray(transform.position, Vector3.down), seed_object.GetComponent<InteractableObject>().cull_radius, out hit, 0, LayerMask.GetMask("Forest"))) {
+            hit.collider.gameObject.GetComponent<ForestScript>().addTree(this);
+            return true;
+        } else {
+            if(!TreeManager.loadedForests.ContainsKey(Globals.GenerationManagerScript.worldToChunk(transform.position))) Destroy(this);
+            List<GameObject> types = new List<GameObject>();
+            types.Add(prefab);
+            GameObject g = new GameObject("Forest");
+            ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
+            newForest.createForest(transform.position, 100, types, 0); //radius should be pulled from biome prefab
+            TreeManager.loadedForests[Globals.GenerationManagerScript.worldToChunk(transform.position)].Add(newForest);
+            return false;
+        }
     }
 
     private void updateState(){
@@ -132,7 +137,6 @@ public class TreeScript : MonoBehaviour {
     //if anim name is blank, have it freeze at the last frame of the closest animation before it that is not blank
     //this means that the first element in stateAnimationNames cannot be blank
     private void updateAnimation() {
-        //anim.enabled = true;
         if (stateAnimationNames[state] != ""){
             if (!anim.IsPlaying(stateAnimationNames[state])) anim.Play(stateAnimationNames[state]);
             anim[stateAnimationNames[state]].time = anim[stateAnimationNames[state]].length * ((age / lifeSpan) - (stateMarks[state] / ratioTotal)) / stateRatios[state];

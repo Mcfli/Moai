@@ -15,7 +15,7 @@ GameObject:
   - 75: {fileID: 7517500}
   - 114: {fileID: 11464378}
   - 114: {fileID: 11473828}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: oak_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

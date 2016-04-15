@@ -11,7 +11,6 @@ public class ForestScript : MonoBehaviour {
         radius = -1;
         lastPropogated = -1;
         trees = new List<TreeScript>();
-        gameObject.layer = LayerMask.GetMask("Forest");
     }
 
     void Start() {
@@ -20,27 +19,33 @@ public class ForestScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if(trees.Count == 0) Destroy(gameObject);
+	    if(trees.Count == 0) destroyForest();
         if(Globals.time - lastPropogated > Globals.TreeManagerScript.secondsToPropogate * Globals.time_resolution)
             propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
 	}
 
-    // "new" initialization function
+    // "new" initialization function (make maxTrees 0 when spawning a forest)
     public void createForest(Vector3 position, float radius, List<GameObject> treeTypes, int maxTrees) {
+        transform.position = position;
         this.radius = radius;
-        for(int i = 0; i < maxTrees; i++) { // will attempt maxTrees times
-            TreeScript t = createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
-            if(t) trees.Add(t);
+        createSphereCollider(radius);
+
+        if(maxTrees >= 1) {
+            int originalSeed = Random.seed;
+            Random.seed = position.GetHashCode();
+            for(int i = 0; i < maxTrees; i++) { // will attempt maxTrees times
+                TreeScript t = createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
+                if(t) trees.Add(t);
+            }
+            Random.seed = originalSeed;
         }
-        SphereCollider collider = gameObject.AddComponent(typeof(SphereCollider)) as SphereCollider;
-        collider.isTrigger = true;
-        collider.radius = radius;
     }
 
-    //load initialization function
+    // load initialization function
     public void loadForest(forestStruct forest) {
         transform.position = forest.position;
         radius = forest.radius;
+        createSphereCollider(radius);
         lastPropogated = forest.lastPropogated;
         foreach(TreeScript.treeStruct t in forest.trees) {
             TreeScript newTree = loadTree(t, (Globals.time - forest.timeUnloaded) / Globals.time_resolution);
@@ -48,10 +53,12 @@ public class ForestScript : MonoBehaviour {
             if(!newTree) newTree = createTree(t.prefab, new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
             if(newTree) trees.Add(newTree);
         }
-        SphereCollider collider = gameObject.AddComponent(typeof(SphereCollider)) as SphereCollider;
-        collider.isTrigger = true;
-        collider.radius = radius;
         // will attempt to propogate on next update
+    }
+
+    private void createSphereCollider(float radius) {
+        SphereCollider collider = gameObject.AddComponent(typeof(SphereCollider)) as SphereCollider;
+        collider.radius = radius;
     }
 
     public void destroyForest() {
@@ -78,6 +85,7 @@ public class ForestScript : MonoBehaviour {
 
     public void addTree(TreeScript tree) {
         trees.Add(tree);
+        tree.transform.parent = transform;
     }
     
     public forestStruct export() {
@@ -95,14 +103,16 @@ public class ForestScript : MonoBehaviour {
     // will return null if tree has died
     private TreeScript loadTree(TreeScript.treeStruct t, float timePassed) {
         if(t.age + timePassed > t.lifeSpan) return null;
-        TreeScript tree = Instantiate(t.prefab, t.position, t.rotation) as TreeScript;
+        GameObject g = Instantiate(t.prefab, t.position, t.rotation) as GameObject;
+        TreeScript tree = g.GetComponent<TreeScript>();
         tree.gameObject.transform.localScale = t.scale;
         tree.age = t.age + timePassed;
         tree.lifeSpan = t.lifeSpan;
+        tree.transform.parent = transform;
         return tree;
     }
 
-    // for instantiting trees - will return null if position is inadequate
+    // for instantiating trees - will return null if position is inadequate
     private TreeScript createTree(GameObject type, Vector2 position) {
         float ground = findGround(position);
         if(ground == -Mathf.Infinity) return null;
@@ -113,7 +123,12 @@ public class ForestScript : MonoBehaviour {
         if(Physics.SphereCast(new Ray(pos, Vector3.down), cull_radius, 0, LayerMask.GetMask("Tree"))) return null; //by spherecast - better for overlapping forests
         //foreach(TreeScript t in trees) if(Vector3.Distance(t.gameObject.transform.position, pos) < cull_radius) return null; //by list iteration - will not take into account of overlapping forest
 
-        return Instantiate(type, pos, Quaternion.Euler(0, Random.Range(0, 360), 0)) as TreeScript;
+        GameObject g = Instantiate(type, pos, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;
+        TreeScript newTree = g.GetComponent<TreeScript>();
+        newTree.age = Random.Range(0, newTree.lifeSpan);
+        newTree.transform.parent = transform;
+
+        return newTree;
     }
 
     private float findGround(Vector2 position, bool mindWater = true) { //returns -Mathf.Infinity if invalid

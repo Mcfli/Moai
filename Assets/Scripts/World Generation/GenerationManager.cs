@@ -19,7 +19,6 @@ public class GenerationManager : MonoBehaviour {
     private Dictionary<Vector2, GameObject> loaded_chunks;
     private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
     private Dictionary<Vector2, GameObject> loaded_water;
-    private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
     //private Dictionary<Vector2, Biome> chunkBiomes;  // keeps track of what chunk is at what biome
 
@@ -40,7 +39,6 @@ public class GenerationManager : MonoBehaviour {
         loaded_chunks = new Dictionary<Vector2, GameObject>();
         detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
         loaded_water = new Dictionary<Vector2, GameObject>();
-        loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
 
@@ -102,6 +100,9 @@ public class GenerationManager : MonoBehaviour {
     }
     
     private bool loadUnload(Vector2 position) {
+        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+
         bool done = true;
         if(!unloadChunks(position)) done = false;
         if(!unloadTrees(position)) done = false;
@@ -112,8 +113,6 @@ public class GenerationManager : MonoBehaviour {
         if(!loadTrees(position)) done = false;
         if(!loadShrines(position)) done = false;
 
-        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
         return done;
     }
 
@@ -194,22 +193,18 @@ public class GenerationManager : MonoBehaviour {
 			for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++){
                 Vector2 this_chunk = new Vector2(x, y);
                 Biome curBiome = chooseBiome(this_chunk);
-                if (!loaded_tree_chunks.Contains(this_chunk)){
-                    tree_manager.loadTrees(this_chunk,curBiome);
-                    loaded_tree_chunks.Add(this_chunk);
-                }
+                tree_manager.loadTrees(this_chunk,curBiome);
             }
         }
         return true;
     }
 
     private bool unloadTrees(Vector2 position) {
-        for(int i = loaded_tree_chunks.Count - 1; i >= 0; i--) {
-            Vector2 this_chunk = loaded_tree_chunks[i];
-			if(Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_load_dist ||
-				Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_load_dist) {
-                tree_manager.unloadTrees((int)this_chunk.x, (int)this_chunk.y);
-                loaded_tree_chunks.RemoveAt(i);
+        List<Vector2> keys = new List<Vector2>(TreeManager.loadedForests.Keys);
+        foreach(Vector2 key in keys) {
+            if(Mathf.Abs(key.x - Globals.cur_chunk.x) > tree_load_dist ||
+               Mathf.Abs(key.y - Globals.cur_chunk.y) > tree_load_dist) {
+                tree_manager.unloadTrees(key);
             }
         }
         return true;

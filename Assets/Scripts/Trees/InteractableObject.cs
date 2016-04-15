@@ -106,7 +106,8 @@ public class InteractableObject: MonoBehaviour
             if (close_trees.Length < 5)
             {
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                Instantiate(spawn_object, transform.position, RandomRotation);
+                GameObject g = Instantiate(spawn_object, transform.position, RandomRotation) as GameObject;
+                g.GetComponent<TreeScript>().findForest();
             }
         }
         Destroy(gameObject);
