@@ -125,6 +125,7 @@ MonoBehaviour:
   cloudPlacementRadius: 1500
   cloudHeightVariation: 50
   cloudSizeVariation: 0.5
+  particleVel: 300
 --- !u!4 &10489869
 Transform:
   m_ObjectHideFlags: 0

@@ -21,9 +21,13 @@ public class Player : MonoBehaviour {
     public AudioClip speedUp;
     AudioSource playerAudio;
 
+    private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
+
     void Awake() {
         thisCollider = GetComponent<Collider>();
         cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
+        firstPersonCont = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+
     }
 
     // Use this for initialization
@@ -37,11 +41,22 @@ public class Player : MonoBehaviour {
         //warp to ground at game start
         if(!startGroundWarp) startGroundWarp = warpToGround();
 
-        if (Input.GetButton("Patience")) {
+        if (Globals.time_scale > 1) {
             warpToGround();
             if(!playerAudio.isPlaying) { //sound
                 playerAudio.loop = true;
                 playerAudio.PlayOneShot(speedUp, .2f);
+            }
+            if (firstPersonCont.enabled)
+            {
+                firstPersonCont.enabled = !firstPersonCont.enabled;
+            }
+        }
+        if (Globals.time_scale == 1)
+        {
+            if (!firstPersonCont.enabled)
+            {
+                firstPersonCont.enabled = !firstPersonCont.enabled;
             }
         }
 

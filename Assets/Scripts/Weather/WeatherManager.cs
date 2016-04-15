@@ -18,6 +18,9 @@ public class WeatherManager : MonoBehaviour {
     // Internal variables
     private float lastUpdated;
     private ParticleSystem activeParticleSystem;
+    private ParticleSystem.Particle[] m_Particles;
+    public float particleVel = 0.0f;
+    private float prevGrav = 0.0f;
     private List<Cloud> clouds; // holds all currently loaded clouds
     private Biome lastBiome;
     private Vector3 curParticlePosition;
@@ -54,6 +57,26 @@ public class WeatherManager : MonoBehaviour {
         }
 
         lastBiome = Globals.cur_biome;
+
+        if(activeParticleSystem)
+        {
+            InitializeIfNeeded();
+            activeParticleSystem.gravityModifier = 0;
+            int numParticlesAlive = activeParticleSystem.GetParticles(m_Particles);
+            for(int i = 0; i < numParticlesAlive; i++)
+            {
+                m_Particles[i].velocity = Vector3.down * particleVel * Mathf.Pow(Globals.time_scale, 0.3f);
+            }
+            activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
+        }
+    }
+
+    void InitializeIfNeeded()
+    {
+        if (m_Particles == null || m_Particles.Length < activeParticleSystem.maxParticles)
+        {
+            m_Particles = new ParticleSystem.Particle[activeParticleSystem.maxParticles];
+        }
     }
 	
 	//public void hideWeather(){visibleParticles = false;}
@@ -62,7 +85,7 @@ public class WeatherManager : MonoBehaviour {
 	//public bool isVisible(){return visibleParticles;}
 
     private bool checkIfVisibleParticles() { //returns true if visible
-        bool visibleParticles = !(Globals.time_scale > 1 || Globals.PlayerScript.isUnderwater());
+        bool visibleParticles = !(Globals.PlayerScript.isUnderwater());
         if(activeParticleSystem) activeParticleSystem.gameObject.SetActive(visibleParticles);
         return visibleParticles;
     }
@@ -93,6 +116,7 @@ public class WeatherManager : MonoBehaviour {
                 activeParticleSystem = Instantiate(Globals.cur_weather.particleS);
                 activeParticleSystem.transform.parent = transform;
                 activeParticleSystem.transform.position = curParticlePosition;
+                prevGrav = activeParticleSystem.gravityModifier;
             }
             Globals.cur_weather.imageSpace.applyToCamera();
         }

@@ -490,9 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed_object: {fileID: 149340, guid: 6bb63408ed8863c40ade462848e944d0, type: 2}
   prefab: {fileID: 188470}
-  max_health: 100
+  seed_object: {fileID: 149340, guid: 6bb63408ed8863c40ade462848e944d0, type: 2}
   minSpawnRadius: 10
   maxSpawnRadius: 50
   spawn_delay: 20
@@ -501,11 +500,12 @@ MonoBehaviour:
   spawn_limit: 0
   cull_radius: 50
   cull_max_density: 5
-  target_scale: 10
+  max_health: 100
+  age: 0
   lifeSpan: 1314000
   lifeSpanVariance: 0.3
-  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
-  dirtMoundOffset: {x: 0, y: 0.8, z: 0}
+  target_scale: 10
+  ratioAnimUpdates: 0.01
   stateAnimationNames:
   - redMushroom_growing
   - 
@@ -567,9 +567,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   cul_spread: 0
   onFire: 0
-  saved_position: {x: 0, y: 0, z: 0}
-  saved_rotation: {x: 0, y: 0, z: 0, w: 0}
-  age: 0
+  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
+  dirtMoundOffset: {x: 0, y: 0.8, z: 0}
 --- !u!137 &13705222
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -580,7 +579,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 20ab273dd5f47e3429cfe958b583adde, type: 2}
+  - {fileID: 2100000, guid: ebbb4ad3c6e90214784ab3bc391f8a69, type: 2}
   - {fileID: 2100000, guid: c4764419012a8ac4285e99397ddee260, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
