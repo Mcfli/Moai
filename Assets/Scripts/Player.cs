@@ -64,8 +64,16 @@ public class Player : MonoBehaviour {
         }
         if (Globals.time_scale > cinematicTimeScale)
         {
-            playerModel.SetActive(true);
-            mainCamera.transform.localPosition = new Vector3(-100, 0, 0);
+			if(!playerModel.active)
+			{
+				playerModel.SetActive(true);
+				mainCamera.transform.localPosition = new Vector3(-40, 40, -40);
+			}
+			else
+			{
+				mainCamera.transform.localPosition += new Vector3 (-1, 0, 1);
+			}
+			mainCamera.transform.LookAt (playerModel.transform.position);
             inCinematic = true;
         }
         if (Globals.time_scale == 1)
