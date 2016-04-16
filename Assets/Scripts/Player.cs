@@ -29,6 +29,10 @@ public class Player : MonoBehaviour {
     private Quaternion playerCamRot;
     private bool inCinematic = false;
     public float cinematicTimeScale;
+    public float waitCamDistance = 60.0f;
+    private float camDistance = 60.0f;
+    private float theta = 0.0f;
+    private GameObject HUD;
 
     void Awake() {
         thisCollider = GetComponent<Collider>();
@@ -38,6 +42,7 @@ public class Player : MonoBehaviour {
         mainCamera = Camera.main;
         playerCamPos = mainCamera.transform.localPosition;
         playerCamRot = mainCamera.transform.localRotation;
+        HUD = GameObject.Find("HUD");
     }
 
     // Use this for initialization
@@ -64,14 +69,23 @@ public class Player : MonoBehaviour {
         }
         if (Globals.time_scale > cinematicTimeScale)
         {
-			if(!playerModel.active)
+			if(!playerModel.activeInHierarchy)
 			{
 				playerModel.SetActive(true);
-				mainCamera.transform.localPosition = new Vector3(-40, 40, -40);
 			}
 			else
 			{
-				mainCamera.transform.localPosition += new Vector3 (-1, 0, 1);
+                RaycastHit hit;
+                Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z), Vector3.down);
+                int terrain = LayerMask.GetMask("Terrain");
+
+                if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+                {
+                    camDistance += 5 * Time.deltaTime;
+                    theta += 0.5f * Time.deltaTime;
+                    float targetY = hit.point.y - playerModel.transform.position.y + 80;
+                    mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
+                }
 			}
 			mainCamera.transform.LookAt (playerModel.transform.position);
             inCinematic = true;
@@ -84,6 +98,8 @@ public class Player : MonoBehaviour {
                 mainCamera.transform.localPosition = playerCamPos;
                 mainCamera.transform.localRotation = playerCamRot;
                 playerModel.SetActive(false);
+                camDistance = waitCamDistance;
+                theta = 0.0f;
             }
             if (!firstPersonCont.enabled)
             {

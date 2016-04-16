@@ -27,6 +27,7 @@ public class WeatherManager : MonoBehaviour {
     // Player for audio source
     private GameObject camera;
     private AudioSource cameraAudio;
+    private bool wasPlaying = false;
 
     // Weather audio
     public AudioClip rainAudio;
@@ -76,6 +77,23 @@ public class WeatherManager : MonoBehaviour {
                 m_Particles[i].velocity = Vector3.down * particleVel * Mathf.Pow(Globals.time_scale, 0.3f);
             }
             activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
+        }
+
+        if (Globals.time_scale > 1)
+        {
+            if(cameraAudio.isPlaying)
+            {
+                wasPlaying = true;
+                cameraAudio.Stop();
+            }
+        }
+        else
+        {
+            if(!cameraAudio.isPlaying && wasPlaying && Globals.cur_weather.name == "Rain")
+            {
+                wasPlaying = false;
+                cameraAudio.Play();
+            }
         }
     }
 
