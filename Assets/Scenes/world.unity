@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81982c6a14679194f88fa3530d1c388e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialWaitSpeed: 100
+  initialWaitSpeed: 1
   maxWaitSpeed: 657000
   waitSpeedGrowth:
     serializedVersion: 2
@@ -1455,7 +1455,8 @@ MonoBehaviour:
   grabSphereRadius: 0
   minWarpOnWaitDist: 1
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
-  cinematicTimeScale: 0
+  cinematicTimeScale: 100
+  waitCamDistance: 60
 --- !u!4 &1837165592 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}

@@ -32,7 +32,6 @@ public class Player : MonoBehaviour {
     public float waitCamDistance = 60.0f;
     private float camDistance = 60.0f;
     private float theta = 0.0f;
-    private GameObject HUD;
 
     void Awake() {
         thisCollider = GetComponent<Collider>();
@@ -42,7 +41,6 @@ public class Player : MonoBehaviour {
         mainCamera = Camera.main;
         playerCamPos = mainCamera.transform.localPosition;
         playerCamRot = mainCamera.transform.localRotation;
-        HUD = GameObject.Find("HUD");
     }
 
     // Use this for initialization
@@ -72,11 +70,12 @@ public class Player : MonoBehaviour {
 			if(!playerModel.activeInHierarchy)
 			{
 				playerModel.SetActive(true);
+                Crosshair.visible = false;
 			}
 			else
 			{
                 RaycastHit hit;
-                Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z), Vector3.down);
+                Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 100000, mainCamera.transform.position.z), Vector3.down);
                 int terrain = LayerMask.GetMask("Terrain");
 
                 if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
@@ -100,6 +99,7 @@ public class Player : MonoBehaviour {
                 playerModel.SetActive(false);
                 camDistance = waitCamDistance;
                 theta = 0.0f;
+                Crosshair.visible = true;
             }
             if (!firstPersonCont.enabled)
             {
