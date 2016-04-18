@@ -79,7 +79,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -124,14 +124,12 @@ MonoBehaviour:
   spawn_object: {fileID: 194074, guid: 65feb40d27e019d40b1d6e7c830f7b26, type: 2}
   cull_layer:
     serializedVersion: 2
-    m_Bits: 256
-  cull_radius: 5
-  life_length: 300
+    m_Bits: 1280
+  cull_radius: 10
   growTime: 3600
   growTimeVariance: 0.3
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
-  fertilityChance: 1
 --- !u!135 &13502012
 SphereCollider:
   m_ObjectHideFlags: 1

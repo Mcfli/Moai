@@ -1,26 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractableObject: MonoBehaviour
-{
+public class InteractableObject: MonoBehaviour{
+    public static float droppedObjectLifeLength = 300;
+
+    //prefab
     public string typeID;            // "" will always return false when comparing
     public GameObject spawn_object;
     public LayerMask cull_layer;
     public float cull_radius;        // How far this must be from other seeds and trees in order to grow.
-    public float life_length;        // How long before the object disappears
+    public int growAttempts;
     public float growTime;           // How long before the seed sprouts
     public float growTimeVariance;
     public GameObject dirtMound;     // prefab - instantiates and hides when instatiated
     public Vector3 dirtMoundOffset;
-    public float fertilityChance;    // How likely ( 0..1 ) it is that the seed will be fertile
 
     private Rigidbody thisRigidbody;
     private Collider thisCollider;
-    private float timeRemain;        // how long left before the seed dies
+    private float timeRemain;        // how long until next check
     private bool planted;
+    private bool playerPlanted;
     private bool wasHeld;
-
-    private bool isFertile;          // Whether or not the seed can produce a tree  
+    private int attempts;
 
     void Awake() {
         thisRigidbody = GetComponent<Rigidbody>();
@@ -34,96 +35,72 @@ public class InteractableObject: MonoBehaviour
             dirtMound.SetActive(false);
         }
         planted = false;
-        isFertile = Random.value < fertilityChance;
+        playerPlanted = false;
     }
 
 
     // Use this for initialization
     void Start(){
-        timeRemain = life_length;
+        timeRemain = droppedObjectLifeLength;
         wasHeld = false;
-        StartCoroutine("tickUpdate");
     }
 
     // Update is called once per frame
     void Update() {
         if(!isHeld()) timeRemain -= Globals.deltaTime / Globals.time_resolution;
+
+        if (isHeld()) { //held
+            wasHeld = true;
+            attempts = 0;
+            timeRemain = Mathf.Infinity;
+            playerPlanted = true;
+        } else if (planted) { //planted
+            if(wasHeld) wasHeld = false; //just planted
+            if(timeRemain < 0) tryToTurnIntoTree();
+        } else { //dropped
+            if (wasHeld) { //just dropped
+                wasHeld = false;
+                timeRemain = droppedObjectLifeLength;
+                warpToGround(thisCollider.bounds.extents.y * 2);
+            }
+            
+            // if fast forwarding, warp to ground
+            if(Globals.time_scale > 1) {
+                warpToGround(thisCollider.bounds.extents.y * 2);
+                thisRigidbody.isKinematic = true;
+            } else thisRigidbody.isKinematic = false;
+            if(timeRemain < 0) Destroy(gameObject);
+        }
     }
 
-    
-    IEnumerator tickUpdate() {
-        while (true) {
-            yield return new WaitForSeconds(1);
-            if (timeRemain < 0) tryToTurnIntoTree();
-            if (isHeld()) {
-                wasHeld = true;
-                isFertile = true;
-            } else if (planted) {
-                if (wasHeld) { //just dropped
-                    wasHeld = false;
-                    timeRemain = growTime;
-                } 
-                
-            } else {
-                if (wasHeld) { //just dropped
-                    wasHeld = false;
-                    timeRemain = life_length;
-
-                    //warpToGround(true);
-                    RaycastHit hit;
-                    Ray rayDown = new Ray(transform.position, Vector3.down);
-                    if (!Physics.Raycast(rayDown, out hit, transform.position.y, LayerMask.GetMask("Terrain")))
-                    {
-                        Ray rayFromTop = new Ray(transform.position + Vector3.up * 10000000, Vector3.down);
-                        if (Physics.Raycast(rayFromTop, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain")))
-                        {
-                            transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y * 2, transform.position.z);
-                            thisRigidbody.velocity = Vector3.zero;
-                            thisRigidbody.ResetInertiaTensor();
-                        }
-                            
-                    }
-                       
-
-                    if (timeRemain < 0) Destroy(gameObject);
-
-                    // if fast forwarding, warp to ground
-                    if (Globals.time_scale > 1) {
-                        warpToGround(false);
-                        thisRigidbody.isKinematic = true;
-                    } else {
-                        thisRigidbody.isKinematic = false;
-                    }
-                }
-            }
-        }
+    void OnCollisionEnter(Collision collision) {
+        Debug.Log(collision.collider.gameObject.layer == LayerMask.GetMask("Terrain"));
+        if(!planted && collision.collider.gameObject.layer == LayerMask.GetMask("Terrain")) plant(collision.contacts[0].point);
     }
 
     private void tryToTurnIntoTree() {
-        if (isFertile && planted)
-        {
-            Collider[] close_trees = Physics.OverlapSphere(transform.position, cull_radius, cull_layer);
-            if (close_trees.Length < 5)
-            {
+        if (planted){
+            if(Physics.OverlapSphere(transform.position, cull_radius, cull_layer).Length < 1) { //other conditions should go here
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                 GameObject g = Instantiate(spawn_object, transform.position, RandomRotation) as GameObject;
                 g.GetComponent<TreeScript>().findForest();
-            }
+                Destroy(gameObject);
+            } else if(attempts < growAttempts) attempts++;
+            else Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
-    private void warpToGround(bool onlyIfUnderground) {
+    private void warpToGround(float amountAboveGround) {
         RaycastHit hit;
         Ray rayDown = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(rayDown, out hit, 10000000, LayerMask.GetMask("Terrain"))) {
-            bool warp = false;
-            if (onlyIfUnderground){
-                if (hit.point.y + thisCollider.bounds.extents.y > transform.position.y) warp = true;
-            } else {
-                warp = true;
+        if(!Physics.Raycast(rayDown, out hit, transform.position.y, LayerMask.GetMask("Terrain"))) {
+            Ray rayFromTop = new Ray(transform.position + Vector3.up * 10000000, Vector3.down);
+            if(Physics.Raycast(rayFromTop, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                transform.position = new Vector3(transform.position.x, hit.point.y + amountAboveGround, transform.position.z);
+                thisRigidbody.velocity = Vector3.zero;
+                thisRigidbody.ResetInertiaTensor();
             }
-            if(warp) transform.position = new Vector3(transform.position.x, hit.point.y + thisCollider.bounds.extents.y, transform.position.z);
+
         }
     }
     
@@ -154,7 +131,8 @@ public class InteractableObject: MonoBehaviour
         thisRigidbody.isKinematic = true;
         if(dirtMound) dirtMound.SetActive(true);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-        timeRemain = growTime * Random.Range(1 - growTimeVariance, 1 + growTimeVariance);
+        timeRemain = growTime;
+        if(!playerPlanted) timeRemain *= Random.Range(1 - growTimeVariance, 1 + growTimeVariance);
         planted = true;
         return true;
     }

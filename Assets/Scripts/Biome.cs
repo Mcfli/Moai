@@ -64,6 +64,7 @@ public class Biome : MonoBehaviour {
         return color;
     }
     
+    /*
     // Creates a new Biome whose parameters consist of a random mixing of two input Biomes' paramaters
     public static Biome Combine(Biome a, Biome b){
         Biome c = new Biome();
@@ -134,4 +135,5 @@ public class Biome : MonoBehaviour {
         }
         return c;
     }
+    */
 }

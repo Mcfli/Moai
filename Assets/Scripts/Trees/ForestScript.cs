@@ -11,6 +11,7 @@ public class ForestScript : MonoBehaviour {
         radius = -1;
         lastPropogated = -1;
         trees = new List<TreeScript>();
+        gameObject.layer = LayerMask.NameToLayer("Forest");
     }
 
     void Start() {
@@ -20,6 +21,7 @@ public class ForestScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    if(trees.Count == 0) destroyForest();
+        for(int i = 0; i < trees.Count; i++) if(!trees[i]) trees.RemoveAt(i);
         if(Globals.time - lastPropogated > Globals.TreeManagerScript.secondsToPropogate * Globals.time_resolution)
             propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
 	}
@@ -67,7 +69,7 @@ public class ForestScript : MonoBehaviour {
     }
 
     public void propogate(int maxSeeds) {
-        int numSeeds = Physics.SphereCastAll(new Ray(transform.position, Vector3.down), radius, 0, LayerMask.GetMask("Seed")).Length;
+        int numSeeds = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Seed")).Length;
         for(int i = 0; i < maxSeeds && numSeeds < maxSeeds; i++) {
             Vector2 twoPos = new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius;
             float ground = findGround(twoPos);
@@ -103,6 +105,7 @@ public class ForestScript : MonoBehaviour {
     // will return null if tree has died
     private TreeScript loadTree(TreeScript.treeStruct t, float timePassed) {
         if(t.age + timePassed > t.lifeSpan) return null;
+        //Debug.Log(t.prefab); //IT'S NULL - forest prefab slot will become itslef *******
         GameObject g = Instantiate(t.prefab, t.position, t.rotation) as GameObject;
         TreeScript tree = g.GetComponent<TreeScript>();
         tree.gameObject.transform.localScale = t.scale;
@@ -120,7 +123,7 @@ public class ForestScript : MonoBehaviour {
 
         //if there's a tree too close by
         float cull_radius = type.GetComponent<TreeScript>().seed_object.GetComponent<InteractableObject>().cull_radius; // kind of inefficient
-        if(Physics.SphereCast(new Ray(pos, Vector3.down), cull_radius, 0, LayerMask.GetMask("Tree"))) return null; //by spherecast - better for overlapping forests
+        if(Physics.OverlapSphere(pos, cull_radius, LayerMask.GetMask("Tree")).Length > 0) return null; //by spherecast - better for overlapping forests
         //foreach(TreeScript t in trees) if(Vector3.Distance(t.gameObject.transform.position, pos) < cull_radius) return null; //by list iteration - will not take into account of overlapping forest
 
         GameObject g = Instantiate(type, pos, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;

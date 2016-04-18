@@ -104,20 +104,21 @@ public class TreeScript : MonoBehaviour {
     }
 
     // returns true if forest found, and false if it created a forest
-    public bool findForest() {
-        RaycastHit hit;
-        if(Physics.SphereCast(new Ray(transform.position, Vector3.down), seed_object.GetComponent<InteractableObject>().cull_radius, out hit, 0, LayerMask.GetMask("Forest"))) {
-            hit.collider.gameObject.GetComponent<ForestScript>().addTree(this);
-            return true;
-        } else {
-            if(!TreeManager.loadedForests.ContainsKey(Globals.GenerationManagerScript.worldToChunk(transform.position))) Destroy(this);
+    public void findForest() {
+        Collider[] col = Physics.OverlapSphere(transform.position, seed_object.GetComponent<InteractableObject>().cull_radius, LayerMask.GetMask("Forest"));
+        if(col.Length > 0) col[0].gameObject.GetComponent<ForestScript>().addTree(this);
+        else {
+            if(!TreeManager.loadedForests.ContainsKey(Globals.GenerationManagerScript.worldToChunk(transform.position))) {
+                Destroy(this);
+                return;
+            }
             List<GameObject> types = new List<GameObject>();
             types.Add(prefab);
             GameObject g = new GameObject("Forest");
             ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
             newForest.createForest(transform.position, 100, types, 0); //radius should be pulled from biome prefab
             TreeManager.loadedForests[Globals.GenerationManagerScript.worldToChunk(transform.position)].Add(newForest);
-            return false;
+            newForest.addTree(this);
         }
     }
 

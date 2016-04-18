@@ -21,19 +21,16 @@ public class TreeManager : MonoBehaviour {
         if (biome.treeTypes.Count < 1) return;
         if(loadedForests.ContainsKey(key)) return;
         List<ForestScript> loaded;
-        if (trees.ContainsKey(key) && trees[key] != null){
-            loaded = loadedForests[key];
+        if (trees.ContainsKey(key) && trees[key] != null){ //load
+            loaded = new List<ForestScript>();
             List<ForestScript.forestStruct> trees_in_chunk = trees[key];
             foreach(ForestScript.forestStruct f in trees_in_chunk) {
                 GameObject g = new GameObject();
                 ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
                 newForest.loadForest(f);
                 loaded.Add(newForest);
-                trees.Remove(key);
             }
-        }
-        else
-        {
+        }else{ //generate
             loaded = new List<ForestScript>();
             float step_size = gen_manager.chunk_size / biome.treeDensity;
 

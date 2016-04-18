@@ -49,7 +49,7 @@ public class GenerationManager : MonoBehaviour {
         weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
         shrine_manager = GetComponent<ShrineManager>();
 
-        Globals.cur_chunk = new Vector2(-1, -1);
+        Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
 
         moistureMap.Init();
         heatMap.Init();
@@ -112,7 +112,7 @@ public class GenerationManager : MonoBehaviour {
         if(!undetailChunks(position)) done = false;
         if(!loadTrees(position)) done = false;
         if(!loadShrines(position)) done = false;
-
+        
         return done;
     }
 
@@ -193,7 +193,7 @@ public class GenerationManager : MonoBehaviour {
 			for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++){
                 Vector2 this_chunk = new Vector2(x, y);
                 Biome curBiome = chooseBiome(this_chunk);
-                tree_manager.loadTrees(this_chunk,curBiome);
+                tree_manager.loadTrees(this_chunk, curBiome);
             }
         }
         return true;
