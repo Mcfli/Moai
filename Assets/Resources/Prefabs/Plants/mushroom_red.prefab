@@ -490,22 +490,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabPath: Prefabs/Plants/mushroom_red
   seed_object: {fileID: 149340, guid: 6bb63408ed8863c40ade462848e944d0, type: 2}
-  prefab: {fileID: 188470}
-  max_health: 100
-  minSpawnRadius: 10
-  maxSpawnRadius: 50
-  spawn_delay: 20
-  spawn_variance: 0.5
-  seed_cull_max_density: 2
-  spawn_limit: 0
-  cull_radius: 50
-  cull_max_density: 5
-  target_scale: 10
-  lifeSpan: 1314000
+  baseLifeSpan: 657000
   lifeSpanVariance: 0.3
-  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
-  dirtMoundOffset: {x: 0, y: 0.8, z: 0}
+  scaleVariance: 0.25
+  ratioAnimUpdates: 0
   stateAnimationNames:
   - redMushroom_growing
   - 
@@ -518,7 +508,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
   - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
   - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000100
+  maxHeight: 0
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -565,11 +555,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  cul_spread: 0
-  onFire: 0
-  saved_position: {x: 0, y: 0, z: 0}
-  saved_rotation: {x: 0, y: 0, z: 0, w: 0}
+  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
+  dirtMoundOffset: {x: 0, y: 0.8, z: 0}
+  prefab: {fileID: 188470}
   age: 0
+  lifeSpan: 1314000
 --- !u!137 &13705222
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

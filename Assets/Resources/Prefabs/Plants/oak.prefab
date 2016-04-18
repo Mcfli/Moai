@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 194074}
+  prefabPath: Prefabs/Plants/oak
   seed_object: {fileID: 122844, guid: 75b1d6320eadab4479b2d6f81b3d3815, type: 2}
   baseLifeSpan: 657000
   lifeSpanVariance: 0.3
@@ -1341,6 +1341,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   dirtMound: {fileID: 131616, guid: bed206811667e2c48b4e132951aa40f0, type: 2}
   dirtMoundOffset: {x: 0.75, y: 1, z: 0}
+  prefab: {fileID: 194074}
   age: 0
   lifeSpan: 1314000
 --- !u!137 &13788024
