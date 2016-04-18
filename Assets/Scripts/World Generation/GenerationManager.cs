@@ -273,15 +273,15 @@ public class GenerationManager : MonoBehaviour {
     }
 
     //---------- HELPER FUNCTIONS ----------//
-    public Vector3 chunkToWorld(Vector2 chunk)
+    public static Vector3 chunkToWorld(Vector2 chunk)
     {
-        Vector3 pos = new Vector3(chunk.x * chunk_size, 0, chunk.y * chunk_size);
+        Vector3 pos = new Vector3(chunk.x * Globals.GenerationManagerScript.chunk_size, 0, chunk.y * Globals.GenerationManagerScript.chunk_size);
         return pos;
     }
 
-    public Vector2 worldToChunk(Vector3 pos)
+    public static Vector2 worldToChunk(Vector3 pos)
     {
-        Vector2 chunk = new Vector2(Mathf.Floor(pos.x/chunk_size), Mathf.Floor(pos.z / chunk_size));
+        Vector2 chunk = new Vector2(Mathf.Floor(pos.x/ Globals.GenerationManagerScript.chunk_size), Mathf.Floor(pos.z / Globals.GenerationManagerScript.chunk_size));
         return chunk;
 	}
 

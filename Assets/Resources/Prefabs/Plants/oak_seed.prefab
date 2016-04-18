@@ -125,9 +125,10 @@ MonoBehaviour:
   cull_layer:
     serializedVersion: 2
     m_Bits: 1280
-  cull_radius: 10
-  growTime: 3600
-  growTimeVariance: 0.3
+  cull_radius: 15
+  growAttempts: 5
+  growTime: 18000
+  growTimeVariance: 0.5
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
 --- !u!135 &13502012

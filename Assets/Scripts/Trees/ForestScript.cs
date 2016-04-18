@@ -5,23 +5,26 @@ using System.Collections.Generic;
 public class ForestScript : MonoBehaviour {
     private float radius;
     private float lastPropogated;
-    private List<TreeScript> trees;
+    private Dictionary<int, TreeScript> trees;
 
     void Awake() {
         radius = -1;
         lastPropogated = -1;
-        trees = new List<TreeScript>();
+        trees = new Dictionary<int, TreeScript>();
         gameObject.layer = LayerMask.NameToLayer("Forest");
     }
 
     void Start() {
-        lastPropogated = Globals.time;
     }
 	
 	// Update is called once per frame
 	void Update () {
-	    if(trees.Count == 0) destroyForest();
-        for(int i = 0; i < trees.Count; i++) if(!trees[i]) trees.RemoveAt(i);
+        if(trees.Count == 0) {
+            destroyForest();
+            TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Remove(GetInstanceID());
+            return;
+        }
+        //for(int i = 0; i < trees.Count; i++) if(!trees[i]) trees.RemoveAt(i);
         if(Globals.time - lastPropogated > Globals.TreeManagerScript.secondsToPropogate * Globals.time_resolution)
             propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
 	}
@@ -35,12 +38,12 @@ public class ForestScript : MonoBehaviour {
         if(maxTrees >= 1) {
             int originalSeed = Random.seed;
             Random.seed = position.GetHashCode();
-            for(int i = 0; i < maxTrees; i++) { // will attempt maxTrees times
-                TreeScript t = createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
-                if(t) trees.Add(t);
-            }
+            for(int i = 0; i < maxTrees; i++) // will attempt maxTrees times
+                createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
             Random.seed = originalSeed;
         }
+
+        propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
     }
 
     // load initialization function
@@ -51,9 +54,7 @@ public class ForestScript : MonoBehaviour {
         lastPropogated = forest.lastPropogated;
         foreach(TreeScript.treeStruct t in forest.trees) {
             TreeScript newTree = loadTree(t, (Globals.time - forest.timeUnloaded) / Globals.time_resolution);
-            // if too old, replace with new tree
-            if(!newTree) newTree = createTree(t.prefab, new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
-            if(newTree) trees.Add(newTree);
+            if(!newTree) newTree = createTree(t.prefab, new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius); // if too old, replace with new tree
         }
         // will attempt to propogate on next update
     }
@@ -64,8 +65,8 @@ public class ForestScript : MonoBehaviour {
     }
 
     public void destroyForest() {
-        foreach(TreeScript t in trees) Destroy(t.gameObject);
-        Destroy(gameObject);
+        //foreach(TreeScript t in trees.Values) if(t) Destroy(t.gameObject);
+        Destroy(gameObject); // will also destroy children
     }
 
     public void propogate(int maxSeeds) {
@@ -76,7 +77,7 @@ public class ForestScript : MonoBehaviour {
             if(ground == -Mathf.Infinity) continue;
             Vector3 pos = new Vector3(twoPos.x, ground, twoPos.y);
 
-            GameObject seed = Instantiate(trees[Random.Range(0, trees.Count)].seed_object);
+            GameObject seed = Instantiate(new List<TreeScript>(trees.Values)[Random.Range(0, trees.Count)].seed_object);
             seed.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
             seed.GetComponent<InteractableObject>().plant(pos);
             numSeeds++;
@@ -86,8 +87,12 @@ public class ForestScript : MonoBehaviour {
     }
 
     public void addTree(TreeScript tree) {
-        trees.Add(tree);
+        trees.Add(tree.GetInstanceID(), tree);
         tree.transform.parent = transform;
+    }
+
+    public void removeTree(int id) {
+        trees.Remove(id);
     }
     
     public forestStruct export() {
@@ -96,7 +101,8 @@ public class ForestScript : MonoBehaviour {
         export.radius = radius;
         export.lastPropogated = lastPropogated;
         export.trees = new List<TreeScript.treeStruct>();
-        foreach(TreeScript t in trees) export.trees.Add(new TreeScript.treeStruct(t));
+        foreach(KeyValuePair<int, TreeScript> t in trees)
+            if(t.Value) export.trees.Add(new TreeScript.treeStruct(t.Value));
         export.timeUnloaded = Globals.time;
         return export;
     }
@@ -105,13 +111,14 @@ public class ForestScript : MonoBehaviour {
     // will return null if tree has died
     private TreeScript loadTree(TreeScript.treeStruct t, float timePassed) {
         if(t.age + timePassed > t.lifeSpan) return null;
-        //Debug.Log(t.prefab); //IT'S NULL - forest prefab slot will become itslef *******
         GameObject g = Instantiate(t.prefab, t.position, t.rotation) as GameObject;
         TreeScript tree = g.GetComponent<TreeScript>();
         tree.gameObject.transform.localScale = t.scale;
         tree.age = t.age + timePassed;
         tree.lifeSpan = t.lifeSpan;
         tree.transform.parent = transform;
+        tree.setForestParent(this);
+        trees.Add(tree.GetInstanceID(), tree);
         return tree;
     }
 
@@ -127,11 +134,13 @@ public class ForestScript : MonoBehaviour {
         //foreach(TreeScript t in trees) if(Vector3.Distance(t.gameObject.transform.position, pos) < cull_radius) return null; //by list iteration - will not take into account of overlapping forest
 
         GameObject g = Instantiate(type, pos, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;
-        TreeScript newTree = g.GetComponent<TreeScript>();
-        newTree.age = Random.Range(0, newTree.lifeSpan);
-        newTree.transform.parent = transform;
+        TreeScript tree = g.GetComponent<TreeScript>();
+        tree.age = Random.Range(0, tree.lifeSpan);
+        tree.transform.parent = transform;
+        tree.setForestParent(this);
+        trees.Add(tree.GetInstanceID(), tree);
 
-        return newTree;
+        return tree;
     }
 
     private float findGround(Vector2 position, bool mindWater = true) { //returns -Mathf.Infinity if invalid

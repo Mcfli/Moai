@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TreeScript : MonoBehaviour {
     //prefab
-    public GameObject prefab;
+    public string prefabPath;
     public GameObject seed_object;
     public float baseLifeSpan = 657000; // base life span in seconds
     public float lifeSpanVariance = 0.3f; // in ratio
@@ -25,10 +25,10 @@ public class TreeScript : MonoBehaviour {
     public Vector3 dirtMoundOffset;
 
     ///-------PRIVATES-------///
-
+    [HideInInspector] public GameObject prefab;
     [HideInInspector] public float age;
     [HideInInspector] public float lifeSpan;
-
+    
     //References
     private Animation anim;
     private BoxCollider boxCollider;
@@ -41,6 +41,8 @@ public class TreeScript : MonoBehaviour {
     private float lastGrowUpdate;
     private int state;
 
+    private ForestScript forestParent;
+
     // Use this for initialization
     // will initialize with random scale and lifeSpan with age of 0
     void Awake(){
@@ -48,6 +50,8 @@ public class TreeScript : MonoBehaviour {
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
         rend = GetComponent<Renderer>();
+
+        prefab = Resources.Load(prefabPath) as GameObject;
 
         gameObject.transform.localScale += gameObject.transform.localScale * Random.Range(-scaleVariance, scaleVariance);
 
@@ -67,10 +71,9 @@ public class TreeScript : MonoBehaviour {
 
         // dirtMound
         if (dirtMound) {
-            dirtMound = Instantiate(dirtMound);
-            dirtMound.transform.SetParent(transform, false);
-            dirtMound.transform.position += dirtMoundOffset;
-            dirtMound.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
+            dirtMound = Instantiate(dirtMound, transform.position, transform.rotation) as GameObject;
+            dirtMound.transform.parent = transform;
+            dirtMound.transform.localPosition += dirtMoundOffset;
         }
     }
 
@@ -83,6 +86,7 @@ public class TreeScript : MonoBehaviour {
         age += Globals.deltaTime / Globals.time_resolution; // update age
 
         if (age > lifeSpan) { // kill if too old
+            forestParent.removeTree(GetInstanceID());
             Destroy(gameObject);
             return;
         }
@@ -103,22 +107,28 @@ public class TreeScript : MonoBehaviour {
         animateNext = true;
     }
 
+    public void setForestParent(ForestScript forest) {
+        forestParent = forest;
+    }
+
     // returns true if forest found, and false if it created a forest
     public void findForest() {
         Collider[] col = Physics.OverlapSphere(transform.position, seed_object.GetComponent<InteractableObject>().cull_radius, LayerMask.GetMask("Forest"));
-        if(col.Length > 0) col[0].gameObject.GetComponent<ForestScript>().addTree(this);
-        else {
-            if(!TreeManager.loadedForests.ContainsKey(Globals.GenerationManagerScript.worldToChunk(transform.position))) {
-                Destroy(this);
+        if(col.Length > 0) {
+            forestParent = col[0].gameObject.GetComponent<ForestScript>();
+            forestParent.addTree(this);
+        } else {
+            if(!TreeManager.loadedForests.ContainsKey(GenerationManager.worldToChunk(transform.position))) { //outside of tree load dist
+                Destroy(gameObject);
                 return;
             }
             List<GameObject> types = new List<GameObject>();
             types.Add(prefab);
             GameObject g = new GameObject("Forest");
-            ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
-            newForest.createForest(transform.position, 100, types, 0); //radius should be pulled from biome prefab
-            TreeManager.loadedForests[Globals.GenerationManagerScript.worldToChunk(transform.position)].Add(newForest);
-            newForest.addTree(this);
+            forestParent = g.AddComponent(typeof(ForestScript)) as ForestScript;
+            forestParent.createForest(transform.position, 100, types, 0); //radius should be pulled from biome prefab
+            TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Add(forestParent.GetInstanceID(),  forestParent);
+            forestParent.addTree(this);
         }
     }
 

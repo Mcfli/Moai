@@ -6,7 +6,7 @@ public class TreeManager : MonoBehaviour {
     public float seedToTreeRatio = 0.5f;
     public float secondsToPropogate = 1800;
     public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
-    public static Dictionary<Vector2, List<ForestScript>> loadedForests;
+    public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
     private GenerationManager gen_manager;
 
@@ -14,24 +14,22 @@ public class TreeManager : MonoBehaviour {
     void Awake() {
         gen_manager = gameObject.GetComponent<GenerationManager>();
         trees = new Dictionary<Vector2, List<ForestScript.forestStruct>>();
-        loadedForests = new Dictionary<Vector2, List<ForestScript>>();
+        loadedForests = new Dictionary<Vector2, Dictionary<int, ForestScript>>();
     }
 
     public void loadTrees(Vector2 key, Biome biome){
         if (biome.treeTypes.Count < 1) return;
         if(loadedForests.ContainsKey(key)) return;
-        List<ForestScript> loaded;
+        Dictionary<int, ForestScript> loaded = new Dictionary<int, ForestScript>();
         if (trees.ContainsKey(key) && trees[key] != null){ //load
-            loaded = new List<ForestScript>();
             List<ForestScript.forestStruct> trees_in_chunk = trees[key];
             foreach(ForestScript.forestStruct f in trees_in_chunk) {
                 GameObject g = new GameObject();
                 ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
                 newForest.loadForest(f);
-                loaded.Add(newForest);
+                loaded.Add(newForest.GetInstanceID(), newForest);
             }
         }else{ //generate
-            loaded = new List<ForestScript>();
             float step_size = gen_manager.chunk_size / biome.treeDensity;
 
             // When Advanced terrain is implemented...
@@ -51,7 +49,7 @@ public class TreeManager : MonoBehaviour {
                     GameObject g = new GameObject("Forest");
                     ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
                     newForest.createForest(position, 50, biome.treeTypes, 16); //radius and max trees should be pulled from biome prefab
-                    loaded.Add(newForest);
+                    loaded.Add(newForest.GetInstanceID(), newForest);
                 }
             }
         }
@@ -106,9 +104,11 @@ public class TreeManager : MonoBehaviour {
 
     public void unloadTrees(Vector2 chunk){
         trees[chunk] = new List<ForestScript.forestStruct>();
-        foreach(ForestScript f in loadedForests[chunk]){
-            trees[chunk].Add(f.export());
-            f.destroyForest();
+        foreach(ForestScript f in loadedForests[chunk].Values) {
+            if(f) {
+                trees[chunk].Add(f.export());
+                f.destroyForest();
+            }
         }
         loadedForests.Remove(chunk);
     }
