@@ -35,15 +35,16 @@ public class ForestScript : MonoBehaviour {
         this.radius = radius;
         createSphereCollider(radius);
 
-        if(maxTrees >= 1) {
-            int originalSeed = Random.seed;
-            Random.seed = position.GetHashCode();
-            for(int i = 0; i < maxTrees; i++) // will attempt maxTrees times
-                createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
-            Random.seed = originalSeed;
-        }
+        int originalSeed = Random.seed;
+        Random.seed = position.GetHashCode();
+
+        if(maxTrees >= 1) for(int i = 0; i < maxTrees; i++) // will attempt maxTrees times
+            createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
 
         propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
+        lastPropogated -= Random.value * Globals.TreeManagerScript.secondsToPropogate * Globals.time_resolution;
+
+        Random.seed = originalSeed;
     }
 
     // load initialization function
@@ -72,12 +73,15 @@ public class ForestScript : MonoBehaviour {
     public void propogate(int maxSeeds) {
         int numSeeds = Physics.OverlapSphere(transform.position, radius, LayerMask.GetMask("Seed")).Length;
         for(int i = 0; i < maxSeeds && numSeeds < maxSeeds; i++) {
+            TreeScript randomTree = new List<TreeScript>(trees.Values)[Random.Range(0, trees.Count)];
+            if(!randomTree.canPropogate()) continue;
+
             Vector2 twoPos = new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius;
             float ground = findGround(twoPos);
             if(ground == -Mathf.Infinity) continue;
             Vector3 pos = new Vector3(twoPos.x, ground, twoPos.y);
 
-            GameObject seed = Instantiate(new List<TreeScript>(trees.Values)[Random.Range(0, trees.Count)].seed_object);
+            GameObject seed = Instantiate(randomTree.seed_object);
             seed.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
             seed.GetComponent<InteractableObject>().plant(pos);
             numSeeds++;
@@ -93,6 +97,10 @@ public class ForestScript : MonoBehaviour {
 
     public void removeTree(int id) {
         trees.Remove(id);
+    }
+
+    public int amountOfTrees() {
+        return trees.Count;
     }
     
     public forestStruct export() {
@@ -119,6 +127,7 @@ public class ForestScript : MonoBehaviour {
         tree.transform.parent = transform;
         tree.setForestParent(this);
         trees.Add(tree.GetInstanceID(), tree);
+        tree.grow();
         return tree;
     }
 
@@ -139,6 +148,7 @@ public class ForestScript : MonoBehaviour {
         tree.transform.parent = transform;
         tree.setForestParent(this);
         trees.Add(tree.GetInstanceID(), tree);
+        tree.grow();
 
         return tree;
     }

@@ -480,6 +480,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
   - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
   - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
+  propogateDuringState: 000100
   maxHeight: 0
   heightVSTime:
   - serializedVersion: 2

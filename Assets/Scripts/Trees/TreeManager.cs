@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class TreeManager : MonoBehaviour {
     public float seedToTreeRatio = 0.5f;
     public float secondsToPropogate = 1800;
+    public float forestRadius; // should be from biome prefab
+    public int forestMaxTrees; // should be from biome prefab
     public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
     public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
@@ -48,7 +50,7 @@ public class TreeManager : MonoBehaviour {
 
                     GameObject g = new GameObject("Forest");
                     ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
-                    newForest.createForest(position, 50, biome.treeTypes, 16); //radius and max trees should be pulled from biome prefab
+                    newForest.createForest(position, forestRadius, biome.treeTypes, forestMaxTrees); //radius and max trees should be pulled from biome prefab
                     loaded.Add(newForest.GetInstanceID(), newForest);
                 }
             }

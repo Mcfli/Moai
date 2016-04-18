@@ -17,6 +17,7 @@ public class TreeScript : MonoBehaviour {
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
+    public List<bool> propogateDuringState;
     public float maxHeight;
     public List<AnimationCurve> heightVSTime; //collision
 
@@ -86,7 +87,7 @@ public class TreeScript : MonoBehaviour {
         age += Globals.deltaTime / Globals.time_resolution; // update age
 
         if (age > lifeSpan) { // kill if too old
-            forestParent.removeTree(GetInstanceID());
+            if(forestParent) forestParent.removeTree(GetInstanceID());
             Destroy(gameObject);
             return;
         }
@@ -99,7 +100,7 @@ public class TreeScript : MonoBehaviour {
         }else anim.enabled = false;
     }
 
-    private void grow() {
+    public void grow() {
         updateState();
         updateAnimation();
         updateCollision();
@@ -111,11 +112,16 @@ public class TreeScript : MonoBehaviour {
         forestParent = forest;
     }
 
+    public bool canPropogate() {
+        return propogateDuringState[state];
+    }
+
     // returns true if forest found, and false if it created a forest
     public void findForest() {
         Collider[] col = Physics.OverlapSphere(transform.position, seed_object.GetComponent<InteractableObject>().cull_radius, LayerMask.GetMask("Forest"));
         if(col.Length > 0) {
             forestParent = col[0].gameObject.GetComponent<ForestScript>();
+            if(forestParent.amountOfTrees() > Globals.TreeManagerScript.forestMaxTrees) Destroy(gameObject); // maxTrees should be from biomes prefab
             forestParent.addTree(this);
         } else {
             if(!TreeManager.loadedForests.ContainsKey(GenerationManager.worldToChunk(transform.position))) { //outside of tree load dist

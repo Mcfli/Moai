@@ -1292,6 +1292,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
+  propogateDuringState: 000100
   maxHeight: 9
   heightVSTime:
   - serializedVersion: 2
