@@ -10,7 +10,7 @@ public class Crosshair : MonoBehaviour {
     public UnityEngine.UI.Image RightTip;
 
     private UnityEngine.UI.Image crosshair;
-    private bool visible;
+    public static bool visible;
 
     void Start() {
         visible = true;
