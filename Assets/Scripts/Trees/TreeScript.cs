@@ -121,7 +121,7 @@ public class TreeScript : MonoBehaviour {
         Collider[] col = Physics.OverlapSphere(transform.position, seed_object.GetComponent<InteractableObject>().cull_radius, LayerMask.GetMask("Forest"));
         if(col.Length > 0) {
             forestParent = col[0].gameObject.GetComponent<ForestScript>();
-            if(forestParent.amountOfTrees() > Globals.TreeManagerScript.forestMaxTrees) Destroy(gameObject); // maxTrees should be from biomes prefab
+            if(forestParent.amountOfTrees() > Globals.GenerationManagerScript.chooseBiome(GenerationManager.worldToChunk(forestParent.transform.position)).forestMaxTrees) Destroy(gameObject);
             forestParent.addTree(this);
         } else {
             if(!TreeManager.loadedForests.ContainsKey(GenerationManager.worldToChunk(transform.position))) { //outside of tree load dist
@@ -132,7 +132,7 @@ public class TreeScript : MonoBehaviour {
             types.Add(prefab);
             GameObject g = new GameObject("Forest");
             forestParent = g.AddComponent(typeof(ForestScript)) as ForestScript;
-            forestParent.createForest(transform.position, 100, types, 0); //radius should be pulled from biome prefab
+            forestParent.createForest(transform.position, Globals.GenerationManagerScript.chooseBiome(GenerationManager.worldToChunk(transform.position)).forestRadius, types, 0);
             TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Add(forestParent.GetInstanceID(),  forestParent);
             forestParent.addTree(this);
         }

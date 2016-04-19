@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class ForestScript : MonoBehaviour {
     private float radius;
-    private float lastPropogated;
+    private float nextPropogationTime;
     private Dictionary<int, TreeScript> trees;
+    private Dictionary<int, TreeScript> newTrees; //temp when chaning forest
 
     void Awake() {
         radius = -1;
-        lastPropogated = -1;
+        nextPropogationTime = -1;
         trees = new Dictionary<int, TreeScript>();
         gameObject.layer = LayerMask.NameToLayer("Forest");
     }
@@ -25,12 +26,14 @@ public class ForestScript : MonoBehaviour {
             return;
         }
         //for(int i = 0; i < trees.Count; i++) if(!trees[i]) trees.RemoveAt(i);
-        if(Globals.time - lastPropogated > Globals.TreeManagerScript.secondsToPropogate * Globals.time_resolution)
+        if(Globals.time > nextPropogationTime)
             propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
 	}
 
     // "new" initialization function (make maxTrees 0 when spawning a forest)
+    // will choose one of the treeTypes at random
     public void createForest(Vector3 position, float radius, List<GameObject> treeTypes, int maxTrees) {
+        GameObject type = treeTypes[Random.Range(0, treeTypes.Count)];
         transform.position = position;
         this.radius = radius;
         createSphereCollider(radius);
@@ -39,10 +42,9 @@ public class ForestScript : MonoBehaviour {
         Random.seed = position.GetHashCode();
 
         if(maxTrees >= 1) for(int i = 0; i < maxTrees; i++) // will attempt maxTrees times
-            createTree(treeTypes[Random.Range(0, treeTypes.Count)], new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
+            createTree(type, new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius);
 
         propogate(Mathf.RoundToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
-        lastPropogated -= Random.value * Globals.TreeManagerScript.secondsToPropogate * Globals.time_resolution;
 
         Random.seed = originalSeed;
     }
@@ -52,7 +54,7 @@ public class ForestScript : MonoBehaviour {
         transform.position = forest.position;
         radius = forest.radius;
         createSphereCollider(radius);
-        lastPropogated = forest.lastPropogated;
+        nextPropogationTime = forest.nextPropogationTime;
         foreach(TreeScript.treeStruct t in forest.trees) {
             TreeScript newTree = loadTree(t, (Globals.time - forest.timeUnloaded) / Globals.time_resolution);
             if(!newTree) newTree = createTree(t.prefab, new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius); // if too old, replace with new tree
@@ -86,7 +88,7 @@ public class ForestScript : MonoBehaviour {
             seed.GetComponent<InteractableObject>().plant(pos);
             numSeeds++;
         }
-        lastPropogated = Globals.time;
+        nextPropogationTime = Globals.time + (Globals.TreeManagerScript.secondsToPropogate + Globals.TreeManagerScript.secondsToPropogate * Random.Range(-Globals.TreeManagerScript.propogationTimeVariance, Globals.TreeManagerScript.propogationTimeVariance)) * Globals.time_resolution;
         //return numSeeds;
     }
 
@@ -107,12 +109,20 @@ public class ForestScript : MonoBehaviour {
         forestStruct export = new forestStruct();
         export.position = transform.position;
         export.radius = radius;
-        export.lastPropogated = lastPropogated;
+        export.nextPropogationTime = nextPropogationTime;
         export.trees = new List<TreeScript.treeStruct>();
         foreach(KeyValuePair<int, TreeScript> t in trees)
             if(t.Value) export.trees.Add(new TreeScript.treeStruct(t.Value));
         export.timeUnloaded = Globals.time;
         return export;
+    }
+
+    public void changeForest(float radius, List<GameObject> treeTypes, int maxTrees) {
+        
+    }
+
+    public void switchOutTree() {
+
     }
 
     // from treeStruct - will force tree placement
@@ -165,7 +175,7 @@ public class ForestScript : MonoBehaviour {
     public struct forestStruct {
         public Vector3 position;
         public float radius;
-        public float lastPropogated;
+        public float nextPropogationTime;
         public List<TreeScript.treeStruct> trees;
         public float timeUnloaded;
     }

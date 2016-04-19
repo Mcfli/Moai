@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TreeManager : MonoBehaviour {
-    public float seedToTreeRatio = 0.5f;
-    public float secondsToPropogate = 1800;
-    public float forestRadius; // should be from biome prefab
-    public int forestMaxTrees; // should be from biome prefab
+    public float seedToTreeRatio = 0.3f;
+    public float secondsToPropogate = 3600;
+    public float propogationTimeVariance = 0.5f;
     public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
     public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
@@ -50,47 +49,13 @@ public class TreeManager : MonoBehaviour {
 
                     GameObject g = new GameObject("Forest");
                     ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
-                    newForest.createForest(position, forestRadius, biome.treeTypes, forestMaxTrees); //radius and max trees should be pulled from biome prefab
+                    newForest.createForest(position, biome.forestRadius, biome.treeTypes, biome.forestMaxTrees);
                     loaded.Add(newForest.GetInstanceID(), newForest);
                 }
             }
         }
         loadedForests.Add(key, loaded);
     }
-
-    /*
-    // Takes a list of trees and puts trees naturally around each
-    public List<GameObject> growTrees(Biome biome,List<GameObject> initial_trees)
-    {
-
-        List<GameObject> new_trees = new List<GameObject>();
-        foreach (GameObject tree in initial_trees)
-        {
-            new_trees.Add(tree);
-            // Grow another nearby tree
-
-            GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
-
-            float theta = Random.Range(0, 2 * Mathf.PI);
-            float dist = biome.treeSpreadMin + Random.Range(0, biome.treeSpeadRange);
-            //Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-
-            Vector3 position = tree.transform.position + new Vector3(Mathf.Cos(theta) * dist, 0, Mathf.Sin(theta) * dist);
-
-            RaycastHit hit;
-            Ray rayDown = new Ray(new Vector3(position.x, 10000000, position.z), Vector3.down);
-            int terrain = LayerMask.GetMask("Terrain");
-            if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)) {
-                if(hit.point.y < Globals.water_level) continue;
-                else position.y = hit.point.y - 1;
-            } else continue;
-
-            GameObject new_tree = createNewTree(treePrefab, position);
-            if (new_tree != null) new_trees.Add(new_tree);
-        }
-        return new_trees;
-    }
-    */
 
     // Remove the trees on chunk(x,y) from our saved tree dict and unload all of those trees
     public void forgetTrees(int x,int y)
@@ -114,21 +79,4 @@ public class TreeManager : MonoBehaviour {
         }
         loadedForests.Remove(chunk);
     }
-
-    /*
-    // Creates a new tree of type prefab at postition pos
-    private GameObject createNewTree(GameObject prefab, Vector3 pos)
-    {
-        Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-        GameObject new_tree = Instantiate(prefab, pos, RandomRotation) as GameObject;
-        TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
-        float scaleFactor = Random.Range(1f, 3.5f);
-        new_tree.transform.localScale = prefab.transform.localScale * scaleFactor;
-        new_treeScript.lifeSpan = new_treeScript.lifeSpan * Random.Range(1 - new_treeScript.lifeSpanVariance, 1 + new_treeScript.lifeSpanVariance);
-        new_treeScript.age = Random.value * new_treeScript.lifeSpan;
-        new_treeScript.prefab = prefab;
-
-        return new_tree;
-    }
-    */
 }
