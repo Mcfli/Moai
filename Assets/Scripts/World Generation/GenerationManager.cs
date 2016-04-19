@@ -94,9 +94,16 @@ public class GenerationManager : MonoBehaviour {
             mapChanges[chunk] = Vector2.zero;
         mapChanges[chunk] += delta;
         updateChunks();
+
+        //comment this out when we have forest changing
         unloadTrees(pos);
         tree_manager.forgetTrees((int)chunk.x, (int)chunk.y);
         tree_manager.loadTrees(chunk, chooseBiome(chunk));
+
+        /* comment this back in when forest changing is in
+        Biome biome = chooseBiome(chunk);
+        foreach(ForestScript forest in TreeManager.loadedForests[chunk].Values) forest.changeForest(biome.forestRadius, biome.forestMaxTrees, biome.treeTypes, biome.mixedForests);
+        */
     }
     
     private bool loadUnload(Vector2 position) {

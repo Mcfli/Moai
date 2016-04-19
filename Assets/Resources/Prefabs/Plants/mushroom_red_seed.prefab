@@ -107,14 +107,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeID: mushroom_red_seed
-  spawn_object: {fileID: 188470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  spawn_object: {fileID: 145976, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
-  cull_radius: 5
-  life_length: 300
-  growTime: 3600
-  growTimeVariance: 0.3
+  cull_radius: 15
+  growAttempts: 5
+  growTime: 18000
+  growTimeVariance: 0.5
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
 --- !u!114 &11484236

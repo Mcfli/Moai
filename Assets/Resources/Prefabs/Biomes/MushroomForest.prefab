@@ -112,9 +112,9 @@ MonoBehaviour:
   - {fileID: 145976, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   doodads: []
   treeDensity: 1
-  treeGrowthIterations: 3
-  treeSpreadMin: 12
-  treeSpeadRange: 25
+  forestRadius: 50
+  forestMaxTrees: 16
+  mixedForests: 1
   doodadDensity: 0
   colors:
   - {r: 0.53676474, g: 0.20918038, b: 0.36506534, a: 0}

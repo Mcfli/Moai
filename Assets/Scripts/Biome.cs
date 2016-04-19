@@ -25,7 +25,8 @@ public class Biome : MonoBehaviour {
 
     public int treeDensity = 2;
     public float forestRadius = 50;
-    public int forestMaxTrees = 2;
+    public int forestMaxTrees = 16;
+    public bool mixedForests = false;
     public int doodadDensity;
 
     // Terrain color

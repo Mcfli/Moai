@@ -83,7 +83,7 @@ public class InteractableObject: MonoBehaviour{
 
     private void tryToTurnIntoTree() {
         if (planted){
-            if(Physics.OverlapSphere(transform.position, cull_radius, cull_layer).Length < 2) { //other conditions should go here
+            if(Physics.OverlapSphere(transform.position, cull_radius, cull_layer).Length < 1) { //other conditions should go here
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                 GameObject g = Instantiate(spawn_object, transform.position, RandomRotation) as GameObject;
                 g.GetComponent<TreeScript>().findForest();

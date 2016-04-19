@@ -49,7 +49,7 @@ public class TreeManager : MonoBehaviour {
 
                     GameObject g = new GameObject("Forest");
                     ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
-                    newForest.createForest(position, biome.forestRadius, biome.treeTypes, biome.forestMaxTrees);
+                    newForest.createForest(position, biome.forestRadius, biome.forestMaxTrees, biome.treeTypes, biome.mixedForests);
                     loaded.Add(newForest.GetInstanceID(), newForest);
                 }
             }

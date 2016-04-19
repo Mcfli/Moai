@@ -18,12 +18,14 @@ public class TreeScript : MonoBehaviour {
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
-    public float maxHeight;
+    public Vector3 baseCollision;
+    public Vector3 scaledCollision;
     public List<AnimationCurve> heightVSTime; //collision
 
     //dirtMound
     public GameObject dirtMound;
     public Vector3 dirtMoundOffset;
+    public float dirtMoundLifeRatio;
 
     ///-------PRIVATES-------///
     [HideInInspector] public GameObject prefab;
@@ -101,6 +103,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     public void grow() {
+        if(dirtMound) dirtMound.SetActive(age/lifeSpan < dirtMoundLifeRatio);
         updateState();
         updateAnimation();
         updateCollision();
@@ -121,20 +124,19 @@ public class TreeScript : MonoBehaviour {
         Collider[] col = Physics.OverlapSphere(transform.position, seed_object.GetComponent<InteractableObject>().cull_radius, LayerMask.GetMask("Forest"));
         if(col.Length > 0) {
             forestParent = col[0].gameObject.GetComponent<ForestScript>();
-            if(forestParent.amountOfTrees() > Globals.GenerationManagerScript.chooseBiome(GenerationManager.worldToChunk(forestParent.transform.position)).forestMaxTrees) Destroy(gameObject);
-            forestParent.addTree(this);
+            if(forestParent.amountOfTrees() > forestParent.maxTrees) Destroy(gameObject);
+            else forestParent.addTree(this);
         } else {
             if(!TreeManager.loadedForests.ContainsKey(GenerationManager.worldToChunk(transform.position))) { //outside of tree load dist
                 Destroy(gameObject);
                 return;
             }
-            List<GameObject> types = new List<GameObject>();
-            types.Add(prefab);
+            Biome biome = Globals.GenerationManagerScript.chooseBiome(GenerationManager.worldToChunk(transform.position));
             GameObject g = new GameObject("Forest");
             forestParent = g.AddComponent(typeof(ForestScript)) as ForestScript;
-            forestParent.createForest(transform.position, Globals.GenerationManagerScript.chooseBiome(GenerationManager.worldToChunk(transform.position)).forestRadius, types, 0);
-            TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Add(forestParent.GetInstanceID(),  forestParent);
+            forestParent.createForest(transform.position, biome.forestRadius, biome.forestMaxTrees);
             forestParent.addTree(this);
+            TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Add(forestParent.GetInstanceID(), forestParent);
         }
     }
 
@@ -143,7 +145,6 @@ public class TreeScript : MonoBehaviour {
             for (int i = 0; i < stateMarks.Count - 1; i++){
                 if (age / lifeSpan < (stateMarks[i + 1]) / ratioTotal){
                     state = i;
-                    if (dirtMound) dirtMound.SetActive(state == 0);
                     Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
                     break;
                 }
@@ -171,8 +172,8 @@ public class TreeScript : MonoBehaviour {
     private void updateCollision() {
         // update collision
         float size = heightVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
-        boxCollider.size = new Vector3(0.4f + 0.6f * size, maxHeight * size, 0.4f + 0.6f * size);
-        boxCollider.center = new Vector3(0, maxHeight * size * 0.5f, 0);
+        boxCollider.size = baseCollision + scaledCollision * size; // new Vector3(0.4f + 0.6f * size, maxHeight * size + 0.1f, 0.4f + 0.6f * size);
+        boxCollider.center = new Vector3(0, boxCollider.size.y * 0.5f, 0);
     }
     
     public struct treeStruct {

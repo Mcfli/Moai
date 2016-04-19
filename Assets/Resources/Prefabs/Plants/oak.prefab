@@ -1276,8 +1276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabPath: Prefabs/Plants/oak
   seed_object: {fileID: 122844, guid: 75b1d6320eadab4479b2d6f81b3d3815, type: 2}
-  baseLifeSpan: 657000
-  lifeSpanVariance: 0.3
+  baseLifeSpan: 1314000
+  lifeSpanVariance: 0.5
   scaleVariance: 0.25
   ratioAnimUpdates: 0.001
   stateAnimationNames:
@@ -1292,8 +1292,9 @@ MonoBehaviour:
   - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
-  propogateDuringState: 000100
-  maxHeight: 9
+  propogateDuringState: 010101
+  baseCollision: {x: 0.4, y: 0.1, z: 0.4}
+  scaledCollision: {x: 0.6, y: 9, z: 0.6}
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -1329,19 +1330,20 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 1
-      inSlope: -0.5
-      outSlope: -0.5
+      inSlope: -0.7
+      outSlope: -0.7
       tangentMode: 10
     - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
+      value: 0.3
+      inSlope: -0.7
+      outSlope: -0.7
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
   dirtMound: {fileID: 131616, guid: bed206811667e2c48b4e132951aa40f0, type: 2}
-  dirtMoundOffset: {x: -0.15, y: 0.4, z: -0.15}
+  dirtMoundOffset: {x: -0.05, y: 0.1, z: -0.15}
+  dirtMoundLifeRatio: 0.02
   prefab: {fileID: 194074}
   age: 0
   lifeSpan: 1314000

@@ -50,6 +50,7 @@ ModelImporter:
     100084: fig1_rignt_002
     100086: forestTree2Armature
     100088: //RootNode
+    100090: Empty
     400000: Bone
     400002: Bone_001
     400004: Bone_002
@@ -95,6 +96,7 @@ ModelImporter:
     400084: fig1_rignt_002
     400086: forestTree2Armature
     400088: //RootNode
+    400090: Empty
     4300000: fig1_rignt_002
     7400000: Default Take
     7400002: forestTree2_dying
@@ -142,8 +144,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 0
+    normalImportMode: 1
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
