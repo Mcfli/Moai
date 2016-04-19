@@ -25,7 +25,7 @@ public class WeatherManager : MonoBehaviour {
     private Vector3 curParticlePosition;
 
     // Player for audio source
-    private GameObject camera;
+    private GameObject cam;
     private AudioSource cameraAudio;
     private bool wasPlaying = false;
 
@@ -43,8 +43,8 @@ public class WeatherManager : MonoBehaviour {
         //changeClouds(10000);
         lastBiome = Globals.cur_biome;
         curParticlePosition = new Vector3(0, 0, 0);
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
-        cameraAudio = camera.AddComponent<AudioSource>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraAudio = cam.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
