@@ -349,6 +349,7 @@ MonoBehaviour:
   mountain_map: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   elevation_map: {fileID: 11483938, guid: c1b765ad54907af4eb2d4ba059c12759, type: 2}
   peak_map: {fileID: 11467348, guid: 54b65dd4c9e6a804eb36eed4ae756157, type: 2}
+  lake_map: {fileID: 11480816, guid: 9c7a324185497ef4bad4cdfc05dda238, type: 2}
   colors:
   - {r: 0.61960787, g: 0.70980394, b: 0.4745098, a: 0}
   - {r: 0.29803923, g: 0.52156866, b: 0, a: 0}
@@ -1109,7 +1110,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_TagString
