@@ -15,6 +15,7 @@ public class ChunkGenerator : MonoBehaviour {
     //references
     private NoiseSynth synth;
     private GenerationManager genManager;
+    private WaterManager waterManager;
     private int seed;
 
     //finals
@@ -24,6 +25,7 @@ public class ChunkGenerator : MonoBehaviour {
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
+        waterManager = GetComponent<WaterManager>();
         seed = GetComponent<Seed>().seed;
         TerrainParent = new GameObject("Terrain");
         TerrainParent.transform.parent = transform;
@@ -60,8 +62,8 @@ public class ChunkGenerator : MonoBehaviour {
             Vector3 lakePos = pos;
             lakePos.x += Random.Range(0,chunk_size);
             lakePos.z += Random.Range(0, chunk_size);
-            lakePos.x = Mathf.Clamp(lakePos.x, pos.x + lakeSize.x + 10, pos.x + chunk_size - lakeSize.x - 10);
-            lakePos.z = Mathf.Clamp(lakePos.z, pos.z + lakeSize.z + 10, pos.z + chunk_size - lakeSize.z - 10);
+            lakePos.x = Mathf.Clamp(lakePos.x, pos.x + lakeSize.x + 20, pos.x + chunk_size - lakeSize.x - 20);
+            lakePos.z = Mathf.Clamp(lakePos.z, pos.z + lakeSize.z + 20, pos.z + chunk_size - lakeSize.z - 20);
 
             lakes.Add(new lakeStruct(lakePos, lakeSize));
         }
@@ -78,26 +80,29 @@ public class ChunkGenerator : MonoBehaviour {
 
                 float lakeOffset = 0;
                 int lakeIntersections = 0;
-
-                foreach(lakeStruct lake in lakes)
-                {
-                    // See if this vertex is in range of this lake
-                    if(Vector3.Distance(new Vector3(x,0,y),lake.position) <= lake.size.x)
-                    {
-                        lakeOffset += lake.size.y * Vector3.Distance(new Vector3(x, 0, y), lake.position)/lake.size.x;
-                        lakeIntersections++;
-                    }
-                }
-                if(lakeIntersections>0)
-                    lakeOffset /= lakeIntersections;
+                
+                
 
                 if(XZDeviationRatio != 0){
                     Random.seed = seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
                     x = (ix + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                     y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                 }
-                // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0) - lakeOffset, y); // replace 0 with Globals.time eventually
+
+
+                float xpos = x + pos.x;
+                float zpos = y + pos.z;
+                Vector3 vertexWorld = new Vector3(xpos, 0, zpos);
+                foreach (lakeStruct lake in lakes)
+                {
+                    // See if this vertex is in range of this lake
+                    if (Vector3.Distance(vertexWorld, lake.position) <= lake.size.x)
+                    {
+                        lakeOffset += lake.size.y * Mathf.Max(0, (1 - (Vector3.Distance(vertexWorld, lake.position) / lake.size.x)));
+                        lakeIntersections++;
+                    }
+                }
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0) - lakeOffset, y); 
             }
         }
         Random.seed = originalSeed;

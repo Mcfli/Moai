@@ -139,7 +139,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   lakeCount: 7
-  lakeSize: {x: 10, y: 10, z: 10}
+  lakeSize: {x: 25, y: 150, z: 25}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -193,6 +193,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: treeSpeadRange
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lakeSize.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lakeSize.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lakeSize.z
       value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []

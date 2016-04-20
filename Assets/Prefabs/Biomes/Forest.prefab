@@ -139,7 +139,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   lakeCount: 2
-  lakeSize: {x: 100, y: 100, z: 40}
+  lakeSize: {x: 150, y: 100, z: 150}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -302,6 +302,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: colorCurve.m_Curve.Array.data[2].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lakeSize.z
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lakeSize.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lakeSize.y
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
