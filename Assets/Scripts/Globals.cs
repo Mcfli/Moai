@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Globals : MonoBehaviour {
-
     public static float time = 0.0f; //incremented by TimeScript
     public static float time_scale = 1.0f;
 	public static float time_resolution = Mathf.Pow(10, -20.0f);
     public static float deltaTime;
+    public static bool paused;
 
     public static float timeOfDay = 0;
     //incremeted by Sky
@@ -24,13 +24,29 @@ public class Globals : MonoBehaviour {
     public static Player PlayerScript = Player.GetComponent<Player>();
     public static Sky SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
     public static WeatherManager WeatherManagerScript = GameObject.Find("Weather").GetComponent<WeatherManager>();
+    public static UI UIScript = GameObject.Find("UI").GetComponent<UI>();
 
-    // Heat & Moisture
-    public static Vector2 heatMoistureOrigin = new Vector2(25,25);
-    public static Vector2 heatMoistureVector = Vector2.zero;
-    public static float heatMoistureMin = 50;
-    public static float heatMostureDistGuaranteed = 50f;  // The distance from the center point a biome is guaranteed to have puzzle
-                                                           // FindObjectsOfType added to a shrine
+    //Biome Elements
+    public static Vector2 WaterFireEarthAirOrigin = new Vector2(0.5f, 0.5f);
+    public static Vector2 WaterFireEarthAirVector = Vector2.zero;
+    public static float WaterFireEarthAirMin = 0.5f;
+    public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
+                                                                // FindObjectsOfType added to a shrine
+
+    //Player Settings
+    public static bool showCrosshair = true;
+    //FOV
+    //Depth of Field
+    //view bobbing
+
+    //resolution
+    //load distance
+
+    //Keybindings
+    //flip mouse buttons
+    //sensitivity
+
+    //sound (volumes)
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component{
         System.Type type = source.GetType();
@@ -51,9 +67,4 @@ public class Globals : MonoBehaviour {
         return component;
     }
 
-    public static Vector2 WaterFireEarthAirOrigin = new Vector2(0.5f,0.5f);
-    public static Vector2 WaterFireEarthAirVector = Vector2.zero;
-    public static float WaterFireEarthAirMin = 0.5f;
-    public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
-                                                           // FindObjectsOfType added to a shrine
 }
