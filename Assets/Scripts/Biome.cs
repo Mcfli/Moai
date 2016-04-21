@@ -34,6 +34,7 @@ public class Biome : MonoBehaviour {
 
     public int lakeCount;
     public Vector3 lakeSize;
+    public Material waterMaterial;
 
 
     public void Init()

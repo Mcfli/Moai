@@ -159,6 +159,11 @@ public class ChunkGenerator : MonoBehaviour {
         MeshCollider collider = (MeshCollider)chunk.AddComponent(typeof(MeshCollider));
         collider.sharedMesh = chunkMeshes.highMesh;
 
+        foreach(lakeStruct lake in lakes)
+        {
+            waterManager.createWater(coordinates, lake.position, lake.size, biome);
+        }
+
         return chunk;
 	}
 

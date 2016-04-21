@@ -138,13 +138,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  lakeCount: 0
+  lakeSize: {x: 0, y: 0, z: 0}
+  waterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: waterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 140834}

@@ -139,7 +139,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   lakeCount: 7
-  lakeSize: {x: 25, y: 150, z: 25}
+  lakeSize: {x: 25, y: 50, z: 25}
+  waterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -197,7 +198,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: lakeSize.y
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: lakeSize.x
@@ -207,6 +208,10 @@ Prefab:
       propertyPath: lakeSize.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 131134}

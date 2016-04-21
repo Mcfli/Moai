@@ -235,9 +235,9 @@ GameObject:
   - 114: {fileID: 188005519}
   - 114: {fileID: 188005514}
   - 114: {fileID: 188005517}
-  - 114: {fileID: 188005516}
   - 114: {fileID: 188005515}
   - 114: {fileID: 188005518}
+  - 114: {fileID: 188005512}
   m_Layer: 0
   m_Name: WorldGen
   m_TagString: Untagged
@@ -282,6 +282,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &188005512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae5262824d45494aa9226c8772b36d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterResolution: 0.1
 --- !u!114 &188005514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,28 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &188005516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 188005509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e93d7ca007a982145aabbe6c06668436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitialWaterLevel: -1000
-  WaterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
-  fogColor: {r: 0.28235295, g: 0.39215687, b: 0.52156866, a: 0}
-  fogDensity: 0.04
-  resolution: 16
-  waveLoadDist: 2
-  waveHeight: {x: 1, y: 1, z: 1}
-  waveSpeed: {x: 2, y: 1, z: 3}
-  waveLength: {x: 1, y: 3, z: 2}
-  waveOffset: {x: 0, y: 7, z: 4}
-  invertEveryOther: 1
 --- !u!114 &188005517
 MonoBehaviour:
   m_ObjectHideFlags: 0
