@@ -115,7 +115,8 @@ MonoBehaviour:
   - {fileID: 180118, guid: 548f0a95d94e02a4293c8f837fad8832, type: 2}
   - {fileID: 199006, guid: 108879e7d0d32ad43a5858240632f7eb, type: 2}
   - {fileID: 152190, guid: a0bd73c4a1103194483fd1ff46a420a0, type: 2}
-  doodadDensity: 140000001400000014000000140000001400000014000000
+  - {fileID: 189006, guid: 448152c6bfa7cad4ebae66a3818f1530, type: 2}
+  doodadDensity: 14000000140000001400000014000000140000001400000014000000
   treeDensity: 2
   treeGrowthIterations: 4
   treeSpreadMin: 24
