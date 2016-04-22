@@ -3,7 +3,12 @@ using System.Collections;
 
 public class WaterBody : MonoBehaviour {
 
-    Mesh mesh;
+    public Vector3 size;
+    public Vector3 center;
+    public Biome biome;
+
+    private Mesh mesh;
+
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +19,17 @@ public class WaterBody : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    // Returns whether this body overlaps another
+    public bool overlaps(WaterBody other)
+    {
+        float deltaX = Mathf.Abs(center.x - other.center.x);
+        float deltaY = Mathf.Abs(center.z - other.center.z);
+
+        if (deltaX < size.x + other.size.x || deltaY < size.x + other.size.x)
+            return true;
+        return false;
+    }
 
     /*
     private void updateVertices(Vector3 waveHeight, Vector3 waveSpeed, Vector3 waveLength, Vector3 waveOffset)

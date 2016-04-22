@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class WaterManager : MonoBehaviour {
     // Tuning variables
     public float waterResolution = 0.4f; // Number of vertices in one unity unit length
+    public float acceptableHeightDiff = 10f;
 
 
     // Chunk -> water object list dictionary
@@ -14,7 +15,7 @@ public class WaterManager : MonoBehaviour {
     private GameObject waterParent;
 
     // Use this for initialization
-    void Start () {
+    void Awake (){
         waterBodies = new Dictionary<Vector2, List<GameObject>>();
         waterParent = new GameObject("Water");
         waterParent.transform.parent = transform;
@@ -25,46 +26,109 @@ public class WaterManager : MonoBehaviour {
 	
 	}
 
-    // Creates a water body game object of specified size at chunk specified by key
-    public void createWater(Vector2 chunk,Vector3 center, Vector3 size, Biome biome)
+    // Looks through each water body in the chunk to determine interections
+    public void groupBodiesInChunk(Vector2 chunk)
     {
+        if (!waterBodies.ContainsKey(chunk) || waterBodies[chunk] == null) return;
+        for (int i = 0; i < waterBodies[chunk].Count;i++)
+        {
+            for (int j = 0; j < waterBodies[chunk].Count; j++)
+            {
+                GameObject body = waterBodies[chunk][i];
+                GameObject other = waterBodies[chunk][j];
+                if (body == other) continue;
+                WaterBody water = body.GetComponent<WaterBody>();
+                WaterBody otherWater = other.GetComponent<WaterBody>();
+
+                // If overlap found
+                if (water.overlaps(otherWater)){
+                    
+                    // Create a new water body, forget its two parents
+                    GameObject newWater =
+                        createWater(chunk, (water.center + otherWater.center) * 0.5f, water.size + otherWater.size, water.biome);
+                    /*
+                    Destroy(body);
+                    Destroy(other);
+                    waterBodies[chunk].Remove(body);
+                    waterBodies[chunk].Remove(other);
+                    waterBodies[chunk].Add(newWater);
+                    i = 0;
+                    j = 0;*/
+                }
+
+                // Otherwise just keep looking for overlaps
+            }
+        }
+    }
+
+    // Creates a water body game object of specified size at chunk specified by key
+    public GameObject createWater(Vector2 chunk,Vector3 center, Vector3 size, Biome biome)
+    {
+        float sideLength = 1.5f * size.x;
+        int resolution = Mathf.CeilToInt(size.x * waterResolution);
+        float stepSize = sideLength / (resolution - 1);
+
+        // Stick water to ground
+        RaycastHit hit;
+        Ray rayTopLeft = new Ray(new Vector3(center.x - sideLength * 0.35f, 10000000, center.z - sideLength * 0.35f), Vector3.down);
+        Ray rayTopRight = new Ray(new Vector3(center.x + sideLength * 0.35f, 10000000, center.z - sideLength * 0.35f), Vector3.down);
+        Ray rayBottomLeft = new Ray(new Vector3(center.x - sideLength * 0.35f, 10000000, center.z + sideLength * 0.35f), Vector3.down);
+        Ray rayBottomRight = new Ray(new Vector3(center.x + sideLength * 0.35f, 10000000, center.z + sideLength * 0.35f), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        float tlHeight = -1f, trHeight = -1f, blHeight = -1f, brHeight = -1f, minHeight, avgHeight;
+
+        if (Physics.Raycast(rayTopLeft, out hit, Mathf.Infinity, terrain))
+            tlHeight = hit.point.y;
+        if (Physics.Raycast(rayTopRight, out hit, Mathf.Infinity, terrain))
+            trHeight = hit.point.y;
+        if (Physics.Raycast(rayBottomLeft, out hit, Mathf.Infinity, terrain))
+            blHeight = hit.point.y;
+        if (Physics.Raycast(rayBottomRight, out hit, Mathf.Infinity, terrain))
+            brHeight = hit.point.y;
+
+        avgHeight = tlHeight + trHeight + blHeight + brHeight;
+        float tlDev = Mathf.Abs(avgHeight - tlHeight);
+        float trDev = Mathf.Abs(avgHeight - trHeight);
+        float blDev = Mathf.Abs(avgHeight - blHeight);
+        float brDev = Mathf.Abs(avgHeight - brHeight);
+
+        if (tlDev + trDev + blDev + brDev > acceptableHeightDiff) return null;
+
+        minHeight = Mathf.Min(tlHeight, trHeight, blHeight, brHeight);
+
         // Set up empty game object
         GameObject water = new GameObject();
         water.layer = LayerMask.NameToLayer("Water");
         water.name = "Lake";
         water.transform.parent = waterParent.transform;
         MeshRenderer mr = water.AddComponent<MeshRenderer>();
+        mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         mr.material = biome.waterMaterial;
         MeshFilter mf = water.AddComponent<MeshFilter>();
         mf.mesh = new Mesh();
         mf.mesh.name = "LakeMesh";
-        
 
-        // Stick water to ground
-        RaycastHit hit;
-        Ray rayDown = new Ray(new Vector3(center.x, 10000000, center.z), Vector3.down);
-        int terrain = LayerMask.GetMask("Terrain");
+        WaterBody wb = water.AddComponent<WaterBody>();
+        wb.center = center;
+        wb.size = size;
+        wb.biome = biome;
 
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-        {
-            water.transform.position = new Vector3(center.x, hit.point.y , center.z);
-        }
-        else return;
+        water.transform.position = new Vector3(center.x, minHeight - 0.2f, center.z);
 
         // Keep track of this water body
         if (!waterBodies.ContainsKey(chunk) || waterBodies[chunk] == null) waterBodies[chunk] = new List<GameObject>();
         waterBodies[chunk].Add(water);
 
         // Generate verticies
-        int resolution = Mathf.CeilToInt(size.x * waterResolution);
-        float stepSize = size.x / (resolution - 1);
+       
         Vector3[] vertices = new Vector3[(resolution * resolution)];
         for (int iy = 0; iy < resolution; iy++)
         {
             for (int ix = 0; ix < resolution; ix++)
             {
-                float x = ix * stepSize - size.x * 0.5f;
-                float y = iy * stepSize - size.x * 0.5f;
+                float x = ix * stepSize - sideLength * 0.5f;
+                float y = iy * stepSize - sideLength * 0.5f;
                 vertices[iy * resolution + ix] = new Vector3(x, 0, y);
             }
         }
@@ -108,12 +172,16 @@ public class WaterManager : MonoBehaviour {
         mf.mesh.triangles = triangles;
 
         ReCalcTriangles(mf.mesh);
+        return water;
     }
 
     // unloads all water bodies in chunk specified by key
     public void unloadWater(Vector2 key)
     {
-
+        foreach(GameObject obj in waterBodies[key])
+        {
+            Destroy(obj);
+        }
     }
 
     private void ReCalcTriangles(Mesh mesh)

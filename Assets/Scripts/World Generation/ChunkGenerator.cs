@@ -80,8 +80,6 @@ public class ChunkGenerator : MonoBehaviour {
 
                 float lakeOffset = 0;
                 int lakeIntersections = 0;
-                
-                
 
                 if(XZDeviationRatio != 0){
                     Random.seed = seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
@@ -93,15 +91,22 @@ public class ChunkGenerator : MonoBehaviour {
                 float xpos = x + pos.x;
                 float zpos = y + pos.z;
                 Vector3 vertexWorld = new Vector3(xpos, 0, zpos);
-                foreach (lakeStruct lake in lakes)
+
+                // Take lakes into account when determining height,
+                // BUt only if the vertex is not on the edge
+                if (ix != 0 && iy != 0 && ix != chunk_resolution - 1 && iy != chunk_resolution - 1)
                 {
-                    // See if this vertex is in range of this lake
-                    if (Vector3.Distance(vertexWorld, lake.position) <= lake.size.x)
+                    foreach (lakeStruct lake in lakes)
                     {
-                        lakeOffset += lake.size.y * Mathf.Max(0, (1 - (Vector3.Distance(vertexWorld, lake.position) / lake.size.x)));
-                        lakeIntersections++;
+                        // See if this vertex is in range of this lake
+                        if (Vector3.Distance(vertexWorld, lake.position) <= lake.size.x)
+                        {
+                            lakeOffset += lake.size.y * Mathf.Max(0, (1 - (Vector3.Distance(vertexWorld, lake.position) / lake.size.x)));
+                            lakeIntersections++;
+                        }
                     }
                 }
+                
                 vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0) - lakeOffset, y); 
             }
         }
@@ -163,6 +168,7 @@ public class ChunkGenerator : MonoBehaviour {
         {
             waterManager.createWater(coordinates, lake.position, lake.size, biome);
         }
+        waterManager.groupBodiesInChunk(coordinates);
 
         return chunk;
 	}

@@ -139,7 +139,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   lakeCount: 7
-  lakeSize: {x: 25, y: 50, z: 25}
+  lakeSize: {x: 75, y: 100, z: 75}
   waterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
 --- !u!1001 &100100000
 Prefab:
