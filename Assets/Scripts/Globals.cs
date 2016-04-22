@@ -24,7 +24,7 @@ public class Globals : MonoBehaviour {
     public static Player PlayerScript = Player.GetComponent<Player>();
     public static Sky SkyScript = GameObject.Find("Sky").GetComponent<Sky>();
     public static WeatherManager WeatherManagerScript = GameObject.Find("Weather").GetComponent<WeatherManager>();
-    public static UI UIScript = GameObject.Find("UI").GetComponent<UI>();
+    public static HUD UIScript = GameObject.Find("UI").GetComponent<HUD>();
 
     //Biome Elements
     public static Vector2 WaterFireEarthAirOrigin = new Vector2(0.5f, 0.5f);

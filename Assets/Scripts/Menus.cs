@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class UI : MonoBehaviour {
+public class Menus : MonoBehaviour {
     public string crosshairToggle = "CrosshairToggle";
     public Color initialColor = new Color(1, 1, 1, 0.75f);
     public Color canGrabColor = new Color(0, 0.5f, 1, 0.75f);
@@ -13,6 +13,7 @@ public class UI : MonoBehaviour {
     public string pauseButton = "PauseButton";
     public RectTransform backdrop;
     public List<GameObject> menuScreens; //first one should be the initial pause screen
+    public List<Vector2> menuPosition; //-1 to 1. 0 is middle of screen
     private bool pauseScreen;
     
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
@@ -29,7 +30,7 @@ public class UI : MonoBehaviour {
             Globals.showCrosshair = !Globals.showCrosshair;
         }
 
-        if(Globals.showCrosshair && !Globals.PlayerScript.isInCinematic() && !Globals.paused) {
+        if(Globals.showCrosshair && !Globals.PlayerScript.isInCinematic()) {
             crosshair.enabled = true;
             crosshair.color = (Globals.PlayerScript.canUse()) ? canUseColor : new Color(0, 0, 0, 0);
             crosshair.color = (Globals.PlayerScript.LookingAtGrabbable()) ? canGrabColor : initialColor;
@@ -42,28 +43,28 @@ public class UI : MonoBehaviour {
 
         if(Globals.paused) {
             Time.timeScale = 0;
-            backdrop.sizeDelta = new Vector2(Screen.width, Screen.height);
             showPauseScreen();
+            adjustScreens();
         } else {
             Time.timeScale = 1;
             hidePauseScreen();
         }
 
-        //if(Input.GetKeyDown(KeyCode.P)) UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh,"Assets/00.asset");
+        if(Input.GetKeyDown(KeyCode.P)) UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh,"Assets/00.asset");
     }
 
     private void showPauseScreen() {
         if(pauseScreen) return;
-        pauseScreen = true;
+        else pauseScreen = true;
         menuScreens[0].SetActive(true);
         backdrop.gameObject.SetActive(true);
         firstPersonCont.getMouseLook().SetCursorLock(false);
-        backdrop.sizeDelta = new Vector2(Screen.width, Screen.height);
+        adjustScreens();
     }
 
     private void hidePauseScreen() {
         if(!pauseScreen) return;
-        pauseScreen = false;
+        else pauseScreen = false;
         foreach(GameObject g in menuScreens) g.SetActive(false);
         backdrop.gameObject.SetActive(false);
         firstPersonCont.getMouseLook().SetCursorLock(true);
@@ -72,6 +73,12 @@ public class UI : MonoBehaviour {
     public void switchTo(GameObject screen) {
         foreach(GameObject g in menuScreens) g.SetActive(false);
         screen.SetActive(true);
+    }
+
+    private void adjustScreens() {
+        for(int i = 0; i < menuScreens.Count && i < menuPosition.Count; i++)
+            menuScreens[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(menuPosition[i].x * Screen.width, menuPosition[i].y * Screen.height) / 2;
+        backdrop.sizeDelta = new Vector2(Screen.width, Screen.height);
     }
 
     public void pauseGame() { Globals.paused = true; }
