@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Fireflies : MonoBehaviour {
-    ParticleSystem ff;
+    private ParticleSystem ff;
     private ParticleSystem.Particle[] m_Particles;
     public float particleVel = 0.0f;
     private ParticleSystem.LimitVelocityOverLifetimeModule fireflyVel;
