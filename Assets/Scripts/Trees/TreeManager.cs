@@ -3,42 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TreeManager : MonoBehaviour {
+    public float seedToTreeRatio = 0.3f;
+    public float secondsToPropogate = 3600;
+    public float propogationTimeVariance = 0.5f;
+    public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
+    public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
     private GenerationManager gen_manager;
-    private static Dictionary<Vector2, List<treeStruct>> trees;
 
     // Use this for initialization
     void Awake() {
         gen_manager = gameObject.GetComponent<GenerationManager>();
-        trees = new Dictionary<Vector2, List<treeStruct>>();
+        trees = new Dictionary<Vector2, List<ForestScript.forestStruct>>();
+        loadedForests = new Dictionary<Vector2, Dictionary<int, ForestScript>>();
     }
-
-    public static void saveTree(Vector2 chunk, TreeScript tree){
-        treeStruct v = new treeStruct(tree);
-        if(!trees.ContainsKey(chunk)||trees[chunk] == null) trees[chunk] = new List<treeStruct>();
-        trees[chunk].Add(v);
-    }
-
 
     public void loadTrees(Vector2 key, Biome biome){
         if (biome.treeTypes.Count < 1) return;
-        if (trees.ContainsKey(key) && trees[key] != null){
-            List<treeStruct> trees_in_chunk = trees[key];
-            for (int i = trees_in_chunk.Count-1; i >= 0; i--) {
-                treeStruct tree = trees_in_chunk[i];
-                if (tree.prefab == null) continue;
-                GameObject new_tree = Instantiate(tree.prefab, tree.position, tree.rotation) as GameObject;
-                TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
-                new_treeScript.age = tree.age;
-                new_treeScript.lifeSpan = tree.life_span;
-                new_treeScript.prefab = tree.prefab;
-                trees[key].Remove(tree);
+        if(loadedForests.ContainsKey(key)) return;
+        Dictionary<int, ForestScript> loaded = new Dictionary<int, ForestScript>();
+        if (trees.ContainsKey(key) && trees[key] != null){ //load
+            List<ForestScript.forestStruct> trees_in_chunk = trees[key];
+            foreach(ForestScript.forestStruct f in trees_in_chunk) {
+                GameObject g = new GameObject();
+                ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
+                newForest.loadForest(f);
+                loaded.Add(newForest.GetInstanceID(), newForest);
             }
-        }
-        else
-        {
-            List<GameObject> treesInChunk = new List<GameObject>();
-            trees[key] = new List<treeStruct>();
+        }else{ //generate
             float step_size = gen_manager.chunk_size / biome.treeDensity;
 
             // When Advanced terrain is implemented...
@@ -46,47 +38,24 @@ public class TreeManager : MonoBehaviour {
 
             for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size){
                 for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size){
-                    Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 
-                    float xpos = i + step_size * Random.value - 0.5f * step_size;
-                    float zpos = j + step_size * Random.value - 0.5f * step_size;
-                    GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
-                    GameObject new_tree = createNewTree(treePrefab, new Vector3(xpos, 0, zpos));
-                    new_tree.transform.rotation = RandomRotation;
-
+                    Vector3 position = new Vector3(i + step_size * Random.value - 0.5f * step_size, 0, j + step_size * Random.value - 0.5f * step_size);
                     
-                    treesInChunk.Add(new_tree);
+                    RaycastHit hit;
+                    Ray rayDown = new Ray(new Vector3(position.x, 10000000, position.z), Vector3.down);
+                    if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+                        if(hit.point.y < Globals.water_level) continue;
+                        else position.y = hit.point.y - 1;
+                    } else continue;
+
+                    GameObject g = new GameObject("Forest");
+                    ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
+                    newForest.createForest(position, biome.forestRadius, biome.forestMaxTrees, biome.treeTypes, biome.mixedForests);
+                    loaded.Add(newForest.GetInstanceID(), newForest);
                 }
             }
-            for (int i = 0; i < biome.treeGrowthIterations; i++)
-            {
-                treesInChunk = growTrees(biome,treesInChunk);
-            }
-
         }
-    }
-
-    // Takes a list of trees and puts trees naturally around each
-    public List<GameObject> growTrees(Biome biome,List<GameObject> initial_trees)
-    {
-
-        List<GameObject> new_trees = new List<GameObject>();
-        foreach (GameObject tree in initial_trees)
-        {
-            new_trees.Add(tree);
-            // Grow another nearby tree
-
-            GameObject treePrefab = biome.treeTypes[Random.Range(0, (biome.treeTypes.Count))];
-
-            float theta = Random.Range(0, 2 * Mathf.PI);
-            float dist = biome.treeSpreadMin + Random.Range(0, biome.treeSpeadRange);
-            Vector3 offset = new Vector3(Mathf.Cos(theta) * dist, 0, Mathf.Sin(theta) * dist);
-            Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-            GameObject new_tree = createNewTree(treePrefab,tree.transform.position + offset);
-            new_tree.transform.rotation = RandomRotation;
-            if (new_tree != null) new_trees.Add(new_tree);
-        }
-        return new_trees;
+        loadedForests.Add(key, loaded);
     }
 
     // Remove the trees on chunk(x,y) from our saved tree dict and unload all of those trees
@@ -94,60 +63,21 @@ public class TreeManager : MonoBehaviour {
     {
 
         Vector2 chunk = new Vector2(x, y);
-        unloadTrees(x, y);
+        unloadTrees(chunk);
         if (trees.ContainsKey(chunk)){
             trees[chunk] = null;
         }
         
     }
 
-    public void unloadTrees(int x, int y){
-        Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size*0.5f,0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
-        Vector3 half_extents = new Vector3(gen_manager.chunk_size*0.5f,100000, gen_manager.chunk_size*0.5f );
-        LayerMask tree_mask = LayerMask.GetMask("Tree");
-        Vector2 chunk = new Vector2(x, y);
-
-        Collider[] colliders = Physics.OverlapBox(center, half_extents,Quaternion.identity,tree_mask);
-
-        for (int i = 0;i < colliders.Length; i++){
-            
-            GameObject tree = colliders[i].gameObject;
-            saveTree(chunk, tree.GetComponent<TreeScript>());
-            
-            Destroy(tree);
+    public void unloadTrees(Vector2 chunk){
+        trees[chunk] = new List<ForestScript.forestStruct>();
+        foreach(ForestScript f in loadedForests[chunk].Values) {
+            if(f) {
+                trees[chunk].Add(f.export());
+                f.destroyForest();
+            }
         }
-    }
-
-    // Creates a new tree of type prefab at postition pos
-    private GameObject createNewTree(GameObject prefab, Vector3 pos)
-    {
-        Quaternion RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-        GameObject new_tree = Instantiate(prefab, pos, RandomRotation) as GameObject;
-        TreeScript new_treeScript = new_tree.GetComponent<TreeScript>();
-        float scaleFactor = Random.Range(1f, 3.5f);
-        new_tree.transform.localScale = prefab.transform.localScale * scaleFactor;
-        new_treeScript.lifeSpan = new_treeScript.lifeSpan * Random.Range(1 - new_treeScript.lifeSpanVariance, 1 + new_treeScript.lifeSpanVariance);
-        new_treeScript.age = Random.value * new_treeScript.lifeSpan;
-        new_treeScript.prefab = prefab;
-
-        return new_tree;
-    }
-
-    private struct treeStruct {
-        public Vector3 position;
-        public Vector3 scale;
-        public Quaternion rotation;
-        public float age;
-        public float life_span;
-        public GameObject prefab;
-
-        public treeStruct(TreeScript t) {
-            position = t.gameObject.transform.position;
-            rotation = t.gameObject.transform.rotation;
-            scale = t.gameObject.transform.localScale;
-            age = t.age;
-            life_span = t.lifeSpan;
-            prefab = t.prefab;
-        }
+        loadedForests.Remove(chunk);
     }
 }

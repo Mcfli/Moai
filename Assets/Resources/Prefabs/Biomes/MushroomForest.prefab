@@ -107,12 +107,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 188470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  - {fileID: 145976, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   doodads: []
   treeDensity: 1
-  treeGrowthIterations: 3
-  treeSpreadMin: 12
-  treeSpeadRange: 25
+  forestRadius: 50
+  forestMaxTrees: 16
+  mixedForests: 1
   doodadDensity: 0
   colors:
   - {r: 0.36764705, g: 0, b: 0.35750514, a: 0}

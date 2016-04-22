@@ -324,6 +324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seedToTreeRatio: 0.3
+  secondsToPropogate: 1800
+  forestRadius: 50
+  forestMaxTrees: 16
 --- !u!114 &188005516
 MonoBehaviour:
   m_ObjectHideFlags: 0

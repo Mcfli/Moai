@@ -797,21 +797,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 136664}
+  prefabPath: Prefabs/Plants/maple_tree
   seed_object: {fileID: 172308, guid: 256c357554288014d9c0d2bb1771b693, type: 2}
-  minSpawnRadius: 10
-  maxSpawnRadius: 50
-  spawn_delay: 5e-18
-  spawn_variance: 0.5
-  seed_cull_max_density: 2
-  spawn_limit: 0
-  cull_radius: 50
-  cull_max_density: 5
-  max_health: 100
-  age: 0
-  lifeSpan: 1314000
+  baseLifeSpan: 657000
   lifeSpanVariance: 0.3
-  target_scale: 10
+  scaleVariance: 0.25
   ratioAnimUpdates: 0.01
   stateAnimationNames:
   - mapleGrowing
@@ -825,7 +815,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
-  propogateDuringState: 000100
+  maxHeight: 0
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -872,10 +862,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  cul_spread: 100
-  onFire: 0
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: 0.8, z: 0}
+  prefab: {fileID: 136664}
+  age: 0
+  lifeSpan: 1314000
 --- !u!137 &13704194
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

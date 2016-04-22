@@ -107,9 +107,8 @@ MonoBehaviour:
   treeTypes: []
   doodads: []
   treeDensity: 0
-  treeGrowthIterations: 2
-  treeSpreadMin: 12
-  treeSpeadRange: 25
+  forestRadius: 50
+  forestMaxTrees: 1
   doodadDensity: 0
   colors:
   - {r: 0.99604464, g: 1, b: 0.71323526, a: 0}

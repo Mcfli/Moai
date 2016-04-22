@@ -131,7 +131,7 @@ public class ChunkGenerator : MonoBehaviour {
     }
 
     public void colorMesh(GameObject chunkObj, Mesh mesh, float chunk_size) {
-        Vector2 chunk = genManager.worldToChunk(chunkObj.transform.position);
+        Vector2 chunk = GenerationManager.worldToChunk(chunkObj.transform.position);
         Biome curBiome = genManager.chooseBiome(chunk);
         Biome up = genManager.chooseBiome(chunk + Vector2.up);
         Biome down = genManager.chooseBiome(chunk + Vector2.down);

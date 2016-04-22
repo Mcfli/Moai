@@ -152,7 +152,7 @@ public class ShrineManager : MonoBehaviour {
 		}
 		else
 		{
-			placeShrine(gen_manager.chunkToWorld(key), key);
+			placeShrine(GenerationManager.chunkToWorld(key), key);
 		}
 	}
 }

@@ -26,10 +26,10 @@ public class Biome : MonoBehaviour {
     public List<int> doodadDensity;
 
     public int treeDensity = 2;
-    public int treeGrowthIterations = 2;
-    public float treeSpreadMin = 12f;
-    public float treeSpeadRange = 25f;
-    
+    public float forestRadius = 50;
+    public int forestMaxTrees = 16;
+    public bool mixedForests = false;
+    public int doodadDensity;
 
     // Terrain color
     public List<Color> colors;
@@ -65,5 +65,4 @@ public class Biome : MonoBehaviour {
 
         return color;
     }
-    
 }
