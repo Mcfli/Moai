@@ -87,7 +87,6 @@ public class ChunkGenerator : MonoBehaviour {
                     y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                 }
 
-
                 float xpos = x + pos.x;
                 float zpos = y + pos.z;
                 Vector3 vertexWorld = new Vector3(xpos, 0, zpos);
@@ -101,7 +100,7 @@ public class ChunkGenerator : MonoBehaviour {
                         // See if this vertex is in range of this lake
                         if (Vector3.Distance(vertexWorld, lake.position) <= lake.size.x)
                         {
-                            lakeOffset += lake.size.y * Mathf.Max(0, (1 - (Vector3.Distance(vertexWorld, lake.position) / lake.size.x)));
+                            lakeOffset += lake.size.y * Mathf.Max(0, Mathf.Pow((1 - (Vector3.Distance(vertexWorld, lake.position) / lake.size.x)),3));
                             lakeIntersections++;
                         }
                     }
@@ -168,7 +167,6 @@ public class ChunkGenerator : MonoBehaviour {
         {
             waterManager.createWater(coordinates, lake.position, lake.size, biome);
         }
-        waterManager.groupBodiesInChunk(coordinates);
 
         return chunk;
 	}

@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterResolution: 0.1
-  acceptableHeightDiff: 1000
+  acceptableHeightDiff: 10000
 --- !u!114 &188005514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +559,6 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
