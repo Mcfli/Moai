@@ -8,15 +8,13 @@ public class Fireflies : MonoBehaviour {
     private ParticleSystem.LimitVelocityOverLifetimeModule fireflyVel;
     private ParticleSystem.EmissionModule fireflyEmission;
     private ParticleSystem.MinMaxCurve waitRate;
-    private ParticleSystem.MinMaxCurve defaultRate;
 
 	// Use this for initialization
 	void Start () {
         ff = GetComponent<ParticleSystem>();
         fireflyVel = ff.limitVelocityOverLifetime;
         fireflyEmission = ff.emission;
-        defaultRate = fireflyEmission.rate;
-        waitRate = defaultRate;
+        waitRate = fireflyEmission.rate;
 	}
 	
 	// Update is called once per frame
@@ -43,6 +41,7 @@ public class Fireflies : MonoBehaviour {
                 InitializeIfNeeded();
                 fireflyVel.dampen = 0.0f;
                 waitRate.constantMax = 1000.0f;
+                fireflyEmission.rate = waitRate;
                 int numParticlesAlive = ff.GetParticles(m_Particles);
                 for (int i = 0; i < numParticlesAlive; i++)
                 {
@@ -56,9 +55,11 @@ public class Fireflies : MonoBehaviour {
         {
             if (ff.isPlaying)
             {
-                if (fireflyEmission.rate.constantMax == 1000)
+                if (fireflyEmission.rate.constantMax == 1000.0f)
                 {
                     fireflyVel.dampen = 1;
+                    waitRate.constantMax = 12.0f;
+                    fireflyEmission.rate = waitRate;
 
                 }
             }
