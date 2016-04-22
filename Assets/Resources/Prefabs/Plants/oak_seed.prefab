@@ -13,7 +13,6 @@ GameObject:
   - 135: {fileID: 13502012}
   - 54: {fileID: 5448438}
   - 75: {fileID: 7517500}
-  - 114: {fileID: 11464378}
   - 114: {fileID: 11473828}
   m_Layer: 10
   m_Name: oak_seed
@@ -29,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.65, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,19 +95,6 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
---- !u!114 &11464378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: maple_seed
-  image: {fileID: 2800000, guid: 69b7c83f540e53d429589d6d6bb59476, type: 3}
 --- !u!114 &11473828
 MonoBehaviour:
   m_ObjectHideFlags: 1

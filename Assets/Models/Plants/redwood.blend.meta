@@ -1,0 +1,1664 @@
+fileFormatVersion: 2
+guid: f5bb65c949a0108469974a1360318a84
+timeCreated: 1461332021
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature_034
+    100002: Bone
+    100004: Bone_001
+    100006: Bone_002
+    100008: Bone_003
+    100010: Bone_004
+    100012: Bone_005
+    100014: Bone_006
+    100016: Bone_007
+    100018: Bone_008
+    100020: Bone_009
+    100022: Bone_010
+    100024: Bone_011
+    100026: Bone_012
+    100028: Bone_013
+    100030: Bone_014
+    100032: Bone_015
+    100034: Bone_016
+    100036: Bone_017
+    100038: Bone_018
+    100040: Bone_019
+    100042: Bone_020
+    100044: Bone_021
+    100046: Bone_022
+    100048: Bone_023
+    100050: Bone_024
+    100052: Bone_025
+    100054: Bone_026
+    100056: Bone_027
+    100058: Bone_028
+    100060: Bone_029
+    100062: Bone_030
+    100064: Bone_031
+    100066: Bone_032
+    100068: Bone_033
+    100070: Bone_034
+    100072: Bone_035
+    100074: Bone_036
+    100076: Bone_037
+    100078: Bone_038
+    100080: Bone_039
+    100082: Bone_040
+    100084: Bone_041
+    100086: Bone_042
+    100088: Bone_043
+    100090: Bone_044
+    100092: Bone_045
+    100094: Bone_046
+    100096: Bone_047
+    100098: Bone_048
+    100100: Bone_049
+    100102: Bone_050
+    100104: Bone_051
+    100106: Bone_052
+    100108: Bone_053
+    100110: Bone_054
+    100112: Bone_055
+    100114: Bone_056
+    100116: Bone_057
+    100118: Bone_058
+    100120: Bone_059
+    100122: Bone_060
+    100124: Bone_061
+    100126: Bone_062
+    100128: Bone_063
+    100130: Bone_064
+    100132: Bone_065
+    100134: Bone_066
+    100136: Bone_067
+    100138: Bone_068
+    100140: Bone_069
+    100142: Bone_070
+    100144: Bone_071
+    100146: Bone_072
+    100148: Bone_073
+    100150: Bone_074
+    100152: Bone_075
+    100154: Bone_076
+    100156: Bone_077
+    100158: Bone_078
+    100160: Bone_079
+    100162: Bone_080
+    100164: Bone_081
+    100166: Bone_082
+    100168: Bone_083
+    100170: Bone_084
+    100172: Bone_085
+    100174: Bone_086
+    100176: Bone_087
+    100178: Bone_088
+    100180: Bone_089
+    100182: Bone_090
+    100184: Bone_091
+    100186: Bone_092
+    100188: Bone_093
+    100190: Bone_094
+    100192: Bone_095
+    100194: Bone_096
+    100196: Bone_097
+    100198: Bone_098
+    100200: Bone_099
+    100202: Bone_100
+    100204: Bone_101
+    100206: Bone_102
+    100208: Bone_103
+    100210: Bone_104
+    100212: Bone_105
+    100214: Bone_106
+    100216: Bone_107
+    100218: Bone_108
+    100220: Bone_109
+    100222: Bone_110
+    100224: Bone_111
+    100226: Bone_112
+    100228: Bone_113
+    100230: Bone_114
+    100232: Bone_115
+    100234: Bone_116
+    100236: Bone_117
+    100238: Bone_118
+    100240: Bone_119
+    100242: Bone_120
+    100244: Bone_121
+    100246: Bone_122
+    100248: Bone_123
+    100250: Bone_124
+    100252: Bone_125
+    100254: Bone_126
+    100256: Bone_127
+    100258: Bone_128
+    100260: Bone_129
+    100262: Bone_130
+    100264: Bone_131
+    100266: Bone_132
+    100268: Bone_133
+    100270: Bone_134
+    100272: Bone_135
+    100274: Bone_136
+    100276: Bone_137
+    100278: Bone_138
+    100280: Bone_139
+    100282: Bone_140
+    100284: Bone_141
+    100286: Bone_142
+    100288: Bone_143
+    100290: Bone_144
+    100292: Bone_145
+    100294: Bone_146
+    100296: Bone_147
+    100298: Bone_148
+    100300: Bone_149
+    100302: Bone_150
+    100304: Bone_151
+    100306: Bone_152
+    100308: Bone_153
+    100310: Bone_154
+    100312: Bone_155
+    100314: Bone_156
+    100316: Bone_157
+    100318: Bone_158
+    100320: Bone_159
+    100322: Bone_160
+    100324: Bone_161
+    100326: Bone_162
+    100328: Bone_163
+    100330: Bone_164
+    100332: Bone_165
+    100334: Bone_166
+    100336: Bone_167
+    100338: Bone_168
+    100340: Bone_169
+    100342: Bone_170
+    100344: Bone_171
+    100346: Bone_172
+    100348: Bone_173
+    100350: Bone_174
+    100352: Bone_175
+    100354: Bone_176
+    100356: Bone_177
+    100358: Bone_178
+    100360: Bone_179
+    100362: Bone_180
+    100364: Bone_181
+    100366: Bone_182
+    100368: Bone_183
+    100370: Bone_184
+    100372: Bone_185
+    100374: Bone_186
+    100376: Bone_187
+    100378: Bone_188
+    100380: Bone_189
+    100382: Bone_190
+    100384: Bone_191
+    100386: Bone_192
+    100388: Bone_193
+    100390: Bone_194
+    100392: Bone_195
+    100394: Bone_196
+    100396: Bone_197
+    100398: Bone_198
+    100400: Bone_199
+    100402: Bone_200
+    100404: Bone_201
+    100406: Bone_202
+    100408: Bone_203
+    100410: Bone_204
+    100412: Bone_205
+    100414: Bone_206
+    100416: Bone_207
+    100418: Bone_208
+    100420: Bone_209
+    100422: Bone_210
+    100424: Bone_211
+    100426: Bone_212
+    100428: Bone_213
+    100430: Bone_214
+    100432: Bone_215
+    100434: Bone_216
+    100436: Bone_217
+    100438: Bone_218
+    100440: Bone_219
+    100442: Bone_220
+    100444: Bone_221
+    100446: Bone_222
+    100448: Bone_223
+    100450: Bone_224
+    100452: Bone_225
+    100454: Bone_226
+    100456: Bone_227
+    100458: Bone_228
+    100460: Bone_229
+    100462: Bone_230
+    100464: Bone_231
+    100466: Bone_232
+    100468: Bone_233
+    100470: Bone_234
+    100472: Bone_235
+    100474: Bone_236
+    100476: Bone_237
+    100478: Bone_238
+    100480: Bone_239
+    100482: Bone_240
+    100484: Bone_241
+    100486: Bone_242
+    100488: Bone_243
+    100490: Bone_244
+    100492: Bone_245
+    100494: Bone_246
+    100496: Bone_247
+    100498: Bone_248
+    100500: Bone_249
+    100502: Bone_250
+    100504: Empty
+    100506: NurbsPath_004
+    100508: //RootNode
+    400000: Armature_034
+    400002: Bone
+    400004: Bone_001
+    400006: Bone_002
+    400008: Bone_003
+    400010: Bone_004
+    400012: Bone_005
+    400014: Bone_006
+    400016: Bone_007
+    400018: Bone_008
+    400020: Bone_009
+    400022: Bone_010
+    400024: Bone_011
+    400026: Bone_012
+    400028: Bone_013
+    400030: Bone_014
+    400032: Bone_015
+    400034: Bone_016
+    400036: Bone_017
+    400038: Bone_018
+    400040: Bone_019
+    400042: Bone_020
+    400044: Bone_021
+    400046: Bone_022
+    400048: Bone_023
+    400050: Bone_024
+    400052: Bone_025
+    400054: Bone_026
+    400056: Bone_027
+    400058: Bone_028
+    400060: Bone_029
+    400062: Bone_030
+    400064: Bone_031
+    400066: Bone_032
+    400068: Bone_033
+    400070: Bone_034
+    400072: Bone_035
+    400074: Bone_036
+    400076: Bone_037
+    400078: Bone_038
+    400080: Bone_039
+    400082: Bone_040
+    400084: Bone_041
+    400086: Bone_042
+    400088: Bone_043
+    400090: Bone_044
+    400092: Bone_045
+    400094: Bone_046
+    400096: Bone_047
+    400098: Bone_048
+    400100: Bone_049
+    400102: Bone_050
+    400104: Bone_051
+    400106: Bone_052
+    400108: Bone_053
+    400110: Bone_054
+    400112: Bone_055
+    400114: Bone_056
+    400116: Bone_057
+    400118: Bone_058
+    400120: Bone_059
+    400122: Bone_060
+    400124: Bone_061
+    400126: Bone_062
+    400128: Bone_063
+    400130: Bone_064
+    400132: Bone_065
+    400134: Bone_066
+    400136: Bone_067
+    400138: Bone_068
+    400140: Bone_069
+    400142: Bone_070
+    400144: Bone_071
+    400146: Bone_072
+    400148: Bone_073
+    400150: Bone_074
+    400152: Bone_075
+    400154: Bone_076
+    400156: Bone_077
+    400158: Bone_078
+    400160: Bone_079
+    400162: Bone_080
+    400164: Bone_081
+    400166: Bone_082
+    400168: Bone_083
+    400170: Bone_084
+    400172: Bone_085
+    400174: Bone_086
+    400176: Bone_087
+    400178: Bone_088
+    400180: Bone_089
+    400182: Bone_090
+    400184: Bone_091
+    400186: Bone_092
+    400188: Bone_093
+    400190: Bone_094
+    400192: Bone_095
+    400194: Bone_096
+    400196: Bone_097
+    400198: Bone_098
+    400200: Bone_099
+    400202: Bone_100
+    400204: Bone_101
+    400206: Bone_102
+    400208: Bone_103
+    400210: Bone_104
+    400212: Bone_105
+    400214: Bone_106
+    400216: Bone_107
+    400218: Bone_108
+    400220: Bone_109
+    400222: Bone_110
+    400224: Bone_111
+    400226: Bone_112
+    400228: Bone_113
+    400230: Bone_114
+    400232: Bone_115
+    400234: Bone_116
+    400236: Bone_117
+    400238: Bone_118
+    400240: Bone_119
+    400242: Bone_120
+    400244: Bone_121
+    400246: Bone_122
+    400248: Bone_123
+    400250: Bone_124
+    400252: Bone_125
+    400254: Bone_126
+    400256: Bone_127
+    400258: Bone_128
+    400260: Bone_129
+    400262: Bone_130
+    400264: Bone_131
+    400266: Bone_132
+    400268: Bone_133
+    400270: Bone_134
+    400272: Bone_135
+    400274: Bone_136
+    400276: Bone_137
+    400278: Bone_138
+    400280: Bone_139
+    400282: Bone_140
+    400284: Bone_141
+    400286: Bone_142
+    400288: Bone_143
+    400290: Bone_144
+    400292: Bone_145
+    400294: Bone_146
+    400296: Bone_147
+    400298: Bone_148
+    400300: Bone_149
+    400302: Bone_150
+    400304: Bone_151
+    400306: Bone_152
+    400308: Bone_153
+    400310: Bone_154
+    400312: Bone_155
+    400314: Bone_156
+    400316: Bone_157
+    400318: Bone_158
+    400320: Bone_159
+    400322: Bone_160
+    400324: Bone_161
+    400326: Bone_162
+    400328: Bone_163
+    400330: Bone_164
+    400332: Bone_165
+    400334: Bone_166
+    400336: Bone_167
+    400338: Bone_168
+    400340: Bone_169
+    400342: Bone_170
+    400344: Bone_171
+    400346: Bone_172
+    400348: Bone_173
+    400350: Bone_174
+    400352: Bone_175
+    400354: Bone_176
+    400356: Bone_177
+    400358: Bone_178
+    400360: Bone_179
+    400362: Bone_180
+    400364: Bone_181
+    400366: Bone_182
+    400368: Bone_183
+    400370: Bone_184
+    400372: Bone_185
+    400374: Bone_186
+    400376: Bone_187
+    400378: Bone_188
+    400380: Bone_189
+    400382: Bone_190
+    400384: Bone_191
+    400386: Bone_192
+    400388: Bone_193
+    400390: Bone_194
+    400392: Bone_195
+    400394: Bone_196
+    400396: Bone_197
+    400398: Bone_198
+    400400: Bone_199
+    400402: Bone_200
+    400404: Bone_201
+    400406: Bone_202
+    400408: Bone_203
+    400410: Bone_204
+    400412: Bone_205
+    400414: Bone_206
+    400416: Bone_207
+    400418: Bone_208
+    400420: Bone_209
+    400422: Bone_210
+    400424: Bone_211
+    400426: Bone_212
+    400428: Bone_213
+    400430: Bone_214
+    400432: Bone_215
+    400434: Bone_216
+    400436: Bone_217
+    400438: Bone_218
+    400440: Bone_219
+    400442: Bone_220
+    400444: Bone_221
+    400446: Bone_222
+    400448: Bone_223
+    400450: Bone_224
+    400452: Bone_225
+    400454: Bone_226
+    400456: Bone_227
+    400458: Bone_228
+    400460: Bone_229
+    400462: Bone_230
+    400464: Bone_231
+    400466: Bone_232
+    400468: Bone_233
+    400470: Bone_234
+    400472: Bone_235
+    400474: Bone_236
+    400476: Bone_237
+    400478: Bone_238
+    400480: Bone_239
+    400482: Bone_240
+    400484: Bone_241
+    400486: Bone_242
+    400488: Bone_243
+    400490: Bone_244
+    400492: Bone_245
+    400494: Bone_246
+    400496: Bone_247
+    400498: Bone_248
+    400500: Bone_249
+    400502: Bone_250
+    400504: Empty
+    400506: NurbsPath_004
+    400508: //RootNode
+    4300000: NurbsPath_004
+    7400000: Default Take
+    7400002: redwood_dying
+    7400004: redwood_growing
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: NurbsPath_004
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: redwood_dying
+      takeName: redwood_dying
+      firstFrame: 0
+      lastFrame: 238
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature_034
+        weight: 1
+      - path: Armature_034/Bone
+        weight: 1
+      - path: Armature_034/Bone/Bone_002
+        weight: 1
+      - path: Armature_034/Bone/Bone_002/Bone_001
+        weight: 1
+      - path: Armature_034/Bone_003
+        weight: 1
+      - path: Armature_034/Bone_004
+        weight: 1
+      - path: Armature_034/Bone_004/Bone_005
+        weight: 1
+      - path: Armature_034/Bone_004/Bone_005/Bone_006
+        weight: 1
+      - path: Armature_034/Bone_004/Bone_005/Bone_006/Bone_007
+        weight: 1
+      - path: Armature_034/Bone_008
+        weight: 1
+      - path: Armature_034/Bone_009
+        weight: 1
+      - path: Armature_034/Bone_010
+        weight: 1
+      - path: Armature_034/Bone_011
+        weight: 1
+      - path: Armature_034/Bone_012
+        weight: 1
+      - path: Armature_034/Bone_012/Bone_013
+        weight: 1
+      - path: Armature_034/Bone_014
+        weight: 1
+      - path: Armature_034/Bone_014/Bone_015
+        weight: 1
+      - path: Armature_034/Bone_016
+        weight: 1
+      - path: Armature_034/Bone_016/Bone_017
+        weight: 1
+      - path: Armature_034/Bone_018
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019/Bone_020
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019/Bone_020/Bone_021
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019/Bone_020/Bone_021/Bone_022
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_023
+        weight: 1
+      - path: Armature_034/Bone_024
+        weight: 1
+      - path: Armature_034/Bone_024/Bone_025
+        weight: 1
+      - path: Armature_034/Bone_024/Bone_025/Bone_026
+        weight: 1
+      - path: Armature_034/Bone_024/Bone_025/Bone_026/Bone_027
+        weight: 1
+      - path: Armature_034/Bone_028
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030/Bone_031
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030/Bone_031/Bone_032
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030/Bone_031/Bone_032/Bone_033
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_034
+        weight: 1
+      - path: Armature_034/Bone_035
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_036
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_036/Bone_037
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_036/Bone_037/Bone_038
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_039
+        weight: 1
+      - path: Armature_034/Bone_040
+        weight: 1
+      - path: Armature_034/Bone_041
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_042
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_042/Bone_043
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_042/Bone_043/Bone_044
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_045
+        weight: 1
+      - path: Armature_034/Bone_046
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047/Bone_048
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047/Bone_048/Bone_049
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047/Bone_048/Bone_049/Bone_050
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_051
+        weight: 1
+      - path: Armature_034/Bone_052
+        weight: 1
+      - path: Armature_034/Bone_052/Bone_053
+        weight: 1
+      - path: Armature_034/Bone_054
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055/Bone_056
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055/Bone_056/Bone_057
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055/Bone_056/Bone_057/Bone_058
+        weight: 1
+      - path: Armature_034/Bone_059
+        weight: 1
+      - path: Armature_034/Bone_060
+        weight: 1
+      - path: Armature_034/Bone_060/Bone_061
+        weight: 1
+      - path: Armature_034/Bone_062
+        weight: 1
+      - path: Armature_034/Bone_062/Bone_063
+        weight: 1
+      - path: Armature_034/Bone_062/Bone_063/Bone_064
+        weight: 1
+      - path: Armature_034/Bone_065
+        weight: 1
+      - path: Armature_034/Bone_065/Bone_066
+        weight: 1
+      - path: Armature_034/Bone_065/Bone_066/Bone_067
+        weight: 1
+      - path: Armature_034/Bone_065/Bone_066/Bone_067/Bone_068
+        weight: 1
+      - path: Armature_034/Bone_069
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_070
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_070/Bone_071
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_072
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_073
+        weight: 1
+      - path: Armature_034/Bone_074
+        weight: 1
+      - path: Armature_034/Bone_074/Bone_075
+        weight: 1
+      - path: Armature_034/Bone_074/Bone_075/Bone_076
+        weight: 1
+      - path: Armature_034/Bone_077
+        weight: 1
+      - path: Armature_034/Bone_077/Bone_078
+        weight: 1
+      - path: Armature_034/Bone_077/Bone_078/Bone_079
+        weight: 1
+      - path: Armature_034/Bone_080
+        weight: 1
+      - path: Armature_034/Bone_080/Bone_081
+        weight: 1
+      - path: Armature_034/Bone_080/Bone_081/Bone_082
+        weight: 1
+      - path: Armature_034/Bone_083
+        weight: 1
+      - path: Armature_034/Bone_083/Bone_084
+        weight: 1
+      - path: Armature_034/Bone_085
+        weight: 1
+      - path: Armature_034/Bone_085/Bone_086
+        weight: 1
+      - path: Armature_034/Bone_087
+        weight: 1
+      - path: Armature_034/Bone_087/Bone_088
+        weight: 1
+      - path: Armature_034/Bone_087/Bone_088/Bone_089
+        weight: 1
+      - path: Armature_034/Bone_087/Bone_088/Bone_089/Bone_090
+        weight: 1
+      - path: Armature_034/Bone_091
+        weight: 1
+      - path: Armature_034/Bone_091/Bone_092
+        weight: 1
+      - path: Armature_034/Bone_091/Bone_092/Bone_093
+        weight: 1
+      - path: Armature_034/Bone_091/Bone_092/Bone_093/Bone_094
+        weight: 1
+      - path: Armature_034/Bone_095
+        weight: 1
+      - path: Armature_034/Bone_095/Bone_096
+        weight: 1
+      - path: Armature_034/Bone_095/Bone_096/Bone_097
+        weight: 1
+      - path: Armature_034/Bone_095/Bone_096/Bone_097/Bone_098
+        weight: 1
+      - path: Armature_034/Bone_099
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100/Bone_101
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100/Bone_101/Bone_102
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100/Bone_101/Bone_102/Bone_103
+        weight: 1
+      - path: Armature_034/Bone_104
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105/Bone_106
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105/Bone_106/Bone_107
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105/Bone_106/Bone_107/Bone_108
+        weight: 1
+      - path: Armature_034/Bone_109
+        weight: 1
+      - path: Armature_034/Bone_109/Bone_110
+        weight: 1
+      - path: Armature_034/Bone_109/Bone_110/Bone_111
+        weight: 1
+      - path: Armature_034/Bone_112
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113/Bone_114
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113/Bone_114/Bone_115
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113/Bone_114/Bone_115/Bone_116
+        weight: 1
+      - path: Armature_034/Bone_117
+        weight: 1
+      - path: Armature_034/Bone_117/Bone_118
+        weight: 1
+      - path: Armature_034/Bone_117/Bone_118/Bone_119
+        weight: 1
+      - path: Armature_034/Bone_120
+        weight: 1
+      - path: Armature_034/Bone_120/Bone_121
+        weight: 1
+      - path: Armature_034/Bone_120/Bone_121/Bone_122
+        weight: 1
+      - path: Armature_034/Bone_123
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124/Bone_125
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124/Bone_125/Bone_126
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124/Bone_125/Bone_126/Bone_127
+        weight: 1
+      - path: Armature_034/Bone_128
+        weight: 1
+      - path: Armature_034/Bone_128/Bone_129
+        weight: 1
+      - path: Armature_034/Bone_128/Bone_129/Bone_130
+        weight: 1
+      - path: Armature_034/Bone_128/Bone_129/Bone_130/Bone_131
+        weight: 1
+      - path: Armature_034/Bone_132
+        weight: 1
+      - path: Armature_034/Bone_132/Bone_133
+        weight: 1
+      - path: Armature_034/Bone_132/Bone_133/Bone_134
+        weight: 1
+      - path: Armature_034/Bone_132/Bone_133/Bone_134/Bone_135
+        weight: 1
+      - path: Armature_034/Bone_136
+        weight: 1
+      - path: Armature_034/Bone_136/Bone_137
+        weight: 1
+      - path: Armature_034/Bone_136/Bone_137/Bone_138
+        weight: 1
+      - path: Armature_034/Bone_136/Bone_137/Bone_138/Bone_139
+        weight: 1
+      - path: Armature_034/Bone_140
+        weight: 1
+      - path: Armature_034/Bone_140/Bone_141
+        weight: 1
+      - path: Armature_034/Bone_140/Bone_141/Bone_142
+        weight: 1
+      - path: Armature_034/Bone_140/Bone_141/Bone_142/Bone_143
+        weight: 1
+      - path: Armature_034/Bone_144
+        weight: 1
+      - path: Armature_034/Bone_144/Bone_145
+        weight: 1
+      - path: Armature_034/Bone_144/Bone_145/Bone_146
+        weight: 1
+      - path: Armature_034/Bone_144/Bone_145/Bone_146/Bone_147
+        weight: 1
+      - path: Armature_034/Bone_148
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149/Bone_150
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149/Bone_150/Bone_151
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149/Bone_150/Bone_151/Bone_152
+        weight: 1
+      - path: Armature_034/Bone_153
+        weight: 1
+      - path: Armature_034/Bone_153/Bone_154
+        weight: 1
+      - path: Armature_034/Bone_153/Bone_154/Bone_155
+        weight: 1
+      - path: Armature_034/Bone_156
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159/Bone_160
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159/Bone_160/Bone_161
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159/Bone_160/Bone_161/Bone_162
+        weight: 1
+      - path: Armature_034/Bone_163
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164/Bone_165
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164/Bone_165/Bone_166
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164/Bone_165/Bone_166/Bone_167
+        weight: 1
+      - path: Armature_034/Bone_168
+        weight: 1
+      - path: Armature_034/Bone_168/Bone_169
+        weight: 1
+      - path: Armature_034/Bone_168/Bone_169/Bone_170
+        weight: 1
+      - path: Armature_034/Bone_171
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173/Bone_174
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173/Bone_174/Bone_175
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173/Bone_174/Bone_175/Bone_176
+        weight: 1
+      - path: Armature_034/Bone_177
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180/Bone_181
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180/Bone_181/Bone_182
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180/Bone_181/Bone_182/Bone_183
+        weight: 1
+      - path: Armature_034/Bone_184
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185/Bone_186
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185/Bone_186/Bone_187
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185/Bone_186/Bone_187/Bone_188
+        weight: 1
+      - path: Armature_034/Bone_189
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190/Bone_191
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190/Bone_191/Bone_192
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190/Bone_191/Bone_192/Bone_193
+        weight: 1
+      - path: Armature_034/Bone_194
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195/Bone_196
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195/Bone_196/Bone_197
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195/Bone_196/Bone_197/Bone_198
+        weight: 1
+      - path: Armature_034/Bone_199
+        weight: 1
+      - path: Armature_034/Bone_199/Bone_200
+        weight: 1
+      - path: Armature_034/Bone_199/Bone_200/Bone_201
+        weight: 1
+      - path: Armature_034/Bone_202
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203/Bone_204
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203/Bone_204/Bone_205
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203/Bone_204/Bone_205/Bone_206
+        weight: 1
+      - path: Armature_034/Bone_207
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211/Bone_212
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211/Bone_212/Bone_213
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211/Bone_212/Bone_213/Bone_214
+        weight: 1
+      - path: Armature_034/Bone_215
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218/Bone_219
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218/Bone_219/Bone_220
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218/Bone_219/Bone_220/Bone_221
+        weight: 1
+      - path: Armature_034/Bone_222
+        weight: 1
+      - path: Armature_034/Bone_222/Bone_223
+        weight: 1
+      - path: Armature_034/Bone_222/Bone_223/Bone_224
+        weight: 1
+      - path: Armature_034/Bone_222/Bone_223/Bone_224/Bone_225
+        weight: 1
+      - path: Armature_034/Bone_226
+        weight: 1
+      - path: Armature_034/Bone_226/Bone_227
+        weight: 1
+      - path: Armature_034/Bone_226/Bone_227/Bone_228
+        weight: 1
+      - path: Armature_034/Bone_226/Bone_227/Bone_228/Bone_229
+        weight: 1
+      - path: Armature_034/Bone_230
+        weight: 1
+      - path: Armature_034/Bone_230/Bone_231
+        weight: 1
+      - path: Armature_034/Bone_230/Bone_231/Bone_232
+        weight: 1
+      - path: Armature_034/Bone_230/Bone_231/Bone_232/Bone_233
+        weight: 1
+      - path: Armature_034/Bone_234
+        weight: 1
+      - path: Armature_034/Bone_234/Bone_235
+        weight: 1
+      - path: Armature_034/Bone_234/Bone_235/Bone_236
+        weight: 1
+      - path: Armature_034/Bone_234/Bone_235/Bone_236/Bone_237
+        weight: 1
+      - path: Armature_034/Bone_238
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247/Bone_248
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247/Bone_248/Bone_249
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247/Bone_248/Bone_249/Bone_250
+        weight: 1
+      - path: Empty
+        weight: 1
+      - path: NurbsPath_004
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: redwood_growing
+      takeName: redwood_growing
+      firstFrame: 0
+      lastFrame: 239
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature_034
+        weight: 1
+      - path: Armature_034/Bone
+        weight: 1
+      - path: Armature_034/Bone/Bone_002
+        weight: 1
+      - path: Armature_034/Bone/Bone_002/Bone_001
+        weight: 1
+      - path: Armature_034/Bone_003
+        weight: 1
+      - path: Armature_034/Bone_004
+        weight: 1
+      - path: Armature_034/Bone_004/Bone_005
+        weight: 1
+      - path: Armature_034/Bone_004/Bone_005/Bone_006
+        weight: 1
+      - path: Armature_034/Bone_004/Bone_005/Bone_006/Bone_007
+        weight: 1
+      - path: Armature_034/Bone_008
+        weight: 1
+      - path: Armature_034/Bone_009
+        weight: 1
+      - path: Armature_034/Bone_010
+        weight: 1
+      - path: Armature_034/Bone_011
+        weight: 1
+      - path: Armature_034/Bone_012
+        weight: 1
+      - path: Armature_034/Bone_012/Bone_013
+        weight: 1
+      - path: Armature_034/Bone_014
+        weight: 1
+      - path: Armature_034/Bone_014/Bone_015
+        weight: 1
+      - path: Armature_034/Bone_016
+        weight: 1
+      - path: Armature_034/Bone_016/Bone_017
+        weight: 1
+      - path: Armature_034/Bone_018
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019/Bone_020
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019/Bone_020/Bone_021
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_019/Bone_020/Bone_021/Bone_022
+        weight: 1
+      - path: Armature_034/Bone_018/Bone_023
+        weight: 1
+      - path: Armature_034/Bone_024
+        weight: 1
+      - path: Armature_034/Bone_024/Bone_025
+        weight: 1
+      - path: Armature_034/Bone_024/Bone_025/Bone_026
+        weight: 1
+      - path: Armature_034/Bone_024/Bone_025/Bone_026/Bone_027
+        weight: 1
+      - path: Armature_034/Bone_028
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030/Bone_031
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030/Bone_031/Bone_032
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_030/Bone_031/Bone_032/Bone_033
+        weight: 1
+      - path: Armature_034/Bone_028/Bone_029/Bone_034
+        weight: 1
+      - path: Armature_034/Bone_035
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_036
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_036/Bone_037
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_036/Bone_037/Bone_038
+        weight: 1
+      - path: Armature_034/Bone_035/Bone_039
+        weight: 1
+      - path: Armature_034/Bone_040
+        weight: 1
+      - path: Armature_034/Bone_041
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_042
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_042/Bone_043
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_042/Bone_043/Bone_044
+        weight: 1
+      - path: Armature_034/Bone_041/Bone_045
+        weight: 1
+      - path: Armature_034/Bone_046
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047/Bone_048
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047/Bone_048/Bone_049
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_047/Bone_048/Bone_049/Bone_050
+        weight: 1
+      - path: Armature_034/Bone_046/Bone_051
+        weight: 1
+      - path: Armature_034/Bone_052
+        weight: 1
+      - path: Armature_034/Bone_052/Bone_053
+        weight: 1
+      - path: Armature_034/Bone_054
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055/Bone_056
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055/Bone_056/Bone_057
+        weight: 1
+      - path: Armature_034/Bone_054/Bone_055/Bone_056/Bone_057/Bone_058
+        weight: 1
+      - path: Armature_034/Bone_059
+        weight: 1
+      - path: Armature_034/Bone_060
+        weight: 1
+      - path: Armature_034/Bone_060/Bone_061
+        weight: 1
+      - path: Armature_034/Bone_062
+        weight: 1
+      - path: Armature_034/Bone_062/Bone_063
+        weight: 1
+      - path: Armature_034/Bone_062/Bone_063/Bone_064
+        weight: 1
+      - path: Armature_034/Bone_065
+        weight: 1
+      - path: Armature_034/Bone_065/Bone_066
+        weight: 1
+      - path: Armature_034/Bone_065/Bone_066/Bone_067
+        weight: 1
+      - path: Armature_034/Bone_065/Bone_066/Bone_067/Bone_068
+        weight: 1
+      - path: Armature_034/Bone_069
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_070
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_070/Bone_071
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_072
+        weight: 1
+      - path: Armature_034/Bone_069/Bone_073
+        weight: 1
+      - path: Armature_034/Bone_074
+        weight: 1
+      - path: Armature_034/Bone_074/Bone_075
+        weight: 1
+      - path: Armature_034/Bone_074/Bone_075/Bone_076
+        weight: 1
+      - path: Armature_034/Bone_077
+        weight: 1
+      - path: Armature_034/Bone_077/Bone_078
+        weight: 1
+      - path: Armature_034/Bone_077/Bone_078/Bone_079
+        weight: 1
+      - path: Armature_034/Bone_080
+        weight: 1
+      - path: Armature_034/Bone_080/Bone_081
+        weight: 1
+      - path: Armature_034/Bone_080/Bone_081/Bone_082
+        weight: 1
+      - path: Armature_034/Bone_083
+        weight: 1
+      - path: Armature_034/Bone_083/Bone_084
+        weight: 1
+      - path: Armature_034/Bone_085
+        weight: 1
+      - path: Armature_034/Bone_085/Bone_086
+        weight: 1
+      - path: Armature_034/Bone_087
+        weight: 1
+      - path: Armature_034/Bone_087/Bone_088
+        weight: 1
+      - path: Armature_034/Bone_087/Bone_088/Bone_089
+        weight: 1
+      - path: Armature_034/Bone_087/Bone_088/Bone_089/Bone_090
+        weight: 1
+      - path: Armature_034/Bone_091
+        weight: 1
+      - path: Armature_034/Bone_091/Bone_092
+        weight: 1
+      - path: Armature_034/Bone_091/Bone_092/Bone_093
+        weight: 1
+      - path: Armature_034/Bone_091/Bone_092/Bone_093/Bone_094
+        weight: 1
+      - path: Armature_034/Bone_095
+        weight: 1
+      - path: Armature_034/Bone_095/Bone_096
+        weight: 1
+      - path: Armature_034/Bone_095/Bone_096/Bone_097
+        weight: 1
+      - path: Armature_034/Bone_095/Bone_096/Bone_097/Bone_098
+        weight: 1
+      - path: Armature_034/Bone_099
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100/Bone_101
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100/Bone_101/Bone_102
+        weight: 1
+      - path: Armature_034/Bone_099/Bone_100/Bone_101/Bone_102/Bone_103
+        weight: 1
+      - path: Armature_034/Bone_104
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105/Bone_106
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105/Bone_106/Bone_107
+        weight: 1
+      - path: Armature_034/Bone_104/Bone_105/Bone_106/Bone_107/Bone_108
+        weight: 1
+      - path: Armature_034/Bone_109
+        weight: 1
+      - path: Armature_034/Bone_109/Bone_110
+        weight: 1
+      - path: Armature_034/Bone_109/Bone_110/Bone_111
+        weight: 1
+      - path: Armature_034/Bone_112
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113/Bone_114
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113/Bone_114/Bone_115
+        weight: 1
+      - path: Armature_034/Bone_112/Bone_113/Bone_114/Bone_115/Bone_116
+        weight: 1
+      - path: Armature_034/Bone_117
+        weight: 1
+      - path: Armature_034/Bone_117/Bone_118
+        weight: 1
+      - path: Armature_034/Bone_117/Bone_118/Bone_119
+        weight: 1
+      - path: Armature_034/Bone_120
+        weight: 1
+      - path: Armature_034/Bone_120/Bone_121
+        weight: 1
+      - path: Armature_034/Bone_120/Bone_121/Bone_122
+        weight: 1
+      - path: Armature_034/Bone_123
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124/Bone_125
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124/Bone_125/Bone_126
+        weight: 1
+      - path: Armature_034/Bone_123/Bone_124/Bone_125/Bone_126/Bone_127
+        weight: 1
+      - path: Armature_034/Bone_128
+        weight: 1
+      - path: Armature_034/Bone_128/Bone_129
+        weight: 1
+      - path: Armature_034/Bone_128/Bone_129/Bone_130
+        weight: 1
+      - path: Armature_034/Bone_128/Bone_129/Bone_130/Bone_131
+        weight: 1
+      - path: Armature_034/Bone_132
+        weight: 1
+      - path: Armature_034/Bone_132/Bone_133
+        weight: 1
+      - path: Armature_034/Bone_132/Bone_133/Bone_134
+        weight: 1
+      - path: Armature_034/Bone_132/Bone_133/Bone_134/Bone_135
+        weight: 1
+      - path: Armature_034/Bone_136
+        weight: 1
+      - path: Armature_034/Bone_136/Bone_137
+        weight: 1
+      - path: Armature_034/Bone_136/Bone_137/Bone_138
+        weight: 1
+      - path: Armature_034/Bone_136/Bone_137/Bone_138/Bone_139
+        weight: 1
+      - path: Armature_034/Bone_140
+        weight: 1
+      - path: Armature_034/Bone_140/Bone_141
+        weight: 1
+      - path: Armature_034/Bone_140/Bone_141/Bone_142
+        weight: 1
+      - path: Armature_034/Bone_140/Bone_141/Bone_142/Bone_143
+        weight: 1
+      - path: Armature_034/Bone_144
+        weight: 1
+      - path: Armature_034/Bone_144/Bone_145
+        weight: 1
+      - path: Armature_034/Bone_144/Bone_145/Bone_146
+        weight: 1
+      - path: Armature_034/Bone_144/Bone_145/Bone_146/Bone_147
+        weight: 1
+      - path: Armature_034/Bone_148
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149/Bone_150
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149/Bone_150/Bone_151
+        weight: 1
+      - path: Armature_034/Bone_148/Bone_149/Bone_150/Bone_151/Bone_152
+        weight: 1
+      - path: Armature_034/Bone_153
+        weight: 1
+      - path: Armature_034/Bone_153/Bone_154
+        weight: 1
+      - path: Armature_034/Bone_153/Bone_154/Bone_155
+        weight: 1
+      - path: Armature_034/Bone_156
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159/Bone_160
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159/Bone_160/Bone_161
+        weight: 1
+      - path: Armature_034/Bone_156/Bone_157/Bone_158/Bone_159/Bone_160/Bone_161/Bone_162
+        weight: 1
+      - path: Armature_034/Bone_163
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164/Bone_165
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164/Bone_165/Bone_166
+        weight: 1
+      - path: Armature_034/Bone_163/Bone_164/Bone_165/Bone_166/Bone_167
+        weight: 1
+      - path: Armature_034/Bone_168
+        weight: 1
+      - path: Armature_034/Bone_168/Bone_169
+        weight: 1
+      - path: Armature_034/Bone_168/Bone_169/Bone_170
+        weight: 1
+      - path: Armature_034/Bone_171
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173/Bone_174
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173/Bone_174/Bone_175
+        weight: 1
+      - path: Armature_034/Bone_171/Bone_172/Bone_173/Bone_174/Bone_175/Bone_176
+        weight: 1
+      - path: Armature_034/Bone_177
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180/Bone_181
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180/Bone_181/Bone_182
+        weight: 1
+      - path: Armature_034/Bone_177/Bone_178/Bone_179/Bone_180/Bone_181/Bone_182/Bone_183
+        weight: 1
+      - path: Armature_034/Bone_184
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185/Bone_186
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185/Bone_186/Bone_187
+        weight: 1
+      - path: Armature_034/Bone_184/Bone_185/Bone_186/Bone_187/Bone_188
+        weight: 1
+      - path: Armature_034/Bone_189
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190/Bone_191
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190/Bone_191/Bone_192
+        weight: 1
+      - path: Armature_034/Bone_189/Bone_190/Bone_191/Bone_192/Bone_193
+        weight: 1
+      - path: Armature_034/Bone_194
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195/Bone_196
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195/Bone_196/Bone_197
+        weight: 1
+      - path: Armature_034/Bone_194/Bone_195/Bone_196/Bone_197/Bone_198
+        weight: 1
+      - path: Armature_034/Bone_199
+        weight: 1
+      - path: Armature_034/Bone_199/Bone_200
+        weight: 1
+      - path: Armature_034/Bone_199/Bone_200/Bone_201
+        weight: 1
+      - path: Armature_034/Bone_202
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203/Bone_204
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203/Bone_204/Bone_205
+        weight: 1
+      - path: Armature_034/Bone_202/Bone_203/Bone_204/Bone_205/Bone_206
+        weight: 1
+      - path: Armature_034/Bone_207
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211/Bone_212
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211/Bone_212/Bone_213
+        weight: 1
+      - path: Armature_034/Bone_207/Bone_208/Bone_209/Bone_210/Bone_211/Bone_212/Bone_213/Bone_214
+        weight: 1
+      - path: Armature_034/Bone_215
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218/Bone_219
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218/Bone_219/Bone_220
+        weight: 1
+      - path: Armature_034/Bone_215/Bone_216/Bone_217/Bone_218/Bone_219/Bone_220/Bone_221
+        weight: 1
+      - path: Armature_034/Bone_222
+        weight: 1
+      - path: Armature_034/Bone_222/Bone_223
+        weight: 1
+      - path: Armature_034/Bone_222/Bone_223/Bone_224
+        weight: 1
+      - path: Armature_034/Bone_222/Bone_223/Bone_224/Bone_225
+        weight: 1
+      - path: Armature_034/Bone_226
+        weight: 1
+      - path: Armature_034/Bone_226/Bone_227
+        weight: 1
+      - path: Armature_034/Bone_226/Bone_227/Bone_228
+        weight: 1
+      - path: Armature_034/Bone_226/Bone_227/Bone_228/Bone_229
+        weight: 1
+      - path: Armature_034/Bone_230
+        weight: 1
+      - path: Armature_034/Bone_230/Bone_231
+        weight: 1
+      - path: Armature_034/Bone_230/Bone_231/Bone_232
+        weight: 1
+      - path: Armature_034/Bone_230/Bone_231/Bone_232/Bone_233
+        weight: 1
+      - path: Armature_034/Bone_234
+        weight: 1
+      - path: Armature_034/Bone_234/Bone_235
+        weight: 1
+      - path: Armature_034/Bone_234/Bone_235/Bone_236
+        weight: 1
+      - path: Armature_034/Bone_234/Bone_235/Bone_236/Bone_237
+        weight: 1
+      - path: Armature_034/Bone_238
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247/Bone_248
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247/Bone_248/Bone_249
+        weight: 1
+      - path: Armature_034/Bone_238/Bone_239/Bone_240/Bone_241/Bone_242/Bone_243/Bone_244/Bone_245/Bone_246/Bone_247/Bone_248/Bone_249/Bone_250
+        weight: 1
+      - path: Empty
+        weight: 1
+      - path: NurbsPath_004
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
