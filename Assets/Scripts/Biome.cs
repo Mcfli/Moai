@@ -23,7 +23,7 @@ public class Biome : MonoBehaviour {
     // Doodads, type and desnity. doodads[0] gives first kind of doodad and 
     // doodadDensity[0] gives how many of that doodad to spawn
     public List<GameObject> doodads;
-    public List<int> doodadDensity;
+    public List<Vector2> doodadDensity;
 
     public int treeDensity = 2;
     public float forestRadius = 50;

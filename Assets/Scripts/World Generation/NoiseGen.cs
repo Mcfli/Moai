@@ -168,7 +168,6 @@ public class NoiseGen : MonoBehaviour
             if (val > 0) val = 1 - val;
             else val = val + 1f;
             total += 2 * (val + 1f) * amp;
-
         }
 
         return amplitude * total;

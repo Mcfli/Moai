@@ -21,7 +21,7 @@ public class DoodadManager : MonoBehaviour
         // 
         for(int i = 0; i < biome.doodads.Count; i++)
         {
-            loadDoodadType(key,biome.doodads[i], biome.doodadDensity[i]);
+            loadDoodadType(key,biome.doodads[i], Mathf.RoundToInt(Random.Range(biome.doodadDensity[i].x,biome.doodadDensity[i].y)));
         }
     }
     
