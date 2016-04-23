@@ -7,7 +7,6 @@ public class WaterManager : MonoBehaviour {
     public float waterResolution = 0.1f; // Number of vertices in one unity unit length
     public float acceptableHeightDiff = 10f;
 
-
     // Chunk -> water object list dictionary
     private static Dictionary<Vector2, List<GameObject>> waterBodies;
     

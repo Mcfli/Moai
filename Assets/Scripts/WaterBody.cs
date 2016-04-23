@@ -298,32 +298,20 @@ public class WaterBody : MonoBehaviour {
                 int v2 = (x + 1) + y * xRes;
                 int v3 = x + (y + 1) * xRes;
                 int v4 = (x + 1) + (y + 1) * xRes;
-
-                if (Mathf.Repeat(x + y, 2) == 1)
-                { //top left to bottom right
-                    triangles[i] = v4;
-                    triangles[i + 1] = v1;
-                    triangles[i + 2] = v3;
-                    triangles[i + 3] = v1;
-                    triangles[i + 4] = v4;
-                    triangles[i + 5] = v2;
-                }
-                else
-                { //top right to bottom left
-                    triangles[i] = v4;
-                    triangles[i + 1] = v2;
-                    triangles[i + 2] = v3;
-                    triangles[i + 3] = v2;
-                    triangles[i + 4] = v1;
-                    triangles[i + 5] = v3;
-                }
+                //top left to bottom right
+                triangles[i] = v4;
+                triangles[i + 1] = v1;
+                triangles[i + 2] = v3;
+                triangles[i + 3] = v1;
+                triangles[i + 4] = v4;
+                triangles[i + 5] = v2;
 
                 i += 6;
             }
         }
         mf.mesh.triangles = triangles;
 
-        mf.mesh.RecalculateBounds();
+        //mf.mesh.RecalculateBounds();
         mf.mesh.RecalculateNormals();
     }
 
