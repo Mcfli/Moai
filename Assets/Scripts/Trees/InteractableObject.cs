@@ -117,7 +117,7 @@ public class InteractableObject: MonoBehaviour{
     }
     
     private bool isHeld(){
-        return Globals.PlayerScript.getHeldObj() == this;
+        return Globals.PlayerScript.getRightObj() == this || Globals.PlayerScript.getRightObj() == this;
     }
 
     public bool canUse(RaycastHit r) {
@@ -138,7 +138,7 @@ public class InteractableObject: MonoBehaviour{
 
     public bool plant(Vector3 place) {
         if (planted) return false;
-        if (Globals.PlayerScript.getHeldObj() == this) Globals.PlayerScript.DropObject();
+        if (Globals.PlayerScript.getRightObj() == this) Globals.PlayerScript.DropObject(false);
         transform.position = place;
         thisRigidbody.isKinematic = true;
         if(dirtMound) dirtMound.SetActive(true);

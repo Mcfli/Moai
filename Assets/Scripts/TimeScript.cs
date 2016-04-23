@@ -20,7 +20,7 @@ public class TimeScript : MonoBehaviour {
         currentTimeReadOnly = Globals.time / Globals.time_resolution;
         currentTimeScaleReadOnly = Globals.time_scale;
 
-        if(Input.GetButton("Patience") && !Globals.paused) { //PATIENCE IS POWER
+        if(Input.GetButton("Patience")) { //PATIENCE IS POWER
             if(waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);
             else Globals.time_scale = maxWaitSpeed;
             if(Input.GetButton("Sprint")) waitingFor += Time.deltaTime * sprintWaitMultiplier;

@@ -10,9 +10,12 @@ public class Player : MonoBehaviour {
     private float cameraHeight;
     
 	private bool startGroundWarp;
-    private InteractableObject heldObj;
-    private float heldObjSize;
-    private Vector3 heldObjOrigScale;
+    private InteractableObject leftObj;
+    private InteractableObject rightObj;
+    //private float leftSize;
+    private float rightSize;
+    private Vector3 leftOrigScale;
+    private Vector3 rightOrigScale;
     private bool underwater;
 
     public AudioClip speedUp;
@@ -57,13 +60,17 @@ public class Player : MonoBehaviour {
                 playerAudio.loop = true;
                 playerAudio.PlayOneShot(speedUp, .2f);
             }
-            firstPersonCont.enabled = false;
+            if (firstPersonCont.enabled)
+            {
+                firstPersonCont.enabled = !firstPersonCont.enabled;
+            }
         }
         if (Globals.time_scale > cinematicTimeScale)
         {
 			if(!playerModel.activeInHierarchy)
 			{
 				playerModel.SetActive(true);
+                Crosshair.visible = false;
 			}
 			else
 			{
@@ -92,35 +99,36 @@ public class Player : MonoBehaviour {
                 playerModel.SetActive(false);
                 camDistance = waitCamDistance;
                 theta = 0.0f;
+                Crosshair.visible = true;
             }
-            firstPersonCont.enabled = true;
+            if (!firstPersonCont.enabled)
+            {
+                firstPersonCont.enabled = !firstPersonCont.enabled;
+            }
         }
-
-        if(Globals.paused || Globals.time_scale > 1) firstPersonCont.lookLock = true;
-        else firstPersonCont.lookLock = false;
 
         //Holding Objects stuff
         if (Input.GetButtonDown("Use")){
-            if (heldObj == null && GetHover().collider && !IsTree(GetHover().collider.gameObject)) 
-                TryGrabObject(GetHover().collider.gameObject);
+            if (rightObj == null && GetHover().collider && !IsTree(GetHover().collider.gameObject)) 
+                TryGrabObject(GetHover().collider.gameObject, false);
             else if (GetHover().collider && IsTree(GetHover().collider.gameObject))
                 TryPunchTree(GetHover().collider.gameObject);
-            else if (TryUseObject()) { }
-            else DropObject();
+            else if (TryUseObject(false)) { }
+            else DropObject(false);
         }
-        if(heldObj != null) followHand(heldObj, heldObjSize);
+        if(rightObj != null) followHand(rightObj, rightSize, false);
 
         underwater = Globals.Player.transform.position.y + cameraHeight < Globals.water_level;
     }
 
     public bool isUnderwater() {return underwater;}
     
-    private void followHand(InteractableObject obj, float objSize){
+    private void followHand(InteractableObject obj, float objSize, bool isLeft){
         Transform t = Camera.main.transform;
         float scale = 0.5f; //temp
         float angleAway = 0.5f; //temp
-        obj.transform.position = t.position + Vector3.Lerp(Vector3.Lerp(t.forward, t.right, angleAway), t.up * -1, 0.15f) * objSize*2 * scale;
-        obj.transform.localScale = heldObjOrigScale * scale;
+        obj.transform.position = t.position + Vector3.Lerp(Vector3.Lerp(t.forward, t.right * ((isLeft) ? -1 : 1), angleAway), t.up * -1, 0.15f) * objSize*2 * scale;
+        obj.transform.localScale = ((isLeft) ? leftOrigScale : rightOrigScale) * scale;
         obj.transform.forward = Camera.main.transform.forward;
     }
     
@@ -135,12 +143,12 @@ public class Player : MonoBehaviour {
         else return false;
 	}
     
-    public InteractableObject getHeldObj(){return heldObj;}
+    public InteractableObject getRightObj(){return rightObj;}
 
     public bool has(string type) {
         if (type == "") return false;
 
-        if (getHeldObj()) if (heldObj.typeID == type) return true;
+        if (getRightObj()) if (rightObj.typeID == type) return true;
         return false;
     }
 
@@ -165,23 +173,35 @@ public class Player : MonoBehaviour {
         return CanGrab(GetHover().collider.gameObject) || IsTree(GetHover().collider.gameObject);
     }
 
-    public bool canUse() {
-        if (heldObj != null) return heldObj.canUse(GetHover());
-        return false;
+    public bool[] canUse() {
+        bool[] val = {false, false};
+        if (leftObj != null) val[0] = leftObj.canUse(GetHover());
+        if (rightObj != null) val[1] = rightObj.canUse(GetHover());
+        return val;
     }
 
-    private bool TryUseObject() {
-        if (heldObj != null) return heldObj.tryUse(GetHover());
-        return false;
+    private bool TryUseObject(bool isLeft) {
+        if (isLeft) {
+            if (leftObj != null) return leftObj.tryUse(GetHover());
+        } else {
+            if (rightObj != null) return rightObj.tryUse(GetHover());
+        } return false;
     }
     
-    private bool TryGrabObject(GameObject obj){
+    private bool TryGrabObject(GameObject obj, bool isLeft){
         if(obj == null || !CanGrab(obj)) return false;
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
-        heldObj = obj.GetComponent<InteractableObject>();
-        heldObjSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
-        heldObjOrigScale = obj.transform.localScale;
-        heldObj.pickedUp();
+        if (isLeft) {
+            leftObj = obj.GetComponent<InteractableObject>();
+            //leftSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
+            leftOrigScale = obj.transform.localScale;
+            leftObj.pickedUp();
+        }else{
+            rightObj = obj.GetComponent<InteractableObject>();
+            rightSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
+            rightOrigScale = obj.transform.localScale;
+            rightObj.pickedUp();
+        }
         return true;
     }
 
@@ -195,20 +215,28 @@ public class Player : MonoBehaviour {
         return true;
     }
     
-    public bool DropObject(){
-        if (heldObj == null) return false;
-        Rigidbody objRigidbody = heldObj.GetComponent<Rigidbody>();
-        Collider objCollider = heldObj.GetComponent<Collider>();
-        if (objRigidbody != null) {
-            objRigidbody.velocity = objRigidbody.velocity;
-            Physics.IgnoreCollision(objCollider, thisCollider, false);
+    public bool DropObject(bool isLeft){
+        if(isLeft){
+            if (leftObj == null) return false;
+            Rigidbody objRigidbody = leftObj.GetComponent<Rigidbody>();
+            Collider objCollider = leftObj.GetComponent<Collider>();
+            if (objRigidbody != null){
+                objRigidbody.velocity = objRigidbody.velocity;
+                Physics.IgnoreCollision(objCollider, thisCollider, false);
+            }
+            leftObj.transform.localScale = leftOrigScale;
+            leftObj = null;
+        }else{
+            if (rightObj == null) return false;
+            Rigidbody objRigidbody = rightObj.GetComponent<Rigidbody>();
+            Collider objCollider = rightObj.GetComponent<Collider>();
+            if (objRigidbody != null) {
+                objRigidbody.velocity = objRigidbody.velocity;
+                Physics.IgnoreCollision(objCollider, thisCollider, false);
+            }
+            rightObj.transform.localScale = rightOrigScale;
+            rightObj = null;
         }
-        heldObj.transform.localScale = heldObjOrigScale;
-        heldObj = null;
         return true;
-    }
-
-    public bool isInCinematic() {
-        return inCinematic;
     }
 }
