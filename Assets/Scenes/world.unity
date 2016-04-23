@@ -125,8 +125,8 @@ MonoBehaviour:
   cloudPlacementRadius: 1500
   cloudHeightVariation: 50
   cloudSizeVariation: 0.5
-  particleVel: 300
-  rainAudio: {fileID: 8300000, guid: 722bb902aee3e654aa4b86ab29ab1a6d, type: 3}
+  particleVel: 0
+  rainAudio: {fileID: 0}
 --- !u!4 &10489869
 Transform:
   m_ObjectHideFlags: 0
@@ -325,9 +325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedToTreeRatio: 0.3
-  secondsToPropogate: 1800
-  forestRadius: 50
-  forestMaxTrees: 16
+  secondsToPropogate: 3600
+  propogationTimeVariance: 0.5
 --- !u!114 &188005516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,7 +1126,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_TagString
@@ -1483,7 +1482,7 @@ MonoBehaviour:
   grabSphereRadius: 0
   minWarpOnWaitDist: 1
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
-  cinematicTimeScale: 100
+  cinematicTimeScale: 0
   waitCamDistance: 60
 --- !u!4 &1837165592 stripped
 Transform:
