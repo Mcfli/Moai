@@ -309,10 +309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedToTreeRatio: 0.3
-  secondsToPropogate: 1800
-  forestRadius: 50
-  forestMaxTrees: 16
 --- !u!114 &188005516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +503,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Are you sure you want to quit?
-
     Warning! Your progress will not be saved.'
 --- !u!222 &221634991
 CanvasRenderer:
@@ -2697,7 +2692,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1637858424}
->>>>>>> UI
 --- !u!1 &1694056955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,7 +3102,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Done
-
 '
 --- !u!222 &1912538104
 CanvasRenderer:
@@ -3481,7 +3474,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Resume
-
 '
 --- !u!222 &2060415522
 CanvasRenderer:
