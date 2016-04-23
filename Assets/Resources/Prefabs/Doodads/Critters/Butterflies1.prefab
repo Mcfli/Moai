@@ -1,53 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &179336
+--- !u!1 &111662
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 452530}
-  - 198: {fileID: 19809958}
-  - 199: {fileID: 19966262}
-  - 114: {fileID: 11461312}
-  m_Layer: 0
-  m_Name: Butterflies3
+  - 4: {fileID: 472158}
+  - 198: {fileID: 19899942}
+  - 199: {fileID: 19969514}
+  - 114: {fileID: 11470260}
+  m_Layer: 14
+  m_Name: Butterflies1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &452530
+--- !u!4 &472158
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179336}
+  m_GameObject: {fileID: 111662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -258.75128, y: 634.863, z: -383.65787}
+  m_LocalPosition: {x: -255.1054, y: 622.57745, z: -365.50793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11461312
+--- !u!114 &11470260
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179336}
+  m_GameObject: {fileID: 111662}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06bae43cd80397a4fb9c511886865fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleVel: 1
---- !u!198 &19809958
+--- !u!198 &19899942
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179336}
+  m_GameObject: {fileID: 111662}
   serializedVersion: 2
   lengthInSec: 5
   startDelay:
@@ -1486,17 +1486,17 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19966262
+--- !u!199 &19969514
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179336}
+  m_GameObject: {fileID: 111662}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: e22eb599b8e687746b4893429fd29b37, type: 2}
+  - {fileID: 2100000, guid: 497546d10461c8147b72ba5ab9f3ca83, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1536,5 +1536,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 179336}
+  m_RootGameObject: {fileID: 111662}
   m_IsPrefabParent: 1

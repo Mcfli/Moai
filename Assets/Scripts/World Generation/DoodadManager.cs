@@ -5,11 +5,14 @@ using System.Collections.Generic;
 public class DoodadManager : MonoBehaviour
 {
     private GenerationManager gen_manager;
+    public static Dictionary<Vector2, List<GameObject>> loaded_doodads;
+
 
     // Use this for initialization
     void Awake()
     {
         gen_manager = gameObject.GetComponent<GenerationManager>();
+        loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
     }
 
     public void loadDoodads(Vector2 key, Biome biome)
@@ -27,8 +30,7 @@ public class DoodadManager : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-
-
+            
             float xpos = key.x * gen_manager.chunk_size + gen_manager.chunk_size * Random.value;
             float zpos = key.y * gen_manager.chunk_size + gen_manager.chunk_size * Random.value;
             Vector3 pos = new Vector3(xpos, 0, zpos);
@@ -41,6 +43,11 @@ public class DoodadManager : MonoBehaviour
                 pos.y = hit.point.y;
                 GameObject d = Instantiate(doodad, pos,doodad.transform.rotation) as GameObject;
                 d.transform.Rotate(Vector3.up*Random.Range(0,2*Mathf.PI));
+                if (!loaded_doodads.ContainsKey(key))
+                {
+                    loaded_doodads[key] = new List<GameObject>();
+                }
+                loaded_doodads[key].Add(d);
             }
             
         }
@@ -48,16 +55,13 @@ public class DoodadManager : MonoBehaviour
 
     public void unloadDoodads(Vector2 chunk)
     {
-        Vector3 center = new Vector3(chunk.x * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f, 0, chunk.y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
-        Vector3 half_extents = new Vector3(gen_manager.chunk_size * 0.5f, 100000, gen_manager.chunk_size * 0.5f);
-        LayerMask doodad_mask = LayerMask.GetMask("Doodad");
-
-        Collider[] colliders = Physics.OverlapBox(center, half_extents, Quaternion.identity, doodad_mask);
-
-        for (int i = 0; i < colliders.Length; i++)
+        if (loaded_doodads.ContainsKey(chunk))
         {
-            GameObject doodad = colliders[i].gameObject;
-            Destroy(doodad);
+            for (int i = loaded_doodads[chunk].Count - 1; i >= 0; i--)
+            {
+                Destroy(loaded_doodads[chunk][i]);
+                loaded_doodads[chunk].RemoveAt(i);
+            }
         }
     }
 
