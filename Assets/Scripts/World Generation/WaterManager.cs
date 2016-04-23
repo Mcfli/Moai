@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class WaterManager : MonoBehaviour {
     // Tuning variables
-    public float waterResolution = 0.4f; // Number of vertices in one unity unit length
+    public float waterResolution = 0.1f; // Number of vertices in one unity unit length
     public float acceptableHeightDiff = 10f;
 
 
@@ -42,13 +42,9 @@ public class WaterManager : MonoBehaviour {
 
                 // If overlap found
                 if (water.overlaps(otherWater)){
-                    
                     // Destroy overlapping water bodies
-
                     Destroy(body);
-                    Destroy(other);
                     waterBodies[chunk].Remove(body);
-                    waterBodies[chunk].Remove(other);
                     i = 0;
                     j = 0;
                 }
@@ -87,7 +83,6 @@ public class WaterManager : MonoBehaviour {
         if (!waterBodies.ContainsKey(chunk) || waterBodies[chunk] == null) waterBodies[chunk] = new List<GameObject>();
         waterBodies[chunk].Add(water);
 
-        
         return water;
     }
 
@@ -99,6 +94,4 @@ public class WaterManager : MonoBehaviour {
             Destroy(obj);
         }
     }
-
-    
 }
