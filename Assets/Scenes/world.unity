@@ -138,7 +138,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &114504078
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +224,235 @@ MonoBehaviour:
   crosshairToggleInput: CrosshairToggle
   LeftTip: {fileID: 2009260715}
   RightTip: {fileID: 1923795458}
+--- !u!1 &188005509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 188005511}
+  - 114: {fileID: 188005520}
+  - 114: {fileID: 188005510}
+  - 114: {fileID: 188005519}
+  - 114: {fileID: 188005514}
+  - 114: {fileID: 188005517}
+  - 114: {fileID: 188005516}
+  - 114: {fileID: 188005515}
+  - 114: {fileID: 188005518}
+  - 114: {fileID: 188005512}
+  m_Layer: 0
+  m_Name: WorldGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &188005510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9847968ac6eb35c4199fb75827fc3094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chunk_size: 500
+  chunk_resolution: 8
+  chunk_load_dist: 4
+  chunk_unload_dist: 6
+  chunk_detail_dist: 1
+  allottedLoadSeconds: 0.5
+  tree_load_dist: 1
+  biomes:
+  - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
+  - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
+  - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
+  WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
+  mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
+  EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
+--- !u!4 &188005511
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &188005512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18eff118216999e41a156474a19facd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &188005514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6fc22e0e963a6940af5482819bf09d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
+  XZDeviationRatio: 0.5
+  XZDeviationSeed: 543825
+  detailDeviation: 2
+  detailDeviationSeed: 854375
+  detailSubdivisions: 3
+--- !u!114 &188005515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88adab1b79f8fdc4d9130af5f3adf536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedToTreeRatio: 0.3
+  secondsToPropogate: 1800
+  forestRadius: 50
+  forestMaxTrees: 16
+--- !u!114 &188005516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93d7ca007a982145aabbe6c06668436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialWaterLevel: -1000
+  WaterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
+  fogColor: {r: 0.28235295, g: 0.39215687, b: 0.52156866, a: 0}
+  fogDensity: 0.04
+  resolution: 16
+  waveLoadDist: 2
+  waveHeight: {x: 1, y: 1, z: 1}
+  waveSpeed: {x: 2, y: 1, z: 3}
+  waveLength: {x: 1, y: 3, z: 2}
+  waveOffset: {x: 0, y: 7, z: 4}
+  invertEveryOther: 1
+--- !u!114 &188005517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc13141df2141c40a6c36c9b7b8a113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  base_map: {fileID: 11441894, guid: 0becd2c46f9626744b0ae39320929755, type: 2}
+  hill_map: {fileID: 11496700, guid: 95a5864a330704b4e805a44e8d47492e, type: 2}
+  type_map: {fileID: 11441516, guid: c07d4e0b24d0bc444bf371c2b0bb5ffa, type: 2}
+  mountain_map: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
+  elevation_map: {fileID: 11483938, guid: c1b765ad54907af4eb2d4ba059c12759, type: 2}
+  peak_map: {fileID: 11467348, guid: 54b65dd4c9e6a804eb36eed4ae756157, type: 2}
+  colors:
+  - {r: 0.61960787, g: 0.70980394, b: 0.4745098, a: 0}
+  - {r: 0.29803923, g: 0.52156866, b: 0, a: 0}
+  - {r: 0.14901961, g: 0.6156863, b: 0.09019608, a: 0}
+  - {r: 0.1254902, g: 0.3372549, b: 0.15294118, a: 0}
+  - {r: 0.20392157, g: 0.1764706, b: 0.1764706, a: 0}
+  - {r: 0.28627452, g: 0.28627452, b: 0.28627452, a: 0}
+  - {r: 0.9191176, g: 0.9191176, b: 0.9191176, a: 0}
+  color_curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  amplitude: 1000
+--- !u!114 &188005518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f316294df247d458da40709882153e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 106806, guid: 678feba97db6b9044934c154b8891552, type: 2}
+  acceptable_heightDiff: 1e-10
+  max_tries: 10000
+  shrine_probability: 1
+--- !u!114 &188005519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81982c6a14679194f88fa3530d1c388e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialWaitSpeed: 1
+  maxWaitSpeed: 657000
+  waitSpeedGrowth:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  timeToGetToMaxWait: 300
+  sprintWaitMultiplier: 5
+  currentTimeReadOnly: 0
+  currentTimeScaleReadOnly: 1
+--- !u!114 &188005520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1116f0493eb144840af1353fd5a96528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setSeed: 1
+  seed: 0
 --- !u!1 &386901798
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +603,7 @@ RectTransform:
   - {fileID: 2009260713}
   - {fileID: 1923795456}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -860,7 +1089,7 @@ Transform:
   - {fileID: 2049966711}
   - {fileID: 1734765665}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1001 &1367203305
 Prefab:
   m_ObjectHideFlags: 0
