@@ -545,7 +545,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 400}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258801224
 MonoBehaviour:
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397559953}
+      - m_Target: {fileID: 397559954}
         m_MethodName: switchTo
         m_Mode: 2
         m_Arguments:
@@ -781,6 +781,7 @@ GameObject:
   - 114: {fileID: 397559950}
   - 114: {fileID: 397559949}
   - 114: {fileID: 397559953}
+  - 114: {fileID: 397559954}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -882,21 +883,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e76a283bdae0f4d9531483e4b46c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseButton: PauseButton
   crosshairToggle: CrosshairToggle
   initialColor: {r: 1, g: 1, b: 1, a: 0.2509804}
   canGrabColor: {r: 0, g: 0.5, b: 1, a: 0.75}
   canUseColor: {r: 0, g: 1, b: 0, a: 0.7490196}
   crosshair: {fileID: 114504080}
-  pauseButton: PauseButton
-  backdrop: {fileID: 258801223}
+--- !u!114 &397559954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 397559948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50ad0e20e5a3f994cb2a09dde415ec6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialMenu: 0
   menuScreens:
   - {fileID: 975260347}
-  - {fileID: 672223398}
   - {fileID: 1099325276}
-  menuPosition:
+  - {fileID: 672223398}
+  menuPositions:
+  - {x: 0, y: 0.25}
   - {x: 0, y: 0.25}
   - {x: 0, y: 0}
-  - {x: 0, y: 0.25}
+  menuBackdrops:
+  - {fileID: 258801223}
+  - {fileID: 258801223}
+  - {fileID: 258801223}
 --- !u!1 &451266844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1154,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit To Title
+  m_Text: Quit To Desktop
 --- !u!222 &722760103
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1245,7 +1261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Crosshair: ON'
+  m_Text: Crosshair
 --- !u!222 &769505151
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1392,7 +1408,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397559953}
+      - m_Target: {fileID: 397559954}
         m_MethodName: switchTo
         m_Mode: 2
         m_Arguments:
@@ -1843,7 +1859,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 912454543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 397559954}
+        m_MethodName: quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: main
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &912454543
@@ -1956,7 +1983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &975260348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2066,6 +2093,7 @@ GameObject:
   - 222: {fileID: 1018816454}
   - 114: {fileID: 1018816453}
   - 114: {fileID: 1018816452}
+  - 114: {fileID: 1018816455}
   m_Layer: 5
   m_Name: Show Crosshair
   m_TagString: Untagged
@@ -2090,7 +2118,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1018816452
 MonoBehaviour:
@@ -2128,14 +2156,14 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1018816453}
-  toggleTransition: 1
+  toggleTransition: 0
   graphic: {fileID: 0}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397559953}
-        m_MethodName: set_enabled
+      - m_Target: {fileID: 397559954}
+        m_MethodName: changeCrosshair
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2147,7 +2175,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &1018816453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2183,6 +2211,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1018816450}
+--- !u!114 &1018816455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1018816450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6420e89e3a91bd4389dfa37965c24dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 769505150}
+  onText: ON
+  offText: OFF
 --- !u!1 &1099325276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,7 +2239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1099325277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2561,7 +2603,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 60, y: 30}
+  m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637858426
 MonoBehaviour:
@@ -2603,7 +2645,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397559953}
+      - m_Target: {fileID: 397559954}
         m_MethodName: switchTo
         m_Mode: 2
         m_Arguments:
@@ -2797,7 +2839,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 397559953}
+      - m_Target: {fileID: 397559954}
         m_MethodName: switchTo
         m_Mode: 2
         m_Arguments:
