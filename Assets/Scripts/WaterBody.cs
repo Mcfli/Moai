@@ -159,8 +159,6 @@ public class WaterBody : MonoBehaviour {
             Ray rayBottomLeft = new Ray(center + Vector3.up * stepLength, bottomLeft);
             Ray rayBottomRight = new Ray(center + Vector3.up * stepLength, bottomRight);
 
-           // Debug.DrawRay(rayTopLeft.origin, rayTopLeft.direction,Color.red,1000);
-
             // Cast rays from center to see if we have lakeable terrain
             if (Physics.Raycast(rayTopLeft, out hit, biome.lakeMaxLength, terrain))
             {
@@ -237,20 +235,28 @@ public class WaterBody : MonoBehaviour {
     private void moveCornersDown()
     {
         if (setBelow) return;
+        //int tries = 0;
         RaycastHit hit;
-        float minHeight = Mathf.Infinity;
+        float minHeight = center.y;
         int xRes = Mathf.CeilToInt(size.x * waterResolution);
         int yRes = Mathf.CeilToInt(size.z * waterResolution);
-        for (int iy = 0; iy < xRes; iy += mf.mesh.vertices.Length - 1)
+        
+        
+        for (int iy = 0; iy < yRes; iy ++)
         {
-            for (int ix = 0; ix < mf.mesh.vertices.Length; ix += mf.mesh.vertices.Length -1)
+            for (int ix = 0; ix < xRes; ix ++)
             {
-                Ray ray = new Ray(mf.mesh.vertices[iy * xRes + ix], Vector3.down);
+                if (iy != 0 && iy != yRes - 1 && ix != 0 && ix != xRes - 1) continue;
+                //if (tries > 5) { setBelow = true; return; }
+                //tries ++;
+                //Ray ray = new Ray(mf.mesh.vertices[iy * xRes + ix], Vector3.down);
+                /*
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrain))
                 {
-                    if(hit.point.y < minHeight)
-                        minHeight = hit.point.y;
-                }
+
+                    //if(hit.point.y < minHeight)
+                    //    minHeight = hit.point.y;
+                }*/
             }
         }
         setBelow = true;
@@ -261,6 +267,7 @@ public class WaterBody : MonoBehaviour {
     private void calculateVertices()
     {
         if (size.Equals(Vector3.zero)) return;
+
         int xRes = Mathf.CeilToInt(size.x * waterResolution);
         int yRes = Mathf.CeilToInt(size.z * waterResolution);
         float xStepSize = size.x / (xRes - 1);
@@ -316,7 +323,8 @@ public class WaterBody : MonoBehaviour {
         }
         mf.mesh.triangles = triangles;
 
-        ReCalcTriangles(mf.mesh);
+        mf.mesh.RecalculateBounds();
+        mf.mesh.RecalculateNormals();
     }
 
     private void ReCalcTriangles(Mesh mesh)
