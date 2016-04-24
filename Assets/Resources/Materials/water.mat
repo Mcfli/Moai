@@ -7,12 +7,11 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: water
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHABLEND_ON _VERTEXCOLOR
+  m_Shader: {fileID: 4800000, guid: b5c53d5ccac6e09489e4817fd43a3382, type: 3}
+  m_ShaderKeywords: _ANIMATE_ON _VERTEXCOLOR
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -104,11 +103,11 @@ Material:
       data:
         first:
           name: _SrcBlend
-        second: 5
+        second: 1
       data:
         first:
           name: _DstBlend
-        second: 10
+        second: 0
       data:
         first:
           name: _Cutoff
@@ -124,11 +123,11 @@ Material:
       data:
         first:
           name: _ZWrite
-        second: 0
+        second: 1
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: 0.67
       data:
         first:
           name: _BumpScale
@@ -148,7 +147,7 @@ Material:
       data:
         first:
           name: _Mode
-        second: 2
+        second: 0
       data:
         first:
           name: _Metallic
@@ -180,7 +179,7 @@ Material:
       data:
         first:
           name: _WaveHeight
-        second: 0.5
+        second: 0.45
       data:
         first:
           name: _WaveSpeed
@@ -193,6 +192,14 @@ Material:
         first:
           name: _RandomSpeed
         second: 0.5
+      data:
+        first:
+          name: _Ambient
+        second: 0.75
+      data:
+        first:
+          name: _Animate
+        second: 1
     m_Colors:
       data:
         first:
@@ -278,3 +285,19 @@ Material:
         first:
           name: _GDirectionCD
         second: {r: 0.1, g: 0.9, b: 0.5, a: 0.5}
+      data:
+        first:
+          name: _RandomSeed
+        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 0.043}
+      data:
+        first:
+          name: _XHeightSpeedLengthOffset
+        second: {r: 0.05, g: 1, b: 0.1, a: 0}
+      data:
+        first:
+          name: _YHeightSpeedLengthOffset
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _ZHeightSpeedLengthOffset
+        second: {r: 0, g: 0, b: 0, a: 0}

@@ -11,7 +11,8 @@ public class WaterBody : MonoBehaviour {
     private Mesh mesh;
     private float stepLength = 0.1f;
     private int terrain;
-    private int maxTries = 3;
+    private int maxTries = 2;
+    private int maxRays = 1;
     public bool settled = false;
     public bool expanded = false;
     public bool setBelow = false;
@@ -125,16 +126,12 @@ public class WaterBody : MonoBehaviour {
     // Gradually expands the water body to the highest it could fill this point
     private void moveToMaxFillHeight()
     {
+
         int tries = 0;
         RaycastHit hit;
-        // Direction rays
-        Vector3 topLeft = Vector3.left + Vector3.forward;
-        Vector3 topRight = Vector3.right + Vector3.forward;
-        Vector3 bottomLeft = Vector3.left + Vector3.back;
-        Vector3 bottomRight = Vector3.right + Vector3.back;
 
         // Contact positions
-        Vector3 topPoint,bottomPoint,leftPoint,rightPoint,topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint;
+        Vector3 topPoint,bottomPoint,leftPoint,rightPoint;
 
         while (tries < maxTries)
         {
@@ -142,10 +139,6 @@ public class WaterBody : MonoBehaviour {
             bottomPoint = Vector3.zero;
             leftPoint = Vector3.zero;
             rightPoint = Vector3.zero;
-            topLeftPoint = Vector3.zero;
-            topRightPoint = Vector3.zero;
-            bottomLeftPoint = Vector3.zero;
-            bottomRightPoint = Vector3.zero;
 
             tries++;
 
@@ -153,28 +146,8 @@ public class WaterBody : MonoBehaviour {
             Ray rayBottom = new Ray(center + Vector3.up * stepLength, Vector3.back);
             Ray rayLeft = new Ray(center + Vector3.up * stepLength, Vector3.left);
             Ray rayRight = new Ray(center + Vector3.up * stepLength, Vector3.right);
-            Ray rayTopLeft = new Ray(center + Vector3.up * stepLength, topLeft);
-            Ray rayTopRight = new Ray(center + Vector3.up * stepLength, topRight);
-            Ray rayBottomLeft = new Ray(center + Vector3.up * stepLength, bottomLeft);
-            Ray rayBottomRight = new Ray(center + Vector3.up * stepLength, bottomRight);
 
             // Cast rays from center to see if we have lakeable terrain
-            if (Physics.Raycast(rayTopLeft, out hit, biome.lakeMaxLength, terrain))
-            {
-                topLeftPoint = hit.point;
-            }
-            if (Physics.Raycast(rayTopRight, out hit, biome.lakeMaxLength, terrain))
-            {
-                topRightPoint = hit.point;
-            }
-            if (Physics.Raycast(rayBottomLeft, out hit, biome.lakeMaxLength, terrain))
-            {
-                bottomLeftPoint = hit.point;
-            }
-            if (Physics.Raycast(rayBottomRight, out hit, biome.lakeMaxLength, terrain))
-            {
-                bottomRightPoint = hit.point;
-            }
             if (Physics.Raycast(rayBottom, out hit, biome.lakeMaxLength, terrain))
             {
                 bottomPoint = hit.point;
@@ -193,9 +166,7 @@ public class WaterBody : MonoBehaviour {
             }
 
             // If any of those casts didn't find ANY terrain, this height is not lakeable
-            if (topLeftPoint == Vector3.zero || topRightPoint == Vector3.zero ||
-                bottomLeftPoint == Vector3.zero || bottomRightPoint == Vector3.zero||
-                leftPoint == Vector3.zero || rightPoint == Vector3.zero ||
+            if (leftPoint == Vector3.zero || rightPoint == Vector3.zero ||
                 topPoint == Vector3.zero || bottomPoint == Vector3.zero)
             {
                 expanded = true;   
@@ -205,10 +176,6 @@ public class WaterBody : MonoBehaviour {
             // Otherwise move up to this position, update size, and keep searching
             else
             {
-                float tlDis = Vector3.Distance(center, topLeftPoint);
-                float trDis = Vector3.Distance(center, topRightPoint);
-                float blDis = Vector3.Distance(center, bottomLeftPoint);
-                float brDis = Vector3.Distance(center, bottomRightPoint);
                 float lDis = Vector3.Distance(center, leftPoint);
                 float rDis = Vector3.Distance(center, rightPoint);
                 float tDis = Vector3.Distance(center, topPoint);
@@ -239,9 +206,9 @@ public class WaterBody : MonoBehaviour {
         float zMax = size.z * 0.5f;
 
         
-        while (edgeIndex < mf.mesh.vertices.Length && tries < maxTries)
+        while (edgeIndex < mf.mesh.vertices.Length && tries < maxRays)
         {
-            //Debug.Log(edgeIndex + "/" + mf.mesh.vertices.Length);
+
             if (mf.mesh.vertices[edgeIndex].x == xMin ||
                 mf.mesh.vertices[edgeIndex].x == xMax ||
                 mf.mesh.vertices[edgeIndex].z == zMin ||
@@ -263,15 +230,14 @@ public class WaterBody : MonoBehaviour {
             }
             tries++;
             edgeIndex++;
-            
-            transform.position = new Vector3(center.x,minHeight - 10f,center.z);
+
+            center.y = minHeight ;
+            transform.position = center - Vector3.up * 10f;
         }
-         
-        if(edgeIndex >= mf.mesh.vertices.Length)
+
+        if(edgeIndex >= mf.mesh.vertices.Length-1)
         {
             setBelow = true;
-            center.y = minHeight - 10f;
-            transform.position = center;
         }
     }
 
