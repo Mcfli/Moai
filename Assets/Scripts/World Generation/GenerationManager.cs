@@ -32,6 +32,7 @@ public class GenerationManager : MonoBehaviour {
     private TreeManager tree_manager;
     private WeatherManager weather_manager;
     private ShrineManager shrine_manager;
+    private WaterManager water_manager;
 
     void Awake() {
         //lists
@@ -46,6 +47,7 @@ public class GenerationManager : MonoBehaviour {
         tree_manager = GetComponent<TreeManager>();
         weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
         shrine_manager = GetComponent<ShrineManager>();
+        water_manager = GetComponent<WaterManager>();
 
         Globals.cur_chunk = new Vector2(-1, -1);
 
@@ -110,6 +112,7 @@ public class GenerationManager : MonoBehaviour {
         if(!undetailChunks(position)) done = false;
         if(!loadTrees(position)) done = false;
         if(!loadShrines(position)) done = false;
+        
 
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
@@ -144,8 +147,11 @@ public class GenerationManager : MonoBehaviour {
 
     private bool unloadChunks(Vector2 position) {
         List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
-        foreach(Vector2 coodinates in l)
-            if(!inLoadDistance(position, coodinates, chunk_unload_dist)) destroyChunk(coodinates);
+        foreach (Vector2 coodinates in l)
+            if (!inLoadDistance(position, coodinates, chunk_unload_dist))
+            {
+                destroyChunk(coodinates);
+            }
         return true;
     }
 
@@ -182,6 +188,7 @@ public class GenerationManager : MonoBehaviour {
     private void destroyChunk(Vector2 coordinates) {
         Destroy(loaded_chunks[coordinates]);
         loaded_chunks.Remove(coordinates);
+        water_manager.unloadWater(coordinates);
     }
 
     private bool loadTrees(Vector2 position) {
@@ -235,7 +242,9 @@ public class GenerationManager : MonoBehaviour {
 		}
         return true;
 	}
-	
+
+
+
     public Biome chooseBiome(Vector2 chunk)
     {
 

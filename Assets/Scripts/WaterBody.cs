@@ -11,10 +11,14 @@ public class WaterBody : MonoBehaviour {
     private Mesh mesh;
     private float stepLength = 0.1f;
     private int terrain;
-    private int maxTries = 30;
+    private int maxTries = 3;
     public bool settled = false;
     public bool expanded = false;
     public bool setBelow = false;
+    
+
+    private int edgeIndex = 0; // keeps track of where in the search of vertices for
+                                // setting the edges below the terrain
 
     // References
     private MeshFilter mf;
@@ -67,8 +71,6 @@ public class WaterBody : MonoBehaviour {
         while(tries < maxTries)
         {
             // Cast rays around current center
-            
-
             topLeft = new Vector3(center.x - stepLength, 10000000, center.z - stepLength);
             topRight = new Vector3(center.x + stepLength, 10000000, center.z - stepLength);
             bottomLeft = new Vector3(center.x - stepLength, 10000000, center.z + stepLength);
@@ -133,9 +135,6 @@ public class WaterBody : MonoBehaviour {
 
         // Contact positions
         Vector3 topPoint,bottomPoint,leftPoint,rightPoint,topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint;
-
-        // Will be asigned to center after height calculations are finished
-        Vector3 physicalCenter = Vector3.zero;
 
         while (tries < maxTries)
         {
@@ -215,19 +214,15 @@ public class WaterBody : MonoBehaviour {
                 float tDis = Vector3.Distance(center, topPoint);
                 float bDis = Vector3.Distance(center, bottomPoint);
 
-                size.x = (lDis + rDis);
-                size.z = (bDis + tDis);
+                size.x = 1.5f*(lDis + rDis);
+                size.z = 1.5f*(bDis + tDis);
                 center.y += stepLength;
-                
-                physicalCenter.y = center.y;
-                physicalCenter.x = center.x + rDis - lDis;
-                physicalCenter.z = center.z + bDis - tDis;
+              
             }
         }
         transform.position = center;
         if (expanded)
         {
-            center = physicalCenter;
             calculateVertices();
         }
     }
@@ -235,33 +230,49 @@ public class WaterBody : MonoBehaviour {
     private void moveCornersDown()
     {
         if (setBelow) return;
-        //int tries = 0;
+        int tries = 0;
         RaycastHit hit;
         float minHeight = center.y;
-        int xRes = Mathf.CeilToInt(size.x * waterResolution);
-        int yRes = Mathf.CeilToInt(size.z * waterResolution);
+        float xMin = -size.x * 0.5f;
+        float xMax = size.x * 0.5f;
+        float zMin = -size.z * 0.5f;
+        float zMax = size.z * 0.5f;
+
         
-        
-        for (int iy = 0; iy < yRes; iy ++)
+        while (edgeIndex < mf.mesh.vertices.Length && tries < maxTries)
         {
-            for (int ix = 0; ix < xRes; ix ++)
+            //Debug.Log(edgeIndex + "/" + mf.mesh.vertices.Length);
+            if (mf.mesh.vertices[edgeIndex].x == xMin ||
+                mf.mesh.vertices[edgeIndex].x == xMax ||
+                mf.mesh.vertices[edgeIndex].z == zMin ||
+                mf.mesh.vertices[edgeIndex].z == zMax)
             {
-                if (iy != 0 && iy != yRes - 1 && ix != 0 && ix != xRes - 1) continue;
-                //if (tries > 5) { setBelow = true; return; }
-                //tries ++;
-                //Ray ray = new Ray(mf.mesh.vertices[iy * xRes + ix], Vector3.down);
-                /*
+                Vector3 vert = center + mf.mesh.vertices[edgeIndex];
+                
+                Ray ray = new Ray(vert, Vector3.down);
+                 
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrain))
                 {
-
-                    //if(hit.point.y < minHeight)
-                    //    minHeight = hit.point.y;
-                }*/
+                    
+                    if (hit.point.y < minHeight)
+                    {
+                        minHeight = hit.point.y;
+                    }
+                }
+            
             }
+            tries++;
+            edgeIndex++;
+            
+            transform.position = new Vector3(center.x,minHeight - 10f,center.z);
         }
-        setBelow = true;
-        center.y = minHeight;
-        transform.position = center;
+         
+        if(edgeIndex >= mf.mesh.vertices.Length)
+        {
+            setBelow = true;
+            center.y = minHeight - 10f;
+            transform.position = center;
+        }
     }
 
     private void calculateVertices()
@@ -310,9 +321,7 @@ public class WaterBody : MonoBehaviour {
             }
         }
         mf.mesh.triangles = triangles;
-
-        //mf.mesh.RecalculateBounds();
-        mf.mesh.RecalculateNormals();
+        ReCalcTriangles(mf.mesh);
     }
 
     private void ReCalcTriangles(Mesh mesh)

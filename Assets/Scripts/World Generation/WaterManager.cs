@@ -88,9 +88,11 @@ public class WaterManager : MonoBehaviour {
     // unloads all water bodies in chunk specified by key
     public void unloadWater(Vector2 key)
     {
+        if (!waterBodies.ContainsKey(key) || waterBodies[key] == null) return;
         foreach(GameObject obj in waterBodies[key])
         {
             Destroy(obj);
         }
+        waterBodies[key].Clear();
     }
 }
