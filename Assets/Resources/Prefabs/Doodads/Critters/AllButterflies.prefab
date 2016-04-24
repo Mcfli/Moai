@@ -570,18 +570,23 @@ ParticleSystem:
         m_Curve:
         - time: 0
           value: 0
-          inSlope: 2.037045
-          outSlope: 2.037045
+          inSlope: 10
+          outSlope: 10
           tangentMode: 10
-        - time: 0.49090716
+        - time: 0.1
           value: 1
-          inSlope: 0.03638333
-          outSlope: 0.03638333
-          tangentMode: 10
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 0.9
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         - time: 1
           value: 0
-          inSlope: -1.9642783
-          outSlope: -1.9642783
+          inSlope: -9.999998
+          outSlope: -9.999998
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -2014,18 +2019,23 @@ ParticleSystem:
         m_Curve:
         - time: 0
           value: 0
-          inSlope: 2.037045
-          outSlope: 2.037045
+          inSlope: 10
+          outSlope: 10
           tangentMode: 10
-        - time: 0.49090716
+        - time: 0.1
           value: 1
-          inSlope: 0.03638333
-          outSlope: 0.03638333
-          tangentMode: 10
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 0.9
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         - time: 1
           value: 0
-          inSlope: -1.9642783
-          outSlope: -1.9642783
+          inSlope: -9.999998
+          outSlope: -9.999998
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -3458,18 +3468,23 @@ ParticleSystem:
         m_Curve:
         - time: 0
           value: 0
-          inSlope: 2.037045
-          outSlope: 2.037045
+          inSlope: 10
+          outSlope: 10
           tangentMode: 10
-        - time: 0.49090716
+        - time: 0.1
           value: 1
-          inSlope: 0.03638333
-          outSlope: 0.03638333
-          tangentMode: 10
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 0.9
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         - time: 1
           value: 0
-          inSlope: -1.9642783
-          outSlope: -1.9642783
+          inSlope: -9.999998
+          outSlope: -9.999998
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
