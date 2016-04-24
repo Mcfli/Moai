@@ -332,7 +332,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 14.645242, y: 93.31493, z: -18.339743}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 418446}
@@ -480,11 +480,9 @@ MonoBehaviour:
   - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
   - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
   - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  collisionCenterMin: {x: 0, y: 0, z: 0}
-  collisionCenterMax: {x: 0, y: 0, z: 0}
-  collisionSizeMin: {x: 0, y: 0, z: 0}
-  collisionSizeMax: {x: 0, y: 0, z: 0}
+  propogateDuringState: 010101
+  baseCollision: {x: 0, y: 0, z: 0}
+  scaledCollision: {x: 0, y: 0, z: 0}
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -530,26 +528,6 @@ MonoBehaviour:
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
-  boundsCenterMin: {x: 0, y: 0, z: 0}
-  boundsCenterMax: {x: 0, y: 0, z: 0}
-  boundsSizeMin: {x: 0, y: 0, z: 0}
-  boundsSizeMax: {x: 0, y: 0, z: 0}
-  boundsVSTime:
-  - serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 0
-    m_PostInfinity: 0
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 0
-    m_PostInfinity: 0
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 0
-    m_PostInfinity: 0
     m_RotationOrder: 0
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: 0.8, z: 0}

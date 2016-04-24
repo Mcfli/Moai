@@ -1,54 +1,17 @@
 fileFormatVersion: 2
-guid: 7423cd35073692849b21b328850609c7
-timeCreated: 1457608918
+guid: f759d95b70082934999e6229c9cdc2bf
+timeCreated: 1460676519
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Armature
-    100002: bottom_trunk
-    100004: cap_bottom
-    100006: cap_bottom_001
-    100008: cap_bottom_002
-    100010: cap_bottom_003
-    100012: cap_bottom_004
-    100014: cap_bottom_005
-    100016: cap_bottom_006
-    100018: cap_bottom_007
-    100020: cap_bottom_008
-    100022: cap_top
-    100024: Cylinder
-    100026: Empty
-    100028: Empty_001
-    100030: mid_trunk
-    100032: //RootNode
-    100034: top_trunk
-    400000: Armature
-    400002: bottom_trunk
-    400004: cap_bottom
-    400006: cap_bottom_001
-    400008: cap_bottom_002
-    400010: cap_bottom_003
-    400012: cap_bottom_004
-    400014: cap_bottom_005
-    400016: cap_bottom_006
-    400018: cap_bottom_007
-    400020: cap_bottom_008
-    400022: cap_top
-    400024: Cylinder
-    400026: Empty
-    400028: Empty_001
-    400030: mid_trunk
-    400032: //RootNode
-    400034: top_trunk
-    4300000: Cylinder
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: dirt
     7400000: Default Take
-    7400002: redMushroom_dying
-    7400004: redMushroom_growing
     9500000: //RootNode
-    11100000: Cylinder
-    11100002: //RootNode
-    13700000: Cylinder
   materials:
     importMaterials: 1
     materialName: 0
@@ -89,10 +52,10 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
-    tangentImportMode: 1
-  importAnimation: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -107,7 +70,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

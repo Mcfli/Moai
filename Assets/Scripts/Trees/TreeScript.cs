@@ -13,21 +13,14 @@ public class TreeScript : MonoBehaviour {
     //animating
     public float ratioAnimUpdates; // in ratio
 
-    //animation, collision, states, bounds
+    //animation, collision, states
     public List<string> stateAnimationNames; //names of animation, leave blank if no animation, currently unused
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
-    public Vector3 collisionCenterMin;
-    public Vector3 collisionCenterMax;
-    public Vector3 collisionSizeMin;
-    public Vector3 collisionSizeMax;
+    public Vector3 baseCollision;
+    public Vector3 scaledCollision;
     public List<AnimationCurve> heightVSTime; //collision
-    public Vector3 boundsCenterMin;
-    public Vector3 boundsCenterMax;
-    public Vector3 boundsSizeMin;
-    public Vector3 boundsSizeMax;
-    public List<AnimationCurve> boundsVSTime; //collision
 
     //dirtMound
     public GameObject dirtMound;
@@ -42,7 +35,7 @@ public class TreeScript : MonoBehaviour {
     //References
     private Animation anim;
     private BoxCollider boxCollider;
-    private SkinnedMeshRenderer rend;
+    private Renderer rend;
     private bool animateNext;
 
     //animation, collision, states
@@ -59,7 +52,7 @@ public class TreeScript : MonoBehaviour {
         // references
         anim = GetComponent<Animation>();
         boxCollider = GetComponent<BoxCollider>();
-        rend = GetComponent<SkinnedMeshRenderer>();
+        rend = GetComponent<Renderer>();
 
         prefab = Resources.Load(prefabPath) as GameObject;
 
@@ -114,7 +107,6 @@ public class TreeScript : MonoBehaviour {
         updateState();
         updateAnimation();
         updateCollision();
-        updateBounds();
         lastGrowUpdate = Globals.time;
         animateNext = true;
     }
@@ -178,18 +170,12 @@ public class TreeScript : MonoBehaviour {
     }
 
     private void updateCollision() {
-        float ratio = heightVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
-        boxCollider.center = Vector3.Lerp(collisionCenterMin, collisionCenterMax, ratio);
-        boxCollider.size = Vector3.Lerp(collisionSizeMin, collisionSizeMax, ratio);
-        //boxCollider.size = baseCollision + scaledCollision * size; // new Vector3(0.4f + 0.6f * size, maxHeight * size + 0.1f, 0.4f + 0.6f * size);
-        //boxCollider.center = new Vector3(0, boxCollider.size.y * 0.5f, 0);
+        // update collision
+        float size = heightVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
+        boxCollider.size = baseCollision + scaledCollision * size; // new Vector3(0.4f + 0.6f * size, maxHeight * size + 0.1f, 0.4f + 0.6f * size);
+        boxCollider.center = new Vector3(0, boxCollider.size.y * 0.5f, 0);
     }
-
-    private void updateBounds() {
-        float ratio = boundsVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
-        rend.localBounds = new Bounds(Vector3.Lerp(boundsCenterMin, boundsCenterMax, ratio), Vector3.Lerp(boundsSizeMin, boundsSizeMax, ratio) * 2);
-    }
-
+    
     public struct treeStruct {
         public Vector3 position;
         public Vector3 scale;
