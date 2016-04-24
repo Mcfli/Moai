@@ -108,8 +108,16 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes:
   - {fileID: 194074, guid: 65feb40d27e019d40b1d6e7c830f7b26, type: 2}
-  doodads: []
-  doodadDensity: 
+  doodads:
+  - {fileID: 166326, guid: 058acdcdba022c348affd7d8772ce700, type: 2}
+  - {fileID: 132580, guid: abf4e16ec7e4a6047b323aed86fc402a, type: 2}
+  - {fileID: 100874, guid: d756f35b2919c7f4b9c39ff8d071e078, type: 2}
+  - {fileID: 180118, guid: 548f0a95d94e02a4293c8f837fad8832, type: 2}
+  - {fileID: 199006, guid: 108879e7d0d32ad43a5858240632f7eb, type: 2}
+  - {fileID: 152190, guid: a0bd73c4a1103194483fd1ff46a420a0, type: 2}
+  - {fileID: 189006, guid: 448152c6bfa7cad4ebae66a3818f1530, type: 2}
+  - {fileID: 186092, guid: 15e4ac4a9dc75d441a1d89436c6b9142, type: 2}
+  doodadDensity: 1400000014000000140000001400000014000000140000001400000014000000
   treeDensity: 3
   forestRadius: 50
   forestMaxTrees: 16

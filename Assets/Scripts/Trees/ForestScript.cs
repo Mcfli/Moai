@@ -129,8 +129,13 @@ public class ForestScript : MonoBehaviour {
             if(ground == -Mathf.Infinity) continue;
             Vector3 pos = new Vector3(twoPos.x, ground, twoPos.y);
             //if(pos is inside shrine) continue;
-
             GameObject seed = Instantiate(randomTree.seed_object);
+            Vector2 seed_chunk = GenerationManager.worldToChunk(seed.transform.position);
+            if (!DoodadManager.loaded_doodads.ContainsKey(seed_chunk))
+            {
+                DoodadManager.loaded_doodads[seed_chunk] = new List<GameObject>();
+            }
+            DoodadManager.loaded_doodads[seed_chunk].Add(seed);
             seed.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
             seed.GetComponent<InteractableObject>().plant(pos);
             numSeeds++;

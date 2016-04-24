@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3372346}
   - 23: {fileID: 2304800}
   - 65: {fileID: 6502146}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: rock3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
