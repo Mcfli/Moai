@@ -12,6 +12,7 @@ public class InteractableObject: MonoBehaviour{
     public int growAttempts;         // times it tries to grow before killing itself
     public float growTime;           // How long before the seed sprouts
     public float growTimeVariance;   // ratio of variance if not player placed
+    public LayerMask collisionLayer;
     public GameObject dirtMound;     // prefab - instantiates and hides when instatiated
     public Vector3 dirtMoundOffset;
 
@@ -59,17 +60,17 @@ public class InteractableObject: MonoBehaviour{
         } else if (planted) { //planted
             //if(wasHeld) wasHeld = false; //just planted
             wasHeld = false;
-            if(timeRemain < 0) tryToTurnIntoTree();
+            if(timeRemain < 0 && spawn_object) tryToTurnIntoTree();
         } else { //dropped
             if (wasHeld) { //just dropped
                 timeRemain = droppedObjectLifeLength;
-                warpToGround(thisCollider.bounds.extents.y * 2);
+                warpToGround(thisCollider.bounds.extents.y * 2, transform.position + Vector3.up * thisCollider.bounds.extents.y * 2, thisCollider.bounds.extents.y * 2);
             }
             wasHeld = false;
 
             // if fast forwarding, warp to ground
             if(Globals.time_scale > 1) {
-                warpToGround(0);
+                warpToGround(0, transform.position, Mathf.Infinity);
                 thisRigidbody.isKinematic = true;
                 plant(transform.position);
             } else thisRigidbody.isKinematic = false;
@@ -85,7 +86,7 @@ public class InteractableObject: MonoBehaviour{
         if (planted){
             if(Physics.OverlapSphere(transform.position, cull_radius, cull_layer).Length < 1) { //other conditions should go here
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                GameObject g = Instantiate(spawn_object, transform.position, RandomRotation) as GameObject;
+                GameObject g = Instantiate(spawn_object, transform.position + spawn_object.transform.position, RandomRotation) as GameObject;
                 g.GetComponent<TreeScript>().findForest();
                 Destroy(gameObject);
             } else if(attempts < growAttempts) {
@@ -96,18 +97,11 @@ public class InteractableObject: MonoBehaviour{
         }
     }
 
-    private void warpToGround(float amountAboveGround) {
+    private void warpToGround(float amountAboveGround, Vector3 origin, float maxDistance) {
         bool hitSuccess = false;
         RaycastHit hit;
-        Ray rayDown = new Ray(transform.position, Vector3.down);
-        if(Physics.Raycast(rayDown, out hit, transform.position.y, LayerMask.GetMask("Terrain"))) {
-            hitSuccess = true;
-        } else {
-            Ray rayFromTop = new Ray(transform.position + Vector3.up * 10000000, Vector3.down);
-            if(Physics.Raycast(rayFromTop, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-                hitSuccess = true;
-            }
-        }
+        Ray rayFromTop = new Ray(origin, Vector3.down);
+        if(Physics.Raycast(rayFromTop, out hit, maxDistance, collisionLayer)) hitSuccess = true;
 
         if(hitSuccess) {
             transform.position = new Vector3(transform.position.x, hit.point.y + amountAboveGround, transform.position.z);

@@ -1193,7 +1193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.488, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 421430}
@@ -1245,8 +1245,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9767742, y: 2.055082, z: 1.5704901}
-  m_Center: {x: -0.0018238276, y: -0.22219884, z: 0.04652354}
+  m_Size: {x: 0.4, y: 0.1, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!111 &11146686
 Animation:
   m_ObjectHideFlags: 1
@@ -1292,9 +1292,11 @@ MonoBehaviour:
   - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
-  propogateDuringState: 010101
-  baseCollision: {x: 0.4, y: 0.1, z: 0.4}
-  scaledCollision: {x: 0.6, y: 9, z: 0.6}
+  propogateDuringState: 000101
+  collisionCenterMin: {x: 0, y: 0, z: 0}
+  collisionCenterMax: {x: 0, y: 4.5, z: 0}
+  collisionSizeMin: {x: 0.4, y: 0.1, z: 0.4}
+  collisionSizeMax: {x: 0.6, y: 9, z: 0.6}
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -1337,6 +1339,56 @@ MonoBehaviour:
       value: 0.3
       inSlope: -0.7
       outSlope: -0.7
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  boundsCenterMin: {x: -0.2756388, y: 0.05366364, z: -0.006242216}
+  boundsCenterMax: {x: -2.407795, y: -0.2905993, z: 0.3083227}
+  boundsSizeMin: {x: 0.2966472, y: 0.2482238, z: 0.2223746}
+  boundsSizeMax: {x: 2.428804, y: 1.722129, z: 1.209274}
+  boundsVSTime:
+  - serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  - serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  - serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: -0.5
+      outSlope: -0.5
+      tangentMode: 10
+    - time: 1
+      value: 0.5
+      inSlope: -0.5
+      outSlope: -0.5
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1424,10 +1476,10 @@ SkinnedMeshRenderer:
   - {fileID: 411070}
   - {fileID: 486990}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 416494}
+  m_RootBone: {fileID: 428654}
   m_AABB:
-    m_Center: {x: 379.5634, y: -368.30896, z: 297.42444}
-    m_Extent: {x: 389.93002, y: 431.188, z: 310.20428}
+    m_Center: {x: -0.42457545, y: 0.062974066, z: -0.018496573}
+    m_Extent: {x: 0.45112437, y: 0.2687399, z: 0.20559373}
   m_DirtyAABB: 0
 --- !u!1001 &100100000
 Prefab:

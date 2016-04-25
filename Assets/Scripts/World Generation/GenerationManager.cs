@@ -9,7 +9,8 @@ public class GenerationManager : MonoBehaviour {
     public int chunk_unload_dist = 6;
     public int chunk_detail_dist = 1;
     public float allottedLoadSeconds = 1;
-	public int tree_load_dist = 1;
+    public int tree_load_dist = 1;
+    public int tree_unload_dist = 1;
     public List<Biome> biomes;
     public NoiseGen WaterFireMap;
     public NoiseGen mountainMap;
@@ -121,13 +122,13 @@ public class GenerationManager : MonoBehaviour {
         if(!unloadChunks(position)) done = false;
         if(!unloadTrees(position)) done = false;
         if(!unloadShrines(position)) done = false;
-        if (!unloadDoodads(position)) done = false;
-        if (!loadChunks(position)) done = false;
+        if(!unloadDoodads(position)) done = false;
+        if(!loadChunks(position)) done = false;
         if(!detailChunks(position)) done = false;
         if(!undetailChunks(position)) done = false;
         if(!loadTrees(position)) done = false;
         if(!loadShrines(position)) done = false;
-        if (!loadDoodads(position)) done = false;
+        if(!loadDoodads(position)) done = false;
 
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
@@ -220,8 +221,8 @@ public class GenerationManager : MonoBehaviour {
     private bool unloadTrees(Vector2 position) {
         List<Vector2> keys = new List<Vector2>(TreeManager.loadedForests.Keys);
         foreach(Vector2 key in keys) {
-            if(Mathf.Abs(key.x - Globals.cur_chunk.x) > tree_load_dist ||
-               Mathf.Abs(key.y - Globals.cur_chunk.y) > tree_load_dist) {
+            if(Mathf.Abs(key.x - Globals.cur_chunk.x) > tree_unload_dist ||
+               Mathf.Abs(key.y - Globals.cur_chunk.y) > tree_unload_dist) {
                 tree_manager.unloadTrees(key);
             }
         }
@@ -251,8 +252,8 @@ public class GenerationManager : MonoBehaviour {
         for (int i = loaded_doodad_chunks.Count - 1; i >= 0; i--)
         {
             Vector2 this_chunk = loaded_doodad_chunks[i];
-            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_load_dist ||
-                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_load_dist)
+            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_unload_dist ||
+                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_unload_dist)
             {
                 doodad_manager.unloadDoodads(this_chunk);
                 loaded_doodad_chunks.RemoveAt(i);
@@ -277,8 +278,8 @@ public class GenerationManager : MonoBehaviour {
     private bool unloadShrines(Vector2 position) {
         for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--){
 			Vector2 this_chunk = loaded_shrine_chunks[i];
-			if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_load_dist ||
-				Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_load_dist)
+			if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_unload_dist ||
+				Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_unload_dist)
 			{
 				shrine_manager.unloadShrines((int)this_chunk.x, (int)this_chunk.y);
 				loaded_shrine_chunks.RemoveAt(i);
