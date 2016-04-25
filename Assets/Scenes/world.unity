@@ -250,7 +250,7 @@ MonoBehaviour:
   chunk_unload_dist: 6
   chunk_detail_dist: 1
   allottedLoadSeconds: 0.5
-  tree_load_dist: 1
+  tree_load_dist: 2
   biomes:
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
@@ -2998,7 +2998,7 @@ MonoBehaviour:
   minWarpOnWaitDist: 1
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 4294965193
+    m_Bits: 4294957001
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
   cinematicTimeScale: 100
   waitCamDistance: 60

@@ -101,9 +101,8 @@ public class Player : MonoBehaviour {
         else firstPersonCont.lookLock = false;
 
         //Holding Objects stuff
-        if (Input.GetButtonDown("Use")){
-            if (heldObj == null && GetHover().collider) 
-                TryGrabObject(GetHover().collider.gameObject);
+        if (Input.GetButtonDown("Use") && !Globals.paused && Globals.time_scale == 1) {
+            if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
             else if (TryUseObject()) { }
             else DropObject();
         }

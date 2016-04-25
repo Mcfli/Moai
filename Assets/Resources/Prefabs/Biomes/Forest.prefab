@@ -110,16 +110,23 @@ MonoBehaviour:
   - {fileID: 194074, guid: 65feb40d27e019d40b1d6e7c830f7b26, type: 2}
   - {fileID: 109448, guid: 11da957ef6c58c44f9ea6408d50c0ea4, type: 2}
   doodads:
-  - {fileID: 166326, guid: 058acdcdba022c348affd7d8772ce700, type: 2}
-  - {fileID: 132580, guid: abf4e16ec7e4a6047b323aed86fc402a, type: 2}
-  - {fileID: 100874, guid: d756f35b2919c7f4b9c39ff8d071e078, type: 2}
-  - {fileID: 180118, guid: 548f0a95d94e02a4293c8f837fad8832, type: 2}
-  - {fileID: 199006, guid: 108879e7d0d32ad43a5858240632f7eb, type: 2}
-  - {fileID: 152190, guid: a0bd73c4a1103194483fd1ff46a420a0, type: 2}
-  - {fileID: 189006, guid: 448152c6bfa7cad4ebae66a3818f1530, type: 2}
   - {fileID: 186092, guid: 15e4ac4a9dc75d441a1d89436c6b9142, type: 2}
-  doodadDensity: 1400000014000000140000001400000014000000140000001400000014000000
-  treeDensity: 3
+  - {fileID: 189006, guid: 448152c6bfa7cad4ebae66a3818f1530, type: 2}
+  - {fileID: 135330, guid: 2e21c1e14494beb4d94acc180832d708, type: 2}
+  - {fileID: 149616, guid: 3635e1867d8bf76498f9a6a056b61f49, type: 2}
+  - {fileID: 137344, guid: 43452567a80bf0d4bb8ac0aac1141c8f, type: 2}
+  - {fileID: 102276, guid: 5d25e09b13b51c542aa0b78a004c0d66, type: 2}
+  - {fileID: 127378, guid: 4554eb0d36f098c4887b913a6c04fd48, type: 2}
+  - {fileID: 134782, guid: 360bb9ce9269cd5429f9018cede3a325, type: 2}
+  - {fileID: 166224, guid: b3dd0280a9d306749b0fb451c4661718, type: 2}
+  - {fileID: 123018, guid: ec0eacd2c26477a42830429e2e4afacb, type: 2}
+  - {fileID: 172810, guid: 63ff9b08fe39a504aab9f4840d301060, type: 2}
+  - {fileID: 139208, guid: 86c5c794764c77748a0235b992647a66, type: 2}
+  - {fileID: 163042, guid: 61aa62e0b8e4602478de01825e69f1b2, type: 2}
+  - {fileID: 128958, guid: 2501911fad0fa4f44b6d0ec05c121f88, type: 2}
+  - {fileID: 191414, guid: 41a53271a25cd534480202725cbc7f09, type: 2}
+  doodadDensity: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 16
   mixedForests: 0

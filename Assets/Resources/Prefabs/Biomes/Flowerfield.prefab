@@ -106,8 +106,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes:
-  - {fileID: 0}
+  treeTypes: []
   doodads: []
   doodadDensity: 
   treeDensity: 2

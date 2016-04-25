@@ -1,15 +1,54 @@
 fileFormatVersion: 2
-guid: bb91c2602fde2de4089bdf1503619d6c
-timeCreated: 1460690812
+guid: 0efb15fd7c572364cb6a49dfb6a84466
+timeCreated: 1461535254
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cube.001
+    100000: b_rock1
+    100002: b_rock2
+    100004: b_rock3
+    100006: b_rock4
+    100008: b_rock5
+    100010: b_rock6
+    100012: b_rock7
+    100014: b_rock8
+    100016: //RootNode
+    400000: b_rock1
+    400002: b_rock2
+    400004: b_rock3
+    400006: b_rock4
+    400008: b_rock5
+    400010: b_rock6
+    400012: b_rock7
+    400014: b_rock8
+    400016: //RootNode
+    2300000: b_rock1
+    2300002: b_rock2
+    2300004: b_rock3
+    2300006: b_rock4
+    2300008: b_rock5
+    2300010: b_rock6
+    2300012: b_rock7
+    2300014: b_rock8
+    3300000: b_rock1
+    3300002: b_rock2
+    3300004: b_rock3
+    3300006: b_rock4
+    3300008: b_rock5
+    3300010: b_rock6
+    3300012: b_rock7
+    3300014: b_rock8
+    4300000: b_rock7
+    4300002: b_rock3
+    4300004: b_rock2
+    4300006: b_rock4
+    4300008: b_rock1
+    4300010: b_rock5
+    4300012: b_rock6
+    4300014: b_rock8
+    7400000: Default Take
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,7 +92,7 @@ ModelImporter:
     normalSmoothAngle: 0
     normalImportMode: 1
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []

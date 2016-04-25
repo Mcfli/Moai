@@ -4484,7 +4484,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 491338}
@@ -7097,8 +7097,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3688912, y: 75.724915, z: 3.3688912}
-  m_Center: {x: 0.3, y: 36.08564, z: -0.31637534}
+  m_Size: {x: 3.3688912, y: 79.23162, z: 3.3688912}
+  m_Center: {x: 0.3, y: 37.83901, z: -0.31637534}
 --- !u!111 &11192402
 Animation:
   m_ObjectHideFlags: 1
@@ -7146,9 +7146,9 @@ MonoBehaviour:
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   propogateDuringState: 000101
   collisionCenterMin: {x: 0.2788626, y: -0.7508587, z: 0}
-  collisionCenterMax: {x: 0.3, y: 36.08564, z: -0.3163753}
+  collisionCenterMax: {x: 0.3, y: 37.83901, z: -0.3163753}
   collisionSizeMin: {x: 0.816488, y: 1.648281, z: 1}
-  collisionSizeMax: {x: 3.368891, y: 75.72491, z: 3.368891}
+  collisionSizeMax: {x: 3.368891, y: 79.23162, z: 3.368891}
   heightVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -7201,19 +7201,34 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   boundsCenterMin: {x: -0.6761925, y: 0.02923673, z: 0.03687167}
-  boundsCenterMax: {x: -7.355129, y: -0.1294556, z: -0.04171038}
+  boundsCenterMax: {x: -7.697715, y: -0.1294556, z: -0.04171038}
   boundsSizeMin: {x: 0.7267091, y: 0.6814099, z: 0.7129986}
-  boundsSizeMax: {x: 7.378858, y: 2.194129, z: 2.003686}
+  boundsSizeMax: {x: 7.721443, y: 2.194129, z: 2.003686}
   boundsVSTime:
   - serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: 0.006250024
       inSlope: 2
       outSlope: 2
       tangentMode: 0
+    - time: 0.110798985
+      value: 0.37344208
+      inSlope: 1.6534328
+      outSlope: 1.6534328
+      tangentMode: 0
+    - time: 0.5022955
+      value: 0.7429479
+      inSlope: 0.97334385
+      outSlope: 0.97334385
+      tangentMode: 0
+    - time: 0.7796949
+      value: 0.8840235
+      inSlope: 1.0874867
+      outSlope: 1.0874867
+      tangentMode: 0
     - time: 1
-      value: 1
+      value: 1.00625
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7543,8 +7558,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 439630}
   m_AABB:
-    m_Center: {x: -7.3551292, y: -0.12945557, z: -0.041710377}
-    m_Extent: {x: 7.3788576, y: 2.1941285, z: 2.003686}
+    m_Center: {x: -7.697715, y: -0.12945557, z: -0.041710377}
+    m_Extent: {x: 7.721443, y: 2.1941285, z: 2.003686}
   m_DirtyAABB: 0
 --- !u!1001 &100100000
 Prefab:

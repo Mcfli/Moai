@@ -106,14 +106,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes:
-  - {fileID: 136664, guid: 03f1f5521b6c9874db682a84e1bc2e45, type: 2}
+  treeTypes: []
   doodads: []
+  doodadDensity: 
   treeDensity: 2
-  treeGrowthIterations: 3
-  treeSpreadMin: 12
-  treeSpeadRange: 25
-  doodadDensity: 0
+  forestRadius: 50
+  forestMaxTrees: 16
+  mixedForests: 0
   colors:
   - {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 0}
   - {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0}

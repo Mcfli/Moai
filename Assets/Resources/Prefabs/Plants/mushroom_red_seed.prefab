@@ -76,7 +76,7 @@ Rigidbody:
   m_GameObject: {fileID: 149340}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 100
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -114,6 +114,9 @@ MonoBehaviour:
   growAttempts: 5
   growTime: 18000
   growTimeVariance: 0.5
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 4294955977
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
 --- !u!135 &13595864
