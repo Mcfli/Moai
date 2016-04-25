@@ -252,6 +252,7 @@ public class WaterBody : MonoBehaviour {
 
         // Generate verticies
         Vector3[] vertices = new Vector3[(xRes * yRes)];
+        Vector2[] uvs = new Vector2[vertices.Length];
         for (int iy = 0; iy < yRes; iy++)
         {
             for (int ix = 0; ix < xRes; ix++)
@@ -259,9 +260,11 @@ public class WaterBody : MonoBehaviour {
                 float x = ix * xStepSize - size.x * 0.5f;
                 float y = iy * yStepSize - size.z * 0.5f;
                 vertices[iy * xRes + ix] = new Vector3(x, 0, y);
+                uvs[iy * xRes + ix] = new Vector2((float)ix/xRes,(float)iy/yRes);
             }
         }
         mf.mesh.vertices = vertices;
+        mf.mesh.uv = uvs;
 
         // Generate triangles using these vertices
         int[] triangles = new int[(xRes - 1) * (yRes - 1) * 6];
@@ -295,17 +298,18 @@ public class WaterBody : MonoBehaviour {
         Vector3[] oldVerts = mesh.vertices;
         int[] triangles = mesh.triangles;
         Vector3[] vertices = new Vector3[triangles.Length];
-
+        Vector2[] uvs = new Vector2[vertices.Length];
 
         for (int i = 0; i < triangles.Length; i++)
         {
             vertices[i] = oldVerts[triangles[i]];
-
+            uvs[i] = mesh.uv[triangles[i]];
             triangles[i] = i;
 
         }
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
