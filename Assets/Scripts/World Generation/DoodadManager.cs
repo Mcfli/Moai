@@ -29,7 +29,7 @@ public class DoodadManager : MonoBehaviour
                 float ratioTotal = 0;
                 foreach(float f in biome.bigDoodadChance) ratioTotal += f;
 
-                GameObject bigDoodad = null;
+                int bigDoodadID = -1;
 
                 float roll = Random.value * ratioTotal;
                 float ratioAdditive = 0;
@@ -37,9 +37,12 @@ public class DoodadManager : MonoBehaviour
                 for(int k = 0; k < biome.bigDoodads.Count; k++) {
                     ratioAdditive += biome.bigDoodadChance[k];
                     if(roll < ratioAdditive) {
-                        if(biome.bigDoodads[k]) bigDoodad = createDoodad(position, biome.bigDoodads[k]);
-                        if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
-                        loaded_doodads[key].Add(bigDoodad);
+                        bigDoodadID = k;
+                        if(biome.bigDoodads[k]) {
+                            GameObject bigDoodad = createDoodad(position, biome.bigDoodads[k]);
+                            if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
+                            loaded_doodads[key].Add(bigDoodad);
+                        }
                         break;
                     }
 
@@ -48,7 +51,10 @@ public class DoodadManager : MonoBehaviour
                 ratioTotal = 0;
                 foreach(float f in biome.smallDoodadChance) ratioTotal += f;
 
-                int numofSmallDoodads = Mathf.RoundToInt(Random.Range(biome.numOfSmallDoodads.x, biome.numOfSmallDoodads.y));
+                roll = Random.value;
+                int numofSmallDoodads = Mathf.RoundToInt(roll * (biome.numOfSmallDoodads.y - biome.numOfSmallDoodads.x) + biome.numOfSmallDoodads.x);
+                float clusterRadius = roll * (biome.doodadClusterRadius.y - biome.doodadClusterRadius.x) + biome.doodadClusterRadius.x;
+                
                 for(int k = 0; k < numofSmallDoodads; k++) {
                     roll = Random.value * ratioTotal;
                     ratioAdditive = 0;
@@ -57,7 +63,7 @@ public class DoodadManager : MonoBehaviour
                         ratioAdditive += biome.smallDoodadChance[l];
                         if(roll < ratioAdditive) {
                             float theta = Random.Range(0, Mathf.PI * 2);
-                            float dist = Random.Range((bigDoodad) ? 5f : 0f, 10f);
+                            float dist = Random.Range(biome.bigDoodadRadius[bigDoodadID], clusterRadius);
                             Vector2 randomPos = position;
                             randomPos.x += Mathf.Cos(theta) * dist;
                             randomPos.y += Mathf.Sin(theta) * dist;

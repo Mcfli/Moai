@@ -24,9 +24,11 @@ public class Biome : MonoBehaviour {
     // doodadDensity[0] gives how many of that doodad to spawn
     public List<GameObject> bigDoodads;     // boulders, etc - can include "None"
     public List<float> bigDoodadChance;
+    public List<float> bigDoodadRadius;      // when placing small doodads around this, it won't place in radius
     public List<GameObject> smallDoodads;   // grass, flowers, etc - placed around big doodads
     public List<float> smallDoodadChance;
     public Vector2 numOfSmallDoodads;       // num of small doodads around a big doodad / in a group
+    public Vector2 doodadClusterRadius;     // scales with numOfSmallDoodads
     public float doodadDensity;             // groups of doodads
 
     public int treeDensity = 2;

@@ -131,6 +131,17 @@ MonoBehaviour:
   - 1
   - 1
   - 3
+  bigDoodadRadius:
+  - 0
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
+  - 0
+  - 0
   smallDoodads:
   - {fileID: 128958, guid: 2501911fad0fa4f44b6d0ec05c121f88, type: 2}
   - {fileID: 191414, guid: 41a53271a25cd534480202725cbc7f09, type: 2}
@@ -182,6 +193,7 @@ MonoBehaviour:
   - 1
   - 1
   numOfSmallDoodads: {x: 10, y: 20}
+  doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 5
   treeDensity: 2
   forestRadius: 50

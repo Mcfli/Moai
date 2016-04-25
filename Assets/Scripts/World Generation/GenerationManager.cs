@@ -38,8 +38,6 @@ public class GenerationManager : MonoBehaviour {
     private DoodadManager doodad_manager;
 
     void Awake() {
-        //Profiler.maxNumberOfSamplesPerFrame *= 6;
-
         //lists
         loaded_chunks = new Dictionary<Vector2, GameObject>();
         detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
