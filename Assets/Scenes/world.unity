@@ -250,8 +250,8 @@ MonoBehaviour:
   chunk_unload_dist: 6
   chunk_detail_dist: 1
   allottedLoadSeconds: 0.1
-  tree_load_dist: 1
-  tree_unload_dist: 2
+  tree_load_dist: 2
+  tree_unload_dist: 3
   biomes:
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
