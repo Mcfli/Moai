@@ -17,9 +17,19 @@ public class DoodadManager : MonoBehaviour
 
     public void loadDoodads(Vector2 key, Biome biome){
         if (biome.doodads.Count < 1) return;
-        
-        for(int i = 0; i < biome.doodads.Count; i++)
-            if(Random.value * 100 < biome.doodadDensity[i]) loadDoodadType(key, biome.doodads[i]);
+
+        float ratioTotal = 0;
+        foreach(float f in biome.doodadDensity) ratioTotal += f;
+
+        int num = Mathf.RoundToInt(Random.Range(biome.numOfDoodadsMinMax.x, biome.numOfDoodadsMinMax.y));
+        for(int i = 0; i < num; i++) {
+            float roll = Random.value * ratioTotal;
+            float ratioAdditive = 0;
+            for(int j = 0; j < biome.doodadDensity.Count; j++) {
+                ratioAdditive += biome.doodadDensity[j];
+                if(roll < ratioAdditive) loadDoodadType(key, biome.doodads[j]);
+            }
+        }
     }
     
     // Populates the chunk with the number of doodad specified as count. 

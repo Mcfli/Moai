@@ -125,7 +125,23 @@ MonoBehaviour:
   - {fileID: 163042, guid: 61aa62e0b8e4602478de01825e69f1b2, type: 2}
   - {fileID: 128958, guid: 2501911fad0fa4f44b6d0ec05c121f88, type: 2}
   - {fileID: 191414, guid: 41a53271a25cd534480202725cbc7f09, type: 2}
-  doodadDensity: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  doodadDensity:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  numOfDoodadsMinMax: {x: 10, y: 10}
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 16
