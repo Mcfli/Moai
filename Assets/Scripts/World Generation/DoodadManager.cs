@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class DoodadManager : MonoBehaviour
 {
+    public int placementSeed;
     private GenerationManager gen_manager;
     public static Dictionary<Vector2, List<GameObject>> loaded_doodads;
 
@@ -16,41 +17,75 @@ public class DoodadManager : MonoBehaviour
     }
 
     public void loadDoodads(Vector2 key, Biome biome){
-        if (biome.doodads.Count < 1) return;
+        if (biome.bigDoodads.Count < 1) return;
 
-        float ratioTotal = 0;
-        foreach(float f in biome.doodadDensity) ratioTotal += f;
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed + placementSeed + key.GetHashCode();
 
-        int num = Mathf.RoundToInt(Random.Range(biome.numOfDoodadsMinMax.x, biome.numOfDoodadsMinMax.y));
-        for(int i = 0; i < num; i++) {
-            float roll = Random.value * ratioTotal;
-            float ratioAdditive = 0;
-            for(int j = 0; j < biome.doodadDensity.Count; j++) {
-                ratioAdditive += biome.doodadDensity[j];
-                if(roll < ratioAdditive) loadDoodadType(key, biome.doodads[j]);
+        float step_size = gen_manager.chunk_size / biome.doodadDensity;
+        for(float i = key.x * gen_manager.chunk_size + 0.5f * step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size) {
+            for(float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size) {
+                Vector2 position = new Vector3(i + step_size * Random.value - 0.5f * step_size, j + step_size * Random.value - 0.5f * step_size);
+                float ratioTotal = 0;
+                foreach(float f in biome.bigDoodadChance) ratioTotal += f;
+
+                GameObject bigDoodad = null;
+
+                float roll = Random.value * ratioTotal;
+                float ratioAdditive = 0;
+
+                for(int k = 0; k < biome.bigDoodads.Count; k++) {
+                    ratioAdditive += biome.bigDoodadChance[k];
+                    if(roll < ratioAdditive) {
+                        if(biome.bigDoodads[k]) bigDoodad = createDoodad(position, biome.bigDoodads[k]);
+                        if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
+                        loaded_doodads[key].Add(bigDoodad);
+                        break;
+                    }
+
+                }
+
+                ratioTotal = 0;
+                foreach(float f in biome.smallDoodadChance) ratioTotal += f;
+
+                int numofSmallDoodads = Mathf.RoundToInt(Random.Range(biome.numOfSmallDoodads.x, biome.numOfSmallDoodads.y));
+                for(int k = 0; k < numofSmallDoodads; k++) {
+                    roll = Random.value * ratioTotal;
+                    ratioAdditive = 0;
+                    for(int l = 0; l < biome.smallDoodads.Count; l++) {
+                        GameObject smallDoodad = null;
+                        ratioAdditive += biome.smallDoodadChance[l];
+                        if(roll < ratioAdditive) {
+                            float theta = Random.Range(0, Mathf.PI * 2);
+                            float dist = Random.Range((bigDoodad) ? 5f : 0f, 10f);
+                            Vector2 randomPos = position;
+                            randomPos.x += Mathf.Cos(theta) * dist;
+                            randomPos.y += Mathf.Sin(theta) * dist;
+                            smallDoodad = createDoodad(randomPos, biome.smallDoodads[l]);
+                            if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
+                            if(smallDoodad) loaded_doodads[key].Add(smallDoodad);
+                            break;
+                        }
+                    }
+                }
             }
         }
+        Random.seed = originalSeed;
     }
     
-    // Populates the chunk with the number of doodad specified as count. 
-    private void loadDoodadType(Vector2 key,GameObject doodad){
-        float xpos = key.x * gen_manager.chunk_size + gen_manager.chunk_size * Random.value;
-        float zpos = key.y * gen_manager.chunk_size + gen_manager.chunk_size * Random.value;
-        Vector3 pos = new Vector3(xpos, 0, zpos);
-
+    private GameObject createDoodad(Vector2 position, GameObject doodad){
+        Vector3 pos = new Vector3(position.x, 10000000, position.y);
         RaycastHit hit;
-        Ray rayDown = new Ray(new Vector3(xpos, 10000000, zpos), Vector3.down);
-        int terrain = LayerMask.GetMask("Terrain");
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)){
+        Ray rayDown = new Ray(pos, Vector3.down);
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
             pos.y = hit.point.y;
             GameObject d = Instantiate(doodad, pos + doodad.transform.position, doodad.transform.rotation) as GameObject;
             d.transform.Rotate(Vector3.up*Random.Range(0,2*Mathf.PI));
             InteractableObject o = d.GetComponent<InteractableObject>();
             if(o) o.plant(d.transform.position);
-            if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
-            loaded_doodads[key].Add(d);
+            return d;
         }
-            
+        return null;
     }
 
     public void unloadDoodads(Vector2 chunk)
@@ -64,5 +99,4 @@ public class DoodadManager : MonoBehaviour
             }
         }
     }
-
 }

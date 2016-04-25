@@ -6,6 +6,7 @@ public class TreeManager : MonoBehaviour {
     public float seedToTreeRatio = 0.3f;
     public float secondsToPropogate = 3600;
     public float propogationTimeVariance = 0.5f;
+    public int placementSeed;
     public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
     public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
@@ -37,7 +38,7 @@ public class TreeManager : MonoBehaviour {
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
             int originalSeed = Random.seed;
-            Random.seed = Globals.SeedScript.seed + key.GetHashCode();
+            Random.seed = Globals.SeedScript.seed + placementSeed + key.GetHashCode();
 
             for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size){
                 for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size){

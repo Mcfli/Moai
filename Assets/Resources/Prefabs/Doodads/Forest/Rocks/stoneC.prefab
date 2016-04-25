@@ -15,7 +15,7 @@ GameObject:
   - 54: {fileID: 5472630}
   - 75: {fileID: 7576206}
   m_Layer: 14
-  m_Name: s_rock3
+  m_Name: stoneC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 139208}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   growTimeVariance: 0
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 4294957001
+    m_Bits: 0
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000

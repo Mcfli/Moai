@@ -22,9 +22,12 @@ public class Biome : MonoBehaviour {
 
     // Doodads, type and desnity. doodads[0] gives first kind of doodad and 
     // doodadDensity[0] gives how many of that doodad to spawn
-    public List<GameObject> doodads;
-    public List<float> doodadDensity;
-    public Vector2 numOfDoodadsMinMax;
+    public List<GameObject> bigDoodads;     // boulders, etc - can include "None"
+    public List<float> bigDoodadChance;
+    public List<GameObject> smallDoodads;   // grass, flowers, etc - placed around big doodads
+    public List<float> smallDoodadChance;
+    public Vector2 numOfSmallDoodads;       // num of small doodads around a big doodad / in a group
+    public float doodadDensity;             // groups of doodads
 
     public int treeDensity = 2;
     public float forestRadius = 50;
@@ -40,7 +43,8 @@ public class Biome : MonoBehaviour {
     {
         colors = new List<Color>();
         treeTypes = new List<GameObject>();
-        doodads = new List<GameObject>();
+        bigDoodads = new List<GameObject>();
+        smallDoodads = new List<GameObject>();
         weatherTypes = new List<Weather>();
     }
 
