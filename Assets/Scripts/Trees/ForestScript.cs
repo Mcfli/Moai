@@ -36,6 +36,9 @@ public class ForestScript : MonoBehaviour {
 
     // "new" initialization function (make maxTrees 0 when spawning a forest)
     public void createForest(Vector3 position, float radius, int maxTrees, List<GameObject> treeTypes, bool mixedForest) {
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed + position.GetHashCode();
+
         transform.position = position;
         this.radius = radius;
         this.maxTrees = maxTrees;
@@ -50,6 +53,8 @@ public class ForestScript : MonoBehaviour {
         }
 
         propogate(Mathf.CeilToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
+
+        Random.seed = originalSeed;
     }
 
     // for new tree created forests
@@ -195,7 +200,7 @@ public class ForestScript : MonoBehaviour {
         if(Physics.OverlapSphere(pos, cull_radius, LayerMask.GetMask("Tree")).Length > 0) return null; //by spherecast - better for overlapping forests
         //foreach(TreeScript t in trees) if(Vector3.Distance(t.gameObject.transform.position, pos) < cull_radius) return null; //by list iteration - will not take into account of overlapping forest
 
-        GameObject g = Instantiate(type, pos, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;
+        GameObject g = Instantiate(type, pos + type.transform.position, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;
         TreeScript tree = g.GetComponent<TreeScript>();
         tree.age = Random.Range(0, tree.lifeSpan);
         tree.setForestParent(this);

@@ -5,6 +5,7 @@ public class Player : MonoBehaviour {
     public float grabDistance = 4;
     public float grabSphereRadius = 0;
     public float minWarpOnWaitDist = 0.5f; // distance from ground you have to be to warp there
+    public LayerMask collisionLayers;
 
     private Collider thisCollider;
     private float cameraHeight;
@@ -49,10 +50,10 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //warp to ground at game start
-        if(!startGroundWarp) startGroundWarp = warpToGround();
+        if(!startGroundWarp) startGroundWarp = warpToGround(Mathf.Infinity);
 
         if (Globals.time_scale > 1) {
-            warpToGround();
+            warpToGround(transform.position.y);
             if(!playerAudio.isPlaying) { //sound
                 playerAudio.loop = true;
                 playerAudio.PlayOneShot(speedUp, .2f);
@@ -100,9 +101,8 @@ public class Player : MonoBehaviour {
         else firstPersonCont.lookLock = false;
 
         //Holding Objects stuff
-        if (Input.GetButtonDown("Use")){
-            if (heldObj == null && GetHover().collider) 
-                TryGrabObject(GetHover().collider.gameObject);
+        if (Input.GetButtonDown("Use") && !Globals.paused && Globals.time_scale == 1) {
+            if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
             else if (TryUseObject()) { }
             else DropObject();
         }
@@ -122,10 +122,10 @@ public class Player : MonoBehaviour {
         obj.transform.forward = Camera.main.transform.forward;
     }
     
-	public bool warpToGround(){
+	public bool warpToGround(float fromHeight){
 		RaycastHit hit;
         Ray rayDown = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
+        if (Physics.Raycast(rayDown, out hit, fromHeight, collisionLayers)){
             if (transform.position.y - (hit.point.y + cameraHeight) > minWarpOnWaitDist)
                 transform.position = new Vector3(transform.position.x, hit.point.y + cameraHeight, transform.position.z);
             return true;

@@ -6,6 +6,7 @@ public class TreeManager : MonoBehaviour {
     public float seedToTreeRatio = 0.3f;
     public float secondsToPropogate = 3600;
     public float propogationTimeVariance = 0.5f;
+    public int placementSeed;
     public static Dictionary<Vector2, List<ForestScript.forestStruct>> trees; //actually a dictionary of forests
     public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
@@ -36,6 +37,9 @@ public class TreeManager : MonoBehaviour {
             // When Advanced terrain is implemented...
             // Instead, check if moisture and heat are sufficient for foliage at each point
 
+            int originalSeed = Random.seed;
+            Random.seed = Globals.SeedScript.seed + placementSeed + key.GetHashCode();
+
             for (float i = key.x * gen_manager.chunk_size + 0.5f*step_size; i < key.x * gen_manager.chunk_size + gen_manager.chunk_size; i += step_size){
                 for (float j = key.y * gen_manager.chunk_size + 0.5f * step_size; j < key.y * gen_manager.chunk_size + gen_manager.chunk_size; j += step_size){
 
@@ -48,12 +52,15 @@ public class TreeManager : MonoBehaviour {
                         else position.y = hit.point.y - 1;
                     } else continue;
 
+                    if(Physics.OverlapSphere(transform.position, biome.forestRadius, LayerMask.GetMask("Seed")).Length > 0) continue;
+
                     GameObject g = new GameObject("Forest");
                     ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
                     newForest.createForest(position, biome.forestRadius, biome.forestMaxTrees, biome.treeTypes, biome.mixedForests);
                     loaded.Add(newForest.GetInstanceID(), newForest);
                 }
             }
+            Random.seed = originalSeed;
         }
         loadedForests.Add(key, loaded);
     }

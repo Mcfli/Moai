@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 1, g: 0.93448275, b: 0.875, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.5
+  m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SkyboxMaterial: {fileID: 2100000, guid: 4edfa39d301eaf6408f1d67a643db749, type: 2}
   m_HaloStrength: 0.5
@@ -244,13 +244,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9847968ac6eb35c4199fb75827fc3094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunk_size: 500
+  chunk_size: 256
   chunk_resolution: 8
   chunk_load_dist: 4
   chunk_unload_dist: 6
   chunk_detail_dist: 1
-  allottedLoadSeconds: 0.5
-  tree_load_dist: 1
+  allottedLoadSeconds: 0.1
+  tree_load_dist: 2
+  tree_unload_dist: 3
   biomes:
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
@@ -281,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18eff118216999e41a156474a19facd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placementSeed: 767887
 --- !u!114 &188005514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +297,7 @@ MonoBehaviour:
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
   XZDeviationRatio: 0.5
   XZDeviationSeed: 543825
-  detailDeviation: 2
+  detailDeviation: 1
   detailDeviationSeed: 854375
   detailSubdivisions: 3
 --- !u!114 &188005515
@@ -312,6 +314,7 @@ MonoBehaviour:
   seedToTreeRatio: 0.3
   secondsToPropogate: 3600
   propogationTimeVariance: 0.5
+  placementSeed: 434321
 --- !u!114 &188005516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &258801223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -866,7 +869,7 @@ RectTransform:
   - {fileID: 1099325277}
   - {fileID: 672223399}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1935,7 +1938,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.75
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -1984,7 +1987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &975260348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2331,7 +2334,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1933
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2355,7 +2358,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_TagString
@@ -2379,7 +2382,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Height
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Center.y
@@ -2503,6 +2506,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2996,6 +3003,9 @@ MonoBehaviour:
   grabDistance: 4
   grabSphereRadius: 0
   minWarpOnWaitDist: 1
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 4294957001
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
   cinematicTimeScale: 100
   waitCamDistance: 60

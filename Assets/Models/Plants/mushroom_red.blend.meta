@@ -69,7 +69,135 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: redMushroom_dying
+      takeName: redMushroom_dying
+      firstFrame: 0
+      lastFrame: 423
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/bottom_trunk
+        weight: 1
+      - path: Armature/bottom_trunk/mid_trunk
+        weight: 1
+      - path: Armature/bottom_trunk/mid_trunk/top_trunk
+        weight: 1
+      - path: Armature/cap_bottom
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_005
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_006
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_007
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_008
+        weight: 1
+      - path: Armature/cap_bottom/cap_top
+        weight: 1
+      - path: Armature/cap_bottom_001
+        weight: 1
+      - path: Armature/cap_bottom_002
+        weight: 1
+      - path: Armature/cap_bottom_003
+        weight: 1
+      - path: Armature/cap_bottom_004
+        weight: 1
+      - path: Cylinder
+        weight: 1
+      - path: Empty
+        weight: 1
+      - path: Empty_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: redMushroom_growing
+      takeName: redMushroom_growing
+      firstFrame: 0
+      lastFrame: 574
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/bottom_trunk
+        weight: 1
+      - path: Armature/bottom_trunk/mid_trunk
+        weight: 1
+      - path: Armature/bottom_trunk/mid_trunk/top_trunk
+        weight: 1
+      - path: Armature/cap_bottom
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_005
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_006
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_007
+        weight: 1
+      - path: Armature/cap_bottom/cap_bottom_008
+        weight: 1
+      - path: Armature/cap_bottom/cap_top
+        weight: 1
+      - path: Armature/cap_bottom_001
+        weight: 1
+      - path: Armature/cap_bottom_002
+        weight: 1
+      - path: Armature/cap_bottom_003
+        weight: 1
+      - path: Armature/cap_bottom_004
+        weight: 1
+      - path: Cylinder
+        weight: 1
+      - path: Empty
+        weight: 1
+      - path: Empty_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -91,7 +219,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 0
     normalImportMode: 1
-    tangentImportMode: 1
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

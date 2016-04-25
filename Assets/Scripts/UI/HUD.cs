@@ -28,10 +28,7 @@ public class HUD : MonoBehaviour {
             crosshair.color = (Globals.PlayerScript.LookingAtGrabbable()) ? canGrabColor : initialColor;
         } else crosshair.enabled = false;
 
-        if(Input.GetButtonDown(pauseButton)) {
-            if(Globals.paused) Globals.paused = false;
-            else Globals.paused = true;
-        }
+        if(Input.GetButtonDown(pauseButton)) Globals.paused = !Globals.paused;
 
         if(Globals.paused) {
             Time.timeScale = 0;
