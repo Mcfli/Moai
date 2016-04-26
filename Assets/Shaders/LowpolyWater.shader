@@ -1,5 +1,5 @@
 ﻿
-Shader "Trolltunga/LowPolyWaves 2.0"
+Shader "LowPolyWaves 2.0"
 {
 	Properties
 	{
@@ -54,8 +54,6 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 				float4  pos : SV_POSITION;
 				float3	norm : NORMAL;
 				float2  uv : TEXCOORD0;
-				float3  viewDir     : TEXCOORD1;
-				float3  lightDir    : TEXCOORD2;
 				LIGHTING_COORDS(3, 4)
 			};
 
@@ -86,8 +84,7 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 				OUT.norm = v.normal;
 				OUT.uv = v.texcoord;
 				TANGENT_SPACE_ROTATION;
-				OUT.viewDir = mul(rotation, normalize(ObjSpaceViewDir(v.vertex)));
-				OUT.lightDir = ld;
+
 				return OUT;
 			}
 
@@ -99,22 +96,20 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 				float3 v1 = IN[1].pos.xyz;
 				float3 v2 = IN[2].pos.xyz;
 
+				float3 center = (v0 + v1 + v2) / 3;
+
 				float3 worldNormal = UnityObjectToWorldNormal(cross(v1 - v0, v2 - v0));
 
 				float attenuation = 1.0;
 
-				float nl = max(0, dot(normalize(worldNormal), _WorldSpaceLightPos0.xyz));
+				float nl = max(0.1, dot(normalize(worldNormal), _WorldSpaceLightPos0.xyz));
 
-				float3 ambientLighting = UNITY_LIGHTMODEL_AMBIENT.rgb;
-				float3	specularReflection = 0;
-				/*
-				float3	specularReflection = attenuation 
-						* _SpecColor.rgb * pow(max(0.0, dot(
-							reflect(-lightDirection, normalDirection),
-							viewDirection)), _Shininess);
-				*/
+				float viewDirection = _WorldSpaceCameraPos.xyz - mul(_Object2World, center).xyz;
+				
+				float3 specularReflection = 0;
+				
 
-				float3 diff = _Color.rgb *nl ;
+				float3 diff = _Color.rgb *nl + ShadeSH9(float4(worldNormal, 0.5));
 
 				g2f OUT;
 				OUT.pos = mul(UNITY_MATRIX_MVP,IN[0].pos);
@@ -142,7 +137,7 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 			half4 frag(g2f IN) : COLOR
 			{
 				return float4(
-				IN.diffuseColor , _Color.a);
+				IN.diffuseColor, _Color.a);
 			}
 
 			ENDCG
