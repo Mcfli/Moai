@@ -15,7 +15,7 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 		SubShader
 	{
 
-		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" "LightMode" = "ForwardBase" }
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
@@ -23,6 +23,7 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 
 			CGPROGRAM
 			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc"
 			#include "AutoLight.cginc"
 			#pragma vertex vert
 			#pragma geometry geom
@@ -44,10 +45,8 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 			float _RandomHeight;
 			float _RandomSpeed;
 
-			uniform float4 _LightColor0;
 
 			uniform float4 _Color;
-			uniform float4 _SpecColor;
 			uniform float _Shininess;
 
 			struct v2g
@@ -80,61 +79,60 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 
 				v.vertex.xyz = v0;
 
+				float ld = normalize(mul(unity_LightPosition[0], UNITY_MATRIX_IT_MV).xyz - v.vertex.xyz);
+
 				v2g OUT;
 				OUT.pos = v.vertex;
 				OUT.norm = v.normal;
 				OUT.uv = v.texcoord;
 				TANGENT_SPACE_ROTATION;
 				OUT.viewDir = mul(rotation, normalize(ObjSpaceViewDir(v.vertex)));
-				OUT.lightDir = mul(rotation, normalize(ObjSpaceLightDir(v.vertex)));
+				OUT.lightDir = ld;
 				return OUT;
 			}
 
 			[maxvertexcount(3)]
 			void geom(triangle v2g IN[3], inout TriangleStream<g2f> triStream)
 			{
+				// Should be in object coordinates
 				float3 v0 = IN[0].pos.xyz;
 				float3 v1 = IN[1].pos.xyz;
 				float3 v2 = IN[2].pos.xyz;
 
-				//float3 centerPos = (v0 + v1 + v2) / 3.0;
+				float3 worldNormal = UnityObjectToWorldNormal(cross(v1 - v0, v2 - v0));
 
-				float3 normalDirection = normalize(cross(v1 - v0, v2 - v0));
-
-				float3 viewDirection = normalize((IN[0].viewDir + IN[1].viewDir + IN[2].viewDir)/3);
-				float3 lightDirection = normalize((IN[0].lightDir + IN[1].lightDir + IN[2].lightDir)/3) ;
 				float attenuation = 1.0;
 
+				float nl = max(0, dot(normalize(worldNormal), _WorldSpaceLightPos0.xyz));
+
 				float3 ambientLighting = UNITY_LIGHTMODEL_AMBIENT.rgb;
-
-				float3 diffuseReflection =
-					saturate(dot(normalDirection, lightDirection)) * attenuation;
-
+				float3	specularReflection = 0;
+				/*
 				float3	specularReflection = attenuation 
 						* _SpecColor.rgb * pow(max(0.0, dot(
 							reflect(-lightDirection, normalDirection),
 							viewDirection)), _Shininess);
-				
+				*/
 
-				float3 diff =  _Color.rgb * diffuseReflection ;
+				float3 diff = _Color.rgb *nl ;
 
 				g2f OUT;
-				OUT.pos = mul(UNITY_MATRIX_MVP, IN[0].pos);
-				OUT.norm = normalDirection;
+				OUT.pos = mul(UNITY_MATRIX_MVP,IN[0].pos);
+				OUT.norm = worldNormal;
 				OUT.uv = IN[0].uv;
 				OUT.diffuseColor = diff;
 				OUT.specularColor = specularReflection;
 				triStream.Append(OUT);
 
 				OUT.pos = mul(UNITY_MATRIX_MVP, IN[1].pos);
-				OUT.norm = normalDirection;
+				OUT.norm = worldNormal;
 				OUT.uv = IN[1].uv;
 				OUT.diffuseColor = diff;
 				OUT.specularColor = specularReflection;
 				triStream.Append(OUT);
 
 				OUT.pos = mul(UNITY_MATRIX_MVP, IN[2].pos);
-				OUT.norm = normalDirection;
+				OUT.norm = worldNormal;
 				OUT.uv = IN[2].uv;
 				OUT.diffuseColor = diff;
 				OUT.specularColor = specularReflection;
@@ -144,7 +142,7 @@ Shader "Trolltunga/LowPolyWaves 2.0"
 			half4 frag(g2f IN) : COLOR
 			{
 				return float4(
-				IN.diffuseColor + IN.specularColor , _Color.a);
+				IN.diffuseColor , _Color.a);
 			}
 
 			ENDCG

@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae5262824d45494aa9226c8772b36d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterResolution: 0.02
+  waterResolution: 0.03
   acceptableHeightDiff: 10000
 --- !u!114 &188005514
 MonoBehaviour:
