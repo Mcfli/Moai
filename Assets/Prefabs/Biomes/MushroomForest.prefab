@@ -141,7 +141,7 @@ MonoBehaviour:
   lakeCount: 3
   lakeSize: {x: 200, y: 70, z: 200}
   lakeMaxLength: 250
-  waterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
+  waterMaterial: {fileID: 2100000, guid: f64afad84f8eedd44bc401c6b84f6e19, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -212,7 +212,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: waterMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
+      objectReference: {fileID: 2100000, guid: f64afad84f8eedd44bc401c6b84f6e19, type: 2}
     - target: {fileID: 0}
       propertyPath: lakeCount
       value: 3
