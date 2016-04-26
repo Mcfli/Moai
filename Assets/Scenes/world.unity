@@ -226,6 +226,7 @@ GameObject:
   - 114: {fileID: 188005515}
   - 114: {fileID: 188005518}
   - 114: {fileID: 188005512}
+  - 114: {fileID: 188005513}
   m_Layer: 0
   m_Name: WorldGen
   m_TagString: Untagged
@@ -283,6 +284,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementSeed: 767887
+--- !u!114 &188005513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 188005509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae5262824d45494aa9226c8772b36d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterResolution: 0.1
+  acceptableHeightDiff: 10
 --- !u!114 &188005514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +335,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 188005509}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e93d7ca007a982145aabbe6c06668436, type: 3}
   m_Name: 
@@ -354,6 +368,7 @@ MonoBehaviour:
   mountain_map: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   elevation_map: {fileID: 11483938, guid: c1b765ad54907af4eb2d4ba059c12759, type: 2}
   peak_map: {fileID: 11467348, guid: 54b65dd4c9e6a804eb36eed4ae756157, type: 2}
+  lake_map: {fileID: 11480816, guid: 9c7a324185497ef4bad4cdfc05dda238, type: 2}
   colors:
   - {r: 0.61960787, g: 0.70980394, b: 0.4745098, a: 0}
   - {r: 0.29803923, g: 0.52156866, b: 0, a: 0}
