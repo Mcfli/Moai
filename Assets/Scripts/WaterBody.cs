@@ -8,7 +8,7 @@ public class WaterBody : MonoBehaviour {
     public Biome biome;
     public float waterResolution;
 
-    private Mesh mesh;
+    //private Mesh mesh;
     private float stepLength = 0.1f;
     private int terrain;
     private int maxTries = 2;
@@ -26,7 +26,7 @@ public class WaterBody : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        mesh = GetComponent<MeshFilter>().mesh;
+        //mesh = GetComponent<MeshFilter>().mesh;
         terrain = LayerMask.GetMask("Terrain");
         center.y = Mathf.Infinity;
         mf = GetComponent<MeshFilter>();
@@ -278,13 +278,22 @@ public class WaterBody : MonoBehaviour {
                 int v2 = (x + 1) + y * xRes;
                 int v3 = x + (y + 1) * xRes;
                 int v4 = (x + 1) + (y + 1) * xRes;
-                //top left to bottom right
-                triangles[i] = v4;
-                triangles[i + 1] = v1;
-                triangles[i + 2] = v3;
-                triangles[i + 3] = v1;
-                triangles[i + 4] = v4;
-                triangles[i + 5] = v2;
+                // Create two triangles from the quad
+                if(Mathf.Repeat(x + y, 2) == 1) { //top left to bottom right
+                    triangles[i] = v4;
+                    triangles[i + 1] = v1;
+                    triangles[i + 2] = v3;
+                    triangles[i + 3] = v1;
+                    triangles[i + 4] = v4;
+                    triangles[i + 5] = v2;
+                } else { //top right to bottom left
+                    triangles[i] = v2;
+                    triangles[i + 1] = v3;
+                    triangles[i + 2] = v4;
+                    triangles[i + 3] = v3;
+                    triangles[i + 4] = v2;
+                    triangles[i + 5] = v1;
+                }
 
                 i += 6;
             }

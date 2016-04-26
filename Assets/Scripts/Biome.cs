@@ -41,6 +41,7 @@ public class Biome : MonoBehaviour {
     public float amplitude;
     public AnimationCurve colorCurve;
 
+    public float lakeChance; //ratio (0.5 for 50%)
     public int lakeCount;
     public Vector3 lakeSize;
     public float lakeMaxLength;

@@ -16,7 +16,6 @@ public class ChunkGenerator : MonoBehaviour {
     private NoiseSynth synth;
     private GenerationManager genManager;
     private WaterManager waterManager;
-    private int seed;
 
     //finals
     private float chunk_size;
@@ -26,7 +25,6 @@ public class ChunkGenerator : MonoBehaviour {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
         waterManager = GetComponent<WaterManager>();
-        seed = GetComponent<Seed>().seed;
         TerrainParent = new GameObject("Terrain");
         TerrainParent.transform.parent = transform;
         chunk_size = genManager.chunk_size;
@@ -55,17 +53,19 @@ public class ChunkGenerator : MonoBehaviour {
         int originalSeed = Random.seed;
 
         // Generate lakes for this chunk
-        Random.seed = NoiseGen.hash((int)pos.x, (int)pos.y, (int)pos.z);
+        Random.seed = Globals.SeedScript.seed + NoiseGen.hash((int)pos.x, (int)pos.y, (int)pos.z);
         for(int il = 0;il < biome.lakeCount; il++)
         {
-            Vector3 lakeSize = biome.lakeSize;
-            Vector3 lakePos = pos;
-            lakePos.x += Random.Range(0,chunk_size);
-            lakePos.z += Random.Range(0, chunk_size);
-            lakePos.x = Mathf.Clamp(lakePos.x, pos.x + lakeSize.x + 20, pos.x + chunk_size - lakeSize.x - 20);
-            lakePos.z = Mathf.Clamp(lakePos.z, pos.z + lakeSize.z + 20, pos.z + chunk_size - lakeSize.z - 20);
+            if(Random.value < biome.lakeChance) {
+                Vector3 lakeSize = biome.lakeSize;
+                Vector3 lakePos = pos;
+                lakePos.x += Random.Range(0, chunk_size);
+                lakePos.z += Random.Range(0, chunk_size);
+                lakePos.x = Mathf.Clamp(lakePos.x, pos.x + lakeSize.x + 20, pos.x + chunk_size - lakeSize.x - 20);
+                lakePos.z = Mathf.Clamp(lakePos.z, pos.z + lakeSize.z + 20, pos.z + chunk_size - lakeSize.z - 20);
 
-            lakes.Add(new lakeStruct(lakePos, lakeSize));
+                lakes.Add(new lakeStruct(lakePos, lakeSize));
+            }
         }
         Random.seed = originalSeed;
 

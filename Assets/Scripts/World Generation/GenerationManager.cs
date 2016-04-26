@@ -19,8 +19,8 @@ public class GenerationManager : MonoBehaviour {
     //lists
     private Dictionary<Vector2, GameObject> loaded_chunks;
     private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
-    private Dictionary<Vector2, GameObject> loaded_water;
-    private List<Vector2> loaded_tree_chunks;
+    //private Dictionary<Vector2, GameObject> loaded_water;
+    //private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
     private List<Vector2> loaded_doodad_chunks;
     //private Dictionary<Vector2, Biome> chunkBiomes;  // keeps track of what chunk is at what biome
@@ -42,8 +42,8 @@ public class GenerationManager : MonoBehaviour {
         //lists
         loaded_chunks = new Dictionary<Vector2, GameObject>();
         detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
-        loaded_water = new Dictionary<Vector2, GameObject>();
-        loaded_tree_chunks = new List<Vector2>();
+        //loaded_water = new Dictionary<Vector2, GameObject>();
+        //loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         loaded_doodad_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
