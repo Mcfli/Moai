@@ -20,6 +20,7 @@ public class GenerationManager : MonoBehaviour {
     private Dictionary<Vector2, GameObject> loaded_chunks;
     private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
     private Dictionary<Vector2, GameObject> loaded_water;
+    private List<Vector2> loaded_tree_chunks;
 	private List<Vector2> loaded_shrine_chunks;
     private List<Vector2> loaded_doodad_chunks;
     //private Dictionary<Vector2, Biome> chunkBiomes;  // keeps track of what chunk is at what biome
@@ -31,28 +32,29 @@ public class GenerationManager : MonoBehaviour {
 
     //references
     private ChunkGenerator chunkGen;
-    private WaterScript waterScript;
     private TreeManager tree_manager;
     private WeatherManager weather_manager;
     private ShrineManager shrine_manager;
     private DoodadManager doodad_manager;
-
+    private WaterManager water_manager;
+	
     void Awake() {
         //lists
         loaded_chunks = new Dictionary<Vector2, GameObject>();
         detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
         loaded_water = new Dictionary<Vector2, GameObject>();
+        loaded_tree_chunks = new List<Vector2>();
 		loaded_shrine_chunks = new List<Vector2>();
         loaded_doodad_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
 
         //references
         chunkGen = GetComponent<ChunkGenerator>();
-        waterScript = GetComponent<WaterScript>();
         tree_manager = GetComponent<TreeManager>();
         weather_manager = GameObject.Find("Weather").GetComponent<WeatherManager>();
         shrine_manager = GetComponent<ShrineManager>();
         doodad_manager = GetComponent<DoodadManager>();
+        water_manager = GetComponent<WaterManager>();
 
         Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
 
@@ -163,8 +165,11 @@ public class GenerationManager : MonoBehaviour {
 
     private bool unloadChunks(Vector2 position) {
         List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
-        foreach(Vector2 coodinates in l)
-            if(!inLoadDistance(position, coodinates, chunk_unload_dist)) destroyChunk(coodinates);
+        foreach (Vector2 coodinates in l)
+            if (!inLoadDistance(position, coodinates, chunk_unload_dist))
+            {
+                destroyChunk(coodinates);
+            }
         return true;
     }
 
@@ -196,15 +201,12 @@ public class GenerationManager : MonoBehaviour {
         GameObject newChunk = chunkGen.generate(coordinates);
         chunkGen.colorChunk(newChunk, chunk_size);
         loaded_chunks.Add(coordinates, newChunk);
-        loaded_water.Add(coordinates, waterScript.generate(coordinates));
     }
 
     private void destroyChunk(Vector2 coordinates) {
         Destroy(loaded_chunks[coordinates]);
         loaded_chunks.Remove(coordinates);
-        Destroy(loaded_water[coordinates]);
-        loaded_water.Remove(coordinates);
-        waterScript.removeMesh(coordinates);
+        water_manager.unloadWater(coordinates);
     }
 
     private bool loadTrees(Vector2 position) {
@@ -287,7 +289,9 @@ public class GenerationManager : MonoBehaviour {
 		}
         return true;
 	}
-	
+
+
+
     public Biome chooseBiome(Vector2 chunk)
     {
 

@@ -9,6 +9,7 @@ public class NoiseSynth : MonoBehaviour {
     public NoiseGen mountain_map;
     public NoiseGen elevation_map;
     public NoiseGen peak_map;
+    public NoiseGen lake_map;
     public Color[] colors;
     public AnimationCurve color_curve;
     public float amplitude;
@@ -23,6 +24,7 @@ public class NoiseSynth : MonoBehaviour {
         mountain_map.Init();
         elevation_map.Init();
         peak_map.Init();
+        lake_map.Init();
 
         valleyHeight = -0.07f * (elevation_map.amplitude + base_map.amplitude);
     }
@@ -38,12 +40,15 @@ public class NoiseSynth : MonoBehaviour {
         float e = elevation_map.genPerlin(x, y, z);
         float b = base_map.genPerlin(x,y,z);
         float h = hill_map.genPerlin(x,y,z);
+        float l = lake_map.genPerlin(x, y, z) - 50f;
 
         // Derived characteristics
         float elevationIndex = e / elevation_map.amplitude;
         float valley = Mathf.Max(valleyHeight, b);
 
+        
         b = select(b, h, 0.5f * (elevationIndex + w), 0.5f, 0.05f);
+        b = select(l, b, w, 0.75f, 0.07f);
 
         b = Mathf.Max(b, valley);
 

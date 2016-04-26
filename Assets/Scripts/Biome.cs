@@ -41,6 +41,12 @@ public class Biome : MonoBehaviour {
     public float amplitude;
     public AnimationCurve colorCurve;
 
+    public int lakeCount;
+    public Vector3 lakeSize;
+    public float lakeMaxLength;
+    public Material waterMaterial;
+
+
     public void Init()
     {
         colors = new List<Color>();

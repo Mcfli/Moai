@@ -15,6 +15,8 @@ public class ChunkGenerator : MonoBehaviour {
     //references
     private NoiseSynth synth;
     private GenerationManager genManager;
+    private WaterManager waterManager;
+    private int seed;
 
     //finals
     private float chunk_size;
@@ -23,6 +25,8 @@ public class ChunkGenerator : MonoBehaviour {
     private void Awake () {
         synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
+        waterManager = GetComponent<WaterManager>();
+        seed = GetComponent<Seed>().seed;
         TerrainParent = new GameObject("Terrain");
         TerrainParent.transform.parent = transform;
         chunk_size = genManager.chunk_size;
@@ -31,6 +35,8 @@ public class ChunkGenerator : MonoBehaviour {
 	}
 
 	public GameObject generate (Vector2 coordinates) {
+        Biome biome = genManager.chooseBiome(coordinates);
+        List<lakeStruct> lakes = new List<lakeStruct>();
         GameObject chunk = new GameObject();
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + coordinates.x + "," + coordinates.y + ")";
@@ -45,23 +51,62 @@ public class ChunkGenerator : MonoBehaviour {
 
         Vector3 pos = new Vector3(coordinates.x * chunk_size, 0, coordinates.y * chunk_size);
         chunk.transform.position = pos;
-        
-        // Generate chunk_resolution^2 vertices
-		Vector3[] vertices = new Vector3[(chunk_resolution*chunk_resolution)];
 
         int originalSeed = Random.seed;
+
+        // Generate lakes for this chunk
+        Random.seed = NoiseGen.hash((int)pos.x, (int)pos.y, (int)pos.z);
+        for(int il = 0;il < biome.lakeCount; il++)
+        {
+            Vector3 lakeSize = biome.lakeSize;
+            Vector3 lakePos = pos;
+            lakePos.x += Random.Range(0,chunk_size);
+            lakePos.z += Random.Range(0, chunk_size);
+            lakePos.x = Mathf.Clamp(lakePos.x, pos.x + lakeSize.x + 20, pos.x + chunk_size - lakeSize.x - 20);
+            lakePos.z = Mathf.Clamp(lakePos.z, pos.z + lakeSize.z + 20, pos.z + chunk_size - lakeSize.z - 20);
+
+            lakes.Add(new lakeStruct(lakePos, lakeSize));
+        }
+        Random.seed = originalSeed;
+
+        // Generate chunk_resolution^2 vertices
+        Vector3[] vertices = new Vector3[(chunk_resolution*chunk_resolution)];
+ 
         for (int iy = 0; iy < chunk_resolution; iy++) {
 			for (int ix = 0; ix < chunk_resolution; ix++) {
                 float x = ix * chunk_size / (chunk_resolution - 1);
                 float y = iy * chunk_size / (chunk_resolution - 1);
                 float origx = x; float origy = y;
+
+                float lakeOffset = 0;
+                int lakeIntersections = 0;
+
                 if(XZDeviationRatio != 0){
                     Random.seed = Globals.SeedScript.seed + XZDeviationSeed + ((origx + coordinates.x * chunk_size).ToString() + "," + (origy + coordinates.y * chunk_size).ToString()).GetHashCode();
                     x = (ix + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                     y = (iy + Random.value * XZDeviationRatio) * chunk_size / (chunk_resolution - 1);
                 }
-                // vertices[iy * chunk_resolution + ix] = EniromentMapper.heightAtPos(xpos,ypos);
-                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0), y); // replace 0 with Globals.time eventually
+
+                float xpos = x + pos.x;
+                float zpos = y + pos.z;
+                Vector3 vertexWorld = new Vector3(xpos, 0, zpos);
+
+                // Take lakes into account when determining height,
+                // BUt only if the vertex is not on the edge
+                if (ix != 0 && iy != 0 && ix != chunk_resolution - 1 && iy != chunk_resolution - 1)
+                {
+                    foreach (lakeStruct lake in lakes)
+                    {
+                        // See if this vertex is in range of this lake
+                        if (Vector3.Distance(vertexWorld, lake.position) <= lake.size.x)
+                        {
+                            lakeOffset += lake.size.y * Mathf.Max(0, Mathf.Pow((1 - (Vector3.Distance(vertexWorld, lake.position) / lake.size.x)),3));
+                            lakeIntersections++;
+                        }
+                    }
+                }
+                
+                vertices[iy * chunk_resolution + ix] = new Vector3(x, synth.heightAt(origx + chunk.transform.position.x, origy + chunk.transform.position.z, 0) - lakeOffset, y); 
             }
         }
         Random.seed = originalSeed;
@@ -117,6 +162,11 @@ public class ChunkGenerator : MonoBehaviour {
 
         MeshCollider collider = (MeshCollider)chunk.AddComponent(typeof(MeshCollider));
         collider.sharedMesh = chunkMeshes.highMesh;
+
+        foreach(lakeStruct lake in lakes)
+        {
+            waterManager.createWater(coordinates, lake.position, lake.size, biome);
+        }
 
         return chunk;
 	}
@@ -269,5 +319,17 @@ public class ChunkGenerator : MonoBehaviour {
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
         }else subDivide(mesh, coordinates, numOfDivisions - 1);
+    }
+
+    private struct lakeStruct
+    {
+        public Vector3 position;
+        public Vector3 size;
+
+        public lakeStruct(Vector3 pos,Vector3 siz)
+        {
+            position = pos;
+            size = siz;
+        }
     }
 }
