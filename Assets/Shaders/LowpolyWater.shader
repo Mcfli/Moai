@@ -102,14 +102,14 @@ Shader "LowPolyWaves 2.0"
 
 				float attenuation = 1.0;
 
-				float nl = max(0.1, dot(normalize(worldNormal), _WorldSpaceLightPos0.xyz));
+				float nl = max(0.4, dot(normalize(worldNormal), _WorldSpaceLightPos0.xyz));
 
 				float viewDirection = _WorldSpaceCameraPos.xyz - mul(_Object2World, center).xyz;
 				
 				float3 specularReflection = 0;
 				
 
-				float3 diff = _Color.rgb *nl + ShadeSH9(float4(worldNormal, 0.5));
+				float3 diff = _Color.rgb *nl ;
 
 				g2f OUT;
 				OUT.pos = mul(UNITY_MATRIX_MVP,IN[0].pos);
