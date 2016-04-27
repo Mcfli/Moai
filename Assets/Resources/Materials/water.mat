@@ -118,6 +118,14 @@ Material:
         second: 0.02
       data:
         first:
+          name: _Ambient
+        second: 0.75
+      data:
+        first:
+          name: _Animate
+        second: 1
+      data:
+        first:
           name: _WaveLength
         second: 0.81
       data:
@@ -174,14 +182,6 @@ Material:
         second: 0
       data:
         first:
-          name: _Ambient
-        second: 0.75
-      data:
-        first:
-          name: _Animate
-        second: 1
-      data:
-        first:
           name: _EmissionScaleUI
         second: 0
       data:
@@ -220,15 +220,15 @@ Material:
       data:
         first:
           name: _XHeightSpeedLengthOffset
-        second: {r: 0.05, g: 1, b: 0.1, a: 0}
+        second: {r: 1, g: 2, b: 1, a: 0}
       data:
         first:
           name: _YHeightSpeedLengthOffset
-        second: {r: 0, g: 0, b: 0, a: 0}
+        second: {r: 1, g: 1, b: 3, a: 7}
       data:
         first:
           name: _ZHeightSpeedLengthOffset
-        second: {r: 0, g: 0, b: 0, a: 0}
+        second: {r: 1, g: 3, b: 2, a: 4}
       data:
         first:
           name: _EmissionColorUI
