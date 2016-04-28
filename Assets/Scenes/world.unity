@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunk_size: 256
-  chunk_resolution: 8
+  chunk_resolution: 4
   chunk_load_dist: 8
   chunk_unload_dist: 12
   chunk_detail_dist: 1
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae5262824d45494aa9226c8772b36d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterResolution: 0.1
+  waterResolution: 0.03
   acceptableHeightDiff: 10
 --- !u!114 &188005514
 MonoBehaviour:
@@ -310,9 +310,9 @@ MonoBehaviour:
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
   XZDeviationRatio: 0.5
   XZDeviationSeed: 543825
-  detailDeviation: 1
+  detailDeviation: 1.25
   detailDeviationSeed: 854375
-  detailSubdivisions: 3
+  detailSubdivisions: 4
 --- !u!114 &188005515
 MonoBehaviour:
   m_ObjectHideFlags: 0

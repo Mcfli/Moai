@@ -44,7 +44,12 @@ public class HUD : MonoBehaviour {
             }
         }
 
-        //if(Input.GetKeyDown(KeyCode.P)) UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh,"Assets/00.asset");
+        if(Input.GetKeyDown(KeyCode.P)) {
+            UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh, "Assets/1.asset");
+            UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,-1)").GetComponent<ChunkMeshes>().highMesh, "Assets/2.asset");
+            UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (-1,0)").GetComponent<ChunkMeshes>().highMesh, "Assets/3.asset");
+            UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (-1,-1)").GetComponent<ChunkMeshes>().highMesh, "Assets/4.asset");
+        }
     }
 
     public void pauseGame() { Globals.paused = true; }

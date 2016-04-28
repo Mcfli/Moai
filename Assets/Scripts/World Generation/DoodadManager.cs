@@ -86,7 +86,7 @@ public class DoodadManager : MonoBehaviour
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
             pos.y = hit.point.y;
             GameObject d = Instantiate(doodad, pos + doodad.transform.position, doodad.transform.rotation) as GameObject;
-            d.transform.Rotate(Vector3.up*Random.Range(0,2*Mathf.PI));
+            d.transform.eulerAngles += (Vector3.up*Random.Range(0f,360f));
             InteractableObject o = d.GetComponent<InteractableObject>();
             if(o) o.plant(d.transform.position);
             return d;
