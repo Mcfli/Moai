@@ -163,7 +163,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154056}
   serializedVersion: 2
-  lengthInSec: 30
+  lengthInSec: 10
   startDelay:
     scalar: 0
     maxCurve:
@@ -210,7 +210,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 30
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1612,7 +1612,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198036}
   serializedVersion: 2
-  lengthInSec: 30
+  lengthInSec: 10
   startDelay:
     scalar: 0
     maxCurve:
@@ -1659,7 +1659,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 30
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3061,7 +3061,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168066}
   serializedVersion: 2
-  lengthInSec: 30
+  lengthInSec: 10
   startDelay:
     scalar: 0
     maxCurve:
@@ -3108,7 +3108,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 30
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:

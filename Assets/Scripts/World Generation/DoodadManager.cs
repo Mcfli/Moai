@@ -17,6 +17,7 @@ public class DoodadManager : MonoBehaviour
     }
 
     public void loadDoodads(Vector2 key, Biome biome){
+        GameObject chunkParent = GameObject.Find("chunk (" + key.x + "," + key.y + ")");
         if (biome.bigDoodads.Count < 1) return;
 
         int originalSeed = Random.seed;
@@ -42,6 +43,7 @@ public class DoodadManager : MonoBehaviour
                             GameObject bigDoodad = createDoodad(position, biome.bigDoodads[k]);
                             if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
                             loaded_doodads[key].Add(bigDoodad);
+                            bigDoodad.transform.parent = chunkParent.transform;
                         }
                         break;
                     }
@@ -69,7 +71,10 @@ public class DoodadManager : MonoBehaviour
                             randomPos.y += Mathf.Sin(theta) * dist;
                             smallDoodad = createDoodad(randomPos, biome.smallDoodads[l]);
                             if(!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
-                            if(smallDoodad) loaded_doodads[key].Add(smallDoodad);
+                            if (smallDoodad){
+                                loaded_doodads[key].Add(smallDoodad);
+                                smallDoodad.transform.parent = chunkParent.transform;
+                            }
                             break;
                         }
                     }
