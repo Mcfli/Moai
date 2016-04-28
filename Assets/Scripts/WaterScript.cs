@@ -8,6 +8,7 @@ public class WaterScript : MonoBehaviour {
     //underwater effects
     public Color fogColor;
     public float fogDensity;
+    public float fogDist;
 
     //waves
     public int resolution;
@@ -32,6 +33,7 @@ public class WaterScript : MonoBehaviour {
     private bool defaultFog;
     private Color defaultFogColor;
     private float defaultFogDensity;
+    private float defaultFogDist;
 
     // Use this for initialization
     void Awake () {
@@ -49,6 +51,7 @@ public class WaterScript : MonoBehaviour {
         defaultFog = RenderSettings.fog;
         defaultFogColor = RenderSettings.fogColor;
         defaultFogDensity = RenderSettings.fogDensity;
+        defaultFogDist = RenderSettings.fogEndDistance;
     }
 	
 	// Update is called once per frame
@@ -68,10 +71,13 @@ public class WaterScript : MonoBehaviour {
             RenderSettings.fog = true;
             RenderSettings.fogColor = fogColor;
             RenderSettings.fogDensity = fogDensity;
-        }else{
+            RenderSettings.fogEndDistance = fogDist;
+        }
+        else{
             RenderSettings.fog = defaultFog;
             RenderSettings.fogColor = defaultFogColor;
             RenderSettings.fogDensity = defaultFogDensity;
+            RenderSettings.fogEndDistance = defaultFogDist;
         }
 	}
 

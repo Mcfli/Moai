@@ -27,6 +27,7 @@ public class Globals : MonoBehaviour {
     public static GameObject WorldGen = GameObject.Find("WorldGen");
     public static GenerationManager GenerationManagerScript = WorldGen.GetComponent<GenerationManager>();
     public static TreeManager TreeManagerScript = WorldGen.GetComponent<TreeManager>();
+    public static WaterManager WaterManagerScript = WorldGen.GetComponent<WaterManager>();
     public static Seed SeedScript = WorldGen.GetComponent<Seed>();
 
     //Biome Elements

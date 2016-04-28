@@ -7,6 +7,16 @@ public class WaterManager : MonoBehaviour {
     public float waterResolution = 0.1f; // Number of vertices in one unity unit length
     public float acceptableHeightDiff = 10f;
 
+    // Underwater effects
+    public Color fogColor;
+    public float fogDensity;
+
+    //underwater effects
+    private bool defaultFog;
+    private Color defaultFogColor;
+    private float defaultFogDensity;
+    private float defaultFogDist;
+
     // Chunk -> water object list dictionary
     private static Dictionary<Vector2, List<GameObject>> waterBodies;
     
@@ -18,12 +28,23 @@ public class WaterManager : MonoBehaviour {
         waterBodies = new Dictionary<Vector2, List<GameObject>>();
         waterParent = new GameObject("Water");
         waterParent.transform.parent = transform;
+        // underwater effects
+        defaultFog = RenderSettings.fog;
+        defaultFogColor = RenderSettings.fogColor;
+        defaultFogDensity = RenderSettings.fogDensity;
+        defaultFogDist = RenderSettings.fogEndDistance;
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+        doUnderwaterEffects();
 	}
+
+    public List<GameObject> lakesInChunk(Vector2 chunk)
+    {
+        if (!waterBodies.ContainsKey(chunk)) return null;
+        return waterBodies[chunk];
+    }
 
     // Looks through each water body in the chunk to determine interections
     public void getRidOfOverlaps(Vector2 chunk)
@@ -94,5 +115,24 @@ public class WaterManager : MonoBehaviour {
             Destroy(obj);
         }
         waterBodies[key].Clear();
+    }
+
+    private void doUnderwaterEffects()
+    {
+        if (Globals.PlayerScript.isUnderwater())
+        {
+            //Debug.Log("underwater");
+            RenderSettings.fog = true;
+            RenderSettings.fogColor = fogColor;
+            RenderSettings.fogDensity = fogDensity;
+            RenderSettings.fogEndDistance = 15;
+        }
+        else
+        {
+            RenderSettings.fog = defaultFog;
+            RenderSettings.fogColor = defaultFogColor;
+            RenderSettings.fogDensity = defaultFogDensity;
+            RenderSettings.fogEndDistance = defaultFogDist;
+        }
     }
 }
