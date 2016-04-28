@@ -108,11 +108,43 @@ public class Player : MonoBehaviour {
         }
         if(heldObj != null) followHand(heldObj, heldObjSize);
 
-        underwater = Globals.Player.transform.position.y + cameraHeight < Globals.water_level;
+        checkUnderwater();
     }
 
     public bool isUnderwater() {return underwater;}
-    
+
+    private void checkUnderwater()
+    {
+        bool isUnder = false;
+        float xpos = transform.position.x;
+        float ypos = transform.position.y + cameraHeight + 10;
+        float zpos = transform.position.z;
+        // Check if player is in each lake in current chunk
+        if (Globals.WaterManagerScript == null ||
+            Globals.WaterManagerScript.lakesInChunk(GenerationManager.worldToChunk(transform.position)) == null)
+                return;
+        foreach(GameObject go in Globals.WaterManagerScript.lakesInChunk(GenerationManager.worldToChunk(transform.position)))
+        {
+            
+            WaterBody wb = go.GetComponent<WaterBody>();
+            float xMin = wb.center.x - 0.5f * wb.size.x;
+            float xMax = wb.center.x + 0.5f * wb.size.x;
+            float zMin = wb.center.z - 0.5f * wb.size.z;
+            float zMax = wb.center.z + 0.5f * wb.size.z;
+
+            if (wb == null) continue;
+            // If player is in this lake, they are underwater
+            if(xpos > xMin && xpos < xMax &&
+                zpos > zMin && zpos < zMax &&
+                ypos < wb.center.y)
+            {
+                isUnder = true;
+                break;
+            }
+        }
+        underwater = isUnder;
+    }
+
     private void followHand(InteractableObject obj, float objSize){
         Transform t = Camera.main.transform;
         float scale = 0.5f; //temp
