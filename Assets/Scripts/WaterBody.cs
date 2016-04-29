@@ -24,6 +24,7 @@ public class WaterBody : MonoBehaviour {
 
     // References
     private MeshFilter mf;
+    private LayerMask clearMask; // The stuff the lake clears when it is spawned
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +33,7 @@ public class WaterBody : MonoBehaviour {
         center.y = Mathf.Infinity;
         mf = GetComponent<MeshFilter>();
         size = Vector3.right + Vector3.forward;
+        clearMask = LayerMask.GetMask("Tree","Doodad","BigDoodad");
     }
 	
 	// Update is called once per frame
@@ -129,14 +131,16 @@ public class WaterBody : MonoBehaviour {
     // Right now acually destroys all overlapping forests
     private void destroyOverlappingTrees()
     {
-        Collider[] colliders = Physics.OverlapBox(center,size+ Vector3.up*1000f,Quaternion.identity);
+        Collider[] colliders = Physics.OverlapBox(center,size*0.5f+ Vector3.up*1000f,Quaternion.identity,clearMask);
        
         foreach(Collider collider in colliders)
         {
             if (collider.gameObject == null|| collider.gameObject.transform.parent == null) continue;
-            TreeScript tree = collider.gameObject.transform.parent.GetComponent<TreeScript>();
-            if (tree == null) continue;
-            Destroy(tree);
+            TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
+            if (tree == null)
+                Destroy(collider.gameObject);
+            else
+                Destroy(tree);
         }
         
         removedForests = true;
