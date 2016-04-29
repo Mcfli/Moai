@@ -13,9 +13,10 @@ public class WaterBody : MonoBehaviour {
     private int terrain;
     private int maxTries = 2;
     private int maxRays = 1;
-    public bool settled = false;
-    public bool expanded = false;
-    public bool setBelow = false;
+    private bool settled = false;
+    private bool removedForests = false;
+    private bool expanded = false;
+    private bool setBelow = false;
     
 
     private int edgeIndex = 0; // keeps track of where in the search of vertices for
@@ -53,6 +54,8 @@ public class WaterBody : MonoBehaviour {
             moveToLocalMinimum();
         else if (!expanded)
             moveToMaxFillHeight();
+        else if (!removedForests)
+            destroyOverlappingTrees();
         else if (!setBelow)
             moveCornersDown();
     }
@@ -121,6 +124,18 @@ public class WaterBody : MonoBehaviour {
             }
         }
         transform.position = center;
+    }
+
+    // Right now acually destroys all overlapping forests
+    private void destroyOverlappingTrees()
+    {
+        Collider[] colliders = Physics.OverlapBox(center,size * 0.5f,Quaternion.identity,LayerMask.NameToLayer("Forest"));
+        foreach(Collider collider in colliders)
+        {
+            ForestScript forest = collider.gameObject.GetComponent<ForestScript>();
+            forest.destroyForest();
+        }
+        removedForests = true;
     }
 
     // Gradually expands the water body to the highest it could fill this point
