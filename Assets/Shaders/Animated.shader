@@ -36,12 +36,15 @@
 			uniform float4 _XHeightSpeedLengthOffset;
 			uniform float4 _YHeightSpeedLengthOffset;
 			uniform float4 _ZHeightSpeedLengthOffset;
+			//uniform fixed3 unity_FogColor;
+			uniform half unity_FogDensity;
 
 			struct v2f{
 				float4  pos         : SV_POSITION;
 				float2  uv          : TEXCOORD0;
 				float3  viewDir     : TEXCOORD1;
 				float3  lightDir    : TEXCOORD2;
+				half2 fogDepth		: TEXCOORD3;
 				LIGHTING_COORDS(3,4)
 				
 			};
@@ -58,6 +61,8 @@
 				TANGENT_SPACE_ROTATION;
 				o.viewDir = mul(rotation, ObjSpaceViewDir(v.vertex));
 				o.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex));
+				o.fogDepth.x = length(mul(UNITY_MATRIX_MV, v.vertex).xyz);
+				o.fogDepth.y = o.fogDepth.x * unity_FogDensity;
 
 				TRANSFER_VERTEX_TO_FRAGMENT(o);
 				return o;
@@ -84,7 +89,13 @@
 
 				fixed alpha = _Color.a;
 
-				fixed3 lightFinal = tex.rgb * amb + tex.rgb * diffuse + _EmissionColor;
+				fixed3 lightSum = tex.rgb * amb + tex.rgb * diffuse + _EmissionColor;
+
+				float fogAmt = i.fogDepth.y * i.fogDepth.y;
+				fogAmt = exp(-fogAmt);
+
+				fixed3 lightFinal = lerp(unity_FogColor, lightSum, fogAmt);
+
 				return fixed4(lightFinal, alpha);
 			}
 			ENDCG
