@@ -10,11 +10,13 @@ public class ShrineManager : MonoBehaviour {
 
     private GenerationManager gen_manager;
     private static Dictionary<Vector2, List<ShrineGrid>> shrines;
+    private static Dictionary<Vector2, List<Obelisk>> obelisks;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
 		shrines = new Dictionary<Vector2, List<ShrineGrid>>();
+
 	}
 	
 	// Update is called once per frame
