@@ -90,9 +90,14 @@ public class TreeScript : MonoBehaviour {
     void Start() {
         grow();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnDestroy()
+    {
+        forestParent.removeTree(GetInstanceID());
+    }
+
+    // Update is called once per frame
+    void Update () {
         age += Globals.deltaTime / Globals.time_resolution; // update age
 
         if (age > lifeSpan) { // kill if too old

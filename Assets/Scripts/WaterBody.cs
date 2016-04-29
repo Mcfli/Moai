@@ -129,12 +129,16 @@ public class WaterBody : MonoBehaviour {
     // Right now acually destroys all overlapping forests
     private void destroyOverlappingTrees()
     {
-        Collider[] colliders = Physics.OverlapBox(center,size * 0.5f,Quaternion.identity,LayerMask.NameToLayer("Forest"));
+        Collider[] colliders = Physics.OverlapBox(center,size+ Vector3.up*1000f,Quaternion.identity);
+       
         foreach(Collider collider in colliders)
         {
-            ForestScript forest = collider.gameObject.GetComponent<ForestScript>();
-            forest.destroyForest();
+            if (collider.gameObject == null|| collider.gameObject.transform.parent == null) continue;
+            TreeScript tree = collider.gameObject.transform.parent.GetComponent<TreeScript>();
+            if (tree == null) continue;
+            Destroy(tree);
         }
+        
         removedForests = true;
     }
 
