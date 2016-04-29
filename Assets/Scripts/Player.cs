@@ -50,7 +50,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //warp to ground at game start
-        if(!startGroundWarp) startGroundWarp = warpToGround(Mathf.Infinity);
+        if(!startGroundWarp) startGroundWarp = warpToGround(3000, true);
 
         if (Globals.time_scale > 1) {
             warpToGround(transform.position.y);
@@ -154,11 +154,11 @@ public class Player : MonoBehaviour {
         obj.transform.forward = Camera.main.transform.forward;
     }
     
-	public bool warpToGround(float fromHeight){
+	public bool warpToGround(float fromHeight, bool overrideMinWarpDist = false){
 		RaycastHit hit;
-        Ray rayDown = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(rayDown, out hit, fromHeight, collisionLayers)){
-            if (transform.position.y - (hit.point.y + cameraHeight) > minWarpOnWaitDist)
+        Ray rayDown = new Ray(new Vector3(transform.position.x, fromHeight, transform.position.z), Vector3.down);
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, collisionLayers)){
+            if (transform.position.y - (hit.point.y + cameraHeight) > minWarpOnWaitDist || overrideMinWarpDist)
                 transform.position = new Vector3(transform.position.x, hit.point.y + cameraHeight, transform.position.z);
             return true;
         }

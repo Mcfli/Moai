@@ -223,7 +223,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  lakeChance: 0.5
+  lakeChance: 0.25
   lakeCount: 1
   lakeSize: {x: 200, y: 125, z: 150}
   lakeMaxLength: 200

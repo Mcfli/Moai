@@ -312,7 +312,7 @@ MonoBehaviour:
   landMaterial: {fileID: 2100000, guid: 3c46ff2f077b2804ea6facc8583ddce0, type: 2}
   XZDeviationRatio: 0.5
   XZDeviationSeed: 543825
-  detailDeviation: 1
+  detailDeviation: 1.25
   detailDeviationSeed: 854375
   detailSubdivisions: 3
 --- !u!114 &188005515
@@ -1744,43 +1744,6 @@ MonoBehaviour:
     type: 3}
   colorCorrectionSelectiveShader: {fileID: 4800000, guid: e515e0f94cefc4c0db54b45cba621544,
     type: 3}
---- !u!114 &838583288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 838583282}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d8db0ec466c14429f58c68c16398a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quality: 1
-  resolution: 4
-  simpleTweakMode: 1
-  focalPoint: 17192
-  smoothness: 0.5
-  focalZDistance: 0
-  focalZStartCurve: 1
-  focalZEndCurve: 1
-  objectFocus: {fileID: 0}
-  focalSize: 0
-  bluriness: 1
-  maxBlurSpread: 1.75
-  foregroundBlurExtrude: 1.15
-  dofBlurShader: {fileID: 4800000, guid: bb4af680337344a4abad65a4e8873c50, type: 3}
-  dofShader: {fileID: 4800000, guid: 987fb0677d01f43ce8a9dbf12271e668, type: 3}
-  visualize: 0
-  bokehDestination: 1
-  bokeh: 1
-  bokehSupport: 1
-  bokehShader: {fileID: 4800000, guid: 57cdacf9b217546aaa18edf39a6151c0, type: 3}
-  bokehTexture: {fileID: 2800000, guid: fc00ec05a89da4ff695a4273715cd5ce, type: 3}
-  bokehScale: 2.4
-  bokehIntensity: 0.15
-  bokehThresholdContrast: 0.1
-  bokehThresholdLuminance: 0.55
-  bokehDownsample: 1
 --- !u!1 &912454540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,11 +2287,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2505,6 +2468,14 @@ Prefab:
     - target: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_LocalPosition.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -2975,6 +2946,10 @@ Prefab:
     - target: {fileID: 173686, guid: fc49b97b43237a04a8db602b5a6bdf65, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 173686, guid: fc49b97b43237a04a8db602b5a6bdf65, type: 2}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc49b97b43237a04a8db602b5a6bdf65, type: 2}

@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3396458}
   - 23: {fileID: 2320652}
   - 65: {fileID: 6535038}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: boulderF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
