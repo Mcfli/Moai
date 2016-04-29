@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     private Vector3 heldObjOrigScale;
     private bool underwater;
 
-    public AudioClip speedUp;
+    public AudioClip SpeedUpSFX;
     AudioSource playerAudio;
 
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
@@ -55,13 +55,16 @@ public class Player : MonoBehaviour {
         if (Globals.time_scale > 1) {
             warpToGround(transform.position.y);
             if(!playerAudio.isPlaying) { //sound
-                playerAudio.loop = true;
-                playerAudio.PlayOneShot(speedUp, .2f);
+                playerAudio.PlayOneShot(SpeedUpSFX, .2f);
             }
             firstPersonCont.enabled = false;
         }
         if (Globals.time_scale > cinematicTimeScale)
         {
+            if(playerAudio.isPlaying)
+            {
+                playerAudio.Stop();
+            }
 			if(!playerModel.activeInHierarchy)
 			{
 				playerModel.SetActive(true);

@@ -26,6 +26,11 @@ public class InteractableObject: MonoBehaviour{
     private bool wasHeld;
     private int attempts;
 
+    public AudioClip PickUp;
+    AudioSource isHolding;
+    public AudioClip CorrectSpot;
+    AudioSource goodLocation;
+
     void Awake() {
         thisRigidbody = GetComponent<Rigidbody>();
         thisCollider = GetComponent<Collider>();
@@ -46,6 +51,8 @@ public class InteractableObject: MonoBehaviour{
     void Start(){
         timeRemain = droppedObjectLifeLength;
         wasHeld = false;
+        isHolding = GetComponent<AudioSource>();
+        goodLocation = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -107,6 +114,11 @@ public class InteractableObject: MonoBehaviour{
             transform.position = new Vector3(transform.position.x, hit.point.y + amountAboveGround, transform.position.z);
             thisRigidbody.velocity = Vector3.zero;
             thisRigidbody.ResetInertiaTensor();
+
+            if(!goodLocation.isPlaying)
+            {
+                goodLocation.PlayOneShot(CorrectSpot, .2F);
+            }
         }
     }
     
@@ -128,6 +140,10 @@ public class InteractableObject: MonoBehaviour{
 
     public void pickedUp() {
         unplant();
+        if (!isHolding.isPlaying)
+        { 
+            isHolding.PlayOneShot(PickUp, .2f);
+        }
     }
 
     public bool plant(Vector3 place) {
