@@ -10,6 +10,11 @@ public class Menus : MonoBehaviour {
 
     private int currentMenu = -2;
 
+    public AudioSource MenuSound1;
+    AudioSource ClickingSound;
+    public AudioSource MenuSound2;
+    AudioSource ClickingLeaving;
+
     //Player Settings
     public static bool showCrosshair = true;
     //FOV
