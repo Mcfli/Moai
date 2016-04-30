@@ -75,6 +75,7 @@ GameObject:
   - 95: {fileID: 9524618}
   - 114: {fileID: 11466952}
   - 65: {fileID: 6536476}
+  - 114: {fileID: 11470840}
   m_Layer: 0
   m_Name: shrine_bottom
   m_TagString: Untagged
@@ -294,6 +295,21 @@ MonoBehaviour:
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
   saved_scale: {x: 0, y: 0, z: 0}
+--- !u!114 &11470840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7495458ee23d81b468f0c4b5352731cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageRes: 0
+  numSquares: 0
+  muralColor: {r: 0, g: 0, b: 0, a: 0}
+  shrineTexture: {fileID: 0}
 --- !u!137 &13705428
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
