@@ -6,6 +6,10 @@ public class Obelisk : MonoBehaviour {
 
     // Tuning variables
     public float lightUpDistance = 10f;
+    // list of islands that can spawn above an obelisk
+    public List<GameObject> possibleIslands;
+    public float islandHeight = 200f;
+
         // Requirements
     public int maxTotalReqs = 4;
     public int minTotalReqs = 2;
@@ -27,6 +31,7 @@ public class Obelisk : MonoBehaviour {
 
     // References
     private Renderer renderer;
+    private GameObject islandInstance;
 
     // Requirements
     // A dictionary of element name : count that is required to activate the obelisk
@@ -38,6 +43,7 @@ public class Obelisk : MonoBehaviour {
         generateRequirements();
         renderer = GetComponentInChildren<Renderer>();
         initMaterials();
+        createIsland();
     }
 	
 	// Update is called once per frame
@@ -83,6 +89,12 @@ public class Obelisk : MonoBehaviour {
             if (!requirements.ContainsKey(element)) requirements[element] = 0;
             requirements[element]++;
         }
+    }
+
+    private void createIsland()
+    {
+        GameObject prefab = possibleIslands[Random.Range(0, possibleIslands.Count)];
+        islandInstance = Instantiate(prefab,transform.position + Vector3.up * islandHeight, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;
     }
 
     /* 

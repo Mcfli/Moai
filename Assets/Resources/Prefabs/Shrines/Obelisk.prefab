@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.28378, y: 134.88887, z: -10.685964}
+  m_LocalPosition: {x: -32.28378, y: -8.79, z: -10.685964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 444752}
@@ -156,6 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightUpDistance: 20
+  possibleIslands:
+  - {fileID: 129564, guid: 45fc2aec41bcaca469198a15c1b1c061, type: 2}
+  islandHeight: 1000
   maxTotalReqs: 4
   minTotalReqs: 2
   teleportDelay: 10
@@ -178,6 +181,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: lightUpDistance
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: possibleIslands.Array.data[0]
+      value: 
+      objectReference: {fileID: 129564, guid: 45fc2aec41bcaca469198a15c1b1c061, type: 2}
+    - target: {fileID: 0}
+      propertyPath: islandHeight
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
