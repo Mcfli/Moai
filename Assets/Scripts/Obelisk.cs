@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Obelisk : MonoBehaviour {
 
     // Tuning variables
+    public float lightUpDistance = 10f;
         // Requirements
     public int maxTotalReqs = 4;
     public int minTotalReqs = 2;
@@ -46,17 +47,22 @@ public class Obelisk : MonoBehaviour {
 
     void OnMouseOver()
     {
-        if (!litUp && Globals.time_scale > 0)
+        float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
+        if (!litUp && Globals.time_scale > 0 && Time.timeScale > 0 && dist < lightUpDistance)
         {
             lightIndicators();
             
+        }
+        else if(litUp && dist > lightUpDistance)
+        {
+            dullIndicators();
         }
 
     }
 
     void OnMouseExit()
     {
-        if (litUp && Globals.time_scale > 0)
+        if (litUp && Globals.time_scale > 0 && Time.timeScale > 0)
         {
             dullIndicators();
 

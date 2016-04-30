@@ -1743,6 +1743,38 @@ MonoBehaviour:
     type: 3}
   colorCorrectionSelectiveShader: {fileID: 4800000, guid: e515e0f94cefc4c0db54b45cba621544,
     type: 3}
+--- !u!114 &838583288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838583282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e4989c5e703e428df4339d59e2c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoGarbageBlurShader: {fileID: 4800000, guid: 08541fc9424999e4e9c33f3abde31695,
+    type: 3}
+  m_BlurShader: {fileID: 4800000, guid: 1855d9636fad3914bacc4a543165c974, type: 3}
+  m_CompositeShader: {fileID: 4800000, guid: e384de4389ba527479054baf0ddb1d3e, type: 3}
+  m_GlowRenderShader: {fileID: 4800000, guid: c04b7cae8accdfb4e9c2648823ff39d7, type: 3}
+  m_FSDSShader: {fileID: 4800000, guid: b14b79b8936134d3f8238f0c2d40d634, type: 3}
+  m_GlowCurve: 1
+  m_GlowRenderLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_GlowResolution: 0
+  m_ShowCutoutGlow: 0
+  m_ShowTransparentGlow: 1
+  m_GlowType: 0
+  m_GlowQuality: 1
+  m_FullScreenGlowTint: {r: 1, g: 1, b: 1, a: 0}
+  m_BlurSpread: 0.52
+  m_BlurIterations: 7
+  m_GlowIntensity: 0.49
+  m_BlurOffset: 0.25
+  m_Samples: 2
 --- !u!1 &912454540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2977,6 +3009,40 @@ MonoBehaviour:
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
   cinematicTimeScale: 100
   waitCamDistance: 60
+--- !u!20 &1837165589
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837165586}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!4 &1837165592 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
