@@ -10,21 +10,6 @@ public class Menus : MonoBehaviour {
 
     private int currentMenu = -2;
 
-    //Player Settings
-    public static bool showCrosshair = true;
-    //FOV
-    //Depth of Field
-    //view bobbing
-
-    //resolution
-    //load distance
-
-    //Keybindings
-    //flip mouse buttons
-    //sensitivity
-
-    //sound (volumes)
-
     void Awake() {
         switchTo(initialMenu);
     }
@@ -71,6 +56,7 @@ public class Menus : MonoBehaviour {
     }
 
     //Player Settings
-    public void changeCrosshair() { showCrosshair = !showCrosshair; }
-    public void changeCrosshair(bool val) { showCrosshair = val; }
+    public static void changeSetting(string setting, int value) {
+        Globals.settings[setting] = value;
+    }
 }

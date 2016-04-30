@@ -20,23 +20,26 @@ public class HUD : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetButtonDown(crosshairToggle) && !Globals.paused) menus.changeCrosshair();
+        if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0) Globals.settings["Crosshair"] = (Globals.settings["Crosshair"] == 0) ? 1 : 0;
 
-        if(Menus.showCrosshair && !Globals.PlayerScript.isInCinematic()) {
+        if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic()) {
             crosshair.enabled = true;
             crosshair.color = (Globals.PlayerScript.canUse()) ? canUseColor : new Color(0, 0, 0, 0);
             crosshair.color = (Globals.PlayerScript.LookingAtGrabbable()) ? canGrabColor : initialColor;
         } else crosshair.enabled = false;
 
-        if(Input.GetButtonDown(pauseButton)) Globals.paused = !Globals.paused;
+        if(Input.GetButtonDown(pauseButton)) {
+            if(Globals.mode == 1) Globals.mode = 0;
+            else if(Globals.mode == 0) Globals.mode = 1;
+        }
 
-        if(Globals.paused) {
+        if(Globals.mode == 1) {
             Time.timeScale = 0;
             if(menus.getCurrentMenu() < 0) {
                 menus.switchTo(menus.initialMenu);
                 firstPersonCont.getMouseLook().SetCursorLock(false);
             }
-        } else {
+        } else if(Globals.mode == 0) {
             Time.timeScale = 1;
             if(menus.getCurrentMenu() >= 0) {
                 menus.switchTo(-1);
@@ -47,6 +50,12 @@ public class HUD : MonoBehaviour {
         //if(Input.GetKeyDown(KeyCode.P)) UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh,"Assets/00.asset");
     }
 
-    public void pauseGame() { Globals.paused = true; }
-    public void resumeGame() { Globals.paused = false; }
+    public void startGame() {
+        Globals.mode = 0;
+        Globals.GenerationManagerScript.initiateWorld();
+        Random.seed = Globals.SeedScript.seed;
+    }
+
+    public void pauseGame() { Globals.mode = 1; }
+    public void resumeGame() { Globals.mode = 0; }
 }

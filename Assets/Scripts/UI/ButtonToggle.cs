@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonToggleText : MonoBehaviour {
+public class ButtonToggle: MonoBehaviour {
     //attach to button (not text)
     public UnityEngine.UI.Text text;
+    public string settingName;
     public string onText = "ON";
     public string offText = "OFF";
     private string head;
@@ -15,7 +16,7 @@ public class ButtonToggleText : MonoBehaviour {
     }
 
     void Start() {
-        toggle.isOn = Menus.showCrosshair;
+        Globals.settings["Crosshair"] = (toggle.isOn) ? 1 : 0;
         updateText();
     }
 	
@@ -26,5 +27,9 @@ public class ButtonToggleText : MonoBehaviour {
     private void updateText() {
         if(toggle.isOn) text.text = head + ": " + onText;
         else text.text = head + ": " + offText;
+    }
+
+    public void updateSetting(bool val) {
+        Globals.settings[settingName] = (val) ? 1 : 0;
     }
 }

@@ -49,66 +49,59 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //warp to ground at game start
-        if(!startGroundWarp) startGroundWarp = warpToGround(3000, true);
+        if(Globals.mode == 0) {
+            //warp to ground at game start
+            if(!startGroundWarp) startGroundWarp = warpToGround(3000, true);
 
-        if (Globals.time_scale > 1) {
-            warpToGround(transform.position.y);
-            if(!playerAudio.isPlaying) { //sound
-                playerAudio.loop = true;
-                playerAudio.PlayOneShot(speedUp, .2f);
-            }
-            firstPersonCont.enabled = false;
-        }
-        if (Globals.time_scale > cinematicTimeScale)
-        {
-			if(!playerModel.activeInHierarchy)
-			{
-				playerModel.SetActive(true);
-			}
-			else
-			{
-                RaycastHit hit;
-                Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 100000, mainCamera.transform.position.z), Vector3.down);
-                int terrain = LayerMask.GetMask("Terrain");
-
-                if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-                {
-                    camDistance += 5 * Time.deltaTime;
-                    theta += 0.5f * Time.deltaTime;
-                    float targetY = hit.point.y - playerModel.transform.position.y + 80;
-                    mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
+            if(Globals.time_scale > 1) {
+                warpToGround(transform.position.y);
+                if(!playerAudio.isPlaying) { //sound
+                    playerAudio.loop = true;
+                    playerAudio.PlayOneShot(speedUp, .2f);
                 }
-			}
-			mainCamera.transform.LookAt (playerModel.transform.position);
-            inCinematic = true;
-        }
-        if (Globals.time_scale == 1)
-        {
-            if(inCinematic)
-            {
-                inCinematic = false;
-                mainCamera.transform.localPosition = playerCamPos;
-                mainCamera.transform.localRotation = playerCamRot;
-                playerModel.SetActive(false);
-                camDistance = waitCamDistance;
-                theta = 0.0f;
+                firstPersonCont.enabled = false;
+                if(Globals.time_scale > cinematicTimeScale) {
+                    if(!playerModel.activeInHierarchy) {
+                        playerModel.SetActive(true);
+                    } else {
+                        RaycastHit hit;
+                        Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 100000, mainCamera.transform.position.z), Vector3.down);
+                        int terrain = LayerMask.GetMask("Terrain");
+
+                        if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)) {
+                            camDistance += 5 * Time.deltaTime;
+                            theta += 0.5f * Time.deltaTime;
+                            float targetY = hit.point.y - playerModel.transform.position.y + 80;
+                            mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
+                        }
+                    }
+                    mainCamera.transform.LookAt(playerModel.transform.position);
+                    inCinematic = true;
+                }
+            }else if(Globals.time_scale == 1) {
+                if(inCinematic) {
+                    inCinematic = false;
+                    mainCamera.transform.localPosition = playerCamPos;
+                    mainCamera.transform.localRotation = playerCamRot;
+                    playerModel.SetActive(false);
+                    camDistance = waitCamDistance;
+                    theta = 0.0f;
+                }
+                firstPersonCont.enabled = true;
             }
-            firstPersonCont.enabled = true;
+            //Holding Objects stuff
+            if (Input.GetButtonDown("Use") && Globals.mode != 0 && Globals.time_scale == 1) {
+                if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
+                else if (TryUseObject()) { }
+                else DropObject();
+            }
+            if(heldObj != null) followHand(heldObj, heldObjSize);
+
+            checkUnderwater();
         }
 
-        if(Globals.paused || Globals.time_scale > 1) firstPersonCont.lookLock = true;
+        if(Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
         else firstPersonCont.lookLock = false;
-
-        //Holding Objects stuff
-        if (Input.GetButtonDown("Use") && !Globals.paused && Globals.time_scale == 1) {
-            if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
-            else if (TryUseObject()) { }
-            else DropObject();
-        }
-        if(heldObj != null) followHand(heldObj, heldObjSize);
-
-        checkUnderwater();
     }
 
     public bool isUnderwater() {return underwater;}
