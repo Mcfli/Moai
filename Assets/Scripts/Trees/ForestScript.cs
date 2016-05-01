@@ -154,6 +154,11 @@ public class ForestScript : MonoBehaviour {
         tree.transform.parent = transform;
     }
 
+    public bool containsTree(int id)
+    {
+        return trees.ContainsKey(id);
+    }
+
     public void removeTree(int id) {
         trees.Remove(id);
     }

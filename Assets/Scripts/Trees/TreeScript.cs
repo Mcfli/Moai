@@ -93,7 +93,8 @@ public class TreeScript : MonoBehaviour {
 
     void OnDestroy()
     {
-        forestParent.removeTree(GetInstanceID());
+        if(forestParent.containsTree(GetInstanceID()))
+            forestParent.removeTree(GetInstanceID());
     }
 
     // Update is called once per frame
