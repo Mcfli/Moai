@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeID: mushroom_red_seed
-  spawn_object: {fileID: 145976, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  spawn_object: {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
