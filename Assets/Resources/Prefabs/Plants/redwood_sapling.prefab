@@ -41,7 +41,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: de8f5ce8023678945a0e879dd8263d8f, type: 2}
   - {fileID: 2100000, guid: 76f7da76209393649bb9c9d8020c50b1, type: 2}
-  - {fileID: 2100000, guid: 44020b626ec2d6845927b787760afade, type: 2}
+  - {fileID: 2100000, guid: 9105e3c433e583349822c6ff79857561, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
