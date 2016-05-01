@@ -7161,7 +7161,6 @@ MonoBehaviour:
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   propogateDuringState: 000101
-  heightBone: {fileID: 109744}
   heightAxis: 88
   collisionRadiusMinMax: {x: 1, y: 1.5}
   collisionVSTime:

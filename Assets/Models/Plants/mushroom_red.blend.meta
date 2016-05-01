@@ -23,6 +23,7 @@ ModelImporter:
     100030: mid_trunk
     100032: //RootNode
     100034: top_trunk
+    100036: Bone
     400000: Armature
     400002: bottom_trunk
     400004: cap_bottom
@@ -41,6 +42,7 @@ ModelImporter:
     400030: mid_trunk
     400032: //RootNode
     400034: top_trunk
+    400036: Bone
     4300000: Cylinder
     7400000: Default Take
     7400002: redMushroom_dying
@@ -50,7 +52,7 @@ ModelImporter:
     11100002: //RootNode
     13700000: Cylinder
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

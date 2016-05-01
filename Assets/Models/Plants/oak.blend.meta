@@ -51,6 +51,7 @@ ModelImporter:
     100086: forestTree2Armature
     100088: //RootNode
     100090: Empty
+    100092: Bone_042
     400000: Bone
     400002: Bone_001
     400004: Bone_002
@@ -97,6 +98,7 @@ ModelImporter:
     400086: forestTree2Armature
     400088: //RootNode
     400090: Empty
+    400092: Bone_042
     4300000: fig1_rignt_002
     7400000: Default Take
     7400002: forestTree2_dying
@@ -105,7 +107,7 @@ ModelImporter:
     11100000: //RootNode
     13700000: fig1_rignt_002
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

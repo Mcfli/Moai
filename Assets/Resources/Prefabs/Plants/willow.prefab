@@ -3468,7 +3468,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
@@ -3487,7 +3487,7 @@ MonoBehaviour:
   heightAxis: 0
   collisionRadiusMinMax: {x: 0, y: 0}
   collisionVSTime: []
-  dirtMound: {fileID: 0}
+  dirtMound: {fileID: 193470, guid: 87d6af015ee9fb44fb3c17bcc1b3cbf0, type: 2}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   dirtMoundLifeRatio: 0
   prefab: {fileID: 0}
@@ -3503,13 +3503,13 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8e202f1bc038c2b488ac212ac83ca909, type: 2}
-  - {fileID: 2100000, guid: fbb4f134455b10b44bd6694d55e21ab6, type: 2}
-  - {fileID: 2100000, guid: c3f607ee178351a4687fa4547bc2358a, type: 2}
-  - {fileID: 2100000, guid: a3471e41af2838d4ca9b91aec4328e79, type: 2}
-  - {fileID: 2100000, guid: 7631022996f34454cac811df18faac22, type: 2}
-  - {fileID: 2100000, guid: 95de5664ec7bfa9428cb0d7213594366, type: 2}
-  - {fileID: 2100000, guid: 65b5fdacac986fc41a047ca30d998402, type: 2}
+  - {fileID: 2100000, guid: 835895f3a2b16944bbcdb5082c8c827d, type: 2}
+  - {fileID: 2100000, guid: 3bc3c8c8fc614f544826693ee1470955, type: 2}
+  - {fileID: 2100000, guid: 3bc3c8c8fc614f544826693ee1470955, type: 2}
+  - {fileID: 2100000, guid: 354e05c9530b9e94f8a40ee03159947f, type: 2}
+  - {fileID: 2100000, guid: cc553cc25fd9dac4c951a619c8d0dad1, type: 2}
+  - {fileID: 2100000, guid: e8c40a57d3d49914887d713853e4ed5f, type: 2}
+  - {fileID: 2100000, guid: a3ce8efadb0c27f49a6a24df2d7c7d89, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3652,7 +3652,7 @@ SkinnedMeshRenderer:
   - {fileID: 446954}
   - {fileID: 466930}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 493266}
+  m_RootBone: {fileID: 444898}
   m_AABB:
     m_Center: {x: -27.725098, y: -11.904882, z: 14.530848}
     m_Extent: {x: 117.77554, y: 74.51028, z: 57.345398}

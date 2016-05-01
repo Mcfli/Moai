@@ -18,7 +18,6 @@ public class TreeScript : MonoBehaviour {
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
-    public GameObject heightBone;
     public char heightAxis;
     public Vector2 collisionRadiusMinMax;
     public List<AnimationCurve> collisionVSTime;
@@ -183,25 +182,24 @@ public class TreeScript : MonoBehaviour {
     }
 
     private void updateCollision() {
-        float ratio = collisionVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
-        float radius = Mathf.Lerp(collisionRadiusMinMax.x, collisionRadiusMinMax.y, ratio);
-        capCollider.center = new Vector3(capCollider.center.x, (heightBone.transform.position.y - transform.position.y) / 2 / transform.localScale.y, capCollider.center.z);
-        capCollider.height = (heightBone.transform.position.y - transform.position.y) / transform.localScale.y;
-        capCollider.radius = radius;
+        capCollider.center = new Vector3(capCollider.center.x, (rend.rootBone.position.y - transform.position.y) / 2 / transform.localScale.y, capCollider.center.z);
+        capCollider.height = (rend.rootBone.position.y - transform.position.y) / transform.localScale.y;
+        capCollider.radius = Mathf.Lerp(collisionRadiusMinMax.x, collisionRadiusMinMax.y, collisionVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]));
     }
 
     private void updateBounds() {
         Vector3 center = rend.localBounds.center;
         Vector3 size = rend.localBounds.size;
+        float height = (rend.rootBone.position.y - transform.position.y) / rend.rootBone.lossyScale.y;
         if(heightAxis == 'x' || heightAxis == 'X') {
-            center.x = (heightBone.transform.position.y - transform.position.y) / 2 / heightBone.transform.lossyScale.y;
-            size.x = (heightBone.transform.position.y - transform.position.y) / heightBone.transform.lossyScale.y;
+            center.x = height / 2;
+            size.x = height;
         } else if(heightAxis == 'z' || heightAxis == 'Z') {
-            center.z = (heightBone.transform.position.y - transform.position.y) / 2 / heightBone.transform.lossyScale.y;
-            size.z = (heightBone.transform.position.y - transform.position.y) / heightBone.transform.lossyScale.y;
+            center.z = height / 2;
+            size.z = height;
         } else {
-            center.y = (heightBone.transform.position.y - transform.position.y) / 2 / heightBone.transform.lossyScale.y;
-            size.y = (heightBone.transform.position.y - transform.position.y) / heightBone.transform.lossyScale.y;
+            center.y = height / 2;
+            size.y = height;
         }
         rend.localBounds = new Bounds(center, size);
     }

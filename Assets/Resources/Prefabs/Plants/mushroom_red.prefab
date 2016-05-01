@@ -575,7 +575,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: ebbb4ad3c6e90214784ab3bc391f8a69, type: 2}
+  - {fileID: 2100000, guid: b6917c3649c0b6649971867d543d85aa, type: 2}
   - {fileID: 2100000, guid: b6768aa4fa3ace0488bb9cf4ed087d60, type: 2}
   - {fileID: 2100000, guid: ebbb4ad3c6e90214784ab3bc391f8a69, type: 2}
   m_SubsetIndices: 
