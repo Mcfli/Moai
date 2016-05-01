@@ -75,6 +75,16 @@ public class Obelisk : MonoBehaviour {
         }
     }
 
+    void OnMouseDown()
+    {
+        float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
+        if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0)
+        {
+            Vector3 pos = islandInstance.GetComponentInChildren<TeleportStone>().gameObject.transform.position;
+            Globals.Player.transform.position = pos + new Vector3(-10, 0, -10);
+        }
+    }
+
     private void generateRequirements()
     {
         int count = Random.Range(minTotalReqs, maxTotalReqs);

@@ -45,6 +45,7 @@ GameObject:
   - 4: {fileID: 401338}
   - 111: {fileID: 11154550}
   - 114: {fileID: 11487224}
+  - 65: {fileID: 6550888}
   m_Layer: 0
   m_Name: ObeliskReturn
   m_TagString: Untagged
@@ -72,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 129564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -189.42712, y: 420.30432, z: 2032.224}
+  m_LocalPosition: {x: -11.601451, y: 134, z: -7.492735}
   m_LocalScale: {x: 1000, y: 100, z: 1000}
   m_Children:
   - {fileID: 401338}
@@ -192,6 +193,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6550888
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.209902, y: 40.558907, z: 8.516628}
+  m_Center: {x: 0.15917419, y: 13.749939, z: -0.023298196}
 --- !u!111 &11154550
 Animation:
   m_ObjectHideFlags: 1
@@ -219,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedObelisk: {fileID: 0}
+  lightUpDistance: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
