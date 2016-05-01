@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ShrineGrid : MonoBehaviour
 {
-
     public bool debug;
     public bool isDone;
     public float size;
@@ -52,7 +51,6 @@ public class ShrineGrid : MonoBehaviour
         targetStateWater = new List<PuzzleObject>();
         targetStateEarth = new List<PuzzleObject>();
         targetStateAir = new List<PuzzleObject>();
-        //completedGlows = new Dictionary<int, bool>();
         validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
@@ -232,9 +230,111 @@ public class ShrineGrid : MonoBehaviour
             isDone = true;
             complete("fire");
         }
-        
+        else if (curElement == "water")
+        {
+            foreach (PuzzleObject tarObj in targetStateWater)
+            {
+                // if we don't currently have the desired item in the box, it can't be complete   
+                bool found = false;
+
+                for (int i = 0; i < curState.Count; i++)
+                {
+                    GameObject gameObj = curState[i];
+                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
+                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+
+                    if (po == null)
+                    {
+                        continue;
+                    }
+
+                    if (po.Equals(tarObj))
+                    {
+                        itemsCounted.Add(gameObj);
+
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    isDone = false;
+                    return;
+                }
+            }
+            isDone = true;
+            complete("water");
+        }
+        else if (curElement == "earth")
+        {
+            foreach (PuzzleObject tarObj in targetStateEarth)
+            {
+                // if we don't currently have the desired item in the box, it can't be complete   
+                bool found = false;
+
+                for (int i = 0; i < curState.Count; i++)
+                {
+                    GameObject gameObj = curState[i];
+                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
+                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+
+                    if (po == null)
+                    {
+                        continue;
+                    }
+
+                    if (po.Equals(tarObj))
+                    {
+                        itemsCounted.Add(gameObj);
+
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    isDone = false;
+                    return;
+                }
+            }
+            isDone = true;
+            complete("earth");
+        }
+        else if (curElement == "air")
+        {
+            foreach (PuzzleObject tarObj in targetStateAir)
+            {
+                // if we don't currently have the desired item in the box, it can't be complete   
+                bool found = false;
+
+                for (int i = 0; i < curState.Count; i++)
+                {
+                    GameObject gameObj = curState[i];
+                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
+                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+
+                    if (po == null)
+                    {
+                        continue;
+                    }
+
+                    if (po.Equals(tarObj))
+                    {
+                        itemsCounted.Add(gameObj);
+
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    isDone = false;
+                    return;
+                }
+            }
+            isDone = true;
+            complete("air");
+        }
+
         // looped through all and did not return false, so we found all of them
-        
+
 
     }
 
