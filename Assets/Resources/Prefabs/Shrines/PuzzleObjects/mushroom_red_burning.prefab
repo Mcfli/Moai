@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: mushroom_red_burning
-  image: {fileID: 2800000, guid: 3bb50d69c5531c745842676c9733a02f, type: 3}
+  image: {fileID: 2100000, guid: 9127756315c473b43b1a53d9105a89fa, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

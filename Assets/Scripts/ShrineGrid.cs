@@ -15,21 +15,28 @@ public class ShrineGrid : MonoBehaviour
     public GameObject glow;
     public GameObject vertexPillar;
 
-    public Vector2 WaterFireEarthAirChange; // The changes the shrine has to WaterFire/EarthAir map
     public float WaterFireEarthAirChangeMin = 15f;
     public float WaterFireEarthAirChangeMax = 50f;
 
     public GameObject completeGlow;
     public GameObject incompleteGlow;
 
+    // The element that the shrine will check curState against targetState... for
+    private string curElement;
+
     private List<GameObject> curState;
-    private List<PuzzleObject> targetState;
+    private List<PuzzleObject> targetStateFire;
+    private List<PuzzleObject> targetStateWater;
+    private List<PuzzleObject> targetStateEarth;
+    private List<PuzzleObject> targetStateAir;
+
+    
 
     public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
     private LayerMask glowLayer;
 
-    private Dictionary<int, bool> completedGlows;
+    //private Dictionary<int, bool> completedGlows;
 
     public Vector3 saved_position;
     public Quaternion saved_rotation;
@@ -41,19 +48,22 @@ public class ShrineGrid : MonoBehaviour
     void Start()
     {
         curState = new List<GameObject>();
-        targetState = new List<PuzzleObject>();
-        completedGlows = new Dictionary<int, bool>();
+        targetStateFire = new List<PuzzleObject>();
+        targetStateWater = new List<PuzzleObject>();
+        targetStateEarth = new List<PuzzleObject>();
+        targetStateAir = new List<PuzzleObject>();
+        //completedGlows = new Dictionary<int, bool>();
         validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
 
-        // For testing 
+
+        curElement = "";
+
         populateValidItems();
         genTargetState();
         updateCurState();
-
-
-        WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin, WaterFireEarthAirChangeMax);
+        
         shrineGlow = Instantiate(incompleteGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
 		shrineGlow.transform.parent = gameObject.transform;
 
@@ -66,13 +76,11 @@ public class ShrineGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (debug)
-            drawGrid();
         if (!isDone)
         {
             updateCurState();
             checkDone();
-            drawGlows();
+            //drawGlows();
         }
 
     }
@@ -80,6 +88,13 @@ public class ShrineGrid : MonoBehaviour
     public void enablePlacementItem(PuzzleObject item)
     {
         validObjects.Add(item);
+    }
+
+    public void changeElement(string element)
+    {
+        curElement = element;
+        GetComponent<Mural>().lightIcon(element);
+
     }
 
     private void populateValidItems()
@@ -180,39 +195,46 @@ public class ShrineGrid : MonoBehaviour
 
     private void checkDone()
     {
-        List<GameObject> itemsCounted= new List<GameObject>();
-        // Look at each requirement in targetState
-        foreach (PuzzleObject tarObj in targetState)
+        List<GameObject> itemsCounted = new List<GameObject>();
+        // Look at each requirement in each targetState
+
+        if(curElement == "fire")
         {
-            // if we don't currently have the desired item in the box, it can't be complete   
-            bool found = false;
-            
-            for(int i = 0; i < curState.Count; i++)
+            foreach (PuzzleObject tarObj in targetStateFire)
             {
-                GameObject gameObj = curState[i];
-                if (itemsCounted.IndexOf(gameObj) != -1) continue;
-                PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+                // if we don't currently have the desired item in the box, it can't be complete   
+                bool found = false;
 
-                if (po == null)
+                for (int i = 0; i < curState.Count; i++)
                 {
-                    continue;
+                    GameObject gameObj = curState[i];
+                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
+                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
+
+                    if (po == null)
+                    {
+                        continue;
+                    }
+
+                    if (po.Equals(tarObj))
+                    {
+                        itemsCounted.Add(gameObj);
+
+                        found = true;
+                    }
                 }
-
-                if (po.Equals( tarObj))
+                if (!found)
                 {
-                    itemsCounted.Add(gameObj);
-
-                    found = true;
+                    isDone = false;
+                    return;
                 }
             }
-            if (!found) {
-                isDone = false;
-                return;
-            }
+            isDone = true;
+            complete("fire");
         }
+        
         // looped through all and did not return false, so we found all of them
-        isDone = true;
-        complete();
+        
 
     }
 
@@ -220,19 +242,50 @@ public class ShrineGrid : MonoBehaviour
     private void genTargetState()
     {
         int numItems = 0;
+
+        // Fire
         numItems = Random.Range(minSolItems, maxSolItems);
         for (int i = 0; i < numItems; i++)
         {
             int index = Random.Range(0, validObjects.Count - 1);
             PuzzleObject placeObj = validObjects[index];
             if (placeObj != null)
-                targetState.Add(placeObj);
+                targetStateFire.Add(placeObj);
+        }
+
+        // Water
+        numItems = Random.Range(minSolItems, maxSolItems);
+        for (int i = 0; i < numItems; i++)
+        {
+            int index = Random.Range(0, validObjects.Count - 1);
+            PuzzleObject placeObj = validObjects[index];
+            if (placeObj != null)
+                targetStateWater.Add(placeObj);
+        }
+
+        // Earth
+        numItems = Random.Range(minSolItems, maxSolItems);
+        for (int i = 0; i < numItems; i++)
+        {
+            int index = Random.Range(0, validObjects.Count - 1);
+            PuzzleObject placeObj = validObjects[index];
+            if (placeObj != null)
+                targetStateEarth.Add(placeObj);
+        }
+        //Air
+        numItems = Random.Range(minSolItems, maxSolItems);
+        for (int i = 0; i < numItems; i++)
+        {
+            int index = Random.Range(0, validObjects.Count - 1);
+            PuzzleObject placeObj = validObjects[index];
+            if (placeObj != null)
+                targetStateAir.Add(placeObj);
         }
     }
 
     private void createMural()
     {
-        GetComponent<Mural>().genMurals(targetState);
+        GetComponent<Mural>().genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
     }
 
     private void createPillars()
@@ -268,6 +321,7 @@ public class ShrineGrid : MonoBehaviour
         }
     }
 
+    /*
     private void drawGrid()
     {
         drawSquare(Color.white);
@@ -290,7 +344,7 @@ public class ShrineGrid : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
     private void drawSquare(Color color)
     {
         Vector3 topleft = gridToReal(Vector2.zero + 3* Vector2.up);
@@ -308,6 +362,7 @@ public class ShrineGrid : MonoBehaviour
         Debug.DrawLine(botright, topright, color);
     }
 
+    /*
     private void drawGlows()
     {
 
@@ -345,13 +400,23 @@ public class ShrineGrid : MonoBehaviour
             }
         } 
     }
+    */
 
-    private void complete()
+    // element - "earth", "fire", "water", "air"
+    private void complete(string element)
     {
         Destroy(shrineGlow);
         shrineGlow = Instantiate(completeGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
         // Stop the cells from glowing
-        drawGlows();
+        //drawGlows();
+
+        Vector2 WaterFireEarthAirChange;
+        if (element == "fire") WaterFireEarthAirChange = Vector2.right; //(1,0)
+        else if (element == "water") WaterFireEarthAirChange = Vector2.left; //(-1,0)
+        else if (element == "earth") WaterFireEarthAirChange = Vector2.down; //(0,-1)
+        else WaterFireEarthAirChange = Vector2.up; //(0,1)
+
+        WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin,WaterFireEarthAirChangeMax);
         // Change the chunk
         GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
@@ -369,10 +434,9 @@ public class ShrineGrid : MonoBehaviour
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-            if (hit.point.y > Globals.water_level)
-            {
-                ret = new Vector3(pos.x, hit.point.y + 5f, pos.z);
-            }
+
+                ret = new Vector3(pos.x, hit.point.y, pos.z);
+            
         }
         return ret;
     }
@@ -396,11 +460,14 @@ public class ShrineGrid : MonoBehaviour
         glow = shrine.glow;
         vertexPillar = shrine.vertexPillar;
         curState = shrine.curState;
-        targetState = shrine.targetState;
+        targetStateFire = shrine.targetStateFire;
+        targetStateWater = shrine.targetStateWater;
+        targetStateEarth = shrine.targetStateEarth;
+        targetStateAir = shrine.targetStateAir;
         validObjects = shrine.validObjects;
         notTerrain = shrine.notTerrain;
         glowLayer = shrine.glowLayer;
-        completedGlows = shrine.completedGlows;
+        //completedGlows = shrine.completedGlows;
         saved_position = shrine.saved_position;
         saved_rotation = shrine.saved_rotation;
         saved_scale = shrine.saved_scale;

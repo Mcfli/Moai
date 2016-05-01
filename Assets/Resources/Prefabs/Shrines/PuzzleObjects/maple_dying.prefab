@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: maple_dying
-  image: {fileID: 2800000, guid: a4a6726f3901ed24dab8d0e24efd7fef, type: 3}
+  image: {fileID: 2100000, guid: 6362d7506fbb2364fbeff24cb70f44e1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

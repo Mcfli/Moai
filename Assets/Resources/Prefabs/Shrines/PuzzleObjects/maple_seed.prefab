@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: maple_seed
-  image: {fileID: 2800000, guid: 69b7c83f540e53d429589d6d6bb59476, type: 3}
+  image: {fileID: 2100000, guid: dfe3e1ddaec1fbb429c3b015234b2e8d, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

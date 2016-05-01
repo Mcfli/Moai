@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: maple_burn
-  image: {fileID: 2800000, guid: b471c28b86cde2e469ad8b8bd324bdf7, type: 3}
+  image: {fileID: 2100000, guid: 9127756315c473b43b1a53d9105a89fa, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

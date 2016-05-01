@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f316294df247d458da40709882153e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 197682, guid: e3fbc0380d916fb49b8fc4b0ea04aab6, type: 2}
+  prefab: {fileID: 154728, guid: 678feba97db6b9044934c154b8891552, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
   shrine_probability: 5
@@ -2315,7 +2315,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_TagString

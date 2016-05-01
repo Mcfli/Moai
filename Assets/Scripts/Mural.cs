@@ -4,12 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Mural : MonoBehaviour {
-    public int imageRes;  // Number of pixels per side in 
-    public int numSquares; // Number of cells per side
-    public Color muralColor;
-    public Texture2D shrineTexture;
+    public Material fireIconDull;
+    public Material waterIconDull;
+    public Material earthIconDull;
+    public Material airIconDull;
 
-    Texture2D muralTex;
+    public Material fireIconLit;
+    public Material waterIconLit;
+    public Material earthIconLit;
+    public Material airIconLit;
+
+    //Texture2D muralTex;
+    private Renderer rend;
 
     /* Shrine mural material mapping
      * 
@@ -26,7 +32,6 @@ public class Mural : MonoBehaviour {
      * Earth01 ---- 0
      * Earth02 ---- 2
      * Earth10 ---- 4
-     * Earth11 ---- 5
      * Earth12 ---- 3
      * Earth20 ---- 7
      * Earth21 ---- 6
@@ -36,7 +41,6 @@ public class Mural : MonoBehaviour {
      * Air01 ---- 18
      * Air02 ---- 17
      * Air10 ---- 15
-     * Air11 ---- 13
      * Air12 ---- 14
      * Air20 ---- 10
      * Air21 ---- 12
@@ -46,7 +50,6 @@ public class Mural : MonoBehaviour {
      * Water01 ---- 19
      * Water02 ---- 20
      * Water10 ---- 22
-     * Water11 ---- 24
      * Water12 ---- 23
      * Water20 ---- 27
      * Water21 ---- 25
@@ -56,7 +59,6 @@ public class Mural : MonoBehaviour {
      * Fire01 ---- 35
      * Fire02 ---- 33
      * Fire10 ---- 32
-     * Fire11 ---- 31
      * Fire12 ---- 36
      * Fire20 ---- 29
      * Fire21 ---- 30
@@ -66,13 +68,92 @@ public class Mural : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        muralTex = new Texture2D(imageRes*numSquares,imageRes*numSquares);
+        rend = GetComponent<Renderer>();
         //snapToTerrain();
 	}
 
-    public void genMurals(List<PuzzleObject> targetState)
+    public void genMurals(List<PuzzleObject> targetStateFire, List<PuzzleObject> targetStateWater, List<PuzzleObject> targetStateEarth, List<PuzzleObject> targetStateAir)
     {
+        if(rend == null) rend = GetComponent<Renderer>();
+        Material[] tempMats = rend.sharedMaterials;
+        // Generate Fire mural
+        int index = 0;
+        foreach(PuzzleObject po in targetStateFire)
+        {
+            if (index == 0)      tempMats[34] = po.image;
+            else if (index == 1) tempMats[35] = po.image;
+            else if (index == 2) tempMats[33] = po.image;
+            else if (index == 3) tempMats[32] = po.image;
+            else if (index == 4) tempMats[36] = po.image;
+            else if (index == 5) tempMats[29] = po.image;
+            else if (index == 6) tempMats[30] = po.image;
+            else                 tempMats[28] = po.image;
+            index++;
+        }
 
+        // Generate Water mural
+        index = 0;
+        foreach (PuzzleObject po in targetStateWater)
+        {
+            if (index == 0)      tempMats[21] = po.image;
+            else if (index == 1) tempMats[19] = po.image;
+            else if (index == 2) tempMats[20] = po.image;
+            else if (index == 3) tempMats[22] = po.image;
+            else if (index == 4) tempMats[23] = po.image;
+            else if (index == 5) tempMats[27] = po.image;
+            else if (index == 6) tempMats[25] = po.image;
+            else                 tempMats[26] = po.image;
+            index++;
+        }
+
+        // Generate Air mural
+        index = 0;
+        foreach (PuzzleObject po in targetStateWater)
+        {
+            if (index == 0)      tempMats[16] = po.image;
+            else if (index == 1) tempMats[18] = po.image;
+            else if (index == 2) tempMats[17] = po.image;
+            else if (index == 3) tempMats[15] = po.image;
+            else if (index == 4) tempMats[14] = po.image;
+            else if (index == 5) tempMats[10] = po.image;
+            else if (index == 6) tempMats[12] = po.image;
+            else                 tempMats[11] = po.image;
+            index++;
+        }
+
+        // Generate Earth mural
+        index = 0;
+        foreach (PuzzleObject po in targetStateWater)
+        {
+            if (index == 0)      tempMats[1] = po.image;
+            else if (index == 1) tempMats[0] = po.image;
+            else if (index == 2) tempMats[2] = po.image;
+            else if (index == 3) tempMats[4] = po.image;
+            else if (index == 4) tempMats[3] = po.image;
+            else if (index == 5) tempMats[7] = po.image;
+            else if (index == 6) tempMats[6] = po.image;
+            else                 tempMats[8] = po.image;
+            index++;
+        }
+
+        // Assign materials
+        rend.sharedMaterials = tempMats;
+    }
+
+    public void lightIcon(string element)
+    {
+        Material[] tempMats = rend.sharedMaterials;
+        tempMats[37] = fireIconDull;
+        tempMats[38] = earthIconDull;
+        tempMats[39] = waterIconDull;
+        tempMats[40] = airIconDull;
+        if (element == "fire")          tempMats[37] = fireIconLit;
+        else if (element == "water")    tempMats[39] = waterIconLit;
+        else if (element == "earth")    tempMats[38] = earthIconLit;
+        else if (element == "air")      tempMats[40] = airIconLit;
+
+        // Assign materials
+        rend.sharedMaterials = tempMats;
     }
 
     private void snapToTerrain()
