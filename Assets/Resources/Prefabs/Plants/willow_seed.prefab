@@ -11,7 +11,10 @@ GameObject:
   - 33: {fileID: 3379566}
   - 23: {fileID: 2397604}
   - 114: {fileID: 11492548}
-  m_Layer: 0
+  - 54: {fileID: 5421826}
+  - 75: {fileID: 7542286}
+  - 135: {fileID: 13539274}
+  m_Layer: 10
   m_Name: willow_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,6 +68,32 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128460}
   m_Mesh: {fileID: 4300000, guid: c533a931522e02942ba95066ae749584, type: 3}
+--- !u!54 &5421826
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128460}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!75 &7542286
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128460}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!114 &11492548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,20 +105,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeID: 
-  spawn_object: {fileID: 0}
+  typeID: willow_seed
+  spawn_object: {fileID: 155264, guid: 315a7e48c60329044ab0a87c30150e02, type: 2}
   cull_layer:
     serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
+    m_Bits: 256
+  cull_radius: 30
+  growAttempts: 5
+  growTime: 18000
+  growTimeVariance: 0.5
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
+    m_Bits: 4294957001
+  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
+  dirtMoundOffset: {x: 0, y: -0.25, z: 0}
+--- !u!135 &13539274
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
