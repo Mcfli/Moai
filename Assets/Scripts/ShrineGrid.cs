@@ -195,7 +195,7 @@ public class ShrineGrid : MonoBehaviour
     {
         List<GameObject> itemsCounted = new List<GameObject>();
         Dictionary<int, bool> completed = new Dictionary<int, bool>();
-        Debug.Log(curState.Count);
+        
         bool done = true;
         // Look at each requirement in each targetState
         int index = 0;
@@ -205,7 +205,7 @@ public class ShrineGrid : MonoBehaviour
         else if (curElement == "earth") targetState = targetStateEarth;
         else if (curElement == "air") targetState = targetStateAir;
         else return;
-
+        
         foreach (PuzzleObject tarObj in targetState)
         {
             // if we don't currently have the desired item in the box, it can't be complete   
@@ -238,6 +238,7 @@ public class ShrineGrid : MonoBehaviour
         isDone = done;
         if(isDone)
             complete(curElement);
+        
         mural.glowPuzzleObjects(completed, targetState, curElement);
     }
 
