@@ -7,6 +7,7 @@ public class PuzzleObject : MonoBehaviour, IEquatable<PuzzleObject>
 {
     public string ID;
     public Material image;
+    public Material imageGlowing;
 
     public bool Equals(PuzzleObject other)
     {

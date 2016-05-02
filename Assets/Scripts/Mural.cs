@@ -140,6 +140,91 @@ public class Mural : MonoBehaviour {
         rend.sharedMaterials = tempMats;
     }
 
+    public void glowPuzzleObjects(Dictionary<int,bool> completed,List<PuzzleObject> targetState, string element)
+    {
+        List<GameObject> itemsCounted = new List<GameObject>();
+        int index = 0;
+        if (rend == null) rend = GetComponent<Renderer>();
+        Material[] tempMats = rend.sharedMaterials;
+
+        // Update fire side
+        if (element.Equals("fire"))
+        {
+            foreach (PuzzleObject po in targetState)
+            {
+                bool objectDone = (completed.ContainsKey(index) && completed[index]);
+                if (index == 0) tempMats[34]      = objectDone ? po.imageGlowing:po.image;
+                else if (index == 1) tempMats[35] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[33] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[32] = objectDone ? po.imageGlowing:po.image;
+                else if (index == 4) tempMats[36] = objectDone ? po.imageGlowing:po.image;
+                else if (index == 5) tempMats[29] = objectDone ? po.imageGlowing:po.image;
+                else if (index == 6) tempMats[30] = objectDone ? po.imageGlowing:po.image;
+                else tempMats[28]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+
+        // Update water side
+        else if (element.Equals("water"))
+        {
+            foreach (PuzzleObject po in targetState)
+            {
+                bool objectDone = (completed.ContainsKey(index) && completed[index]);
+                if (index == 0) tempMats[21]      = objectDone ? po.imageGlowing : po.image;
+                else if (index == 1) tempMats[19] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[20] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[22] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[23] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[27] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[25] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[26]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+        // Update air side
+        if (element.Equals("air"))
+        {
+            bool objectDone = (completed.ContainsKey(index) && completed[index]);
+            foreach (PuzzleObject po in targetState)
+            {
+                if (index == 0) tempMats[16]      = objectDone ? po.imageGlowing : po.image;
+                else if (index == 1) tempMats[18] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[17] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[15] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[14] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[10] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[12] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[11]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+        // Update earth side
+        if (element.Equals("earth"))
+        {
+            bool objectDone = (completed.ContainsKey(index) && completed[index]);
+            foreach (PuzzleObject po in targetState)
+            {
+                if (index == 0) tempMats[1]      = objectDone ? po.imageGlowing : po.image;
+                else if (index == 1) tempMats[0] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[2] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[4] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[3] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[7] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[6] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[8]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+        // Assign materials
+        rend.sharedMaterials = tempMats;
+
+    }
+
     public void lightIcon(string element)
     {
         Material[] tempMats = rend.sharedMaterials;
@@ -147,10 +232,10 @@ public class Mural : MonoBehaviour {
         tempMats[38] = earthIconDull;
         tempMats[39] = waterIconDull;
         tempMats[40] = airIconDull;
-        if (element == "fire")          tempMats[37] = fireIconLit;
-        else if (element == "water")    tempMats[39] = waterIconLit;
-        else if (element == "earth")    tempMats[38] = earthIconLit;
-        else if (element == "air")      tempMats[40] = airIconLit;
+        if (element.Equals( "fire"))          tempMats[37] = fireIconLit;
+        else if (element.Equals("water"))    tempMats[39] = waterIconLit;
+        else if (element.Equals("earth"))    tempMats[38] = earthIconLit;
+        else if (element.Equals("air"))    tempMats[40] = airIconLit;
 
         // Assign materials
         rend.sharedMaterials = tempMats;

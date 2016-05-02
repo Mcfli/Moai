@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: maple_dying
   image: {fileID: 2100000, guid: 6362d7506fbb2364fbeff24cb70f44e1, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 89ee5c415dca9e7469e5fb864edce754, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

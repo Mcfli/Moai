@@ -10,7 +10,7 @@ public class ShrineGrid : MonoBehaviour
     public int resolution;  // res X res Number of squares in the grid
     public int minSolItems; // min items for a solution
     public int maxSolItems; // max items for a solution
-    public GameObject mural;
+    public Mural mural;
     public GameObject glow;
     public GameObject vertexPillar;
 
@@ -54,7 +54,7 @@ public class ShrineGrid : MonoBehaviour
         validObjects = new List<PuzzleObject>();
         notTerrain = ~(LayerMask.GetMask("Terrain"));
         glowLayer = LayerMask.GetMask("Glow");
-
+        mural = GetComponent<Mural>();
 
         curElement = "";
 
@@ -91,7 +91,7 @@ public class ShrineGrid : MonoBehaviour
     public void changeElement(string element)
     {
         curElement = element;
-        GetComponent<Mural>().lightIcon(element);
+        mural.lightIcon(element);
 
     }
 
@@ -194,148 +194,51 @@ public class ShrineGrid : MonoBehaviour
     private void checkDone()
     {
         List<GameObject> itemsCounted = new List<GameObject>();
+        Dictionary<int, bool> completed = new Dictionary<int, bool>();
+        Debug.Log(curState.Count);
+        bool done = true;
         // Look at each requirement in each targetState
+        int index = 0;
+        List<PuzzleObject> targetState;
+        if (curElement == "fire") targetState = targetStateFire;
+        else if (curElement == "water") targetState = targetStateWater;
+        else if (curElement == "earth") targetState = targetStateEarth;
+        else if (curElement == "air") targetState = targetStateAir;
+        else return;
 
-        if(curElement == "fire")
+        foreach (PuzzleObject tarObj in targetState)
         {
-            foreach (PuzzleObject tarObj in targetStateFire)
+            // if we don't currently have the desired item in the box, it can't be complete   
+            bool found = false;
+
+            for (int i = 0; i < curState.Count; i++)
             {
-                // if we don't currently have the desired item in the box, it can't be complete   
-                bool found = false;
+                GameObject gameObj = curState[i];
+                if (itemsCounted.IndexOf(gameObj) != -1) continue;
+                PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
 
-                for (int i = 0; i < curState.Count; i++)
+                if (po == null)
                 {
-                    GameObject gameObj = curState[i];
-                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
-                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
-
-                    if (po == null)
-                    {
-                        continue;
-                    }
-
-                    if (po.Equals(tarObj))
-                    {
-                        itemsCounted.Add(gameObj);
-
-                        found = true;
-                    }
+                    continue;
                 }
-                if (!found)
+
+                if (po.Equals(tarObj))
                 {
-                    isDone = false;
-                    return;
+                    itemsCounted.Add(gameObj);
+                    found = true;
+                    completed[index] = true;
                 }
             }
-            isDone = true;
-            complete("fire");
-        }
-        else if (curElement == "water")
-        {
-            foreach (PuzzleObject tarObj in targetStateWater)
+            if (!found)
             {
-                // if we don't currently have the desired item in the box, it can't be complete   
-                bool found = false;
-
-                for (int i = 0; i < curState.Count; i++)
-                {
-                    GameObject gameObj = curState[i];
-                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
-                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
-
-                    if (po == null)
-                    {
-                        continue;
-                    }
-
-                    if (po.Equals(tarObj))
-                    {
-                        itemsCounted.Add(gameObj);
-
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    isDone = false;
-                    return;
-                }
+                done = false;
             }
-            isDone = true;
-            complete("water");
+            index++;
         }
-        else if (curElement == "earth")
-        {
-            foreach (PuzzleObject tarObj in targetStateEarth)
-            {
-                // if we don't currently have the desired item in the box, it can't be complete   
-                bool found = false;
-
-                for (int i = 0; i < curState.Count; i++)
-                {
-                    GameObject gameObj = curState[i];
-                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
-                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
-
-                    if (po == null)
-                    {
-                        continue;
-                    }
-
-                    if (po.Equals(tarObj))
-                    {
-                        itemsCounted.Add(gameObj);
-
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    isDone = false;
-                    return;
-                }
-            }
-            isDone = true;
-            complete("earth");
-        }
-        else if (curElement == "air")
-        {
-            foreach (PuzzleObject tarObj in targetStateAir)
-            {
-                // if we don't currently have the desired item in the box, it can't be complete   
-                bool found = false;
-
-                for (int i = 0; i < curState.Count; i++)
-                {
-                    GameObject gameObj = curState[i];
-                    if (itemsCounted.IndexOf(gameObj) != -1) continue;
-                    PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
-
-                    if (po == null)
-                    {
-                        continue;
-                    }
-
-                    if (po.Equals(tarObj))
-                    {
-                        itemsCounted.Add(gameObj);
-
-                        found = true;
-                    }
-                }
-                if (!found)
-                {
-                    isDone = false;
-                    return;
-                }
-            }
-            isDone = true;
-            complete("air");
-        }
-
-        // looped through all and did not return false, so we found all of them
-
-
+        isDone = done;
+        if(isDone)
+            complete(curElement);
+        mural.glowPuzzleObjects(completed, targetState, curElement);
     }
 
     // Uses a random Vector2 based on the resolution size and uses a random index based on the count in validObjects to populate targetState dictionary.
@@ -385,7 +288,7 @@ public class ShrineGrid : MonoBehaviour
 
     private void createMural()
     {
-        GetComponent<Mural>().genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
+        mural.genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
     }
 
     private void createPillars()
@@ -421,30 +324,7 @@ public class ShrineGrid : MonoBehaviour
         }
     }
 
-    /*
-    private void drawGrid()
-    {
-        drawSquare(Color.white);
-        foreach(GameObject gameObj in curState)
-        {
-            if(gameObj == null)
-            {
-                continue;
-            }
-            PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
-            if(po != null)
-            {
-                if (targetState.Contains(po))
-                {
-                    Debug.DrawRay(gameObj.transform.position, Vector3.up, Color.green);
-                }
-                else
-                {
-                    Debug.DrawRay(gameObj.transform.position, Vector3.up, Color.white);
-                }
-            }
-        }
-    }*/
+
     private void drawSquare(Color color)
     {
         Vector3 topleft = gridToReal(Vector2.zero + 3* Vector2.up);
@@ -462,45 +342,6 @@ public class ShrineGrid : MonoBehaviour
         Debug.DrawLine(botright, topright, color);
     }
 
-    /*
-    private void drawGlows()
-    {
-
-        // Look through the items in targetState
-        for (int i = 0; i < targetState.Count; i++)
-        {
-            PuzzleObject targetObj = targetState[i];
-            bool targetObjComplete = false;
-            // Look through the stuff in current state to see if this item was found
-
-            foreach (GameObject curObj in curState)
-            {
-                PuzzleObject curPuzzleObj = curObj.GetComponent<PuzzleObject>();
-                if (curPuzzleObj == null) continue;
-                // If this object matches the one in our target state, and there isn't already a glow for that item, make a glow, 
-                // then move on to next item in target state
-                if(curPuzzleObj.Equals(targetObj))
-                {
-                    targetObjComplete = true;
-                    if(!completedGlows.ContainsKey(i) || completedGlows[i] == false)
-                    {
-                        GameObject glowInstance = Instantiate(glow, curObj.transform.position, Quaternion.identity) as GameObject;
-                        glowInstance.name = "Glow " + gameObject.GetHashCode() + targetObj.GetHashCode();
-                        completedGlows[i] = true;
-                    }
-                }
-            }
-
-            // If this object has a glow on it but isn't complete, destroy the glow
-            if (completedGlows.ContainsKey(i) && completedGlows[i] == true && !targetObjComplete)
-            {
-                GameObject glowInstance = GameObject.Find("Glow " + gameObject.GetHashCode() + targetObj.GetHashCode());
-                Destroy(glowInstance);
-                completedGlows[i] = false;
-            }
-        } 
-    }
-    */
 
     // element - "earth", "fire", "water", "air"
     private void complete(string element)

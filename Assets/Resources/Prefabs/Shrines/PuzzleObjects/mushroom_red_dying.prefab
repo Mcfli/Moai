@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: mushroom_red_dying
   image: {fileID: 2100000, guid: d6dfec3e026986f43bcbc99989a3c2d2, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 1fe69943aeecdb745b54395c73d2e678, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
