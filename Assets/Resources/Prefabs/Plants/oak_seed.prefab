@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 122844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeID: oak_seed
-  spawn_object: {fileID: 194074, guid: 65feb40d27e019d40b1d6e7c830f7b26, type: 2}
+  spawn_object: {fileID: 154274, guid: 65feb40d27e019d40b1d6e7c830f7b26, type: 2}
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
@@ -267,7 +267,7 @@ MonoBehaviour:
   growTimeVariance: 0.5
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 4294955977
+    m_Bits: 4294957001
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
@@ -282,7 +282,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:

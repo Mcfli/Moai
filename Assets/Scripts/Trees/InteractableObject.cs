@@ -94,7 +94,9 @@ public class InteractableObject: MonoBehaviour{
             if(Physics.OverlapSphere(transform.position, cull_radius, cull_layer).Length < 1) { //other conditions should go here
                 var RandomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                 GameObject g = Instantiate(spawn_object, transform.position + spawn_object.transform.position, RandomRotation) as GameObject;
-                g.GetComponent<TreeScript>().findForest();
+                TreeScript t = g.GetComponent<TreeScript>();
+                t.findForest();
+                if(playerPlanted) t.lifeSpan = t.baseLifeSpan;
                 Destroy(gameObject);
             } else if(attempts < growAttempts) {
                 timeRemain = growTime;

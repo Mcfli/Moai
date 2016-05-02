@@ -1,0 +1,878 @@
+fileFormatVersion: 2
+guid: 877b57a5ae17a0d4fbd574b60a0008f7
+timeCreated: 1462094173
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone
+    100002: Bone_001
+    100004: Bone_002
+    100006: Bone_003
+    100008: Bone_004
+    100010: Bone_005
+    100012: Bone_006
+    100014: Bone_007
+    100016: Bone_008
+    100018: Bone_009
+    100020: Bone_010
+    100022: Bone_011
+    100024: Bone_012
+    100026: Bone_013
+    100028: Bone_014
+    100030: Bone_015
+    100032: Bone_016
+    100034: Bone_017
+    100036: Bone_018
+    100038: Bone_019
+    100040: Bone_020
+    100042: Bone_021
+    100044: Bone_022
+    100046: Bone_023
+    100048: Bone_024
+    100050: Bone_025
+    100052: Bone_026
+    100054: Bone_027
+    100056: Bone_028
+    100058: Bone_029
+    100060: Bone_030
+    100062: Bone_031
+    100064: Bone_032
+    100066: Bone_033
+    100068: Bone_034
+    100070: Bone_035
+    100072: Bone_036
+    100074: Bone_037
+    100076: Bone_038
+    100078: Bone_039
+    100080: Bone_040
+    100082: Bone_041
+    100084: Bone_042
+    100086: Bone_043
+    100088: Bone_044
+    100090: Bone_045
+    100092: Bone_046
+    100094: Bone_047
+    100096: Bone_048
+    100098: Bone_049
+    100100: Bone_050
+    100102: Bone_051
+    100104: Bone_052
+    100106: Bone_053
+    100108: Bone_054
+    100110: Bone_055
+    100112: Bone_056
+    100114: Bone_057
+    100116: Bone_058
+    100118: Bone_059
+    100120: Bone_060
+    100122: Bone_061
+    100124: Bone_062
+    100126: Bone_063
+    100128: Bone_064
+    100130: Bone_065
+    100132: Bone_066
+    100134: Bone_067
+    100136: Bone_068
+    100138: Bone_069
+    100140: Bone_070
+    100142: Bone_071
+    100144: Bone_072
+    100146: Bone_073
+    100148: Bone_074
+    100150: Bone_075
+    100152: Bone_076
+    100154: Bone_077
+    100156: Bone_078
+    100158: Bone_079
+    100160: Bone_080
+    100162: Bone_081
+    100164: Bone_082
+    100166: Bone_083
+    100168: Bone_084
+    100170: Bone_085
+    100172: Bone_086
+    100174: Bone_087
+    100176: Bone_088
+    100178: Bone_089
+    100180: Bone_090
+    100182: Bone_091
+    100184: Bone_092
+    100186: Bone_093
+    100188: Bone_094
+    100190: Bone_095
+    100192: Bone_096
+    100194: Bone_097
+    100196: Bone_098
+    100198: Bone_099
+    100200: Bone_100
+    100202: Bone_101
+    100204: Bone_102
+    100206: Bone_103
+    100208: Bone_104
+    100210: Bone_105
+    100212: Bone_106
+    100214: Bone_107
+    100216: Bone_108
+    100218: Bone_109
+    100220: Bone_110
+    100222: Bone_111
+    100224: Bone_112
+    100226: Bone_113
+    100228: Bone_114
+    100230: Bone_115
+    100232: Bone_116
+    100234: Bone_117
+    100236: Bone_118
+    100238: Bone_119
+    100240: Bone_120
+    100242: branch2_002
+    100244: //RootNode
+    100246: swampArmature
+    400000: Bone
+    400002: Bone_001
+    400004: Bone_002
+    400006: Bone_003
+    400008: Bone_004
+    400010: Bone_005
+    400012: Bone_006
+    400014: Bone_007
+    400016: Bone_008
+    400018: Bone_009
+    400020: Bone_010
+    400022: Bone_011
+    400024: Bone_012
+    400026: Bone_013
+    400028: Bone_014
+    400030: Bone_015
+    400032: Bone_016
+    400034: Bone_017
+    400036: Bone_018
+    400038: Bone_019
+    400040: Bone_020
+    400042: Bone_021
+    400044: Bone_022
+    400046: Bone_023
+    400048: Bone_024
+    400050: Bone_025
+    400052: Bone_026
+    400054: Bone_027
+    400056: Bone_028
+    400058: Bone_029
+    400060: Bone_030
+    400062: Bone_031
+    400064: Bone_032
+    400066: Bone_033
+    400068: Bone_034
+    400070: Bone_035
+    400072: Bone_036
+    400074: Bone_037
+    400076: Bone_038
+    400078: Bone_039
+    400080: Bone_040
+    400082: Bone_041
+    400084: Bone_042
+    400086: Bone_043
+    400088: Bone_044
+    400090: Bone_045
+    400092: Bone_046
+    400094: Bone_047
+    400096: Bone_048
+    400098: Bone_049
+    400100: Bone_050
+    400102: Bone_051
+    400104: Bone_052
+    400106: Bone_053
+    400108: Bone_054
+    400110: Bone_055
+    400112: Bone_056
+    400114: Bone_057
+    400116: Bone_058
+    400118: Bone_059
+    400120: Bone_060
+    400122: Bone_061
+    400124: Bone_062
+    400126: Bone_063
+    400128: Bone_064
+    400130: Bone_065
+    400132: Bone_066
+    400134: Bone_067
+    400136: Bone_068
+    400138: Bone_069
+    400140: Bone_070
+    400142: Bone_071
+    400144: Bone_072
+    400146: Bone_073
+    400148: Bone_074
+    400150: Bone_075
+    400152: Bone_076
+    400154: Bone_077
+    400156: Bone_078
+    400158: Bone_079
+    400160: Bone_080
+    400162: Bone_081
+    400164: Bone_082
+    400166: Bone_083
+    400168: Bone_084
+    400170: Bone_085
+    400172: Bone_086
+    400174: Bone_087
+    400176: Bone_088
+    400178: Bone_089
+    400180: Bone_090
+    400182: Bone_091
+    400184: Bone_092
+    400186: Bone_093
+    400188: Bone_094
+    400190: Bone_095
+    400192: Bone_096
+    400194: Bone_097
+    400196: Bone_098
+    400198: Bone_099
+    400200: Bone_100
+    400202: Bone_101
+    400204: Bone_102
+    400206: Bone_103
+    400208: Bone_104
+    400210: Bone_105
+    400212: Bone_106
+    400214: Bone_107
+    400216: Bone_108
+    400218: Bone_109
+    400220: Bone_110
+    400222: Bone_111
+    400224: Bone_112
+    400226: Bone_113
+    400228: Bone_114
+    400230: Bone_115
+    400232: Bone_116
+    400234: Bone_117
+    400236: Bone_118
+    400238: Bone_119
+    400240: Bone_120
+    400242: branch2_002
+    400244: //RootNode
+    400246: swampArmature
+    4300000: branch2_002
+    7400000: Default Take
+    7400002: swampTree_dying
+    7400004: swampTree_growing
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: branch2_002
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: swampTree_dying
+      takeName: swampTree_dying
+      firstFrame: 0
+      lastFrame: 184
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: branch2_002
+        weight: 1
+      - path: swampArmature
+        weight: 1
+      - path: swampArmature/Bone
+        weight: 1
+      - path: swampArmature/Bone/Bone_003
+        weight: 1
+      - path: swampArmature/Bone/Bone_003/Bone_002
+        weight: 1
+      - path: swampArmature/Bone/Bone_003/Bone_002/Bone_001
+        weight: 1
+      - path: swampArmature/Bone_004
+        weight: 1
+      - path: swampArmature/Bone_005
+        weight: 1
+      - path: swampArmature/Bone_006
+        weight: 1
+      - path: swampArmature/Bone_007
+        weight: 1
+      - path: swampArmature/Bone_008
+        weight: 1
+      - path: swampArmature/Bone_009
+        weight: 1
+      - path: swampArmature/Bone_010
+        weight: 1
+      - path: swampArmature/Bone_011
+        weight: 1
+      - path: swampArmature/Bone_012
+        weight: 1
+      - path: swampArmature/Bone_013
+        weight: 1
+      - path: swampArmature/Bone_014
+        weight: 1
+      - path: swampArmature/Bone_015
+        weight: 1
+      - path: swampArmature/Bone_016
+        weight: 1
+      - path: swampArmature/Bone_017
+        weight: 1
+      - path: swampArmature/Bone_018
+        weight: 1
+      - path: swampArmature/Bone_019
+        weight: 1
+      - path: swampArmature/Bone_020
+        weight: 1
+      - path: swampArmature/Bone_021
+        weight: 1
+      - path: swampArmature/Bone_022
+        weight: 1
+      - path: swampArmature/Bone_023
+        weight: 1
+      - path: swampArmature/Bone_024
+        weight: 1
+      - path: swampArmature/Bone_025
+        weight: 1
+      - path: swampArmature/Bone_026
+        weight: 1
+      - path: swampArmature/Bone_027
+        weight: 1
+      - path: swampArmature/Bone_028
+        weight: 1
+      - path: swampArmature/Bone_029
+        weight: 1
+      - path: swampArmature/Bone_030
+        weight: 1
+      - path: swampArmature/Bone_031
+        weight: 1
+      - path: swampArmature/Bone_032
+        weight: 1
+      - path: swampArmature/Bone_033
+        weight: 1
+      - path: swampArmature/Bone_034
+        weight: 1
+      - path: swampArmature/Bone_035
+        weight: 1
+      - path: swampArmature/Bone_036
+        weight: 1
+      - path: swampArmature/Bone_037
+        weight: 1
+      - path: swampArmature/Bone_038
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_114
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_114/Bone_113
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_114/Bone_116
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_119
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_119/Bone_120
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_117
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_117/Bone_118
+        weight: 1
+      - path: swampArmature/Bone_039
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_082
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_085
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_085/Bone_086
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_087
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_087/Bone_088
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_089
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_089/Bone_090
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_091
+        weight: 1
+      - path: swampArmature/Bone_040
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_093
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_093/Bone_092
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_093/Bone_095
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_096
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_096/Bone_097
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_098
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_098/Bone_099
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_100
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_100/Bone_101
+        weight: 1
+      - path: swampArmature/Bone_041
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_102
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_103
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_103/Bone_104
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_105
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_105/Bone_106
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_107
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_107/Bone_108
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_109
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_109/Bone_110
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_111
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_111/Bone_112
+        weight: 1
+      - path: swampArmature/Bone_042
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044/Bone_045
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044/Bone_045/Bone_046
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044/Bone_045/Bone_046/Bone_047
+        weight: 1
+      - path: swampArmature/Bone_048
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050/Bone_051
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050/Bone_051/Bone_052
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050/Bone_051/Bone_052/Bone_053
+        weight: 1
+      - path: swampArmature/Bone_054
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056/Bone_057
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056/Bone_057/Bone_058
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056/Bone_057/Bone_058/Bone_059
+        weight: 1
+      - path: swampArmature/Bone_060
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066/Bone_067
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066/Bone_067/Bone_068
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066/Bone_067/Bone_068/Bone_069
+        weight: 1
+      - path: swampArmature/Bone_070
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071/Bone_072
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071/Bone_072/Bone_073
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071/Bone_072/Bone_073/Bone_074
+        weight: 1
+      - path: swampArmature/Bone_075
+        weight: 1
+      - path: swampArmature/Bone_076
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077/Bone_078
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077/Bone_078/Bone_079
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077/Bone_078/Bone_079/Bone_080
+        weight: 1
+      - path: swampArmature/Bone_081
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: swampTree_growing
+      takeName: swampTree_growing
+      firstFrame: 0
+      lastFrame: 619
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: branch2_002
+        weight: 1
+      - path: swampArmature
+        weight: 1
+      - path: swampArmature/Bone
+        weight: 1
+      - path: swampArmature/Bone/Bone_003
+        weight: 1
+      - path: swampArmature/Bone/Bone_003/Bone_002
+        weight: 1
+      - path: swampArmature/Bone/Bone_003/Bone_002/Bone_001
+        weight: 1
+      - path: swampArmature/Bone_004
+        weight: 1
+      - path: swampArmature/Bone_005
+        weight: 1
+      - path: swampArmature/Bone_006
+        weight: 1
+      - path: swampArmature/Bone_007
+        weight: 1
+      - path: swampArmature/Bone_008
+        weight: 1
+      - path: swampArmature/Bone_009
+        weight: 1
+      - path: swampArmature/Bone_010
+        weight: 1
+      - path: swampArmature/Bone_011
+        weight: 1
+      - path: swampArmature/Bone_012
+        weight: 1
+      - path: swampArmature/Bone_013
+        weight: 1
+      - path: swampArmature/Bone_014
+        weight: 1
+      - path: swampArmature/Bone_015
+        weight: 1
+      - path: swampArmature/Bone_016
+        weight: 1
+      - path: swampArmature/Bone_017
+        weight: 1
+      - path: swampArmature/Bone_018
+        weight: 1
+      - path: swampArmature/Bone_019
+        weight: 1
+      - path: swampArmature/Bone_020
+        weight: 1
+      - path: swampArmature/Bone_021
+        weight: 1
+      - path: swampArmature/Bone_022
+        weight: 1
+      - path: swampArmature/Bone_023
+        weight: 1
+      - path: swampArmature/Bone_024
+        weight: 1
+      - path: swampArmature/Bone_025
+        weight: 1
+      - path: swampArmature/Bone_026
+        weight: 1
+      - path: swampArmature/Bone_027
+        weight: 1
+      - path: swampArmature/Bone_028
+        weight: 1
+      - path: swampArmature/Bone_029
+        weight: 1
+      - path: swampArmature/Bone_030
+        weight: 1
+      - path: swampArmature/Bone_031
+        weight: 1
+      - path: swampArmature/Bone_032
+        weight: 1
+      - path: swampArmature/Bone_033
+        weight: 1
+      - path: swampArmature/Bone_034
+        weight: 1
+      - path: swampArmature/Bone_035
+        weight: 1
+      - path: swampArmature/Bone_036
+        weight: 1
+      - path: swampArmature/Bone_037
+        weight: 1
+      - path: swampArmature/Bone_038
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_114
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_114/Bone_113
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_114/Bone_116
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_119
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_115/Bone_119/Bone_120
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_117
+        weight: 1
+      - path: swampArmature/Bone_038/Bone_117/Bone_118
+        weight: 1
+      - path: swampArmature/Bone_039
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_082
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_085
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_085/Bone_086
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_087
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_083/Bone_087/Bone_088
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_089
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_084/Bone_089/Bone_090
+        weight: 1
+      - path: swampArmature/Bone_039/Bone_091
+        weight: 1
+      - path: swampArmature/Bone_040
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_093
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_093/Bone_092
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_093/Bone_095
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_096
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_096/Bone_097
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_098
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_094/Bone_098/Bone_099
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_100
+        weight: 1
+      - path: swampArmature/Bone_040/Bone_100/Bone_101
+        weight: 1
+      - path: swampArmature/Bone_041
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_102
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_103
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_103/Bone_104
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_105
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_105/Bone_106
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_107
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_107/Bone_108
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_109
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_109/Bone_110
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_111
+        weight: 1
+      - path: swampArmature/Bone_041/Bone_111/Bone_112
+        weight: 1
+      - path: swampArmature/Bone_042
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044/Bone_045
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044/Bone_045/Bone_046
+        weight: 1
+      - path: swampArmature/Bone_042/Bone_043/Bone_044/Bone_045/Bone_046/Bone_047
+        weight: 1
+      - path: swampArmature/Bone_048
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050/Bone_051
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050/Bone_051/Bone_052
+        weight: 1
+      - path: swampArmature/Bone_048/Bone_049/Bone_050/Bone_051/Bone_052/Bone_053
+        weight: 1
+      - path: swampArmature/Bone_054
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056/Bone_057
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056/Bone_057/Bone_058
+        weight: 1
+      - path: swampArmature/Bone_054/Bone_055/Bone_056/Bone_057/Bone_058/Bone_059
+        weight: 1
+      - path: swampArmature/Bone_060
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066/Bone_067
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066/Bone_067/Bone_068
+        weight: 1
+      - path: swampArmature/Bone_060/Bone_061/Bone_062/Bone_063/Bone_064/Bone_065/Bone_066/Bone_067/Bone_068/Bone_069
+        weight: 1
+      - path: swampArmature/Bone_070
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071/Bone_072
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071/Bone_072/Bone_073
+        weight: 1
+      - path: swampArmature/Bone_070/Bone_071/Bone_072/Bone_073/Bone_074
+        weight: 1
+      - path: swampArmature/Bone_075
+        weight: 1
+      - path: swampArmature/Bone_076
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077/Bone_078
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077/Bone_078/Bone_079
+        weight: 1
+      - path: swampArmature/Bone_076/Bone_077/Bone_078/Bone_079/Bone_080
+        weight: 1
+      - path: swampArmature/Bone_081
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

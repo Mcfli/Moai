@@ -18,16 +18,9 @@ public class TreeScript : MonoBehaviour {
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
-    public Vector3 collisionCenterMin;
-    public Vector3 collisionCenterMax;
-    public Vector3 collisionSizeMin;
-    public Vector3 collisionSizeMax;
-    public List<AnimationCurve> heightVSTime;
-    public Vector3 boundsCenterMin;
-    public Vector3 boundsCenterMax;
-    public Vector3 boundsSizeMin;
-    public Vector3 boundsSizeMax;
-    public List<AnimationCurve> boundsVSTime;
+    public char heightAxis;
+    public Vector2 collisionRadiusMinMax;
+    public List<AnimationCurve> collisionVSTime;
 
     //dirtMound
     public GameObject dirtMound;
@@ -41,9 +34,10 @@ public class TreeScript : MonoBehaviour {
     
     //References
     private Animation anim;
-    private BoxCollider boxCollider;
+    private CapsuleCollider capCollider;
     private SkinnedMeshRenderer rend;
     private bool animateNext;
+    private bool updateBoxes;
 
     //animation, collision, states
     private float ratioTotal;
@@ -58,7 +52,7 @@ public class TreeScript : MonoBehaviour {
     void Awake(){
         // references
         anim = GetComponent<Animation>();
-        boxCollider = GetComponent<BoxCollider>();
+        capCollider = GetComponent<CapsuleCollider>();
         rend = GetComponent<SkinnedMeshRenderer>();
 
         prefab = Resources.Load(prefabPath) as GameObject;
@@ -69,6 +63,7 @@ public class TreeScript : MonoBehaviour {
         lifeSpan = baseLifeSpan + Random.Range(-lifeSpanVariance, lifeSpanVariance) * baseLifeSpan;
         state = 0;
         animateNext = true;
+        updateBoxes = false;
 
         ratioTotal = 0;
         stateMarks = new List<float> { 0 };
@@ -91,10 +86,10 @@ public class TreeScript : MonoBehaviour {
         grow();
     }
 
-    void OnDestroy()
-    {
-        if(forestParent.containsTree(GetInstanceID()))
-            forestParent.removeTree(GetInstanceID());
+    void OnDestroy(){
+        if(forestParent)
+            if(forestParent.containsTree(GetInstanceID()))
+                forestParent.removeTree(GetInstanceID());
     }
 
     // Update is called once per frame
@@ -109,9 +104,16 @@ public class TreeScript : MonoBehaviour {
 
         if (Globals.time > lastGrowUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) grow();
 
+        if(updateBoxes) {
+            updateCollision();
+            updateBounds();
+            updateBoxes = false;
+        }
+
         if (animateNext && rend.isVisible){
             anim.enabled = true;
             animateNext = false;
+            updateBoxes = true;
         }else anim.enabled = false;
     }
 
@@ -119,8 +121,6 @@ public class TreeScript : MonoBehaviour {
         if(dirtMound) dirtMound.SetActive(age/lifeSpan < dirtMoundLifeRatio);
         updateState();
         updateAnimation();
-        updateCollision();
-        updateBounds();
         lastGrowUpdate = Globals.time;
         animateNext = true;
     }
@@ -184,16 +184,26 @@ public class TreeScript : MonoBehaviour {
     }
 
     private void updateCollision() {
-        float ratio = heightVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
-        boxCollider.center = Vector3.Lerp(collisionCenterMin, collisionCenterMax, ratio);
-        boxCollider.size = Vector3.Lerp(collisionSizeMin, collisionSizeMax, ratio);
-        //boxCollider.size = baseCollision + scaledCollision * size; // new Vector3(0.4f + 0.6f * size, maxHeight * size + 0.1f, 0.4f + 0.6f * size);
-        //boxCollider.center = new Vector3(0, boxCollider.size.y * 0.5f, 0);
+        capCollider.center = new Vector3(capCollider.center.x, (rend.rootBone.position.y - transform.position.y) / 2 / transform.localScale.y, capCollider.center.z);
+        capCollider.height = (rend.rootBone.position.y - transform.position.y) / transform.localScale.y;
+        capCollider.radius = Mathf.Lerp(collisionRadiusMinMax.x, collisionRadiusMinMax.y, collisionVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]));
     }
 
     private void updateBounds() {
-        float ratio = boundsVSTime[state].Evaluate((age / lifeSpan - stateMarks[state]) / stateRatios[state]);
-        rend.localBounds = new Bounds(Vector3.Lerp(boundsCenterMin, boundsCenterMax, ratio), Vector3.Lerp(boundsSizeMin, boundsSizeMax, ratio) * 2);
+        Vector3 center = rend.localBounds.center;
+        Vector3 size = rend.localBounds.size;
+        float height = (rend.rootBone.position.y - transform.position.y) / rend.rootBone.lossyScale.y;
+        if(heightAxis == 'x' || heightAxis == 'X') {
+            center.x = height / 2;
+            size.x = height;
+        } else if(heightAxis == 'z' || heightAxis == 'Z') {
+            center.z = height / 2;
+            size.z = height;
+        } else {
+            center.y = height / 2;
+            size.y = height;
+        }
+        rend.localBounds = new Bounds(center, size);
     }
 
     public struct treeStruct {

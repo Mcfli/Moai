@@ -260,6 +260,7 @@ ModelImporter:
     100504: Empty
     100506: NurbsPath_004
     100508: //RootNode
+    100510: Bone_251
     400000: Armature_034
     400002: Bone
     400004: Bone_001
@@ -515,6 +516,7 @@ ModelImporter:
     400504: Empty
     400506: NurbsPath_004
     400508: //RootNode
+    400510: Bone_251
     4300000: NurbsPath_004
     7400000: Default Take
     7400002: redwood_dying
@@ -523,7 +525,7 @@ ModelImporter:
     11100000: //RootNode
     13700000: NurbsPath_004
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

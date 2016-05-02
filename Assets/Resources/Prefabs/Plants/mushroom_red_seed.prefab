@@ -30,8 +30,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149340}
   m_LocalRotation: {x: -0.000000059604645, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -45,7 +45,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 067a9eabcad5b0b4bacdf86ddf61ce0b, type: 2}
+  - {fileID: 2100000, guid: 2d4d3a175be9b0d4dbc6c143794ef3d2, type: 2}
   - {fileID: 2100000, guid: 7499b1d0f0eb71a41b0ba43c6469996b, type: 2}
   - {fileID: 2100000, guid: 473cb8a2fdc9ca947a3b4d3e25e95a1d, type: 2}
   m_SubsetIndices: 
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeID: mushroom_red_seed
-  spawn_object: {fileID: 145976, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  spawn_object: {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
@@ -266,7 +266,7 @@ MonoBehaviour:
   growTimeVariance: 0.5
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 4294955977
+    m_Bits: 4294957001
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
@@ -281,7 +281,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
