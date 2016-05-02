@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InteractableObject: MonoBehaviour{
     public static float droppedObjectLifeLength = 300;
@@ -23,7 +24,7 @@ public class InteractableObject: MonoBehaviour{
     private float timeRemain;        // how long until next check
     private bool planted;
     private bool playerPlanted;
-    private bool wasHeld;
+    private bool held;
     private int attempts;
 
     public AudioClip PickUp;
@@ -50,31 +51,22 @@ public class InteractableObject: MonoBehaviour{
     // Use this for initialization
     void Start(){
         timeRemain = droppedObjectLifeLength;
-        wasHeld = false;
+        held = isHeld();
         isHolding = GetComponent<AudioSource>();
         goodLocation = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update() {
-        if(!isHeld()) timeRemain -= Globals.deltaTime / Globals.time_resolution;
+        if(!held) timeRemain -= Globals.deltaTime / Globals.time_resolution;
 
-        if (isHeld()) { //held
-            wasHeld = true;
+        if (held) { //held
             attempts = 0;
             timeRemain = Mathf.Infinity;
             playerPlanted = true;
         } else if (planted) { //planted
-            //if(wasHeld) wasHeld = false; //just planted
-            wasHeld = false;
             if(timeRemain < 0 && spawn_object) tryToTurnIntoTree();
         } else { //dropped
-            if (wasHeld) { //just dropped
-                timeRemain = droppedObjectLifeLength;
-                warpToGround(thisCollider.bounds.extents.y * 2, transform.position + Vector3.up * thisCollider.bounds.extents.y * 2, thisCollider.bounds.extents.y * 2);
-            }
-            wasHeld = false;
-
             // if fast forwarding, warp to ground
             if(Globals.time_scale > 1) {
                 warpToGround(0, transform.position, Mathf.Infinity);
@@ -86,7 +78,7 @@ public class InteractableObject: MonoBehaviour{
     }
 
     void OnCollisionEnter(Collision collision) {
-        if(!planted && !isHeld() && collision.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")) plant(collision.contacts[0].point);
+        if(!planted && !held && collision.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")) plant(collision.contacts[0].point);
     }
 
     private void tryToTurnIntoTree() {
@@ -146,6 +138,16 @@ public class InteractableObject: MonoBehaviour{
         { 
             isHolding.PlayOneShot(PickUp, .2f);
         }
+        held = true;
+
+        Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
+        if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) DoodadManager.loaded_doodads[coordinates].Remove(gameObject);
+    }
+
+    public void dropped() {
+        timeRemain = droppedObjectLifeLength;
+        warpToGround(thisCollider.bounds.extents.y * 2, transform.position + Vector3.up * thisCollider.bounds.extents.y * 2, thisCollider.bounds.extents.y * 2);
+        held = false;
     }
 
     public bool plant(Vector3 place) {
@@ -158,6 +160,9 @@ public class InteractableObject: MonoBehaviour{
         timeRemain = growTime;
         if(!playerPlanted) timeRemain *= Random.Range(1 - growTimeVariance, 1 + growTimeVariance);
         planted = true;
+        Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
+        if(!DoodadManager.loaded_doodads.ContainsKey(coordinates)) DoodadManager.loaded_doodads[coordinates] = new List<GameObject>();
+        DoodadManager.loaded_doodads[coordinates].Add(gameObject);
         return true;
     }
 

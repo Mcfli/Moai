@@ -222,6 +222,7 @@ public class Player : MonoBehaviour {
             Physics.IgnoreCollision(objCollider, thisCollider, false);
         }
         heldObj.transform.localScale = heldObjOrigScale;
+        heldObj.dropped();
         heldObj = null;
         return true;
     }
