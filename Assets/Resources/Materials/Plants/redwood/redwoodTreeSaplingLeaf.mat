@@ -135,6 +135,10 @@ Material:
         first:
           name: _Animate
         second: 1
+      data:
+        first:
+          name: _ShadowIntensity
+        second: 0.6
     m_Colors:
       data:
         first:
@@ -143,7 +147,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.3354, g: 0.8388, b: 0.4789, a: 1}
+        second: {r: 0.18431373, g: 0.49019608, b: 0.09019608, a: 1}
       data:
         first:
           name: _RandomSeed
