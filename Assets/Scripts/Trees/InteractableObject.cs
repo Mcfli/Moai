@@ -154,6 +154,7 @@ public class InteractableObject: MonoBehaviour{
         if (planted) return false;
         if (Globals.PlayerScript.getHeldObj() == this) Globals.PlayerScript.DropObject();
         transform.position = place;
+        if(!thisRigidbody) thisRigidbody = GetComponent<Rigidbody>();
         thisRigidbody.isKinematic = true;
         if(dirtMound) dirtMound.SetActive(true);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);

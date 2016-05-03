@@ -155,7 +155,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     private void updateState(){
-        if (age / lifeSpan >= stateMarks[state + 1] / ratioTotal || age / lifeSpan < stateMarks[state] / ratioTotal){
+        if (age / lifeSpan > stateMarks[state + 1] / ratioTotal || age / lifeSpan <= stateMarks[state] / ratioTotal || !GetComponent<PuzzleObject>()){
             for (int i = 0; i < stateMarks.Count - 1; i++){
                 if (age / lifeSpan < (stateMarks[i + 1]) / ratioTotal){
                     state = i;

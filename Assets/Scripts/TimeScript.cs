@@ -25,6 +25,8 @@ public class TimeScript : MonoBehaviour {
             else Globals.time_scale = maxWaitSpeed;
             if(Input.GetButton("Sprint")) waitingFor += Time.deltaTime * sprintWaitMultiplier;
             else waitingFor += Time.deltaTime;
+        } else if(Globals.paused) {
+            Globals.time_scale = 0;
         } else {
             Globals.time_scale = 1;
             waitingFor = 0;
