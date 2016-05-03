@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 490886}
   - 33: {fileID: 3338098}
   - 23: {fileID: 2319818}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: bushesA
   m_TagString: Untagged
   m_Icon: {fileID: 0}

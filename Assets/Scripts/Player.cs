@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 
     public AudioClip SpeedUpSFX;
     AudioSource playerAudio;
+    [HideInInspector] public AudioSource pickupDropAudio;
 
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
     private GameObject playerModel;
@@ -39,6 +40,9 @@ public class Player : MonoBehaviour {
         mainCamera = Camera.main;
         playerCamPos = mainCamera.transform.localPosition;
         playerCamRot = mainCamera.transform.localRotation;
+        pickupDropAudio = mainCamera.gameObject.AddComponent<AudioSource>();
+        pickupDropAudio.playOnAwake = false;
+        pickupDropAudio.volume = 0.25f;
     }
 
     // Use this for initialization
@@ -223,6 +227,10 @@ public class Player : MonoBehaviour {
         }
         heldObj.transform.localScale = heldObjOrigScale;
         heldObj.dropped();
+        if(!objRigidbody) {
+            heldObj.transform.position = mainCamera.transform.position + mainCamera.transform.forward * 1;
+            objRigidbody.velocity = mainCamera.transform.forward * 1;
+        }
         heldObj = null;
         return true;
     }

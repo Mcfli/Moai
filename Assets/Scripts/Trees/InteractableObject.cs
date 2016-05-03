@@ -28,9 +28,8 @@ public class InteractableObject: MonoBehaviour{
     private int attempts;
 
     public AudioClip PickUp;
-    AudioSource isHolding;
     public AudioClip CorrectSpot;
-    AudioSource goodLocation;
+    private AudioSource pickupDropAudio;
 
     void Awake() {
         thisRigidbody = GetComponent<Rigidbody>();
@@ -52,8 +51,7 @@ public class InteractableObject: MonoBehaviour{
     void Start(){
         timeRemain = droppedObjectLifeLength;
         held = isHeld();
-        isHolding = GetComponent<AudioSource>();
-        goodLocation = GetComponent<AudioSource>();
+        pickupDropAudio = Globals.PlayerScript.pickupDropAudio;
     }
 
     // Update is called once per frame
@@ -108,11 +106,6 @@ public class InteractableObject: MonoBehaviour{
             transform.position = new Vector3(transform.position.x, hit.point.y + amountAboveGround, transform.position.z);
             thisRigidbody.velocity = Vector3.zero;
             thisRigidbody.ResetInertiaTensor();
-
-            if(!goodLocation.isPlaying)
-            {
-                goodLocation.PlayOneShot(CorrectSpot, .2F);
-            }
         }
     }
     
@@ -128,16 +121,19 @@ public class InteractableObject: MonoBehaviour{
 
     public bool tryUse(RaycastHit r) {
         if (r.collider == null) return false;
-        if (r.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")) return plant(r.point);
+        if (r.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")) {
+            if(plant(r.point)) {
+                pickupDropAudio.PlayOneShot(CorrectSpot, .2F);
+                return true;
+            } else return false;
+        }
+
         return false;
     }
 
     public void pickedUp() {
         unplant();
-        if (!isHolding.isPlaying)
-        { 
-            isHolding.PlayOneShot(PickUp, .2f);
-        }
+        pickupDropAudio.PlayOneShot(PickUp, .2f);
         held = true;
 
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
@@ -146,7 +142,7 @@ public class InteractableObject: MonoBehaviour{
 
     public void dropped() {
         timeRemain = droppedObjectLifeLength;
-        warpToGround(thisCollider.bounds.extents.y * 2, transform.position + Vector3.up * thisCollider.bounds.extents.y * 2, thisCollider.bounds.extents.y * 2);
+        if(thisRigidbody) if(!thisRigidbody.isKinematic) warpToGround(thisCollider.bounds.extents.y * 2, transform.position + Vector3.up * thisCollider.bounds.extents.y * 2, thisCollider.bounds.extents.y * 2);
         held = false;
     }
 
