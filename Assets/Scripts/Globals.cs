@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Globals : MonoBehaviour {
     public static float time = 0.0f; //incremented by TimeScript
     public static float time_scale = 1.0f;
 	public static float time_resolution = Mathf.Pow(10, -20.0f);
     public static float deltaTime;
-    public static bool paused;
+    public static int mode = -1; // -1 main menu, 0 playing, 1 paused
 
     public static float timeOfDay = 0;
     //incremeted by Sky
@@ -29,6 +30,7 @@ public class Globals : MonoBehaviour {
     public static TreeManager TreeManagerScript = WorldGen.GetComponent<TreeManager>();
     public static WaterManager WaterManagerScript = WorldGen.GetComponent<WaterManager>();
     public static Seed SeedScript = WorldGen.GetComponent<Seed>();
+    public static Menus MenusScript = GameObject.Find("UI").GetComponent<Menus>();
 
     //Biome Elements
     public static Vector2 WaterFireEarthAirOrigin = new Vector2(0.5f, 0.5f);
@@ -36,6 +38,25 @@ public class Globals : MonoBehaviour {
     public static float WaterFireEarthAirMin = 0.5f;
     public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                                 // FindObjectsOfType added to a shrine
+
+    public static Dictionary<string, int> settings = new Dictionary<string, int>(){
+        { "Crosshair", 1 },     // bool
+        { "FOV", 90 },          // bool
+        { "WaitCine", 1},       // bool
+        { "Bobbing", 1 },       // bool
+
+        { "Resolution", 0 },    // int (index of Screen.resolutions)
+        { "Screenmode", 0 },    // 0 full, 1 windowed, 2 borderless
+        { "LoadDist", 8 },      // int
+        { "Brightness", 50 },   // percent 0-100
+            
+        { "InvertMouse", 0 },   // bool
+        { "Sensitivity", 100 }, // percent 1-200
+
+        { "Master", 100 },      // percent 0-100
+        { "Music", 75 },        // percent 0-100
+        { "SFX", 100 },         // percent 0-100
+    };
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component{
         System.Type type = source.GetType();

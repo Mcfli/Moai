@@ -66,9 +66,7 @@ public class GenerationManager : MonoBehaviour {
     }
 
     void Start() {
-        initiateChunks(Globals.cur_chunk);
-        doneLoading = loadUnload(Globals.cur_chunk);
-      
+        if(Globals.mode > -1) initiateWorld();
     }
 	
 	// Update is called once per frame
@@ -79,7 +77,7 @@ public class GenerationManager : MonoBehaviour {
             Globals.cur_chunk = current_chunk;
             doneLoading = false;
         }
-        if(!doneLoading) doneLoading = loadUnload(Globals.cur_chunk);
+        if(!doneLoading && Globals.mode > -1) doneLoading = loadUnload(Globals.cur_chunk);
     }
 
     // Merges the biome at pos with other_biome
@@ -95,6 +93,11 @@ public class GenerationManager : MonoBehaviour {
         loadTrees();
     }
     */
+
+    public void initiateWorld() {
+        initiateChunks(Globals.cur_chunk);
+        doneLoading = loadUnload(Globals.cur_chunk);
+    }
 
     // Changes the WaterFire/EarthAir values at chunk by WaterFire:delta.x,EarthAir:delta.y
     public void modifyChunk(Vector3 pos, Vector2 delta)
@@ -332,6 +335,24 @@ public class GenerationManager : MonoBehaviour {
             chunkGen.refresh(chunk.Value);
             chunkGen.colorChunk(chunk.Value, chunk_size);
         }
+    }
+
+    public void generateChunk(Vector2 coordinates, bool detailed) {
+        //if(!loadDoodads(position)) done = false;
+        Biome curBiome = chooseBiome(coordinates);
+        createChunk(coordinates);
+        if(detailed) {
+            ChunkMeshes cm = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
+            cm.mf.mesh = cm.highMesh;
+            detailed_chunks.Add(coordinates, cm);
+        }
+        tree_manager.loadTrees(coordinates, curBiome);
+        shrine_manager.loadShrines(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
+        loaded_shrine_chunks.Add(coordinates);
+        shrine_manager.loadShrines(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
+        loaded_shrine_chunks.Add(coordinates);
+        doodad_manager.loadDoodads(coordinates, curBiome);
+        loaded_doodad_chunks.Add(coordinates);
     }
 
     //---------- HELPER FUNCTIONS ----------//

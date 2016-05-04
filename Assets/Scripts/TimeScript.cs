@@ -20,16 +20,19 @@ public class TimeScript : MonoBehaviour {
         currentTimeReadOnly = Globals.time / Globals.time_resolution;
         currentTimeScaleReadOnly = Globals.time_scale;
 
-        if(Input.GetButton("Patience") && !Globals.paused) { //PATIENCE IS POWER
+        if(Input.GetButton("Patience") && Globals.mode == 0) { //PATIENCE IS POWER
             if(waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);
             else Globals.time_scale = maxWaitSpeed;
             if(Input.GetButton("Sprint")) waitingFor += Time.deltaTime * sprintWaitMultiplier;
             else waitingFor += Time.deltaTime;
-        } else if(Globals.paused) {
-            Globals.time_scale = 0;
         } else {
             Globals.time_scale = 1;
             waitingFor = 0;
         }
+
+        if(Globals.mode == 1) { //paused
+            Time.timeScale = 0;
+            Globals.time_scale = 0;
+        } else Time.timeScale = 1;
     }
 }
