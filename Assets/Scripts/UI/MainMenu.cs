@@ -36,11 +36,12 @@ public class MainMenu : MonoBehaviour {
     }
 
     void Update() {
-        if(Globals.mode == -1) {
-            Camera.main.transform.position = cameraPosition;
-            Camera.main.transform.eulerAngles = cameraRotation;
-            firstPersonCont.lookLock = true;
-            firstPersonCont.getMouseLook().SetCursorLock(false);
-        }
+        if(Globals.mode != -1) return;
+
+        Camera.main.transform.position = cameraPosition;
+        Camera.main.transform.eulerAngles = cameraRotation;
+        firstPersonCont.lookLock = true;
+        firstPersonCont.getMouseLook().SetCursorLock(false);
+        
     }
 }

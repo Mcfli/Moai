@@ -34,6 +34,11 @@ public class Menus : MonoBehaviour {
         for(int i = 0; i < menuScreens.Count; i++) if(menu == menuScreens[i]) m = i;
         switchTo(m);
     }
+
+    public void switchToInitial() {
+        if(Globals.mode == -1) switchTo(mainMenu);
+        else switchTo(pauseMenu);
+    }
     
     private void adjustScreen(int menuNum) {
         menuScreens[menuNum].GetComponent<RectTransform>().anchoredPosition = new Vector2(menuPositions[menuNum].x * Screen.width, menuPositions[menuNum].y * Screen.height) / 2;
