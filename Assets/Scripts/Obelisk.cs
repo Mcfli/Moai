@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Obelisk : MonoBehaviour {
 
@@ -37,6 +38,13 @@ public class Obelisk : MonoBehaviour {
     // A dictionary of element name : count that is required to activate the obelisk
     private Dictionary<string, int> requirements;
 
+	// Screen Fader
+	private FadeInOut fader;
+
+	private Vector3 telePos;
+
+	private bool fromObelisk = false;
+
 	// Use this for initialization
 	void Start () {
         requirements = new Dictionary<string, int>();
@@ -44,11 +52,37 @@ public class Obelisk : MonoBehaviour {
         renderer = GetComponentInChildren<Renderer>();
         initMaterials();
         createIsland();
+		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();
+		telePos = islandInstance.GetComponentInChildren<TeleportStone> ().gameObject.transform.position;
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(fromObelisk)
+		{
+			if (fader.fadingWhite) 
+			{
+				fader.fadeToWhite ();
+			}
+			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
+			{
+				fader.fadeImage.color = Color.white;
+				Globals.Player.transform.position = telePos + new Vector3(-10,0,-10);
+				fader.fadingClear = true;
+				fader.fadingWhite = false;
+			} 
+			else if(fader.fadingClear)
+			{
+				fader.fadeToClear ();
+				if(fader.fadeImage.color.a <= 0.05f)
+				{
+					fader.fadeImage.color = Color.clear;
+					fader.fadingClear = false;
+					fromObelisk = false;
+				}
+			}	
+		}
+
 	}
 
     void OnMouseOver()
@@ -80,8 +114,8 @@ public class Obelisk : MonoBehaviour {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
         if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0)
         {
-            Vector3 pos = islandInstance.GetComponentInChildren<TeleportStone>().gameObject.transform.position;
-            Globals.Player.transform.position = pos + new Vector3(-10, 0, -10);
+			fader.fadingWhite = true;
+			fromObelisk = true;
         }
     }
 
