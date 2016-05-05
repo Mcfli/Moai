@@ -108,7 +108,7 @@ public class Mural : MonoBehaviour {
 
         // Generate Air mural
         index = 0;
-        foreach (PuzzleObject po in targetStateWater)
+        foreach (PuzzleObject po in targetStateAir)
         {
             if (index == 0)      tempMats[16] = po.image;
             else if (index == 1) tempMats[18] = po.image;
@@ -123,7 +123,7 @@ public class Mural : MonoBehaviour {
 
         // Generate Earth mural
         index = 0;
-        foreach (PuzzleObject po in targetStateWater)
+        foreach (PuzzleObject po in targetStateEarth)
         {
             if (index == 0)      tempMats[1] = po.image;
             else if (index == 1) tempMats[0] = po.image;

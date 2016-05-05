@@ -20,6 +20,11 @@ public class ShrineGrid : MonoBehaviour
     public GameObject completeGlow;
     public GameObject incompleteGlow;
 
+    public GameObject fireStar;
+    public GameObject waterStar;
+    public GameObject earthStar;
+    public GameObject airStar;
+
     // The element that the shrine will check curState against targetState... for
     private string curElement;
 
@@ -28,8 +33,6 @@ public class ShrineGrid : MonoBehaviour
     private List<PuzzleObject> targetStateWater;
     private List<PuzzleObject> targetStateEarth;
     private List<PuzzleObject> targetStateAir;
-
-    
 
     public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
@@ -238,7 +241,7 @@ public class ShrineGrid : MonoBehaviour
         isDone = done;
         if(isDone)
             complete(curElement);
-        
+        mural.genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
         mural.glowPuzzleObjects(completed, targetState, curElement);
     }
 
@@ -362,7 +365,24 @@ public class ShrineGrid : MonoBehaviour
         // Change the chunk
         GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
-        GameObject.Find("Sky").GetComponent<Sky>().addStar();
+        GameObject star;
+        Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
+        if (element.Equals("fire")){
+            star = Instantiate(fireStar, target, Quaternion.identity) as GameObject;
+        }
+        else if (element.Equals("water"))
+        {
+            star = Instantiate(waterStar, target, Quaternion.identity) as GameObject;
+        }
+        else if (element.Equals("earth"))
+        {
+            star = Instantiate(earthStar, target, Quaternion.identity) as GameObject;
+        }
+        else if (element.Equals("air"))
+        {
+            star = Instantiate(airStar, target, Quaternion.identity) as GameObject;
+        }
+
         // Update puzzle complexity
         Globals.WaterFireEarthAirVector += WaterFireEarthAirChange;
     }
