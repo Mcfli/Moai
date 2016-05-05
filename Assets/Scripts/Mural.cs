@@ -156,10 +156,10 @@ public class Mural : MonoBehaviour {
                 if (index == 0) tempMats[34]      = objectDone ? po.imageGlowing:po.image;
                 else if (index == 1) tempMats[35] = objectDone ? po.imageGlowing : po.image;
                 else if (index == 2) tempMats[33] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 3) tempMats[32] = objectDone ? po.imageGlowing:po.image;
-                else if (index == 4) tempMats[36] = objectDone ? po.imageGlowing:po.image;
-                else if (index == 5) tempMats[29] = objectDone ? po.imageGlowing:po.image;
-                else if (index == 6) tempMats[30] = objectDone ? po.imageGlowing:po.image;
+                else if (index == 3) tempMats[32] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[36] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[29] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[30] = objectDone ? po.imageGlowing : po.image;
                 else tempMats[28]                 = objectDone ? po.imageGlowing : po.image;
                 index++;
             }
@@ -185,7 +185,7 @@ public class Mural : MonoBehaviour {
         }
 
         // Update air side
-        if (element.Equals("air"))
+        else if (element.Equals("air"))
         {
             bool objectDone = (completed.ContainsKey(index) && completed[index]);
             foreach (PuzzleObject po in targetState)
@@ -203,7 +203,7 @@ public class Mural : MonoBehaviour {
         }
 
         // Update earth side
-        if (element.Equals("earth"))
+        else if (element.Equals("earth"))
         {
             bool objectDone = (completed.ContainsKey(index) && completed[index]);
             foreach (PuzzleObject po in targetState)
