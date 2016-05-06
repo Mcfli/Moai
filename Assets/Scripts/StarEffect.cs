@@ -21,8 +21,8 @@ public class StarEffect : MonoBehaviour {
 
     public void setTarget(Vector3 tar)
     {
-        step = speed * Vector3.Normalize(transform.position - target);
         target = tar;
+        step = speed * Vector3.Normalize(target - transform.position);
         isTargetSet = true;
     }
 

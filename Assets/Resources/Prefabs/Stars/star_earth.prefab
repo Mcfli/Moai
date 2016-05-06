@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7accf832ff357a0418d2fc2547604f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 10
   explosionPrefab: {fileID: 0}
   beamPrefab: {fileID: 113870, guid: b97b9ad5be903490d9c109751d31ea0f, type: 2}
   element: earth
