@@ -371,20 +371,21 @@ public class ShrineGrid : MonoBehaviour
         GameObject star;
         Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
         if (element.Equals("fire")){
-            star = Instantiate(fireStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
         }
         else if (element.Equals("water"))
         {
-            star = Instantiate(waterStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
         }
         else if (element.Equals("earth"))
         {
-            star = Instantiate(earthStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
         }
-        else if (element.Equals("air"))
+        else 
         {
-            star = Instantiate(airStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
         }
+        star.GetComponent<StarEffect>().setTarget(target);
 
         // Update puzzle complexity
         Globals.WaterFireEarthAirVector += WaterFireEarthAirChange;

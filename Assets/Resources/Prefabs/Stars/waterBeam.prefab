@@ -36,7 +36,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198212}
   serializedVersion: 2
-  lengthInSec: 1
+  lengthInSec: 6
   startDelay:
     scalar: 0
     maxCurve:
@@ -388,7 +388,7 @@ ParticleSystem:
       minMaxState: 0
     randomizeRotationDirection: 0
     gravityModifier: 0
-    maxNumParticles: 4000
+    maxNumParticles: 5000
     rotation3D: 0
   ShapeModule:
     serializedVersion: 2
@@ -415,7 +415,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 1000
+      scalar: 2000
       maxCurve:
         serializedVersion: 2
         m_Curve:

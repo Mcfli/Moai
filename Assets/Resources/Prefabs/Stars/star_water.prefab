@@ -76,8 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   explosionPrefab: {fileID: 0}
-  beamPrefab: {fileID: 0}
-  element: 
+  beamPrefab: {fileID: 198212, guid: 4b258684795234210a36ba02a6dfd0a8, type: 2}
+  element: water
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

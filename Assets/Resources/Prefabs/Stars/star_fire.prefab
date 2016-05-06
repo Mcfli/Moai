@@ -76,8 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   explosionPrefab: {fileID: 0}
-  beamPrefab: {fileID: 0}
-  element: 
+  beamPrefab: {fileID: 103542, guid: 981d01434da724f28a3aba8bafe027b0, type: 2}
+  element: fire
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

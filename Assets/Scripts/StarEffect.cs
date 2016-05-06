@@ -21,7 +21,7 @@ public class StarEffect : MonoBehaviour {
 
     public void setTarget(Vector3 tar)
     {
-        step = speed * Vector3.Normalize(target - transform.position);
+        step = speed * Vector3.Normalize(transform.position - target);
         target = tar;
         isTargetSet = true;
     }
@@ -69,8 +69,8 @@ public class StarEffect : MonoBehaviour {
     }
 
 	private void cullParticles(){
-		if (!beam.GetComponent<ParticleSystem> ().isPlaying &&
-			!explosion.GetComponent<ParticleSystem> ().isPlaying) {
+		if ((beam!=null&&!beam.GetComponent<ParticleSystem>().isPlaying) ||
+			(explosion!= null && !explosion.GetComponent<ParticleSystem> ().isPlaying)) {
 			if(explosion != null) Destroy (explosion);
 			if(beam != null) Destroy (beam);
 		}
