@@ -11,10 +11,13 @@ public class StarEffect : MonoBehaviour {
     private bool isTargetSet = false;
     private bool isAtTarget = false;
     private bool hasExploded = false;
+	private bool culledParticles = false;
 
     // References
     private GameObject starsParent;
     private Vector3 step;
+	private GameObject explosion;
+	private GameObject beam;
 
     public void setTarget(Vector3 tar)
     {
@@ -27,16 +30,19 @@ public class StarEffect : MonoBehaviour {
 	void Start () {
         starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
 		if(beamPrefab != null)
-			Instantiate (beamPrefab, transform.position, Quaternion.identity);
+			beam = Instantiate (beamPrefab, transform.position, Quaternion.identity) as GameObject;
     }
 	
 	// Update is called once per frame
 	void Update () {
         transform.LookAt(Globals.Player.transform.position);
-        if (isTargetSet && !isAtTarget)
-            move();
-        else if (!hasExploded)
-            explode();
+		if (isTargetSet && !isAtTarget)
+			move ();
+		else if (!hasExploded)
+			explode ();
+		else if (!culledParticles)
+			cullParticles ();
+		
 	}
 
     // Move the star towards its target
@@ -57,6 +63,16 @@ public class StarEffect : MonoBehaviour {
     // Create particle system explosion at origin
     private void explode()
     {
-        if (explosionPrefab != null) Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        if (explosionPrefab != null)
+			explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+		hasExploded = true;
     }
+
+	private void cullParticles(){
+		if (!beam.GetComponent<ParticleSystem> ().isPlaying &&
+			!explosion.GetComponent<ParticleSystem> ().isPlaying) {
+			if(explosion != null) Destroy (explosion);
+			if(beam != null) Destroy (beam);
+		}
+	}
 }
