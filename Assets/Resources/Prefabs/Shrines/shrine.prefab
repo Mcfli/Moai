@@ -517,6 +517,10 @@ MonoBehaviour:
   waterStar: {fileID: 123306, guid: 7db9a44707bc22d4cb89db8bbd6a5c52, type: 2}
   earthStar: {fileID: 160032, guid: 5671e915bb040094487e6393657dc309, type: 2}
   airStar: {fileID: 192418, guid: 6f460d8d50670c0419036b05dcf76182, type: 2}
+  fireBeam: {fileID: 103542, guid: 981d01434da724f28a3aba8bafe027b0, type: 2}
+  waterBeam: {fileID: 198212, guid: 4b258684795234210a36ba02a6dfd0a8, type: 2}
+  earthBeam: {fileID: 113870, guid: b97b9ad5be903490d9c109751d31ea0f, type: 2}
+  airBeam: {fileID: 130744, guid: 46a56c5c0881c4bcf804068c451784a1, type: 2}
   validObjects: []
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}

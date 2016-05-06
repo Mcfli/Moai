@@ -4,6 +4,8 @@ using System.Collections;
 public class StarEffect : MonoBehaviour {
     public float speed = 1;
     public GameObject explosionPrefab;
+	public GameObject beamPrefab;
+	public string element;
 
     private Vector3 target;
     private bool isTargetSet = false;
@@ -24,6 +26,8 @@ public class StarEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
+		if(beamPrefab != null)
+			Instantiate (beamPrefab, transform.position, Quaternion.identity);
     }
 	
 	// Update is called once per frame

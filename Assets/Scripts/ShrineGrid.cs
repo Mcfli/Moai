@@ -24,6 +24,10 @@ public class ShrineGrid : MonoBehaviour
     public GameObject waterStar;
     public GameObject earthStar;
     public GameObject airStar;
+	public GameObject fireBeam;
+	public GameObject waterBeam;
+	public GameObject earthBeam;
+	public GameObject airBeam;
 
     // The element that the shrine will check curState against targetState... for
     private string curElement;
