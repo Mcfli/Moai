@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f316294df247d458da40709882153e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shrine_prefab: {fileID: 106806, guid: 678feba97db6b9044934c154b8891552, type: 2}
+  shrine_prefab: {fileID: 154728, guid: 678feba97db6b9044934c154b8891552, type: 2}
   obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
@@ -1002,6 +1002,8 @@ MonoBehaviour:
   - {fileID: 258801223}
   - {fileID: 258801223}
   - {fileID: 258801223}
+  MenuSound1: {fileID: 0}
+  MenuSound2: {fileID: 0}
 --- !u!114 &397559955
 MonoBehaviour:
   m_ObjectHideFlags: 0
