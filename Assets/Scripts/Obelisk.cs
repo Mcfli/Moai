@@ -30,6 +30,9 @@ public class Obelisk : MonoBehaviour {
     // Control lighting up
     private bool litUp = false;
 
+    // if star currency has been used on it
+    private bool isDone = false;
+
     // References
     private Renderer renderer;
     private GameObject islandInstance;
@@ -45,6 +48,10 @@ public class Obelisk : MonoBehaviour {
 
 	private bool fromObelisk = false;
 
+    public Vector3 saved_position;
+    public Quaternion saved_rotation;
+    public Vector3 saved_scale;
+
 	// Use this for initialization
 	void Start () {
         requirements = new Dictionary<string, int>();
@@ -54,6 +61,7 @@ public class Obelisk : MonoBehaviour {
         createIsland();
 		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();
 		telePos = islandInstance.GetComponentInChildren<TeleportStone> ().gameObject.transform.position;
+        transform.position = snapToTerrain(transform.position);
     }
 	
 	// Update is called once per frame
@@ -138,7 +146,7 @@ public class Obelisk : MonoBehaviour {
     private void createIsland()
     {
         GameObject prefab = possibleIslands[Random.Range(0, possibleIslands.Count)];
-        islandInstance = Instantiate(prefab,transform.position + Vector3.up * islandHeight, Quaternion.Euler(0, Random.Range(0, 360), 0)) as GameObject;
+        islandInstance = Instantiate(prefab,transform.position + Vector3.up * islandHeight, Quaternion.Euler(-90, Random.Range(0, 360), 0)) as GameObject;
         islandInstance.GetComponentInChildren<TeleportStone>().linkedObelisk = gameObject;
     }
 
@@ -299,5 +307,34 @@ public class Obelisk : MonoBehaviour {
         }
         renderer.sharedMaterials = tempMats;
         litUp = false;
+    }
+
+    public void saveTransforms()
+    {
+        saved_position = transform.position;
+        saved_rotation = transform.rotation;
+        saved_scale = transform.localScale;
+    }
+
+    public void copyFrom(Obelisk obelisk)
+    {
+        isDone = obelisk.isDone;
+        saved_position = obelisk.saved_position;
+        saved_rotation = obelisk.saved_rotation;
+        saved_scale = obelisk.saved_scale;
+    }
+
+    private Vector3 snapToTerrain(Vector3 pos)
+    {
+        Vector3 ret = pos;
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(pos.x, 10000000, pos.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+        {
+             ret = new Vector3(pos.x, hit.point.y + 0.1f, pos.z);
+        }
+        return ret;
     }
 }

@@ -384,10 +384,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f316294df247d458da40709882153e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 106806, guid: 678feba97db6b9044934c154b8891552, type: 2}
+  shrine_prefab: {fileID: 106806, guid: 678feba97db6b9044934c154b8891552, type: 2}
+  obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
   shrine_probability: 5
+  obelisk_probability: 20
+  obelist_min_dist: 4
 --- !u!114 &188005519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,7 +3124,7 @@ MonoBehaviour:
   minWarpOnWaitDist: 1
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 4294957001
+    m_Bits: 4294563785
   speedUp: {fileID: 8300000, guid: 5229610a91819164c9ba4f9ec2aa82f4, type: 3}
   cinematicTimeScale: 100
   waitCamDistance: 60

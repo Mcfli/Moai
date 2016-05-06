@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 444752}
   - 33: {fileID: 3353742}
   - 23: {fileID: 2333976}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 111: {fileID: 11110220}
   - 65: {fileID: 6587042}
   - 114: {fileID: 11492128}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Obelisk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightUpDistance: 20
   possibleIslands:
-  - {fileID: 129564, guid: 45fc2aec41bcaca469198a15c1b1c061, type: 2}
+  - {fileID: 145242, guid: 322683f3093238f4b9d6745f6d78bad2, type: 2}
   islandHeight: 1000
   maxTotalReqs: 4
   minTotalReqs: 2
@@ -171,6 +171,9 @@ MonoBehaviour:
   earthIndicatorDull: {fileID: 2100000, guid: 9db34aed4f7ac5c419836186a934de33, type: 2}
   earthIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
   baseMat: {fileID: 2100000, guid: 5d8c1eb0016499d4587f9d6256a7e3a1, type: 2}
+  saved_position: {x: 0, y: 0, z: 0}
+  saved_rotation: {x: 0, y: 0, z: 0, w: 0}
+  saved_scale: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
