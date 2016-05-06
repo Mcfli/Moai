@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: mushroom_red_seed
-  image: {fileID: 2800000, guid: 8974e966d2e954d488107c45e1d08572, type: 3}
+  image: {fileID: 2100000, guid: ff2019c9b8d096f4fabddb618ceff8df, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

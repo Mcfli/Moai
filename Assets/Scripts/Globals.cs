@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Globals : MonoBehaviour {
     public static float time = 0.0f; //incremented by TimeScript
@@ -36,6 +37,8 @@ public class Globals : MonoBehaviour {
     public static float WaterFireEarthAirMin = 0.5f;
     public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                                 // FindObjectsOfType added to a shrine
+
+    public static List<GameObject> elementalStars = new List<GameObject>();
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component{
         System.Type type = source.GetType();

@@ -40,7 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: maple_mature
-  image: {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
+  image: {fileID: 2100000, guid: f4000f86a8693274885d6f596c8eeba3, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 016bd40e3aa41654393b9b218c881d9b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

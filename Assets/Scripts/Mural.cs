@@ -4,102 +4,241 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Mural : MonoBehaviour {
-    public int imageRes;  // Number of pixels per side in 
-    public int numSquares; // Number of cells per side
-    public Color muralColor;
-    public Texture2D shrineTexture;
+    public Material fireIconDull;
+    public Material waterIconDull;
+    public Material earthIconDull;
+    public Material airIconDull;
 
-    Texture2D muralTex;
+    public Material fireIconLit;
+    public Material waterIconLit;
+    public Material earthIconLit;
+    public Material airIconLit;
+
+    //Texture2D muralTex;
+    private Renderer rend;
+
+    /* Shrine mural material mapping
+     * 
+     * Material Name ---- Index
+     * 
+     * shrine ---- 9
+     * 
+     * FireSide ---- 37
+     * EarthSide ---- 38
+     * WaterSide ----- 39
+     * AirSide ---- 40
+     * 
+     * Earth00 ---- 1
+     * Earth01 ---- 0
+     * Earth02 ---- 2
+     * Earth10 ---- 4
+     * Earth12 ---- 3
+     * Earth20 ---- 7
+     * Earth21 ---- 6
+     * Earth22 ---- 8
+     * 
+     * Air00 ---- 16
+     * Air01 ---- 18
+     * Air02 ---- 17
+     * Air10 ---- 15
+     * Air12 ---- 14
+     * Air20 ---- 10
+     * Air21 ---- 12
+     * Air22 ---- 11
+     * 
+     * Water00 ---- 21
+     * Water01 ---- 19
+     * Water02 ---- 20
+     * Water10 ---- 22
+     * Water12 ---- 23
+     * Water20 ---- 27
+     * Water21 ---- 25
+     * Water22 ---- 26
+     * 
+     * Fire00 ---- 34
+     * Fire01 ---- 35
+     * Fire02 ---- 33
+     * Fire10 ---- 32
+     * Fire12 ---- 36
+     * Fire20 ---- 29
+     * Fire21 ---- 30
+     * Fire22 ---- 28
+     * 
+     */
 
 	// Use this for initialization
 	void Start () {
-        muralTex = new Texture2D(imageRes*numSquares,imageRes*numSquares);
+        rend = GetComponent<Renderer>();
         //snapToTerrain();
 	}
 
-    // Generate mural texture based on a target state
-    public void generateTexture(List<PuzzleObject> state)
+    public void genMurals(List<PuzzleObject> targetStateFire, List<PuzzleObject> targetStateWater, List<PuzzleObject> targetStateEarth, List<PuzzleObject> targetStateAir)
     {
-       
-        muralTex = new Texture2D(imageRes * numSquares, imageRes * numSquares,TextureFormat.ARGB32,false);
-        muralTex.name = "Mural Texture";
-        muralTex.filterMode = FilterMode.Point;
-        
-        Color[] newPixels = new Color[imageRes * numSquares * imageRes * numSquares];
-        for(int i = 0; i< newPixels.Length; i++)
+        if(rend == null) rend = GetComponent<Renderer>();
+        Material[] tempMats = rend.sharedMaterials;
+        // Generate Fire mural
+        int index = 0;
+        foreach(PuzzleObject po in targetStateFire)
         {
-            newPixels[i] = muralColor;
+            if (index == 0)      tempMats[34] = po.image;
+            else if (index == 1) tempMats[35] = po.image;
+            else if (index == 2) tempMats[33] = po.image;
+            else if (index == 3) tempMats[32] = po.image;
+            else if (index == 4) tempMats[36] = po.image;
+            else if (index == 5) tempMats[29] = po.image;
+            else if (index == 6) tempMats[30] = po.image;
+            else                 tempMats[28] = po.image;
+            index++;
         }
 
-        Vector2 coordIndex = Vector2.zero;
+        // Generate Water mural
+        index = 0;
+        foreach (PuzzleObject po in targetStateWater)
+        {
+            if (index == 0)      tempMats[21] = po.image;
+            else if (index == 1) tempMats[19] = po.image;
+            else if (index == 2) tempMats[20] = po.image;
+            else if (index == 3) tempMats[22] = po.image;
+            else if (index == 4) tempMats[23] = po.image;
+            else if (index == 5) tempMats[27] = po.image;
+            else if (index == 6) tempMats[25] = po.image;
+            else                 tempMats[26] = po.image;
+            index++;
+        }
 
-        foreach (PuzzleObject obj in state) {
-            Texture2D image = obj.image;
+        // Generate Air mural
+        index = 0;
+        foreach (PuzzleObject po in targetStateAir)
+        {
+            if (index == 0)      tempMats[16] = po.image;
+            else if (index == 1) tempMats[18] = po.image;
+            else if (index == 2) tempMats[17] = po.image;
+            else if (index == 3) tempMats[15] = po.image;
+            else if (index == 4) tempMats[14] = po.image;
+            else if (index == 5) tempMats[10] = po.image;
+            else if (index == 6) tempMats[12] = po.image;
+            else                 tempMats[11] = po.image;
+            index++;
+        }
 
-            Vector2 coord = coordIndex;
-            // The coordinates for texturing are mirrored, so we need to flip the cord values
-            coord.x = (numSquares - 1) - coord.x;
-            coord.y = (numSquares - 1) - coord.y;
+        // Generate Earth mural
+        index = 0;
+        foreach (PuzzleObject po in targetStateEarth)
+        {
+            if (index == 0)      tempMats[1] = po.image;
+            else if (index == 1) tempMats[0] = po.image;
+            else if (index == 2) tempMats[2] = po.image;
+            else if (index == 3) tempMats[4] = po.image;
+            else if (index == 4) tempMats[3] = po.image;
+            else if (index == 5) tempMats[7] = po.image;
+            else if (index == 6) tempMats[6] = po.image;
+            else                 tempMats[8] = po.image;
+            index++;
+        }
 
-            // Calculate where to start adding these pixels to new
-            int offx = (int)coord.x * imageRes;
-            int offy = (int)coord.y * imageRes * imageRes * numSquares;
+        // Assign materials
+        rend.sharedMaterials = tempMats;
+    }
 
-            Color[] pixels = image.GetPixels();
-            // Add image pixels to newPixels
-            for (int i = 0; i < imageRes; i++) {
-                for (int j = 0; j < imageRes; j++) {
-                    Color newColor = new Color();
-                    Color imgColor = pixels[j + i * imageRes];
-                    Color bgColor = newPixels[j + i * numSquares * imageRes + offx + offy];
+    public void glowPuzzleObjects(Dictionary<int,bool> completed,List<PuzzleObject> targetState, string element)
+    {
+        List<GameObject> itemsCounted = new List<GameObject>();
+        int index = 0;
+        if (rend == null) rend = GetComponent<Renderer>();
+        Material[] tempMats = rend.sharedMaterials;
 
-                    newColor.a = 1 - (1 - newColor.a) * (1 - bgColor.a);        // alpha 
-                    newColor.r = imgColor.r * imgColor.a / newColor.a + bgColor.r * bgColor.a * (1 - imgColor.a) / newColor.a; // Red
-                    newColor.g = imgColor.g * imgColor.a / newColor.a + bgColor.g * bgColor.a * (1 - imgColor.a) / newColor.a; // Green
-                    newColor.b = imgColor.b * imgColor.a / newColor.a + bgColor.b * bgColor.a * (1 - imgColor.a) / newColor.a; // Blue
-                    newPixels[j + i * numSquares * imageRes + offx + offy] = newColor;
-                }
-            }
-
-            // Increment picture position
-            coordIndex += Vector2.right;
-            // If too far horizontal, move to nex row
-            if (coordIndex.x > 2)
+        // Update fire side
+        if (element.Equals("fire"))
+        {
+            foreach (PuzzleObject po in targetState)
             {
-                coordIndex.x = 0;
-                coordIndex.y += 1;
-            }
-            // If on center square, move right
-            if(coordIndex.x == 1 && coordIndex.y == 1)
-                coordIndex += Vector2.right;
-        }
-
-        //TEMP SHRINE ICON
-        Vector2 shrineCoord = new Vector2(1,1);
-
-        // Calculate where to start adding these pixels to new
-        int shrineOffx = (int)shrineCoord.x * imageRes;
-        int shrineOffy = (int)shrineCoord.y * imageRes * imageRes * numSquares;
-
-        Color[] shrinePixels = shrineTexture.GetPixels();
-        // Add image pixels to newPixels
-        for (int i = 0; i < imageRes; i++) {
-            for (int j = 0; j < imageRes; j++) {
-                Color newColor = new Color();
-                Color imgColor = shrinePixels[j + i * imageRes];
-                Color bgColor = newPixels[j + i * numSquares * imageRes + shrineOffx + shrineOffy];
-
-                newColor.a = 1 - (1 - newColor.a) * (1 - bgColor.a);        // alpha 
-                newColor.r = imgColor.r * imgColor.a / newColor.a + bgColor.r * bgColor.a * (1 - imgColor.a) / newColor.a; // Red
-                newColor.g = imgColor.g * imgColor.a / newColor.a + bgColor.g * bgColor.a * (1 - imgColor.a) / newColor.a; // Green
-                newColor.b = imgColor.b * imgColor.a / newColor.a + bgColor.b * bgColor.a * (1 - imgColor.a) / newColor.a; // Blue
-                newPixels[j + i * numSquares * imageRes + shrineOffx + shrineOffy] = newColor;
+                bool objectDone = (completed.ContainsKey(index) && completed[index]);
+                if (index == 0) tempMats[34]      = objectDone ? po.imageGlowing:po.image;
+                else if (index == 1) tempMats[35] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[33] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[32] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[36] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[29] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[30] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[28]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
             }
         }
 
-        muralTex.SetPixels(newPixels);
-        muralTex.Apply();
-        gameObject.GetComponent<Renderer>().materials[4].mainTexture = muralTex;
+
+        // Update water side
+        else if (element.Equals("water"))
+        {
+            foreach (PuzzleObject po in targetState)
+            {
+                bool objectDone = (completed.ContainsKey(index) && completed[index]);
+                if (index == 0) tempMats[21]      = objectDone ? po.imageGlowing : po.image;
+                else if (index == 1) tempMats[19] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[20] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[22] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[23] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[27] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[25] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[26]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+        // Update air side
+        else if (element.Equals("air"))
+        {
+            bool objectDone = (completed.ContainsKey(index) && completed[index]);
+            foreach (PuzzleObject po in targetState)
+            {
+                if (index == 0) tempMats[16]      = objectDone ? po.imageGlowing : po.image;
+                else if (index == 1) tempMats[18] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[17] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[15] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[14] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[10] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[12] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[11]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+        // Update earth side
+        else if (element.Equals("earth"))
+        {
+            bool objectDone = (completed.ContainsKey(index) && completed[index]);
+            foreach (PuzzleObject po in targetState)
+            {
+                if (index == 0) tempMats[1]      = objectDone ? po.imageGlowing : po.image;
+                else if (index == 1) tempMats[0] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 2) tempMats[2] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 3) tempMats[4] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 4) tempMats[3] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 5) tempMats[7] = objectDone ? po.imageGlowing : po.image;
+                else if (index == 6) tempMats[6] = objectDone ? po.imageGlowing : po.image;
+                else tempMats[8]                 = objectDone ? po.imageGlowing : po.image;
+                index++;
+            }
+        }
+
+        // Assign materials
+        rend.sharedMaterials = tempMats;
+
+    }
+
+    public void lightIcon(string element)
+    {
+        Material[] tempMats = rend.sharedMaterials;
+        tempMats[37] = fireIconDull;
+        tempMats[38] = earthIconDull;
+        tempMats[39] = waterIconDull;
+        tempMats[40] = airIconDull;
+        if (element.Equals( "fire"))          tempMats[37] = fireIconLit;
+        else if (element.Equals("water"))    tempMats[39] = waterIconLit;
+        else if (element.Equals("earth"))    tempMats[38] = earthIconLit;
+        else if (element.Equals("air"))    tempMats[40] = airIconLit;
+
+        // Assign materials
+        rend.sharedMaterials = tempMats;
     }
 
     private void snapToTerrain()
