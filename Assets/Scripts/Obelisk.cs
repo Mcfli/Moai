@@ -83,7 +83,6 @@ public class Obelisk : MonoBehaviour {
 			else if(fader.fadingClear)
 			{
 				fader.fadeToClear ();
-                Debug.Log(fader.fadeImage.color.a);
 				if(fader.fadeImage.color.a <= 0.05f)
 				{
 					fader.fadeImage.color = Color.clear;
