@@ -159,6 +159,8 @@ MonoBehaviour:
   possibleIslands:
   - {fileID: 128172, guid: b3b9c09acc2fcd9418544e5277743224, type: 2}
   - {fileID: 188550, guid: d49b4d3b26e234946b7ff6a52282d32a, type: 2}
+  - {fileID: 129554, guid: 6a402b5b64419d84497b178aa9558b9d, type: 2}
+  - {fileID: 199530, guid: 71c2aec8f2fafe6428b039c8ec8f8a7c, type: 2}
   islandHeight: 1000
   maxTotalReqs: 4
   minTotalReqs: 2
@@ -176,6 +178,8 @@ MonoBehaviour:
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
   saved_scale: {x: 0, y: 0, z: 0}
+  ObeliskSuccess: {fileID: 0}
+  ObeliskFail: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
