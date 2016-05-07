@@ -10,9 +10,8 @@ GameObject:
   - 4: {fileID: 440230}
   - 33: {fileID: 3387654}
   - 23: {fileID: 2367208}
-  - 95: {fileID: 9523198}
   - 65: {fileID: 6557422}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: doodadmushroomC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150136}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -10.252055, y: 125.91723, z: -12.865762}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,23 +78,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2525558, y: 3.2373257, z: 2.8264477}
   m_Center: {x: 0.0109680295, y: -0.011242512, z: -0.6808216}
---- !u!95 &9523198
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150136}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 71bfa11438f868e4d9fadc1c83d2cc76, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

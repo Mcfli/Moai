@@ -10,9 +10,8 @@ GameObject:
   - 4: {fileID: 406732}
   - 33: {fileID: 3389502}
   - 23: {fileID: 2306444}
-  - 95: {fileID: 9593180}
-  - 65: {fileID: 6572440}
-  m_Layer: 0
+  - 64: {fileID: 6461546}
+  m_Layer: 15
   m_Name: doodadmushroomB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118220}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -28.7, y: 120.099884, z: -6.207682}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,8 +65,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118220}
   m_Mesh: {fileID: 4300000, guid: a1e1205e5ccf2974cb3687aae6417762, type: 3}
---- !u!65 &6572440
-BoxCollider:
+--- !u!64 &6461546
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -76,25 +75,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 17.291164, y: 19.459332, z: 20.806452}
-  m_Center: {x: 0.033683777, y: 0.10418894, z: -2.7765665}
---- !u!95 &9593180
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118220}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a1e1205e5ccf2974cb3687aae6417762, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: a1e1205e5ccf2974cb3687aae6417762, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

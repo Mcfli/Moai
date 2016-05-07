@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400084}
   - 33: {fileID: 3301266}
   - 23: {fileID: 2301890}
-  - 95: {fileID: 9501906}
   - 65: {fileID: 6543018}
   m_Layer: 0
   m_Name: swampgiantLeaf
@@ -26,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185738}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 14.93471, y: 134.04523, z: -19.590317}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,23 +75,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5687834, y: 0.46401894, z: 1.4332238}
   m_Center: {x: 0.08301409, y: -0.017332401, z: 0.53059924}
---- !u!95 &9501906
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185738}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e04746c3a6d280e408ded65f067c5c9f, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
