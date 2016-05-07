@@ -70,6 +70,8 @@ public class Obelisk : MonoBehaviour {
 		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();
 		telePos = islandInstance.GetComponentInChildren<TeleportStone> ().gameObject.transform.position;
         transform.position = snapToTerrain(transform.position);
+        SuccessAudio = GetComponent<AudioSource>();
+        FailAudio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame

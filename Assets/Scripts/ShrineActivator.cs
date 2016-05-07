@@ -14,6 +14,7 @@ public class ShrineActivator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         parentShrine = transform.parent.gameObject.GetComponent<ShrineGrid>();
+        ShrineSuccess = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
