@@ -34,7 +34,6 @@ public class MusicManager : MonoBehaviour
         // If there is no instance of this class, set it.
         if (Instance == null)
         {
-            DontDestroyOnLoad(gameObject); // Don't destroy this object
             Instance = this;
         }
         else

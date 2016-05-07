@@ -1,10 +1,22 @@
 fileFormatVersion: 2
 guid: 17b47a34bdbe94e48872fb285c74cd9e
-timeCreated: 1461953137
+timeCreated: 1462586358
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fireIndicatorDull: {instanceID: 0}
+  - fireIndicatorLit: {instanceID: 0}
+  - airIndicatorDull: {instanceID: 0}
+  - airIndicatorLit: {instanceID: 0}
+  - waterIndicatorDull: {instanceID: 0}
+  - waterIndicatorLit: {instanceID: 0}
+  - earthIndicatorDull: {instanceID: 0}
+  - earthIndicatorLit: {instanceID: 0}
+  - baseMat: {instanceID: 0}
+  - completedMat: {instanceID: 0}
+  - ObeliskSuccess: {fileID: 8300000, guid: b905c87097e6f254ab1c7afcd0161035, type: 3}
+  - ObeliskFail: {fileID: 8300000, guid: ace688ac69c0ee0429c596946b5947e1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

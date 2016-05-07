@@ -53,6 +53,13 @@ public class Obelisk : MonoBehaviour {
     public Quaternion saved_rotation;
     public Vector3 saved_scale;
 
+    //Audio Sources
+
+    public AudioClip ObeliskSuccess;
+    public AudioClip ObeliskFail;
+    AudioSource SuccessAudio;
+    AudioSource FailAudio;
+
 	// Use this for initialization
 	void Start () {
         requirements = new Dictionary<string, int>();
@@ -126,12 +133,17 @@ public class Obelisk : MonoBehaviour {
         {
 			fader.fadingWhite = true;
 			fromObelisk = true;
-            if (!isDone) spendStars();
-            // Success sound
+            if (!isDone)
+            {
+                spendStars();
+                // Success sound
+                SuccessAudio.PlayOneShot(ObeliskSuccess, .5F);
+            }
         }
         else
         {
             // Failure sound
+            FailAudio.PlayOneShot(ObeliskFail, .5F);
         }
     }
 

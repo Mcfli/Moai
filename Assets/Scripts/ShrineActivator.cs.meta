@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 7f118ceb4b1d5b44a822a3a572ef9c35
-timeCreated: 1462055549
+timeCreated: 1462586580
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ShrineCompletion: {fileID: 8300000, guid: cdf0bffc59ce8b147b8dd379e15b7f18, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

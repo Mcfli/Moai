@@ -1748,11 +1748,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0ee2e8931898bee479f8f967a1ae13fa, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -1826,8 +1826,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateOnAwake: 1
   MusicList:
-  - {fileID: 8300000, guid: 0ee2e8931898bee479f8f967a1ae13fa, type: 3}
   - {fileID: 8300000, guid: 5655601b5638dd2408046fd3953ffd2a, type: 3}
+  - {fileID: 8300000, guid: 6df52ec0625c90b4d9949c8e917979d0, type: 3}
+  - {fileID: 8300000, guid: 99cd8176316a47a4d9c8030732a89fe1, type: 3}
+  - {fileID: 8300000, guid: 0ee2e8931898bee479f8f967a1ae13fa, type: 3}
+  - {fileID: 8300000, guid: 8c973c5435a2481429cea0fb0464d4f5, type: 3}
 --- !u!114 &838583286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1996,6 +1999,23 @@ MonoBehaviour:
   m_GlowIntensity: 0.49
   m_BlurOffset: 0.25
   m_Samples: 2
+--- !u!114 &838583290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838583282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005d5190beda2174fbf47063f1725e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 0.4
+  Playlist: {fileID: 838583285}
+  Shuffle: 1
+  Repeat: 0
+  FadeDuration: 1
+  PlayOnAwake: 1
 --- !u!1 &912454540
 GameObject:
   m_ObjectHideFlags: 0
