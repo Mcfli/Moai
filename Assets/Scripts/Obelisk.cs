@@ -86,7 +86,7 @@ public class Obelisk : MonoBehaviour {
 			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
 			{
 				fader.fadeImage.color = Color.white;
-				Globals.Player.transform.position = telePos + new Vector3(-10, 3,-10);
+				Globals.Player.transform.position = telePos + new Vector3(-5, 10,-5);
 				fader.fadingClear = true;
 				fader.fadingWhite = false;
 			} 
