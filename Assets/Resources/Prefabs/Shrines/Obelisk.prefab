@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.28378, y: -8.79, z: -10.685964}
+  m_LocalPosition: {x: 551.8482, y: 115.741646, z: -1256.0409}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 444752}
@@ -70,7 +70,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 17045193a119ccf45a67ea26c86f8013, type: 2}
+  - {fileID: 2100000, guid: 793d5a4713944f540be223ccae1a5a8b, type: 2}
   - {fileID: 2100000, guid: 3a5255d98cb1dad4296968378047f3be, type: 2}
   - {fileID: 2100000, guid: dd83b7915baa7184db61215e5f976d34, type: 2}
   - {fileID: 2100000, guid: 238fc45ece028314db81b4f4dc67bebb, type: 2}
@@ -81,14 +81,14 @@ MeshRenderer:
   - {fileID: 2100000, guid: eec691e262a2ce841b5d6308960c3d6a, type: 2}
   - {fileID: 2100000, guid: fa889189205a30a418777e027ed82957, type: 2}
   - {fileID: 2100000, guid: ef11dd085d30f2c4e9f536465f014650, type: 2}
-  - {fileID: 2100000, guid: d38e3bfadd486a04aa0f8ae2a51723b0, type: 2}
+  - {fileID: 2100000, guid: 45144698612b32e43a0bc9ab28c44510, type: 2}
   - {fileID: 2100000, guid: cc9ca86ac81643447a789a887cc6ffd5, type: 2}
   - {fileID: 2100000, guid: d706638accaf826448b9c483fb6244ca, type: 2}
   - {fileID: 2100000, guid: 684fe92c2dc03e74f979237e370a0acd, type: 2}
   - {fileID: 2100000, guid: cbb54a0574f4b484daf049ec802743c4, type: 2}
   - {fileID: 2100000, guid: 7e9bb9c323135054f9f8f7e19eea172f, type: 2}
-  - {fileID: 2100000, guid: b56e4439fbd0f5d4989ae3b92aacfb06, type: 2}
-  - {fileID: 2100000, guid: 2f19fb6fffde6fd42bdac54d7910b78f, type: 2}
+  - {fileID: 2100000, guid: f3f4e40c6499bf440bf1e1a8c12f1289, type: 2}
+  - {fileID: 2100000, guid: 52d55512597018e48bf0e825c9026443, type: 2}
   - {fileID: 2100000, guid: 1984cff114d6a0a4fb75439f37515698, type: 2}
   - {fileID: 2100000, guid: bfa6289a976e24640b52e2c9e29b8364, type: 2}
   - {fileID: 2100000, guid: 743ce9a5246f9834aab02e10de98939f, type: 2}
@@ -171,6 +171,7 @@ MonoBehaviour:
   earthIndicatorDull: {fileID: 2100000, guid: 9db34aed4f7ac5c419836186a934de33, type: 2}
   earthIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
   baseMat: {fileID: 2100000, guid: 5d8c1eb0016499d4587f9d6256a7e3a1, type: 2}
+  completedMat: {fileID: 0}
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
   saved_scale: {x: 0, y: 0, z: 0}

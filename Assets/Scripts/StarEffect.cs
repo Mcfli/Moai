@@ -6,6 +6,7 @@ public class StarEffect : MonoBehaviour {
     public GameObject explosionPrefab;
 	public GameObject beamPrefab;
 	public string element;
+    public Material spentMat;
 
     private Vector3 target;
     private bool isTargetSet = false;
@@ -21,9 +22,14 @@ public class StarEffect : MonoBehaviour {
 
     public void setTarget(Vector3 tar)
     {
-        step = speed * Vector3.Normalize(target - transform.position);
         target = tar;
+        step = speed * Vector3.Normalize(target - transform.position);
         isTargetSet = true;
+    }
+
+    public void spendStar()
+    {
+        GetComponent<Renderer>().material = spentMat;
     }
 
 	// Use this for initialization
@@ -69,8 +75,8 @@ public class StarEffect : MonoBehaviour {
     }
 
 	private void cullParticles(){
-		if (!beam.GetComponent<ParticleSystem> ().isPlaying &&
-			!explosion.GetComponent<ParticleSystem> ().isPlaying) {
+		if ((beam!=null&&!beam.GetComponent<ParticleSystem>().isPlaying) ||
+			(explosion!= null && !explosion.GetComponent<ParticleSystem> ().isPlaying)) {
 			if(explosion != null) Destroy (explosion);
 			if(beam != null) Destroy (beam);
 		}

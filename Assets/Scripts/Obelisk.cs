@@ -26,6 +26,7 @@ public class Obelisk : MonoBehaviour {
     public Material earthIndicatorDull;
     public Material earthIndicatorLit;
     public Material baseMat;
+    public Material completedMat;
     
     // Control lighting up
     private bool litUp = false;
@@ -117,20 +118,73 @@ public class Obelisk : MonoBehaviour {
         }
     }
 
+    // Sound here
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0)
+        if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && (isDone || areReqsMet()))
         {
 			fader.fadingWhite = true;
 			fromObelisk = true;
+            if (!isDone) spendStars();
+            // Success sound
         }
+        else
+        {
+            // Failure sound
+        }
+    }
+
+    private void spendStars()
+    {
+        // Get rid of air stars
+        for(int i = 0; i < requirements["air"]; i++)
+        {
+            Globals.airStars[0].GetComponent<StarEffect>().spendStar();
+            Globals.airStars.RemoveAt(0);
+        }
+
+        // Get rid of earth stars
+        for (int i = 0; i < requirements["earth"]; i++)
+        {
+            Globals.earthStars[0].GetComponent<StarEffect>().spendStar();
+            Globals.earthStars.RemoveAt(0);
+        }
+
+        // Get rid of fire stars
+        for (int i = 0; i < requirements["fire"]; i++)
+        {
+            Globals.fireStars[0].GetComponent<StarEffect>().spendStar();
+            Globals.fireStars.RemoveAt(0);
+        }
+
+        // Get rid of water stars
+        for (int i = 0; i < requirements["water"]; i++)
+        {
+            Globals.waterStars[0].GetComponent<StarEffect>().spendStar();
+            Globals.waterStars.RemoveAt(0);
+        }
+
+        isDone = true;
+    }
+
+    private bool areReqsMet()
+    {
+        if (Globals.airStars.Count < requirements["air"]) return false;
+        if (Globals.earthStars.Count < requirements["earth"]) return false;
+        if (Globals.fireStars.Count < requirements["fire"]) return false;
+        if (Globals.waterStars.Count < requirements["water"]) return false;
+        return true;
     }
 
     private void generateRequirements()
     {
         int count = Random.Range(minTotalReqs, maxTotalReqs);
-        for(int i = 0;i < count;i ++)
+        requirements["air"] = 0;
+        requirements["earth"] = 0;
+        requirements["fire"] = 0;
+        requirements["water"] = 0;
+        for (int i = 0;i < count;i ++)
         {
             string element;
             float rand = Random.value;
@@ -214,49 +268,80 @@ public class Obelisk : MonoBehaviour {
 
     void lightIndicators()
     {
+        int airLevel    = Mathf.Min(requirements["air"],Globals.airStars.Count);
+        int earthLevel  = Mathf.Min(requirements["earth"], Globals.earthStars.Count);
+        int fireLevel   = Mathf.Min(requirements["fire"], Globals.fireStars.Count);
+        int waterLevel = Mathf.Min(requirements["water"], Globals.waterStars.Count);
         // Light 
         // Dull the active slots
         Material[] tempMats = renderer.sharedMaterials;
-        // Air
-        if (requirements.ContainsKey("air"))
+        if (!isDone)
         {
-            if (requirements["air"] >= 1) tempMats[2] = airIndicatorLit;
-            if (requirements["air"] >= 2) tempMats[1] = airIndicatorLit;
-            if (requirements["air"] >= 3) tempMats[3] = airIndicatorLit;
-            if (requirements["air"] >= 4) tempMats[4] = airIndicatorLit;
-            if (requirements["air"] >= 5) tempMats[5] = airIndicatorLit;
+            // Air
+            if (requirements.ContainsKey("air"))
+            {
+                if (airLevel >= 1) tempMats[2] = airIndicatorLit;
+                if (airLevel >= 2) tempMats[1] = airIndicatorLit;
+                if (airLevel >= 3) tempMats[3] = airIndicatorLit;
+                if (airLevel >= 4) tempMats[4] = airIndicatorLit;
+                if (airLevel >= 5) tempMats[5] = airIndicatorLit;
+            }
+
+            // Fire
+            if (requirements.ContainsKey("fire"))
+            {
+                if (fireLevel >= 1) tempMats[9] = fireIndicatorLit;
+                if (fireLevel >= 2) tempMats[10] = fireIndicatorLit;
+                if (fireLevel >= 3) tempMats[8] = fireIndicatorLit;
+                if (fireLevel >= 4) tempMats[7] = fireIndicatorLit;
+                if (fireLevel >= 5) tempMats[6] = fireIndicatorLit;
+            }
+
+            // Earth
+            if (requirements.ContainsKey("earth"))
+            {
+                if (earthLevel >= 1) tempMats[15] = earthIndicatorLit;
+                if (earthLevel >= 2) tempMats[16] = earthIndicatorLit;
+                if (earthLevel >= 3) tempMats[14] = earthIndicatorLit;
+                if (earthLevel >= 4) tempMats[13] = earthIndicatorLit;
+                if (earthLevel >= 5) tempMats[12] = earthIndicatorLit;
+            }
+
+            // Water
+            if (requirements.ContainsKey("water"))
+            {
+                if (waterLevel >= 1) tempMats[20] = waterIndicatorLit;
+                if (waterLevel >= 2) tempMats[19] = waterIndicatorLit;
+                if (waterLevel >= 3) tempMats[21] = waterIndicatorLit;
+                if (waterLevel >= 4) tempMats[22] = waterIndicatorLit;
+                if (waterLevel >= 5) tempMats[23] = waterIndicatorLit;
+            }
         }
-
-
-        // Fire
-        if (requirements.ContainsKey("fire"))
+        // If done, light it all up in white
+        else
         {
-            if (requirements["fire"] >= 1) tempMats[9] = fireIndicatorLit;
-            if (requirements["fire"] >= 2) tempMats[10] = fireIndicatorLit;
-            if (requirements["fire"] >= 3) tempMats[8] = fireIndicatorLit;
-            if (requirements["fire"] >= 4) tempMats[7] = fireIndicatorLit;
-            if (requirements["fire"] >= 5) tempMats[6] = fireIndicatorLit;
+            tempMats[2]    = completedMat;
+            tempMats[1]    = completedMat;
+            tempMats[3]    = completedMat;
+            tempMats[4]    = completedMat;
+            tempMats[5]    = completedMat;
+            tempMats[9]    = completedMat;
+            tempMats[10]   = completedMat;
+            tempMats[8]    = completedMat;
+            tempMats[7]    = completedMat;
+            tempMats[6]    = completedMat;
+            tempMats[15]   = completedMat;
+            tempMats[16]   = completedMat;
+            tempMats[14]   = completedMat;
+            tempMats[13]   = completedMat;
+            tempMats[12]   = completedMat;
+            tempMats[20]   = completedMat;
+            tempMats[19]   = completedMat;
+            tempMats[21]   = completedMat;
+            tempMats[22]   = completedMat;
+            tempMats[23] = completedMat;
         }
-
-        // Earth
-        if (requirements.ContainsKey("earth"))
-        {
-            if (requirements["earth"] >= 1) tempMats[15] = earthIndicatorLit;
-            if (requirements["earth"] >= 2) tempMats[16] = earthIndicatorLit;
-            if (requirements["earth"] >= 3) tempMats[14] = earthIndicatorLit;
-            if (requirements["earth"] >= 4) tempMats[13] = earthIndicatorLit;
-            if (requirements["earth"] >= 5) tempMats[12] = earthIndicatorLit;
-        }
-
-        // Water
-        if (requirements.ContainsKey("water"))
-        {
-            if (requirements["water"] >= 1) tempMats[20] = waterIndicatorLit;
-            if (requirements["water"] >= 2) tempMats[19] = waterIndicatorLit;
-            if (requirements["water"] >= 3) tempMats[21] = waterIndicatorLit;
-            if (requirements["water"] >= 4) tempMats[22] = waterIndicatorLit;
-            if (requirements["water"] >= 5) tempMats[23] = waterIndicatorLit;
-        }
+        
         renderer.sharedMaterials = tempMats;
         litUp = true;
     }
@@ -265,46 +350,82 @@ public class Obelisk : MonoBehaviour {
     {
         // Dull the active slots
         Material[] tempMats = renderer.sharedMaterials;
-        // Air
-        if (requirements.ContainsKey("air"))
+
+        if (!isDone)
         {
-            if (requirements["air"] >= 1) tempMats[2] = airIndicatorDull;
-            if (requirements["air"] >= 2) tempMats[1] = airIndicatorDull;
-            if (requirements["air"] >= 3) tempMats[3] = airIndicatorDull;
-            if (requirements["air"] >= 4) tempMats[4] = airIndicatorDull;
-            if (requirements["air"] >= 5) tempMats[5] = airIndicatorDull;
-        }
+            // Air
+            if (requirements.ContainsKey("air"))
+            {
+                if (requirements["air"] >= 1) tempMats[2] = airIndicatorDull;
+                if (requirements["air"] >= 2) tempMats[1] = airIndicatorDull;
+                if (requirements["air"] >= 3) tempMats[3] = airIndicatorDull;
+                if (requirements["air"] >= 4) tempMats[4] = airIndicatorDull;
+                if (requirements["air"] >= 5) tempMats[5] = airIndicatorDull;
+            }
 
 
-        // Fire
-        if (requirements.ContainsKey("fire"))
+            // Fire
+            if (requirements.ContainsKey("fire"))
+            {
+                if (requirements["fire"] >= 1) tempMats[9] = fireIndicatorDull;
+                if (requirements["fire"] >= 2) tempMats[10] = fireIndicatorDull;
+                if (requirements["fire"] >= 3) tempMats[8] = fireIndicatorDull;
+                if (requirements["fire"] >= 4) tempMats[7] = fireIndicatorDull;
+                if (requirements["fire"] >= 5) tempMats[6] = fireIndicatorDull;
+            }
+
+            // Earth
+            if (requirements.ContainsKey("earth"))
+            {
+                if (requirements["earth"] >= 1) tempMats[15] = earthIndicatorDull;
+                if (requirements["earth"] >= 2) tempMats[16] = earthIndicatorDull;
+                if (requirements["earth"] >= 3) tempMats[14] = earthIndicatorDull;
+                if (requirements["earth"] >= 4) tempMats[13] = earthIndicatorDull;
+                if (requirements["earth"] >= 5) tempMats[12] = earthIndicatorDull;
+            }
+
+            // Water
+            if (requirements.ContainsKey("water"))
+            {
+                if (requirements["water"] >= 1) tempMats[20] = waterIndicatorDull;
+                if (requirements["water"] >= 2) tempMats[19] = waterIndicatorDull;
+                if (requirements["water"] >= 3) tempMats[21] = waterIndicatorDull;
+                if (requirements["water"] >= 4) tempMats[22] = waterIndicatorDull;
+                if (requirements["water"] >= 5) tempMats[23] = waterIndicatorDull;
+            }
+        }
+        // If it's done, just shut it all down
+        else
         {
-            if (requirements["fire"] >= 1) tempMats[9] = fireIndicatorDull;
-            if (requirements["fire"] >= 2) tempMats[10] = fireIndicatorDull;
-            if (requirements["fire"] >= 3) tempMats[8] = fireIndicatorDull;
-            if (requirements["fire"] >= 4) tempMats[7] = fireIndicatorDull;
-            if (requirements["fire"] >= 5) tempMats[6] = fireIndicatorDull;
+            // Air
+            tempMats[2] = baseMat;
+            tempMats[1] = baseMat;
+            tempMats[3] = baseMat;
+            tempMats[4] = baseMat;
+            tempMats[5] = baseMat;
+
+            // Fire
+            tempMats[9] = baseMat;
+            tempMats[10] = baseMat;
+            tempMats[8] = baseMat;
+            tempMats[7] = baseMat;
+            tempMats[6] = baseMat;
+
+            // Earth
+            tempMats[15] = baseMat;
+            tempMats[16] = baseMat;
+            tempMats[14] = baseMat;
+            tempMats[13] = baseMat;
+            tempMats[12] = baseMat;
+
+            // Water
+            tempMats[20] = baseMat;
+            tempMats[19] = baseMat;
+            tempMats[21] = baseMat;
+            tempMats[22] = baseMat;
+            tempMats[23] = baseMat;
         }
 
-        // Earth
-        if (requirements.ContainsKey("earth"))
-        {
-            if (requirements["earth"] >= 1) tempMats[15] = earthIndicatorDull;
-            if (requirements["earth"] >= 2) tempMats[16] = earthIndicatorDull;
-            if (requirements["earth"] >= 3) tempMats[14] = earthIndicatorDull;
-            if (requirements["earth"] >= 4) tempMats[13] = earthIndicatorDull;
-            if (requirements["earth"] >= 5) tempMats[12] = earthIndicatorDull;
-        }
-
-        // Water
-        if (requirements.ContainsKey("water"))
-        {
-            if (requirements["water"] >= 1) tempMats[20] = waterIndicatorDull;
-            if (requirements["water"] >= 2) tempMats[19] = waterIndicatorDull;
-            if (requirements["water"] >= 3) tempMats[21] = waterIndicatorDull;
-            if (requirements["water"] >= 4) tempMats[22] = waterIndicatorDull;
-            if (requirements["water"] >= 5) tempMats[23] = waterIndicatorDull;
-        }
         renderer.sharedMaterials = tempMats;
         litUp = false;
     }

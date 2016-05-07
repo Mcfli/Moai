@@ -91,7 +91,8 @@ public class ShrineGrid : MonoBehaviour
 
     public void enablePlacementItem(PuzzleObject item)
     {
-        validObjects.Add(item);
+        if(validObjects.IndexOf(item) == -1)
+            validObjects.Add(item);
     }
 
     public void changeElement(string element)
@@ -371,23 +372,31 @@ public class ShrineGrid : MonoBehaviour
         GameObject star;
         Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
         if (element.Equals("fire")){
-            star = Instantiate(fireStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
+            Globals.fireStars.Add(star);
         }
         else if (element.Equals("water"))
         {
-            star = Instantiate(waterStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
+            Globals.waterStars.Add(star);
         }
         else if (element.Equals("earth"))
         {
-            star = Instantiate(earthStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
+            Globals.earthStars.Add(star);
         }
-        else if (element.Equals("air"))
+        else 
         {
-            star = Instantiate(airStar, target, Quaternion.identity) as GameObject;
+            star = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
+            Globals.airStars.Add(star);
         }
+        star.GetComponent<StarEffect>().setTarget(target);
 
         // Update puzzle complexity
         Globals.WaterFireEarthAirVector += WaterFireEarthAirChange;
+
+        // Add star to list
+        
     }
 
     private Vector3 snapToTerrain(Vector3 pos)

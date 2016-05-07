@@ -79,6 +79,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MKGlowTex
+        second:
+          m_Texture: {fileID: 2800000, guid: b1d7fee26e54cc3498f6267f072a45b9, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -91,7 +98,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: 0.5
+        second: 1
       data:
         first:
           name: _Parallax
@@ -103,7 +110,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -128,12 +135,36 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _Emission
+        second: 1
+      data:
+        first:
+          name: _MKGlowPower
+        second: 1.162
+      data:
+        first:
+          name: _MKGlowTexStrength
+        second: 0
+      data:
+        first:
+          name: _MKGlowOffSet
+        second: 0
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0.41835696, g: 0.9705882, b: 0.24264705, a: 1}
+        second: {r: 0.07586217, g: 1, b: 0, a: 0}
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0.75, b: 0.06724119, a: 1}
+        second: {r: 0, g: 0.75, b: 0.06724119, a: 0.866}
+      data:
+        first:
+          name: _MKGlowColor
+        second: {r: 0.4979716, g: 1, b: 0.33823532, a: 1}
+      data:
+        first:
+          name: _MKGlowTexColor
+        second: {r: 0.034482718, g: 1, b: 0, a: 1}
