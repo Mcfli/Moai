@@ -453,7 +453,6 @@ MonoBehaviour:
   waterIconLit: {fileID: 2100000, guid: 06addb17d3b712644aaf4d81c1b7c244, type: 2}
   earthIconLit: {fileID: 2100000, guid: 1bc8164a0618bfa428212addd15ba440, type: 2}
   airIconLit: {fileID: 2100000, guid: 2107f994a9ff6234bacd09fd56142ca9, type: 2}
-  baseMat: {fileID: 0}
 --- !u!114 &11422084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,6 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: water
+  ShrineComplete: {fileID: 0}
 --- !u!114 &11429334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: fire
+  ShrineComplete: {fileID: 0}
 --- !u!114 &11432296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -490,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: earth
+  ShrineComplete: {fileID: 0}
 --- !u!114 &11460188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -512,12 +514,15 @@ MonoBehaviour:
   vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
   WaterFireEarthAirChangeMin: 15
   WaterFireEarthAirChangeMax: 50
-  completeGlow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
+  airGlow: {fileID: 161888, guid: 2a76d3a7f46d7bf4d94df5fc1e0f0a49, type: 2}
+  earthGlow: {fileID: 161888, guid: 33ab65a9d0e2c724791a2e6fb9843349, type: 2}
+  fireGlow: {fileID: 161888, guid: 2868ab919628875429b0a9d3dd44e86e, type: 2}
+  waterGlow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   incompleteGlow: {fileID: 199770, guid: fedda00804191d540a88071d169a7e26, type: 2}
   fireStar: {fileID: 123736, guid: 91f1e349ced6af5419e0a29475c6f489, type: 2}
   waterStar: {fileID: 123306, guid: 7db9a44707bc22d4cb89db8bbd6a5c52, type: 2}
-  earthStar: {fileID: 160032, guid: 5671e915bb040094487e6393657dc309, type: 2}
-  airStar: {fileID: 192418, guid: 6f460d8d50670c0419036b05dcf76182, type: 2}
+  earthStar: {fileID: 192418, guid: 6f460d8d50670c0419036b05dcf76182, type: 2}
+  airStar: {fileID: 160032, guid: 5671e915bb040094487e6393657dc309, type: 2}
   fireBeam: {fileID: 103542, guid: 981d01434da724f28a3aba8bafe027b0, type: 2}
   waterBeam: {fileID: 198212, guid: 4b258684795234210a36ba02a6dfd0a8, type: 2}
   earthBeam: {fileID: 113870, guid: b97b9ad5be903490d9c109751d31ea0f, type: 2}
@@ -538,6 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: air
+  ShrineComplete: {fileID: 0}
 --- !u!137 &13797042
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

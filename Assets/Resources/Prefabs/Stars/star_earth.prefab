@@ -1,16 +1,16 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &160032
+--- !u!1 &192418
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 473210}
-  - 33: {fileID: 3322760}
-  - 23: {fileID: 2346062}
-  - 114: {fileID: 11419776}
+  - 4: {fileID: 440354}
+  - 33: {fileID: 3375904}
+  - 23: {fileID: 2305946}
+  - 114: {fileID: 11403340}
   m_Layer: 0
   m_Name: star_earth
   m_TagString: Untagged
@@ -18,29 +18,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &473210
+--- !u!4 &440354
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160032}
+  m_GameObject: {fileID: 192418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -262.97092, y: 478.5207, z: 120.79375}
-  m_LocalScale: {x: 100, y: 100, z: 0}
+  m_LocalScale: {x: 150, y: 150, z: 150}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2346062
+--- !u!23 &2305946
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160032}
+  m_GameObject: {fileID: 192418}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 3d63d92ce2f513f44bca337287e55269, type: 2}
+  - {fileID: 2100000, guid: c5eab744548d98b49a85a880f8a92387, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -56,27 +56,27 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3322760
+--- !u!33 &3375904
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160032}
+  m_GameObject: {fileID: 192418}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11419776
+--- !u!114 &11403340
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160032}
+  m_GameObject: {fileID: 192418}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7accf832ff357a0418d2fc2547604f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
-  explosionPrefab: {fileID: 0}
-  beamPrefab: {fileID: 113870, guid: b97b9ad5be903490d9c109751d31ea0f, type: 2}
+  speed: 100
+  explosionPrefab: {fileID: 193712, guid: b3b2e45f1e43e5a41a82758630ac8bfe, type: 2}
+  beamPrefab: {fileID: 130744, guid: 46a56c5c0881c4bcf804068c451784a1, type: 2}
   element: earth
   spentMat: {fileID: 2100000, guid: 4ebba7b55681b8542bf49989177e2b9e, type: 2}
 --- !u!1001 &100100000
@@ -88,5 +88,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 160032}
+  m_RootGameObject: {fileID: 192418}
   m_IsPrefabParent: 1

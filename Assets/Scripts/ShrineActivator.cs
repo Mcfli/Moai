@@ -24,7 +24,7 @@ public class ShrineActivator : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (Time.timeScale > 0)
+        if (Time.timeScale > 0 && parentShrine != null && !parentShrine.isDone)
         {
             
             float dist = Vector3.Distance(transform.position, Globals.Player.transform.position);
