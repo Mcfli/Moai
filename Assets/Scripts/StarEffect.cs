@@ -30,6 +30,7 @@ public class StarEffect : MonoBehaviour {
     public void spendStar()
     {
         GetComponent<Renderer>().material = spentMat;
+        for (int i = 0; i < 5; i++) Globals.SkyScript.addStar();
     }
 
 	// Use this for initialization
@@ -41,11 +42,11 @@ public class StarEffect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.LookAt(Globals.Player.transform.position);
+        //transform.LookAt(Globals.Player.transform.position);
 		if (isTargetSet && !isAtTarget)
 			move ();
-		else if (!hasExploded)
-			explode ();
+		//else if (!hasExploded)
+		//	explode ();
 		else if (!culledParticles)
 			cullParticles ();
 		
@@ -61,7 +62,11 @@ public class StarEffect : MonoBehaviour {
         }
         else
         {
+            explode();
             isAtTarget = true;
+            transform.LookAt(starsParent.transform);
+            starsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90 - Globals.SkyScript.horizonBufferAngle), 
+                (90 - Globals.SkyScript.horizonBufferAngle)), 0, Random.Range(-(90 - Globals.SkyScript.sunAxisShift), (90 - Globals.SkyScript.sunAxisShift)));
             transform.parent = starsParent.transform;
         }
     }

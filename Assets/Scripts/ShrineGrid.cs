@@ -86,7 +86,6 @@ public class ShrineGrid : MonoBehaviour
             updateCurState();
             checkDone();
         }
-
     }
 
     public void enablePlacementItem(PuzzleObject item)
@@ -370,7 +369,8 @@ public class ShrineGrid : MonoBehaviour
         GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
         GameObject star;
-        Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
+        Vector3 variation = new Vector3(Random.Range(-1000f,1000f), 0, Random.Range(-1000f, 1000f));
+        Vector3 target = Globals.Player.transform.position  + Vector3.up * 10000;
         if (element.Equals("fire")){
             star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
             Globals.fireStars.Add(star);

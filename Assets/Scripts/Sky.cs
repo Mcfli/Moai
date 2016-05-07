@@ -41,7 +41,7 @@ public class Sky : MonoBehaviour {
     void Start() {
         Halo.SetActive(false);
         listOfStars = new List<GameObject>();
-        for(int i = 0; i < 100; i++) addStar(); //temp
+        //for(int i = 0; i < 100; i++) addStar(); //temp
     }
 
     void Update() {

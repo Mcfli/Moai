@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 160032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -262.97092, y: 478.5207, z: 120.79375}
-  m_LocalScale: {x: 100, y: 100, z: 0}
+  m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7accf832ff357a0418d2fc2547604f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
-  explosionPrefab: {fileID: 0}
+  speed: 100
+  explosionPrefab: {fileID: 193712, guid: cbe397e78e628db4ab5b27a5cae08fa7, type: 2}
   beamPrefab: {fileID: 113870, guid: b97b9ad5be903490d9c109751d31ea0f, type: 2}
   element: earth
   spentMat: {fileID: 2100000, guid: 4ebba7b55681b8542bf49989177e2b9e, type: 2}
