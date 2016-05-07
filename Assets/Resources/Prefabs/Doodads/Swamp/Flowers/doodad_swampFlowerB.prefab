@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &114526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 479570}
+  - 33: {fileID: 3349030}
+  - 23: {fileID: 2363716}
+  - 95: {fileID: 9597948}
+  - 114: {fileID: 11492046}
+  - 136: {fileID: 13635206}
+  - 114: {fileID: 11434824}
+  - 54: {fileID: 5482888}
+  m_Layer: 0
+  m_Name: doodad_swampFlowerB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479570
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -6.840572, y: 123.26199, z: -4.9518805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!23 &2363716
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: e894261e9b941504a8e4b1c928d07a5b, type: 2}
+  - {fileID: 2100000, guid: fd72132f6d6d2e24d9f3a1c021481add, type: 2}
+  - {fileID: 2100000, guid: a265c830e15b4674da274dedd93c7751, type: 2}
+  - {fileID: 2100000, guid: 4126c58e910660c47af33885c295b79e, type: 2}
+  - {fileID: 2100000, guid: 22dea9461ab62bc42baf9b2543119ddf, type: 2}
+  - {fileID: 2100000, guid: 4812580d884f9e943bce4f03fa7853fa, type: 2}
+  - {fileID: 2100000, guid: 599d2741e6fbaab4690242728967c9c7, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3349030
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_Mesh: {fileID: 4300000, guid: 6e37ad58418a60a4e8cd44fa685cb1b8, type: 3}
+--- !u!54 &5482888
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!95 &9597948
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 6e37ad58418a60a4e8cd44fa685cb1b8, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11434824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: flower
+  image: {fileID: 2800000, guid: f588d850485d0ae479d73cf3bd0b7b00, type: 3}
+  imageGlowing: {fileID: 0}
+--- !u!114 &11492046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeID: flower
+  spawn_object: {fileID: 0}
+  cull_layer:
+    serializedVersion: 2
+    m_Bits: 0
+  cull_radius: 0
+  growAttempts: 0
+  growTime: 0
+  growTimeVariance: 0
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  dirtMound: {fileID: 0}
+  dirtMoundOffset: {x: 0, y: 0, z: 0}
+  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
+--- !u!136 &13635206
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.80621094
+  m_Height: 0.47111917
+  m_Direction: 1
+  m_Center: {x: -0.04384631, y: 0.00022861367, z: 0.81261843}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 114526}
+  m_IsPrefabParent: 1
