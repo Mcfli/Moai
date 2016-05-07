@@ -75,7 +75,8 @@ public class Obelisk : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 		if(fromObelisk)
 		{
 			if (fader.fadingWhite) 
@@ -85,7 +86,7 @@ public class Obelisk : MonoBehaviour {
 			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
 			{
 				fader.fadeImage.color = Color.white;
-				Globals.Player.transform.position = telePos + new Vector3(-10,0,-10);
+				Globals.Player.transform.position = telePos + new Vector3(-10, 3,-10);
 				fader.fadingClear = true;
 				fader.fadingWhite = false;
 			} 
@@ -131,7 +132,7 @@ public class Obelisk : MonoBehaviour {
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && (isDone || areReqsMet()))
+        if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fader.fadingWhite && !fader.fadingClear && (isDone || areReqsMet()))
         {
 			fader.fadingWhite = true;
 			fromObelisk = true;

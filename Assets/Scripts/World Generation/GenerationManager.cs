@@ -296,9 +296,9 @@ public class GenerationManager : MonoBehaviour {
 
     private bool loadObelisks(Vector2 position)
     {
-        for (int x = (int)Globals.cur_chunk.x - chunk_load_dist; x <= (int)Globals.cur_chunk.x + chunk_load_dist; x++)
+        for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++)
         {
-            for (int y = (int)Globals.cur_chunk.y - chunk_load_dist; y <= (int)Globals.cur_chunk.y + chunk_load_dist; y++)
+            for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++)
             {
                 Vector2 this_chunk = new Vector2(x, y);
                 if (!loaded_obelisk_chunks.Contains(this_chunk))
@@ -316,8 +316,8 @@ public class GenerationManager : MonoBehaviour {
         for (int i = loaded_obelisk_chunks.Count - 1; i >= 0; i--)
         {
             Vector2 this_chunk = loaded_obelisk_chunks[i];
-            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > chunk_unload_dist ||
-                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > chunk_unload_dist)
+            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_unload_dist ||
+                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_unload_dist)
             {
                 shrine_manager.unloadObelisks((int)this_chunk.x, (int)this_chunk.y);
                 loaded_obelisk_chunks.RemoveAt(i);

@@ -77,7 +77,7 @@ public class Player : MonoBehaviour {
 			{
                 RaycastHit hit;
                 Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 100000, mainCamera.transform.position.z), Vector3.down);
-                int terrain = LayerMask.GetMask("Terrain");
+                int terrain = LayerMask.GetMask("Terrain", "Islands");
 
                 if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
                 {

@@ -31,7 +31,7 @@ public class TeleportStone : MonoBehaviour {
 			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
 			{
 				fader.fadeImage.color = Color.white;
-				Globals.Player.transform.position = telePos + new Vector3(-10,0,-10);
+				Globals.Player.transform.position = telePos + new Vector3(-10, 3,-10);
 				fader.fadingClear = true;
 				fader.fadingWhite = false;
 			} 
@@ -42,6 +42,7 @@ public class TeleportStone : MonoBehaviour {
 				{
 					fader.fadeImage.color = Color.clear;
 					fader.fadingClear = false;
+                    fromIsland = false;
 				}
 			}
 		}
@@ -50,7 +51,7 @@ public class TeleportStone : MonoBehaviour {
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0)
+        if (dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fader.fadingWhite && !fader.fadingClear)
         {
 			fader.fadingWhite = true;
 			fromIsland = true;
