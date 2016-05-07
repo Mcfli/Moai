@@ -158,6 +158,7 @@ MonoBehaviour:
   lightUpDistance: 20
   possibleIslands:
   - {fileID: 128172, guid: b3b9c09acc2fcd9418544e5277743224, type: 2}
+  - {fileID: 188550, guid: d49b4d3b26e234946b7ff6a52282d32a, type: 2}
   islandHeight: 1000
   maxTotalReqs: 4
   minTotalReqs: 2
