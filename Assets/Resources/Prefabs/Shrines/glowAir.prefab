@@ -1,57 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &199770
+--- !u!1 &161888
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 419882}
-  - 108: {fileID: 10832044}
-  - 122: {fileID: 12262564}
-  - 65: {fileID: 6551214}
+  - 4: {fileID: 496016}
+  - 108: {fileID: 10830788}
+  - 122: {fileID: 12298638}
+  - 65: {fileID: 6510746}
   m_Layer: 11
-  m_Name: incompleteGlow
+  m_Name: glowAir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &419882
+--- !u!4 &496016
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199770}
+  m_GameObject: {fileID: 161888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 21.78, y: 133.25, z: 13.79052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!65 &6551214
+--- !u!65 &6510746
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199770}
+  m_GameObject: {fileID: 161888}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!108 &10832044
+--- !u!108 &10830788
 Light:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199770}
+  m_GameObject: {fileID: 161888}
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 0.397}
+  m_Color: {r: 1, g: 0.9792089, b: 0.6985294, a: 0.466}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 30
@@ -75,16 +75,16 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!122 &12262564
+--- !u!122 &12298638
 Halo:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199770}
+  m_GameObject: {fileID: 161888}
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 1610612735
+    rgba: 4278253823
   m_Size: 9.7
 --- !u!1001 &100100000
 Prefab:
@@ -92,8 +92,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 199770}
+  m_RootGameObject: {fileID: 161888}
   m_IsPrefabParent: 1

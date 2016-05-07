@@ -17,7 +17,10 @@ public class ShrineGrid : MonoBehaviour
     public float WaterFireEarthAirChangeMin = 15f;
     public float WaterFireEarthAirChangeMax = 50f;
 
-    public GameObject completeGlow;
+    public GameObject airGlow;
+    public GameObject earthGlow;
+    public GameObject fireGlow;
+    public GameObject waterGlow;
     public GameObject incompleteGlow;
 
     public GameObject fireStar;
@@ -206,10 +209,10 @@ public class ShrineGrid : MonoBehaviour
         // Look at each requirement in each targetState
         int index = 0;
         List<PuzzleObject> targetState;
-        if (curElement == "fire") targetState = targetStateFire;
-        else if (curElement == "water") targetState = targetStateWater;
-        else if (curElement == "earth") targetState = targetStateEarth;
-        else if (curElement == "air") targetState = targetStateAir;
+        if (curElement.Equals("fire")) targetState = targetStateFire;
+        else if (curElement.Equals( "water")) targetState = targetStateWater;
+        else if (curElement.Equals("earth")) targetState = targetStateEarth;
+        else if (curElement.Equals("air")) targetState = targetStateAir;
         else return;
         
         foreach (PuzzleObject tarObj in targetState)
@@ -354,7 +357,15 @@ public class ShrineGrid : MonoBehaviour
     private void complete(string element)
     {
         Destroy(shrineGlow);
-        shrineGlow = Instantiate(completeGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+        if(element.Equals("air"))
+            shrineGlow = Instantiate(airGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+        else if (element.Equals("earth"))
+            shrineGlow = Instantiate(earthGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+        else if (element.Equals("fire"))
+            shrineGlow = Instantiate(fireGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+        else
+            shrineGlow = Instantiate(waterGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+
         // Stop the cells from glowing
         //drawGlows();
 

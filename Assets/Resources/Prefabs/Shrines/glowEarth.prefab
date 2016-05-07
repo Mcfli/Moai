@@ -12,7 +12,7 @@ GameObject:
   - 122: {fileID: 12298638}
   - 65: {fileID: 6510746}
   m_Layer: 11
-  m_Name: glow
+  m_Name: glowEarth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 0, g: 0.754716, b: 0.9044118, a: 1}
+  m_Color: {r: 1, g: 0.9792089, b: 0.6985294, a: 0.466}
   m_Intensity: 8
   m_Range: 10
   m_SpotAngle: 30
@@ -84,7 +84,7 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4292996198
+    rgba: 4278253823
   m_Size: 9.7
 --- !u!1001 &100100000
 Prefab:

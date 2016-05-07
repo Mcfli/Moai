@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  explosionPrefab: {fileID: 0}
+  explosionPrefab: {fileID: 193712, guid: ebe519e32eb53da4a9c733857364e3ce, type: 2}
   beamPrefab: {fileID: 103542, guid: 981d01434da724f28a3aba8bafe027b0, type: 2}
   element: fire
   spentMat: {fileID: 2100000, guid: 4ebba7b55681b8542bf49989177e2b9e, type: 2}
