@@ -38,7 +38,10 @@ public class Globals : MonoBehaviour {
     public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                                 // FindObjectsOfType added to a shrine
 
-    public static List<GameObject> elementalStars = new List<GameObject>();
+    public static List<GameObject> airStars = new List<GameObject>();
+    public static List<GameObject> earthStars = new List<GameObject>();
+    public static List<GameObject> fireStars = new List<GameObject>();
+    public static List<GameObject> waterStars = new List<GameObject>();
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component{
         System.Type type = source.GetType();

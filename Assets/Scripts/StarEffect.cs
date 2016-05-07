@@ -6,6 +6,7 @@ public class StarEffect : MonoBehaviour {
     public GameObject explosionPrefab;
 	public GameObject beamPrefab;
 	public string element;
+    public Material spentMat;
 
     private Vector3 target;
     private bool isTargetSet = false;
@@ -24,6 +25,11 @@ public class StarEffect : MonoBehaviour {
         target = tar;
         step = speed * Vector3.Normalize(target - transform.position);
         isTargetSet = true;
+    }
+
+    public void spendStar()
+    {
+        GetComponent<Renderer>().material = spentMat;
     }
 
 	// Use this for initialization

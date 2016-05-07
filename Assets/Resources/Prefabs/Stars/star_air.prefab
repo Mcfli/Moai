@@ -74,10 +74,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7accf832ff357a0418d2fc2547604f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 40
   explosionPrefab: {fileID: 0}
   beamPrefab: {fileID: 130744, guid: 46a56c5c0881c4bcf804068c451784a1, type: 2}
   element: air
+  spentMat: {fileID: 2100000, guid: 4ebba7b55681b8542bf49989177e2b9e, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
