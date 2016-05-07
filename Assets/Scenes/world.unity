@@ -390,7 +390,7 @@ MonoBehaviour:
   max_tries: 10000
   shrine_probability: 5
   obelisk_probability: 20
-  obelist_min_dist: 4
+  obelisk_min_dist: 2
 --- !u!114 &188005519
 MonoBehaviour:
   m_ObjectHideFlags: 0

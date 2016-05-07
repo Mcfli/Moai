@@ -9,7 +9,7 @@ public class ShrineManager : MonoBehaviour {
     public int max_tries = 1;
     public int shrine_probability = 1;
     public int obelisk_probability = 5;
-    public int obelist_min_dist = 2;
+    public int obelisk_min_dist = 2;
 
     private GenerationManager gen_manager;
     private static Dictionary<Vector2, List<ShrineGrid>> shrines;
@@ -47,9 +47,9 @@ public class ShrineManager : MonoBehaviour {
 
     public void placeObelisk(Vector3 chunk_pos, Vector2 chunk)
     {
-        for(int i = -obelist_min_dist; i <= obelist_min_dist; i++)
+        for(int i = -obelisk_min_dist; i <= obelisk_min_dist; i++)
         {
-            for (int j = -obelist_min_dist; j <= obelist_min_dist; j++)
+            for (int j = -obelisk_min_dist; j <= obelisk_min_dist; j++)
             {
                 Vector2 temp = chunk + Vector2.right * i + Vector2.up * j;
                 if(obelisks.ContainsKey(temp) && obelisks[temp] != null)
