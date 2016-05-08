@@ -109,24 +109,68 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   - {fileID: 155264, guid: 315a7e48c60329044ab0a87c30150e02, type: 2}
-  bigDoodads: []
-  bigDoodadChance: []
-  bigDoodadRadius: []
-  smallDoodads: []
-  smallDoodadChance: []
-  numOfSmallDoodads: {x: 0, y: 0}
-  doodadClusterRadius: {x: 0, y: 0}
-  doodadDensity: 0
+  bigDoodads:
+  - {fileID: 145722, guid: 05d820987f9e7b34d9b369a883691066, type: 2}
+  - {fileID: 135330, guid: 2e21c1e14494beb4d94acc180832d708, type: 2}
+  - {fileID: 149616, guid: 3635e1867d8bf76498f9a6a056b61f49, type: 2}
+  - {fileID: 137344, guid: 43452567a80bf0d4bb8ac0aac1141c8f, type: 2}
+  - {fileID: 102276, guid: 5d25e09b13b51c542aa0b78a004c0d66, type: 2}
+  - {fileID: 127378, guid: 4554eb0d36f098c4887b913a6c04fd48, type: 2}
+  - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
+  - {fileID: 150136, guid: 1deb94146c380a94daa7ab6431c81459, type: 2}
+  bigDoodadChance:
+  - 5
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 2
+  - 2
+  bigDoodadRadius:
+  - 1
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
+  - 3
+  - 3
+  smallDoodads:
+  - {fileID: 122762, guid: 76b634e68351db246a01a42fbdb2a1a9, type: 2}
+  - {fileID: 185738, guid: 765f137ab4b60dc4e8cbe913d2add33e, type: 2}
+  - {fileID: 173966, guid: 4b6608859410f484880353f04b938aa5, type: 2}
+  - {fileID: 121766, guid: 06f715c6f5c1f5d4ba0b806ce2cce6bb, type: 2}
+  - {fileID: 114526, guid: 62f245aef34405c4b8a90e3f09780b27, type: 2}
+  - {fileID: 197814, guid: 58e9ee00a93132241bcab2fff23922b2, type: 2}
+  - {fileID: 130328, guid: 70eb339ca4089f149926e2e767f569a4, type: 2}
+  - {fileID: 153190, guid: 3fc236fa0f5c35c4faedab22f9ff70d4, type: 2}
+  - {fileID: 176168, guid: e61efd943506db245beee80bff64d39d, type: 2}
+  - {fileID: 136088, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
+  smallDoodadChance:
+  - 2
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 2
+  numOfSmallDoodads: {x: 10, y: 20}
+  doodadClusterRadius: {x: 10, y: 20}
+  doodadDensity: 4
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 16
   mixedForests: 1
   colors:
-  - {r: 0.36764705, g: 0, b: 0.35750514, a: 0}
-  - {r: 0.42500892, g: 0.18274221, b: 0.47794116, a: 0}
-  - {r: 0.20765722, g: 0.17371324, b: 0.46323532, a: 0}
-  - {r: 0.015679069, g: 0.18053633, b: 0.21323532, a: 0}
-  - {r: 0, g: 0.44852942, b: 0.39284992, a: 0}
+  - {r: 0.0233564, g: 0.17647058, b: 0.0814342, a: 0}
+  - {r: 0, g: 0.2352941, b: 0.07951321, a: 0}
+  - {r: 0, g: 0.2352941, b: 0.115881145, a: 0}
+  - {r: 0.0045415196, g: 0.102941155, b: 0.070367485, a: 0}
+  - {r: 0.10726642, g: 0.22794116, b: 0.18799366, a: 0}
   - {r: 0.43533736, g: 0.4852941, b: 0.47909257, a: 0}
   amplitude: 800
   colorCurve:
@@ -145,10 +189,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  lakeChance: 0
-  lakeCount: 0
-  lakeSize: {x: 0, y: 0, z: 0}
-  lakeMaxLength: 0
+  lakeChance: 1
+  lakeCount: 1
+  lakeSize: {x: 200, y: 55, z: 200}
+  lakeMaxLength: 250
   waterMaterial: {fileID: 2100000, guid: f64afad84f8eedd44bc401c6b84f6e19, type: 2}
 --- !u!1001 &100100000
 Prefab:

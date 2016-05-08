@@ -346,6 +346,7 @@ public class GenerationManager : MonoBehaviour {
         Biome ret = biomes[0];
         foreach(Biome biome in biomes)
         {
+            if (biome == null) Debug.Log("SHIT!");
             float WaterFire_error = Mathf.Abs(biome.WaterFire - WaterFire);
             float EarthAir_error = Mathf.Abs(biome.EarthAir - EarthAir);
            

@@ -118,26 +118,6 @@ Material:
         second: 0.02
       data:
         first:
-          name: _WaveLength
-        second: 0.81
-      data:
-        first:
-          name: _WaveHeight
-        second: 1.31
-      data:
-        first:
-          name: _WaveSpeed
-        second: 1.25
-      data:
-        first:
-          name: _RandomHeight
-        second: 0.13
-      data:
-        first:
-          name: _RandomSpeed
-        second: 0.98
-      data:
-        first:
           name: _Parallax
         second: 0.02
       data:
@@ -182,6 +162,26 @@ Material:
         second: 1
       data:
         first:
+          name: _WaveLength
+        second: 0.81
+      data:
+        first:
+          name: _WaveHeight
+        second: 1.31
+      data:
+        first:
+          name: _WaveSpeed
+        second: 1.25
+      data:
+        first:
+          name: _RandomHeight
+        second: 0.13
+      data:
+        first:
+          name: _RandomSpeed
+        second: 0.98
+      data:
+        first:
           name: _EmissionScaleUI
         second: 0
       data:
@@ -208,7 +208,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.44279847, g: 0.7435718, b: 0.9558824, a: 1}
+        second: {r: 0.44279847, g: 0.7435718, b: 0.9558824, a: 0.759}
       data:
         first:
           name: _SpecColor
