@@ -25,7 +25,6 @@ public class WeatherManager : MonoBehaviour {
     private Vector3 curParticlePosition;
 
     // Player for audio source
-    private GameObject cam;
     private AudioSource cameraAudio;
     private bool wasPlaying = false;
 
@@ -37,18 +36,14 @@ public class WeatherManager : MonoBehaviour {
     }
 
     void Start() {
-        lastUpdated = 0;
-        changeWeather();
-        checkIfVisibleParticles();
-        //changeClouds(10000);
-        lastBiome = Globals.cur_biome;
-        curParticlePosition = new Vector3(0, 0, 0);
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
-        cameraAudio = cam.AddComponent<AudioSource>();
+        cameraAudio = Camera.main.gameObject.AddComponent<AudioSource>();
+        initializeWeather();
     }
 
     // Update is called once per frame
     void Update(){
+        if(Globals.mode == -1) return;
+
         if (Globals.time > lastUpdated + updateTime * Globals.time_resolution || lastBiome != Globals.cur_biome) {
             lastUpdated = Globals.time;
             changeWeather();
@@ -97,12 +92,20 @@ public class WeatherManager : MonoBehaviour {
         }
     }
 
-    void InitializeIfNeeded()
+    public void InitializeIfNeeded()
     {
         if (m_Particles == null || m_Particles.Length < activeParticleSystem.maxParticles)
         {
             m_Particles = new ParticleSystem.Particle[activeParticleSystem.maxParticles];
         }
+    }
+	
+    public void initializeWeather() {
+        lastUpdated = 0;
+        changeWeather();
+        checkIfVisibleParticles();
+        lastBiome = Globals.cur_biome;
+        curParticlePosition = new Vector3(0, 0, 0);
     }
 	
 	//public void hideWeather(){visibleParticles = false;}

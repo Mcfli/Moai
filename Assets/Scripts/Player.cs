@@ -10,7 +10,6 @@ public class Player : MonoBehaviour {
     private Collider thisCollider;
     private float cameraHeight;
     
-	private bool startGroundWarp;
     private InteractableObject heldObj;
     private float heldObjSize;
     private Vector3 heldObjOrigScale;
@@ -47,53 +46,43 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		startGroundWarp = false;
         playerAudio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //warp to ground at game start
-        if(!startGroundWarp) startGroundWarp = warpToGround(3000, true);
+        if(Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
+        else firstPersonCont.lookLock = false;
+
+        if(Globals.mode != 0) return;
 
         if (Globals.time_scale > 1) {
             warpToGround(transform.position.y);
-            if(!playerAudio.isPlaying) { //sound
-                playerAudio.PlayOneShot(SpeedUpSFX, .2f);
-            }
+            if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
             firstPersonCont.enabled = false;
-        }
-        if (Globals.time_scale > cinematicTimeScale)
-        {
-            if(playerAudio.isPlaying)
-            {
-                playerAudio.Stop();
-            }
-			if(!playerModel.activeInHierarchy)
-			{
-				playerModel.SetActive(true);
-			}
-			else
-			{
-                RaycastHit hit;
-                Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 100000, mainCamera.transform.position.z), Vector3.down);
-                int terrain = LayerMask.GetMask("Terrain", "Islands");
 
-                if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
-                {
-                    camDistance += 5 * Time.deltaTime;
-                    theta += 0.5f * Time.deltaTime;
-                    float targetY = hit.point.y - playerModel.transform.position.y + 80;
-                    mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
+            if(Globals.time_scale > cinematicTimeScale) {
+                if(playerAudio.isPlaying) playerAudio.Stop();
+                if(!playerModel.activeInHierarchy) {
+                    playerModel.SetActive(true);
+                } else {
+                    RaycastHit hit;
+                    Ray rayDown = new Ray(new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 100000, mainCamera.transform.position.z), Vector3.down);
+                    int terrain = LayerMask.GetMask("Terrain");
+
+                    if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)) {
+                        camDistance += 5 * Time.deltaTime;
+                        theta += 0.5f * Time.deltaTime;
+                        float targetY = hit.point.y - playerModel.transform.position.y + 80;
+                        mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
+                    }
                 }
-			}
-			mainCamera.transform.LookAt (playerModel.transform.position);
-            inCinematic = true;
+                mainCamera.transform.LookAt(playerModel.transform.position);
+                inCinematic = true;
+            }
         }
-        if (Globals.time_scale == 1)
-        {
-            if(inCinematic)
-            {
+        if(Globals.time_scale == 1) {
+            if(inCinematic) {
                 inCinematic = false;
                 mainCamera.transform.localPosition = playerCamPos;
                 mainCamera.transform.localRotation = playerCamRot;
@@ -104,11 +93,8 @@ public class Player : MonoBehaviour {
             firstPersonCont.enabled = true;
         }
 
-        if(Globals.paused || Globals.time_scale > 1) firstPersonCont.lookLock = true;
-        else firstPersonCont.lookLock = false;
-
         //Holding Objects stuff
-        if (Input.GetButtonDown("Use") && !Globals.paused && Globals.time_scale == 1) {
+        if (Input.GetButtonDown("Use") && Globals.mode == 0 && Globals.time_scale == 1) {
             if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
             else if (TryUseObject()) { }
             else DropObject();

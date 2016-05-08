@@ -19,35 +19,53 @@ public class HUD : MonoBehaviour {
         menus = GetComponent<Menus>();
     }
 
-    void Update() {
-        if(Input.GetButtonDown(crosshairToggle) && !Globals.paused) menus.changeCrosshair();
+    void Start() {
+        if(Globals.mode == -1) //mainmenu
+            menus.switchTo(menus.mainMenu);
+        else if(Globals.mode == 1) //paused
+            menus.switchTo(menus.pauseMenu);
+        else if(Globals.mode == 0) //playing
+            menus.switchTo(-1);
+    }
 
-        if(Menus.showCrosshair && !Globals.PlayerScript.isInCinematic()) {
+    void Update() {
+        //crosshair color
+        if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic() && Globals.mode == 0) {
             crosshair.enabled = true;
-            if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
-            else if(Globals.PlayerScript.LookingAtGrabbable()) crosshair.color = canGrabColor;
+            if(Globals.PlayerScript.LookingAtGrabbable() && Globals.PlayerScript.getHeldObj() == null) crosshair.color = canGrabColor;
+            else if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
             else crosshair.color = initialColor;
         } else crosshair.enabled = false;
 
-        if(Input.GetButtonDown(pauseButton)) Globals.paused = !Globals.paused;
+        //toggle crosshair
+        if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0)
+            Globals.settings["Crosshair"] = (Globals.settings["Crosshair"] == 0) ? 1 : 0;
 
-        if(Globals.paused) {
-            Time.timeScale = 0;
-            if(menus.getCurrentMenu() < 0) {
-                menus.switchTo(menus.initialMenu);
-                firstPersonCont.getMouseLook().SetCursorLock(false);
-            }
-        } else {
-            Time.timeScale = 1;
-            if(menus.getCurrentMenu() >= 0) {
-                menus.switchTo(-1);
-                firstPersonCont.getMouseLook().SetCursorLock(true);
-            }
+        //pause button
+        if(Input.GetButtonDown(pauseButton)) {
+            if(Globals.mode == 1) resumeGame();
+            else if(Globals.mode == 0) pauseGame();
         }
-
-        //if(Input.GetKeyDown(KeyCode.P)) UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh,"Assets/00.asset");
+        
+        /*
+        if(Input.GetKeyDown(KeyCode.P)) {
+            //UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh, "Assets/00.asset");
+            for(int x = -19; x <= -15; x++)
+                for(int y = -8; y <= -5; y++)
+                    UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (" + x + "," + y + ")").GetComponent<ChunkMeshes>().lowMesh, "Assets/" + "chunk (" + x + ", " + y + ")" + ".asset");
+        }
+        */
     }
 
-    public void pauseGame() { Globals.paused = true; }
-    public void resumeGame() { Globals.paused = false; }
+    public void pauseGame() {
+        Globals.mode = 1;
+        menus.switchTo(menus.pauseMenu);
+        firstPersonCont.getMouseLook().SetCursorLock(false);
+    }
+
+    public void resumeGame() {
+        Globals.mode = 0;
+        menus.switchTo(-1);
+        firstPersonCont.getMouseLook().SetCursorLock(true);
+    }
 }

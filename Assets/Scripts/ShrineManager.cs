@@ -12,8 +12,8 @@ public class ShrineManager : MonoBehaviour {
     public int obelisk_min_dist = 2;
 
     private GenerationManager gen_manager;
-    private static Dictionary<Vector2, List<ShrineGrid>> shrines;
-    private static Dictionary<Vector2, GameObject> obelisks;
+    public static Dictionary<Vector2, List<ShrineGrid>> shrines;
+    public static Dictionary<Vector2, GameObject> obelisks;
 
     // Use this for initialization
     void Awake () {
