@@ -30,7 +30,7 @@ public class HUD : MonoBehaviour {
 
     void Update() {
         //crosshair color
-        if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic()) {
+        if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic() && Globals.mode == 0) {
             crosshair.enabled = true;
             if(Globals.PlayerScript.LookingAtGrabbable() && Globals.PlayerScript.getHeldObj() == null) crosshair.color = canGrabColor;
             else if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
@@ -47,13 +47,12 @@ public class HUD : MonoBehaviour {
             else if(Globals.mode == 0) pauseGame();
         }
 
-        //if(Input.GetKeyDown(KeyCode.P)) UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh,"Assets/00.asset");
-    }
-
-    public void startGame() {
-        Globals.mode = 0;
-        Globals.GenerationManagerScript.initiateWorld();
-        Random.seed = Globals.SeedScript.seed;
+        if(Input.GetKeyDown(KeyCode.P)) {
+            //UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh, "Assets/00.asset");
+            for(int x = -19; x <= -15; x++)
+                for(int y = -8; y <= -5; y++)
+                    UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (" + x + "," + y + ")").GetComponent<ChunkMeshes>().lowMesh, "Assets/" + "chunk (" + x + ", " + y + ")" + ".asset");
+        }
     }
 
     public void pauseGame() {

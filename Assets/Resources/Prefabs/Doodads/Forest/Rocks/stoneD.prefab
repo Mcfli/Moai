@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11475908}
   - 54: {fileID: 5423444}
   - 75: {fileID: 7539678}
+  - 114: {fileID: 11438994}
   m_Layer: 14
   m_Name: stoneD
   m_TagString: Untagged
@@ -104,6 +105,19 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &11438994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: rock
+  image: {fileID: 2800000, guid: 69b7c83f540e53d429589d6d6bb59476, type: 3}
 --- !u!114 &11475908
 MonoBehaviour:
   m_ObjectHideFlags: 1

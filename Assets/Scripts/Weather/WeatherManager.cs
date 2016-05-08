@@ -37,16 +37,13 @@ public class WeatherManager : MonoBehaviour {
 
     void Start() {
         cameraAudio = Camera.main.gameObject.AddComponent<AudioSource>();
-        lastUpdated = 0;
-        changeWeather();
-        checkIfVisibleParticles();
-        //changeClouds(10000);
-        lastBiome = Globals.cur_biome;
-        curParticlePosition = new Vector3(0, 0, 0);
+        initializeWeather();
     }
 
     // Update is called once per frame
     void Update(){
+        if(Globals.mode == -1) return;
+
         if (Globals.time > lastUpdated + updateTime * Globals.time_resolution || lastBiome != Globals.cur_biome) {
             lastUpdated = Globals.time;
             changeWeather();
@@ -95,7 +92,7 @@ public class WeatherManager : MonoBehaviour {
         }
     }
 
-    void InitializeIfNeeded()
+    public void InitializeIfNeeded()
     {
         if (m_Particles == null || m_Particles.Length < activeParticleSystem.maxParticles)
         {
@@ -103,7 +100,15 @@ public class WeatherManager : MonoBehaviour {
         }
     }
 	
-	//public void hideWeather(){visibleParticles = false;}
+    public void initializeWeather() {
+        lastUpdated = 0;
+        changeWeather();
+        checkIfVisibleParticles();
+        lastBiome = Globals.cur_biome;
+        curParticlePosition = new Vector3(0, 0, 0);
+    }
+	
+    //public void hideWeather(){visibleParticles = false;}
 	//public void showWeather(){visibleParticles = true;}
 	//public void toggleWeather(){visibleParticles = !visibleParticles;}
 	//public bool isVisible(){return visibleParticles;}

@@ -10,7 +10,6 @@ public class Player : MonoBehaviour {
     private Collider thisCollider;
     private float cameraHeight;
     
-	private bool startGroundWarp;
     private InteractableObject heldObj;
     private float heldObjSize;
     private Vector3 heldObjOrigScale;
@@ -47,7 +46,6 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		startGroundWarp = false;
         playerAudio = GetComponent<AudioSource>();
 	}
 	
@@ -57,9 +55,6 @@ public class Player : MonoBehaviour {
         else firstPersonCont.lookLock = false;
 
         if(Globals.mode != 0) return;
-        
-        //warp to ground at game start
-        if(!startGroundWarp) startGroundWarp = warpToGround(3000, true);
 
         if (Globals.time_scale > 1) {
             warpToGround(transform.position.y);

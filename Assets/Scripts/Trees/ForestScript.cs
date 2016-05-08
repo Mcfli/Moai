@@ -36,9 +36,6 @@ public class ForestScript : MonoBehaviour {
 
     // "new" initialization function (make maxTrees 0 when spawning a forest)
     public void createForest(Vector3 position, float radius, int maxTrees, List<GameObject> treeTypes, bool mixedForest) {
-        int originalSeed = Random.seed;
-        Random.seed = Globals.SeedScript.seed + position.GetHashCode();
-
         transform.position = position;
         this.radius = radius;
         this.maxTrees = maxTrees;
@@ -53,8 +50,6 @@ public class ForestScript : MonoBehaviour {
         }
 
         propogate(Mathf.CeilToInt(trees.Count * Globals.TreeManagerScript.seedToTreeRatio));
-
-        Random.seed = originalSeed;
     }
 
     // for new tree created forests

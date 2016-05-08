@@ -66,7 +66,10 @@ public class GenerationManager : MonoBehaviour {
     }
 
     void Start() {
-        if(Globals.mode > -1) initiateWorld();
+        if(Globals.mode > -1) {
+            initiateWorld();
+            Globals.PlayerScript.warpToGround(3000, true);
+        }
     }
 	
 	// Update is called once per frame
@@ -77,7 +80,11 @@ public class GenerationManager : MonoBehaviour {
             Globals.cur_chunk = current_chunk;
             doneLoading = false;
         }
-        if(!doneLoading && Globals.mode > -1) doneLoading = loadUnload(Globals.cur_chunk);
+        if(!doneLoading && Globals.mode > -1) {
+            doneLoading = loadUnload(Globals.cur_chunk);
+            //StartCoroutine(coLoadUnload(Globals.cur_chunk));
+            //doneLoading = true;
+        }
     }
 
     // Merges the biome at pos with other_biome
@@ -95,8 +102,30 @@ public class GenerationManager : MonoBehaviour {
     */
 
     public void initiateWorld() {
+        Globals.time = 0;
         initiateChunks(Globals.cur_chunk);
         doneLoading = loadUnload(Globals.cur_chunk);
+    }
+
+    public void deleteWorld() { //burn it to the ground
+        foreach(KeyValuePair<Vector2, Dictionary<int, ForestScript>> p in TreeManager.loadedForests) foreach(KeyValuePair<int, ForestScript> q in p.Value) q.Value.destroyForest();
+        foreach(Vector2 v in loaded_shrine_chunks) shrine_manager.unloadShrines((int)v.x, (int)v.y);
+        foreach(KeyValuePair<Vector2, List<GameObject>> p in DoodadManager.loaded_doodads) foreach(GameObject g in p.Value) Destroy(g);
+        foreach(KeyValuePair<Vector2, GameObject> p in loaded_chunks) {
+            Destroy(loaded_chunks[p.Key]);
+            water_manager.unloadWater(p.Key);
+        }
+
+        loaded_chunks = new Dictionary<Vector2, GameObject>();
+        detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
+        loaded_shrine_chunks = new List<Vector2>();
+        loaded_doodad_chunks = new List<Vector2>();
+        mapChanges = new Dictionary<Vector2, Vector2>();
+        TreeManager.trees = new Dictionary<Vector2, List<ForestScript.forestStruct>>();
+        TreeManager.loadedForests = new Dictionary<Vector2, Dictionary<int, ForestScript>>();
+        ShrineManager.shrines = new Dictionary<Vector2, List<ShrineGrid>>();
+        WaterManager.waterBodies = new Dictionary<Vector2, List<GameObject>>();
+        DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
     }
 
     // Changes the WaterFire/EarthAir values at chunk by WaterFire:delta.x,EarthAir:delta.y
@@ -139,6 +168,29 @@ public class GenerationManager : MonoBehaviour {
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
         return done;
     }
+
+    /*
+    private IEnumerator coLoadUnload(Vector2 position) {
+        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+
+        unloadChunks(position);
+        unloadTrees(position);
+        unloadShrines(position);
+        unloadDoodads(position);
+        loadChunks(position);
+        detailChunks(position);
+        undetailChunks(position);
+        loadTrees(position);
+        loadShrines(position);
+        loadDoodads(position);
+
+        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+
+        yield return "";
+    }
+    */
 
     private void initiateChunks(Vector2 position) {
         for(float x = position.x - chunk_load_dist; x <= position.x + chunk_load_dist; x++) {

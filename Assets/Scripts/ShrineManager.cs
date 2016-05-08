@@ -9,7 +9,7 @@ public class ShrineManager : MonoBehaviour {
     public int shrine_probability = 1;
 
     private GenerationManager gen_manager;
-    private static Dictionary<Vector2, List<ShrineGrid>> shrines;
+    public static Dictionary<Vector2, List<ShrineGrid>> shrines;
 
 	// Use this for initialization
 	void Awake () {

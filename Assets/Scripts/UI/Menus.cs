@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Menus : MonoBehaviour {
     public int mainMenu = 0;                    // -1 for no menu
     public int pauseMenu = 0;                   // -1 for no menu
-    public List<GameObject> menuScreens;        // first one should be the initial pause screen
+    public List<GameObject> menuScreens;
     public List<Vector2> menuPositions;         // -1 to 1. 0 is middle of screen
     public List<RectTransform> menuBackdrops;   // menus can use the same backgrounds or have no background
 
@@ -42,15 +42,23 @@ public class Menus : MonoBehaviour {
     
     private void adjustScreen(int menuNum) {
         menuScreens[menuNum].GetComponent<RectTransform>().anchoredPosition = new Vector2(menuPositions[menuNum].x * Screen.width, menuPositions[menuNum].y * Screen.height) / 2;
-        if(menuBackdrops[menuNum]) menuBackdrops[menuNum].sizeDelta = new Vector2(Screen.width, Screen.height);
+        if(menuBackdrops[menuNum]) {
+            float aspectRatio = menuBackdrops[menuNum].sizeDelta.x / menuBackdrops[menuNum].sizeDelta.y;
+            if((float)Screen.width / (float)Screen.height > aspectRatio) menuBackdrops[menuNum].sizeDelta = new Vector2(Screen.width, Screen.width / aspectRatio);
+            else menuBackdrops[menuNum].sizeDelta = new Vector2(Screen.height * aspectRatio, Screen.height);
+        }
     }
 
     public int getCurrentMenu() {
         return currentMenu;
     }
 
-    public void loadScene(string sceneName) {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    public void returnToTitle() {
+        Globals.GenerationManagerScript.deleteWorld();
+        Random.seed = (int)System.DateTime.Now.Ticks;
+        Globals.MenusScript.GetComponent<MainMenu>().setupMain();
+        Globals.mode = -1;
+        switchToInitial();
     }
 
     public void quit() {

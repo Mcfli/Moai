@@ -18,7 +18,7 @@ public class WaterManager : MonoBehaviour {
     private float defaultFogDist;
 
     // Chunk -> water object list dictionary
-    private static Dictionary<Vector2, List<GameObject>> waterBodies;
+    public static Dictionary<Vector2, List<GameObject>> waterBodies;
     
     // References
     private GameObject waterParent;

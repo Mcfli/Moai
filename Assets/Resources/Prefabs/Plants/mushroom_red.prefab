@@ -483,7 +483,7 @@ MonoBehaviour:
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5
   scaleVariance: 0.25
-  ratioAnimUpdates: 0
+  ratioAnimUpdates: 0.001
   stateAnimationNames:
   - redMushroom_growing
   - 
@@ -497,7 +497,6 @@ MonoBehaviour:
   - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
   - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
   propogateDuringState: 000101
-  heightBone: {fileID: 180094}
   heightAxis: 88
   collisionRadiusMinMax: {x: 0.3, y: 0.65}
   collisionVSTime:

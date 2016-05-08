@@ -40,22 +40,27 @@ public class Globals : MonoBehaviour {
                                                                 // FindObjectsOfType added to a shrine
 
     public static Dictionary<string, int> settings = new Dictionary<string, int>(){
+        // Gameplay
         { "Crosshair", 1 },     // bool
-        { "FOV", 90 },          // bool
-        { "WaitCine", 1},       // bool
+        { "FOV", 90 },          // int 30-110
+        { "DOF", 1 },           // bool
+        { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool
 
+        // Controls
+        { "InvertMouse", 0 },   // bool
+        { "Sensitivity", 4 },   // int 1-10
+
+        // Video
         { "Resolution", 0 },    // int (index of Screen.resolutions)
         { "Screenmode", 0 },    // 0 full, 1 windowed, 2 borderless
         { "LoadDist", 8 },      // int
         { "Brightness", 50 },   // percent 0-100
-            
-        { "InvertMouse", 0 },   // bool
-        { "Sensitivity", 100 }, // percent 1-200
 
-        { "Master", 100 },      // percent 0-100
-        { "Music", 75 },        // percent 0-100
-        { "SFX", 100 },         // percent 0-100
+        // Audio
+        { "MasterVol", 100 },   // percent 0-100
+        { "MusicVol", 75 },     // percent 0-100
+        { "SFXVol", 100 },      // percent 0-100
     };
 
     public static T CopyComponent<T>(GameObject destination, T source) where T : Component{
