@@ -35,7 +35,7 @@ public class Obelisk : MonoBehaviour {
     private bool isDone = false;
 
     // References
-    private Renderer renderer;
+    private Renderer m_renderer;
     private GameObject islandInstance;
 
     // Requirements
@@ -64,7 +64,7 @@ public class Obelisk : MonoBehaviour {
 	void Start () {
         requirements = new Dictionary<string, int>();
         generateRequirements();
-        renderer = GetComponentInChildren<Renderer>();
+        m_renderer = GetComponentInChildren<Renderer>();
         initMaterials();
         createIsland();
 		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();
@@ -249,7 +249,7 @@ public class Obelisk : MonoBehaviour {
 
     void initMaterials()
     {
-        Material[] tempMats = renderer.sharedMaterials;
+        Material[] tempMats = m_renderer.sharedMaterials;
         // Air
         tempMats[2] = baseMat;
         tempMats[1] = baseMat;
@@ -277,7 +277,7 @@ public class Obelisk : MonoBehaviour {
         tempMats[21] = baseMat;
         tempMats[22] = baseMat;
         tempMats[23] = baseMat;
-        renderer.sharedMaterials = tempMats;
+        m_renderer.sharedMaterials = tempMats;
         dullIndicators();
     }
 
@@ -289,7 +289,7 @@ public class Obelisk : MonoBehaviour {
         int waterLevel = Mathf.Min(requirements["water"], Globals.waterStars.Count);
         // Light 
         // Dull the active slots
-        Material[] tempMats = renderer.sharedMaterials;
+        Material[] tempMats = m_renderer.sharedMaterials;
         if (!isDone)
         {
             // Air
@@ -356,15 +356,15 @@ public class Obelisk : MonoBehaviour {
             tempMats[22]   = completedMat;
             tempMats[23] = completedMat;
         }
-        
-        renderer.sharedMaterials = tempMats;
+
+        m_renderer.sharedMaterials = tempMats;
         litUp = true;
     }
 
     void dullIndicators()
     {
         // Dull the active slots
-        Material[] tempMats = renderer.sharedMaterials;
+        Material[] tempMats = m_renderer.sharedMaterials;
 
         if (!isDone)
         {
@@ -441,7 +441,7 @@ public class Obelisk : MonoBehaviour {
             tempMats[23] = baseMat;
         }
 
-        renderer.sharedMaterials = tempMats;
+        m_renderer.sharedMaterials = tempMats;
         litUp = false;
     }
 

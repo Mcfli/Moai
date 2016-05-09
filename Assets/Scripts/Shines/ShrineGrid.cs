@@ -104,6 +104,10 @@ public class ShrineGrid : MonoBehaviour
 
     }
 
+    public string getElement() {
+        return curElement;
+    }
+
     private void populateValidItems()
     {
         // Find all biomes within our current WaterFire-EarthAir vector box
@@ -195,6 +199,8 @@ public class ShrineGrid : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             GameObject go = collider.gameObject;
+            InteractableObject io = go.GetComponent<InteractableObject>();
+            if(io) if(Globals.PlayerScript.getHeldObj() == io) continue;
             if(go.GetComponent<PuzzleObject>() != null)
                 curState.Add(go);
         }
@@ -202,7 +208,7 @@ public class ShrineGrid : MonoBehaviour
 
     private void checkDone()
     {
-        List<GameObject> itemsCounted = new List<GameObject>();
+        List<GameObject> itemsCounted = curState;
         Dictionary<int, bool> completed = new Dictionary<int, bool>();
         
         bool done = true;
@@ -220,10 +226,9 @@ public class ShrineGrid : MonoBehaviour
             // if we don't currently have the desired item in the box, it can't be complete   
             bool found = false;
 
-            for (int i = 0; i < curState.Count; i++)
+            for (int i = 0; i < itemsCounted.Count; i++)
             {
-                GameObject gameObj = curState[i];
-                if (itemsCounted.IndexOf(gameObj) != -1) continue;
+                GameObject gameObj = itemsCounted[i];
                 PuzzleObject po = gameObj.GetComponent<PuzzleObject>();
 
                 if (po == null)
@@ -233,9 +238,10 @@ public class ShrineGrid : MonoBehaviour
 
                 if (po.Equals(tarObj))
                 {
-                    itemsCounted.Add(gameObj);
+                    itemsCounted.RemoveAt(i);
                     found = true;
                     completed[index] = true;
+                    break;
                 }
             }
             if (!found)

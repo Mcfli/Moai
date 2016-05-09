@@ -22,20 +22,21 @@ public class ShrineActivator : MonoBehaviour {
 	
 	}
 
-    void OnMouseDown()
+    public bool activate()
     {
         if (Time.timeScale > 0 && parentShrine != null && !parentShrine.isDone)
         {
-            
-            float dist = Vector3.Distance(transform.position, Globals.Player.transform.position);
-            if (dist < 10f)
-            {
-                parentShrine.changeElement(element);
+            parentShrine.changeElement(element);
 
-                //Shrine Completion Sound
-                ShrineSuccess.PlayOneShot(ShrineComplete, .5F);
-            }
+            //Shrine Completion Sound
+            ShrineSuccess.PlayOneShot(ShrineComplete, .5F);
+            return true;
         }
+        return false;
         
+    }
+
+    public bool active() {
+        return parentShrine.getElement() == element;
     }
 }
