@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: flower
+  ID: daisy
   image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
   imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
 --- !u!114 &11499290

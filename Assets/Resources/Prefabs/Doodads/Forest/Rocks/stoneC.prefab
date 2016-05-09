@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: rock
-  image: {fileID: 2800000, guid: 69b7c83f540e53d429589d6d6bb59476, type: 3}
+  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
+  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
