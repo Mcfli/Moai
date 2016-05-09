@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9aed27220686014cb443fbf7470bd09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabDistance: 5
+  grabDistance: 7
   grabSphereRadius: 0
   minWarpOnWaitDist: 1
   collisionLayers:
