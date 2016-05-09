@@ -95,8 +95,8 @@ public class Player : MonoBehaviour {
 
         //Holding Objects stuff
         if (Input.GetButtonDown("Use") && Globals.mode == 0 && Globals.time_scale == 1) {
-            if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
-            else if (TryUseObject()) { }
+            if(TryUseObject()) { }
+            else if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
             else DropObject();
         }
         if(heldObj != null) followHand(heldObj, heldObjSize);
@@ -184,12 +184,22 @@ public class Player : MonoBehaviour {
     }
 
     public bool canUse() {
-        if (heldObj != null) return heldObj.canUse(GetHover());
+        if(heldObj == null) {
+            if(GetHover().collider) {
+                ShrineActivator sa = GetHover().collider.gameObject.GetComponent<ShrineActivator>();
+                if(sa) return !sa.active();
+            }
+        } else return heldObj.canUse(GetHover());
         return false;
     }
 
     private bool TryUseObject() {
-        if (heldObj != null) return heldObj.tryUse(GetHover());
+        if(heldObj == null) {
+            if(GetHover().collider) {
+                ShrineActivator sa = GetHover().collider.gameObject.GetComponent<ShrineActivator>();
+                if(sa) return sa.activate();
+            }
+        } else return heldObj.tryUse(GetHover());
         return false;
     }
     
