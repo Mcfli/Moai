@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11458152}
   - 33: {fileID: 3370970}
   - 23: {fileID: 2375072}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: swampLotus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

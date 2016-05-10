@@ -14,7 +14,7 @@ GameObject:
   - 136: {fileID: 13635206}
   - 114: {fileID: 11434824}
   - 54: {fileID: 5482888}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: doodad_swampFlowerB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
