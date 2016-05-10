@@ -16,7 +16,7 @@ public class WaterBody : MonoBehaviour {
     private bool settled = false;
     private bool removedForests = false;
     private bool expanded = false;
-    private bool setBelow = false;
+    public bool setBelow = false;
     
 
     private int edgeIndex = 0; // keeps track of where in the search of vertices for
@@ -60,6 +60,7 @@ public class WaterBody : MonoBehaviour {
             destroyOverlappingTrees();
         else if (!setBelow)
             moveCornersDown();
+        
     }
 
     // Drops the water body to the lwoest nearby point
@@ -131,16 +132,13 @@ public class WaterBody : MonoBehaviour {
     // Right now acually destroys all overlapping forests
     private void destroyOverlappingTrees()
     {
-        Collider[] colliders = Physics.OverlapBox(center,size*0.5f,Quaternion.identity,clearMask);
-       
-        foreach(Collider collider in colliders)
+        Vector3 halfExtents = new Vector3(size.x*0.45f, 100, size.z*0.45f);
+        Collider[] colliders = Physics.OverlapBox(center + Vector3.down * 100, 
+            halfExtents,Quaternion.identity,clearMask);
+        foreach (Collider collider in colliders)
         {
-            if (collider.gameObject == null|| collider.gameObject.transform.parent == null) continue;
-            TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
-            if (tree == null)
-                Destroy(collider.gameObject);
-            else
-                Destroy(tree);
+            if (collider.gameObject == null) continue;
+            Destroy(collider.gameObject);
         }
         
         removedForests = true;
