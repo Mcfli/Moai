@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3356056}
   - 23: {fileID: 2304092}
   - 135: {fileID: 13567700}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: bushes2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

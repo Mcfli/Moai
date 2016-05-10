@@ -14,7 +14,7 @@ GameObject:
   - 54: {fileID: 5455358}
   - 114: {fileID: 11442110}
   - 114: {fileID: 11425034}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: rock17
   m_TagString: Untagged
   m_Icon: {fileID: 0}

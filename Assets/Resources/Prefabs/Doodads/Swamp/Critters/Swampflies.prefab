@@ -11,7 +11,8 @@ GameObject:
   - 198: {fileID: 19859978}
   - 199: {fileID: 19990584}
   - 114: {fileID: 11473610}
-  m_Layer: 15
+  - 135: {fileID: 13531850}
+  m_Layer: 14
   m_Name: Swampflies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,6 +43,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleVel: 1
+--- !u!135 &13531850
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19859978
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -12,7 +12,7 @@ GameObject:
   - 199: {fileID: 19993618}
   - 114: {fileID: 11426642}
   - 135: {fileID: 13536336}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Fireflies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
