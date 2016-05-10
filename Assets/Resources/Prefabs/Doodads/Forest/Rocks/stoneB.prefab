@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: rock
-  image: {fileID: 2100000, guid: b32ff87446468f341b31b1acc41fb205, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 15702a8d6d671124d858ca10b96b1dec, type: 2}
+  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
+  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
 --- !u!114 &11444842
 MonoBehaviour:
   m_ObjectHideFlags: 1

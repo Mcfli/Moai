@@ -8,7 +8,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 443816}
-  m_Layer: 15
+  - 135: {fileID: 13569756}
+  m_Layer: 14
   m_Name: Butterflies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +27,7 @@ GameObject:
   - 198: {fileID: 19843498}
   - 199: {fileID: 19943666}
   - 114: {fileID: 11484000}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Butterflies1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +45,7 @@ GameObject:
   - 198: {fileID: 19880858}
   - 199: {fileID: 19935366}
   - 114: {fileID: 11418646}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Butterflies2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +63,7 @@ GameObject:
   - 198: {fileID: 19851116}
   - 199: {fileID: 19981116}
   - 114: {fileID: 11489932}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Butterflies3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,6 +157,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleVel: 1
+--- !u!135 &13569756
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19843498
 ParticleSystem:
   m_ObjectHideFlags: 1

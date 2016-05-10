@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 490886}
   - 33: {fileID: 3338098}
   - 23: {fileID: 2319818}
+  - 135: {fileID: 13548956}
   m_Layer: 14
   m_Name: bushesA
   m_TagString: Untagged
@@ -62,6 +63,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147566}
   m_Mesh: {fileID: 4300000, guid: ae3dfd0c08e68474a9e672092de45c54, type: 3}
+--- !u!135 &13548956
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.1178095
+  m_Center: {x: 0.038823426, y: 0.13799503, z: 0.0072425026}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

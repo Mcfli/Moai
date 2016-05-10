@@ -45,8 +45,8 @@ MonoBehaviour:
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
-  - 0.75
-  - 0.25
+  - 0.8
+  - 0.2
   SkyGradients:
   - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
   - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}

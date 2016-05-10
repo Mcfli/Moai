@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPath: Prefabs/Plants/icespike
-  seed_object: {fileID: 0}
+  seed_object: {fileID: 192844, guid: e774fff6dccd04d4cb1ef2ec1b56217d, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5
   scaleVariance: 0.25
