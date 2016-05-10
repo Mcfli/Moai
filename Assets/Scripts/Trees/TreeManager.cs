@@ -47,8 +47,8 @@ public class TreeManager : MonoBehaviour {
                     
                     RaycastHit hit;
                     Ray rayDown = new Ray(new Vector3(position.x, 10000000, position.z), Vector3.down);
-                    if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-                        if(hit.point.y < Globals.water_level) continue;
+                    if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain","Water"))) {
+                        if(hit.collider.GetComponent<WaterBody>() != null) continue;
                         else position.y = hit.point.y - 1;
                     } else continue;
 

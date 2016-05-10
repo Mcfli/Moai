@@ -8,12 +8,13 @@ public class DoodadManager : MonoBehaviour
     private GenerationManager gen_manager;
     public static Dictionary<Vector2, List<GameObject>> loaded_doodads;
 
-
+    private LayerMask mask;
     // Use this for initialization
     void Awake()
     {
         gen_manager = gameObject.GetComponent<GenerationManager>();
         loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
+        mask = LayerMask.GetMask("Terrain", "Water");
     }
 
     public void loadDoodads(Vector2 key, Biome biome){
@@ -83,13 +84,17 @@ public class DoodadManager : MonoBehaviour
         Vector3 pos = new Vector3(position.x, 10000000, position.y);
         RaycastHit hit;
         Ray rayDown = new Ray(pos, Vector3.down);
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))){
-            pos.y = hit.point.y;
-            GameObject d = Instantiate(doodad, pos + doodad.transform.position, doodad.transform.rotation) as GameObject;
-            d.transform.Rotate(Vector3.forward*Random.Range(0f,360f));
-            InteractableObject o = d.GetComponent<InteractableObject>();
-            if(o) o.plant(d.transform.position);
-            return d;
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, mask)){
+            if(hit.collider.gameObject.GetComponent<WaterBody>() == null)
+            {
+                pos.y = hit.point.y;
+                GameObject d = Instantiate(doodad, pos + doodad.transform.position, doodad.transform.rotation) as GameObject;
+                d.transform.Rotate(Vector3.forward * Random.Range(0f, 360f));
+                InteractableObject o = d.GetComponent<InteractableObject>();
+                if (o) o.plant(d.transform.position);
+                return d;
+            }
+            
         }
         return null;
     }
