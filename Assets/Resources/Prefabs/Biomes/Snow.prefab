@@ -39,8 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.2
-  EarthAir: 0.2
+  WaterFire: 0.4
+  EarthAir: 0.4
   weatherTypes:
   - {fileID: 11431138, guid: 3dc4b1975c90d3b4b9a9dc2a3464decb, type: 2}
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
@@ -107,8 +107,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes: []
-  doodads: []
-  doodadDensity: 
+  bigDoodads: []
+  bigDoodadChance: []
+  bigDoodadRadius: []
+  smallDoodads: []
+  smallDoodadChance: []
+  numOfSmallDoodads: {x: 0, y: 0}
+  doodadClusterRadius: {x: 0, y: 0}
+  doodadDensity: 0
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 16
@@ -133,8 +139,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  lakeChance: 0
   lakeCount: 0
   lakeSize: {x: 0, y: 0, z: 0}
+  lakeMaxLength: 0
   waterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
 --- !u!1001 &100100000
 Prefab:
