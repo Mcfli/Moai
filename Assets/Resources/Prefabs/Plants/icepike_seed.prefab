@@ -116,8 +116,8 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 4294957001
-  dirtMound: {fileID: 118434, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
-  dirtMoundOffset: {x: 0, y: -0.25, z: 0}
+  dirtMound: {fileID: 161524, guid: 66ef956a168627d42818ee98ff2f5789, type: 2}
+  dirtMoundOffset: {x: 0, y: -0.5, z: 0}
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!135 &13564042

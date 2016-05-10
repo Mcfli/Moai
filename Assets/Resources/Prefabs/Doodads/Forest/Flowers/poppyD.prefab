@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: flower
-  image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
+  image: {fileID: 2100000, guid: c3526d409cd9bda4ca07d5bb4c243e7d, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 9e0fc3a93bc552d44a3092e2ff511791, type: 2}
 --- !u!114 &11477658
 MonoBehaviour:
   m_ObjectHideFlags: 1

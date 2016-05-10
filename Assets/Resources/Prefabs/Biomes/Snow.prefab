@@ -108,15 +108,61 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes:
   - {fileID: 142420, guid: 0d9e39619741946499b0f2bed603153f, type: 2}
-  bigDoodads: []
-  bigDoodadChance: []
-  bigDoodadRadius: []
-  smallDoodads: []
-  smallDoodadChance: []
-  numOfSmallDoodads: {x: 0, y: 0}
-  doodadClusterRadius: {x: 0, y: 0}
-  doodadDensity: 0
-  treeDensity: 2
+  - {fileID: 187382, guid: 20960e1533a1c7245bab5c916fda8ac8, type: 2}
+  bigDoodads:
+  - {fileID: 0}
+  bigDoodadChance:
+  - 1
+  bigDoodadRadius:
+  - 0
+  smallDoodads:
+  - {fileID: 156636, guid: 7b8c9e59e5412d24a85707be74d952ff, type: 2}
+  - {fileID: 163366, guid: 267468faa53237044b764b6422722140, type: 2}
+  - {fileID: 139806, guid: 6bc05ca6c15f0d64cba4e0e75eca6d0b, type: 2}
+  - {fileID: 166160, guid: 5025265de060d0140a74a15b0e6a9970, type: 2}
+  - {fileID: 171222, guid: 496ab5383811b564db9591e14cefe739, type: 2}
+  - {fileID: 172556, guid: 972ba84d0a809134c91e5e2b0252f545, type: 2}
+  - {fileID: 120536, guid: 6f40927c13d22194188a38f631f1ea1b, type: 2}
+  - {fileID: 121420, guid: 17eaeb912897e3344aeb13a34b45e5c1, type: 2}
+  - {fileID: 157472, guid: 4b2ec1562b0591b43be482fad6358d97, type: 2}
+  - {fileID: 166330, guid: 914acd81e18a5c6488c4c1007564ee9f, type: 2}
+  - {fileID: 171698, guid: ae8b06ac5e06f804db9e49764cf9e7dc, type: 2}
+  - {fileID: 129510, guid: 312a8fa5ca1526144acdf2ab24deecbb, type: 2}
+  - {fileID: 110602, guid: 00346f79bbe0634459bc10479a04e66a, type: 2}
+  - {fileID: 190856, guid: 4cedcf4c959015746af64fc40cb6db47, type: 2}
+  - {fileID: 116518, guid: b6a8f759d250dce42a1c8ae8c95060b4, type: 2}
+  - {fileID: 188480, guid: 8413a3471f1474640a1ff38382f6d8e0, type: 2}
+  - {fileID: 150448, guid: f6fc9486bc226c7428d61a9300547679, type: 2}
+  - {fileID: 155200, guid: 488b1cf48fa6a1149ab1115b3bb9d4f1, type: 2}
+  - {fileID: 142536, guid: 26ccd58f7516ad74e801ca84b39beecf, type: 2}
+  - {fileID: 134574, guid: b8d56b591d270514db01c68064cfb22e, type: 2}
+  - {fileID: 183820, guid: 79fe732fc87ef5f4998e50b81cc91d76, type: 2}
+  smallDoodadChance:
+  - 6
+  - 6
+  - 6
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  numOfSmallDoodads: {x: 5, y: 7}
+  doodadClusterRadius: {x: 10, y: 20}
+  doodadDensity: 4
+  treeDensity: 1
   forestRadius: 50
   forestMaxTrees: 8
   mixedForests: 0

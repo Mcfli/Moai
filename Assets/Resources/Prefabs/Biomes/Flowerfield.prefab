@@ -45,8 +45,8 @@ MonoBehaviour:
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
-  - 0.7
-  - 0.3
+  - 0.8
+  - 0.2
   SkyGradients:
   - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
   - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
@@ -107,8 +107,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes: []
-  doodads: []
-  doodadDensity: 
+  bigDoodads: []
+  bigDoodadChance: []
+  bigDoodadRadius: []
+  smallDoodads: []
+  smallDoodadChance: []
+  numOfSmallDoodads: {x: 0, y: 0}
+  doodadClusterRadius: {x: 0, y: 0}
+  doodadDensity: 0
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 16
@@ -137,6 +143,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  lakeChance: 0
+  lakeCount: 0
+  lakeSize: {x: 0, y: 0, z: 0}
+  lakeMaxLength: 0
+  waterMaterial: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
