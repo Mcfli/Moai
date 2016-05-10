@@ -69,10 +69,10 @@ public class CheatConsole : MonoBehaviour {
 
     void addStars()
     {
-        GameObject aStar = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
-        GameObject eStar = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
-        GameObject fStar = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
-        GameObject wStar = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
+        GameObject aStar = Instantiate(airStar, Globals.Player.transform.position, Quaternion.identity) as GameObject;
+        GameObject eStar = Instantiate(earthStar,   Globals.Player.transform.position, Quaternion.identity) as GameObject;
+        GameObject fStar = Instantiate(fireStar,    Globals.Player.transform.position, Quaternion.identity) as GameObject;
+        GameObject wStar = Instantiate(waterStar,   Globals.Player.transform.position, Quaternion.identity) as GameObject;
 
         Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
 
