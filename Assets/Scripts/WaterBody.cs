@@ -16,8 +16,9 @@ public class WaterBody : MonoBehaviour {
     private bool settled = false;
     private bool removedForests = false;
     private bool expanded = false;
-    public bool setBelow = false;
-    
+    private bool setBelow = false;
+    private bool addedCollider = false;
+
 
     private int edgeIndex = 0; // keeps track of where in the search of vertices for
                                 // setting the edges below the terrain
@@ -38,7 +39,7 @@ public class WaterBody : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!settled || !expanded ||!setBelow) fitToTerrain();
+        if (!settled || !expanded ||!setBelow || !removedForests || !addedCollider) fitToTerrain();
 	}
 
     // Returns whether this body overlaps another
@@ -60,6 +61,8 @@ public class WaterBody : MonoBehaviour {
             destroyOverlappingTrees();
         else if (!setBelow)
             moveCornersDown();
+        else if (!addedCollider)
+            addCollider();
         
     }
 
@@ -260,6 +263,13 @@ public class WaterBody : MonoBehaviour {
         {
             setBelow = true;
         }
+    }
+
+    private void addCollider()
+    {
+        gameObject.AddComponent<BoxCollider>();
+
+        addedCollider = true;
     }
 
     private void calculateVertices()
