@@ -174,7 +174,7 @@ MonoBehaviour:
   earthIndicatorDull: {fileID: 2100000, guid: 9db34aed4f7ac5c419836186a934de33, type: 2}
   earthIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
   baseMat: {fileID: 2100000, guid: 5d8c1eb0016499d4587f9d6256a7e3a1, type: 2}
-  completedMat: {fileID: 0}
+  completedMat: {fileID: 2100000, guid: 641667712c21ba846b1027edfc689232, type: 2}
   saved_position: {x: 0, y: 0, z: 0}
   saved_rotation: {x: 0, y: 0, z: 0, w: 0}
   saved_scale: {x: 0, y: 0, z: 0}
