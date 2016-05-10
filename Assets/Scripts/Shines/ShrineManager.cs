@@ -13,13 +13,13 @@ public class ShrineManager : MonoBehaviour {
 
     private GenerationManager gen_manager;
     public static Dictionary<Vector2, List<ShrineGrid>> shrines;
-    public static Dictionary<Vector2, GameObject> obelisks;
+    public static Dictionary<Vector2, Obelisk> obelisks;
 
     // Use this for initialization
     void Awake () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
 		shrines = new Dictionary<Vector2, List<ShrineGrid>>();
-        obelisks = new Dictionary<Vector2, GameObject>();
+        obelisks = new Dictionary<Vector2, Obelisk>();
 	}
 	
 	// Update is called once per frame
@@ -66,8 +66,8 @@ public class ShrineManager : MonoBehaviour {
                 Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
                 if (checkHeights(position))
                 {
-                    obelisks[chunk] = Instantiate(obelisk_prefab, position, Quaternion.Euler(0, 0, 0)) as GameObject;
-                    
+                    GameObject obelisk  = Instantiate(obelisk_prefab, position, Quaternion.Euler(0, 0, 0)) as GameObject;
+                    saveObelisk(chunk, obelisk);
                     break;
                 }
             }
@@ -151,7 +151,7 @@ public class ShrineManager : MonoBehaviour {
     public void saveObelisk(Vector2 chunk, GameObject obelisk)
     {
         obelisk.GetComponent<Obelisk>().saveTransforms();
-        obelisks[chunk] = obelisk;
+        obelisks[chunk] = obelisk.GetComponent<Obelisk>();
     }
 
 	public void unloadShrines(int x, int y)
@@ -218,11 +218,9 @@ public class ShrineManager : MonoBehaviour {
 
         if (obelisks.ContainsKey(key))
         {
-            GameObject obelisks_in_chunk = obelisks[key];
-            Obelisk obelisk = obelisks_in_chunk.GetComponent<Obelisk>();
+            Obelisk obelisk = obelisks[key];
             GameObject new_obelisk = Instantiate(obelisk_prefab, obelisk.saved_position, obelisk.saved_rotation) as GameObject;
             new_obelisk.GetComponent<Obelisk>().copyFrom(obelisk);
-            obelisks[key] = new_obelisk;
         }
         else
         {

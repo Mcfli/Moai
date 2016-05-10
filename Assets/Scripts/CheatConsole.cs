@@ -12,6 +12,8 @@ public class CheatConsole : MonoBehaviour
     private GameObject fireStar;
     private GameObject waterStar;
 
+    private GameObject puzzleFinisher;
+
     private bool active = true;
     void Start()
     {
@@ -19,6 +21,7 @@ public class CheatConsole : MonoBehaviour
         earthStar = Resources.Load("Prefabs/Stars/star_earth") as GameObject;
         fireStar = Resources.Load("Prefabs/Stars/star_fire") as GameObject;
         waterStar = Resources.Load("Prefabs/Stars/star_water") as GameObject;
+        puzzleFinisher = Resources.Load("Prefabs/puzzleFinisher") as GameObject;
         console = GameObject.Find("Console").GetComponent<InputField>();
         toggleConsole();
     }
@@ -57,6 +60,11 @@ public class CheatConsole : MonoBehaviour
             Debug.Log("Adding one of each elemental star");
             addStars();
         }
+        else if (text.Equals("finish"))
+        {
+            Debug.Log("Creating puzzle finisher");
+            finishShrine();
+        }
         else
         {
             Debug.Log("Unrecognized Command");
@@ -85,5 +93,11 @@ public class CheatConsole : MonoBehaviour
         Globals.earthStars.Add(eStar);
         Globals.fireStars.Add(fStar);
         Globals.waterStars.Add(wStar);
+    }
+
+    // Create a shrine finisher at player
+    void finishShrine()
+    {
+        Instantiate(puzzleFinisher, Globals.Player.transform.position, Quaternion.identity);
     }
 }
