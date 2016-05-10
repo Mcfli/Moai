@@ -213,8 +213,8 @@ public class ForestScript : MonoBehaviour {
     private float findGround(Vector2 position, bool mindWater = true) { //returns -Mathf.Infinity if invalid
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(position.x, 10000000, position.y), Vector3.down);
-        if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-            if(hit.point.y < Globals.water_level && mindWater) return -Mathf.Infinity; //if it hits water
+        if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain","Water"))) {
+            if(mindWater && hit.collider.gameObject.GetComponent<WaterBody>() != null) return -Mathf.Infinity; //if it hits water
             else return hit.point.y;
         } else return -Mathf.Infinity; //if it didn't hit
     }

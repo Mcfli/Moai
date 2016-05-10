@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3327242}
   - 23: {fileID: 2363884}
   - 65: {fileID: 6556146}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: swampBamboo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

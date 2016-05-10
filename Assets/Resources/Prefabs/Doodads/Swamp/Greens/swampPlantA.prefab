@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 496204}
   - 33: {fileID: 3308876}
   - 23: {fileID: 2368920}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: swampPlantA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
