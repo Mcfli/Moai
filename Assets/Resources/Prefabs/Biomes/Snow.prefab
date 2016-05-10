@@ -106,7 +106,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes: []
+  treeTypes:
+  - {fileID: 142420, guid: 0d9e39619741946499b0f2bed603153f, type: 2}
   bigDoodads: []
   bigDoodadChance: []
   bigDoodadRadius: []

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 413138}
   - 33: {fileID: 3348952}
   - 23: {fileID: 2352502}
-  - 65: {fileID: 6513908}
+  - 64: {fileID: 6452910}
   m_Layer: 15
   m_Name: boulderB
   m_TagString: Untagged
@@ -63,8 +63,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149616}
   m_Mesh: {fileID: 4300004, guid: 0efb15fd7c572364cb6a49dfb6a84466, type: 3}
---- !u!65 &6513908
-BoxCollider:
+--- !u!64 &6452910
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -73,8 +73,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.509201, y: 3.4930136, z: 2.0314906}
-  m_Center: {x: 0.27210742, y: 0.20095752, z: 0.051338}
+  m_Convex: 0
+  m_Mesh: {fileID: 4300004, guid: 0efb15fd7c572364cb6a49dfb6a84466, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
