@@ -187,9 +187,9 @@ public class Mural : MonoBehaviour {
         // Update air side
         else if (element.Equals("air"))
         {
-            bool objectDone = (completed.ContainsKey(index) && completed[index]);
             foreach (PuzzleObject po in targetState)
             {
+                bool objectDone = (completed.ContainsKey(index) && completed[index]);
                 if (index == 0) tempMats[16]      = objectDone ? po.imageGlowing : po.image;
                 else if (index == 1) tempMats[18] = objectDone ? po.imageGlowing : po.image;
                 else if (index == 2) tempMats[17] = objectDone ? po.imageGlowing : po.image;
@@ -205,9 +205,9 @@ public class Mural : MonoBehaviour {
         // Update earth side
         else if (element.Equals("earth"))
         {
-            bool objectDone = (completed.ContainsKey(index) && completed[index]);
             foreach (PuzzleObject po in targetState)
             {
+                bool objectDone = (completed.ContainsKey(index) && completed[index]);
                 if (index == 0) tempMats[1]      = objectDone ? po.imageGlowing : po.image;
                 else if (index == 1) tempMats[0] = objectDone ? po.imageGlowing : po.image;
                 else if (index == 2) tempMats[2] = objectDone ? po.imageGlowing : po.image;
