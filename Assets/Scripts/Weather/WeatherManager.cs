@@ -61,7 +61,7 @@ public class WeatherManager : MonoBehaviour {
         }
 
         lastBiome = Globals.cur_biome;
-
+        ApplyImageSpace();
         if(activeParticleSystem)
         {
             InitializeIfNeeded();
@@ -156,8 +156,14 @@ public class WeatherManager : MonoBehaviour {
                     cameraAudio.Stop();
                 }
             }
-            Globals.cur_weather.imageSpace.applyToCamera();
+            
         }
+    }
+
+    private void ApplyImageSpace()
+    {
+        //if()
+        Globals.cur_weather.imageSpace.applyToCamera();
     }
 
     private void changeClouds(int amount) {

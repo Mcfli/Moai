@@ -49,8 +49,8 @@ MonoBehaviour:
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
-      value: 1
+    - time: 0.9942726
+      value: 0.53640425
       inSlope: 2
       outSlope: 2
       tangentMode: 0
@@ -81,6 +81,11 @@ MonoBehaviour:
       inSlope: 0
       outSlope: 0
       tangentMode: 0
+    - time: 0.2655688
+      value: 0.8114921
+      inSlope: 1.0874867
+      outSlope: 1.0874867
+      tangentMode: 0
     - time: 1
       value: 1
       inSlope: 0
@@ -88,8 +93,8 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
-  saturation: 0.7
+    m_RotationOrder: 0
+  saturation: 0.2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
