@@ -33,17 +33,21 @@ public class ChunkGenerator : MonoBehaviour {
 	}
 
 	public GameObject generate (Vector2 coordinates) {
-        Biome biome = genManager.chooseBiome(coordinates);
-        List<lakeStruct> lakes = new List<lakeStruct>();
+        
         GameObject chunk = new GameObject();
+        ChunkMeshes chunkMeshes = chunk.AddComponent<ChunkMeshes>();
+        chunkMeshes.coordinates = coordinates;
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + coordinates.x + "," + coordinates.y + ")";
-        ChunkMeshes chunkMeshes = chunk.AddComponent<ChunkMeshes>();
         chunk.transform.parent = TerrainParent.transform;
         MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
         mr.material = landMaterial;
         MeshFilter mf = chunk.AddComponent<MeshFilter>();
+        return chunk;
 
+        Biome biome = genManager.chooseBiome(coordinates);
+        List<lakeStruct> lakes = new List<lakeStruct>();
+        
 		chunkMeshes.lowMesh = new Mesh();
         chunkMeshes.lowMesh.name = "chunk (" + coordinates.x + ","+ coordinates.y + ") [l]";
 
@@ -264,72 +268,5 @@ public class ChunkGenerator : MonoBehaviour {
         colorChunk(chunk, chunk_size);
     }
 
-    private void ReCalcTriangles(Mesh mesh) {
-        Vector3[] oldVerts = mesh.vertices;
-        int[] triangles = mesh.triangles;
-        Vector3[] vertices = new Vector3[triangles.Length];
-        for (int i = 0; i < triangles.Length; i++){
-            vertices[i] = oldVerts[triangles[i]];
-            triangles[i] = i;
-        }
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        
-        mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
-    }
-
-    //assumes no shared vertices and returns no shared vertices
-    private void subDivide(Mesh mesh, Vector2 coordinates, int numOfDivisions) {
-        if(numOfDivisions < 1) return;
-        Vector3[] oldVerts = mesh.vertices;
-        Vector3[] vertices = new Vector3[oldVerts.Length * 4];
-        int[] triangles = new int[oldVerts.Length * 4];
-
-        int originalSeed = Random.seed;
-        for (int i = 0; i < oldVerts.Length; i += 3) {
-            Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
-            Random.seed = Globals.SeedScript.seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
-            hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), hypotMid.y + Random.Range(-detailDeviation, detailDeviation), hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
-            Vector3 midpoint1 = Vector3.Lerp(oldVerts[i+1], oldVerts[i+2], 0.5f);
-            Vector3 midpoint2 = Vector3.Lerp(oldVerts[i+2], oldVerts[i], 0.5f);
-            vertices[i * 4    ] = hypotMid;
-            vertices[i * 4 + 1] = oldVerts[i + 1];
-            vertices[i * 4 + 2] = midpoint1;
-
-            vertices[i * 4 + 3] = oldVerts[i + 2];
-            vertices[i * 4 + 4] = hypotMid;
-            vertices[i * 4 + 5] = midpoint1;
-
-            vertices[i * 4 + 6] = hypotMid;
-            vertices[i * 4 + 7] = oldVerts[i + 2];
-            vertices[i * 4 + 8] = midpoint2;
-
-            vertices[i * 4 + 9] = oldVerts[i];
-            vertices[i * 4 +10] = hypotMid;
-            vertices[i * 4 +11] = midpoint2;
-        }
-        Random.seed = originalSeed;
-        for(int i = 0; i < triangles.Length; i++) triangles[i] = i;
-
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-
-        if(numOfDivisions == 1) {
-            mesh.RecalculateBounds();
-            mesh.RecalculateNormals();
-        }else subDivide(mesh, coordinates, numOfDivisions - 1);
-    }
-
-    private struct lakeStruct
-    {
-        public Vector3 position;
-        public Vector3 size;
-
-        public lakeStruct(Vector3 pos,Vector3 siz)
-        {
-            position = pos;
-            size = siz;
-        }
-    }
+    
 }
