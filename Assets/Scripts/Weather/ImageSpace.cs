@@ -17,9 +17,9 @@ public class ImageSpace : MonoBehaviour {
     {
         main_curves = Camera.main.GetComponent<ColorCorrectionCurves>();
         
-        main_curves.redChannel = curveLerp(redChannel);
-        main_curves.greenChannel = greenChannel;
-        main_curves.blueChannel = blueChannel;
+        main_curves.redChannel = curveLerp(main_curves.redChannel,redChannel,Time.deltaTime*adjust_speed);
+        main_curves.greenChannel = curveLerp(main_curves.greenChannel, greenChannel, Time.deltaTime * adjust_speed);
+        main_curves.blueChannel = curveLerp(main_curves.blueChannel, blueChannel, Time.deltaTime * adjust_speed);
         main_curves.UpdateParameters();
         
         main_curves.saturation = Mathf.Lerp(main_curves.saturation,saturation,Time.deltaTime*adjust_speed);
