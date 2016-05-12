@@ -30,6 +30,7 @@ public class Player : MonoBehaviour {
     public float waitCamDistance = 60.0f;
     private float camDistance = 60.0f;
     private float theta = 0.0f;
+	public float zoomInSpeed = 5.0f;
 
     void Awake() {
         thisCollider = GetComponent<Collider>();
@@ -82,15 +83,27 @@ public class Player : MonoBehaviour {
             }
         }
         if(Globals.time_scale == 1) {
-            if(inCinematic) {
-                inCinematic = false;
-                mainCamera.transform.localPosition = playerCamPos;
-                mainCamera.transform.localRotation = playerCamRot;
-                playerModel.SetActive(false);
-                camDistance = waitCamDistance;
-                theta = 0.0f;
-            }
-            firstPersonCont.enabled = true;
+			if(Vector3.Distance(mainCamera.transform.localPosition, playerCamPos) > 20.0f)
+			{
+				Vector3 direction = Vector3.Normalize (playerCamPos - mainCamera.transform.localPosition);
+				mainCamera.transform.localPosition += direction * zoomInSpeed;
+				//mainCamera.transform.localPosition = Vector3.Lerp (mainCamera.transform.localPosition, playerCamPos, Time.deltaTime * camLerpPlayer);
+				//mainCamera.transform.localRotation = Quaternion.Lerp (mainCamera.transform.localRotation, playerCamRot, Time.deltaTime * camLerpPlayer);
+			}
+			else
+			{
+				if(inCinematic) {
+					inCinematic = false;
+
+					mainCamera.transform.localPosition = playerCamPos;
+					mainCamera.transform.localRotation = playerCamRot;
+					playerModel.SetActive(false);
+					camDistance = waitCamDistance;
+					theta = 0.0f;
+				}
+				firstPersonCont.enabled = true;
+			}
+            
         }
 
         //Holding Objects stuff

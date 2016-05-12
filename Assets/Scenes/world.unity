@@ -2850,6 +2850,7 @@ MonoBehaviour:
   pickupDropAudio: {fileID: 0}
   cinematicTimeScale: 100
   waitCamDistance: 60
+  zoominSpeed: 5
 --- !u!82 &1837165588
 AudioSource:
   m_ObjectHideFlags: 0
