@@ -7,7 +7,7 @@ namespace UnityStandardAssets.ImageEffects
     [RequireComponent (typeof(Camera))]
     [AddComponentMenu ("Image Effects/Camera/Depth of Field (Lens Blur, Scatter, DX11)") ]
     public class DepthOfField : PostEffectsBase {
-
+        public bool dynamicFocus = true;
         public bool  visualizeFocus = false;
         public float focalLength = 10.0f;
         public float focalSize = 0.05f;
@@ -158,8 +158,20 @@ namespace UnityStandardAssets.ImageEffects
             internalBlurWidth = Mathf.Max(maxBlurSize, 0.0f);
 
             // focal & coc calculations
-
-            focalDistance01 = (focalTransform) ? (cachedCamera.WorldToViewportPoint (focalTransform.position)).z / (cachedCamera.farClipPlane) : FocalDistance01 (focalLength);
+            if(!dynamicFocus)
+                focalDistance01 = (focalTransform) ? (cachedCamera.WorldToViewportPoint (focalTransform.position)).z / (cachedCamera.farClipPlane) : FocalDistance01 (focalLength);
+            else
+            {
+                float dist = 0;
+                RaycastHit hit;
+                Ray forward = new Ray(transform.position, transform.forward);
+                if (Physics.SphereCast(forward, 0.5f, out hit))
+                {
+                    dist = (cachedCamera.WorldToViewportPoint(hit.point)).z / (cachedCamera.farClipPlane);
+                }
+                focalDistance01 = dist;
+            }
+                
             dofHdrMaterial.SetVector("_CurveParams", new Vector4(1.0f, focalSize, (1.0f / (1.0f - aperture) - 1.0f), focalDistance01));
 
             // possible render texture helpers
