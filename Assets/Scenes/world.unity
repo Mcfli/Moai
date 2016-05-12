@@ -253,8 +253,8 @@ MonoBehaviour:
   chunk_unload_dist: 12
   chunk_detail_dist: 1
   allottedLoadSeconds: 0.1
-  tree_load_dist: 2
-  tree_unload_dist: 3
+  tree_load_dist: 1
+  tree_unload_dist: 2
   biomes:
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
@@ -392,9 +392,9 @@ MonoBehaviour:
   obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
-  shrine_probability: 5
-  obelisk_probability: 20
-  obelisk_min_dist: 2
+  shrine_probability: 3
+  obelisk_probability: 5
+  obelisk_min_dist: 3
 --- !u!114 &188005519
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -329,7 +329,7 @@ public class ShrineGrid : MonoBehaviour
     private void killTrees()
     {
         Vector3 half_extents = new Vector3(size, 100000, size);
-        LayerMask tree_mask = LayerMask.GetMask("Tree");
+        LayerMask tree_mask = LayerMask.GetMask("Tree","Doodad","BigDoodad");
 
         Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
         for (int i = 0; i < colliders.Length; i++)
@@ -383,7 +383,7 @@ public class ShrineGrid : MonoBehaviour
 
         WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin,WaterFireEarthAirChangeMax);
         // Change the chunk
-        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
+        //GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
         GameObject star;
         Vector3 variation = new Vector3(Random.Range(-1000f,1000f), 0, Random.Range(-1000f, 1000f));
