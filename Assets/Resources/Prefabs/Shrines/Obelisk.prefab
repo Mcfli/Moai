@@ -192,7 +192,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -236,7 +236,7 @@ MonoBehaviour:
   - {fileID: 188550, guid: d49b4d3b26e234946b7ff6a52282d32a, type: 2}
   - {fileID: 129554, guid: 6a402b5b64419d84497b178aa9558b9d, type: 2}
   - {fileID: 199530, guid: 71c2aec8f2fafe6428b039c8ec8f8a7c, type: 2}
-  islandHeight: 1000
+  islandHeight: 700
   maxTotalReqs: 4
   minTotalReqs: 2
   teleportDelay: 10
