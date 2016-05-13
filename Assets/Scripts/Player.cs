@@ -122,9 +122,9 @@ public class Player : MonoBehaviour {
     private void checkUnderwater()
     {
         bool isUnder = false;
-        float xpos = transform.position.x;
-        float ypos = transform.position.y + cameraHeight + 10;
-        float zpos = transform.position.z;
+        float xpos = mainCamera.transform.position.x;
+        float ypos = mainCamera.transform.position.y;
+        float zpos = mainCamera.transform.position.z;
         // Check if player is in each lake in current chunk
         if (Globals.WaterManagerScript == null ||
             Globals.WaterManagerScript.lakesInChunk(GenerationManager.worldToChunk(transform.position)) == null)
