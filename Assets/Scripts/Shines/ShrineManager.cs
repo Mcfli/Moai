@@ -8,6 +8,7 @@ public class ShrineManager : MonoBehaviour {
     public float acceptable_heightDiff = 0.0f;
     public int max_tries = 1;
     public int shrine_probability = 1;
+    public int shrine_min_dist = 2;
     public int obelisk_probability = 5;
     public int obelisk_min_dist = 2;
 
@@ -29,6 +30,17 @@ public class ShrineManager : MonoBehaviour {
 
 	public void placeShrine(Vector3 chunk_pos, Vector2 chunk)
     {
+        for (int i = -shrine_min_dist; i <= shrine_min_dist; i++)
+        {
+            for (int j = -shrine_min_dist; j <= shrine_min_dist; j++)
+            {
+                Vector2 temp = chunk + Vector2.right * i + Vector2.up * j;
+                if (shrines.ContainsKey(temp) && shrines[temp] != null || obelisks.ContainsKey(temp) && obelisks[temp] != null)
+                {
+                    return;
+                }
+            }
+        }
         int val = Random.Range(1, shrine_probability);
         if (val == 1)
         {
@@ -37,8 +49,8 @@ public class ShrineManager : MonoBehaviour {
                 Vector3 position = new Vector3(Random.Range(chunk_pos.x, chunk_pos.x + gen_manager.chunk_size) + 50, 0, Random.Range(chunk_pos.z, chunk_pos.z + gen_manager.chunk_size) + 50);
                 if (checkHeights(position))
                 {
-                    Instantiate(shrine_prefab, position, Quaternion.Euler(0, 0, 0));
-                    shrines[chunk] = new List<ShrineGrid>();
+                    GameObject shrine = Instantiate(shrine_prefab, position, Quaternion.Euler(0, 0, 0)) as GameObject;
+                    saveShrine(chunk, shrine);
                     break;
                 }
             }
@@ -52,7 +64,7 @@ public class ShrineManager : MonoBehaviour {
             for (int j = -obelisk_min_dist; j <= obelisk_min_dist; j++)
             {
                 Vector2 temp = chunk + Vector2.right * i + Vector2.up * j;
-                if(obelisks.ContainsKey(temp) && obelisks[temp] != null)
+                if (obelisks.ContainsKey(temp) && obelisks[temp] != null || shrines.ContainsKey(temp) && shrines[temp] != null)
                 {
                     return;
                 }
