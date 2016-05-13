@@ -11,15 +11,24 @@ public class ChunkMeshes : MonoBehaviour{
     public Vector2 coordinates;
 
     // Generation Checkpoints 
-    public bool done = false;
+    public bool doneBase = false;
+    public bool doneObjects = false;
+    public bool unloadedBase = false;
+    public bool unloadedObjects = false;
     public bool detailed = false;
-    public bool unloaded = false;
     public bool meshGenerated = false;
+    public bool colliderGenerated = false;
     public bool treesGenerated = false;
     public bool doodadsGenerated = false;
     public bool shrinesGenerated = false;
     public bool obelisksGenerated = false;
     public bool lakesGenerated = false;
+
+    public float XZDeviationRatio; //only deviates positively (sadly)
+    public int XZDeviationSeed;
+    public float detailDeviation;
+    public int detailDeviationSeed;
+    public int detailSubdivisions;
 
     //references
     private NoiseSynth synth;
@@ -28,6 +37,10 @@ public class ChunkMeshes : MonoBehaviour{
     private ShrineManager shrineManager;
     private DoodadManager doodadManager;
     private WaterManager waterManager;
+
+    // private
+    private List<lakeStruct> lakes;
+    private Biome biome;
 
     public void setReferences(NoiseSynth sy,GenerationManager g, TreeManager t,ShrineManager s,DoodadManager d,WaterManager w)
     {
@@ -39,33 +52,49 @@ public class ChunkMeshes : MonoBehaviour{
         waterManager = w;
     }
 
-    public void load()
+    public void loadBase()
     {
-        unloaded = false;
+        if (System.DateTime.Now >= genManager.endTime) return;
+        unloadedBase = false;
         if (!meshGenerated) generateMesh();
-        else if (!treesGenerated) generateTrees();
-        else if (!doodadsGenerated) generateDoodads();
-        else if (!shrinesGenerated) generateShrines();
-        else if (!obelisksGenerated) generateObelisks();
-        else if (!lakesGenerated) generateLakes();
-        else done = true;
+        if (meshGenerated && !colliderGenerated) generateMesh();
+        else if (meshGenerated && colliderGenerated && !lakesGenerated) generateLakes();
+        else if (meshGenerated && colliderGenerated && lakesGenerated) doneBase = true;
     }
 
-    public void unload()
+    public void loadObjects()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
+        unloadedObjects = false;
+        if (!doodadsGenerated) generateDoodads();
+        if (doodadsGenerated && !treesGenerated) generateTrees();
+        if (doodadsGenerated && treesGenerated && !shrinesGenerated) generateShrines();
+        if (doodadsGenerated && treesGenerated && shrinesGenerated && !obelisksGenerated) generateObelisks();
+        if (doodadsGenerated && treesGenerated && shrinesGenerated && obelisksGenerated) doneObjects = true;
+    }
+
+    public void unloadBase()
+    {
+        if (System.DateTime.Now >= genManager.endTime) return;
         if (meshGenerated) unloadMesh();
-        else if (treesGenerated) unloadTrees();
-        else if (doodadsGenerated) unloadDoodads();
-        else if (shrinesGenerated) unloadShrines();
-        else if (obelisksGenerated) unloadObelisks();
-        else if (lakesGenerated) unloadLakes();
-        else unloaded = true;
+        if (!meshGenerated && lakesGenerated) unloadLakes();
+        else if(!meshGenerated && !lakesGenerated) unloadedBase = true;
+    }
+
+    public void unloadObjects()
+    {
+        if (unloadedObjects || System.DateTime.Now >= genManager.endTime) return;
+        if (treesGenerated) unloadTrees();
+        if (!treesGenerated && doodadsGenerated) unloadDoodads();
+        if (!treesGenerated && !doodadsGenerated && shrinesGenerated) unloadShrines();
+        if (!treesGenerated && !doodadsGenerated && !shrinesGenerated && obelisksGenerated) unloadObelisks();
+        if(!treesGenerated && !doodadsGenerated && !shrinesGenerated && !obelisksGenerated) unloadedObjects = true;
     }
 
     void generateMesh()
     {
         Biome biome = genManager.chooseBiome(coordinates);
-        List<lakeStruct> lakes = new List<lakeStruct>();
+        lakes = new List<lakeStruct>();
 
         lowMesh = new Mesh();
         lowMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [l]";
@@ -77,6 +106,7 @@ public class ChunkMeshes : MonoBehaviour{
 
         // Generate lakes for this chunk
         Random.seed = Globals.SeedScript.seed + NoiseGen.hash((int)pos.x, (int)pos.y, (int)pos.z);
+
         for (int il = 0; il < biome.lakeCount; il++)
         {
             if (Random.value < biome.lakeChance)
@@ -147,12 +177,12 @@ public class ChunkMeshes : MonoBehaviour{
         lowMesh.vertices = vertices;
 
         // Generate triangles using these vertices
-        int[] triangles = new int[(chunk_resolution - 1) * (chunk_resolution - 1) * 6];
+        int[] triangles = new int[(genManager.chunk_resolution - 1) * (genManager.chunk_resolution - 1) * 6];
         int i = 0;
         // iterate through each quad in vertices
-        for (int y = 0; y < chunk_resolution - 1; y++)
+        for (int y = 0; y < genManager.chunk_resolution - 1; y++)
         {
-            for (int x = 0; x < chunk_resolution - 1; x++)
+            for (int x = 0; x < genManager.chunk_resolution - 1; x++)
             {
                 // Specify quad edges as vertex indices
                 //v1 ________ v2
@@ -160,10 +190,10 @@ public class ChunkMeshes : MonoBehaviour{
                 //  |        |
                 //  |        |
                 //v3 _________  v4
-                int v1 = x + y * chunk_resolution;
-                int v2 = (x + 1) + y * chunk_resolution;
-                int v3 = x + (y + 1) * chunk_resolution;
-                int v4 = (x + 1) + (y + 1) * chunk_resolution;
+                int v1 = x + y * genManager.chunk_resolution;
+                int v2 = (x + 1) + y * genManager.chunk_resolution;
+                int v3 = x + (y + 1) * genManager.chunk_resolution;
+                int v4 = (x + 1) + (y + 1) * genManager.chunk_resolution;
 
                 // Create two triangles from the quad
                 if (Mathf.Repeat(x + y, 2) == 1)
@@ -188,84 +218,76 @@ public class ChunkMeshes : MonoBehaviour{
                 i += 6;
             }
         }
-        chunkMeshes.lowMesh.triangles = triangles;
-        ReCalcTriangles(chunkMeshes.lowMesh);
+        lowMesh.triangles = triangles;
+        ReCalcTriangles(lowMesh);
 
-        chunkMeshes.highMesh = Instantiate(chunkMeshes.lowMesh);
-        chunkMeshes.highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [h]";
-        subDivide(chunkMeshes.highMesh, coordinates, detailSubdivisions);
+        highMesh = Instantiate(lowMesh);
+        highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [h]";
+        subDivide(highMesh, coordinates, detailSubdivisions);
 
-        mf.mesh = chunkMeshes.lowMesh;
-        chunkMeshes.mf = mf;
+        mf.mesh = lowMesh;
 
-        MeshCollider collider = (MeshCollider)chunk.AddComponent(typeof(MeshCollider));
-        collider.sharedMesh = chunkMeshes.highMesh;
-
-        foreach (lakeStruct lake in lakes)
-        {
-            water_manager.createWater(coordinates, lake.position, lake.size, biome);
-        }
+        MeshCollider collider = (MeshCollider) gameObject.AddComponent(typeof(MeshCollider));
+        collider.sharedMesh = highMesh;
+        meshGenerated = true;
     }
-
-    
 
     void generateTrees()
     {
-
+        treesGenerated = true;
     }
 
     void generateDoodads()
     {
-
+        doodadsGenerated = true;
     }
 
     void generateShrines()
     {
-
+        shrinesGenerated = true;
     }
 
     void generateObelisks()
     {
-
+        obelisksGenerated = true;
     }
 
     void generateLakes()
     {
-
-    }
-
-    void undetailMesh()
-    {
-
+        foreach (lakeStruct lake in lakes)
+        {
+            waterManager.createWater(coordinates, lake.position, lake.size, biome);
+        }
+        lakesGenerated = true;
     }
 
     void unloadMesh()
-    {   
-         
+    {
+        meshGenerated = false;
     }    
          
     void unloadTrees()
-    {    
-         
+    {
+        treesGenerated = false;
     }    
          
     void unloadDoodads()
-    {    
-         
+    {
+        doodadsGenerated = false;
     }
 
     void unloadShrines()
     {
-
+        shrinesGenerated = false;
     }
     void unloadObelisks()
-    {    
-        
+    {
+        obelisksGenerated = false;
     }    
          
     void unloadLakes()
     {
-
+        lakesGenerated = false;
     }
 
     private void ReCalcTriangles(Mesh mesh)
@@ -297,8 +319,11 @@ public class ChunkMeshes : MonoBehaviour{
         for (int i = 0; i < oldVerts.Length; i += 3)
         {
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
-            Random.seed = Globals.SeedScript.seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * chunk_size).ToString() + "," + (hypotMid.z + coordinates.y * chunk_size).ToString()).GetHashCode();
-            hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), hypotMid.y + Random.Range(-detailDeviation, detailDeviation), hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
+            Random.seed = Globals.SeedScript.seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * genManager.chunk_size).ToString() + ","
+                + (hypotMid.z + coordinates.y * genManager.chunk_size).ToString()).GetHashCode();
+            hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), 
+                hypotMid.y + Random.Range(-detailDeviation, detailDeviation), 
+                hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i + 1], oldVerts[i + 2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i + 2], oldVerts[i], 0.5f);
             vertices[i * 4] = hypotMid;

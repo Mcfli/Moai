@@ -383,7 +383,7 @@ public class ShrineGrid : MonoBehaviour
 
         WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin,WaterFireEarthAirChangeMax);
         // Change the chunk
-        GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
+
         // Add a star
         GameObject star;
         Vector3 variation = new Vector3(Random.Range(-1000f,1000f), 0, Random.Range(-1000f, 1000f));
