@@ -242,7 +242,7 @@ public class GenerationManager : MonoBehaviour {
         doneLoading = done;
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-        //StopCoroutine("loadUnload");
+        StopCoroutine("loadUnload");
     }
 
     private void createChunk(Vector2 coordinates)
