@@ -57,9 +57,9 @@ public class ChunkMeshes : MonoBehaviour{
         if (System.DateTime.Now >= genManager.endTime) return;
         unloadedBase = false;
         if (!meshGenerated) generateMesh();
-        if (meshGenerated && !colliderGenerated) generateMesh();
-        else if (meshGenerated && colliderGenerated && !lakesGenerated) generateLakes();
-        else if (meshGenerated && colliderGenerated && lakesGenerated) doneBase = true;
+        if (meshGenerated && !colliderGenerated) generateCollider();
+        if (meshGenerated && colliderGenerated && !lakesGenerated) generateLakes();
+        if (meshGenerated && colliderGenerated && lakesGenerated) doneBase = true;
     }
 
     public void loadObjects()
@@ -93,7 +93,8 @@ public class ChunkMeshes : MonoBehaviour{
 
     void generateMesh()
     {
-        Biome biome = genManager.chooseBiome(coordinates);
+        if (System.DateTime.Now >= genManager.endTime) return;
+        biome = genManager.chooseBiome(coordinates);
         lakes = new List<lakeStruct>();
 
         lowMesh = new Mesh();
@@ -227,33 +228,50 @@ public class ChunkMeshes : MonoBehaviour{
 
         mf.mesh = lowMesh;
 
-        MeshCollider collider = (MeshCollider) gameObject.AddComponent(typeof(MeshCollider));
-        collider.sharedMesh = highMesh;
+        
         meshGenerated = true;
+        
+
+        colorMesh(lowMesh);
+        colorMesh(highMesh);
+    }
+
+
+    void generateCollider()
+    {
+        if (System.DateTime.Now >= genManager.endTime) return;
+        MeshCollider collider = (MeshCollider)gameObject.AddComponent(typeof(MeshCollider));
+        collider.sharedMesh = highMesh;
+        colliderGenerated = true;
     }
 
     void generateTrees()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         treesGenerated = true;
     }
 
     void generateDoodads()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         doodadsGenerated = true;
     }
 
     void generateShrines()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         shrinesGenerated = true;
     }
 
     void generateObelisks()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         obelisksGenerated = true;
     }
 
     void generateLakes()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         foreach (lakeStruct lake in lakes)
         {
             waterManager.createWater(coordinates, lake.position, lake.size, biome);
@@ -263,30 +281,36 @@ public class ChunkMeshes : MonoBehaviour{
 
     void unloadMesh()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         meshGenerated = false;
     }    
          
     void unloadTrees()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         treesGenerated = false;
     }    
          
     void unloadDoodads()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         doodadsGenerated = false;
     }
 
     void unloadShrines()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         shrinesGenerated = false;
     }
     void unloadObelisks()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         obelisksGenerated = false;
     }    
          
     void unloadLakes()
     {
+        if (System.DateTime.Now >= genManager.endTime) return;
         lakesGenerated = false;
     }
 
@@ -354,6 +378,57 @@ public class ChunkMeshes : MonoBehaviour{
             mesh.RecalculateNormals();
         }
         else subDivide(mesh, coordinates, numOfDivisions - 1);
+    }
+
+    public void colorMesh(Mesh mesh)
+    {
+        Vector2 chunk = GenerationManager.worldToChunk(transform.position);
+        Biome curBiome = biome;
+        Biome up = genManager.chooseBiome(chunk + Vector2.up);
+        Biome down = genManager.chooseBiome(chunk + Vector2.down);
+        Biome left = genManager.chooseBiome(chunk + Vector2.left);
+        Biome right = genManager.chooseBiome(chunk + Vector2.right);
+
+        Vector3[] verts = mesh.vertices;
+        Color[] colors = new Color[verts.Length];
+        for (int c = 0; c < verts.Length; c += 3)
+        {
+            float height = (verts[c].y + verts[c + 1].y + verts[c + 2].y) / 3;
+            float h = verts[c].x / genManager.chunk_size;
+            float v = verts[c].z / genManager.chunk_size;
+
+            h = Mathf.Sqrt(h);
+            v = Mathf.Sqrt(v);
+
+            Color biome_color = curBiome.colorAt(height);
+            Color left_color = left.colorAt(height);
+            Color right_color = right.colorAt(height);
+            Color up_color = up.colorAt(height);
+            Color down_color = down.colorAt(height);
+
+            Color color = biome_color;
+            Color hcolor, vcolor;
+
+            if (h > 0.5)
+                hcolor = Color.Lerp(biome_color, right_color, 0.5f * (h - 0.5f));
+            else
+                hcolor = Color.Lerp(left_color, biome_color, 0.5f * h);
+            if (v > 0.5)
+                vcolor = Color.Lerp(biome_color, up_color, 0.5f * (v - 0.5f));
+            else
+                vcolor = Color.Lerp(down_color, biome_color, 0.5f * v);
+
+            float hm = Mathf.Abs(h - 0.5f);
+            float vm = Mathf.Abs(v - 0.5f);
+            float interp = Mathf.Max(vm / (hm + vm), 0f);
+
+            color = Color.Lerp(hcolor, vcolor, interp);
+
+            colors[c] = color;
+            colors[c + 1] = color;
+            colors[c + 2] = color;
+        }
+        mesh.colors = colors;
     }
 
     private struct lakeStruct
