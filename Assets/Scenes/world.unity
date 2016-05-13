@@ -397,10 +397,10 @@ MonoBehaviour:
   obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
-  shrine_probability: 2
-  shrine_min_dist: 2
-  obelisk_probability: 3
-  obelisk_min_dist: 2
+  shrine_probability: 0.9
+  shrine_min_dist: 3
+  obelisk_probability: 0.05
+  obelisk_min_dist: 3
 --- !u!114 &188005519
 MonoBehaviour:
   m_ObjectHideFlags: 0
