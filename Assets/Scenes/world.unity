@@ -249,8 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk_size: 256
   chunk_resolution: 8
-  chunk_load_dist: 50
-  chunk_unload_dist: 51
+  chunk_load_dist: 10
+  chunk_unload_dist: 4
   chunk_detail_dist: 1
   XZDeviationRatio: 0.5
   XZDeviationSeed: 543825

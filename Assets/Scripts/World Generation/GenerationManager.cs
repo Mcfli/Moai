@@ -94,8 +94,9 @@ public class GenerationManager : MonoBehaviour {
         }
         if(!doneLoading && Globals.mode > -1) {
             endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
-            doneLoading = loadUnload(Globals.cur_chunk);
+            StartCoroutine("loadUnload",Globals.cur_chunk);
         }
+
     }
 
     // Merges the biome at pos with other_biome
@@ -139,8 +140,7 @@ public class GenerationManager : MonoBehaviour {
         DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
     }
     
-    private bool loadUnload(Vector2 position) {
-        
+    private IEnumerator loadUnload(Vector2 position) {
         bool done = true;
 
         // Unload chunks if there are loaded chunks
@@ -149,6 +149,7 @@ public class GenerationManager : MonoBehaviour {
             List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
             foreach (Vector2 coordinates in l)
             {
+                if (System.DateTime.Now >= endTime) yield return null;
                 // Unload objects
                 if (!inLoadDistance(position, coordinates, tree_unload_dist))
                 {
@@ -169,7 +170,6 @@ public class GenerationManager : MonoBehaviour {
                     // Unload base stuff
                     if (chunkObj.doneBase && !chunkObj.unloadedBase)
                     {
-                        Debug.Log("done base and not unloaded base");
                         done = false;
                         chunkObj.unloadBase();
                     }
@@ -178,24 +178,23 @@ public class GenerationManager : MonoBehaviour {
                     else if (chunkObj.unloadedBase && (!chunkObj.doneObjects ||
                         chunkObj.unloadedObjects))
                     {
-                        Debug.Log("done base and not unloaded base");
                         Destroy(loaded_chunks[coordinates]);
                         loaded_chunks.Remove(coordinates);
                     }
                 }
-
-
             }
         }
         
         // Load chunks
         curDist = 0;
-        while (curDist < chunk_load_dist && (System.DateTime.Now < endTime))
+        while (curDist < chunk_load_dist)
         {
-            for(int i = -curDist; i <= curDist; i++)
+            if (System.DateTime.Now >= endTime) yield return null;
+            for (int i = -curDist; i <= curDist; i++)
             {
                 for (int j = -curDist; j <= curDist; j++)
                 {
+                    if (System.DateTime.Now >= endTime) yield return null;
                     Vector2 thisChunk = new Vector2(position.x + i, position.y + j);
                     // If no chunk at these coordinates, make one
                     if (!loaded_chunks.ContainsKey(thisChunk))
@@ -239,11 +238,11 @@ public class GenerationManager : MonoBehaviour {
                 }
             }
             curDist++;
-        } 
-        
+        }
+        doneLoading = done;
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-        return done;
+        //StopCoroutine("loadUnload");
     }
 
     private void createChunk(Vector2 coordinates)
