@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
     {
         bool isUnder = false;
         float xpos = mainCamera.transform.position.x;
-        float ypos = mainCamera.transform.position.y;
+        float ypos = mainCamera.transform.position.y + 10;
         float zpos = mainCamera.transform.position.z;
         // Check if player is in each lake in current chunk
         if (Globals.WaterManagerScript == null ||
