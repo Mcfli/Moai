@@ -112,7 +112,7 @@ public class Player : MonoBehaviour {
             else if (heldObj == null && LookingAtGrabbable()) TryGrabObject(GetHover().collider.gameObject);
             else DropObject();
         }
-        if(heldObj != null) followHand(heldObj, heldObjSize);
+        if(heldObj != null && !inCinematic) followHand(heldObj, heldObjSize);
 
         checkUnderwater();
     }
