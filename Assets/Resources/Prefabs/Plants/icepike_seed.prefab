@@ -14,7 +14,7 @@ GameObject:
   - 75: {fileID: 7562404}
   - 135: {fileID: 13564042}
   - 114: {fileID: 11413556}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: icepike_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
