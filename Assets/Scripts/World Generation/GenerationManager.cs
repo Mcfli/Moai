@@ -8,6 +8,11 @@ public class GenerationManager : MonoBehaviour {
     public int chunk_load_dist = 6;
     public int chunk_unload_dist = 6;
     public int chunk_detail_dist = 1;
+    public float XZDeviationRatio; //only deviates positively (sadly)
+    public int XZDeviationSeed;
+    public float detailDeviation;
+    public int detailDeviationSeed;
+    public int detailSubdivisions;
     public float allottedLoadSeconds = 1;
     public int tree_load_dist = 1;
     public int tree_unload_dist = 1;
@@ -18,12 +23,7 @@ public class GenerationManager : MonoBehaviour {
 
     //lists
     private Dictionary<Vector2, GameObject> loaded_chunks;
-    private Dictionary<Vector2, ChunkMeshes> detailed_chunks;
-    //private Dictionary<Vector2, GameObject> loaded_water;
-    //private List<Vector2> loaded_tree_chunks;
-	private List<Vector2> loaded_shrine_chunks;
-    private List<Vector2> loaded_doodad_chunks;
-    private List<Vector2> loaded_obelisk_chunks;
+   
     //private Dictionary<Vector2, Biome> chunkBiomes;  // keeps track of what chunk is at what biome
 
     // WaterFire/EarthAir modifiers per chunk.
@@ -38,16 +38,17 @@ public class GenerationManager : MonoBehaviour {
     private ShrineManager shrine_manager;
     private DoodadManager doodad_manager;
     private WaterManager water_manager;
-	
+    private NoiseSynth synth;
+
+    private Material landMaterial;
+    private GameObject TerrainParent;
+    private int curDist = 0;
+
+    public System.DateTime endTime;
+
     void Awake() {
         //lists
         loaded_chunks = new Dictionary<Vector2, GameObject>();
-        detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
-        //loaded_water = new Dictionary<Vector2, GameObject>();
-        //loaded_tree_chunks = new List<Vector2>();
-		loaded_shrine_chunks = new List<Vector2>();
-        loaded_obelisk_chunks = new List<Vector2>();
-        loaded_doodad_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
 
         //references
@@ -57,6 +58,12 @@ public class GenerationManager : MonoBehaviour {
         shrine_manager = GetComponent<ShrineManager>();
         doodad_manager = GetComponent<DoodadManager>();
         water_manager = GetComponent<WaterManager>();
+        synth = GetComponent<NoiseSynth>();
+
+        TerrainParent = new GameObject("Terrain");
+        TerrainParent.transform.parent = transform;
+
+        landMaterial = Resources.Load("Materials/WorldGen/Ground") as Material;
 
         Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
 
@@ -69,7 +76,7 @@ public class GenerationManager : MonoBehaviour {
 
     void Start() {
         if(Globals.mode > -1) {
-            initiateWorld();
+            //initiateWorld();
             Globals.PlayerScript.warpToGround(3000, true);
         }
     }
@@ -80,13 +87,16 @@ public class GenerationManager : MonoBehaviour {
         Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
         if(Globals.cur_chunk != current_chunk) {
             Globals.cur_chunk = current_chunk;
+            weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+            Globals.cur_biome = chooseBiome(Globals.cur_chunk);
             doneLoading = false;
+            curDist = 0;
         }
         if(!doneLoading && Globals.mode > -1) {
-            doneLoading = loadUnload(Globals.cur_chunk);
-            //StartCoroutine(coLoadUnload(Globals.cur_chunk));
-            //doneLoading = true;
+            endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
+            StartCoroutine("loadUnload",Globals.cur_chunk);
         }
+
     }
 
     // Merges the biome at pos with other_biome
@@ -105,13 +115,13 @@ public class GenerationManager : MonoBehaviour {
 
     public void initiateWorld() {
         Globals.time = 0;
-        initiateChunks(Globals.cur_chunk);
-        doneLoading = loadUnload(Globals.cur_chunk);
+        //initiateChunks(Globals.cur_chunk);
+        //doneLoading = loadUnload(Globals.cur_chunk);
     }
 
     public void deleteWorld() { //burn it to the ground
         foreach(KeyValuePair<Vector2, Dictionary<int, ForestScript>> p in TreeManager.loadedForests) foreach(KeyValuePair<int, ForestScript> q in p.Value) q.Value.destroyForest();
-        foreach(Vector2 v in loaded_shrine_chunks) shrine_manager.unloadShrines((int)v.x, (int)v.y);
+        //foreach(Vector2 v in loaded_shrine_chunks) shrine_manager.unloadShrines((int)v.x, (int)v.y);
         foreach(KeyValuePair<Vector2, List<GameObject>> p in DoodadManager.loaded_doodads) foreach(GameObject g in p.Value) Destroy(g);
         foreach(KeyValuePair<Vector2, GameObject> p in loaded_chunks) {
             Destroy(loaded_chunks[p.Key]);
@@ -119,9 +129,9 @@ public class GenerationManager : MonoBehaviour {
         }
 
         loaded_chunks = new Dictionary<Vector2, GameObject>();
-        detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
-        loaded_shrine_chunks = new List<Vector2>();
-        loaded_doodad_chunks = new List<Vector2>();
+        //detailed_chunks = new Dictionary<Vector2, ChunkMeshes>();
+        //loaded_shrine_chunks = new List<Vector2>();
+        //loaded_doodad_chunks = new List<Vector2>();
         mapChanges = new Dictionary<Vector2, Vector2>();
         TreeManager.trees = new Dictionary<Vector2, List<ForestScript.forestStruct>>();
         TreeManager.loadedForests = new Dictionary<Vector2, Dictionary<int, ForestScript>>();
@@ -129,48 +139,130 @@ public class GenerationManager : MonoBehaviour {
         WaterManager.waterBodies = new Dictionary<Vector2, List<GameObject>>();
         DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
     }
-
-    // Changes the WaterFire/EarthAir values at chunk by WaterFire:delta.x,EarthAir:delta.y
-    public void modifyChunk(Vector3 pos, Vector2 delta)
-    {
-        Vector2 chunk = worldToChunk(pos);
-        if (!mapChanges.ContainsKey(chunk))
-            mapChanges[chunk] = Vector2.zero;
-        mapChanges[chunk] += delta;
-        updateChunks();
-
-        //comment this out when we have forest changing
-        unloadTrees(pos);
-        tree_manager.forgetTrees((int)chunk.x, (int)chunk.y);
-        tree_manager.loadTrees(chunk, chooseBiome(chunk));
-
-        /* comment this back in when forest changing is in
-        Biome biome = chooseBiome(chunk);
-        foreach(ForestScript forest in TreeManager.loadedForests[chunk].Values) forest.changeForest(biome.forestRadius, biome.forestMaxTrees, biome.treeTypes, biome.mixedForests);
-        */
-    }
     
-    private bool loadUnload(Vector2 position) {
-        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-
+    private IEnumerator loadUnload(Vector2 position) {
         bool done = true;
-        if(!unloadChunks(position)) done = false;
-        if(!unloadTrees(position)) done = false;
-        if(!unloadShrines(position)) done = false;
-        if(!unloadDoodads(position)) done = false;
-        if (!unloadObelisks(position)) done = false;
-        if(!loadChunks(position)) done = false;
-        if(!detailChunks(position)) done = false;
-        if(!undetailChunks(position)) done = false;
-        if(!loadTrees(position)) done = false;
-        if(!loadShrines(position)) done = false;
-        if(!loadDoodads(position)) done = false;
-        if (!loadObelisks(position)) done = false;
 
+        // Unload chunks if there are loaded chunks
+        if (loaded_chunks.Keys.Count > 0)
+        {
+            List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
+            foreach (Vector2 coordinates in l)
+            {
+                if (System.DateTime.Now >= endTime) yield return null;
+                // Unload objects
+                if (!inLoadDistance(position, coordinates, tree_unload_dist))
+                {
+                    if (!loaded_chunks.ContainsKey(coordinates)) continue;
+                    ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
+                    if (chunkObj.doneObjects && !chunkObj.unloadedObjects)
+                    {
+                        done = false;
+                        chunkObj.unloadObjects();
+                    }
+                }
+
+                // Unload topology
+                if (!inLoadDistance(position, coordinates, chunk_unload_dist))
+                {
+                    ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
+
+                    // Unload base stuff
+                    if (chunkObj.doneBase && !chunkObj.unloadedBase)
+                    {
+                        done = false;
+                        chunkObj.unloadBase();
+                    }
+
+                    // Destroy the chunk if necessary
+                    else if (chunkObj.unloadedBase && (!chunkObj.doneObjects ||
+                        chunkObj.unloadedObjects))
+                    {
+                        Destroy(loaded_chunks[coordinates]);
+                        loaded_chunks.Remove(coordinates);
+                    }
+                }
+            }
+        }
+        
+        // Load chunks
+        curDist = 0;
+        while (curDist < chunk_load_dist)
+        {
+            if (System.DateTime.Now >= endTime) yield return null;
+            for (int i = -curDist; i <= curDist; i++)
+            {
+                for (int j = -curDist; j <= curDist; j++)
+                {
+                    if (System.DateTime.Now >= endTime) yield return null;
+                    if (i != curDist && i != -curDist &&
+                       j != curDist && j != -curDist)
+                        continue;
+                    Vector2 thisChunk = new Vector2(position.x + i, position.y + j);
+                    // If no chunk at these coordinates, make one
+                    if (!loaded_chunks.ContainsKey(thisChunk))
+                    {
+                        createChunk(thisChunk);
+                        done = false;
+                    }
+                    ChunkMeshes chunkObj = loaded_chunks[thisChunk].GetComponent<ChunkMeshes>();
+                    
+                    // If the chunk still needs loading, continue loading it
+                    if (!chunkObj.doneBase)
+                    {
+                        chunkObj.loadBase();
+                        done = false;
+                    }
+                    else
+                    {
+                        // If the chunk needs to be detailed, detail it
+                        if (inLoadDistance(position, thisChunk, chunk_detail_dist) && !chunkObj.detailed)
+                        {
+                            chunkObj.mf.mesh = chunkObj.highMesh;
+                            chunkObj.detailed = true;
+                            done = false;
+                        }
+
+                        // If the chunk needs to be undetailed, undetail it
+                        else if (!inLoadDistance(position, thisChunk, chunk_detail_dist) && chunkObj.detailed)
+                        {
+                            chunkObj.mf.mesh = chunkObj.lowMesh;
+                            chunkObj.detailed = false;
+                            done = false;
+                        }
+                    }
+
+                    // If the chunk needs to load its objects, continue loading them
+                    if (chunkObj.doneBase && inLoadDistance(position, thisChunk, tree_load_dist) && !chunkObj.doneObjects)
+                    {
+                        chunkObj.loadObjects();
+                        done = false;
+                    }
+                }
+            }
+            curDist++;
+        }
+        doneLoading = done;
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-        return done;
+        StopCoroutine("loadUnload");
+    }
+
+    private void createChunk(Vector2 coordinates)
+    {
+        GameObject chunk = new GameObject();
+        ChunkMeshes chunkMeshes = chunk.AddComponent<ChunkMeshes>();
+        chunkMeshes.coordinates = coordinates;
+        chunkMeshes.setReferences(synth, this, tree_manager, shrine_manager, doodad_manager, water_manager);
+        chunkMeshes.coordinates = coordinates;
+        chunk.layer = LayerMask.NameToLayer("Terrain");
+        chunk.name = "chunk (" + coordinates.x + "," + coordinates.y + ")";
+        chunk.transform.parent = TerrainParent.transform;
+        MeshRenderer mr = chunk.AddComponent<MeshRenderer>();
+        mr.material = landMaterial;
+        MeshFilter mf = chunk.AddComponent<MeshFilter>();
+        chunkMeshes.mf = mf;
+        loaded_chunks[coordinates] = chunk;
     }
 
     /*
@@ -195,7 +287,7 @@ public class GenerationManager : MonoBehaviour {
         yield return "";
     }
     */
-
+    /*
     private void initiateChunks(Vector2 position) {
         for(float x = position.x - chunk_load_dist; x <= position.x + chunk_load_dist; x++) {
             for(float y = position.y - chunk_load_dist; y <= position.y + chunk_load_dist; y++) {
@@ -205,6 +297,7 @@ public class GenerationManager : MonoBehaviour {
         }
     }
 
+    
     // Loads chunks within chunk_load_dist range
     // Changes chunks within chunk_detail_dist range to detailed chunk
     // returns true if all chunks are finished loading
@@ -255,12 +348,8 @@ public class GenerationManager : MonoBehaviour {
             }
         return true;
     }
+    
 
-    private void createChunk(Vector2 coordinates) {
-        GameObject newChunk = chunkGen.generate(coordinates);
-        chunkGen.colorChunk(newChunk, chunk_size);
-        loaded_chunks.Add(coordinates, newChunk);
-    }
 
     private void destroyChunk(Vector2 coordinates) {
         Destroy(loaded_chunks[coordinates]);
@@ -380,7 +469,7 @@ public class GenerationManager : MonoBehaviour {
         }
         return true;
     }
-
+    */
     public Biome chooseBiome(Vector2 chunk)
     {
 
@@ -423,7 +512,7 @@ public class GenerationManager : MonoBehaviour {
             chunkGen.colorChunk(chunk.Value, chunk_size);
         }
     }
-
+    /*
     public void generateChunk(Vector2 coordinates, bool detailed) {
         //if(!loadDoodads(position)) done = false;
         Biome curBiome = chooseBiome(coordinates);
@@ -441,7 +530,7 @@ public class GenerationManager : MonoBehaviour {
         doodad_manager.loadDoodads(coordinates, curBiome);
         loaded_doodad_chunks.Add(coordinates);
     }
-
+    */
     //---------- HELPER FUNCTIONS ----------//
     public static Vector3 chunkToWorld(Vector2 chunk)
     {
