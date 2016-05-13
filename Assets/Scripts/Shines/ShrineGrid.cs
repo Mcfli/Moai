@@ -51,7 +51,11 @@ public class ShrineGrid : MonoBehaviour
     public Quaternion saved_rotation;
     public Vector3 saved_scale;
 
-    private GameObject shrineGlow;
+    public GameObject doneWater;
+    public GameObject doneFire;
+    public GameObject doneAir;
+    public GameObject doneEarth;
+
 
     // Use this for initialization
     void Start()
@@ -71,9 +75,13 @@ public class ShrineGrid : MonoBehaviour
         populateValidItems();
         genTargetState();
         updateCurState();
-        
-        shrineGlow = Instantiate(incompleteGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
-		shrineGlow.transform.parent = gameObject.transform;
+
+        incompleteGlow.SetActive(true);
+        doneWater.SetActive(false);
+        doneAir.SetActive(false);
+        doneFire.SetActive(false);
+        doneEarth.SetActive(false);
+		
 
 		transform.position = snapToTerrain(transform.position);
 		createMural();
@@ -362,15 +370,15 @@ public class ShrineGrid : MonoBehaviour
     // element - "earth", "fire", "water", "air"
     private void complete(string element)
     {
-        Destroy(shrineGlow);
-        if(element.Equals("air"))
-            shrineGlow = Instantiate(airGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+        incompleteGlow.SetActive(false);
+        if (element.Equals("air"))
+            doneAir.SetActive(true);
         else if (element.Equals("earth"))
-            shrineGlow = Instantiate(earthGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+            doneEarth.SetActive(true);
         else if (element.Equals("fire"))
-            shrineGlow = Instantiate(fireGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+            doneFire.SetActive(true);
         else
-            shrineGlow = Instantiate(waterGlow, transform.position + Vector3.up * 10, Quaternion.identity) as GameObject;
+            doneWater.SetActive(true);
 
         // Stop the cells from glowing
         //drawGlows();
