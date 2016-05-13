@@ -59,7 +59,8 @@ public class ChunkMeshes : MonoBehaviour{
         if (!meshGenerated) generateMesh();
         if (meshGenerated && !colliderGenerated) generateCollider();
         if (meshGenerated && colliderGenerated && !lakesGenerated) generateLakes();
-        if (meshGenerated && colliderGenerated && lakesGenerated) doneBase = true;
+        if (meshGenerated && colliderGenerated && lakesGenerated && !obelisksGenerated) generateObelisks();
+        if (meshGenerated && colliderGenerated && lakesGenerated && obelisksGenerated) doneBase = true;
     }
 
     public void loadObjects()
@@ -69,8 +70,7 @@ public class ChunkMeshes : MonoBehaviour{
         if (!doodadsGenerated) generateDoodads();
         if (doodadsGenerated && !treesGenerated) generateTrees();
         if (doodadsGenerated && treesGenerated && !shrinesGenerated) generateShrines();
-        if (doodadsGenerated && treesGenerated && shrinesGenerated && !obelisksGenerated) generateObelisks();
-        if (doodadsGenerated && treesGenerated && shrinesGenerated && obelisksGenerated) doneObjects = true;
+        if (doodadsGenerated && treesGenerated && shrinesGenerated) doneObjects = true;
     }
 
     public void unloadBase()
@@ -246,25 +246,30 @@ public class ChunkMeshes : MonoBehaviour{
 
     void generateTrees()
     {
-        if (System.DateTime.Now >= genManager.endTime) return;
+        if (System.DateTime.Now >= genManager.endTime) return;   
+        treeManager.loadTrees(coordinates, biome);
+          
         treesGenerated = true;
     }
 
     void generateDoodads()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        doodadManager.loadDoodads(coordinates, biome);
         doodadsGenerated = true;
     }
 
     void generateShrines()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        shrineManager.loadShrines((int)coordinates.x, (int)coordinates.y);
         shrinesGenerated = true;
     }
 
     void generateObelisks()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        shrineManager.loadObelisks((int)coordinates.x, (int)coordinates.y);
         obelisksGenerated = true;
     }
 
@@ -287,29 +292,34 @@ public class ChunkMeshes : MonoBehaviour{
     void unloadTrees()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        treeManager.unloadTrees(coordinates);
         treesGenerated = false;
     }    
          
     void unloadDoodads()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        doodadManager.unloadDoodads(coordinates);
         doodadsGenerated = false;
     }
 
     void unloadShrines()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        shrineManager.unloadShrines((int)coordinates.x, (int)coordinates.y);
         shrinesGenerated = false;
     }
     void unloadObelisks()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        shrineManager.unloadObelisks((int)coordinates.x, (int)coordinates.y);
         obelisksGenerated = false;
     }    
          
     void unloadLakes()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
+        waterManager.unloadWater(coordinates);
         lakesGenerated = false;
     }
 

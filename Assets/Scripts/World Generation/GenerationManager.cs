@@ -153,7 +153,7 @@ public class GenerationManager : MonoBehaviour {
                 // Unload objects
                 if (!inLoadDistance(position, coordinates, tree_unload_dist))
                 {
-
+                    if (!loaded_chunks.ContainsKey(coordinates)) continue;
                     ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
                     if (chunkObj.doneObjects && !chunkObj.unloadedObjects)
                     {
@@ -195,6 +195,9 @@ public class GenerationManager : MonoBehaviour {
                 for (int j = -curDist; j <= curDist; j++)
                 {
                     if (System.DateTime.Now >= endTime) yield return null;
+                    if (i != curDist && i != -curDist &&
+                       j != curDist && j != -curDist)
+                        continue;
                     Vector2 thisChunk = new Vector2(position.x + i, position.y + j);
                     // If no chunk at these coordinates, make one
                     if (!loaded_chunks.ContainsKey(thisChunk))
