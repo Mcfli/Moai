@@ -249,15 +249,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk_size: 256
   chunk_resolution: 8
-  chunk_load_dist: 8
-  chunk_unload_dist: 12
+  chunk_load_dist: 50
+  chunk_unload_dist: 51
   chunk_detail_dist: 1
   XZDeviationRatio: 0.5
   XZDeviationSeed: 543825
   detailDeviation: 1.25
   detailDeviationSeed: 854375
   detailSubdivisions: 3
-  allottedLoadSeconds: 0.05
+  allottedLoadSeconds: 0.01
   tree_load_dist: 1
   tree_unload_dist: 2
   biomes:

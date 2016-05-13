@@ -76,9 +76,8 @@ public class ChunkMeshes : MonoBehaviour{
     public void unloadBase()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
-        if (meshGenerated) unloadMesh();
-        if (!meshGenerated && lakesGenerated) unloadLakes();
-        else if(!meshGenerated && !lakesGenerated) unloadedBase = true;
+        if (lakesGenerated) unloadLakes();
+        if(!lakesGenerated) unloadedBase = true;
     }
 
     public void unloadObjects()

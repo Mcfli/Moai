@@ -42,6 +42,7 @@ public class GenerationManager : MonoBehaviour {
 
     private Material landMaterial;
     private GameObject TerrainParent;
+    private int curDist = 0;
 
     public System.DateTime endTime;
 
@@ -89,6 +90,7 @@ public class GenerationManager : MonoBehaviour {
             weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
             Globals.cur_biome = chooseBiome(Globals.cur_chunk);
             doneLoading = false;
+            curDist = 0;
         }
         if(!doneLoading && Globals.mode > -1) {
             endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
@@ -140,57 +142,60 @@ public class GenerationManager : MonoBehaviour {
     private bool loadUnload(Vector2 position) {
         
         bool done = true;
-        
 
-        // Unload chunks
-        
-        List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
-        foreach (Vector2 coordinates in l)
+        // Unload chunks if there are loaded chunks
+        if (loaded_chunks.Keys.Count > 0)
         {
-            // Unload objects
-            if (!inLoadDistance(position, coordinates, tree_unload_dist))
+            List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
+            foreach (Vector2 coordinates in l)
             {
-                
-                ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
-                if (chunkObj.doneObjects && !chunkObj.unloadedObjects)
+                // Unload objects
+                if (!inLoadDistance(position, coordinates, tree_unload_dist))
                 {
-                    done = false;
-                    chunkObj.unloadObjects();
+
+                    ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
+                    if (chunkObj.doneObjects && !chunkObj.unloadedObjects)
+                    {
+                        done = false;
+                        chunkObj.unloadObjects();
+                    }
                 }
+
+                // Unload topology
+                if (!inLoadDistance(position, coordinates, chunk_unload_dist))
+                {
+                    ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
+
+                    // Unload base stuff
+                    if (chunkObj.doneBase && !chunkObj.unloadedBase)
+                    {
+                        Debug.Log("done base and not unloaded base");
+                        done = false;
+                        chunkObj.unloadBase();
+                    }
+
+                    // Destroy the chunk if necessary
+                    else if (chunkObj.unloadedBase && (!chunkObj.doneObjects ||
+                        chunkObj.unloadedObjects))
+                    {
+                        Debug.Log("done base and not unloaded base");
+                        Destroy(loaded_chunks[coordinates]);
+                        loaded_chunks.Remove(coordinates);
+                    }
+                }
+
+
             }
-
-            // Unload topology
-            if (!inLoadDistance(position, coordinates, chunk_unload_dist))
-            {
-                ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
-               
-                // Unload base stuff
-                if (chunkObj.doneBase && !chunkObj.unloadedBase)
-                {
-                    done = false;
-                    chunkObj.unloadBase();
-                }
-
-                // Destroy the chunk if necessary
-                else if (chunkObj.unloadedBase && chunkObj.unloadedObjects)
-                {
-                    Destroy(loaded_chunks[coordinates]);
-                    loaded_chunks.Remove(coordinates);
-                }
-            }
-
-            
         }
-            
+        
         // Load chunks
-        int curDist = 0;
-        while(curDist < chunk_load_dist && (System.DateTime.Now < endTime))
+        curDist = 0;
+        while (curDist < chunk_load_dist && (System.DateTime.Now < endTime))
         {
             for(int i = -curDist; i <= curDist; i++)
             {
                 for (int j = -curDist; j <= curDist; j++)
                 {
-
                     Vector2 thisChunk = new Vector2(position.x + i, position.y + j);
                     // If no chunk at these coordinates, make one
                     if (!loaded_chunks.ContainsKey(thisChunk))
