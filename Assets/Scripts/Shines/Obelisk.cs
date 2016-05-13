@@ -60,6 +60,9 @@ public class Obelisk : MonoBehaviour {
     AudioSource SuccessAudio;
     AudioSource FailAudio;
 
+    // Cull size
+    public float cullSize;
+
 	// Use this for initialization
 	void Start () {
         requirements = new Dictionary<string, int>();
@@ -445,6 +448,20 @@ public class Obelisk : MonoBehaviour {
         litUp = false;
     }
 
+    private void killTrees()
+    {
+        Vector3 half_extents = new Vector3(cullSize, 100000, cullSize);
+        LayerMask tree_mask = LayerMask.GetMask("Tree", "Doodad", "BigDoodad");
+
+        Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+
+            GameObject tree = colliders[i].gameObject;
+            Destroy(tree);
+        }
+    }
+
     public void saveTransforms()
     {
         saved_position = transform.position;
@@ -455,6 +472,7 @@ public class Obelisk : MonoBehaviour {
     public void copyFrom(Obelisk obelisk)
     {
         isDone = obelisk.isDone;
+        cullSize = obelisk.cullSize;
         saved_position = obelisk.saved_position;
         saved_rotation = obelisk.saved_rotation;
         saved_scale = obelisk.saved_scale;

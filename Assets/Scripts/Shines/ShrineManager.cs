@@ -7,9 +7,9 @@ public class ShrineManager : MonoBehaviour {
     public GameObject obelisk_prefab;
     public float acceptable_heightDiff = 0.0f;
     public int max_tries = 1;
-    public int shrine_probability = 1;
+    public float shrine_probability = 0.70f;
     public int shrine_min_dist = 2;
-    public int obelisk_probability = 5;
+    public float obelisk_probability = 0.50f;
     public int obelisk_min_dist = 2;
 
     private GenerationManager gen_manager;
@@ -41,8 +41,7 @@ public class ShrineManager : MonoBehaviour {
                 }
             }
         }
-        int val = Random.Range(1, shrine_probability);
-        if (val == 1)
+        if(Random.value < shrine_probability)
         {
             for (int tries = 0; tries <= max_tries; tries++)
             {
@@ -70,8 +69,7 @@ public class ShrineManager : MonoBehaviour {
                 }
             }
         }
-        int val = Random.Range(1, obelisk_probability);
-        if (val == 1)
+        if (Random.value < obelisk_probability)
         {
             for (int tries = 0; tries <= max_tries; tries++)
             {
