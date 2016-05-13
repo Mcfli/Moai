@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CheatConsole : MonoBehaviour
 {
 
-    private InputField console;
+    public InputField console;
 
     private GameObject airStar;
     private GameObject earthStar;
@@ -22,8 +22,7 @@ public class CheatConsole : MonoBehaviour
         fireStar = Resources.Load("Prefabs/Stars/star_fire") as GameObject;
         waterStar = Resources.Load("Prefabs/Stars/star_water") as GameObject;
         puzzleFinisher = Resources.Load("Prefabs/puzzleFinisher") as GameObject;
-        console = GameObject.Find("Console").GetComponent<InputField>();
-        toggleConsole();
+        deactivateConsole();
     }
 
     void Update()
@@ -35,19 +34,23 @@ public class CheatConsole : MonoBehaviour
         console.gameObject.SetActive(active);
     }
 
-    void toggleConsole()
-    {
+    void toggleConsole() {
         active = !active;
 
-        if (!active)
-        {
+        if(!active) {
             console.DeactivateInputField();
         }
         console.gameObject.SetActive(active);
-        if (active)
-        {
+        if(active) {
             console.ActivateInputField();
         }
+        console.text = "";
+    }
+
+    void deactivateConsole() {
+        active = false;
+        console.DeactivateInputField();
+        console.gameObject.SetActive(false);
         console.text = "";
     }
 

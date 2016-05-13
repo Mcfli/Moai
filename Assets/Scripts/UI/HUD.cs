@@ -31,11 +31,11 @@ public class HUD : MonoBehaviour {
     void Update() {
         //crosshair color
         if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic() && Globals.mode == 0) {
-            crosshair.enabled = true;
+            crosshair.gameObject.SetActive(true);
             if(Globals.PlayerScript.LookingAtGrabbable() && Globals.PlayerScript.getHeldObj() == null) crosshair.color = canGrabColor;
             else if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
             else crosshair.color = initialColor;
-        } else crosshair.enabled = false;
+        } else crosshair.gameObject.SetActive(false);
 
         //toggle crosshair
         if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0)
