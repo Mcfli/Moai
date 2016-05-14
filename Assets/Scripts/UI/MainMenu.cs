@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour {
     public List<MMBackground> titleScreens;
     public int loadingScreen;
     public UnityEngine.UI.Image loadingBackdrop;
+    public UnityEngine.UI.Image loadingIcon;
     public List<Sprite> loadingWallpapers;
     public RectTransform title;
     public RectTransform buttonsParent;
@@ -39,7 +40,9 @@ public class MainMenu : MonoBehaviour {
         }
         else if(loadStep == 1)
         {
-
+            float rot = Mathf.PingPong(Time.time,2) - 1;
+            loadingIcon.rectTransform.localScale = new Vector3(rot,
+                loadingIcon.rectTransform.localScale.y, loadingIcon.rectTransform.localScale.z);
         }
         else if(loadStep == 2) {
             loadGame();
@@ -76,8 +79,8 @@ public class MainMenu : MonoBehaviour {
         Globals.MenusScript.switchTo(loadingScreen);
         Random.seed = (int)System.DateTime.Now.Ticks;
         loadingBackdrop.sprite = loadingWallpapers[Random.Range(0, loadingWallpapers.Count)];
-        Camera.main.GetComponent<MusicManager>().Stop(false);
-        AudioListener.volume = 0;
+        //Camera.main.GetComponent<MusicManager>().Stop(false);
+        //AudioListener.volume = 0;
     }
 
     private void loadGame() {
@@ -86,8 +89,8 @@ public class MainMenu : MonoBehaviour {
         Globals.GenerationManagerScript.initiateWorld();
         Globals.WeatherManagerScript.initializeWeather();
         Globals.MenusScript.switchTo(-1);
-        Camera.main.GetComponent<MusicManager>().Play();
-        AudioListener.volume = 1;
+        //Camera.main.GetComponent<MusicManager>().Play();
+        //AudioListener.volume = 1;
 
         Camera.main.transform.position = origCamPos;
         Camera.main.transform.eulerAngles = origCamRot;
