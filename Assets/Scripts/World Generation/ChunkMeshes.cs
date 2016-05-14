@@ -226,8 +226,6 @@ public class ChunkMeshes : MonoBehaviour{
         subDivide(highMesh, coordinates, detailSubdivisions);
 
         mf.mesh = lowMesh;
-
-        
         meshGenerated = true;
         
 
@@ -241,6 +239,7 @@ public class ChunkMeshes : MonoBehaviour{
         if (System.DateTime.Now >= genManager.endTime) return;
         MeshCollider collider = (MeshCollider)gameObject.AddComponent(typeof(MeshCollider));
         collider.sharedMesh = highMesh;
+        
         colliderGenerated = true;
     }
 

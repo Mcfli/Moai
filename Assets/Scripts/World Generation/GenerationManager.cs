@@ -43,6 +43,7 @@ public class GenerationManager : MonoBehaviour {
     private Material landMaterial;
     private GameObject TerrainParent;
     private int curDist = 0;
+    private bool playerWarped = false;
 
     public System.DateTime endTime;
 
@@ -77,7 +78,7 @@ public class GenerationManager : MonoBehaviour {
     void Start() {
         if(Globals.mode > -1) {
             //initiateWorld();
-            Globals.PlayerScript.warpToGround(3000, true);
+            
         }
     }
 	
@@ -97,26 +98,17 @@ public class GenerationManager : MonoBehaviour {
             StartCoroutine("loadUnload",Globals.cur_chunk);
         }
 
+        if (!playerWarped)
+        {
+            playerWarped = Globals.PlayerScript.warpToGround(10000000, true);
+        }
+
     }
 
-    // Merges the biome at pos with other_biome
-    /*
-    public void mergeBiomes(Vector3 pos,Biome other_biome)
-    {
-        Vector2 chunk = worldToChunk(pos);
-        Biome old_biome = chunkBiomes[chunk];
-        Biome new_biome = Biome.Combine(old_biome,other_biome);
-        chunkBiomes[chunk] = new_biome;
-        smoothChunkColors(chunk);
-        unloadTrees();
-        loadTrees();
-    }
-    */
-
+    // Called by menu on play
     public void initiateWorld() {
         Globals.time = 0;
-        //initiateChunks(Globals.cur_chunk);
-        //doneLoading = loadUnload(Globals.cur_chunk);
+        playerWarped = false;
     }
 
     public void deleteWorld() { //burn it to the ground
@@ -265,211 +257,6 @@ public class GenerationManager : MonoBehaviour {
         loaded_chunks[coordinates] = chunk;
     }
 
-    /*
-    private IEnumerator coLoadUnload(Vector2 position) {
-        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-
-        unloadChunks(position);
-        unloadTrees(position);
-        unloadShrines(position);
-        unloadDoodads(position);
-        loadChunks(position);
-        detailChunks(position);
-        undetailChunks(position);
-        loadTrees(position);
-        loadShrines(position);
-        loadDoodads(position);
-
-        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-
-        yield return "";
-    }
-    */
-    /*
-    private void initiateChunks(Vector2 position) {
-        for(float x = position.x - chunk_load_dist; x <= position.x + chunk_load_dist; x++) {
-            for(float y = position.y - chunk_load_dist; y <= position.y + chunk_load_dist; y++) {
-                Vector2 coordinates = new Vector2(x, y);
-                createChunk(coordinates);
-            }
-        }
-    }
-
-    
-    // Loads chunks within chunk_load_dist range
-    // Changes chunks within chunk_detail_dist range to detailed chunk
-    // returns true if all chunks are finished loading
-    private bool loadChunks(Vector2 position) {
-        System.DateTime endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
-        for(float x = position.x - chunk_load_dist; x <= position.x + chunk_load_dist; x++) {
-            for(float y = position.y - chunk_load_dist; y <= position.y + chunk_load_dist; y++) {
-                Vector2 coordinates = new Vector2(x, y);
-                if(inLoadDistance(position, coordinates, chunk_load_dist) && !loaded_chunks.ContainsKey(coordinates)) {
-                    createChunk(coordinates);
-                    if(System.DateTime.Now > endTime && allottedLoadSeconds > 0) return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private bool unloadChunks(Vector2 position) {
-        List<Vector2> l = new List<Vector2>(loaded_chunks.Keys);
-        foreach (Vector2 coodinates in l)
-            if (!inLoadDistance(position, coodinates, chunk_unload_dist))
-            {
-                destroyChunk(coodinates);
-            }
-        return true;
-    }
-
-    private bool detailChunks(Vector2 position) {
-        for(float x = position.x - chunk_detail_dist; x <= position.x + chunk_detail_dist; x++) {
-            for(float y = position.y - chunk_detail_dist; y <= position.y + chunk_detail_dist; y++) {
-                Vector2 coordinates = new Vector2(x, y);
-                if(inLoadDistance(position, coordinates, chunk_detail_dist) && !detailed_chunks.ContainsKey(coordinates) && loaded_chunks.ContainsKey(coordinates)) {
-                    ChunkMeshes cm = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
-                    cm.mf.mesh = cm.highMesh;
-                    detailed_chunks.Add(coordinates, cm);
-                }
-            }
-        }
-        return true;
-    }
-
-    private bool undetailChunks(Vector2 position) {
-        foreach(Vector2 coordinates in new List<Vector2>(detailed_chunks.Keys))
-            if(!inLoadDistance(position, coordinates, chunk_detail_dist) && detailed_chunks.ContainsKey(coordinates)) {
-                ChunkMeshes cm = detailed_chunks[coordinates];
-                cm.mf.mesh = cm.lowMesh;
-                detailed_chunks.Remove(coordinates);
-            }
-        return true;
-    }
-    
-
-
-    private void destroyChunk(Vector2 coordinates) {
-        Destroy(loaded_chunks[coordinates]);
-        loaded_chunks.Remove(coordinates);
-        water_manager.unloadWater(coordinates);
-    }
-
-    private bool loadTrees(Vector2 position) {
-		for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++){
-			for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++){
-                Vector2 this_chunk = new Vector2(x, y);
-                Biome curBiome = chooseBiome(this_chunk);
-                tree_manager.loadTrees(this_chunk, curBiome);
-            }
-        }
-        return true;
-    }
-
-    private bool unloadTrees(Vector2 position) {
-        List<Vector2> keys = new List<Vector2>(TreeManager.loadedForests.Keys);
-        foreach(Vector2 key in keys) {
-            if(Mathf.Abs(key.x - Globals.cur_chunk.x) > tree_unload_dist ||
-               Mathf.Abs(key.y - Globals.cur_chunk.y) > tree_unload_dist) {
-                tree_manager.unloadTrees(key);
-            }
-        }
-        return true;
-    }
-
-    private bool loadDoodads(Vector2 position)
-    {
-        for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++)
-        {
-            for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++)
-            {
-                Vector2 this_chunk = new Vector2(x, y);
-                if (!loaded_doodad_chunks.Contains(this_chunk))
-                {
-                    Biome curBiome = chooseBiome(this_chunk);
-                    doodad_manager.loadDoodads(this_chunk,curBiome);
-                    loaded_doodad_chunks.Add(this_chunk);
-                }
-            }
-        }
-        return true;
-    }
-
-    private bool unloadDoodads(Vector2 position)
-    {
-        for (int i = loaded_doodad_chunks.Count - 1; i >= 0; i--)
-        {
-            Vector2 this_chunk = loaded_doodad_chunks[i];
-            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_unload_dist ||
-                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_unload_dist)
-            {
-                doodad_manager.unloadDoodads(this_chunk);
-                loaded_doodad_chunks.RemoveAt(i);
-            }
-        }
-        return true;
-    }
-
-    private bool loadShrines(Vector2 position) {
-		for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++){
-			for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++){
-				Vector2 this_chunk = new Vector2(x, y);
-				if (!loaded_shrine_chunks.Contains(this_chunk)){
-					shrine_manager.loadShrines(x, y);
-					loaded_shrine_chunks.Add(this_chunk);
-				}
-			}
-        }
-        return true;
-    }
-
-    private bool unloadShrines(Vector2 position) {
-        for (int i = loaded_shrine_chunks.Count - 1; i >= 0; i--){
-			Vector2 this_chunk = loaded_shrine_chunks[i];
-			if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_unload_dist ||
-				Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_unload_dist)
-			{
-				shrine_manager.unloadShrines((int)this_chunk.x, (int)this_chunk.y);
-				loaded_shrine_chunks.RemoveAt(i);
-			}
-		}
-        return true;
-	}
-
-    private bool loadObelisks(Vector2 position)
-    {
-        for (int x = (int)Globals.cur_chunk.x - tree_load_dist; x <= (int)Globals.cur_chunk.x + tree_load_dist; x++)
-        {
-            for (int y = (int)Globals.cur_chunk.y - tree_load_dist; y <= (int)Globals.cur_chunk.y + tree_load_dist; y++)
-            {
-                Vector2 this_chunk = new Vector2(x, y);
-                if (!loaded_obelisk_chunks.Contains(this_chunk))
-                {
-                    shrine_manager.loadObelisks(x, y);
-                    loaded_obelisk_chunks.Add(this_chunk);
-                }
-            }
-        }
-        return true;
-    }
-
-    private bool unloadObelisks(Vector2 position)
-    {
-        for (int i = loaded_obelisk_chunks.Count - 1; i >= 0; i--)
-        {
-            Vector2 this_chunk = loaded_obelisk_chunks[i];
-            if (Mathf.Abs(this_chunk.x - Globals.cur_chunk.x) > tree_unload_dist ||
-                Mathf.Abs(this_chunk.y - Globals.cur_chunk.y) > tree_unload_dist)
-            {
-                shrine_manager.unloadObelisks((int)this_chunk.x, (int)this_chunk.y);
-                loaded_obelisk_chunks.RemoveAt(i);
-            }
-        }
-        return true;
-    }
-    */
     public Biome chooseBiome(Vector2 chunk)
     {
 
@@ -512,25 +299,6 @@ public class GenerationManager : MonoBehaviour {
             chunkGen.colorChunk(chunk.Value, chunk_size);
         }
     }
-    /*
-    public void generateChunk(Vector2 coordinates, bool detailed) {
-        //if(!loadDoodads(position)) done = false;
-        Biome curBiome = chooseBiome(coordinates);
-        createChunk(coordinates);
-        if(detailed) {
-            ChunkMeshes cm = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
-            cm.mf.mesh = cm.highMesh;
-            detailed_chunks.Add(coordinates, cm);
-        }
-        tree_manager.loadTrees(coordinates, curBiome);
-        shrine_manager.loadShrines(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
-        loaded_shrine_chunks.Add(coordinates);
-        shrine_manager.loadShrines(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
-        loaded_shrine_chunks.Add(coordinates);
-        doodad_manager.loadDoodads(coordinates, curBiome);
-        loaded_doodad_chunks.Add(coordinates);
-    }
-    */
     //---------- HELPER FUNCTIONS ----------//
     public static Vector3 chunkToWorld(Vector2 chunk)
     {
