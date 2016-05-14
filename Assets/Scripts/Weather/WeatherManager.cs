@@ -69,7 +69,7 @@ public class WeatherManager : MonoBehaviour {
             int numParticlesAlive = activeParticleSystem.GetParticles(m_Particles);
             for(int i = 0; i < numParticlesAlive; i++)
             {
-                m_Particles[i].velocity = Vector3.down * particleVel * Mathf.Pow(Globals.time_scale, 0.3f);
+                m_Particles[i].velocity = Vector3.down * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
             }
             activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
         }

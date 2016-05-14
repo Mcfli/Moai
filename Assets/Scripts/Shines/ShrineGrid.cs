@@ -86,7 +86,7 @@ public class ShrineGrid : MonoBehaviour
 
 		transform.position = snapToTerrain(transform.position);
 		createMural();
-		createPillars();
+		
 		killTrees();
     }
 
@@ -95,7 +95,11 @@ public class ShrineGrid : MonoBehaviour
     {
         if (!isPlaced)
         {
-
+            snapSelfToTerrain();
+            if (isPlaced)
+            {
+                createPillars();
+            }
         }
         if (!isDone)
         {
@@ -427,6 +431,20 @@ public class ShrineGrid : MonoBehaviour
 
         // Add star to list
         
+    }
+
+    private void snapSelfToTerrain()
+    {
+        RaycastHit hit;
+        Ray rayDown = new Ray(new Vector3(transform.position.x, 10000000, transform.position.z), Vector3.down);
+        int terrain = LayerMask.GetMask("Terrain");
+
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
+        {
+
+            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            isPlaced = true;
+        }
     }
 
     private Vector3 snapToTerrain(Vector3 pos)
