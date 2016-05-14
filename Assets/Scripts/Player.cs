@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
             {
                 if (GetHover().collider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                 {
-                    waypoint.transform.position = GetHover().point;
+                    waypoint.transform.position = GetHover().point + Vector3.up * (waypoint.transform.localScale.y);
                     waypoint.SetActive(true);
                 }
             }
