@@ -24,18 +24,24 @@ public class MainMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Start () {
-        if(Globals.mode != -1) return;
+        if(Globals.mode != -1 && loadStep == -1) return;
         setupMain();
     }
 
     void Update() {
-        if(Globals.mode != -1) return;
+        if(Globals.mode != -1 && loadStep == -1) return;
 
         if(loadStep == 0) {
             prepLoad();
-            loadStep++;
+            loadStep = 1;
+            StartCoroutine(loadingDelay());
             return;
-        }else if(loadStep == 1) {
+        }
+        else if(loadStep == 1)
+        {
+
+        }
+        else if(loadStep == 2) {
             loadGame();
             loadStep = -1;
             return;
@@ -53,8 +59,17 @@ public class MainMenu : MonoBehaviour {
         buttonsParent.anchoredPosition = new Vector2(mmback.buttonsPosition.x * Screen.width, mmback.buttonsPosition.y * Screen.height) / 2;
     }
 
+
     public void startGame() {
         loadStep = 0;
+    }
+
+    private IEnumerator loadingDelay()
+    {
+        Globals.mode = 0;
+        Random.seed = Globals.SeedScript.seed;
+        yield return new WaitForSeconds(8f);
+        loadStep = 2;
     }
 
     private void prepLoad() {
@@ -66,8 +81,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     private void loadGame() {
-        Globals.mode = 0;
-        Random.seed = Globals.SeedScript.seed;
+        
         if(scene) Destroy(scene);
         Globals.GenerationManagerScript.initiateWorld();
         Globals.WeatherManagerScript.initializeWeather();
