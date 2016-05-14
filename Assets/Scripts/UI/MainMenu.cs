@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour {
     public List<MMBackground> titleScreens;
     public int loadingScreen;
     public UnityEngine.UI.Image loadingBackdrop;
+    public UnityEngine.UI.Image loadingIcon;
     public List<Sprite> loadingWallpapers;
     public RectTransform title;
     public RectTransform buttonsParent;
@@ -24,18 +25,26 @@ public class MainMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Start () {
-        if(Globals.mode != -1) return;
+        if(Globals.mode != -1 && loadStep == -1) return;
         setupMain();
     }
 
     void Update() {
-        if(Globals.mode != -1) return;
+        if(Globals.mode != -1 && loadStep == -1) return;
 
         if(loadStep == 0) {
             prepLoad();
-            loadStep++;
+            loadStep = 1;
+            StartCoroutine(loadingDelay());
             return;
-        }else if(loadStep == 1) {
+        }
+        else if(loadStep == 1)
+        {
+            float rot = Mathf.PingPong(Time.time,2) - 1;
+            loadingIcon.rectTransform.localScale = new Vector3(rot,
+                loadingIcon.rectTransform.localScale.y, loadingIcon.rectTransform.localScale.z);
+        }
+        else if(loadStep == 2) {
             loadGame();
             loadStep = -1;
             return;
@@ -53,27 +62,35 @@ public class MainMenu : MonoBehaviour {
         buttonsParent.anchoredPosition = new Vector2(mmback.buttonsPosition.x * Screen.width, mmback.buttonsPosition.y * Screen.height) / 2;
     }
 
+
     public void startGame() {
         loadStep = 0;
+    }
+
+    private IEnumerator loadingDelay()
+    {
+        Globals.mode = 0;
+        Random.seed = Globals.SeedScript.seed;
+        yield return new WaitForSeconds(8f);
+        loadStep = 2;
     }
 
     private void prepLoad() {
         Globals.MenusScript.switchTo(loadingScreen);
         Random.seed = (int)System.DateTime.Now.Ticks;
         loadingBackdrop.sprite = loadingWallpapers[Random.Range(0, loadingWallpapers.Count)];
-        Camera.main.GetComponent<MusicManager>().Stop(false);
-        AudioListener.volume = 0;
+        //Camera.main.GetComponent<MusicManager>().Stop(false);
+        //AudioListener.volume = 0;
     }
 
     private void loadGame() {
-        Globals.mode = 0;
-        Random.seed = Globals.SeedScript.seed;
+        
         if(scene) Destroy(scene);
         Globals.GenerationManagerScript.initiateWorld();
         Globals.WeatherManagerScript.initializeWeather();
         Globals.MenusScript.switchTo(-1);
-        Camera.main.GetComponent<MusicManager>().Play();
-        AudioListener.volume = 1;
+        //Camera.main.GetComponent<MusicManager>().Play();
+        //AudioListener.volume = 1;
 
         Camera.main.transform.position = origCamPos;
         Camera.main.transform.eulerAngles = origCamRot;
