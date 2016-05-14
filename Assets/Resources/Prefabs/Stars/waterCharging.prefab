@@ -1,42 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &193712
+--- !u!1 &122300
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 450592}
-  - 198: {fileID: 19882492}
-  - 199: {fileID: 19919622}
+  - 4: {fileID: 415150}
+  - 198: {fileID: 19819440}
+  - 199: {fileID: 19912676}
   m_Layer: 0
-  m_Name: fireExplosion
+  m_Name: waterCharging
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &450592
+--- !u!4 &415150
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193712}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_GameObject: {fileID: 122300}
+  m_LocalRotation: {x: 0, y: -0.81714517, z: 0, w: 0.57643193}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!198 &19882492
+--- !u!198 &19819440
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193712}
+  m_GameObject: {fileID: 122300}
   serializedVersion: 2
-  lengthInSec: 1
+  lengthInSec: 3
   startDelay:
     scalar: 0
     maxCurve:
@@ -83,7 +83,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     startLifetime:
-      scalar: 10
+      scalar: 3.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -118,7 +118,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 4000
+      scalar: -6
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -244,10 +244,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278190335
+        rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: 25
+      scalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -387,14 +387,14 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     randomizeRotationDirection: 0
-    gravityModifier: 5
+    gravityModifier: 0
     maxNumParticles: 1000
     rotation3D: 0
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 0
-    radius: 1
+    type: 1
+    radius: 20
     angle: 25
     length: 5
     boxX: 1
@@ -415,7 +415,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 4000
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -470,14 +470,19 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 1
-          inSlope: -1
-          outSlope: -1
+          value: 0.24324322
+          inSlope: 1.041881
+          outSlope: 1.041881
           tangentMode: 10
-        - time: 1
-          value: 0
-          inSlope: -1
-          outSlope: -1
+        - time: 0.49944013
+          value: 0.7636004
+          inSlope: 0.7456197
+          outSlope: 0.7456197
+          tangentMode: 10
+        - time: 0.9653768
+          value: 0.972973
+          inSlope: 0.44935846
+          outSlope: 0.44935846
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -613,10 +618,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4278240551
+          rgba: 4294967295
         key1:
           serializedVersion: 2
-          rgba: 4278226181
+          rgba: 4294967295
         key2:
           serializedVersion: 2
           rgba: 0
@@ -1150,25 +1155,25 @@ ParticleSystem:
     inWorldSpace: 0
     dampen: 1
   SizeBySpeedModule:
-    enabled: 1
+    enabled: 0
     curve:
       scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 10
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         - time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
-          tangentMode: 10
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 0
+        m_RotationOrder: 4
       minCurve:
         serializedVersion: 2
         m_Curve:
@@ -1186,7 +1191,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 1
-    range: {x: 0, y: 200}
+    range: {x: 0, y: 1}
   RotationBySpeedModule:
     enabled: 0
     x:
@@ -1528,17 +1533,17 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19919622
+--- !u!199 &19912676
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193712}
+  m_GameObject: {fileID: 122300}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 3c483b566d52afc4ba2449b7197d67ef, type: 2}
+  - {fileID: 2100000, guid: 897bc71cc1378ea46b119db45a0999dc, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1554,13 +1559,13 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
-  m_VelocityScale: 0.4
-  m_LengthScale: 0.05
+  m_VelocityScale: 0
+  m_LengthScale: 2
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_RenderAlignment: 0
@@ -1578,5 +1583,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 193712}
+  m_RootGameObject: {fileID: 122300}
   m_IsPrefabParent: 1
