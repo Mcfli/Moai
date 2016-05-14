@@ -170,7 +170,7 @@ public class GenerationManager : MonoBehaviour {
                     else if (chunkObj.unloadedBase && (!chunkObj.doneObjects ||
                         chunkObj.unloadedObjects))
                     {
-                        Destroy(loaded_chunks[coordinates]);
+                        ObjectPool.Erase(loaded_chunks[coordinates]);
                         loaded_chunks.Remove(coordinates);
                     }
                 }
@@ -242,7 +242,7 @@ public class GenerationManager : MonoBehaviour {
 
     private void createChunk(Vector2 coordinates)
     {
-        GameObject chunk = new GameObject();
+        GameObject chunk = ObjectPool.Create();
         ChunkMeshes chunkMeshes = chunk.AddComponent<ChunkMeshes>();
         chunkMeshes.coordinates = coordinates;
         chunkMeshes.setReferences(synth, this, tree_manager, shrine_manager, doodad_manager, water_manager);
