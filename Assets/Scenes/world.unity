@@ -979,6 +979,10 @@ Prefab:
       propertyPath: MenuSound1
       value: 
       objectReference: {fileID: 8300000, guid: 60577576253fbae4fa7d9a3088898d15, type: 3}
+    - target: {fileID: 8207724, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0
@@ -1759,7 +1763,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -2445,6 +2449,82 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &1590814655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1590814659}
+  - 33: {fileID: 1590814658}
+  - 136: {fileID: 1590814657}
+  - 23: {fileID: 1590814656}
+  m_Layer: 0
+  m_Name: Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!23 &1590814656
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590814655}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 3fdd47b4e3961354abe8804393e37ddf, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!136 &1590814657
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590814655}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1590814658
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590814655}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1590814659
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590814655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 160.67967, y: 31.653198, z: -268.1202}
+  m_LocalScale: {x: 5, y: 10000, z: 5}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &1694056955
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,7 +2721,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425282, guid: fc49b97b43237a04a8db602b5a6bdf65, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 425282, guid: fc49b97b43237a04a8db602b5a6bdf65, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2877,7 +2957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9aed27220686014cb443fbf7470bd09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabDistance: 7
+  grabDistance: 10
   grabSphereRadius: 0
   minWarpOnWaitDist: 1
   collisionLayers:
@@ -2888,6 +2968,7 @@ MonoBehaviour:
   cinematicTimeScale: 100
   waitCamDistance: 60
   zoomInSpeed: 5
+  waypoint: {fileID: 1590814655}
 --- !u!82 &1837165588
 AudioSource:
   m_ObjectHideFlags: 0

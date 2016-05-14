@@ -32,6 +32,8 @@ public class Player : MonoBehaviour {
     private float theta = 0.0f;
 	public float zoomInSpeed = 5.0f;
 
+    public GameObject waypoint;
+
     void Awake() {
         thisCollider = GetComponent<Collider>();
         cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
@@ -113,6 +115,20 @@ public class Player : MonoBehaviour {
             else DropObject();
         }
         if(heldObj != null && !inCinematic) followHand(heldObj, heldObjSize);
+
+        // Waypoints
+        if (Input.GetButtonDown("Waypoint") && Globals.mode == 0 && Globals.time_scale == 1)
+        {
+            if (GetHover().collider != null)
+            {
+                if (GetHover().collider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+                {
+                    waypoint.transform.position = GetHover().point + Vector3.up * (waypoint.transform.localScale.y);
+                    waypoint.SetActive(true);
+                }
+            }
+        
+        }
 
         checkUnderwater();
     }
