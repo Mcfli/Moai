@@ -168,19 +168,16 @@ public class ShrineManager : MonoBehaviour {
 
 	public void unloadShrines(int x, int y)
 	{
-		Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size*0.5f,0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
-		Vector3 half_extents = new Vector3(gen_manager.chunk_size*0.5f,100000, gen_manager.chunk_size*0.5f );
-		LayerMask shrine_mask = LayerMask.GetMask("Shrine");
 		Vector2 chunk = new Vector2(x, y);
-
-		Collider[] colliders = Physics.OverlapBox(center, half_extents,Quaternion.identity,shrine_mask);
-		for (int i = 0;i < colliders.Length; i++)
+        if (!shrines.ContainsKey(chunk)) return;
+        List<ShrineGrid> chunkShrines = shrines[chunk];
+		for (int i = shrines[chunk].Count -1 ; i >= 0; i--)
 		{
-			GameObject shrine = colliders[i].gameObject;
-			shrine.GetComponent<ShrineGrid>().saveTransforms();
-			saveShrine(chunk, shrine);
+            ShrineGrid shrine = chunkShrines[i];
+			shrine.saveTransforms();
+			saveShrine(chunk, shrine.gameObject);
 
-			Destroy(shrine);
+			Destroy(shrine.gameObject);
 		}
 	}
 

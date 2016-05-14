@@ -44,6 +44,7 @@ public class ShrineGrid : MonoBehaviour
     public List<PuzzleObject> validObjects;
     private LayerMask notTerrain;
     private LayerMask glowLayer;
+    private bool isPlaced;
 
     //private Dictionary<int, bool> completedGlows;
 
@@ -92,6 +93,10 @@ public class ShrineGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isPlaced)
+        {
+
+        }
         if (!isDone)
         {
             updateCurState();

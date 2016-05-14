@@ -249,15 +249,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunk_size: 256
   chunk_resolution: 8
-  chunk_load_dist: 30
-  chunk_unload_dist: 30
+  chunk_load_dist: 10
+  chunk_unload_dist: 12
   chunk_detail_dist: 1
   XZDeviationRatio: 0.5
   XZDeviationSeed: 543825
   detailDeviation: 1.25
   detailDeviationSeed: 854375
   detailSubdivisions: 3
-  allottedLoadSeconds: 0.01
+  allottedLoadSeconds: 0.005
   tree_load_dist: 1
   tree_unload_dist: 2
   biomes:
@@ -397,8 +397,8 @@ MonoBehaviour:
   obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
   acceptable_heightDiff: 1e-10
   max_tries: 10000
-  shrine_probability: 3
-  shrine_min_dist: 2
+  shrine_probability: 1
+  shrine_min_dist: 1
   obelisk_probability: 1
   obelisk_min_dist: 2
 --- !u!114 &188005519
@@ -2882,7 +2882,7 @@ MonoBehaviour:
   minWarpOnWaitDist: 1
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 4294957001
+    m_Bits: 4294891465
   SpeedUpSFX: {fileID: 8300000, guid: ef0f7a0eb989b304e8f55754eb97e4e7, type: 3}
   pickupDropAudio: {fileID: 0}
   cinematicTimeScale: 100

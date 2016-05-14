@@ -34,6 +34,9 @@ public class Obelisk : MonoBehaviour {
     // if star currency has been used on it
     private bool isDone = false;
 
+    // if it has been snapped to terrain succefully
+    private bool isPlaced = false;
+
     // References
     private Renderer m_renderer;
     private GameObject islandInstance;
@@ -69,7 +72,7 @@ public class Obelisk : MonoBehaviour {
         createIsland();
 		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();
 		telePos = islandInstance.GetComponentInChildren<TeleportStone> ().gameObject.transform.position;
-        transform.position = snapToTerrain(transform.position);
+        
         SuccessAudio = GetComponent<AudioSource>();
         FailAudio = GetComponent<AudioSource>();
     }
@@ -77,7 +80,8 @@ public class Obelisk : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-		if(fromObelisk)
+        if (!isPlaced) transform.position = snapToTerrain(transform.position);
+        if (fromObelisk)
 		{
 			if (fader.fadingWhite) 
 			{
@@ -462,6 +466,7 @@ public class Obelisk : MonoBehaviour {
 
     private Vector3 snapToTerrain(Vector3 pos)
     {
+
         Vector3 ret = pos;
         RaycastHit hit;
         Ray rayDown = new Ray(new Vector3(pos.x, 10000000, pos.z), Vector3.down);
@@ -469,7 +474,9 @@ public class Obelisk : MonoBehaviour {
 
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
-             ret = new Vector3(pos.x, hit.point.y + 0.1f, pos.z);
+            isPlaced = true;
+            ret = new Vector3(pos.x, hit.point.y + 0.1f, pos.z);
+            
         }
         return ret;
     }
