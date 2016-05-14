@@ -2882,7 +2882,7 @@ MonoBehaviour:
   minWarpOnWaitDist: 1
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 4294957001
+    m_Bits: 4294891465
   SpeedUpSFX: {fileID: 8300000, guid: ef0f7a0eb989b304e8f55754eb97e4e7, type: 3}
   pickupDropAudio: {fileID: 0}
   cinematicTimeScale: 100
