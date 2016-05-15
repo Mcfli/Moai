@@ -13,6 +13,8 @@ public class ChunkMeshes : MonoBehaviour{
     // Generation Checkpoints 
     public bool doneBase = false;
     public bool doneObjects = false;
+    public bool loadingBase = false;
+    public bool loadingObjects = false;
     public bool unloadedBase = false;
     public bool unloadedObjects = false;
     public bool detailed = false;
@@ -56,21 +58,31 @@ public class ChunkMeshes : MonoBehaviour{
     {
         if (System.DateTime.Now >= genManager.endTime) return;
         unloadedBase = false;
+        loadingBase = true;
         if (!meshGenerated) generateMesh();
         if (meshGenerated && !colliderGenerated) generateCollider();
         if (meshGenerated && colliderGenerated && !lakesGenerated) generateLakes();
         if (meshGenerated && colliderGenerated && lakesGenerated && !obelisksGenerated) generateObelisks();
-        if (meshGenerated && colliderGenerated && lakesGenerated && obelisksGenerated) doneBase = true;
+        if (meshGenerated && colliderGenerated && lakesGenerated && obelisksGenerated)
+        {
+            doneBase = true;
+            loadingBase = false;
+        }
     }
 
     public void loadObjects()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
         unloadedObjects = false;
+        loadingObjects = true;
         if (!doodadsGenerated) generateDoodads();
         if (doodadsGenerated && !treesGenerated) generateTrees();
         if (doodadsGenerated && treesGenerated && !shrinesGenerated) generateShrines();
-        if (doodadsGenerated && treesGenerated && shrinesGenerated) doneObjects = true;
+        if (doodadsGenerated && treesGenerated && shrinesGenerated)
+        {
+            doneObjects = true;
+            loadingObjects = false;
+        }
     }
 
     public void unloadBase()
