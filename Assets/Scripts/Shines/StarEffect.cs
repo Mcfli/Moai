@@ -5,10 +5,12 @@ public class StarEffect : MonoBehaviour {
     public float speed = 1;
     public GameObject explosionPrefab;
 	public GameObject beamPrefab;
-	public string element;
+    public GameObject chargingPrefab;
+    public string element;
     public Material spentMat;
 
     private Vector3 target;
+    private bool isCharging = false;
     private bool isTargetSet = false;
     private bool isAtTarget = false;
     private bool hasExploded = false;
@@ -19,6 +21,7 @@ public class StarEffect : MonoBehaviour {
     private Vector3 step;
 	private GameObject explosion;
 	private GameObject beam;
+    private GameObject charge;
 
     public void setTarget(Vector3 tar)
     {
@@ -36,14 +39,28 @@ public class StarEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
-		if(beamPrefab != null)
-			beam = Instantiate (beamPrefab, transform.position, Quaternion.identity) as GameObject;
+        if (chargingPrefab != null)
+        {
+            charge = Instantiate(chargingPrefab, transform.position + Vector3.up * 10f, Quaternion.identity) as GameObject;
+            isCharging = true;
+        }
+            
     }
 	
 	// Update is called once per frame
 	void Update () {
         //transform.LookAt(Globals.Player.transform.position);
-		if (isTargetSet && !isAtTarget)
+        if (isCharging)
+        {
+            if (!charge.GetComponent<ParticleSystem>().isPlaying)
+            {
+                Destroy(charge);
+                isCharging = false;
+                if (beamPrefab != null)
+                    beam = Instantiate(beamPrefab, transform.position, Quaternion.identity) as GameObject;
+            }
+        }
+		if (!isCharging && isTargetSet && !isAtTarget)
 			move ();
 		//else if (!hasExploded)
 		//	explode ();

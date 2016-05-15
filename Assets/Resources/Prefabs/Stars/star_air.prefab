@@ -77,6 +77,7 @@ MonoBehaviour:
   speed: 100
   explosionPrefab: {fileID: 193712, guid: cbe397e78e628db4ab5b27a5cae08fa7, type: 2}
   beamPrefab: {fileID: 113870, guid: 46a56c5c0881c4bcf804068c451784a1, type: 2}
+  chargingPrefab: {fileID: 170596, guid: 99f79a5d60ed86c4ab749798390a7c1a, type: 2}
   element: air
   spentMat: {fileID: 2100000, guid: 4ebba7b55681b8542bf49989177e2b9e, type: 2}
 --- !u!1001 &100100000
