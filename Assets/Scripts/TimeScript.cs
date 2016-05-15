@@ -11,6 +11,7 @@ public class TimeScript : MonoBehaviour {
     public float currentTimeScaleReadOnly = 1;
 
     private float waitingFor;
+    private float totalWaitingTime;
 	
 	// Update is called once per frame
 	void Update () {

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour {
-    public GameObject moai;
     public List<MMBackground> titleScreens;
     public int loadingScreen;
     public UnityEngine.UI.Image loadingBackdrop;
