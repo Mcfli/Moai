@@ -106,6 +106,10 @@ public class ShrineGrid : MonoBehaviour
             updateCurState();
             checkDone();
         }
+		if(gameObject.GetComponent<Renderer>().isVisible)
+		{
+			killTrees ();
+		}
     }
 
     public void enablePlacementItem(PuzzleObject item)
@@ -353,7 +357,8 @@ public class ShrineGrid : MonoBehaviour
         {
 
             GameObject tree = colliders[i].gameObject;
-            Destroy(tree);
+			if(tree.GetComponent<InteractableObject>() != null && !tree.GetComponent<InteractableObject>().playerPlanted)
+            	Destroy(tree);
         }
     }
 
