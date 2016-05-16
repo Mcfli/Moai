@@ -255,7 +255,7 @@ MonoBehaviour:
   saved_scale: {x: 0, y: 0, z: 0}
   ObeliskSuccess: {fileID: 8300000, guid: b905c87097e6f254ab1c7afcd0161035, type: 3}
   ObeliskFail: {fileID: 8300000, guid: ace688ac69c0ee0429c596946b5947e1, type: 3}
-  cullSize: 50
+  cullSize: 75
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

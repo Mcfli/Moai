@@ -78,6 +78,8 @@ public class Obelisk : MonoBehaviour {
         
         SuccessAudio = GetComponent<AudioSource>();
         FailAudio = GetComponent<AudioSource>();
+
+		killTrees();
     }
 	
 	// Update is called once per frame
