@@ -237,6 +237,7 @@ public class Player : MonoBehaviour {
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
         heldObj = obj.GetComponent<InteractableObject>();
         heldObjSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
+		obj.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         heldObjOrigScale = obj.transform.localScale;
         heldObj.pickedUp();
         return true;
@@ -251,6 +252,7 @@ public class Player : MonoBehaviour {
             Physics.IgnoreCollision(objCollider, thisCollider, false);
         }
         heldObj.transform.localScale = heldObjOrigScale;
+		heldObj.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         heldObj.dropped();
         if(!objRigidbody) {
             heldObj.transform.position = mainCamera.transform.position + mainCamera.transform.forward * 1;
