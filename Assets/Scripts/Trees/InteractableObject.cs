@@ -23,7 +23,7 @@ public class InteractableObject: MonoBehaviour{
 
     private float timeRemain;        // how long until next check
     private bool planted;
-    public bool playerPlanted;
+    private bool playerPlanted;
     private bool held;
     private int attempts;
 

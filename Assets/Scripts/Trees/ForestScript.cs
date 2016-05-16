@@ -128,17 +128,26 @@ public class ForestScript : MonoBehaviour {
             float ground = findGround(twoPos);
             if(ground == -Mathf.Infinity) continue;
             Vector3 pos = new Vector3(twoPos.x, ground, twoPos.y);
-            //if(pos is inside shrine) continue;
-            GameObject seed = Instantiate(randomTree.seed_object);
-            Vector2 seed_chunk = GenerationManager.worldToChunk(seed.transform.position);
-            if (!DoodadManager.loaded_doodads.ContainsKey(seed_chunk))
+            RaycastHit raycastHit;
+            LayerMask shrine = LayerMask.GetMask("Shrine");
+            if (Physics.SphereCast(pos, 25.0f, pos, out raycastHit, 25.0f, shrine))
             {
-                DoodadManager.loaded_doodads[seed_chunk] = new List<GameObject>();
+                continue;
             }
-            DoodadManager.loaded_doodads[seed_chunk].Add(seed);
-            seed.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-            seed.GetComponent<InteractableObject>().plant(pos);
-            numSeeds++;
+            else
+            {
+                GameObject seed = Instantiate(randomTree.seed_object);
+                Vector2 seed_chunk = GenerationManager.worldToChunk(seed.transform.position);
+                if (!DoodadManager.loaded_doodads.ContainsKey(seed_chunk))
+                {
+                    DoodadManager.loaded_doodads[seed_chunk] = new List<GameObject>();
+                }
+                DoodadManager.loaded_doodads[seed_chunk].Add(seed);
+                seed.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                seed.GetComponent<InteractableObject>().plant(pos);
+                numSeeds++;
+            }
+            
         }
         nextPropogationTime = Globals.time + (Globals.TreeManagerScript.secondsToPropogate + Globals.TreeManagerScript.secondsToPropogate * Random.Range(-Globals.TreeManagerScript.propogationTimeVariance, Globals.TreeManagerScript.propogationTimeVariance)) * Globals.time_resolution;
         //return numSeeds;
