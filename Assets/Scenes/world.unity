@@ -258,13 +258,15 @@ MonoBehaviour:
   detailDeviationSeed: 854375
   detailSubdivisions: 3
   allottedLoadSeconds: 0.01
-  tree_load_dist: 1
+  tree_load_dist: 2
   tree_unload_dist: 2
   biomes:
+  - {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
+  - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
+  - {fileID: 11487490, guid: 44397433d10f2144ca655e69aff42a89, type: 2}
   - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
-  - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
-  - {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
+  - {fileID: 11424312, guid: 9cf44e1b9308e414c8b4eaa3346edd49, type: 2}
   WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
@@ -1785,12 +1787,12 @@ MonoBehaviour:
   m_GlowCurve: 1
   m_GlowRenderLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_GlowResolution: 0
+    m_Bits: 661504
+  m_GlowResolution: 1
   m_ShowCutoutGlow: 0
   m_ShowTransparentGlow: 1
   m_GlowType: 0
-  m_GlowQuality: 1
+  m_GlowQuality: 0
   m_FullScreenGlowTint: {r: 1, g: 1, b: 1, a: 0}
   m_BlurSpread: 0.52
   m_BlurIterations: 7
@@ -1855,7 +1857,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 838583282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
   m_Name: 
@@ -3293,6 +3295,7 @@ MonoBehaviour:
   m_JumpSound: {fileID: 0}
   m_LandSound: {fileID: 0}
   lookLock: 0
+  flyCheat: 0
 --- !u!143 &1837165591
 CharacterController:
   m_ObjectHideFlags: 0
