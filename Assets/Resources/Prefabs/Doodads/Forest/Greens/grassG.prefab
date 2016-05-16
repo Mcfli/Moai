@@ -11,9 +11,9 @@ GameObject:
   - 33: {fileID: 3321574}
   - 23: {fileID: 2394200}
   - 54: {fileID: 5416222}
-  - 65: {fileID: 6595642}
   - 114: {fileID: 11440512}
   - 114: {fileID: 11484396}
+  - 65: {fileID: 6504434}
   m_Layer: 14
   m_Name: grassG
   m_TagString: Untagged
@@ -27,9 +27,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106144}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.12, z: -0}
-  m_LocalScale: {x: 1.273626, y: 1.273626, z: 1.273626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,7 +81,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6595642
+--- !u!65 &6504434
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1780779, y: 0.9537392, z: 2.0000005}
-  m_Center: {x: -0.41351998, y: 0.027659513, z: 0.000000059604645}
+  m_Size: {x: 1.178078, y: 2, z: 0.953739}
+  m_Center: {x: -0.17379601, y: 0.806283, z: 0.37720248}
 --- !u!114 &11440512
 MonoBehaviour:
   m_ObjectHideFlags: 1

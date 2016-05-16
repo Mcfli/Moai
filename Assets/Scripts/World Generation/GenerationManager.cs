@@ -245,7 +245,7 @@ public class GenerationManager : MonoBehaviour {
         GameObject chunk = new GameObject();
         ChunkMeshes chunkMeshes = chunk.AddComponent<ChunkMeshes>();
         chunkMeshes.coordinates = coordinates;
-        chunkMeshes.setReferences(synth, this, tree_manager, shrine_manager, doodad_manager, water_manager);
+        chunkMeshes.setReferences(synth, this, chunkGen, tree_manager, shrine_manager, doodad_manager, water_manager);
         chunkMeshes.coordinates = coordinates;
         chunk.layer = LayerMask.NameToLayer("Terrain");
         chunk.name = "chunk (" + coordinates.x + "," + coordinates.y + ")";

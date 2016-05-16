@@ -24,15 +24,10 @@ public class ChunkMeshes : MonoBehaviour{
     public bool obelisksGenerated = false;
     public bool lakesGenerated = false;
 
-    public float XZDeviationRatio; //only deviates positively (sadly)
-    public int XZDeviationSeed;
-    public float detailDeviation;
-    public int detailDeviationSeed;
-    public int detailSubdivisions;
-
     //references
     private NoiseSynth synth;
     private GenerationManager genManager;
+    private ChunkGenerator chunkGen;
     private TreeManager treeManager;
     private ShrineManager shrineManager;
     private DoodadManager doodadManager;
@@ -42,10 +37,11 @@ public class ChunkMeshes : MonoBehaviour{
     private List<lakeStruct> lakes;
     private Biome biome;
 
-    public void setReferences(NoiseSynth sy,GenerationManager g, TreeManager t,ShrineManager s,DoodadManager d,WaterManager w)
+    public void setReferences(NoiseSynth sy,GenerationManager g, ChunkGenerator c, TreeManager t,ShrineManager s,DoodadManager d,WaterManager w)
     {
         synth = sy;
         genManager = g;
+        chunkGen = c;
         treeManager = t;
         shrineManager = s;
         doodadManager = d;
@@ -223,7 +219,7 @@ public class ChunkMeshes : MonoBehaviour{
 
         highMesh = Instantiate(lowMesh);
         highMesh.name = "chunk (" + coordinates.x + "," + coordinates.y + ") [h]";
-        subDivide(highMesh, coordinates, detailSubdivisions);
+        subDivide(highMesh, coordinates, chunkGen.detailSubdivisions);
 
         mf.mesh = lowMesh;
         meshGenerated = true;
@@ -351,11 +347,11 @@ public class ChunkMeshes : MonoBehaviour{
         for (int i = 0; i < oldVerts.Length; i += 3)
         {
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
-            Random.seed = Globals.SeedScript.seed + detailDeviationSeed + ((hypotMid.x + coordinates.x * genManager.chunk_size).ToString() + ","
+            Random.seed = Globals.SeedScript.seed + chunkGen.detailDeviationSeed + ((hypotMid.x + coordinates.x * genManager.chunk_size).ToString() + ","
                 + (hypotMid.z + coordinates.y * genManager.chunk_size).ToString()).GetHashCode();
-            hypotMid = new Vector3(hypotMid.x + Random.Range(-detailDeviation, detailDeviation), 
-                hypotMid.y + Random.Range(-detailDeviation, detailDeviation), 
-                hypotMid.z + Random.Range(-detailDeviation, detailDeviation));
+            hypotMid = new Vector3(hypotMid.x + Random.Range(-chunkGen.detailDeviation, chunkGen.detailDeviation), 
+                hypotMid.y + Random.Range(-chunkGen.detailDeviation, chunkGen.detailDeviation), 
+                hypotMid.z + Random.Range(-chunkGen.detailDeviation, chunkGen.detailDeviation));
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i + 1], oldVerts[i + 2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i + 2], oldVerts[i], 0.5f);
             vertices[i * 4] = hypotMid;
