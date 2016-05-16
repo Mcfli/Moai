@@ -2596,7 +2596,7 @@ GameObject:
   - 33: {fileID: 1590814658}
   - 136: {fileID: 1590814657}
   - 23: {fileID: 1590814656}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
