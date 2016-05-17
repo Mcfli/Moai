@@ -192,6 +192,7 @@ public class ForestScript : MonoBehaviour {
         tree.gameObject.transform.localScale = t.scale;
         tree.age = t.age + timePassed;
         tree.lifeSpan = t.lifeSpan;
+        tree.playerPlanted = t.playerPlanted;
         tree.setForestParent(this);
         addTree(tree);
         tree.grow();

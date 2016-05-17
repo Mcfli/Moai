@@ -47,6 +47,8 @@ public class TreeScript : MonoBehaviour {
 
     private ForestScript forestParent;
 
+    public bool playerPlanted = false;
+
     // Use this for initialization
     // will initialize with random scale and lifeSpan with age of 0
     void Awake(){
@@ -213,6 +215,7 @@ public class TreeScript : MonoBehaviour {
         public float age;
         public float lifeSpan;
         public GameObject prefab;
+        public bool playerPlanted;
 
         public treeStruct(TreeScript t) {
             position = t.transform.position;
@@ -221,6 +224,7 @@ public class TreeScript : MonoBehaviour {
             age = t.age;
             lifeSpan = t.lifeSpan;
             prefab = t.prefab;
+            playerPlanted = t.playerPlanted;
         }
     }
 }
