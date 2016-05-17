@@ -17,10 +17,6 @@ public class ShrineGrid : MonoBehaviour
     public float WaterFireEarthAirChangeMin = 15f;
     public float WaterFireEarthAirChangeMax = 50f;
 
-    public GameObject airGlow;
-    public GameObject earthGlow;
-    public GameObject fireGlow;
-    public GameObject waterGlow;
     public GameObject incompleteGlow;
 
     public GameObject fireStar;

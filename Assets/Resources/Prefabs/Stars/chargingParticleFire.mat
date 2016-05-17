@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: beamParticleAir
+  m_Name: chargingParticleFire
   m_Shader: {fileID: 4800000, guid: 362b10b50404144459370ffa22dc0c52, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -137,19 +137,19 @@ Material:
       data:
         first:
           name: _MKGlowPower
-        second: 0.22
+        second: 0.09
       data:
         first:
           name: _MKGlowTexStrength
-        second: 0.317
+        second: 0.17
       data:
         first:
           name: _MKGlowOffSet
-        second: 0.0182
+        second: 0.0052
       data:
         first:
           name: _InvFade
-        second: 0.02
+        second: 0.2
     m_Colors:
       data:
         first:
@@ -162,11 +162,11 @@ Material:
       data:
         first:
           name: _MKGlowColor
-        second: {r: 0.082179934, g: 0.58823526, b: 0.16943087, a: 1}
+        second: {r: 0.83823526, g: 0.13874237, b: 0, a: 1}
       data:
         first:
           name: _MKGlowTexColor
-        second: {r: 0.08514194, g: 0.53676474, b: 0, a: 1}
+        second: {r: 0.9632353, g: 0.9366632, b: 0, a: 1}
       data:
         first:
           name: _TintColor
