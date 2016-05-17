@@ -89,7 +89,8 @@ public class ChunkMeshes : MonoBehaviour{
     {
         if (System.DateTime.Now >= genManager.endTime) return;
         if (lakesGenerated) unloadLakes();
-        if(!lakesGenerated) unloadedBase = true;
+        if (!lakesGenerated && obelisksGenerated) unloadObelisks();
+        if(!lakesGenerated && !obelisksGenerated) unloadedBase = true;
     }
 
     public void unloadObjects()
@@ -98,8 +99,7 @@ public class ChunkMeshes : MonoBehaviour{
         if (treesGenerated) unloadTrees();
         if (!treesGenerated && doodadsGenerated) unloadDoodads();
         if (!treesGenerated && !doodadsGenerated && shrinesGenerated) unloadShrines();
-        if (!treesGenerated && !doodadsGenerated && !shrinesGenerated && obelisksGenerated) unloadObelisks();
-        if(!treesGenerated && !doodadsGenerated && !shrinesGenerated && !obelisksGenerated) unloadedObjects = true;
+        if(!treesGenerated && !doodadsGenerated && !shrinesGenerated) unloadedObjects = true;
     }
 
     void generateMesh()

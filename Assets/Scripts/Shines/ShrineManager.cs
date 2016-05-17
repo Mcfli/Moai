@@ -181,20 +181,9 @@ public class ShrineManager : MonoBehaviour {
 
     public void unloadObelisks(int x, int y)
     {
-        Vector3 center = new Vector3(x * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f, 0, y * gen_manager.chunk_size + gen_manager.chunk_size * 0.5f);
-        Vector3 half_extents = new Vector3(gen_manager.chunk_size * 0.5f, 100000, gen_manager.chunk_size * 0.5f);
-        LayerMask obelisk_mask = LayerMask.GetMask("Obelisk");
         Vector2 chunk = new Vector2(x, y);
-
-        Collider[] colliders = Physics.OverlapBox(center, half_extents, Quaternion.identity, obelisk_mask);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            GameObject obelisk = colliders[i].gameObject;
-            obelisk.GetComponent<Obelisk>().saveTransforms();
-            saveObelisk(chunk, obelisk);
-
-            Destroy(obelisk);
-        }
+        if (obelisks.ContainsKey(chunk)) 
+            Destroy(obelisks[chunk].gameObject);
     }
 
 	public void loadShrines(int x, int y)
