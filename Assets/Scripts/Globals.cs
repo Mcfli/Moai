@@ -51,6 +51,7 @@ public class Globals : MonoBehaviour {
         { "DOF", 1 },           // bool
         { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool
+        { "Tooltip", 1 },       // bool
 
         // Controls
         { "InvertMouse", 0 },   // bool

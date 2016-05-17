@@ -4,6 +4,7 @@ using System.Collections;
 public class ShrineActivator : MonoBehaviour {
 
     public string element;
+    public static bool firstActivate = false;
 
     private ShrineGrid parentShrine;
 
@@ -30,6 +31,8 @@ public class ShrineActivator : MonoBehaviour {
 
             //Shrine Completion Sound
             ShrineSuccess.PlayOneShot(ShrineComplete, .5F);
+            firstActivate = true;
+
             return true;
         }
         return false;

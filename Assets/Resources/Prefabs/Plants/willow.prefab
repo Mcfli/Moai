@@ -3606,10 +3606,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 132758}
+  dirtMound: {fileID: 193470, guid: 87d6af015ee9fb44fb3c17bcc1b3cbf0, type: 2}
   dirtMoundOffset: {x: -0.05, y: 0.1, z: -0.15}
   dirtMoundLifeRatio: 0.02
-  prefab: {fileID: 181180}
+  prefab: {fileID: 0}
   age: 485926
   lifeSpan: 1203515.8
 --- !u!136 &13621334

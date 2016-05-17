@@ -1357,6 +1357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: maple_mature
   image: {fileID: 2800000, guid: dcb58fef37c5a15449853aa88d1f4f87, type: 3}
+  imageGlowing: {fileID: 0}
 --- !u!114 &11456228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1435,10 +1436,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 194114}
+  dirtMound: {fileID: 131616, guid: bed206811667e2c48b4e132951aa40f0, type: 2}
   dirtMoundOffset: {x: -0.05, y: 0.1, z: -0.15}
   dirtMoundLifeRatio: 0.02
-  prefab: {fileID: 160220}
+  prefab: {fileID: 0}
   age: 413577.28
   lifeSpan: 1203515.8
 --- !u!136 &13661798

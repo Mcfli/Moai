@@ -5,10 +5,11 @@ using System.Collections.Generic;
 public class HUD : MonoBehaviour {
     public string pauseButton = "PauseButton";
     public string crosshairToggle = "CrosshairToggle";
+    public GameObject HUDParent;
     public Color initialColor = new Color(1, 1, 1, 0.75f);
     public Color canGrabColor = new Color(0, 0.5f, 1, 0.75f);
     public Color canUseColor = new Color(0, 0, 1, 0.75f);
-    public UnityEngine.UI.Image crosshair;
+    public List<UnityEngine.UI.Image> crosshairList;
 
     //references
     private Menus menus;
@@ -30,12 +31,14 @@ public class HUD : MonoBehaviour {
 
     void Update() {
         //crosshair color
-        if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic() && Globals.mode == 0) {
-            crosshair.enabled = true;
-            if(Globals.PlayerScript.LookingAtGrabbable() && Globals.PlayerScript.getHeldObj() == null) crosshair.color = canGrabColor;
-            else if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
-            else crosshair.color = initialColor;
-        } else crosshair.enabled = false;
+        foreach(UnityEngine.UI.Image crosshair in crosshairList) {
+            if(Globals.settings["Crosshair"] == 1 && !Globals.PlayerScript.isInCinematic()) {
+                crosshair.gameObject.SetActive(true);
+                if(Globals.PlayerScript.LookingAtGrabbable() && Globals.PlayerScript.getHeldObj() == null) crosshair.color = canGrabColor;
+                else if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
+                else crosshair.color = initialColor;
+            } else crosshair.gameObject.SetActive(false);
+        }
 
         //toggle crosshair
         if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0)
@@ -46,7 +49,9 @@ public class HUD : MonoBehaviour {
             if(Globals.mode == 1) resumeGame();
             else if(Globals.mode == 0) pauseGame();
         }
-        
+
+        HUDParent.SetActive(Globals.mode == 0);
+
         /*
         if(Input.GetKeyDown(KeyCode.P)) {
             //UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh, "Assets/00.asset");

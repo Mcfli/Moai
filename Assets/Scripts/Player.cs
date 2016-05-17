@@ -196,7 +196,12 @@ public class Player : MonoBehaviour {
         return false;
     }
 
-    private RaycastHit GetHover() {
+    public string holding() {
+        if(getHeldObj()) return heldObj.typeID;
+        else return "";
+    }
+
+    public RaycastHit GetHover() {
         RaycastHit raycastHit;
         Transform t = Camera.main.transform; //camera transform
         Physics.SphereCast(t.position, grabSphereRadius, t.forward, out raycastHit, grabDistance);

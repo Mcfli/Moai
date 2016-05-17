@@ -16,8 +16,7 @@ public class ButtonDisplay: MonoBehaviour {
     }
 
     void Start() {
-        toggle.isOn = (Globals.settings["Crosshair"] == 1);
-        //Globals.settings["Crosshair"] = (toggle.isOn) ? 1 : 0;
+        toggle.isOn = (Globals.settings[settingName] == 1);
         updateText();
     }
 	

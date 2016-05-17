@@ -6,7 +6,6 @@ public class Menus : MonoBehaviour {
     public int mainMenu = 0;                    // -1 for no menu
     public int pauseMenu = 0;                   // -1 for no menu
     public List<GameObject> menuScreens;
-    public List<Vector2> menuPositions;         // -1 to 1. 0 is middle of screen
     public List<RectTransform> menuBackdrops;   // menus can use the same backgrounds or have no background
 
     private int currentMenu = -2;
@@ -41,7 +40,6 @@ public class Menus : MonoBehaviour {
     }
     
     private void adjustScreen(int menuNum) {
-        menuScreens[menuNum].GetComponent<RectTransform>().anchoredPosition = new Vector2(menuPositions[menuNum].x * Screen.width, menuPositions[menuNum].y * Screen.height) / 2;
         if(menuBackdrops[menuNum]) {
             float aspectRatio = menuBackdrops[menuNum].sizeDelta.x / menuBackdrops[menuNum].sizeDelta.y;
             if((float)Screen.width / (float)Screen.height > aspectRatio) menuBackdrops[menuNum].sizeDelta = new Vector2(Screen.width, Screen.width / aspectRatio);
