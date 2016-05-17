@@ -91,7 +91,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Top left corner raycast
         RaycastHit hitOne;
-        Ray rayDownOne = new Ray(new Vector3(position.x - 25, 10000000, position.z - 25), Vector3.down);
+        Ray rayDownOne = new Ray(new Vector3(position.x - 50, 10000000, position.z - 50), Vector3.down);
         float distOne = 0.0f;
         if (Physics.Raycast(rayDownOne, out hitOne, Mathf.Infinity, terrain))
         {
@@ -100,7 +100,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Top right corner raycast
         RaycastHit hitTwo;
-        Ray rayDownTwo = new Ray(new Vector3(position.x + 25, 10000000, position.z - 25), Vector3.down);
+        Ray rayDownTwo = new Ray(new Vector3(position.x + 50, 10000000, position.z - 50), Vector3.down);
         float distTwo = 0.0f;
         if (Physics.Raycast(rayDownTwo, out hitTwo, Mathf.Infinity, terrain))
         {
@@ -109,7 +109,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Bottom left corner raycast
         RaycastHit hitThree;
-        Ray rayDownThree = new Ray(new Vector3(position.x - 25, 10000000, position.z + 25), Vector3.down);
+        Ray rayDownThree = new Ray(new Vector3(position.x - 50, 10000000, position.z + 50), Vector3.down);
         float distThree = 0.0f;
         if (Physics.Raycast(rayDownThree, out hitThree, Mathf.Infinity, terrain))
         {
@@ -118,7 +118,7 @@ public class ShrineManager : MonoBehaviour {
 
         // Bottom right corner raycast
         RaycastHit hitFour;
-        Ray rayDownFour = new Ray(new Vector3(position.x + 25, 10000000, position.z + 25), Vector3.down);
+        Ray rayDownFour = new Ray(new Vector3(position.x + 50, 10000000, position.z + 50), Vector3.down);
         float distFour = 0.0f;
         if (Physics.Raycast(rayDownFour, out hitFour, Mathf.Infinity, terrain))
         {
@@ -138,6 +138,7 @@ public class ShrineManager : MonoBehaviour {
 
         if (total_diff < acceptable_heightDiff)
         {
+			Debug.Log ("acceptable " + total_diff);
             acceptable = true;
         }
         else

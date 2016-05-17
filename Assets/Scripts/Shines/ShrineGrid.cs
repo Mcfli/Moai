@@ -339,17 +339,36 @@ public class ShrineGrid : MonoBehaviour
         }
     }
 
-    private void killTrees()
+    public void killTrees()
     {
-        Vector3 half_extents = new Vector3(size, 100000, size);
-        LayerMask tree_mask = LayerMask.GetMask("Tree","Doodad","BigDoodad");
+        Vector3 half_extents = new Vector3(size + 25, 100000, size + 25);
+        LayerMask tree_mask = LayerMask.GetMask("Tree","Doodad","BigDoodad", "Seed");
 
         Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
         for (int i = 0; i < colliders.Length; i++)
         {
-
             GameObject tree = colliders[i].gameObject;
-            Destroy(tree);
+            if (tree.GetComponent<InteractableObject>() != null)
+            {
+                if (!tree.GetComponent<InteractableObject>().playerPlanted)
+                {
+                    Destroy(tree);
+                }
+                    
+            }
+            else if (tree.GetComponent<TreeScript>() != null)
+            {
+                if (!tree.GetComponent<TreeScript>().playerPlanted)
+                {
+                    Destroy(tree);
+                }
+            }
+            // should only make it here if it's not interactable
+            else if(tree.layer == LayerMask.NameToLayer("Doodad") || tree.layer == LayerMask.NameToLayer("BigDoodad"))
+            {
+                Destroy(tree);
+            }
+			
         }
     }
 
