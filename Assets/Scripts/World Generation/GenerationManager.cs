@@ -92,6 +92,10 @@ public class GenerationManager : MonoBehaviour {
             Globals.cur_biome = chooseBiome(Globals.cur_chunk);
             doneLoading = false;
             curDist = 0;
+			if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null)
+			{
+				ShrineManager.shrines [current_chunk] [0].killTrees ();
+			}
         }
         if(!doneLoading && Globals.mode > -1) {
             endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
@@ -235,6 +239,12 @@ public class GenerationManager : MonoBehaviour {
             curDist++;
         }
         doneLoading = done;
+		if(doneLoading){
+			if (ShrineManager.shrines.ContainsKey (Globals.cur_chunk) && ShrineManager.shrines[Globals.cur_chunk] != null)
+			{
+				ShrineManager.shrines [Globals.cur_chunk][0].killTrees();
+			}
+		}
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
         StopCoroutine("loadUnload");

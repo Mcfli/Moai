@@ -138,6 +138,7 @@ public class ShrineManager : MonoBehaviour {
 
         if (total_diff < acceptable_heightDiff)
         {
+			Debug.Log (total_diff);
             acceptable = true;
         }
         else
