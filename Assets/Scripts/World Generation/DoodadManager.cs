@@ -9,6 +9,7 @@ public class DoodadManager : MonoBehaviour
     public static Dictionary<Vector2, List<GameObject>> loaded_doodads;
 
     private LayerMask mask;
+    private bool loading = false;
     // Use this for initialization
     void Awake()
     {
@@ -23,7 +24,9 @@ public class DoodadManager : MonoBehaviour
 
     private IEnumerator gradualLoad(Vector2 key, Biome biome)
     {
+        
         if (biome.bigDoodads.Count < 1) yield break;
+        loading = true;
 
         int originalSeed = Random.seed;
         Random.seed = Globals.SeedScript.seed + placementSeed + key.GetHashCode();
@@ -54,7 +57,7 @@ public class DoodadManager : MonoBehaviour
                             GameObject bigDoodad = createDoodad(position, biome.bigDoodads[k]);
                             if (!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
                             loaded_doodads[key].Add(bigDoodad);
-                            yield return null;
+                           // if (System.DateTime.Now >= gen_manager.endTime) yield return null;
                         }
                         break;
                     }
@@ -86,7 +89,7 @@ public class DoodadManager : MonoBehaviour
                             smallDoodad = createDoodad(randomPos, biome.smallDoodads[l]);
                             if (!loaded_doodads.ContainsKey(key)) loaded_doodads[key] = new List<GameObject>();
                             if (smallDoodad) loaded_doodads[key].Add(smallDoodad);
-                            yield return null;
+                           // if (System.DateTime.Now >= gen_manager.endTime) yield return null;
                             break;
                         }
                     }
@@ -94,6 +97,7 @@ public class DoodadManager : MonoBehaviour
             }
         }
         Random.seed = originalSeed;
+        loading = false;
     }
     
     private GameObject createDoodad(Vector2 position, GameObject doodad){
@@ -117,6 +121,12 @@ public class DoodadManager : MonoBehaviour
 
     public void unloadDoodads(Vector2 chunk)
     {
+        StartCoroutine(gradualUnload(chunk));
+    }
+
+    private IEnumerator gradualUnload(Vector2 chunk)
+    {
+        if (loading) yield return null;
         if (loaded_doodads.ContainsKey(chunk))
         {
             for (int i = loaded_doodads[chunk].Count - 1; i >= 0; i--)

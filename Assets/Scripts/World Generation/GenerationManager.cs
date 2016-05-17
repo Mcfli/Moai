@@ -151,7 +151,7 @@ public class GenerationManager : MonoBehaviour {
                 {
                     if (!loaded_chunks.ContainsKey(coordinates)) continue;
                     ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
-                    if (chunkObj.doneObjects && !chunkObj.unloadedObjects)
+                    if ((chunkObj.doneObjects ||chunkObj.loadingObjects) && !chunkObj.unloadedObjects)
                     {
                         done = false;
                         chunkObj.unloadObjects();
@@ -164,7 +164,7 @@ public class GenerationManager : MonoBehaviour {
                     ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
 
                     // Unload base stuff
-                    if (chunkObj.doneBase && !chunkObj.unloadedBase)
+                    if ((chunkObj.doneBase || chunkObj.loadingBase) && !chunkObj.unloadedBase)
                     {
                         done = false;
                         chunkObj.unloadBase();

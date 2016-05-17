@@ -9,6 +9,7 @@ public class ForestScript : MonoBehaviour {
     private float nextPropogationTime = -1;
     private Dictionary<int, TreeScript> trees = new Dictionary<int, TreeScript>();
     private SphereCollider sphereCol;
+    private bool unloaded = false;
 
     /*
     //temp when changing forest - if this is not null, that means forest is in the process of changing
@@ -24,10 +25,18 @@ public class ForestScript : MonoBehaviour {
     
 	// Update is called once per frame
 	void Update () {
-        if(trees.Count == 0) {
-            destroyForest();
-            TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Remove(GetInstanceID());
-            return;
+        if ((trees.Count == 0 && !unloaded)) {
+
+            if (TreeManager.loadedForests.ContainsKey(GenerationManager.worldToChunk(transform.position)))
+            {
+
+                TreeManager.loadedForests[GenerationManager.worldToChunk(transform.position)].Remove(GetInstanceID());
+                unloaded = true;
+                destroyForest();
+
+                return;
+            }
+
         }
 
         /*if(newTreeTypes != null) switchOutTree();

@@ -226,6 +226,7 @@ public class Obelisk : MonoBehaviour {
         GameObject prefab = possibleIslands[Random.Range(0, possibleIslands.Count)];
         islandInstance = Instantiate(prefab,transform.position + Vector3.up * islandHeight, Quaternion.Euler(-90, Random.Range(0, 360), 0)) as GameObject;
         islandInstance.GetComponentInChildren<TeleportStone>().linkedObelisk = gameObject;
+        islandInstance.transform.parent = transform;
     }
 
     /* 

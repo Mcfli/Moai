@@ -11,6 +11,7 @@ public class TreeManager : MonoBehaviour {
     public static Dictionary<Vector2, Dictionary<int, ForestScript>> loadedForests;
 
     private GenerationManager gen_manager;
+    private bool loading = false;
 
     // Use this for initialization
     void Awake() {
@@ -36,9 +37,21 @@ public class TreeManager : MonoBehaviour {
     }
 
     public void unloadTrees(Vector2 chunk){
+        StartCoroutine(gradualUnload(chunk));
+    }
+
+    private IEnumerator gradualUnload(Vector2 chunk)
+    {
+        
+        if (loading) yield return null;
+        if (!loadedForests.ContainsKey(chunk)) yield break;
         trees[chunk] = new List<ForestScript.forestStruct>();
-        foreach(ForestScript f in loadedForests[chunk].Values) {
-            if(f) {
+
+        foreach (ForestScript f in loadedForests[chunk].Values)
+        {
+            if (f)
+            {
+                if (System.DateTime.Now >= gen_manager.endTime) yield return null;
                 trees[chunk].Add(f.export());
                 f.destroyForest();
             }
@@ -48,9 +61,11 @@ public class TreeManager : MonoBehaviour {
 
     private IEnumerator gradualLoad(Vector2 key, Biome biome)
     {
+        loading = true;
         if (System.DateTime.Now >= gen_manager.endTime) yield return null;
         if (biome.treeTypes.Count < 1) yield break;
         if (loadedForests.ContainsKey(key)) yield break;
+        
         Dictionary<int, ForestScript> loaded = new Dictionary<int, ForestScript>();
         if (trees.ContainsKey(key) && trees[key] != null)
         { //load
@@ -102,5 +117,6 @@ public class TreeManager : MonoBehaviour {
             Random.seed = originalSeed;
         }
         loadedForests.Add(key, loaded);
+        loading = false;
     }
 }
