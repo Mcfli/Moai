@@ -91,7 +91,7 @@ public class CheatConsole : MonoBehaviour
         */
 
         foreach(KeyValuePair<string, List<GameObject>> p in Globals.Stars)
-            Globals.Stars[p.Key].Add(Globals.SkyScript.addStar(p.Key));
+            Globals.SkyScript.addStar(p.Key);
     }
 
     // Create a shrine finisher at player

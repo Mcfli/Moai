@@ -165,9 +165,10 @@ public class Obelisk : MonoBehaviour {
         foreach(KeyValuePair<string, List<GameObject>> p in Globals.Stars) {
             for(int i = 0; i < requirements[p.Key]; i++) {
                 int r = Random.Range(0, Globals.Stars[p.Key].Count);
-                Globals.SkyScript.changeStar("normal", Globals.Stars[p.Key][r]); // may clutter up middle part
-                //Globals.SkyScript.removeStar(Globals.Stars[p.Key][r]); // this just removes the star
+                //Globals.SkyScript.changeStar("normal", Globals.Stars[p.Key][r]); // may clutter up middle part
+                Globals.SkyScript.removeStar(Globals.Stars[p.Key][r]); // this just removes the star
                 Globals.Stars[p.Key].RemoveAt(r);
+                Globals.MenusScript.GetComponent<StarHUD>().removeStar(p.Key);
                 for(int j = 0; j < Globals.SkyScript.extraStars; j++) Globals.SkyScript.addStar();
             }
         }

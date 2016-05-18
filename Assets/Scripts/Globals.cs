@@ -48,12 +48,13 @@ public class Globals : MonoBehaviour {
 
     public static Dictionary<string, int> settings = new Dictionary<string, int>(){
         // Gameplay
-        { "Crosshair", 1 },     // bool
+        { "ShowHUD", 1 },       // bool
         { "FOV", 90 },          // int 30-110
         { "DOF", 1 },           // bool
         { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool
         { "Tooltip", 1 },       // bool
+        { "StarIcons", 1 },     // bool
 
         // Controls
         { "InvertMouse", 0 },   // bool

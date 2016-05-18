@@ -82,7 +82,7 @@ public class StarEffect : MonoBehaviour {
             explode();
             isAtTarget = true;
             Destroy(gameObject);
-            Globals.Stars[element].Add(Globals.SkyScript.addStar(element));
+            Globals.SkyScript.addStar(element);
             /*
             transform.LookAt(starsParent.transform);
             starsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90 - Globals.SkyScript.horizonBufferAngle), 

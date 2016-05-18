@@ -188,7 +188,10 @@ public class Sky : MonoBehaviour {
         else if(element.Equals("air")) star = Instantiate(airStar) as GameObject;
         else if(element.Equals("earth")) star = Instantiate(earthStar) as GameObject;
         else star = Instantiate(normalStar) as GameObject;
-        if(Globals.Stars.ContainsKey(element)) Globals.Stars[element].Add(star);
+        if(Globals.Stars.ContainsKey(element)) {
+            Globals.Stars[element].Add(star);
+            Globals.MenusScript.GetComponent<StarHUD>().addStar(element);
+        }
         listOfStars.Add(star);
         return star;
     }
