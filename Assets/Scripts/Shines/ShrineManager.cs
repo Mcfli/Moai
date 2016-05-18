@@ -7,8 +7,10 @@ public class ShrineManager : MonoBehaviour {
     public GameObject obelisk_prefab;
     public float acceptable_heightDiff = 0.0f;
     public int max_tries = 1;
+    public int shrinePlacementSeed;
     public float shrine_probability = 0.70f;
     public int shrine_min_dist = 2;
+    public int obeliskPlacementSeed;
     public float obelisk_probability = 0.50f;
     public int obelisk_min_dist = 2;
 
@@ -190,7 +192,10 @@ public class ShrineManager : MonoBehaviour {
 	{
 		Vector2 key = new Vector2(x, y);
 
-		if (shrines.ContainsKey(key))
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed + shrinePlacementSeed + key.GetHashCode();
+
+        if (shrines.ContainsKey(key))
 		{
 			List<ShrineGrid> shrines_in_chunk = shrines[key];
 
@@ -206,11 +211,16 @@ public class ShrineManager : MonoBehaviour {
 		{
 			placeShrine(GenerationManager.chunkToWorld(key), key);
 		}
+
+        Random.seed = originalSeed;
 	}
 
     public void loadObelisks(int x, int y)
     {
         Vector2 key = new Vector2(x, y);
+
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed + obeliskPlacementSeed + key.GetHashCode();
 
         if (obelisks.ContainsKey(key))
         {
@@ -222,5 +232,7 @@ public class ShrineManager : MonoBehaviour {
         {
             placeObelisk(GenerationManager.chunkToWorld(key), key);
         }
+
+        Random.seed = originalSeed;
     }
 }

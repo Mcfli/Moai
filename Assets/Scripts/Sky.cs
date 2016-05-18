@@ -4,20 +4,27 @@ using System.Collections.Generic;
 
 public class Sky : MonoBehaviour {
     //attach to sky
-    public float timePerDegree = 5; //x axis, in seconds (5 is 30 min day)
-    public float initialTimeOfDay = 180; //noon
+    public float timePerDegree = 5;             //x axis, in seconds (5 is 30 min day)
+    public float initialTimeOfDay = 180;        //noon
     public GameObject DayNightSpin;
     public GameObject SunLight;
     public GameObject MoonLight;
     public GameObject Halo;
     public GameObject StarsParent;
-    public GameObject starPrefab;
+    public GameObject normalStar;
+    public GameObject fireStar;
+    public GameObject waterStar;
+    public GameObject airStar;
+    public GameObject earthStar;
+    public int extraStars = 5; //number of normal stars that are generated when spent
     public float maxStarAlpha = 1;
     public float horizonBufferAngle = 30;
-    public float sunAxisShift = 20; // tilt of sun/moon rotation
-    public float daysPerYear = 365; // z axis
+    public float starBufferAngle = 10;
+    public float elementalStarAngleRadius = 10; // angle from center
+    public float sunAxisShift = 20;             // tilt of sun/moon rotation
+    public float daysPerYear = 365;             // z axis
     public float timeScaleThatHaloAppears = 1000;
-    public int skyDuringHalo = 3; //0 for midnight, 3 for noon, etc
+    public int skyDuringHalo = 3;               //0 for midnight, 3 for noon, etc
 
     //finals
     private GameObject Player;
@@ -65,7 +72,7 @@ public class Sky : MonoBehaviour {
 
     private void updateTransforms() {
         DayNightSpin.transform.localEulerAngles = new Vector3(Globals.timeOfDay, 0, 0); //update angle of sun/moon with Globals.timeOfDay - x axis
-        StarsParent.transform.localEulerAngles = new Vector3(ratio(270, 90) * horizonBufferAngle * 2 - horizonBufferAngle, 0, 0);
+        StarsParent.transform.localEulerAngles = new Vector3(ratio(270, 90) * starBufferAngle * 2 - starBufferAngle, 0, 0);
         float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time / Globals.time_resolution, daysPerYear * 360 * timePerDegree) / (daysPerYear * 360 * timePerDegree)); //tilt of sun/moon - z axis
         transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z + axis); //update angle of sun/moon ring with time of year
         transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
@@ -131,25 +138,71 @@ public class Sky : MonoBehaviour {
         }
     }
 
-    public void addStar() { // puts star in sky, called when shrine complete
-        GameObject star = Instantiate(starPrefab) as GameObject;
-        listOfStars.Add(star);
-		star.transform.SetParent(StarsParent.transform);
-        star.transform.localPosition = Vector3.up * 10000;
+    public GameObject addStar() { // puts star in sky, called when shrine complete
+        return addStar("normal");
+    }
 
+    public GameObject addStar(string element) {
+        if(element.Equals("fire") || element.Equals("water") || element.Equals("air") || element.Equals("earth"))
+            return addStar(element, new Vector2(Random.Range(-elementalStarAngleRadius, elementalStarAngleRadius), Random.Range(-elementalStarAngleRadius, elementalStarAngleRadius)));
+        return addStar(element, new Vector2(Random.Range(-(90 - starBufferAngle), (90 - starBufferAngle)), Random.Range(-(90 - starBufferAngle), (90 - starBufferAngle))));
+    }
+
+    public GameObject addStar(string element, Vector2 angle) {
+        GameObject star = createStar(element);
+
+        star.transform.SetParent(StarsParent.transform);
+        star.transform.localPosition = Vector3.up * 10000;
         Vector3 origRot = StarsParent.transform.localEulerAngles;
-		StarsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90-horizonBufferAngle), (90-horizonBufferAngle)), 0, Random.Range(-(90-sunAxisShift), (90-sunAxisShift)));
-		star.transform.SetParent(null);
+        StarsParent.transform.localEulerAngles = new Vector3(angle.x, 0, angle.y);
+        star.transform.SetParent(null);
         StarsParent.transform.rotation = Quaternion.identity;
         star.transform.SetParent(StarsParent.transform);
         StarsParent.transform.localEulerAngles = origRot;
-
         star.transform.LookAt(StarsParent.transform);
+        return star;
     }
-	
-	public int getNumberOfStars(){
+
+    public GameObject changeStar(string element, GameObject oldStar) {
+        GameObject star = createStar(element);
+
+        star.transform.position = oldStar.transform.position;
+        star.transform.rotation = oldStar.transform.rotation;
+        star.transform.SetParent(StarsParent.transform);
+        star.transform.LookAt(StarsParent.transform);
+
+        removeStar(oldStar);
+
+        return star;
+    }
+
+    public void removeStar(GameObject oldStar) {
+        listOfStars.Remove(oldStar);
+        Destroy(oldStar);
+    }
+
+    private GameObject createStar(string element) {
+        GameObject star;
+        if(element.Equals("fire")) star = Instantiate(fireStar) as GameObject;
+        else if(element.Equals("water")) star = Instantiate(waterStar) as GameObject;
+        else if(element.Equals("air")) star = Instantiate(airStar) as GameObject;
+        else if(element.Equals("earth")) star = Instantiate(earthStar) as GameObject;
+        else star = Instantiate(normalStar) as GameObject;
+        if(Globals.Stars.ContainsKey(element)) {
+            Globals.Stars[element].Add(star);
+            Globals.MenusScript.GetComponent<StarHUD>().addStar(element);
+        }
+        listOfStars.Add(star);
+        return star;
+    }
+
+    public int getNumberOfStars(){
 		return listOfStars.Count;
 	}
+
+    public void removeNulls() {
+        for(int i = 0; i < listOfStars.Count; i++) if(!listOfStars[i]) listOfStars.RemoveAt(i);
+    }
 	
 	//"time" is number of degrees it takes to finish changing to new sky
 	//if time is 0, change sky immediately; time should not be less than 0

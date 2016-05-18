@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Globals : MonoBehaviour {
     public static float time = 0.0f; //incremented by TimeScript
     public static float time_scale = 1.0f;
-	public static float time_resolution = Mathf.Pow(10, -20.0f);
+    public static float time_resolution = Mathf.Pow(10, -20.0f);
     public static float deltaTime;
     public static int mode = -1; // -1 main menu, 0 playing, 1 paused
 
@@ -39,19 +39,22 @@ public class Globals : MonoBehaviour {
     public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                                 // FindObjectsOfType added to a shrine
 
-    public static List<GameObject> airStars = new List<GameObject>();
-    public static List<GameObject> earthStars = new List<GameObject>();
-    public static List<GameObject> fireStars = new List<GameObject>();
-    public static List<GameObject> waterStars = new List<GameObject>();
+    public static Dictionary<string, List<GameObject>> Stars = new Dictionary<string, List<GameObject>>() {
+        { "fire",  new List<GameObject>() },
+        { "water", new List<GameObject>() },
+        { "air",   new List<GameObject>() },
+        { "earth", new List<GameObject>() },
+    };
 
     public static Dictionary<string, int> settings = new Dictionary<string, int>(){
         // Gameplay
-        { "Crosshair", 1 },     // bool
+        { "ShowHUD", 1 },       // bool
         { "FOV", 90 },          // int 30-110
         { "DOF", 1 },           // bool
         { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool
         { "Tooltip", 1 },       // bool
+        { "StarIcons", 1 },     // bool
 
         // Controls
         { "InvertMouse", 0 },   // bool

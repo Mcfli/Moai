@@ -161,32 +161,16 @@ public class Obelisk : MonoBehaviour {
 
     private void spendStars()
     {
-        // Get rid of air stars
-        for(int i = 0; i < requirements["air"]; i++)
-        {
-            Globals.airStars[0].GetComponent<StarEffect>().spendStar();
-            Globals.airStars.RemoveAt(0);
-        }
-
-        // Get rid of earth stars
-        for (int i = 0; i < requirements["earth"]; i++)
-        {
-            Globals.earthStars[0].GetComponent<StarEffect>().spendStar();
-            Globals.earthStars.RemoveAt(0);
-        }
-
-        // Get rid of fire stars
-        for (int i = 0; i < requirements["fire"]; i++)
-        {
-            Globals.fireStars[0].GetComponent<StarEffect>().spendStar();
-            Globals.fireStars.RemoveAt(0);
-        }
-
-        // Get rid of water stars
-        for (int i = 0; i < requirements["water"]; i++)
-        {
-            Globals.waterStars[0].GetComponent<StarEffect>().spendStar();
-            Globals.waterStars.RemoveAt(0);
+        // Get rid of stars
+        foreach(KeyValuePair<string, List<GameObject>> p in Globals.Stars) {
+            for(int i = 0; i < requirements[p.Key]; i++) {
+                int r = Random.Range(0, Globals.Stars[p.Key].Count);
+                //Globals.SkyScript.changeStar("normal", Globals.Stars[p.Key][r]); // may clutter up middle part
+                Globals.SkyScript.removeStar(Globals.Stars[p.Key][r]); // this just removes the star
+                Globals.Stars[p.Key].RemoveAt(r);
+                Globals.MenusScript.GetComponent<StarHUD>().removeStar(p.Key);
+                for(int j = 0; j < Globals.SkyScript.extraStars; j++) Globals.SkyScript.addStar();
+            }
         }
 
         isDone = true;
@@ -194,10 +178,8 @@ public class Obelisk : MonoBehaviour {
 
     private bool areReqsMet()
     {
-        if (Globals.airStars.Count < requirements["air"]) return false;
-        if (Globals.earthStars.Count < requirements["earth"]) return false;
-        if (Globals.fireStars.Count < requirements["fire"]) return false;
-        if (Globals.waterStars.Count < requirements["water"]) return false;
+        foreach(KeyValuePair<string, List<GameObject>> p in Globals.Stars)
+            if(Globals.Stars[p.Key].Count < requirements[p.Key]) return false;
         return true;
     }
 
@@ -293,10 +275,10 @@ public class Obelisk : MonoBehaviour {
 
     void lightIndicators()
     {
-        int airLevel    = Mathf.Min(requirements["air"],Globals.airStars.Count);
-        int earthLevel  = Mathf.Min(requirements["earth"], Globals.earthStars.Count);
-        int fireLevel   = Mathf.Min(requirements["fire"], Globals.fireStars.Count);
-        int waterLevel = Mathf.Min(requirements["water"], Globals.waterStars.Count);
+        int airLevel    = Mathf.Min(requirements["air"],   Globals.Stars["air"].Count);
+        int earthLevel  = Mathf.Min(requirements["earth"], Globals.Stars["earth"].Count);
+        int fireLevel   = Mathf.Min(requirements["fire"],  Globals.Stars["fire"].Count);
+        int waterLevel  = Mathf.Min(requirements["water"], Globals.Stars["water"].Count);
         // Light 
         // Dull the active slots
         Material[] tempMats = m_renderer.sharedMaterials;
