@@ -9106,6 +9106,8 @@ MonoBehaviour:
   waterStarHUD: {fileID: 156938, guid: 4ffc5d1ce236e644a846dbdc815f014e, type: 2}
   airStarHUD: {fileID: 199404, guid: 687b2ec2331fda64b929eae80f327420, type: 2}
   earthStarHUD: {fileID: 143302, guid: 49b944a10022c6842b8dbdd150587176, type: 2}
+  distanceBetweenIcons: 20
+  firstIconOffset: {x: 10, y: 10}
 --- !u!114 &11439462
 MonoBehaviour:
   m_ObjectHideFlags: 1

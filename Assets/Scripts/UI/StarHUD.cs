@@ -8,6 +8,8 @@ public class StarHUD : MonoBehaviour {
     public GameObject waterStarHUD;
     public GameObject airStarHUD;
     public GameObject earthStarHUD;
+    public float distanceBetweenIcons;
+    public Vector2 firstIconOffset;
 
     private Dictionary<string, List<GameObject>> StarIcons = new Dictionary<string, List<GameObject>>() {
         { "fire",  new List<GameObject>() },
@@ -26,22 +28,22 @@ public class StarHUD : MonoBehaviour {
             icon = Instantiate(fireStarHUD);
             icon.transform.SetParent(StarHUDParent.transform);
             RectTransform t = icon.transform as RectTransform;
-            t.anchoredPosition = new Vector2(-10f - StarIcons[element].Count * 20, 10f);
+            t.anchoredPosition = new Vector2(-firstIconOffset.x - StarIcons[element].Count * distanceBetweenIcons, firstIconOffset.y);
         } else if(element.Equals("water")) {
             icon = Instantiate(waterStarHUD);
             icon.transform.SetParent(StarHUDParent.transform);
             RectTransform t = icon.transform as RectTransform;
-            t.anchoredPosition = new Vector2(-10f - StarIcons[element].Count * 20, -10f);
+            t.anchoredPosition = new Vector2(-firstIconOffset.x - StarIcons[element].Count * distanceBetweenIcons, -firstIconOffset.y);
         } else if(element.Equals("air")) {
             icon = Instantiate(airStarHUD);
             icon.transform.SetParent(StarHUDParent.transform);
             RectTransform t = icon.transform as RectTransform;
-            t.anchoredPosition = new Vector2(10f + StarIcons[element].Count * 20, 10f);
+            t.anchoredPosition = new Vector2(firstIconOffset.x + StarIcons[element].Count * distanceBetweenIcons, firstIconOffset.y);
         } else if(element.Equals("earth")) {
             icon = Instantiate(earthStarHUD);
             icon.transform.SetParent(StarHUDParent.transform);
             RectTransform t = icon.transform as RectTransform;
-            t.anchoredPosition = new Vector2(10f + StarIcons[element].Count * 20, -10f);
+            t.anchoredPosition = new Vector2(firstIconOffset.x + StarIcons[element].Count * distanceBetweenIcons, -firstIconOffset.y);
         } else return;
         StarIcons[element].Add(icon);
     }
