@@ -92,14 +92,16 @@ public class GenerationManager : MonoBehaviour {
             Globals.cur_biome = chooseBiome(Globals.cur_chunk);
             doneLoading = false;
             curDist = 0;
-			if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null)
-			{
+            StopCoroutine("loadUnload");
+            StartCoroutine("loadUnload", Globals.cur_chunk);
+            if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null && ShrineManager.shrines[current_chunk].Count > 0)
+            {
 				ShrineManager.shrines [current_chunk] [0].killTrees ();
 			}
         }
-        if(!doneLoading && Globals.mode > -1) {
+        if(Globals.mode > -1) {
             endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
-            StartCoroutine("loadUnload",Globals.cur_chunk);
+            
         }
 
         if (!playerWarped)
@@ -113,6 +115,7 @@ public class GenerationManager : MonoBehaviour {
     public void initiateWorld() {
         Globals.time = 0;
         playerWarped = false;
+        StartCoroutine("loadUnload", Globals.cur_chunk);
     }
 
     public void deleteWorld() { //burn it to the ground
