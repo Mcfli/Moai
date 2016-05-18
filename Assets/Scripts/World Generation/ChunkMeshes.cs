@@ -52,7 +52,7 @@ public class ChunkMeshes : MonoBehaviour{
 
     public void loadBase()
     {
-        if (System.DateTime.Now >= genManager.endTime) return;
+        //if (System.DateTime.Now >= genManager.endTime) return;
         unloadedBase = false;
         loadingBase = true;
         if (!meshGenerated) generateMesh();
@@ -69,7 +69,7 @@ public class ChunkMeshes : MonoBehaviour{
     public void loadObjects()
     {
         if (System.DateTime.Now >= genManager.endTime) return;
-        unloadedObjects = false;
+       // unloadedObjects = false;
         loadingObjects = true;
         if (!doodadsGenerated) generateDoodads();
         if (doodadsGenerated && !treesGenerated) generateTrees();

@@ -107,6 +107,7 @@ public class GenerationManager : MonoBehaviour {
         if (!playerWarped)
         {
             playerWarped = Globals.PlayerScript.warpToGround(10000000, true);
+
         }
 
     }
