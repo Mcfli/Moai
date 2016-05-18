@@ -59,6 +59,11 @@ public class CheatConsole : MonoBehaviour
             Debug.Log("Creating puzzle finisher");
             finishShrine();
         }
+        else if(text.Equals("fly"))
+        {
+            Debug.Log("Fly toggled");
+            Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().flyCheat = !Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().flyCheat;
+        }
         else
         {
             Debug.Log("Unrecognized Command");
