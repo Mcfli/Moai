@@ -51,7 +51,6 @@ public class TreeManager : MonoBehaviour {
         {
             if (f)
             {
-                if (System.DateTime.Now >= gen_manager.endTime) yield return null;
                 trees[chunk].Add(f.export());
                 f.destroyForest();
             }
@@ -61,6 +60,7 @@ public class TreeManager : MonoBehaviour {
 
     private IEnumerator gradualLoad(Vector2 key, Biome biome)
     {
+        
         loading = true;
         if (System.DateTime.Now >= gen_manager.endTime) yield return null;
         if (biome.treeTypes.Count < 1) yield break;

@@ -77,8 +77,11 @@ public class MainMenu : MonoBehaviour {
 
     private void prepLoad() {
         Globals.MenusScript.switchTo(loadingScreen);
+        
         Random.seed = (int)System.DateTime.Now.Ticks;
         loadingBackdrop.sprite = loadingWallpapers[Random.Range(0, loadingWallpapers.Count)];
+        Globals.GenerationManagerScript.initiateWorld();
+        Globals.WeatherManagerScript.initializeWeather();
         //Camera.main.GetComponent<MusicManager>().Stop(false);
         //AudioListener.volume = 0;
     }
@@ -86,8 +89,7 @@ public class MainMenu : MonoBehaviour {
     private void loadGame() {
         
         if(scene) Destroy(scene);
-        Globals.GenerationManagerScript.initiateWorld();
-        Globals.WeatherManagerScript.initializeWeather();
+        
         Globals.MenusScript.switchTo(-1);
         //Camera.main.GetComponent<MusicManager>().Play();
         //AudioListener.volume = 1;

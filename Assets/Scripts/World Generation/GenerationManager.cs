@@ -44,6 +44,7 @@ public class GenerationManager : MonoBehaviour {
     private GameObject TerrainParent;
     private int curDist = 0;
     private bool playerWarped = false;
+    private Coroutine currentLoad;
 
     public System.DateTime endTime;
 
@@ -92,10 +93,12 @@ public class GenerationManager : MonoBehaviour {
             Globals.cur_biome = chooseBiome(Globals.cur_chunk);
             doneLoading = false;
             curDist = 0;
+            StopCoroutine(currentLoad);
+            currentLoad = StartCoroutine("loadUnload", Globals.cur_chunk);
         }
-        if(!doneLoading && Globals.mode > -1) {
+        if( Globals.mode > -1) {
             endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
-            StartCoroutine("loadUnload",Globals.cur_chunk);
+            
         }
 
         if (!playerWarped)
@@ -109,6 +112,12 @@ public class GenerationManager : MonoBehaviour {
     public void initiateWorld() {
         Globals.time = 0;
         playerWarped = false;
+        Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
+        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+        doneLoading = false;
+        curDist = 0;
+        currentLoad = StartCoroutine("loadUnload", Globals.cur_chunk);
     }
 
     public void deleteWorld() { //burn it to the ground
@@ -237,7 +246,6 @@ public class GenerationManager : MonoBehaviour {
         doneLoading = done;
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-        StopCoroutine("loadUnload");
     }
 
     private void createChunk(Vector2 coordinates)
