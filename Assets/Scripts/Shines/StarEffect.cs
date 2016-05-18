@@ -7,7 +7,7 @@ public class StarEffect : MonoBehaviour {
 	public GameObject beamPrefab;
     public GameObject chargingPrefab;
     public string element;
-    public Material spentMat;
+    //public Material spentMat;
 
     private Vector3 target;
     private bool isCharging = false;
@@ -17,7 +17,7 @@ public class StarEffect : MonoBehaviour {
 	private bool culledParticles = false;
 
     // References
-    private GameObject starsParent;
+    //private GameObject starsParent;
     private Vector3 step;
 	private GameObject explosion;
 	private GameObject beam;
@@ -30,15 +30,15 @@ public class StarEffect : MonoBehaviour {
         isTargetSet = true;
     }
 
-    public void spendStar()
+    /*public void spendStar()
     {
         GetComponent<Renderer>().material = spentMat;
-        for (int i = 0; i < 5; i++) Globals.SkyScript.addStar();
-    }
+        for (int i = 0; i < extraStars; i++) Globals.SkyScript.addStar();
+    }*/
 
 	// Use this for initialization
 	void Start () {
-        starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
+        //starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
         if (chargingPrefab != null)
         {
             charge = Instantiate(chargingPrefab, transform.position + Vector3.up * 10f, Quaternion.identity) as GameObject;
@@ -81,10 +81,14 @@ public class StarEffect : MonoBehaviour {
         {
             explode();
             isAtTarget = true;
+            Destroy(gameObject);
+            Globals.Stars[element].Add(Globals.SkyScript.addStar(element));
+            /*
             transform.LookAt(starsParent.transform);
             starsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90 - Globals.SkyScript.horizonBufferAngle), 
                 (90 - Globals.SkyScript.horizonBufferAngle)), 0, Random.Range(-(90 - Globals.SkyScript.sunAxisShift), (90 - Globals.SkyScript.sunAxisShift)));
             transform.parent = starsParent.transform;
+            */
         }
     }
 

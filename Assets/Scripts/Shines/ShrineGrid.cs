@@ -403,22 +403,22 @@ public class ShrineGrid : MonoBehaviour
         Vector3 target = Globals.Player.transform.position  + Vector3.up * 10000;
         if (element.Equals("fire")){
             star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
-            Globals.fireStars.Add(star);
+            //Globals.fireStars.Add(star);
         }
         else if (element.Equals("water"))
         {
             star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
-            Globals.waterStars.Add(star);
+            //Globals.waterStars.Add(star);
         }
         else if (element.Equals("earth"))
         {
             star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
-            Globals.earthStars.Add(star);
+            //Globals.earthStars.Add(star);
         }
         else 
         {
             star = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
-            Globals.airStars.Add(star);
+            //Globals.airStars.Add(star);
         }
         star.GetComponent<StarEffect>().setTarget(target);
 
