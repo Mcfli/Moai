@@ -341,7 +341,7 @@ public class ShrineGrid : MonoBehaviour
 
     public void killTrees()
     {
-        Vector3 half_extents = new Vector3(size + 25, 100000, size + 25);
+        Vector3 half_extents = new Vector3(size, 100000, size);
         LayerMask tree_mask = LayerMask.GetMask("Tree","Doodad","BigDoodad", "Seed");
 
         Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
