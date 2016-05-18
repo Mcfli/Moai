@@ -361,9 +361,9 @@ public class ChunkMeshes : MonoBehaviour{
             Vector3 hypotMid = Vector3.Lerp(oldVerts[i], oldVerts[i + 1], 0.5f);
             Random.seed = Globals.SeedScript.seed + chunkGen.detailDeviationSeed + ((hypotMid.x + coordinates.x * genManager.chunk_size).ToString() + ","
                 + (hypotMid.z + coordinates.y * genManager.chunk_size).ToString()).GetHashCode();
-            hypotMid = new Vector3(hypotMid.x + Random.Range(-chunkGen.detailDeviationSeed, chunkGen.detailDeviationSeed), 
-                hypotMid.y + Random.Range(-chunkGen.detailDeviationSeed, chunkGen.detailDeviationSeed), 
-                hypotMid.z + Random.Range(-chunkGen.detailDeviationSeed, chunkGen.detailDeviationSeed));
+            hypotMid = new Vector3(hypotMid.x + Random.Range(-chunkGen.detailDeviation, chunkGen.detailDeviation), 
+                hypotMid.y + Random.Range(-chunkGen.detailDeviation, chunkGen.detailDeviation), 
+                hypotMid.z + Random.Range(-chunkGen.detailDeviation, chunkGen.detailDeviation));
             Vector3 midpoint1 = Vector3.Lerp(oldVerts[i + 1], oldVerts[i + 2], 0.5f);
             Vector3 midpoint2 = Vector3.Lerp(oldVerts[i + 2], oldVerts[i], 0.5f);
             vertices[i * 4] = hypotMid;
