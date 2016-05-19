@@ -960,8 +960,8 @@ MonoBehaviour:
   dynamicFocus: 1
   visualizeFocus: 0
   focalLength: 10
-  focalSize: 0.75
-  aperture: 0.57
+  focalSize: 0.72
+  aperture: 0.363
   focalTransform: {fileID: 0}
   maxBlurSize: 2
   highResolution: 1
