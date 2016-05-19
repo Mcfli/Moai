@@ -184,7 +184,7 @@ MonoBehaviour:
   detailDeviation: 1.25
   detailDeviationSeed: 854375
   detailSubdivisions: 3
-  allottedLoadSeconds: 0.01
+  allottedLoadSeconds: 0.04
   tree_load_dist: 1
   tree_unload_dist: 2
   biomes:
@@ -3286,6 +3286,7 @@ MonoBehaviour:
   m_JumpSound: {fileID: 0}
   m_LandSound: {fileID: 0}
   lookLock: 0
+  flyCheat: 0
 --- !u!143 &1837165591
 CharacterController:
   m_ObjectHideFlags: 0
