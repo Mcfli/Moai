@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
     public float grabDistance = 4;
+    public float waypointDist = 20;
     public float grabSphereRadius = 0;
     public float minWarpOnWaitDist = 0.5f; // distance from ground you have to be to warp there
     public LayerMask collisionLayers;
@@ -128,11 +129,11 @@ public class Player : MonoBehaviour {
         // Waypoints
         if (Input.GetButtonDown("Waypoint") && Globals.mode == 0 && Globals.time_scale == 1)
         {
-            if (GetHover().collider != null)
+            if (checkWaypoint().collider != null)
             {
-                if (GetHover().collider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+                if (checkWaypoint().collider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                 {
-                    waypoint.transform.position = GetHover().point + Vector3.up * (waypoint.transform.localScale.y);
+                    waypoint.transform.position = checkWaypoint().point + Vector3.up * (waypoint.transform.localScale.y);
                     waypoint.SetActive(true);
                 }
             }
@@ -214,6 +215,14 @@ public class Player : MonoBehaviour {
         RaycastHit raycastHit;
         Transform t = Camera.main.transform; //camera transform
         Physics.SphereCast(t.position, grabSphereRadius, t.forward, out raycastHit, grabDistance);
+        return raycastHit;
+    }
+
+    public RaycastHit checkWaypoint()
+    {
+        RaycastHit raycastHit;
+        Transform t = Camera.main.transform; //camera transform
+        Physics.SphereCast(t.position, grabSphereRadius, t.forward, out raycastHit, waypointDist);
         return raycastHit;
     }
 

@@ -67,7 +67,7 @@ public class Mural : MonoBehaviour {
      */
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         rend = GetComponent<Renderer>();
         //snapToTerrain();
 	}
@@ -78,6 +78,7 @@ public class Mural : MonoBehaviour {
         Material[] tempMats = rend.sharedMaterials;
         // Generate Fire mural
         int index = 0;
+        
         foreach(PuzzleObject po in targetStateFire)
         {
             if (index == 0)      tempMats[34] = po.image;
@@ -259,5 +260,20 @@ public class Mural : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+    }
+
+    public void WipeOldMural()
+    {
+        if (rend == null) rend = GetComponent<Renderer>();
+        Material[] tempMats = rend.sharedMaterials;
+
+        for(int i = 0; i < tempMats.Length; i++)
+        {
+            if (i != 9 && i != 37 && i != 38 && i != 39 && i != 40)
+            {
+                tempMats[i] = tempMats[9];
+            }
+        }
+        rend.sharedMaterials = tempMats;
     }
 }

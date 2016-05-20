@@ -18,16 +18,21 @@ public class ShrineManager : MonoBehaviour {
     public static Dictionary<Vector2, ShrineGrid> shrines;
     public static Dictionary<Vector2, Obelisk> obelisks;
 
+    private List<Vector2> failedShrines;
+    private List<Vector2> failedObelisks;
+
     // Use this for initialization
     void Awake () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
 		shrines = new Dictionary<Vector2, ShrineGrid>();
         obelisks = new Dictionary<Vector2, Obelisk>();
-	}
+        failedShrines = new List<Vector2>();
+        failedObelisks = new List<Vector2>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 	public void placeShrine(Vector3 chunk_pos, Vector2 chunk)
@@ -37,13 +42,13 @@ public class ShrineManager : MonoBehaviour {
             for (int j = -shrine_min_dist; j <= shrine_min_dist; j++)
             {
                 Vector2 temp = chunk + Vector2.right * i + Vector2.up * j;
-                if (shrines.ContainsKey(temp) && shrines[temp] != null || obelisks.ContainsKey(temp) && obelisks[temp] != null)
+                if (shrines.ContainsKey(temp) || obelisks.ContainsKey(temp))
                 {
                     return;
                 }
             }
         }
-        if (Random.value < shrine_probability)
+        if (Random.value < shrine_probability && !failedShrines.Contains(chunk))
         {
             for (int tries = 0; tries <= max_tries; tries++)
             {
@@ -52,9 +57,14 @@ public class ShrineManager : MonoBehaviour {
                 {
                     GameObject shrine = Instantiate(shrine_prefab, position, Quaternion.Euler(0, 0, 0)) as GameObject;
                     saveShrine(chunk, shrine);
-                    break;
+                    return;
                 }
             }
+            failedShrines.Add(chunk);
+        }
+        else
+        {
+            failedShrines.Add(chunk);
         }
     }
 
@@ -71,7 +81,7 @@ public class ShrineManager : MonoBehaviour {
                 }
             }
         }
-        if (Random.value < obelisk_probability)
+        if (Random.value < obelisk_probability && !failedObelisks.Contains(chunk))
         {
             for (int tries = 0; tries <= max_tries; tries++)
             {
@@ -83,6 +93,11 @@ public class ShrineManager : MonoBehaviour {
                     break;
                 }
             }
+            failedObelisks.Add(chunk);
+        }
+        else
+        {
+            failedObelisks.Add(chunk);
         }
     }
 
@@ -153,7 +168,7 @@ public class ShrineManager : MonoBehaviour {
 	public void saveShrine(Vector2 chunk, GameObject shrine)
 	{
 		shrine.GetComponent<ShrineGrid>().saveTransforms();
-		shrines[chunk] = shrine.GetComponent<ShrineGrid>();
+        shrines[chunk] = shrine.GetComponent<ShrineGrid>();
 	}
 
     public void saveObelisk(Vector2 chunk, GameObject obelisk)
@@ -189,7 +204,6 @@ public class ShrineManager : MonoBehaviour {
 
         int originalSeed = Random.seed;
         Random.seed = Globals.SeedScript.seed + obeliskPlacementSeed + key.GetHashCode();
-
         if (shrines.ContainsKey(key))
         {
             ShrineGrid shrine = shrines[key];
@@ -197,7 +211,7 @@ public class ShrineManager : MonoBehaviour {
             new_shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
             saveShrine(key, new_shrine);
         }
-        else
+        else if(!failedShrines.Contains(key))
         {
             placeShrine(GenerationManager.chunkToWorld(key), key);
         }
