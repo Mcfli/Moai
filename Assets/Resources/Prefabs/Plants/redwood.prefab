@@ -3462,6 +3462,8 @@ GameObject:
   - 137: {fileID: 13717098}
   - 114: {fileID: 11411514}
   - 136: {fileID: 13672384}
+  - 65: {fileID: 6598920}
+  - 135: {fileID: 13595346}
   m_Layer: 8
   m_Name: redwood
   m_TagString: Untagged
@@ -7115,6 +7117,18 @@ Transform:
   - {fileID: 493808}
   m_Father: {fileID: 440870}
   m_RootOrder: 0
+--- !u!65 &6598920
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.75, y: 1.63, z: 7.34}
+  m_Center: {x: 0.28, y: -1.56, z: 0.14}
 --- !u!111 &11156130
 Animation:
   m_ObjectHideFlags: 1
@@ -7220,6 +7234,19 @@ MonoBehaviour:
   prefab: {fileID: 0}
   age: 0
   lifeSpan: 1314000
+  playerPlanted: 0
+--- !u!135 &13595346
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.73
+  m_Center: {x: 0.14, y: 0.47, z: 0}
 --- !u!136 &13672384
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -7229,7 +7256,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.5
+  m_Radius: 1.77
   m_Height: 75.9975
   m_Direction: 1
   m_Center: {x: 0.3, y: 36.22194, z: -0.25}
