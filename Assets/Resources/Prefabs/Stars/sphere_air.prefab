@@ -154,7 +154,7 @@ MonoBehaviour:
   beamPrefab: {fileID: 113870, guid: 46a56c5c0881c4bcf804068c451784a1, type: 2}
   chargingPrefab: {fileID: 170596, guid: 99f79a5d60ed86c4ab749798390a7c1a, type: 2}
   element: air
-  BeamSound: {fileID: 8300000, guid: 3cdd1c7747b1dd54db800675060afc31, type: 3}
+  BeamSound: {fileID: 8300000, guid: 99350bd454e751a469a5f64ce581471d, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

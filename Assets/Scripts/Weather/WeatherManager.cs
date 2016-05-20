@@ -154,11 +154,15 @@ public class WeatherManager : MonoBehaviour {
                 {
                     cameraAudio.clip = rainAudio;
                     cameraAudio.loop = true;
-                    cameraAudio.Play();                 
+                    cameraAudio.Play();
+                    windAudio.Stop();                 
                 }
                 else
                 {
                     cameraAudio.Stop();
+                    windAudio.clip = Wind;
+                    windAudio.loop = true;
+                    windAudio.Play();
                 }
             }
             

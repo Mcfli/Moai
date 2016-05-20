@@ -154,7 +154,7 @@ MonoBehaviour:
   beamPrefab: {fileID: 198212, guid: 4b258684795234210a36ba02a6dfd0a8, type: 2}
   chargingPrefab: {fileID: 122300, guid: 76445888aeb59cb43908dde22b2c82ed, type: 2}
   element: water
-  BeamSound: {fileID: 8300000, guid: 3cdd1c7747b1dd54db800675060afc31, type: 3}
+  BeamSound: {fileID: 8300000, guid: 99350bd454e751a469a5f64ce581471d, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
