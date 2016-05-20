@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bd294ef01c1c34aac97e17eeaba320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudHeight: 700
+  cloudHeight: 1000
   cloudMovement: {x: 0.1, y: 0}
   chanceOfCloudFade: 0.01
   particlesHeight: 500
@@ -188,10 +188,12 @@ MonoBehaviour:
   tree_load_dist: 1
   tree_unload_dist: 2
   biomes:
-  - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
   - {fileID: 11478254, guid: 281879c1a5592264e971b4bab9a55f50, type: 2}
-  - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
+  - {fileID: 11487490, guid: ad2447ac027de2f47b4a91026a5875d3, type: 2}
+  - {fileID: 11424312, guid: 9cf44e1b9308e414c8b4eaa3346edd49, type: 2}
+  - {fileID: 11487490, guid: 5d39b086b10389b49a480b5b68511c03, type: 2}
   - {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
+  - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
   WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
@@ -2748,9 +2750,23 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11408490, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: trigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408490, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: anotherTooltip
+      value: 
+      objectReference: {fileID: 1486964831}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1486964831 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11420038, guid: 3e25a969be5701c4c9d727322eee84b8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1486964830}
+  m_Script: {fileID: 11500000, guid: 41bc2c4d65637074c98befcfbd2e9f64, type: 3}
 --- !u!1 &1547163455
 GameObject:
   m_ObjectHideFlags: 0
