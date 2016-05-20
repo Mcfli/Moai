@@ -68,7 +68,7 @@ Material:
         first:
           name: _DetailAlbedoMap
         second:
-          m_Texture: {fileID: 2800000, guid: 83505e7af590f36499b1a3aff599ee04, type: 3}
+          m_Texture: {fileID: 2800000, guid: 0b4349dabefc8294a91bb6d80f13a11a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
