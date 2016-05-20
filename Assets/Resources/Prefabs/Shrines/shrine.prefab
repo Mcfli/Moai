@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 425502}
   - 198: {fileID: 19852182}
   - 199: {fileID: 19984906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: doneFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 487582}
   - 137: {fileID: 13797042}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrine_square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - 4: {fileID: 402126}
   - 198: {fileID: 19829574}
   - 199: {fileID: 19900348}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: doneEarth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - 4: {fileID: 465176}
   - 198: {fileID: 19845622}
   - 199: {fileID: 19997736}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: incompleteGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - 4: {fileID: 480274}
   - 65: {fileID: 6587446}
   - 114: {fileID: 11429334}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrineFireActivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - 4: {fileID: 421804}
   - 65: {fileID: 6512090}
   - 114: {fileID: 11422084}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrineWaterActivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - 114: {fileID: 11460188}
   - 65: {fileID: 6551010}
   - 114: {fileID: 11405106}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - 4: {fileID: 424458}
   - 65: {fileID: 6507558}
   - 114: {fileID: 11432296}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrineEarthActivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - 4: {fileID: 417150}
   - 198: {fileID: 19888282}
   - 199: {fileID: 19992572}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: doneAir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - 4: {fileID: 452166}
   - 65: {fileID: 6554176}
   - 114: {fileID: 11475832}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrineAirActivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - 4: {fileID: 438656}
   - 198: {fileID: 19875980}
   - 199: {fileID: 19998992}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: doneWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 443826}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 419232}
   - 111: {fileID: 11131066}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: shrine_top_anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 470210}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: topArmature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -646,10 +646,6 @@ MonoBehaviour:
   vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}
   WaterFireEarthAirChangeMin: 15
   WaterFireEarthAirChangeMax: 50
-  airGlow: {fileID: 161888, guid: 2a76d3a7f46d7bf4d94df5fc1e0f0a49, type: 2}
-  earthGlow: {fileID: 161888, guid: 33ab65a9d0e2c724791a2e6fb9843349, type: 2}
-  fireGlow: {fileID: 161888, guid: 2868ab919628875429b0a9d3dd44e86e, type: 2}
-  waterGlow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   incompleteGlow: {fileID: 133212}
   fireStar: {fileID: 123736, guid: 91f1e349ced6af5419e0a29475c6f489, type: 2}
   waterStar: {fileID: 123306, guid: 7db9a44707bc22d4cb89db8bbd6a5c52, type: 2}
