@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: 94055c682f5244ff18d43ee3d14a57c6
+timeCreated: 1463776347
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ruin_B
+    100002: ruin_C
+    100004: ruin_D
+    100006: ruin_E
+    100008: ruin_F
+    100010: ruin_G
+    100012: ruin_H
+    100014: ruin_I
+    100016: ruin_J
+    100018: ruin_K
+    100020: ruin_L
+    100022: ruin_M
+    100024: ruin_N
+    100026: ruin_O
+    100028: ruin_P
+    100030: ruin_Q
+    100032: ruin_R
+    100034: ruin_S
+    100036: ruin_T
+    100038: ruinA
+    100040: //RootNode
+    100042: ruin_U
+    400000: ruin_B
+    400002: ruin_C
+    400004: ruin_D
+    400006: ruin_E
+    400008: ruin_F
+    400010: ruin_G
+    400012: ruin_H
+    400014: ruin_I
+    400016: ruin_J
+    400018: ruin_K
+    400020: ruin_L
+    400022: ruin_M
+    400024: ruin_N
+    400026: ruin_O
+    400028: ruin_P
+    400030: ruin_Q
+    400032: ruin_R
+    400034: ruin_S
+    400036: ruin_T
+    400038: ruinA
+    400040: //RootNode
+    400042: ruin_U
+    2300000: ruin_B
+    2300002: ruin_C
+    2300004: ruin_D
+    2300006: ruin_E
+    2300008: ruin_F
+    2300010: ruin_G
+    2300012: ruin_H
+    2300014: ruin_I
+    2300016: ruin_J
+    2300018: ruin_K
+    2300020: ruin_L
+    2300022: ruin_M
+    2300024: ruin_N
+    2300026: ruin_O
+    2300028: ruin_P
+    2300030: ruin_Q
+    2300032: ruin_R
+    2300034: ruin_S
+    2300036: ruin_T
+    2300038: ruinA
+    2300040: ruin_U
+    3300000: ruin_B
+    3300002: ruin_C
+    3300004: ruin_D
+    3300006: ruin_E
+    3300008: ruin_F
+    3300010: ruin_G
+    3300012: ruin_H
+    3300014: ruin_I
+    3300016: ruin_J
+    3300018: ruin_K
+    3300020: ruin_L
+    3300022: ruin_M
+    3300024: ruin_N
+    3300026: ruin_O
+    3300028: ruin_P
+    3300030: ruin_Q
+    3300032: ruin_R
+    3300034: ruin_S
+    3300036: ruin_T
+    3300038: ruinA
+    3300040: ruin_U
+    4300000: ruin_R
+    4300002: ruin_S
+    4300004: ruin_Q
+    4300006: ruin_T
+    4300008: ruin_C
+    4300010: ruin_D
+    4300012: ruin_E
+    4300014: ruin_G
+    4300016: ruin_F
+    4300018: ruin_B
+    4300020: ruin_M
+    4300022: ruin_N
+    4300024: ruin_O
+    4300026: ruin_P
+    4300028: ruin_K
+    4300030: ruin_L
+    4300032: ruin_H
+    4300034: ruin_I
+    4300036: ruin_J
+    4300038: ruinA
+    4300040: ruin_U
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
