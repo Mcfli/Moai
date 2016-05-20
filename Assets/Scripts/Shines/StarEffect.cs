@@ -23,6 +23,9 @@ public class StarEffect : MonoBehaviour {
 	private GameObject beam;
     private GameObject charge;
 
+    public AudioClip BeamSound;
+    AudioSource BeamAudio;
+
     public void setTarget(Vector3 tar)
     {
         target = tar;
@@ -39,6 +42,8 @@ public class StarEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
+        BeamAudio = GetComponent<AudioSource>();
+        BeamAudio.PlayOneShot(BeamSound, 1F);
         if (chargingPrefab != null)
         {
             charge = Instantiate(chargingPrefab, transform.position + Vector3.up * 10f, Quaternion.identity) as GameObject;

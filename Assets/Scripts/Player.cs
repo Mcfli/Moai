@@ -54,7 +54,16 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            if (!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
+        }
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.LeftBracket))
+        {
+            if (playerAudio.isPlaying)
+                playerAudio.Stop();
+        }
+        if (Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
         else firstPersonCont.lookLock = false;
 
         if(Globals.mode != 0) return;

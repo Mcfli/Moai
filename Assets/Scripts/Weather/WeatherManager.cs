@@ -26,10 +26,12 @@ public class WeatherManager : MonoBehaviour {
 
     // Player for audio source
     private AudioSource cameraAudio;
+    private AudioSource windAudio;
     private bool wasPlaying = false;
 
     // Weather audio
     public AudioClip rainAudio;
+    public AudioClip Wind;
 
     void Awake(){
         clouds = new List<Cloud>();
@@ -37,6 +39,7 @@ public class WeatherManager : MonoBehaviour {
 
     void Start() {
         cameraAudio = Camera.main.gameObject.AddComponent<AudioSource>();
+        windAudio = Camera.main.gameObject.AddComponent<AudioSource>();
         initializeWeather();
     }
 
@@ -80,6 +83,7 @@ public class WeatherManager : MonoBehaviour {
             {
                 wasPlaying = true;
                 cameraAudio.Stop();
+                windAudio.Play();
             }
         }
         else
@@ -88,6 +92,7 @@ public class WeatherManager : MonoBehaviour {
             {
                 wasPlaying = false;
                 cameraAudio.Play();
+                windAudio.Stop();
             }
         }
     }
@@ -149,7 +154,7 @@ public class WeatherManager : MonoBehaviour {
                 {
                     cameraAudio.clip = rainAudio;
                     cameraAudio.loop = true;
-                    cameraAudio.Play();
+                    cameraAudio.Play();                 
                 }
                 else
                 {
