@@ -142,6 +142,7 @@ public class Player : MonoBehaviour {
     public void updateSettings() {
         DOF.enabled = (Globals.settings["DOF"] == 1);
         firstPersonCont.setHeadBob(Globals.settings["Bobbing"] == 1);
+        firstPersonCont.setInvertY(Globals.settings["InvertMouse"] == 1);
     }
 
     private void checkUnderwater()

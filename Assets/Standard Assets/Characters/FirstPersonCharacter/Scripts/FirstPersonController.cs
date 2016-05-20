@@ -276,5 +276,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void setHeadBob(bool val) {
             m_UseHeadBob = val;
         }
+
+        public void setInvertY(bool val) {
+            m_MouseLook.invertY = val;
+        }
     }
 }
