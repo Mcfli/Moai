@@ -39,6 +39,18 @@ public class ChunkMeshes : MonoBehaviour{
     private List<lakeStruct> lakes;
     private Biome biome;
 
+    void Update()
+    {
+        if (loadingBase)
+        {
+            loadBase();
+        }
+        else if (loadingObjects)
+        {
+            loadObjects();
+        }
+    }
+
     public void setReferences(NoiseSynth sy,GenerationManager g, ChunkGenerator c, TreeManager t,ShrineManager s,DoodadManager d,WaterManager w)
     {
         synth = sy;
@@ -261,7 +273,7 @@ public class ChunkMeshes : MonoBehaviour{
 
     void generateTrees()
     {
-        if (System.DateTime.Now >= genManager.endTime) return;   
+        if (System.DateTime.Now >= genManager.endTime) return;
         treeManager.loadTrees(coordinates, biome);
           
         treesGenerated = true;
