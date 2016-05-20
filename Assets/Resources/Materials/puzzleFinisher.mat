@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: EarthIconLitMat
-  m_Shader: {fileID: 4800000, guid: 3116dc5d2d459014eb4d26279676bac8, type: 3}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
+  m_Name: puzzleFinisher
+  m_Shader: {fileID: 4800000, guid: 89b18f3351773cd40b880c34e6ac5614, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
@@ -82,14 +82,14 @@ Material:
         first:
           name: _MKGlowTex
         second:
-          m_Texture: {fileID: 2800000, guid: b1d7fee26e54cc3498f6267f072a45b9, type: 3}
+          m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _Illum
         second:
-          m_Texture: {fileID: 2800000, guid: 44ecc382868547b4f8d6f3643e0e6409, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -143,12 +143,16 @@ Material:
         second: 0
       data:
         first:
+          name: _Emission
+        second: 1
+      data:
+        first:
           name: _MKGlowPower
-        second: 0.01
+        second: 0.1
       data:
         first:
           name: _MKGlowTexStrength
-        second: 0
+        second: 1
       data:
         first:
           name: _MKGlowOffSet
@@ -161,16 +165,16 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0.36551726, g: 1, b: 0, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _Color
-        second: {r: 0.23137255, g: 0.23529412, b: 0.23529412, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _MKGlowColor
-        second: {r: 1, g: 0.9724138, b: 0, a: 1}
+        second: {r: 0, g: 1, b: 1, a: 1}
       data:
         first:
           name: _MKGlowTexColor
-        second: {r: 1, g: 0.9724138, b: 0, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
