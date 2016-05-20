@@ -6527,7 +6527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPath: Prefabs/Plants/firetree
-  seed_object: {fileID: 0}
+  seed_object: {fileID: 121402, guid: 1cdc96197c6b54ccca90a97b1a9c391c, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5
   scaleVariance: 0.25
@@ -6593,7 +6593,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 0}
+  dirtMound: {fileID: 168730, guid: 6fd98040f71b342e6886d6d48a9e9ea0, type: 2}
   dirtMoundOffset: {x: -0.05, y: 0.1, z: -0.15}
   dirtMoundLifeRatio: 0.02
   prefab: {fileID: 0}
