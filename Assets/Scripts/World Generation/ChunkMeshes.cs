@@ -88,6 +88,7 @@ public class ChunkMeshes : MonoBehaviour{
         if (doodadsGenerated && treesGenerated && !shrinesGenerated) generateShrines();
         if (doodadsGenerated && treesGenerated && shrinesGenerated)
         {
+            unloadedObjects = false;
             doneObjects = true;
             loadingObjects = false;
         }

@@ -53,8 +53,6 @@ public class MainMenu : MonoBehaviour {
         Camera.main.transform.eulerAngles = mmback.cameraRotation;
         firstPersonCont.lookLock = true;
         firstPersonCont.getMouseLook().SetCursorLock(false);
-        Globals.Player.transform.position = Vector3.zero;
-        Globals.Player.transform.eulerAngles = Vector3.zero;
         title.anchoredPosition = new Vector2(mmback.titlePosition.x * Screen.width, mmback.titlePosition.y * Screen.height) / 2;
         float aspectRatio = title.sizeDelta.x / title.sizeDelta.y;
         title.sizeDelta = new Vector2(Screen.height * mmback.titleScale * aspectRatio, Screen.height * mmback.titleScale);
@@ -92,8 +90,8 @@ public class MainMenu : MonoBehaviour {
         //Camera.main.GetComponent<MusicManager>().Play();
         //AudioListener.volume = 1;
 
-        Camera.main.transform.position = origCamPos;
-        Camera.main.transform.eulerAngles = origCamRot;
+        Camera.main.transform.localPosition = origCamPos;
+        Camera.main.transform.localEulerAngles = origCamRot;
         firstPersonCont.enabled = true;
         firstPersonCont.lookLock = false;
         firstPersonCont.getMouseLook().SetCursorLock(true);
@@ -112,13 +110,10 @@ public class MainMenu : MonoBehaviour {
         Globals.cur_biome = mmback.biome;
         Globals.time = mmback.time * Globals.time_resolution;
 
-        Globals.Player.transform.position = Vector3.zero;
-        Globals.Player.transform.eulerAngles = Vector3.zero;
-
         firstPersonCont.enabled = false;
         firstPersonCont.lookLock = true;
-        origCamPos = Camera.main.transform.position;
-        origCamRot = Camera.main.transform.eulerAngles;
+        origCamPos = Camera.main.transform.localPosition;
+        origCamRot = Camera.main.transform.localEulerAngles;
         Camera.main.transform.position = mmback.cameraPosition;
         Camera.main.transform.eulerAngles = mmback.cameraRotation;
         firstPersonCont.getMouseLook().SetCursorLock(false);
