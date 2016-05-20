@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WordWall : MonoBehaviour {
-    static Dictionary<Vector2, WordWallText> generatedWalls;
+    static Dictionary<Vector2, WordWallText> generatedWalls = new Dictionary<Vector2, WordWallText>();
     public List<WordWallText> texts;
 
     // Tuning

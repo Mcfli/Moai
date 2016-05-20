@@ -180,6 +180,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   texts:
+  - {fileID: 11456074, guid: c3f89243d727d4847bef4a5e46cd5211, type: 2}
+  - {fileID: 11406488, guid: 18f4e4b64f2d4bd4799d96ce65a8d0c2, type: 2}
+  - {fileID: 11428572, guid: 417be4d3238fc4246acfe9cf47addf95, type: 2}
+  - {fileID: 11489556, guid: 1c657edbeab51304a81472d6c9c3087f, type: 2}
+  - {fileID: 11435474, guid: 6e5112f21717bed418901e8e26fffcae, type: 2}
+  - {fileID: 11438872, guid: 1038cd84f14edc14796b953a1f55acec, type: 2}
   - {fileID: 11491708, guid: c4c42456b2efd094c98053bae3832f86, type: 2}
   fadeSpeed: 0.5
 --- !u!1001 &100100000
