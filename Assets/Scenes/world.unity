@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrine_prefab: {fileID: 154728, guid: 678feba97db6b9044934c154b8891552, type: 2}
   obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
-  acceptable_heightDiff: 1e-10
+  acceptable_heightDiff: 5
   max_tries: 10000
   shrinePlacementSeed: 0
   shrine_probability: 0.9
@@ -3103,6 +3103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabDistance: 10
+  waypointDist: 20
   grabSphereRadius: 0
   minWarpOnWaitDist: 1
   collisionLayers:
