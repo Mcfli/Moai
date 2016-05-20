@@ -23,6 +23,9 @@ public class StarEffect : MonoBehaviour {
 	private GameObject beam;
     private GameObject charge;
 
+    public AudioClip BeamSound;
+    AudioSource shrineComplete;
+
     public void setTarget(Vector3 tar)
     {
         target = tar;
@@ -39,6 +42,7 @@ public class StarEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
+        shrineComplete = GetComponent<AudioSource>();
         if (chargingPrefab != null)
         {
             charge = Instantiate(chargingPrefab, transform.position + Vector3.up * 10f, Quaternion.identity) as GameObject;
@@ -61,7 +65,9 @@ public class StarEffect : MonoBehaviour {
             }
         }
 		if (!isCharging && isTargetSet && !isAtTarget)
-			move ();
+        {
+            move();
+        }
 		//else if (!hasExploded)
 		//	explode ();
 		else if (!culledParticles)
@@ -75,7 +81,8 @@ public class StarEffect : MonoBehaviour {
         if(Vector3.Distance(transform.position,target) > speed)
         {
             transform.position += step;
-
+            //Shrine Completion Sound
+            shrineComplete.PlayOneShot(BeamSound, .8F);
         }
         else
         {
@@ -83,6 +90,7 @@ public class StarEffect : MonoBehaviour {
             isAtTarget = true;
             Destroy(gameObject);
             Globals.SkyScript.addStar(element);
+            shrineComplete.PlayOneShot(BeamSound, .8F);
             /*
             transform.LookAt(starsParent.transform);
             starsParent.transform.localEulerAngles = new Vector3(Random.Range(-(90 - Globals.SkyScript.horizonBufferAngle), 

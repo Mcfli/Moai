@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 
     public AudioClip SpeedUpSFX;
     AudioSource playerAudio;
-    [HideInInspector] public AudioSource pickupDropAudio;
+    [HideInInspector] public AudioSource pickupDropAudio; 
 
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
     private GameObject playerModel;
@@ -44,26 +44,37 @@ public class Player : MonoBehaviour {
         playerCamRot = mainCamera.transform.localRotation;
         pickupDropAudio = mainCamera.gameObject.AddComponent<AudioSource>();
         pickupDropAudio.playOnAwake = false;
-        pickupDropAudio.volume = 0.25f;
+        pickupDropAudio.volume = 0.5f;
     }
 
     // Use this for initialization
     void Start () {
         playerAudio = GetComponent<AudioSource>();
+        playerAudio.Stop();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            if (!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
+        }
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.LeftBracket))
+        {
+            if (playerAudio.isPlaying)
+                playerAudio.Stop();
+        }
+
+            if (Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
         else firstPersonCont.lookLock = false;
-
-        if(Globals.mode != 0) return;
-
+        if (Globals.mode != 0) return;;
         if (Globals.time_scale > 1) {
-            warpToGround(transform.position.y);
-            if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
-            firstPersonCont.enabled = false;
+        warpToGround(transform.position.y);
 
+            
+            
+            firstPersonCont.enabled = false;
+                                               
             if(Globals.time_scale > cinematicTimeScale) {
                 if(playerAudio.isPlaying) playerAudio.Stop();
                 if(!playerModel.activeInHierarchy) {

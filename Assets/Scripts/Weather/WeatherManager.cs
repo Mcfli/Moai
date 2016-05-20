@@ -31,6 +31,7 @@ public class WeatherManager : MonoBehaviour {
     // Weather audio
     public AudioClip rainAudio;
 
+
     void Awake(){
         clouds = new List<Cloud>();
     }

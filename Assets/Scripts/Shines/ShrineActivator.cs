@@ -8,14 +8,10 @@ public class ShrineActivator : MonoBehaviour {
 
     private ShrineGrid parentShrine;
 
-    public AudioClip ShrineComplete;
-    AudioSource ShrineSuccess;
-
     // Click this to set parent shrine's element to this prefab's element
 	// Use this for initialization
 	void Start () {
         parentShrine = transform.parent.gameObject.GetComponent<ShrineGrid>();
-        ShrineSuccess = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -29,8 +25,6 @@ public class ShrineActivator : MonoBehaviour {
         {
             parentShrine.changeElement(element);
 
-            //Shrine Completion Sound
-            ShrineSuccess.PlayOneShot(ShrineComplete, .5F);
             firstActivate = true;
 
             return true;

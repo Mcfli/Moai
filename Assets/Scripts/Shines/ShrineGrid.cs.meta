@@ -1,15 +1,27 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 90d3e20e04ef1704d8a570cfea712f07
-timeCreated: 1455849678
-=======
-guid: d4bd6f0446aa4244f8ea88a813241e46
-timeCreated: 1455849586
->>>>>>> origin/PCG_Puzzles
+timeCreated: 1463717363
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mural: {instanceID: 0}
+  - glow: {instanceID: 0}
+  - vertexPillar: {instanceID: 0}
+  - incompleteGlow: {instanceID: 0}
+  - fireStar: {instanceID: 0}
+  - waterStar: {instanceID: 0}
+  - earthStar: {instanceID: 0}
+  - airStar: {instanceID: 0}
+  - fireBeam: {instanceID: 0}
+  - waterBeam: {instanceID: 0}
+  - earthBeam: {instanceID: 0}
+  - airBeam: {instanceID: 0}
+  - doneWater: {instanceID: 0}
+  - doneFire: {instanceID: 0}
+  - doneAir: {instanceID: 0}
+  - doneEarth: {instanceID: 0}
+  - BeamSound: {fileID: 8300000, guid: 5c409791a5b529d4a96afb92a10bac88, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
