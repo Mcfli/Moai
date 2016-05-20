@@ -41,10 +41,10 @@ InputManager:
     m_Name: Fly
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: r
-    positiveButton: e
-    altNegativeButton: ']'
-    altPositiveButton: '['
+    negativeButton: f
+    positiveButton: r
+    altNegativeButton: k
+    altPositiveButton: i
     gravity: 10000
     dead: 1
     sensitivity: 100

@@ -64,6 +64,11 @@ public class CheatConsole : MonoBehaviour
             Debug.Log("Fly toggled");
             Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().flyCheat = !Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().flyCheat;
         }
+        else if (text.Equals("flash"))
+        {
+            Debug.Log("Superspeed activated");
+            Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().setRunSpeed(100);
+        }
         else
         {
             Debug.Log("Unrecognized Command");
