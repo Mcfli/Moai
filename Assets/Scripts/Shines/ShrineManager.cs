@@ -43,7 +43,7 @@ public class ShrineManager : MonoBehaviour {
                 }
             }
         }
-        if(Random.value < shrine_probability)
+        if (Random.value < shrine_probability)
         {
             for (int tries = 0; tries <= max_tries; tries++)
             {
@@ -167,7 +167,6 @@ public class ShrineManager : MonoBehaviour {
 		Vector2 chunk = new Vector2(x, y);
         if (shrines.ContainsKey(chunk))
         {
-            shrines[chunk].saveTransforms();
 			saveShrine(chunk, shrines[chunk].gameObject);
 			Destroy(shrines[chunk].gameObject);
         }
@@ -178,7 +177,6 @@ public class ShrineManager : MonoBehaviour {
         Vector2 chunk = new Vector2(x, y);
         if (obelisks.ContainsKey(chunk))
         {
-            obelisks[chunk].saveTransforms();
             saveObelisk(chunk, obelisks[chunk].gameObject);
             Destroy(obelisks[chunk].gameObject);
         }
@@ -197,6 +195,7 @@ public class ShrineManager : MonoBehaviour {
             ShrineGrid shrine = shrines[key];
             GameObject new_shrine = Instantiate(shrine_prefab, shrine.saved_position, shrine.saved_rotation) as GameObject;
             new_shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
+            saveShrine(key, new_shrine);
         }
         else
         {
