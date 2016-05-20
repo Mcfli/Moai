@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 9ba3d0c01901446b0b829e31c5d46c7c
+timeCreated: 1463743720
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: small_redrockA
+    100002: small_redrockB
+    100004: small_redrockC
+    100006: small_redrockD
+    100008: small_redrockE
+    100010: small_redrockF
+    100012: small_redrockG
+    100014: small_redrockH
+    100016: small_redrockI
+    100018: small_redrockJ
+    100020: small_redrockK
+    100022: small_redrockL
+    100024: small_redrockM
+    100026: small_redrockN
+    100028: small_redrockO
+    100030: small_redrockP
+    100032: small_redrockQ
+    100034: small_redrockR
+    100036: small_redrockS
+    100038: //RootNode
+    100040: small_redrockT
+    400000: small_redrockA
+    400002: small_redrockB
+    400004: small_redrockC
+    400006: small_redrockD
+    400008: small_redrockE
+    400010: small_redrockF
+    400012: small_redrockG
+    400014: small_redrockH
+    400016: small_redrockI
+    400018: small_redrockJ
+    400020: small_redrockK
+    400022: small_redrockL
+    400024: small_redrockM
+    400026: small_redrockN
+    400028: small_redrockO
+    400030: small_redrockP
+    400032: small_redrockQ
+    400034: small_redrockR
+    400036: small_redrockS
+    400038: //RootNode
+    400040: small_redrockT
+    2300000: small_redrockA
+    2300002: small_redrockB
+    2300004: small_redrockC
+    2300006: small_redrockD
+    2300008: small_redrockE
+    2300010: small_redrockF
+    2300012: small_redrockG
+    2300014: small_redrockH
+    2300016: small_redrockI
+    2300018: small_redrockJ
+    2300020: small_redrockK
+    2300022: small_redrockL
+    2300024: small_redrockM
+    2300026: small_redrockN
+    2300028: small_redrockO
+    2300030: small_redrockP
+    2300032: small_redrockQ
+    2300034: small_redrockR
+    2300036: small_redrockS
+    2300038: small_redrockT
+    3300000: small_redrockA
+    3300002: small_redrockB
+    3300004: small_redrockC
+    3300006: small_redrockD
+    3300008: small_redrockE
+    3300010: small_redrockF
+    3300012: small_redrockG
+    3300014: small_redrockH
+    3300016: small_redrockI
+    3300018: small_redrockJ
+    3300020: small_redrockK
+    3300022: small_redrockL
+    3300024: small_redrockM
+    3300026: small_redrockN
+    3300028: small_redrockO
+    3300030: small_redrockP
+    3300032: small_redrockQ
+    3300034: small_redrockR
+    3300036: small_redrockS
+    3300038: small_redrockT
+    4300000: small_redrockM
+    4300002: small_redrockN
+    4300004: small_redrockO
+    4300006: small_redrockP
+    4300008: small_redrockQ
+    4300010: small_redrockR
+    4300012: small_redrockS
+    4300014: small_redrockT
+    4300016: small_redrockH
+    4300018: small_redrockI
+    4300020: small_redrockJ
+    4300022: small_redrockK
+    4300024: small_redrockL
+    4300026: small_redrockC
+    4300028: small_redrockB
+    4300030: small_redrockE
+    4300032: small_redrockG
+    4300034: small_redrockF
+    4300036: small_redrockD
+    4300038: small_redrockA
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
