@@ -511,6 +511,7 @@ public class ShrineGrid : MonoBehaviour
         saved_position = shrine.saved_position;
         saved_rotation = shrine.saved_rotation;
         saved_scale = shrine.saved_scale;
+		changeElement (curElement);
         mural.WipeOldMural();
         mural.genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
     }
