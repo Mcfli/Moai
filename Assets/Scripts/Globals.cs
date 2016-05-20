@@ -48,7 +48,7 @@ public class Globals : MonoBehaviour {
 
     public static Dictionary<string, int> settings = new Dictionary<string, int>(){
         // Gameplay
-        { "FOV", 90 },          // int 30-110
+        { "FOV", 60 },          // int 30-110
         { "DOF", 1 },           // bool
         { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool

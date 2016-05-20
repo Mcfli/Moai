@@ -143,6 +143,10 @@ public class Player : MonoBehaviour {
         DOF.enabled = (Globals.settings["DOF"] == 1);
         firstPersonCont.setHeadBob(Globals.settings["Bobbing"] == 1);
         firstPersonCont.setInvertY(Globals.settings["InvertMouse"] == 1);
+        if(firstPersonCont.getFOVKick().originalFov != Globals.settings["FOV"]) {
+            firstPersonCont.getFOVKick().originalFov = Globals.settings["FOV"];
+            Camera.main.fieldOfView = Globals.settings["FOV"];
+        }
     }
 
     private void checkUnderwater()

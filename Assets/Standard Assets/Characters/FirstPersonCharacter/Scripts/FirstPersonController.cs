@@ -273,6 +273,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             return m_MouseLook;
         }
 
+        public FOVKick getFOVKick() {
+            return m_FovKick;
+        }
+
         public void setHeadBob(bool val) {
             m_UseHeadBob = val;
         }
