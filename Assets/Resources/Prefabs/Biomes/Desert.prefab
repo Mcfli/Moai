@@ -107,14 +107,16 @@ MonoBehaviour:
   treeTypes:
   - {fileID: 100220, guid: d49070e5524084da79ee85976e869002, type: 2}
   - {fileID: 147566, guid: f0eb8bf17ff714ff29642684f1737f0e, type: 2}
-  bigDoodads: []
-  bigDoodadChance: []
-  bigDoodadRadius: []
-  smallDoodads:
+  bigDoodads:
   - {fileID: 151944, guid: 34bc9d500634c4c5984bf956ced6b130, type: 2}
+  bigDoodadChance:
+  - 2
+  bigDoodadRadius:
+  - 4.5
+  smallDoodads: []
   smallDoodadChance: []
   numOfSmallDoodads: {x: 10, y: 20}
-  doodadClusterRadius: {x: 0, y: 0}
+  doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
   treeDensity: 2
   forestRadius: 15

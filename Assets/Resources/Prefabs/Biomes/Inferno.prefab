@@ -161,8 +161,112 @@ MonoBehaviour:
   - {fileID: 158034, guid: 5310fd09e83614aafa5f67e630ab282b, type: 2}
   - {fileID: 136852, guid: c2665a78d627e4078aa4901b04008311, type: 2}
   - {fileID: 117872, guid: 9c4ccb3dbce254a5db5f01fb151f2fe3, type: 2}
-  bigDoodadChance: []
-  bigDoodadRadius: []
+  bigDoodadChance:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  bigDoodadRadius:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 6
+  - 6
+  - 6
+  - 5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 5
+  - 4.5
+  - 6
+  - 5
+  - 4.5
+  - 6
+  - 5
+  - 4.5
+  - 6
+  - 4.5
+  - 5
+  - 5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 5
+  - 6
+  - 4.5
+  - 5
+  - 5
+  - 4.5
+  - 5
+  - 4.5
+  - 5
+  - 6
+  - 5
+  - 4.5
+  - 4.5
+  - 5
+  - 4.5
+  - 4.5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 4.5
   smallDoodads:
   - {fileID: 106908, guid: c724d7720b76a4d6e9836ce026b742bd, type: 2}
   - {fileID: 133364, guid: bba188cb5ffa34de8bbefe0d5c80deb8, type: 2}
@@ -205,14 +309,55 @@ MonoBehaviour:
   - {fileID: 141204, guid: fb360c9fbe7344f278f1af8d931fd52e, type: 2}
   - {fileID: 125624, guid: 9e269f02bf9704aa791ca61db1f1cf85, type: 2}
   - {fileID: 133462, guid: 79e7facae7cf44ff19937ccc7ccd6e7a, type: 2}
-  smallDoodadChance: []
-  numOfSmallDoodads: {x: 0, y: 0}
-  doodadClusterRadius: {x: 0, y: 0}
+  smallDoodadChance:
+  - 30
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  numOfSmallDoodads: {x: 10, y: 20}
+  doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
-  treeDensity: 2
+  treeDensity: 1
   forestRadius: 50
-  forestMaxTrees: 16
-  mixedForests: 0
+  forestMaxTrees: 10
+  mixedForests: 1
   colors:
   - {r: 0.49264705, g: 0.2365805, b: 0.03984646, a: 0}
   - {r: 0.28676468, g: 0.14032856, b: 0.08645111, a: 0}
