@@ -109,8 +109,64 @@ MonoBehaviour:
   - {fileID: 147566, guid: f0eb8bf17ff714ff29642684f1737f0e, type: 2}
   bigDoodads:
   - {fileID: 151944, guid: 34bc9d500634c4c5984bf956ced6b130, type: 2}
+  - {fileID: 138668, guid: 919a9a02a0a974637bbe65a87a59d74b, type: 2}
+  - {fileID: 193532, guid: 4775558bc9fc348a9abebe9e1c74bf88, type: 2}
+  - {fileID: 194280, guid: 1cf99edb641b64bf686f85e02c3c8469, type: 2}
+  - {fileID: 198816, guid: 80e70652a8bc746549e81ae36158db7e, type: 2}
+  - {fileID: 171530, guid: 6b8009c6e9ef94aa4a258bb1320739c3, type: 2}
+  - {fileID: 120038, guid: 460e35f7b7b8b42f48fdb86d1ed30850, type: 2}
+  - {fileID: 195498, guid: 0f23de361e4154c459864b401da8e1c3, type: 2}
+  - {fileID: 177580, guid: 49f10dddfa9b3497e9528becc5f02a7d, type: 2}
+  - {fileID: 169434, guid: bed6f4c90102f4e65b86f5e2f92560f0, type: 2}
+  - {fileID: 172476, guid: b76a20c6a6a2e4189b47c32ce30eadb6, type: 2}
+  - {fileID: 126190, guid: 49e34430888ab4704b2d0b1d1be48a82, type: 2}
+  - {fileID: 148024, guid: 821fc4148b5ed45d4b9f5df919cf954c, type: 2}
+  - {fileID: 141570, guid: be5d4790b08f14830b1b2feb2eaab898, type: 2}
+  - {fileID: 193938, guid: ef9b1680c4afd42cd8f8e2ea294e306f, type: 2}
+  - {fileID: 168080, guid: 7d9b067eaeebc4151b4abaf7d5caef56, type: 2}
+  - {fileID: 184786, guid: 3ec77b6ad24924697a3aa6c73f2e7b7b, type: 2}
+  - {fileID: 191806, guid: 88bb564c8cb614d8ea635a8e0d409e60, type: 2}
+  - {fileID: 149518, guid: 09ae69f7dd24943678e5d41a4356ed06, type: 2}
+  - {fileID: 149300, guid: a973ba15dfa2b416ba407ed879d8079d, type: 2}
+  - {fileID: 101934, guid: 28ae6116669aa43b09948ea29fa6d0c3, type: 2}
+  - {fileID: 190886, guid: aa463a58dcfe449368cae16bc8972558, type: 2}
+  - {fileID: 191408, guid: 307305b5a1a0448f9a7bba231273039d, type: 2}
+  - {fileID: 124522, guid: 95a14a70e96cd437d97a6250ec3e31ca, type: 2}
+  - {fileID: 153208, guid: 1b2eef4595e274a4ea97d4073e1dedd0, type: 2}
+  - {fileID: 162862, guid: 43996bbcf2c484f31aa3f635b152d6c4, type: 2}
+  - {fileID: 157550, guid: 3877bb24860d94323a7b76be6e61fbf6, type: 2}
+  - {fileID: 142810, guid: de5813ecc066a45fb8ec5b6c1e9295c5, type: 2}
+  - {fileID: 136224, guid: ccae932a81ad448d5a9b17e60332e731, type: 2}
   bigDoodadChance:
-  - 2
+  - 5
+  - 3
+  - 3
+  - 3
+  - 1
+  - 3
+  - 3
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   bigDoodadRadius:
   - 4.5
   smallDoodads: []
@@ -118,7 +174,7 @@ MonoBehaviour:
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
-  treeDensity: 2
+  treeDensity: 4
   forestRadius: 15
   forestMaxTrees: 1
   mixedForests: 1
