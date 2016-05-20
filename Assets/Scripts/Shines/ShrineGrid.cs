@@ -55,7 +55,7 @@ public class ShrineGrid : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         curState = new List<GameObject>();
         targetStateFire = new List<PuzzleObject>();
@@ -67,6 +67,7 @@ public class ShrineGrid : MonoBehaviour
         glowLayer = LayerMask.GetMask("Glow");
         mural = GetComponent<Mural>();
 
+        
         curElement = "";
 
         populateValidItems();
@@ -81,6 +82,7 @@ public class ShrineGrid : MonoBehaviour
 		
 
 		transform.position = snapToTerrain(transform.position);
+        mural.WipeOldMural();
 		createMural();
 		
 		killTrees();
@@ -493,7 +495,8 @@ public class ShrineGrid : MonoBehaviour
         resolution = shrine.resolution;
         minSolItems = shrine.minSolItems;
         maxSolItems = shrine.maxSolItems;
-        mural = shrine.mural;
+        //mural = shrine.mural;
+        curElement = shrine.curElement;
         glow = shrine.glow;
         vertexPillar = shrine.vertexPillar;
         curState = shrine.curState;
@@ -508,6 +511,8 @@ public class ShrineGrid : MonoBehaviour
         saved_position = shrine.saved_position;
         saved_rotation = shrine.saved_rotation;
         saved_scale = shrine.saved_scale;
+        mural.WipeOldMural();
+        mural.genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
     }
 
 }
