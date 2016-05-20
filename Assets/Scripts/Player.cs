@@ -221,7 +221,9 @@ public class Player : MonoBehaviour {
         if(heldObj == null) {
             if(GetHover().collider) {
                 ShrineActivator sa = GetHover().collider.gameObject.GetComponent<ShrineActivator>();
-                if(sa) return !sa.active();
+                WordWall ww = GetHover().collider.gameObject.GetComponent<WordWall>();
+                if (sa) return !sa.active();
+                else if (ww) return true;
             }
         } else return heldObj.canUse(GetHover());
         return false;
