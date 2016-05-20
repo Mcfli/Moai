@@ -94,9 +94,9 @@ public class GenerationManager : MonoBehaviour {
             curDist = 0;
             StopCoroutine("loadUnload");
             StartCoroutine("loadUnload", Globals.cur_chunk);
-            if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null && ShrineManager.shrines[current_chunk].Count > 0)
+            if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null)
             {
-				ShrineManager.shrines [current_chunk] [0].killTrees ();
+				ShrineManager.shrines [current_chunk].killTrees ();
 			}
         }
         if(Globals.mode > -1) {
@@ -135,7 +135,7 @@ public class GenerationManager : MonoBehaviour {
         mapChanges = new Dictionary<Vector2, Vector2>();
         TreeManager.trees = new Dictionary<Vector2, List<ForestScript.forestStruct>>();
         TreeManager.loadedForests = new Dictionary<Vector2, Dictionary<int, ForestScript>>();
-        ShrineManager.shrines = new Dictionary<Vector2, List<ShrineGrid>>();
+        ShrineManager.shrines = new Dictionary<Vector2, ShrineGrid>();
         WaterManager.waterBodies = new Dictionary<Vector2, List<GameObject>>();
         DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
     }
@@ -246,7 +246,7 @@ public class GenerationManager : MonoBehaviour {
 		if(doneLoading){
 			if (ShrineManager.shrines.ContainsKey (Globals.cur_chunk) && ShrineManager.shrines[Globals.cur_chunk] != null)
 			{
-				ShrineManager.shrines [Globals.cur_chunk][0].killTrees();
+				ShrineManager.shrines [Globals.cur_chunk].killTrees();
 			}
 		}
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));

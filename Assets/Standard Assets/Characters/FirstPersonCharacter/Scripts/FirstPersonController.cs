@@ -272,5 +272,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             return m_MouseLook;
         }
+
+        public void setRunSpeed(float speed)
+        {
+            m_RunSpeed = speed;
+        }
     }
 }

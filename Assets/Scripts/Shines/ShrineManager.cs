@@ -15,13 +15,13 @@ public class ShrineManager : MonoBehaviour {
     public int obelisk_min_dist = 2;
 
     private GenerationManager gen_manager;
-    public static Dictionary<Vector2, List<ShrineGrid>> shrines;
+    public static Dictionary<Vector2, ShrineGrid> shrines;
     public static Dictionary<Vector2, Obelisk> obelisks;
 
     // Use this for initialization
     void Awake () {
         gen_manager = gameObject.GetComponent<GenerationManager>();
-		shrines = new Dictionary<Vector2, List<ShrineGrid>>();
+		shrines = new Dictionary<Vector2, ShrineGrid>();
         obelisks = new Dictionary<Vector2, Obelisk>();
 	}
 	
@@ -153,11 +153,7 @@ public class ShrineManager : MonoBehaviour {
 	public void saveShrine(Vector2 chunk, GameObject shrine)
 	{
 		shrine.GetComponent<ShrineGrid>().saveTransforms();
-		if(!shrines.ContainsKey(chunk) || shrines[chunk] == null)
-		{
-			shrines[chunk] = new List<ShrineGrid>();
-		}
-		shrines[chunk].Add(shrine.GetComponent<ShrineGrid>());
+		shrines[chunk] = shrine.GetComponent<ShrineGrid>();
 	}
 
     public void saveObelisk(Vector2 chunk, GameObject obelisk)
@@ -169,48 +165,43 @@ public class ShrineManager : MonoBehaviour {
 	public void unloadShrines(int x, int y)
 	{
 		Vector2 chunk = new Vector2(x, y);
-        if (!shrines.ContainsKey(chunk)) return;
-        List<ShrineGrid> chunkShrines = shrines[chunk];
-		for (int i = shrines[chunk].Count -1 ; i >= 0; i--)
-		{
-            ShrineGrid shrine = chunkShrines[i];
-			shrine.saveTransforms();
-			saveShrine(chunk, shrine.gameObject);
-
-			Destroy(shrine.gameObject);
-		}
+        if (shrines.ContainsKey(chunk))
+        {
+            shrines[chunk].saveTransforms();
+			saveShrine(chunk, shrines[chunk].gameObject);
+			Destroy(shrines[chunk].gameObject);
+        }
 	}
 
     public void unloadObelisks(int x, int y)
     {
         Vector2 chunk = new Vector2(x, y);
-        if (obelisks.ContainsKey(chunk)) 
+        if (obelisks.ContainsKey(chunk))
+        {
+            obelisks[chunk].saveTransforms();
+            saveObelisk(chunk, obelisks[chunk].gameObject);
             Destroy(obelisks[chunk].gameObject);
+        }
+            
     }
 
 	public void loadShrines(int x, int y)
 	{
-		Vector2 key = new Vector2(x, y);
+        Vector2 key = new Vector2(x, y);
 
         int originalSeed = Random.seed;
-        Random.seed = Globals.SeedScript.seed + shrinePlacementSeed + key.GetHashCode();
+        Random.seed = Globals.SeedScript.seed + obeliskPlacementSeed + key.GetHashCode();
 
         if (shrines.ContainsKey(key))
-		{
-			List<ShrineGrid> shrines_in_chunk = shrines[key];
-
-			for (int i = shrines_in_chunk.Count-1; i >= 0; i--)
-			{
-				ShrineGrid shrine = shrines_in_chunk[i];
-				GameObject new_shrine = Instantiate(shrine_prefab, shrine.saved_position, shrine.saved_rotation) as GameObject;
-				new_shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
-				shrines[key].Remove(shrine);  
-			}
-		}
-		else
-		{
-			placeShrine(GenerationManager.chunkToWorld(key), key);
-		}
+        {
+            ShrineGrid shrine = shrines[key];
+            GameObject new_shrine = Instantiate(shrine_prefab, shrine.saved_position, shrine.saved_rotation) as GameObject;
+            new_shrine.GetComponent<ShrineGrid>().copyFrom(shrine);
+        }
+        else
+        {
+            placeShrine(GenerationManager.chunkToWorld(key), key);
+        }
 
         Random.seed = originalSeed;
 	}
