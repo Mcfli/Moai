@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPath: Prefabs/Plants/cactusA
-  seed_object: {fileID: 0}
+  seed_object: {fileID: 125840, guid: 6fed428e54133498bb858ea791e5ccda, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5
   scaleVariance: 0.25
@@ -489,7 +489,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 0}
+  dirtMound: {fileID: 150312, guid: 1ef2a7e2429584d9ebf07ac56f89e40d, type: 2}
   dirtMoundOffset: {x: -0.05, y: 0.1, z: -0.15}
   dirtMoundLifeRatio: 0.02
   prefab: {fileID: 0}

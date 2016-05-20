@@ -104,7 +104,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes: []
+  treeTypes:
+  - {fileID: 100220, guid: d49070e5524084da79ee85976e869002, type: 2}
+  - {fileID: 147566, guid: f0eb8bf17ff714ff29642684f1737f0e, type: 2}
   bigDoodads: []
   bigDoodadChance: []
   bigDoodadRadius: []
@@ -113,10 +115,10 @@ MonoBehaviour:
   numOfSmallDoodads: {x: 0, y: 0}
   doodadClusterRadius: {x: 0, y: 0}
   doodadDensity: 0
-  treeDensity: 0
-  forestRadius: 50
+  treeDensity: 2
+  forestRadius: 15
   forestMaxTrees: 1
-  mixedForests: 0
+  mixedForests: 1
   colors:
   - {r: 0.99604464, g: 1, b: 0.71323526, a: 0}
   - {r: 1, g: 0.9670385, b: 0.52205884, a: 0}
