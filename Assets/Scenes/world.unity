@@ -3122,7 +3122,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Swamp Mouse Buttons
+  m_Text: Swap Mouse Buttons
 --- !u!222 &224831993
 CanvasRenderer:
   m_ObjectHideFlags: 0
