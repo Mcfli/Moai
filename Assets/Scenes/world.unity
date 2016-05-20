@@ -127,6 +127,7 @@ MonoBehaviour:
   cloudSizeVariation: 0.5
   particleVel: 300
   rainAudio: {fileID: 8300000, guid: 722bb902aee3e654aa4b86ab29ab1a6d, type: 3}
+  Wind: {fileID: 8300000, guid: 3566db37786d1eb4ca5a980037354c36, type: 3}
 --- !u!4 &10489869
 Transform:
   m_ObjectHideFlags: 0
@@ -2807,6 +2808,46 @@ Prefab:
       propertyPath: m_Volume
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 11448012, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1685962294}
+    - target: {fileID: 11448012, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448012, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448012, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448012, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 60577576253fbae4fa7d9a3088898d15, type: 3}
+    - target: {fileID: 11467772, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1685962294}
+    - target: {fileID: 11467772, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOneShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467772, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467772, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467772, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: fa87de9a40ebb934dae511cb9cab055b, type: 3}
     m_RemovedComponents:
     - {fileID: 8220148, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
     - {fileID: 8210568, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
@@ -2814,6 +2855,8 @@ Prefab:
     - {fileID: 8249652, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
     - {fileID: 8274890, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
     - {fileID: 8226006, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+    - {fileID: 8232998, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+    - {fileID: 8222424, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1486964831 stripped
@@ -3037,6 +3080,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!82 &1685962294 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8207724, guid: 3e25a969be5701c4c9d727322eee84b8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1486964830}
 --- !u!1 &1694056955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3259,7 +3307,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1.75
   Loop: 1
   Mute: 0

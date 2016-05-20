@@ -54,6 +54,9 @@ public class ShrineGrid : MonoBehaviour
     public GameObject doneEarth;
 
 
+    public AudioClip BeamSound;
+    private AudioSource shrineComplete;
+
     // Use this for initialization
     void Start()
     {
@@ -84,6 +87,7 @@ public class ShrineGrid : MonoBehaviour
 		createMural();
 		
 		killTrees();
+        shrineComplete = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -422,21 +426,25 @@ public class ShrineGrid : MonoBehaviour
         Vector3 target = Globals.Player.transform.position  + Vector3.up * 10000;
         if (element.Equals("fire")){
             star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
+            shrineComplete.PlayOneShot(BeamSound, .8F);
             //Globals.fireStars.Add(star);
         }
         else if (element.Equals("water"))
         {
             star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
+            shrineComplete.PlayOneShot(BeamSound, .8F);
             //Globals.waterStars.Add(star);
         }
         else if (element.Equals("earth"))
         {
             star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
+            shrineComplete.PlayOneShot(BeamSound, .8F);
             //Globals.earthStars.Add(star);
         }
         else 
         {
             star = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
+            shrineComplete.PlayOneShot(BeamSound, .8F);
             //Globals.airStars.Add(star);
         }
         star.GetComponent<StarEffect>().setTarget(target);

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7accf832ff357a0418d2fc2547604f74
-timeCreated: 1463718114
+timeCreated: 1463775724
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -8,7 +8,7 @@ MonoImporter:
   - explosionPrefab: {instanceID: 0}
   - beamPrefab: {instanceID: 0}
   - chargingPrefab: {instanceID: 0}
-  - BeamSound: {fileID: 8300000, guid: 5c409791a5b529d4a96afb92a10bac88, type: 3}
+  - BeamSound: {fileID: 8300000, guid: 9e551677a7263e8438d8b36def6149cc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
