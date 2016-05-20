@@ -110,11 +110,12 @@ MonoBehaviour:
   bigDoodads: []
   bigDoodadChance: []
   bigDoodadRadius: []
-  smallDoodads: []
+  smallDoodads:
+  - {fileID: 151944, guid: 34bc9d500634c4c5984bf956ced6b130, type: 2}
   smallDoodadChance: []
-  numOfSmallDoodads: {x: 0, y: 0}
+  numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 0, y: 0}
-  doodadDensity: 0
+  doodadDensity: 4
   treeDensity: 2
   forestRadius: 15
   forestMaxTrees: 1
