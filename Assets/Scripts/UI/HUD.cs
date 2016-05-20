@@ -34,7 +34,7 @@ public class HUD : MonoBehaviour {
 
         //crosshair color
         foreach(UnityEngine.UI.Image crosshair in crosshairList) {
-            if(!Globals.PlayerScript.isInCinematic()) {
+            if(!Globals.PlayerScript.isInCinematic() && Globals.settings["Crosshair"] == 1) {
                 crosshair.gameObject.SetActive(true);
                 if(Globals.PlayerScript.LookingAtGrabbable() && Globals.PlayerScript.getHeldObj() == null) crosshair.color = canGrabColor;
                 else if(Globals.PlayerScript.canUse()) crosshair.color = canUseColor;
@@ -42,7 +42,7 @@ public class HUD : MonoBehaviour {
             } else crosshair.gameObject.SetActive(false);
         }
 
-        //toggle crosshair
+        //toggle HUD
         if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0)
             Globals.settings["ShowHUD"] = (Globals.settings["ShowHUD"] == 0) ? 1 : 0;
 

@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
     private GameObject playerModel;
+    private UnityStandardAssets.ImageEffects.DepthOfField DOF;
 
     private Camera mainCamera;
     private Vector3 playerCamPos;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour {
         thisCollider = GetComponent<Collider>();
         cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
         firstPersonCont = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+        DOF = Camera.main.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
         playerModel = transform.FindChild("moai").gameObject;
         mainCamera = Camera.main;
         playerCamPos = mainCamera.transform.localPosition;
@@ -54,6 +56,8 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        updateSettings();
+
         if(Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
         else firstPersonCont.lookLock = false;
 
@@ -64,7 +68,7 @@ public class Player : MonoBehaviour {
             if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
             firstPersonCont.enabled = false;
 
-            if(Globals.time_scale > cinematicTimeScale) {
+            if(Globals.time_scale > cinematicTimeScale && Globals.settings["WaitCinematic"] == 1) {
                 if(playerAudio.isPlaying) playerAudio.Stop();
                 if(!playerModel.activeInHierarchy) {
                     playerModel.SetActive(true);
@@ -134,6 +138,11 @@ public class Player : MonoBehaviour {
     }
 
     public bool isUnderwater() {return underwater;}
+
+    public void updateSettings() {
+        DOF.enabled = (Globals.settings["DOF"] == 1);
+        firstPersonCont.setHeadBob(Globals.settings["Bobbing"] == 1);
+    }
 
     private void checkUnderwater()
     {
