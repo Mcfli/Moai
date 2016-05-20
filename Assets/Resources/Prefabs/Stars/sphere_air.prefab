@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3322760}
   - 23: {fileID: 2346062}
   - 114: {fileID: 11419776}
+  - 82: {fileID: 8255130}
   m_Layer: 0
   m_Name: sphere_air
   m_TagString: Untagged
@@ -63,6 +64,80 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160032}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &8255130
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160032}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &11419776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,8 +154,7 @@ MonoBehaviour:
   beamPrefab: {fileID: 113870, guid: 46a56c5c0881c4bcf804068c451784a1, type: 2}
   chargingPrefab: {fileID: 170596, guid: 99f79a5d60ed86c4ab749798390a7c1a, type: 2}
   element: air
-  spentMat: {fileID: 2100000, guid: 4ebba7b55681b8542bf49989177e2b9e, type: 2}
-  extraStars: 10
+  BeamSound: {fileID: 8300000, guid: 71427011e98107a41a371356f5b8e453, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -23,9 +23,8 @@ public class StarEffect : MonoBehaviour {
 	private GameObject beam;
     private GameObject charge;
 
-    private AudioSource beamAudio;
-    private bool wasPlaying = false;
     public AudioClip BeamSound;
+    AudioSource BeamAudio;
 
     public void setTarget(Vector3 tar)
     {
@@ -43,14 +42,16 @@ public class StarEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //starsParent = GameObject.Find("Sky").GetComponent<Sky>().StarsParent;
-        beamAudio = Camera.main.gameObject.AddComponent<AudioSource>();
+        BeamAudio = GetComponent<AudioSource>();
+        BeamAudio.PlayOneShot(BeamSound, 1F);
         if (chargingPrefab != null)
         {
             charge = Instantiate(chargingPrefab, transform.position + Vector3.up * 10f, Quaternion.identity) as GameObject;
             isCharging = true;
         }
-            
+        
     }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -63,11 +64,6 @@ public class StarEffect : MonoBehaviour {
                 isCharging = false;
                 if (beamPrefab != null)
                     beam = Instantiate(beamPrefab, transform.position, Quaternion.identity) as GameObject;
-                if (beamAudio.isPlaying)
-                {
-                    wasPlaying = false;
-                    beamAudio.Play();
-                }
             }
         }
 		if (!isCharging && isTargetSet && !isAtTarget)
