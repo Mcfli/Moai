@@ -274,5 +274,6 @@ public class Mural : MonoBehaviour {
                 tempMats[i] = tempMats[9];
             }
         }
+        rend.sharedMaterials = tempMats;
     }
 }

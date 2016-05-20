@@ -512,8 +512,23 @@ public class ShrineGrid : MonoBehaviour
         saved_rotation = shrine.saved_rotation;
         saved_scale = shrine.saved_scale;
 		changeElement (curElement);
+        if (isDone)
+            loadCompletedShrine(curElement);
         mural.WipeOldMural();
         mural.genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
+    }
+
+    private void loadCompletedShrine(string element)
+    {
+        incompleteGlow.SetActive(false);
+        if (element.Equals("air"))
+            doneAir.SetActive(true);
+        else if (element.Equals("earth"))
+            doneEarth.SetActive(true);
+        else if (element.Equals("fire"))
+            doneFire.SetActive(true);
+        else
+            doneWater.SetActive(true);
     }
 
 }
