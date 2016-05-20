@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3335714}
   - 23: {fileID: 2388452}
   - 54: {fileID: 5449046}
-  - 65: {fileID: 6556782}
+  - 65: {fileID: 6532860}
   - 114: {fileID: 11401520}
   - 114: {fileID: 11407698}
   m_Layer: 14
@@ -81,7 +81,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6556782
+--- !u!65 &6532860
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.94506603, y: 0.62855816, z: 1.3684723}
-  m_Center: {x: -0.301869, y: 0.08078202, z: -0.034024008}
+  m_Size: {x: 0.945066, y: 1.368473, z: 0.628558}
+  m_Center: {x: -0.008818001, y: 0.5131295, z: -0.011810005}
 --- !u!114 &11401520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
   growTimeVariance: 0
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294432712
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0

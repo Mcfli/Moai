@@ -11,6 +11,7 @@ public class PuzzleObject : MonoBehaviour, IEquatable<PuzzleObject>
 
     public bool Equals(PuzzleObject other)
     {
+        if(ID == "universal" || other.ID == "universal") return true;
         return ID.Equals(other.ID);
     }
 
