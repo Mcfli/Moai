@@ -417,37 +417,18 @@ public class ShrineGrid : MonoBehaviour
 
         WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin,WaterFireEarthAirChangeMax);
         // Change the chunk
-        //GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
+        // GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
         GameObject star;
-        Vector3 variation = new Vector3(Random.Range(-1000f,1000f), 0, Random.Range(-1000f, 1000f));
         Vector3 target = Globals.Player.transform.position  + Vector3.up * 10000;
-        if (element.Equals("fire")){
-            star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
-            //Globals.fireStars.Add(star);
-        }
-        else if (element.Equals("water"))
-        {
-            star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
-            //Globals.waterStars.Add(star);
-        }
-        else if (element.Equals("earth"))
-        {
-            star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
-            //Globals.earthStars.Add(star);
-        }
-        else 
-        {
-            star = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
-            //Globals.airStars.Add(star);
-        }
+        if (element.Equals("fire")) star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
+        else if (element.Equals("water")) star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
+        else if (element.Equals("earth")) star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
+        else star = Instantiate(airStar, transform.position, Quaternion.identity) as GameObject;
         star.GetComponent<StarEffect>().setTarget(target);
 
         // Update puzzle complexity
         Globals.WaterFireEarthAirVector += WaterFireEarthAirChange;
-
-        // Add star to list
-        
     }
 
     private void snapSelfToTerrain()

@@ -13,7 +13,7 @@ public class StarEffect : MonoBehaviour {
     private bool isCharging = false;
     private bool isTargetSet = false;
     private bool isAtTarget = false;
-    private bool hasExploded = false;
+    //private bool hasExploded = false;
 	private bool culledParticles = false;
 
     // References
@@ -102,7 +102,7 @@ public class StarEffect : MonoBehaviour {
     {
         if (explosionPrefab != null)
 			explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
-		hasExploded = true;
+		//hasExploded = true;
     }
 
 	private void cullParticles(){
