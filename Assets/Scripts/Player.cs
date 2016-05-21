@@ -136,7 +136,7 @@ public class Player : MonoBehaviour {
                     waypoint.transform.position = checkWaypoint().point + Vector3.up * (waypoint.transform.localScale.y);
                     waypoint.SetActive(true);
                 }
-                else
+                else if (checkWaypoint().collider.gameObject.layer == LayerMask.NameToLayer("Waypoint"))
                 {
                     waypoint.SetActive(false);
                 }

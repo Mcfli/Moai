@@ -143,7 +143,7 @@ public class GenerationManager : MonoBehaviour {
         ShrineManager.obelisks = new Dictionary<Vector2, Obelisk>();
         WaterManager.waterBodies = new Dictionary<Vector2, List<GameObject>>();
         DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
-        GameObject.Find("Waypoint").SetActive(false);
+        Globals.PlayerScript.waypoint.SetActive(false);
     }
     
     private IEnumerator loadUnload(Vector2 position) {
