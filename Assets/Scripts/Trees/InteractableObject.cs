@@ -73,6 +73,7 @@ public class InteractableObject: MonoBehaviour{
             } else thisRigidbody.isKinematic = false;
             if(timeRemain < 0) Destroy(gameObject);
         }
+        
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -141,7 +142,17 @@ public class InteractableObject: MonoBehaviour{
         held = true;
 
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
-        if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) DoodadManager.loaded_doodads[coordinates].Remove(gameObject);
+        if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) 
+        {
+            for (int i = 0; i < DoodadManager.loaded_doodads[coordinates].Count; i++)
+            {
+                if (gameObject.GetInstanceID() == DoodadManager.loaded_doodads[coordinates][i].GetInstanceID())
+                {
+                    DoodadManager.loaded_doodads[coordinates].RemoveAt(i);
+                }
+            }
+        }
+        
     }
 
     public void dropped() {

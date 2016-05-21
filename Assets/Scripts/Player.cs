@@ -95,7 +95,7 @@ public class Player : MonoBehaviour {
             }
         }
         if(Globals.time_scale == 1) {
-			if(Vector3.Distance(mainCamera.transform.localPosition, playerCamPos) > 20.0f)
+			if(Vector3.Distance(mainCamera.transform.localPosition, playerCamPos) > 25.0f)
 			{
 				Vector3 direction = Vector3.Normalize (playerCamPos - mainCamera.transform.localPosition);
 				mainCamera.transform.localPosition += direction * zoomInSpeed;
