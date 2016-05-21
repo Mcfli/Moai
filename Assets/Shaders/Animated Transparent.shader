@@ -1,4 +1,4 @@
-﻿Shader "Animated" {
+﻿Shader "Animated Transparent" {
 	Properties{
 		_Color("Main Color", Color) = (1,1,1,1)
 		_EmissionColor("Emission", Color) = (0,0,0,1)
@@ -14,12 +14,11 @@
 	}
 
 	SubShader{
-		Tags{ "Queue" = "Geometry" }
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
 
 		Pass{
 			Tags{ "LightMode" = "ForwardBase" }
-			//Blend SrcAlpha OneMinusSrcAlpha
-
+			Blend SrcAlpha OneMinusSrcAlpha
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -46,7 +45,7 @@
 				float3  viewDir     : TEXCOORD1;
 				float3  lightDir    : TEXCOORD2;
 				half2 fogDepth		: TEXCOORD3;
-				LIGHTING_COORDS(4,5)
+				LIGHTING_COORDS(5,6)
 				
 			};
 
