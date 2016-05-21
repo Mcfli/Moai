@@ -433,13 +433,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrine_prefab: {fileID: 154728, guid: 678feba97db6b9044934c154b8891552, type: 2}
   obelisk_prefab: {fileID: 136944, guid: fb7a071914f132a46b2842501c06b810, type: 2}
-  acceptable_heightDiff: 5
+  acceptable_heightDiff: 4
   max_tries: 10000
   shrinePlacementSeed: 65436
   shrine_probability: 0.9
   shrine_min_dist: 1
-  obeliskPlacementSeed: 135
-  obelisk_probability: 0.07
+  obeliskPlacementSeed: 0
+  obelisk_probability: 0.23
   obelisk_min_dist: 3
 --- !u!114 &188005519
 MonoBehaviour:
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1116f0493eb144840af1353fd5a96528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setSeed: 1
+  setSeed: 0
   seed: 0
 --- !u!1 &386901798
 GameObject:

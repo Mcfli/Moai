@@ -99,7 +99,7 @@ public class Obelisk : MonoBehaviour {
 
                 RaycastHit hit;
                 Ray rayDown = new Ray(Globals.Player.transform.position + Vector3.up * 100, Vector3.down);
-                if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Island")))
+                if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Islands")))
                     Globals.Player.transform.position = new Vector3(Globals.Player.transform.position.x, hit.point.y + Camera.main.transform.localPosition.y, Globals.Player.transform.position.z);
 
                 fader.fadingClear = true;
