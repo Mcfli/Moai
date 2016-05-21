@@ -15,7 +15,7 @@ GameObject:
   - 54: {fileID: 5451220}
   - 75: {fileID: 7568954}
   - 114: {fileID: 11471974}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: small_redrockB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
