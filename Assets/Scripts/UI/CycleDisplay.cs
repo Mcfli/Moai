@@ -1,33 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ToggleDisplay: MonoBehaviour {
+public class CycleDisplay: MonoBehaviour {
     //attach to button (not text)
     public UnityEngine.UI.Text text;
     public string settingName;
-    public string onText = "ON";
-    public string offText = "OFF";
     private string head;
-    private UnityEngine.UI.Toggle toggle;
+    private UnityEngine.UI.Button button;
 
 	void Awake() {
         head = text.text;
-        toggle = GetComponent<UnityEngine.UI.Toggle>();
+        button = GetComponent<UnityEngine.UI.Button>();
     }
 
     void Start() {
-        toggle.isOn = (Globals.settings[settingName] == 1);
+        //button.isOn = (Globals.settings[settingName] == 1);
         updateText();
     }
 	
     void Update() {
+        if(Screen.resolutions.Length < 1) button.interactable = false;
         updateText();
     }
 
     private void updateText() {
-        if(!toggle.interactable) text.text = head;
-        else if(toggle.isOn) text.text = head + ": " + onText;
-        else text.text = head + ": " + offText;
+        if(!button.interactable) text.text = head;
+        text.text = head + ": " + Screen.currentResolution.width + "x" + Screen.currentResolution.height;
     }
 
     public void updateSetting(bool val) {
@@ -35,6 +33,6 @@ public class ToggleDisplay: MonoBehaviour {
     }
 
     public void updateSetting() {
-        Globals.settings[settingName] = (toggle.isOn) ? 1 : 0;
+        //Globals.settings[settingName] = (toggle.isOn) ? 1 : 0;
     }
 }

@@ -22,12 +22,13 @@ public class Player : MonoBehaviour {
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
     private GameObject playerModel;
     private UnityStandardAssets.ImageEffects.DepthOfField DOF;
+    private MusicManager musicMan;
 
     private Camera mainCamera;
     private Vector3 playerCamPos;
     private Quaternion playerCamRot;
     private bool inCinematic = false;
-    public float cinematicTimeScale;
+    //public float cinematicTimeScale;
     public float waitCamDistance = 60.0f;
     private float camDistance = 60.0f;
     private float theta = 0.0f;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour {
         cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
         firstPersonCont = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
         DOF = Camera.main.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+        musicMan = Camera.main.GetComponent<MusicManager>();
         playerModel = transform.FindChild("moai").gameObject;
         mainCamera = Camera.main;
         playerCamPos = mainCamera.transform.localPosition;
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour {
             if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
             firstPersonCont.enabled = false;
 
-            if(Globals.time_scale > cinematicTimeScale && Globals.settings["WaitCinematic"] == 1) {
+            if(Globals.time_scale > Globals.SkyScript.timeScaleThatHaloAppears && Globals.settings["WaitCinematic"] == 1) {
                 if(playerAudio.isPlaying) playerAudio.Stop();
                 if(!playerModel.activeInHierarchy) {
                     playerModel.SetActive(true);
@@ -143,10 +145,17 @@ public class Player : MonoBehaviour {
         DOF.enabled = (Globals.settings["DOF"] == 1);
         firstPersonCont.setHeadBob(Globals.settings["Bobbing"] == 1);
         firstPersonCont.setInvertY(Globals.settings["InvertMouse"] == 1);
-        if(firstPersonCont.getFOVKick().originalFov != Globals.settings["FOV"]) {
+        AudioListener.volume = Globals.settings["MasterVol"] / 100f;
+        musicMan.Volume = Globals.settings["MusicVol"] / 100f;
+        RenderSettings.ambientIntensity = Globals.settings["Brightness"] / 50f;
+        if(Globals.mode == -1) {
+            firstPersonCont.getFOVKick().originalFov = 60;
+            Camera.main.fieldOfView = 60;
+        }else if(firstPersonCont.getFOVKick().originalFov != Globals.settings["FOV"]) {
             firstPersonCont.getFOVKick().originalFov = Globals.settings["FOV"];
             Camera.main.fieldOfView = Globals.settings["FOV"];
         }
+        if(Screen.fullScreen != (Globals.settings["Screenmode"] == 1)) Screen.fullScreen = !Screen.fullScreen;
     }
 
     private void checkUnderwater()

@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour {
 
     void Awake() {
         firstPersonCont = Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+        Globals.settings["Screenmode"] = (Screen.fullScreen ? 1 : 0);
     }
 
     // Update is called once per frame

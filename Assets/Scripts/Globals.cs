@@ -65,13 +65,13 @@ public class Globals : MonoBehaviour {
 
         // Video
         { "Resolution", 0 },    // int (index of Screen.resolutions)
-        { "Screenmode", 0 },    // 0 full, 1 windowed, 2 borderless
+        { "Screenmode", 1 },    // 0 windowed, 1 full, 2 borderless
         { "LoadDist", 8 },      // int
         { "Brightness", 50 },   // percent 0-100
 
         // Audio
         { "MasterVol", 100 },   // percent 0-100
-        { "MusicVol", 75 },     // percent 0-100
+        { "MusicVol", 50 },     // percent 0-100
         { "SFXVol", 100 },      // percent 0-100
     };
 
