@@ -210,9 +210,19 @@ public class Player : MonoBehaviour {
     }
     
 	public bool warpToGround(float fromHeight, bool overrideMinWarpDist = false){
-		RaycastHit hit;
+
+        LayerMask coll = collisionLayers;
+        // If we don't want islands, take out
+        if (Globals.loading || overrideMinWarpDist)
+        {
+            int islandInt = LayerMask.GetMask("Islands");
+            coll = coll.value ^ islandInt;
+        }
+            
+        RaycastHit hit;
+
         Ray rayDown = new Ray(new Vector3(transform.position.x, fromHeight, transform.position.z), Vector3.down);
-        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, collisionLayers)){
+        if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, coll)){
             if (transform.position.y - (hit.point.y + cameraHeight) > minWarpOnWaitDist || overrideMinWarpDist)
                 transform.position = new Vector3(transform.position.x, hit.point.y + cameraHeight, transform.position.z);
             return true;
