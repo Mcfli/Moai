@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 468240}
   - 33: {fileID: 3313498}
   - 23: {fileID: 2307896}
-  - 64: {fileID: 6482578}
+  - 64: {fileID: 6481770}
   m_Layer: 0
   m_Name: flowerbio_flowerD_B
   m_TagString: Untagged
@@ -71,8 +71,8 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167330}
-  m_Mesh: {fileID: 4300002, guid: ed61305f0c60a48909426a0ba0319c09, type: 3}
---- !u!64 &6482578
+  m_Mesh: {fileID: 4300002, guid: 6f7c74d9f156f4d40b1261b48ac8a3f4, type: 3}
+--- !u!64 &6481770
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -83,7 +83,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
-  m_Mesh: {fileID: 4300002, guid: ed61305f0c60a48909426a0ba0319c09, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 6f7c74d9f156f4d40b1261b48ac8a3f4, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

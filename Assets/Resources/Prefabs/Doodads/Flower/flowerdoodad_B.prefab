@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 470384}
   - 33: {fileID: 3345334}
   - 23: {fileID: 2330414}
-  - 64: {fileID: 6458396}
+  - 64: {fileID: 6478474}
   m_Layer: 0
   m_Name: flowerdoodad_B
   m_TagString: Untagged
@@ -66,8 +66,8 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107224}
-  m_Mesh: {fileID: 4300000, guid: f109f030a3285437f8d43f9d15d0841f, type: 3}
---- !u!64 &6458396
+  m_Mesh: {fileID: 4300000, guid: dfc3e2996ec2e4f6c95e654508a23dd7, type: 3}
+--- !u!64 &6478474
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -78,7 +78,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: f109f030a3285437f8d43f9d15d0841f, type: 3}
+  m_Mesh: {fileID: 4300000, guid: dfc3e2996ec2e4f6c95e654508a23dd7, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
