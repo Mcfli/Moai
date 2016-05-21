@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 public class Mural : MonoBehaviour {
@@ -16,6 +14,7 @@ public class Mural : MonoBehaviour {
 
     //Texture2D muralTex;
     private Renderer rend;
+    private Dictionary<string,List<int>> indexSwaps;
 
     /* Shrine mural material mapping
      * 
@@ -75,19 +74,22 @@ public class Mural : MonoBehaviour {
     public void genMurals(List<PuzzleObject> targetStateFire, List<PuzzleObject> targetStateWater, List<PuzzleObject> targetStateEarth, List<PuzzleObject> targetStateAir)
     {
         if(rend == null) rend = GetComponent<Renderer>();
+        if (indexSwaps == null) generateIndexSwaps();
         Material[] tempMats = rend.sharedMaterials;
+
         // Generate Fire mural
         int index = 0;
         
         foreach(PuzzleObject po in targetStateFire)
         {
-            if (index == 0)      tempMats[34] = po.image;
-            else if (index == 1) tempMats[35] = po.image;
-            else if (index == 2) tempMats[33] = po.image;
-            else if (index == 3) tempMats[32] = po.image;
-            else if (index == 4) tempMats[36] = po.image;
-            else if (index == 5) tempMats[29] = po.image;
-            else if (index == 6) tempMats[30] = po.image;
+            int scramble = indexSwaps["fire"][index];
+            if (scramble == 0)      tempMats[34] = po.image;
+            else if (scramble == 1) tempMats[35] = po.image;
+            else if (scramble == 2) tempMats[33] = po.image;
+            else if (scramble == 3) tempMats[32] = po.image;
+            else if (scramble == 4) tempMats[36] = po.image;
+            else if (scramble == 5) tempMats[29] = po.image;
+            else if (scramble == 6) tempMats[30] = po.image;
             else                 tempMats[28] = po.image;
             index++;
         }
@@ -96,13 +98,14 @@ public class Mural : MonoBehaviour {
         index = 0;
         foreach (PuzzleObject po in targetStateWater)
         {
-            if (index == 0)      tempMats[21] = po.image;
-            else if (index == 1) tempMats[19] = po.image;
-            else if (index == 2) tempMats[20] = po.image;
-            else if (index == 3) tempMats[22] = po.image;
-            else if (index == 4) tempMats[23] = po.image;
-            else if (index == 5) tempMats[27] = po.image;
-            else if (index == 6) tempMats[25] = po.image;
+            int scramble = indexSwaps["water"][index];
+            if (scramble == 0)      tempMats[21] = po.image;
+            else if (scramble == 1) tempMats[19] = po.image;
+            else if (scramble == 2) tempMats[20] = po.image;
+            else if (scramble == 3) tempMats[22] = po.image;
+            else if (scramble == 4) tempMats[23] = po.image;
+            else if (scramble == 5) tempMats[27] = po.image;
+            else if (scramble == 6) tempMats[25] = po.image;
             else                 tempMats[26] = po.image;
             index++;
         }
@@ -111,13 +114,14 @@ public class Mural : MonoBehaviour {
         index = 0;
         foreach (PuzzleObject po in targetStateAir)
         {
-            if (index == 0)      tempMats[16] = po.image;
-            else if (index == 1) tempMats[18] = po.image;
-            else if (index == 2) tempMats[17] = po.image;
-            else if (index == 3) tempMats[15] = po.image;
-            else if (index == 4) tempMats[14] = po.image;
-            else if (index == 5) tempMats[10] = po.image;
-            else if (index == 6) tempMats[12] = po.image;
+            int scramble = indexSwaps["air"][index];
+            if (scramble == 0)      tempMats[16] = po.image;
+            else if (scramble == 1) tempMats[18] = po.image;
+            else if (scramble == 2) tempMats[17] = po.image;
+            else if (scramble == 3) tempMats[15] = po.image;
+            else if (scramble == 4) tempMats[14] = po.image;
+            else if (scramble == 5) tempMats[10] = po.image;
+            else if (scramble == 6) tempMats[12] = po.image;
             else                 tempMats[11] = po.image;
             index++;
         }
@@ -126,13 +130,14 @@ public class Mural : MonoBehaviour {
         index = 0;
         foreach (PuzzleObject po in targetStateEarth)
         {
-            if (index == 0)      tempMats[1] = po.image;
-            else if (index == 1) tempMats[0] = po.image;
-            else if (index == 2) tempMats[2] = po.image;
-            else if (index == 3) tempMats[4] = po.image;
-            else if (index == 4) tempMats[3] = po.image;
-            else if (index == 5) tempMats[7] = po.image;
-            else if (index == 6) tempMats[6] = po.image;
+            int scramble = indexSwaps["earth"][index];
+            if (scramble == 0)      tempMats[1] = po.image;
+            else if (scramble == 1) tempMats[0] = po.image;
+            else if (scramble == 2) tempMats[2] = po.image;
+            else if (scramble == 3) tempMats[4] = po.image;
+            else if (scramble == 4) tempMats[3] = po.image;
+            else if (scramble == 5) tempMats[7] = po.image;
+            else if (scramble == 6) tempMats[6] = po.image;
             else                 tempMats[8] = po.image;
             index++;
         }
@@ -153,14 +158,15 @@ public class Mural : MonoBehaviour {
         {
             foreach (PuzzleObject po in targetState)
             {
+                int scramble = indexSwaps["fire"][index];
                 bool objectDone = (completed.ContainsKey(index) && completed[index]);
-                if (index == 0) tempMats[34]      = objectDone ? po.imageGlowing:po.image;
-                else if (index == 1) tempMats[35] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 2) tempMats[33] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 3) tempMats[32] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 4) tempMats[36] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 5) tempMats[29] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 6) tempMats[30] = objectDone ? po.imageGlowing : po.image;
+                if (scramble == 0) tempMats[34]      = objectDone ? po.imageGlowing:po.image;
+                else if (scramble == 1) tempMats[35] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 2) tempMats[33] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 3) tempMats[32] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 4) tempMats[36] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 5) tempMats[29] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 6) tempMats[30] = objectDone ? po.imageGlowing : po.image;
                 else tempMats[28]                 = objectDone ? po.imageGlowing : po.image;
                 index++;
             }
@@ -172,14 +178,15 @@ public class Mural : MonoBehaviour {
         {
             foreach (PuzzleObject po in targetState)
             {
+                int scramble = indexSwaps["water"][index];
                 bool objectDone = (completed.ContainsKey(index) && completed[index]);
-                if (index == 0) tempMats[21]      = objectDone ? po.imageGlowing : po.image;
-                else if (index == 1) tempMats[19] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 2) tempMats[20] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 3) tempMats[22] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 4) tempMats[23] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 5) tempMats[27] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 6) tempMats[25] = objectDone ? po.imageGlowing : po.image;
+                if (scramble == 0) tempMats[21]      = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 1) tempMats[19] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 2) tempMats[20] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 3) tempMats[22] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 4) tempMats[23] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 5) tempMats[27] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 6) tempMats[25] = objectDone ? po.imageGlowing : po.image;
                 else tempMats[26]                 = objectDone ? po.imageGlowing : po.image;
                 index++;
             }
@@ -190,14 +197,15 @@ public class Mural : MonoBehaviour {
         {
             foreach (PuzzleObject po in targetState)
             {
+                int scramble = indexSwaps["air"][index];
                 bool objectDone = (completed.ContainsKey(index) && completed[index]);
-                if (index == 0) tempMats[16]      = objectDone ? po.imageGlowing : po.image;
-                else if (index == 1) tempMats[18] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 2) tempMats[17] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 3) tempMats[15] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 4) tempMats[14] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 5) tempMats[10] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 6) tempMats[12] = objectDone ? po.imageGlowing : po.image;
+                if (scramble == 0) tempMats[16]      = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 1) tempMats[18] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 2) tempMats[17] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 3) tempMats[15] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 4) tempMats[14] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 5) tempMats[10] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 6) tempMats[12] = objectDone ? po.imageGlowing : po.image;
                 else tempMats[11]                 = objectDone ? po.imageGlowing : po.image;
                 index++;
             }
@@ -208,14 +216,15 @@ public class Mural : MonoBehaviour {
         {
             foreach (PuzzleObject po in targetState)
             {
+                int scramble = indexSwaps["earth"][index];
                 bool objectDone = (completed.ContainsKey(index) && completed[index]);
-                if (index == 0) tempMats[1]      = objectDone ? po.imageGlowing : po.image;
-                else if (index == 1) tempMats[0] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 2) tempMats[2] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 3) tempMats[4] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 4) tempMats[3] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 5) tempMats[7] = objectDone ? po.imageGlowing : po.image;
-                else if (index == 6) tempMats[6] = objectDone ? po.imageGlowing : po.image;
+                if (scramble == 0) tempMats[1]      = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 1) tempMats[0] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 2) tempMats[2] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 3) tempMats[4] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 4) tempMats[3] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 5) tempMats[7] = objectDone ? po.imageGlowing : po.image;
+                else if (scramble == 6) tempMats[6] = objectDone ? po.imageGlowing : po.image;
                 else tempMats[8]                 = objectDone ? po.imageGlowing : po.image;
                 index++;
             }
@@ -240,6 +249,60 @@ public class Mural : MonoBehaviour {
 
         // Assign materials
         rend.sharedMaterials = tempMats;
+    }
+
+    private void generateIndexSwaps()
+    {
+        indexSwaps = new Dictionary<string, List<int>>();
+        indexSwaps["fire"] = new List<int>();
+        indexSwaps["water"] = new List<int>();
+        indexSwaps["air"] = new List<int>();
+        indexSwaps["earth"] = new List<int>();
+
+        int origSeed = Random.seed;
+        int rand;
+        Random.seed = GenerationManager.worldToChunk(transform.position).GetHashCode();
+
+        // Generate index swaps
+        List<int> fireIndices  = new List<int>();
+        
+        for (int i = 0; i < 7; i++)
+        {
+            fireIndices.Add(i);
+        }
+        List<int> waterIndices = new List<int>(fireIndices);
+        List<int> airIndices = new List<int>(fireIndices);
+        List<int> earthIndices = new List<int>(fireIndices);
+
+        while (fireIndices.Count > 0)
+        {
+            rand = fireIndices[Random.Range(0, fireIndices.Count)];
+            fireIndices.Remove(rand);
+            indexSwaps["fire"].Add(rand);
+        }
+
+        while (waterIndices.Count > 0)
+        {
+            rand = waterIndices[Random.Range(0, waterIndices.Count)];
+            waterIndices.Remove(rand);
+            indexSwaps["water"].Add(rand);
+        }
+
+        while (airIndices.Count > 0)
+        {
+            rand = airIndices[Random.Range(0, airIndices.Count)];
+            airIndices.Remove(rand);
+            indexSwaps["air"].Add(rand);
+        }
+
+        while (earthIndices.Count > 0)
+        {
+            rand = earthIndices[Random.Range(0, earthIndices.Count)];
+            earthIndices.Remove(rand);
+            indexSwaps["earth"].Add(rand);
+        }
+
+        Random.seed = origSeed;
     }
 
     private void snapToTerrain()
