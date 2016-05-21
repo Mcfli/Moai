@@ -387,20 +387,25 @@ MonoBehaviour:
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   propogateDuringState: 000101
   heightAxis: 88
-  collisionRadiusMinMax: {x: 0.25, y: 0.4573089}
+  collisionRadiusMinMax: {x: 0.8, y: 0.85}
   collisionVSTime:
   - serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
+      inSlope: 3.2243302
+      outSlope: 3.2243302
+      tangentMode: 0
+    - time: 0.13383898
+      value: 0.8870573
+      inSlope: 0.29812175
+      outSlope: 0.29812175
+      tangentMode: 0
     - time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -423,14 +428,19 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 1
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.94803935
+      value: 0.9438297
+      inSlope: -0.18212324
+      outSlope: -0.18212324
+      tangentMode: 0
     - time: 1
       value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 10
+      inSlope: -3.4534893
+      outSlope: -3.4534893
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -440,6 +450,7 @@ MonoBehaviour:
   prefab: {fileID: 141346, guid: 1dc6b18a18d7b4d60a8840ae24ba00a4, type: 2}
   age: 545044.8
   lifeSpan: 1203515.8
+  playerPlanted: 0
 --- !u!114 &11450834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -463,10 +474,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.45730886
-  m_Height: 6.0885878
+  m_Radius: 0.85
+  m_Height: 5.509547
   m_Direction: 1
-  m_Center: {x: 0.008, y: 2.7504637, z: -0.004503895}
+  m_Center: {x: 0, y: 2.2, z: 0}
 --- !u!137 &13750648
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
