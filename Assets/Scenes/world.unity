@@ -219,6 +219,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22418240, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22497192, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
       propertyPath: m_AnchorMin.x
       value: 0.01
@@ -231,25 +235,13 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 22418240, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
+    - target: {fileID: 163952, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11439728, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
-      propertyPath: worldWallText
-      value: 
-      objectReference: {fileID: 19241148}
-    m_RemovedComponents:
-    - {fileID: 8282608, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
-    - {fileID: 8226006, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &19241148 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11424192, guid: 3e25a969be5701c4c9d727322eee84b8,
-    type: 2}
-  m_PrefabInternal: {fileID: 19241147}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &188005509
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +297,8 @@ MonoBehaviour:
   - {fileID: 11487490, guid: 5d39b086b10389b49a480b5b68511c03, type: 2}
   - {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
   - {fileID: 11476116, guid: 0d7d4f5eaf7295a4c803eec7f54efed2, type: 2}
+  snowBiome: {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
+  alwaysSnowHeight: 700
   WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
