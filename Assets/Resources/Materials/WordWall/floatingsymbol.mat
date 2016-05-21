@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: obeliskrocka3
+  m_Name: floatingsymbol
   m_Shader: {fileID: 4800000, guid: 1d2d15bc10e64474d875fbb2dfdea4dc, type: 3}
   m_ShaderKeywords: _ANIMATE_ON
   m_LightmapFlags: 5
@@ -155,7 +155,7 @@ Material:
       data:
         first:
           name: _YHeightSpeedLengthOffset
-        second: {r: 1.6, g: 1.5, b: 1, a: 3}
+        second: {r: 0.5, g: 1, b: 1, a: 0}
       data:
         first:
           name: _ZHeightSpeedLengthOffset

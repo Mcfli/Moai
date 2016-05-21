@@ -155,7 +155,7 @@ Material:
       data:
         first:
           name: _YHeightSpeedLengthOffset
-        second: {r: 2, g: 0.5, b: 1, a: 5}
+        second: {r: 1.8, g: 0.5, b: 1, a: 5}
       data:
         first:
           name: _ZHeightSpeedLengthOffset
