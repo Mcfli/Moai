@@ -129,15 +129,18 @@ public class Player : MonoBehaviour {
         // Waypoints
         if (Input.GetButtonDown("Waypoint") && Globals.mode == 0 && Globals.time_scale == 1)
         {
-            if (checkWaypoint().collider != null)
+                if (checkWaypoint().collider != null)
             {
                 if (checkWaypoint().collider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                 {
                     waypoint.transform.position = checkWaypoint().point + Vector3.up * (waypoint.transform.localScale.y);
                     waypoint.SetActive(true);
                 }
+                else
+                {
+                    waypoint.SetActive(false);
+                }
             }
-        
         }
 
         checkUnderwater();
