@@ -16,7 +16,6 @@ public class DoodadManager : MonoBehaviour
     {
         gen_manager = gameObject.GetComponent<GenerationManager>();
         loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
-		held_object = new GameObject ();
         mask = LayerMask.GetMask("Terrain", "Water");
     }
 
