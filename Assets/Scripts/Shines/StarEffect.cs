@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class StarEffect : MonoBehaviour {
+    public static bool isEffectPlaying = false;
+
     public float speed = 1;
     public GameObject explosionPrefab;
 	public GameObject beamPrefab;
@@ -46,6 +48,7 @@ public class StarEffect : MonoBehaviour {
         BeamAudio.PlayOneShot(BeamSound, 1F);
         if (chargingPrefab != null)
         {
+            isEffectPlaying = true;
             charge = Instantiate(chargingPrefab, transform.position + Vector3.up * 10f, Quaternion.identity) as GameObject;
             isCharging = true;
         }
@@ -86,6 +89,7 @@ public class StarEffect : MonoBehaviour {
         {
             explode();
             isAtTarget = true;
+            
             Destroy(gameObject);
             Globals.SkyScript.addStar(element);
             /*
@@ -100,6 +104,7 @@ public class StarEffect : MonoBehaviour {
     // Create particle system explosion at origin
     private void explode()
     {
+        isEffectPlaying = false;
         if (explosionPrefab != null)
 			explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
 		//hasExploded = true;

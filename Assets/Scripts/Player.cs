@@ -66,8 +66,8 @@ public class Player : MonoBehaviour {
 
         if(Globals.mode != 0) return;
         
-        if (Input.GetButtonDown("Patience") && !playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
-        else if (Input.GetButtonUp("Patience") && playerAudio.isPlaying) playerAudio.Stop();
+        if (!StarEffect.isEffectPlaying && Input.GetButtonDown("Patience") && !playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
+        else if (!StarEffect.isEffectPlaying && Input.GetButtonUp("Patience") && playerAudio.isPlaying) playerAudio.Stop();
 
         if (Globals.time_scale > 1) {
             warpToGround(transform.position.y);
