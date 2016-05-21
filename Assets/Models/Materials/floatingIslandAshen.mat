@@ -82,8 +82,8 @@ Material:
         first:
           name: _MKGlowTex
         second:
-          m_Texture: {fileID: 2800000, guid: 6e4e6ecc78701fd43a948eb42241ab36, type: 3}
-          m_Scale: {x: 10, y: 10}
+          m_Texture: {fileID: 2800000, guid: 9322dcf1452f07e41b8a39976ca90d5f, type: 3}
+          m_Scale: {x: 25, y: 25}
           m_Offset: {x: 0, y: 0}
       data:
         first:
