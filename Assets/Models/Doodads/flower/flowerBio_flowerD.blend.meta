@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: bebbef35f4ff748ff9c14e3dcab47553
-timeCreated: 1463721675
+guid: ed61305f0c60a48909426a0ba0319c09
+timeCreated: 1463797213
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: flowerbio_flowerD_A
+    100004: flowerbio_flowerD_B
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: dirt_001
+    400002: flowerbio_flowerD_A
+    400004: flowerbio_flowerD_B
+    2300000: flowerbio_flowerD_A
+    2300002: flowerbio_flowerD_B
+    3300000: flowerbio_flowerD_A
+    3300002: flowerbio_flowerD_B
+    4300000: flowerbio_flowerD_A
+    4300002: flowerbio_flowerD_B
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -36,7 +43,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.4
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
