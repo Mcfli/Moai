@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
         else if (Input.GetButtonUp("Patience") && playerAudio.isPlaying) playerAudio.Stop();
 
         if (Globals.time_scale > 1) {
-            warpToGround(transform.position.y);
+            if(!Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().flyCheat) warpToGround(transform.position.y);
             if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
             firstPersonCont.enabled = false;
 

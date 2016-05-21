@@ -18,14 +18,14 @@ public class TreeScript : MonoBehaviour {
     public List<float> stateRatios; //ratio of each state, currently unused
     public List<PuzzleObject> statePuzzleObjects; //puzzleObject component for each state
     public List<bool> propogateDuringState;
-    public char heightAxis;
+    public Axis heightAxis;
     public Vector2 collisionRadiusMinMax;
     public List<AnimationCurve> collisionVSTime;
 
-    //dirtMound
-    public GameObject dirtMound;
-    public Vector3 dirtMoundOffset;
-    public float dirtMoundLifeRatio;
+    //sapling
+    public GameObject sapling;
+    public Vector3 saplingOffset;
+    public float saplingLifeRatio;
 
     ///-------PRIVATES-------///
     [HideInInspector] public GameObject prefab;
@@ -48,6 +48,8 @@ public class TreeScript : MonoBehaviour {
     private ForestScript forestParent;
 
     public bool playerPlanted = false;
+
+    public enum Axis { XAxis, YAxis, ZAxis}
 
     // Use this for initialization
     // will initialize with random scale and lifeSpan with age of 0
@@ -76,11 +78,11 @@ public class TreeScript : MonoBehaviour {
 
         foreach (AnimationState animState in anim) animState.speed = 0; //fixes twitching
 
-        // dirtMound
-        if (dirtMound) {
-            dirtMound = Instantiate(dirtMound, transform.position, transform.rotation) as GameObject;
-            dirtMound.transform.parent = transform;
-            dirtMound.transform.localPosition += dirtMoundOffset;
+        // sapling
+        if (sapling) {
+            sapling = Instantiate(sapling, transform.position, transform.rotation) as GameObject;
+            sapling.transform.parent = transform;
+            sapling.transform.localPosition += saplingOffset;
         }
     }
 
@@ -120,7 +122,7 @@ public class TreeScript : MonoBehaviour {
     }
 
     public void grow() {
-        if(dirtMound) dirtMound.SetActive(age/lifeSpan < dirtMoundLifeRatio);
+        if(sapling) sapling.SetActive(age/lifeSpan < saplingLifeRatio);
         updateState();
         updateAnimation();
         lastGrowUpdate = Globals.time;
@@ -195,15 +197,19 @@ public class TreeScript : MonoBehaviour {
         Vector3 center = rend.localBounds.center;
         Vector3 size = rend.localBounds.size;
         float height = (rend.rootBone.position.y - transform.position.y) / rend.rootBone.lossyScale.y;
-        if(heightAxis == 'x' || heightAxis == 'X') {
-            center.x = height / 2;
-            size.x = height;
-        } else if(heightAxis == 'z' || heightAxis == 'Z') {
-            center.z = height / 2;
-            size.z = height;
-        } else {
-            center.y = height / 2;
-            size.y = height;
+        switch(heightAxis) {
+            case Axis.XAxis:
+                center.x = height / 2;
+                size.x = height;
+                break;
+            case Axis.YAxis:
+                center.y = height / 2;
+                size.y = height;
+                break;
+            case Axis.ZAxis:
+                center.z = height / 2;
+                size.z = height;
+                break;
         }
         rend.localBounds = new Bounds(center, size);
     }

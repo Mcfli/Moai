@@ -5595,7 +5595,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196524}
-  m_LocalRotation: {x: 0.14617082, y: 0.9105336, z: 0.31898087, w: 0.21866407}
+  m_LocalRotation: {x: 0.14617081, y: 0.9105335, z: 0.31898084, w: 0.21866404}
   m_LocalPosition: {x: -1.11758706e-10, y: 0.000505778, z: 2.2351741e-10}
   m_LocalScale: {x: 1, y: 0.9999998, z: 1}
   m_Children:
@@ -6545,7 +6545,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   propogateDuringState: 000101
-  heightAxis: 88
+  heightAxis: 0
   collisionRadiusMinMax: {x: 2, y: 3.8}
   collisionVSTime:
   - serializedVersion: 2
@@ -6593,9 +6593,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 168730, guid: 6fd98040f71b342e6886d6d48a9e9ea0, type: 2}
-  dirtMoundOffset: {x: -0.05, y: 0.1, z: -0.15}
-  dirtMoundLifeRatio: 0.02
+  sapling: {fileID: 168730, guid: 6fd98040f71b342e6886d6d48a9e9ea0, type: 2}
+  saplingOffset: {x: -0.05, y: 0.1, z: -0.15}
+  saplingLifeRatio: 0.02
   prefab: {fileID: 0}
   age: 413577.28
   lifeSpan: 1203515.8
@@ -6839,8 +6839,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 448392}
   m_AABB:
-    m_Center: {x: -2561.3735, y: -2359.7778, z: 1378.0312}
-    m_Extent: {x: 5590.5903, y: 5142.3706, z: 3513.2031}
+    m_Center: {x: -0.0006, y: -0.017, z: 0.00038908003}
+    m_Extent: {x: 0.011, y: 0.015, z: 0.009610919}
   m_DirtyAABB: 0
 --- !u!1001 &100100000
 Prefab:

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b9cd78f01ba84b445a582f078d3dc2e5
-timeCreated: 1461974296
+guid: d0924ee94b34d90438d7c434768829fc
+timeCreated: 1463809933
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: shrinebottom
+    4300000: dirt
     7400000: Default Take
     9500000: //RootNode
   materials:

@@ -1,15 +1,44 @@
 fileFormatVersion: 2
-guid: b9cd78f01ba84b445a582f078d3dc2e5
-timeCreated: 1461974296
+guid: 9d7f6dfeb4b5ae942a981ee39d77aa30
+timeCreated: 1463813430
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: shrine_rocks
+    100004: shrine_rocks_001
+    100006: shrine_rocks_002
+    100008: shrine_rocks_003
+    100010: shrine_rocks_004
+    100012: shrine_rocks_005
     400000: //RootNode
+    400002: shrine_rocks
+    400004: shrine_rocks_001
+    400006: shrine_rocks_002
+    400008: shrine_rocks_003
+    400010: shrine_rocks_004
+    400012: shrine_rocks_005
     2300000: //RootNode
+    2300002: shrine_rocks
+    2300004: shrine_rocks_001
+    2300006: shrine_rocks_002
+    2300008: shrine_rocks_003
+    2300010: shrine_rocks_004
+    2300012: shrine_rocks_005
     3300000: //RootNode
-    4300000: shrinebottom
+    3300002: shrine_rocks
+    3300004: shrine_rocks_001
+    3300006: shrine_rocks_002
+    3300008: shrine_rocks_003
+    3300010: shrine_rocks_004
+    3300012: shrine_rocks_005
+    4300000: shrine_rocks
+    4300002: shrine_rocks_005
+    4300004: shrine_rocks_004
+    4300006: shrine_rocks_003
+    4300008: shrine_rocks_002
+    4300010: shrine_rocks_001
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -36,7 +65,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

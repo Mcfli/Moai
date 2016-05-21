@@ -497,7 +497,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
   - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
   propogateDuringState: 000101
-  heightAxis: 88
+  heightAxis: 0
   collisionRadiusMinMax: {x: 0.3, y: 0.65}
   collisionVSTime:
   - serializedVersion: 2
@@ -545,12 +545,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
-  dirtMoundOffset: {x: 0, y: 0.8, z: 0}
-  dirtMoundLifeRatio: 0
+  sapling: {fileID: 165260, guid: 93ee65e579d33a14c80ebd77974f9569, type: 2}
+  saplingOffset: {x: 0, y: 0.8, z: 0}
+  saplingLifeRatio: 0.02
   prefab: {fileID: 0}
   age: 0
   lifeSpan: 1314000
+  playerPlanted: 0
 --- !u!136 &13685326
 CapsuleCollider:
   m_ObjectHideFlags: 1
