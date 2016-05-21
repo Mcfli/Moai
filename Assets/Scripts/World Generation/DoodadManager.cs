@@ -7,6 +7,7 @@ public class DoodadManager : MonoBehaviour
     public int placementSeed;
     private GenerationManager gen_manager;
     public static Dictionary<Vector2, List<GameObject>> loaded_doodads;
+	public static GameObject held_object;
 
     private LayerMask mask;
     private bool loading = false;
@@ -15,6 +16,7 @@ public class DoodadManager : MonoBehaviour
     {
         gen_manager = gameObject.GetComponent<GenerationManager>();
         loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
+		held_object = new GameObject ();
         mask = LayerMask.GetMask("Terrain", "Water");
     }
 
@@ -131,8 +133,12 @@ public class DoodadManager : MonoBehaviour
         {
             for (int i = loaded_doodads[chunk].Count - 1; i >= 0; i--)
             {
-                Destroy(loaded_doodads[chunk][i]);
-                loaded_doodads[chunk].RemoveAt(i);
+				if(loaded_doodads[chunk][i] != held_object)
+				{
+					Destroy(loaded_doodads[chunk][i]);
+					loaded_doodads[chunk].RemoveAt(i);
+				}
+                
             }
         }
     }
