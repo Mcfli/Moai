@@ -15,7 +15,7 @@ GameObject:
   - 54: {fileID: 5415984}
   - 75: {fileID: 7546940}
   - 114: {fileID: 11495444}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: small_firerockB
   m_TagString: Untagged
   m_Icon: {fileID: 0}

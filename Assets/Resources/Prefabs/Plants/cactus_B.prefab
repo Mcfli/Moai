@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/cactusB
+  prefabPath: Prefabs/Plants/cactus_B
   seed_object: {fileID: 121134, guid: a811f23813b4e45d0970ef86382bc83a, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5

@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3341512}
   - 23: {fileID: 2352874}
   - 64: {fileID: 6480780}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: big_redrockG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

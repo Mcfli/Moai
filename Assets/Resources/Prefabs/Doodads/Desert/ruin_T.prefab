@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3311732}
   - 23: {fileID: 2394206}
   - 64: {fileID: 6475174}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ruin_T
   m_TagString: Untagged
   m_Icon: {fileID: 0}

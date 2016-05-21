@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11422840}
   - 136: {fileID: 13665036}
   - 114: {fileID: 11435752}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: desert_flower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

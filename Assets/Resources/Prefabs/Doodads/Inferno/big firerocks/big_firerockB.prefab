@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3392968}
   - 23: {fileID: 2388574}
   - 64: {fileID: 6488824}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: big_firerockB
   m_TagString: Untagged
   m_Icon: {fileID: 0}

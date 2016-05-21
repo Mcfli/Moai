@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3383654}
   - 23: {fileID: 2365954}
   - 64: {fileID: 6473098}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: desertpillar_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
