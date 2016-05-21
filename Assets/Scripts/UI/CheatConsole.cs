@@ -9,6 +9,7 @@ public class CheatConsole : MonoBehaviour
 
     private GameObject puzzleFinisher;
     private bool active = true;
+    private bool speed = false;
 
     void Start()
     {
@@ -66,8 +67,18 @@ public class CheatConsole : MonoBehaviour
         }
         else if (text.Equals("flash"))
         {
-            Debug.Log("Superspeed activated");
-            Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().setRunSpeed(100);
+            Debug.Log("Superspeed toggled");
+            if (!speed)
+            {
+                speed = true;
+                Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().setRunSpeed(100);
+            }
+            else
+            {
+                speed = false;
+                Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().setRunSpeed(30);
+            }
+            
         }
         else
         {
