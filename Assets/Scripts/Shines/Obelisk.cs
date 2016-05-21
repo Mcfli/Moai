@@ -95,8 +95,14 @@ public class Obelisk : MonoBehaviour {
 			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
 			{
 				fader.fadeImage.color = Color.white;
-				Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
-				fader.fadingClear = true;
+                Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
+
+                RaycastHit hit;
+                Ray rayDown = new Ray(Globals.Player.transform.position + Vector3.up * 100, Vector3.down);
+                if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Island")))
+                    Globals.Player.transform.position = new Vector3(Globals.Player.transform.position.x, hit.point.y + Camera.main.transform.localPosition.y, Globals.Player.transform.position.z);
+
+                fader.fadingClear = true;
 				fader.fadingWhite = false;
 			} 
 			else if(fader.fadingClear)

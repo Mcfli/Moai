@@ -148,7 +148,6 @@ public class Mural : MonoBehaviour {
 
     public void glowPuzzleObjects(Dictionary<int,bool> completed,List<PuzzleObject> targetState, string element)
     {
-        List<GameObject> itemsCounted = new List<GameObject>();
         int index = 0;
         if (rend == null) rend = GetComponent<Renderer>();
         Material[] tempMats = rend.sharedMaterials;

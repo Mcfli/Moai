@@ -73,7 +73,7 @@ public class TreeManager : MonoBehaviour {
             foreach (ForestScript.forestStruct f in trees_in_chunk)
             {
                 yield return null;
-                GameObject g = new GameObject();
+                GameObject g = new GameObject("Forest");
                 ForestScript newForest = g.AddComponent(typeof(ForestScript)) as ForestScript;
                 newForest.loadForest(f);
                 loaded.Add(newForest.GetInstanceID(), newForest);
