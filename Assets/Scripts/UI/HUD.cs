@@ -48,7 +48,7 @@ public class HUD : MonoBehaviour {
             Globals.settings["ShowHUD"] = (Globals.settings["ShowHUD"] == 0) ? 1 : 0;
 
         //pause button
-        if(Input.GetButtonDown(pauseButton)) {
+        if(!Globals.loading && Input.GetButtonDown(pauseButton)) {
             if(Globals.mode == 1) resumeGame();
             else if(Globals.mode == 0) pauseGame();
         }

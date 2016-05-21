@@ -8,6 +8,7 @@ public class Globals : MonoBehaviour {
     public static float time_resolution = Mathf.Pow(10, -20.0f);
     public static float deltaTime;
     public static int mode = -1; // -1 main menu, 0 playing, 1 paused
+    public static bool loading = false;
 
     public static float timeOfDay = 0;
     //incremeted by Sky
