@@ -145,13 +145,7 @@ public class InteractableObject: MonoBehaviour{
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
         if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) 
         {
-            for (int i = 0; i < DoodadManager.loaded_doodads[coordinates].Count; i++)
-            {
-                if (gameObject.GetInstanceID() == DoodadManager.loaded_doodads[coordinates][i].GetInstanceID())
-                {
-					DoodadManager.loaded_doodads[coordinates].RemoveAt(i);
-                }
-            }
+            DoodadManager.loaded_doodads[coordinates].Remove(gameObject);
         }
         
     }
