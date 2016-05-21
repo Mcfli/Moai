@@ -24,7 +24,7 @@ public class InteractableObject: MonoBehaviour{
     private float timeRemain;        // how long until next check
     private bool planted;
     public bool playerPlanted;
-    private bool held;
+    public bool held;
     private int attempts;
 
     public AudioClip PickUp;
@@ -140,23 +140,18 @@ public class InteractableObject: MonoBehaviour{
         unplant();
         pickupDropAudio.PlayOneShot(PickUp, .2f);
         held = true;
+		DoodadManager.held_object = gameObject;
 
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
         if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) 
         {
-            //Debug.Log("Remove object from list");
-            //Debug.Log("Coordinates: " + coordinates);
-            //Debug.Log("Size: " + DoodadManager.loaded_doodads[coordinates].Count);
             for (int i = 0; i < DoodadManager.loaded_doodads[coordinates].Count; i++)
             {
                 if (gameObject.GetInstanceID() == DoodadManager.loaded_doodads[coordinates][i].GetInstanceID())
                 {
-                    //Debug.Log("Found instance id");
-                    //Debug.Log("Instance id" + gameObject.GetInstanceID());
-                    DoodadManager.loaded_doodads[coordinates].RemoveAt(i);
+					DoodadManager.loaded_doodads[coordinates].RemoveAt(i);
                 }
             }
-                //Debug.Log("Size: " + DoodadManager.loaded_doodads[coordinates].Count);
         }
         
     }
@@ -165,6 +160,7 @@ public class InteractableObject: MonoBehaviour{
         timeRemain = droppedObjectLifeLength;
         if(thisRigidbody) if(!thisRigidbody.isKinematic) warpToGround(thisCollider.bounds.extents.y * 2, transform.position + Vector3.up * thisCollider.bounds.extents.y * 2, thisCollider.bounds.extents.y * 2);
         held = false;
+		DoodadManager.held_object = null;
     }
 
     public bool plant(Vector3 place) {
