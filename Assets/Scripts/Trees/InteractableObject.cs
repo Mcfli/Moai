@@ -144,13 +144,19 @@ public class InteractableObject: MonoBehaviour{
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
         if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) 
         {
+            //Debug.Log("Remove object from list");
+            //Debug.Log("Coordinates: " + coordinates);
+            //Debug.Log("Size: " + DoodadManager.loaded_doodads[coordinates].Count);
             for (int i = 0; i < DoodadManager.loaded_doodads[coordinates].Count; i++)
             {
                 if (gameObject.GetInstanceID() == DoodadManager.loaded_doodads[coordinates][i].GetInstanceID())
                 {
+                    //Debug.Log("Found instance id");
+                    //Debug.Log("Instance id" + gameObject.GetInstanceID());
                     DoodadManager.loaded_doodads[coordinates].RemoveAt(i);
                 }
             }
+                //Debug.Log("Size: " + DoodadManager.loaded_doodads[coordinates].Count);
         }
         
     }
