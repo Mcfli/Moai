@@ -8309,6 +8309,7 @@ MonoBehaviour:
   pauseButton: PauseButton
   crosshairToggle: CrosshairToggle
   HUDParent: {fileID: 185308}
+  worldWallText: {fileID: 11424192}
   initialColor: {r: 1, g: 1, b: 1, a: 0.39215687}
   canGrabColor: {r: 0, g: 0.5, b: 1, a: 0.75}
   canUseColor: {r: 0, g: 1, b: 0, a: 0.7490196}

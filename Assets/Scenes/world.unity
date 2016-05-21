@@ -235,11 +235,21 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11439728, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: worldWallText
+      value: 
+      objectReference: {fileID: 19241148}
     m_RemovedComponents:
     - {fileID: 8282608, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
     - {fileID: 8226006, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &19241148 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11424192, guid: 3e25a969be5701c4c9d727322eee84b8,
+    type: 2}
+  m_PrefabInternal: {fileID: 19241147}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &188005509
 GameObject:
   m_ObjectHideFlags: 0

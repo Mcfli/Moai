@@ -22,7 +22,7 @@ public class WordWall : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rend = transform.FindChild("model").GetComponent<Renderer>();
-        screenText = GameObject.Find("WordWallText").GetComponent<UnityEngine.UI.Text>();
+        screenText = Globals.MenusScript.GetComponent<HUD>().worldWallText;
         screenText.color = new Color(0,0,0,0);
 
         // If we have already generated this one, load it
