@@ -70,7 +70,7 @@ public class Obelisk : MonoBehaviour {
 	void Start () {
         requirements = new Dictionary<string, int>();
         generateRequirements();
-        m_renderer = GetComponentInChildren<Renderer>();
+        m_renderer = GetComponent<Renderer>();
         initMaterials();
         createIsland();
 		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();

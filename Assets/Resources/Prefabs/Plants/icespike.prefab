@@ -386,7 +386,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   propogateDuringState: 000101
-  heightAxis: 88
+  heightAxis: 0
   collisionRadiusMinMax: {x: 0.8, y: 0.85}
   collisionVSTime:
   - serializedVersion: 2
@@ -444,10 +444,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 198440, guid: dd77975b48088434287a21a1eebc35d3, type: 2}
-  dirtMoundOffset: {x: 0, y: 0.1, z: -0.05}
-  dirtMoundLifeRatio: 0.02
-  prefab: {fileID: 141346, guid: 1dc6b18a18d7b4d60a8840ae24ba00a4, type: 2}
+  sapling: {fileID: 198440, guid: dd77975b48088434287a21a1eebc35d3, type: 2}
+  saplingOffset: {x: 0, y: 0.1, z: -0.05}
+  saplingLifeRatio: 0.02
+  prefab: {fileID: 0}
   age: 545044.8
   lifeSpan: 1203515.8
   playerPlanted: 0
@@ -522,8 +522,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 405334}
   m_AABB:
-    m_Center: {x: 0.5296473, y: 0.0022856146, z: -32768}
-    m_Extent: {x: 0.5639575, y: 0.18626864, z: 32768.18}
+    m_Center: {x: 0.5296473, y: 0.0022856146, z: 0.0047495216}
+    m_Extent: {x: 0.5639575, y: 0.18626864, z: 0.17493798}
   m_DirtyAABB: 0
 --- !u!1001 &100100000
 Prefab:

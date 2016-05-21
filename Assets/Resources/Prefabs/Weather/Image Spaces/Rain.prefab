@@ -83,13 +83,13 @@ MonoBehaviour:
       tangentMode: 0
     - time: 1.0018518
       value: 0.51250005
-      inSlope: 2
-      outSlope: 2
+      inSlope: 1.4309521
+      outSlope: 1.4309521
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  saturation: 0.3
+  saturation: 0.7
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

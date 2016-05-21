@@ -25,6 +25,7 @@ GameObject:
   - 4: {fileID: 417430}
   - 111: {fileID: 11173118}
   - 137: {fileID: 13701802}
+  - 114: {fileID: 11442018}
   m_Layer: 14
   m_Name: fire
   m_TagString: Untagged
@@ -690,6 +691,17 @@ MonoBehaviour:
   playerPlanted: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
+--- !u!114 &11442018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5e5d9520f088849895e1c0cb623aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11462830
 MonoBehaviour:
   m_ObjectHideFlags: 1

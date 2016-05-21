@@ -17,22 +17,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &115770
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 487582}
-  - 137: {fileID: 13797042}
-  m_Layer: 12
-  m_Name: shrine_square
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &131642
 GameObject:
   m_ObjectHideFlags: 1
@@ -213,6 +197,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 419232}
   - 111: {fileID: 11131066}
+  - 137: {fileID: 13745802}
+  - 114: {fileID: 11449864}
   m_Layer: 12
   m_Name: shrine_top_anim
   m_TagString: Untagged
@@ -269,7 +255,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.535, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 487582}
   - {fileID: 470210}
   m_Father: {fileID: 489638}
   m_RootOrder: 1
@@ -374,7 +359,7 @@ Transform:
   m_Children:
   - {fileID: 443826}
   m_Father: {fileID: 419232}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &480274
 Transform:
   m_ObjectHideFlags: 1
@@ -387,18 +372,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 489638}
   m_RootOrder: 3
---- !u!4 &487582
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115770}
-  m_LocalRotation: {x: -1.1082841e-15, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5e-15, z: -1.4733723}
-  m_LocalScale: {x: 3.2053125, y: 3.2053125, z: 3.2053123}
-  m_Children: []
-  m_Father: {fileID: 419232}
-  m_RootOrder: 0
 --- !u!4 &489638
 Transform:
   m_ObjectHideFlags: 1
@@ -624,6 +597,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: earth
   ShrineComplete: {fileID: 0}
+--- !u!114 &11449864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5e5d9520f088849895e1c0cb623aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11460188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -676,12 +660,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: air
   ShrineComplete: {fileID: 0}
---- !u!137 &13797042
+--- !u!137 &13745802
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115770}
+  m_GameObject: {fileID: 194066}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

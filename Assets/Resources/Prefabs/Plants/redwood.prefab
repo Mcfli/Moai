@@ -7175,7 +7175,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
   - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
   propogateDuringState: 000101
-  heightAxis: 88
+  heightAxis: 0
   collisionRadiusMinMax: {x: 1, y: 1.5}
   collisionVSTime:
   - serializedVersion: 2
@@ -7228,9 +7228,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  dirtMound: {fileID: 195122, guid: 4d463b852170e62429d432765a271053, type: 2}
-  dirtMoundOffset: {x: 0.267, y: 0.12, z: -0.174}
-  dirtMoundLifeRatio: 0.02
+  sapling: {fileID: 195122, guid: 4d463b852170e62429d432765a271053, type: 2}
+  saplingOffset: {x: 0.267, y: 0.12, z: -0.174}
+  saplingLifeRatio: 0.02
   prefab: {fileID: 0}
   age: 0
   lifeSpan: 1314000
