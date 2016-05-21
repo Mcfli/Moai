@@ -508,6 +508,7 @@ MonoBehaviour:
   - {fileID: 188550, guid: d49b4d3b26e234946b7ff6a52282d32a, type: 2}
   - {fileID: 129554, guid: 6a402b5b64419d84497b178aa9558b9d, type: 2}
   - {fileID: 199530, guid: 71c2aec8f2fafe6428b039c8ec8f8a7c, type: 2}
+  - {fileID: 128172, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
   islandHeight: 1000
   maxTotalReqs: 4
   minTotalReqs: 2
