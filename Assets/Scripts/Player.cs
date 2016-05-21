@@ -86,7 +86,7 @@ public class Player : MonoBehaviour {
                     if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)) {
                         camDistance += 5 * Time.deltaTime;
                         theta += 0.5f * Time.deltaTime;
-                        float targetY = hit.point.y - playerModel.transform.position.y + 80;
+                        float targetY = Mathf.Max(hit.point.y - playerModel.transform.position.y + 80, 20);
                         mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
                     }
                 }
