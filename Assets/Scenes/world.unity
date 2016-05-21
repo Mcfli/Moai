@@ -415,8 +415,8 @@ MonoBehaviour:
   shrine_probability: 0.9
   shrine_min_dist: 1
   obeliskPlacementSeed: 0
-  obelisk_probability: 0.23
-  obelisk_min_dist: 3
+  obelisk_probability: 1
+  obelisk_min_dist: 4
 --- !u!114 &188005519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,19 +1212,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 435800, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.36086282
+      value: 0.3608628
       objectReference: {fileID: 0}
     - target: {fileID: 435800, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.5782842
+      value: -0.57828414
       objectReference: {fileID: 0}
     - target: {fileID: 435800, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.6074429
+      value: -0.60744286
       objectReference: {fileID: 0}
     - target: {fileID: 435800, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.40789542
+      value: 0.40789536
       objectReference: {fileID: 0}
     - target: {fileID: 493726, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
       propertyPath: m_LocalRotation.x

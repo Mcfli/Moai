@@ -45790,7 +45790,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176222}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: ff9c5397dea755a4ba110fc8ff44cd75, type: 2}
@@ -46188,7 +46188,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188550}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: ff9c5397dea755a4ba110fc8ff44cd75, type: 2}
@@ -46619,6 +46619,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11416364
@@ -46681,6 +46682,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11426134
@@ -46709,6 +46711,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11428722
@@ -46751,6 +46754,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11434026
@@ -46779,6 +46783,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11434570
@@ -46835,6 +46840,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11448396
@@ -46905,6 +46911,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11484556
