@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour {
 
         if(loadStep == 0) {
             prepLoad();
+            Globals.loading = true;
             loadStep = 1;
             StartCoroutine(loadingDelay());
             return;
@@ -46,6 +47,7 @@ public class MainMenu : MonoBehaviour {
         }
         else if(loadStep == 2) {
             loadGame();
+            Globals.loading = false;
             loadStep = -1;
             return;
         }
