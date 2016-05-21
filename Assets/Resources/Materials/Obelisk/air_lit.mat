@@ -173,8 +173,8 @@ Material:
       data:
         first:
           name: _MKGlowColor
-        second: {r: 0.45588237, g: 0.4433063, b: 0, a: 1}
+        second: {r: 0.030493068, g: 0.6911765, b: 0.25375858, a: 1}
       data:
         first:
           name: _MKGlowTexColor
-        second: {r: 1, g: 0.8482759, b: 0, a: 1}
+        second: {r: 0.33041993, g: 0.5588235, b: 0.02465397, a: 1}

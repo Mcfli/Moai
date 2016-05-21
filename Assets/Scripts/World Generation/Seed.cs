@@ -7,10 +7,15 @@ public class Seed : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+        randomizeSeed();
+    }
+
+    public int randomizeSeed() {
         if(setSeed) Random.seed = seed;
         else {
             Random.seed = (int)System.DateTime.Now.Ticks;
             seed = Random.seed;
         }
+        return seed;
     }
 }

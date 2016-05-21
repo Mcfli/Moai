@@ -68,7 +68,7 @@ public class MainMenu : MonoBehaviour {
     private IEnumerator loadingDelay()
     {
         Globals.mode = 0;
-        Random.seed = Globals.SeedScript.seed;
+        Random.seed = Globals.SeedScript.randomizeSeed();
         yield return new WaitForSeconds(8f);
         loadStep = 2;
     }
