@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleS: {fileID: 19805386, guid: 283398f9d664bbe43be3d4761a8314d6, type: 2}
-  imageSpace: {fileID: 11468104, guid: ccfab5984aa14344887e16b41d174687, type: 2}
+  imageSpace: {fileID: 11468104, guid: 615760a39c10cd54c9caac4d75d11537, type: 2}
   numberOfClouds: 140
 --- !u!1001 &100100000
 Prefab:

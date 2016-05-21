@@ -118,7 +118,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 0
+      scalar: 25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -244,7 +244,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4278226171
       minMaxState: 0
     startSize:
       scalar: 1
@@ -387,7 +387,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     randomizeRotationDirection: 0
-    gravityModifier: 1
+    gravityModifier: 0
     maxNumParticles: 10000
     rotation3D: 0
   ShapeModule:
@@ -608,15 +608,15 @@ ParticleSystem:
       minMaxState: 0
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4278220793
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 3321898067
         key2:
           serializedVersion: 2
           rgba: 0
@@ -636,7 +636,7 @@ ParticleSystem:
           serializedVersion: 2
           rgba: 0
         ctime0: 0
-        ctime1: 65535
+        ctime1: 64764
         ctime2: 0
         ctime3: 0
         ctime4: 0
@@ -1538,7 +1538,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: dcbe255423a15604ca391d7834e27f73, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
