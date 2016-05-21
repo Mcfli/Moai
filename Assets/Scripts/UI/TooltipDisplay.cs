@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TooltipDisplay : MonoBehaviour {
-    //reset
-    //static "active" tooltip
-    //tie with settings
     public GameObject tooltip;
     public float timeUntilDisplay;
+    public AudioClip activateSound;
     public float secondsToGiveUp;   //0 for indefinite
 
     public enum Cause { GameStart, AnotherTooltipFinish, PlantingSeedInGround, CollectivePatienceAmount, HoveredGameObjectHasComponent, Never };
@@ -25,10 +23,15 @@ public class TooltipDisplay : MonoBehaviour {
 
     [HideInInspector] public bool finished;
     [HideInInspector] public bool triggered;
-    private float timeTriggered;
+    private float timeTriggered; // seconds from time triggered
     private float timeWaited;
     private float timePressed;
     private bool holdingSeed;
+    private AudioSource audioSource;
+
+    void Awake() {
+        audioSource = Globals.MenusScript.GetComponent<AudioSource>();
+    }
 
     void Start() {
         reset();
@@ -37,11 +40,11 @@ public class TooltipDisplay : MonoBehaviour {
     void Update() {
         if(finishCheck()) finish();
         else if(triggerCheck()) {
-            if(Time.time >= timeTriggered + timeUntilDisplay) {
-                tooltip.SetActive(true);
+            timeTriggered += Time.deltaTime;
+            if(timeTriggered >= timeUntilDisplay) {
                 if(TooltipSystem.activeTooltip && TooltipSystem.activeTooltip != this) TooltipSystem.activeTooltip.finish();
-                TooltipSystem.activeTooltip = this;
-            }else if(secondsToGiveUp > 0 && Time.time >= timeTriggered + timeUntilDisplay + secondsToGiveUp) finish();
+                else if(!tooltip.activeSelf) activate();
+            }else if(secondsToGiveUp > 0 && timeTriggered >= timeUntilDisplay + secondsToGiveUp) finish();
         }
     }
 
@@ -49,10 +52,16 @@ public class TooltipDisplay : MonoBehaviour {
         tooltip.SetActive(false);
         finished = false;
         triggered = false;
-        timeTriggered = -1;
+        timeTriggered = 0;
         timeWaited = 0;
         timePressed = -1;
         holdingSeed = false;
+    }
+
+    public void activate() {
+        tooltip.SetActive(true);
+        TooltipSystem.activeTooltip = this;
+        audioSource.PlayOneShot(activateSound);
     }
 
     public void finish() {
@@ -111,7 +120,6 @@ public class TooltipDisplay : MonoBehaviour {
                 if(Globals.PlayerScript.GetHover().collider) if(Globals.PlayerScript.GetHover().collider.gameObject.GetComponent(componentType) != null) triggered = true;
                 break;
         }
-        if(triggered) timeTriggered = Time.time;
         return triggered;
     }
 }

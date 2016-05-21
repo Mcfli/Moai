@@ -48,11 +48,14 @@ public class Globals : MonoBehaviour {
 
     public static Dictionary<string, int> settings = new Dictionary<string, int>(){
         // Gameplay
-        { "ShowHUD", 1 },       // bool
-        { "FOV", 90 },          // int 30-110
+        { "FOV", 60 },          // int 30-110
         { "DOF", 1 },           // bool
         { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool
+
+        // HUD
+        { "ShowHUD", 1 },       // bool
+        { "Crosshair", 1 },     // bool
         { "Tooltip", 1 },       // bool
         { "StarIcons", 1 },     // bool
 
@@ -62,13 +65,14 @@ public class Globals : MonoBehaviour {
 
         // Video
         { "Resolution", 0 },    // int (index of Screen.resolutions)
-        { "Screenmode", 0 },    // 0 full, 1 windowed, 2 borderless
+        { "Screenmode", 1 },    // 0 windowed, 1 full, 2 borderless
         { "LoadDist", 8 },      // int
         { "Brightness", 50 },   // percent 0-100
+        { "ShadowDist", 15 },  // int
 
         // Audio
         { "MasterVol", 100 },   // percent 0-100
-        { "MusicVol", 75 },     // percent 0-100
+        { "MusicVol", 50 },     // percent 0-100
         { "SFXVol", 100 },      // percent 0-100
     };
 

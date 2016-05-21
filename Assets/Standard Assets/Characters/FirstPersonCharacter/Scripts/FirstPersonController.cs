@@ -273,9 +273,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             return m_MouseLook;
         }
 
-        public void setRunSpeed(float speed)
-        {
+        public void setRunSpeed(float speed){
             m_RunSpeed = speed;
+        }
+
+        public FOVKick getFOVKick() {
+            return m_FovKick;
+        }
+
+        public void setHeadBob(bool val) {
+            m_UseHeadBob = val;
+        }
+
+        public void setInvertY(bool val) {
+            m_MouseLook.invertY = val;
         }
     }
 }

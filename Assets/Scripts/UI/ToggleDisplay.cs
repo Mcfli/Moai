@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonDisplay: MonoBehaviour {
+public class ToggleDisplay: MonoBehaviour {
     //attach to button (not text)
     public UnityEngine.UI.Text text;
     public string settingName;
@@ -28,10 +28,13 @@ public class ButtonDisplay: MonoBehaviour {
         if(!toggle.interactable) text.text = head;
         else if(toggle.isOn) text.text = head + ": " + onText;
         else text.text = head + ": " + offText;
-
     }
 
     public void updateSetting(bool val) {
         Globals.settings[settingName] = (val) ? 1 : 0;
+    }
+
+    public void updateSetting() {
+        Globals.settings[settingName] = (toggle.isOn) ? 1 : 0;
     }
 }

@@ -22,12 +22,14 @@ public class Player : MonoBehaviour {
 
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
     private GameObject playerModel;
+    private UnityStandardAssets.ImageEffects.DepthOfField DOF;
+    private MusicManager musicMan;
 
     private Camera mainCamera;
     private Vector3 playerCamPos;
     private Quaternion playerCamRot;
     private bool inCinematic = false;
-    public float cinematicTimeScale;
+    //public float cinematicTimeScale;
     public float waitCamDistance = 60.0f;
     private float camDistance = 60.0f;
     private float theta = 0.0f;
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour {
         thisCollider = GetComponent<Collider>();
         cameraHeight = GameObject.FindGameObjectWithTag("MainCamera").transform.localPosition.y;
         firstPersonCont = GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+        DOF = Camera.main.GetComponent<UnityStandardAssets.ImageEffects.DepthOfField>();
+        musicMan = Camera.main.GetComponent<MusicManager>();
         playerModel = transform.FindChild("moai").gameObject;
         mainCamera = Camera.main;
         playerCamPos = mainCamera.transform.localPosition;
@@ -55,26 +59,22 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftBracket))
-        {
-            if (!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
-        }
-        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.LeftBracket))
-        {
-            if (playerAudio.isPlaying)
-                playerAudio.Stop();
-        }
+        updateSettings();
+
         if (Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
         else firstPersonCont.lookLock = false;
 
         if(Globals.mode != 0) return;
+        
+        if (Input.GetButtonDown("Patience") && !playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
+        else if (Input.GetButtonUp("Patience") && playerAudio.isPlaying) playerAudio.Stop();
 
         if (Globals.time_scale > 1) {
             warpToGround(transform.position.y);
             if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
             firstPersonCont.enabled = false;
 
-            if(Globals.time_scale > cinematicTimeScale) {
+            if(Globals.time_scale > Globals.SkyScript.timeScaleThatHaloAppears && Globals.settings["WaitCinematic"] == 1) {
                 if(playerAudio.isPlaying) playerAudio.Stop();
                 if(!playerModel.activeInHierarchy) {
                     playerModel.SetActive(true);
@@ -144,6 +144,26 @@ public class Player : MonoBehaviour {
     }
 
     public bool isUnderwater() {return underwater;}
+
+    public void updateSettings() {
+        DOF.enabled = (Globals.settings["DOF"] == 1);
+        firstPersonCont.setHeadBob(Globals.settings["Bobbing"] == 1);
+        firstPersonCont.setInvertY(Globals.settings["InvertMouse"] == 1);
+        firstPersonCont.getMouseLook().XSensitivity = Globals.settings["Sensitivity"];
+        firstPersonCont.getMouseLook().YSensitivity= Globals.settings["Sensitivity"];
+        QualitySettings.shadowDistance = Globals.settings["ShadowDist"] * 10;
+        AudioListener.volume = Globals.settings["MasterVol"] / 100f;
+        musicMan.Volume = Globals.settings["MusicVol"] / 100f;
+        RenderSettings.ambientIntensity = Globals.settings["Brightness"] / 50f;
+        if(Globals.mode == -1) {
+            firstPersonCont.getFOVKick().originalFov = 60;
+            Camera.main.fieldOfView = 60;
+        }else if(firstPersonCont.getFOVKick().originalFov != Globals.settings["FOV"]) {
+            firstPersonCont.getFOVKick().originalFov = Globals.settings["FOV"];
+            Camera.main.fieldOfView = Globals.settings["FOV"];
+        }
+        if(Screen.fullScreen != (Globals.settings["Screenmode"] == 1)) Screen.fullScreen = !Screen.fullScreen;
+    }
 
     private void checkUnderwater()
     {
