@@ -122,7 +122,9 @@ public class GenerationManager : MonoBehaviour {
     }
 
     public void deleteWorld() { //burn it to the ground
-        foreach(KeyValuePair<Vector2, Dictionary<int, ForestScript>> p in TreeManager.loadedForests) foreach(KeyValuePair<int, ForestScript> q in p.Value) q.Value.destroyForest();
+        foreach (Obelisk o in ShrineManager.obelisks.Values) if(o != null) Destroy(o.gameObject);
+        foreach (ShrineGrid s in ShrineManager.shrines.Values) if (s != null) Destroy(s.gameObject);
+        foreach (KeyValuePair<Vector2, Dictionary<int, ForestScript>> p in TreeManager.loadedForests) foreach(KeyValuePair<int, ForestScript> q in p.Value) q.Value.destroyForest();
         //foreach(Vector2 v in loaded_shrine_chunks) shrine_manager.unloadShrines((int)v.x, (int)v.y);
         foreach(KeyValuePair<Vector2, List<GameObject>> p in DoodadManager.loaded_doodads) foreach(GameObject g in p.Value) Destroy(g);
         foreach(KeyValuePair<Vector2, GameObject> p in loaded_chunks) {
@@ -138,6 +140,7 @@ public class GenerationManager : MonoBehaviour {
         TreeManager.trees = new Dictionary<Vector2, List<ForestScript.forestStruct>>();
         TreeManager.loadedForests = new Dictionary<Vector2, Dictionary<int, ForestScript>>();
         ShrineManager.shrines = new Dictionary<Vector2, ShrineGrid>();
+        ShrineManager.obelisks = new Dictionary<Vector2, Obelisk>();
         WaterManager.waterBodies = new Dictionary<Vector2, List<GameObject>>();
         DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
     }
