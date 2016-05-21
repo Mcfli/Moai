@@ -14,7 +14,7 @@ GameObject:
   - 54: {fileID: 5465464}
   - 75: {fileID: 7574288}
   - 114: {fileID: 11440536}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: firetree_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

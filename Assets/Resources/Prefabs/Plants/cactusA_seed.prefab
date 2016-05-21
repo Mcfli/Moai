@@ -14,7 +14,7 @@ GameObject:
   - 54: {fileID: 5439682}
   - 75: {fileID: 7567864}
   - 114: {fileID: 11489208}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cactusA_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

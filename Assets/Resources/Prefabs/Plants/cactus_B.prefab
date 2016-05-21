@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 436878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 410778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 441840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 454006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 404176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - 137: {fileID: 13718628}
   - 114: {fileID: 11448926}
   - 136: {fileID: 13656636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cactus_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 463432}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 482534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 420102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 488024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cactusB_Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 423566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 455414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 437644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 482488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 402652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 419064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bone_009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/cactusA
+  prefabPath: Prefabs/Plants/cactusB
   seed_object: {fileID: 121134, guid: a811f23813b4e45d0970ef86382bc83a, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5
