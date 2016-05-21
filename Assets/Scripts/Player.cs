@@ -154,7 +154,6 @@ public class Player : MonoBehaviour {
         firstPersonCont.setInvertY(Globals.settings["InvertMouse"] == 1);
         firstPersonCont.getMouseLook().XSensitivity = Globals.settings["Sensitivity"];
         firstPersonCont.getMouseLook().YSensitivity= Globals.settings["Sensitivity"];
-        QualitySettings.shadowDistance = Globals.settings["ShadowDist"] * 10;
         AudioListener.volume = Globals.settings["MasterVol"] / 100f;
         musicMan.Volume = Globals.settings["MusicVol"] / 100f;
         RenderSettings.ambientIntensity = Globals.settings["Brightness"] / 50f;
