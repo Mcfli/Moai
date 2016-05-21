@@ -87,6 +87,10 @@ public class Player : MonoBehaviour {
                         camDistance += 5 * Time.deltaTime;
                         theta += 0.5f * Time.deltaTime;
                         float targetY = hit.point.y - playerModel.transform.position.y + 80;
+                        if (playerModel.transform.position.y - hit.point.y > 200)
+                        {
+                            targetY = playerModel.transform.position.y - hit.point.y;
+                        }
                         mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
                     }
                 }
