@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: c4c404d7d0de34086bd0a57fb24a6fe1
+timeCreated: 1463741095
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: big_firerockA
+    100002: big_firerockAA
+    100004: big_firerockB
+    100006: big_firerockBB
+    100008: big_firerockC
+    100010: big_firerockCC
+    100012: big_firerockD
+    100014: big_firerockE
+    100016: big_firerockF
+    100018: big_firerockG
+    100020: big_firerockH
+    100022: big_firerockI
+    100024: big_firerockJ
+    100026: big_firerockK
+    100028: big_firerockL
+    100030: big_firerockM
+    100032: big_firerockN
+    100034: big_firerockO
+    100036: big_firerockP
+    100038: big_firerockQ
+    100040: big_firerockR
+    100042: big_firerockS
+    100044: //RootNode
+    100046: big_firerockT
+    100048: big_firerockU
+    100050: big_firerockV
+    100052: big_firerockW
+    100054: big_firerockX
+    100056: big_firerockY
+    100058: big_firerockZ
+    400000: big_firerockA
+    400002: big_firerockAA
+    400004: big_firerockB
+    400006: big_firerockBB
+    400008: big_firerockC
+    400010: big_firerockCC
+    400012: big_firerockD
+    400014: big_firerockE
+    400016: big_firerockF
+    400018: big_firerockG
+    400020: big_firerockH
+    400022: big_firerockI
+    400024: big_firerockJ
+    400026: big_firerockK
+    400028: big_firerockL
+    400030: big_firerockM
+    400032: big_firerockN
+    400034: big_firerockO
+    400036: big_firerockP
+    400038: big_firerockQ
+    400040: big_firerockR
+    400042: big_firerockS
+    400044: //RootNode
+    400046: big_firerockT
+    400048: big_firerockU
+    400050: big_firerockV
+    400052: big_firerockW
+    400054: big_firerockX
+    400056: big_firerockY
+    400058: big_firerockZ
+    2300000: big_firerockA
+    2300002: big_firerockAA
+    2300004: big_firerockB
+    2300006: big_firerockBB
+    2300008: big_firerockC
+    2300010: big_firerockCC
+    2300012: big_firerockD
+    2300014: big_firerockE
+    2300016: big_firerockF
+    2300018: big_firerockG
+    2300020: big_firerockH
+    2300022: big_firerockI
+    2300024: big_firerockJ
+    2300026: big_firerockK
+    2300028: big_firerockL
+    2300030: big_firerockM
+    2300032: big_firerockN
+    2300034: big_firerockO
+    2300036: big_firerockP
+    2300038: big_firerockQ
+    2300040: big_firerockR
+    2300042: big_firerockS
+    2300044: big_firerockT
+    2300046: big_firerockU
+    2300048: big_firerockV
+    2300050: big_firerockW
+    2300052: big_firerockX
+    2300054: big_firerockY
+    2300056: big_firerockZ
+    3300000: big_firerockA
+    3300002: big_firerockAA
+    3300004: big_firerockB
+    3300006: big_firerockBB
+    3300008: big_firerockC
+    3300010: big_firerockCC
+    3300012: big_firerockD
+    3300014: big_firerockE
+    3300016: big_firerockF
+    3300018: big_firerockG
+    3300020: big_firerockH
+    3300022: big_firerockI
+    3300024: big_firerockJ
+    3300026: big_firerockK
+    3300028: big_firerockL
+    3300030: big_firerockM
+    3300032: big_firerockN
+    3300034: big_firerockO
+    3300036: big_firerockP
+    3300038: big_firerockQ
+    3300040: big_firerockR
+    3300042: big_firerockS
+    3300044: big_firerockT
+    3300046: big_firerockU
+    3300048: big_firerockV
+    3300050: big_firerockW
+    3300052: big_firerockX
+    3300054: big_firerockY
+    3300056: big_firerockZ
+    4300000: big_firerockB
+    4300002: big_firerockA
+    4300004: big_firerockC
+    4300006: big_firerockD
+    4300008: big_firerockE
+    4300010: big_firerockCC
+    4300012: big_firerockZ
+    4300014: big_firerockY
+    4300016: big_firerockW
+    4300018: big_firerockU
+    4300020: big_firerockS
+    4300022: big_firerockK
+    4300024: big_firerockI
+    4300026: big_firerockAA
+    4300028: big_firerockBB
+    4300030: big_firerockM
+    4300032: big_firerockN
+    4300034: big_firerockO
+    4300036: big_firerockP
+    4300038: big_firerockL
+    4300040: big_firerockQ
+    4300042: big_firerockH
+    4300044: big_firerockJ
+    4300046: big_firerockG
+    4300048: big_firerockR
+    4300050: big_firerockV
+    4300052: big_firerockX
+    4300054: big_firerockF
+    4300056: big_firerockT
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

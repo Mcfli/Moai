@@ -42,11 +42,9 @@ MonoBehaviour:
   WaterFire: 0.51
   EarthAir: 0
   weatherTypes:
-  - {fileID: 11431138, guid: 3dc4b1975c90d3b4b9a9dc2a3464decb, type: 2}
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
   - 0.8
-  - 0.2
   SkyGradients:
   - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
   - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
@@ -106,19 +104,258 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  treeTypes: []
-  bigDoodads: []
-  bigDoodadChance: []
-  bigDoodadRadius: []
-  smallDoodads: []
-  smallDoodadChance: []
-  numOfSmallDoodads: {x: 0, y: 0}
-  doodadClusterRadius: {x: 0, y: 0}
-  doodadDensity: 0
-  treeDensity: 2
+  treeTypes:
+  - {fileID: 168890, guid: 8a25948f17eb54ffb8399cf2fe8f35fa, type: 2}
+  bigDoodads:
+  - {fileID: 128448, guid: 645b1c09ac1684bbb99b9aac5837ab19, type: 2}
+  - {fileID: 178140, guid: e724e7162b6ae4fe4913d0be8906471d, type: 2}
+  - {fileID: 112182, guid: ac193ed4e1c6c43c3982d2588b60b361, type: 2}
+  - {fileID: 172412, guid: 064dfaaf245a8489b867e9cc1bfacea8, type: 2}
+  - {fileID: 115670, guid: c14334f9787e64c8495ad898e6310c1c, type: 2}
+  - {fileID: 119560, guid: 9b20d7a7e2f7e4cd9b53b93c4ff895a8, type: 2}
+  - {fileID: 135208, guid: 1e6e22f10d9324fe797773fc8c944584, type: 2}
+  - {fileID: 145202, guid: 3b67c7454925a4699adfc5db811704a7, type: 2}
+  - {fileID: 150890, guid: a77b1cd6574654ee694421fbb5119460, type: 2}
+  - {fileID: 157224, guid: 72ce1cf2555294a0fb7d4a70fd933542, type: 2}
+  - {fileID: 151092, guid: 4abc6278f464745fca30483c4517e962, type: 2}
+  - {fileID: 111288, guid: c40e3b20356f644d1ae334c5b3cf32e3, type: 2}
+  - {fileID: 179906, guid: 1ebacb6d464484f3e8efca13766f6757, type: 2}
+  - {fileID: 101024, guid: ab4593cafdf724271bbb4b0451dd39ce, type: 2}
+  - {fileID: 136402, guid: 79a66afe6c0034e918eaa8677088e243, type: 2}
+  - {fileID: 100716, guid: 9eb71c74325b249a484a2a7ed0a7fa99, type: 2}
+  - {fileID: 111202, guid: 01fbdbda4c9814faa865898c11df2814, type: 2}
+  - {fileID: 156354, guid: af32036af51f545f7a43e80796e52c44, type: 2}
+  - {fileID: 135824, guid: 71d394b659ca74231be2067c7c934891, type: 2}
+  - {fileID: 105280, guid: b9eb8b6a77e094a25ba6469d39194d02, type: 2}
+  - {fileID: 111606, guid: 3b7c5d5cb623041f5b593168b6203704, type: 2}
+  - {fileID: 121822, guid: 9513414665aff431b9ff7d2f19462aac, type: 2}
+  - {fileID: 130144, guid: 50e3d59239f9a4dd49a7741042d5176b, type: 2}
+  - {fileID: 191462, guid: 6447e146567844c3ea047e615966e638, type: 2}
+  - {fileID: 157036, guid: d129f9acfa7b6412097c35f43165d024, type: 2}
+  - {fileID: 163036, guid: 7ab0364fb76034ae29f47e7d85aa7e78, type: 2}
+  - {fileID: 107126, guid: 6423cfabc64db476194f7ac19032a248, type: 2}
+  - {fileID: 129928, guid: 8a5414be8d30246c7a5e2c0eb91493a7, type: 2}
+  - {fileID: 117900, guid: 8e4a88eb0086c4a538286d3878b194fb, type: 2}
+  - {fileID: 118752, guid: 0b1c3b775df9f4f77ba031ea3fc0606a, type: 2}
+  - {fileID: 189206, guid: d3c9ea5e57e0c4d04ad52db0b3cc85ff, type: 2}
+  - {fileID: 194288, guid: 46152e77ad781409b884a1fdb2446da5, type: 2}
+  - {fileID: 195918, guid: c31ae8d8cce43449aa4e9dd760fb10f9, type: 2}
+  - {fileID: 103556, guid: 718c8783aaf664581a317ff68ec7265d, type: 2}
+  - {fileID: 149894, guid: a0b123c4a25f54f5787da4fea76254de, type: 2}
+  - {fileID: 196498, guid: 1bb44aa4da3cb4d7086eac30d8bba4c7, type: 2}
+  - {fileID: 158662, guid: 7c8e187503433458d8fcc9d89e5018c9, type: 2}
+  - {fileID: 171990, guid: cd8131e3829134cda8d55f2e590d1f21, type: 2}
+  - {fileID: 184724, guid: bfb8a477c193945e7ab529b0b7a80cba, type: 2}
+  - {fileID: 165740, guid: 96336467cf06f4da2a69ba653584e756, type: 2}
+  - {fileID: 141568, guid: 36d5484563e224eaeacab2901a382330, type: 2}
+  - {fileID: 169482, guid: c8ef3338cadb94949a4b469488fd9ddd, type: 2}
+  - {fileID: 137892, guid: 07ee18ced89074dcda43c9dcbdaee267, type: 2}
+  - {fileID: 104232, guid: 07d4ada8f5e6b45088c32d058ceda480, type: 2}
+  - {fileID: 136576, guid: 2305ffcac148840aa8bc8afcb85e2ac3, type: 2}
+  - {fileID: 136882, guid: 5fed1190a65344d65b92af5ca0121958, type: 2}
+  - {fileID: 186942, guid: 7c09f1c07f3c542409562368576db076, type: 2}
+  - {fileID: 126652, guid: 51bf1c78b1a644387b8d740d55290d40, type: 2}
+  - {fileID: 194948, guid: 6ad130a9b586940e2b1ad04ddd702005, type: 2}
+  - {fileID: 158034, guid: 5310fd09e83614aafa5f67e630ab282b, type: 2}
+  - {fileID: 136852, guid: c2665a78d627e4078aa4901b04008311, type: 2}
+  - {fileID: 117872, guid: 9c4ccb3dbce254a5db5f01fb151f2fe3, type: 2}
+  bigDoodadChance:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  bigDoodadRadius:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 6
+  - 6
+  - 6
+  - 5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 5
+  - 4.5
+  - 6
+  - 5
+  - 4.5
+  - 6
+  - 5
+  - 4.5
+  - 6
+  - 4.5
+  - 5
+  - 5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 5
+  - 6
+  - 4.5
+  - 5
+  - 5
+  - 4.5
+  - 5
+  - 4.5
+  - 5
+  - 6
+  - 5
+  - 4.5
+  - 4.5
+  - 5
+  - 4.5
+  - 4.5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 4.5
+  smallDoodads:
+  - {fileID: 106908, guid: c724d7720b76a4d6e9836ce026b742bd, type: 2}
+  - {fileID: 133364, guid: bba188cb5ffa34de8bbefe0d5c80deb8, type: 2}
+  - {fileID: 191222, guid: 4d0305446647441cdad9f255026dfa15, type: 2}
+  - {fileID: 187452, guid: ced3ede1c8f49455da5e534b0fd65a9a, type: 2}
+  - {fileID: 119142, guid: 6091d461566e0447abadd7cea1357820, type: 2}
+  - {fileID: 192148, guid: 9116c064b2ac2472c9d42fe4cecb64bb, type: 2}
+  - {fileID: 195374, guid: 72976b9ed231848be8c492921296dbba, type: 2}
+  - {fileID: 109856, guid: e6be30f0a8306401793dde2761a0d882, type: 2}
+  - {fileID: 175180, guid: ae8e392cee8934b14bbe8738d450aa28, type: 2}
+  - {fileID: 143840, guid: c194ca157d8584a63bcdde3bd64c3c38, type: 2}
+  - {fileID: 153576, guid: a1763ad86db344312af26f3f02d36252, type: 2}
+  - {fileID: 196554, guid: 47ec5ab5ce0d44cec94d2d08fe4e8956, type: 2}
+  - {fileID: 108200, guid: 093f64fd74aec4b33936eb1c1129c18b, type: 2}
+  - {fileID: 121308, guid: eed5d7145e91741bcb2e40dbcc8573d7, type: 2}
+  - {fileID: 197474, guid: e67a0986b45814ab9903483f32ec15a9, type: 2}
+  - {fileID: 106834, guid: 75b979b5966a24167a3019e36cec630a, type: 2}
+  - {fileID: 134544, guid: 0b1817a2054b546c6a2fd0b643f5ff16, type: 2}
+  - {fileID: 149998, guid: 0678ba6dfc98d4294a5597f40c6b5007, type: 2}
+  - {fileID: 159078, guid: 703dc6ca6a36c4321960d132a9e10146, type: 2}
+  - {fileID: 128142, guid: 165445974afac4674b8ebe922029733b, type: 2}
+  - {fileID: 130396, guid: b34dde6cc5f65401ca76107e408fecde, type: 2}
+  - {fileID: 104236, guid: 2d1a51f1d894c4dd4adfb266cb8d585c, type: 2}
+  - {fileID: 160834, guid: 0da067509661347a6acb0a37b97d9ffc, type: 2}
+  - {fileID: 163274, guid: a684a2b94db4340b8bcd0464d3f9bd11, type: 2}
+  - {fileID: 111866, guid: 77aac8b7ce34f42478b48d7f25240752, type: 2}
+  - {fileID: 118184, guid: 59084883a82fb4ca8af5f3e834eff632, type: 2}
+  - {fileID: 139310, guid: de6550625a447458d87bbffcb3d80998, type: 2}
+  - {fileID: 162704, guid: ce487b7953c3a4c0f99c4468abb21f87, type: 2}
+  - {fileID: 109816, guid: 4fbdb331b2dcc43a6b67760de1ba1e02, type: 2}
+  - {fileID: 131350, guid: f3baab7135364459c932c841c62a464f, type: 2}
+  - {fileID: 168774, guid: 47f215b9a089e49cf8637ab67a3b3633, type: 2}
+  - {fileID: 181060, guid: 66f1582f61b4e47a19cc6e2a8d39bc9e, type: 2}
+  - {fileID: 142190, guid: fe4091701a07d483e9a6925b04867da1, type: 2}
+  - {fileID: 156572, guid: 0f00d245ed72a4293896c48d0ba23b60, type: 2}
+  - {fileID: 182956, guid: 4879dbff4ba2c42a395787c71b2188f0, type: 2}
+  - {fileID: 188886, guid: 93da5164c75fe44db8fc499e8745b504, type: 2}
+  - {fileID: 198740, guid: 2dd736de172c74074b8387f12e0753dc, type: 2}
+  - {fileID: 102766, guid: 73aefd226fa1a44a78fbefcf380ed4db, type: 2}
+  - {fileID: 141204, guid: fb360c9fbe7344f278f1af8d931fd52e, type: 2}
+  - {fileID: 125624, guid: 9e269f02bf9704aa791ca61db1f1cf85, type: 2}
+  - {fileID: 133462, guid: 79e7facae7cf44ff19937ccc7ccd6e7a, type: 2}
+  smallDoodadChance:
+  - 30
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  numOfSmallDoodads: {x: 10, y: 20}
+  doodadClusterRadius: {x: 10, y: 20}
+  doodadDensity: 4
+  treeDensity: 1
   forestRadius: 50
-  forestMaxTrees: 16
-  mixedForests: 0
+  forestMaxTrees: 10
+  mixedForests: 1
   colors:
   - {r: 0.49264705, g: 0.2365805, b: 0.03984646, a: 0}
   - {r: 0.28676468, g: 0.14032856, b: 0.08645111, a: 0}

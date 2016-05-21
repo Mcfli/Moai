@@ -1,0 +1,2026 @@
+fileFormatVersion: 2
+guid: 503dadb2f5df545c1b7a58c184cab6f0
+timeCreated: 1463713352
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone
+    100002: Bone.001
+    100004: Bone.001_end
+    100006: Bone.002
+    100008: Bone.003
+    100010: Bone.004
+    100012: Bone.005
+    100014: Bone.006
+    100016: Bone.007
+    100018: Bone.007_end
+    100020: Bone.008
+    100022: Bone.009
+    100024: Bone.010
+    100026: Bone.011
+    100028: Bone.012
+    100030: Bone.012_end
+    100032: Bone.013
+    100034: Bone.014
+    100036: Bone.015
+    100038: Bone.016
+    100040: Bone.017
+    100042: Bone.017_end
+    100044: Bone.018
+    100046: Bone.019
+    100048: Bone.019_end
+    100050: Bone.020
+    100052: Bone.021
+    100054: Bone.022
+    100056: Bone.022_end
+    100058: Bone.023
+    100060: Bone.024
+    100062: Bone.025
+    100064: Bone.025_end
+    100066: Bone.026
+    100068: Bone.026_end
+    100070: Bone.027
+    100072: Bone.027_end
+    100074: Bone.028
+    100076: Bone.028_end
+    100078: Bone.029
+    100080: Bone.029_end
+    100082: Bone.030
+    100084: Bone.030_end
+    100086: Bone.031
+    100088: Bone.031_end
+    100090: Bone.032
+    100092: Bone.032_end
+    100094: Bone.033
+    100096: Bone.033_end
+    100098: Bone.034
+    100100: Bone.034_end
+    100102: Bone.035
+    100104: Bone.035_end
+    100106: Bone.036
+    100108: Bone.036_end
+    100110: Bone.037
+    100112: Bone.038
+    100114: Bone.039
+    100116: Bone.040
+    100118: Bone.041
+    100120: Bone.042
+    100122: Bone.042_end
+    100124: Bone.043
+    100126: Bone.044
+    100128: Bone.045
+    100130: Bone.046
+    100132: Bone.047
+    100134: Bone.048
+    100136: Bone.049
+    100138: Bone.049_end
+    100140: Bone.050
+    100142: Bone.051
+    100144: Bone.052
+    100146: Bone.053
+    100148: Bone.054
+    100150: Bone.055
+    100152: Bone.056
+    100154: Bone.056_end
+    100156: Bone.057
+    100158: Bone.058
+    100160: Bone.059
+    100162: Bone.060
+    100164: Bone.061
+    100166: Bone.062
+    100168: Bone.063
+    100170: Bone.064
+    100172: Bone.065
+    100174: Bone.066
+    100176: Bone.067
+    100178: Bone.067_end
+    100180: Bone.068
+    100182: Bone.069
+    100184: Bone.070
+    100186: Bone.071
+    100188: Bone.072
+    100190: Bone.073
+    100192: Bone.074
+    100194: Bone.074_end
+    100196: Bone.075
+    100198: Bone.076
+    100200: Bone.077
+    100202: Bone.078
+    100204: Bone.079
+    100206: Bone.080
+    100208: Bone.080_end
+    100210: Bone.081
+    100212: Bone.082
+    100214: Bone.083
+    100216: Bone.084
+    100218: Bone.085
+    100220: Bone.086
+    100222: Bone.087
+    100224: Bone.087_end
+    100226: Bone.088
+    100228: Bone.089
+    100230: Bone.090
+    100232: Bone.091
+    100234: Bone.092
+    100236: Bone.093
+    100238: Bone.094
+    100240: Bone.094_end
+    100242: Bone.095
+    100244: Bone.096
+    100246: Bone.097
+    100248: Bone.098
+    100250: Bone.099
+    100252: Bone.100
+    100254: Bone.101
+    100256: Bone.102
+    100258: Bone.103
+    100260: Bone.104
+    100262: Bone.105
+    100264: Bone.105_end
+    100266: Bone.106
+    100268: Bone.107
+    100270: Bone.108
+    100272: Bone.109
+    100274: Bone.110
+    100276: Bone.111
+    100278: Bone.112
+    100280: Bone.112_end
+    100282: Bone.113
+    100284: Bone.114
+    100286: Bone.115
+    100288: Bone.116
+    100290: Bone.117
+    100292: Bone.118
+    100294: Bone.118_end
+    100296: Bone.119
+    100298: Bone.120
+    100300: Bone.121
+    100302: Bone.122
+    100304: Bone.123
+    100306: Bone.124
+    100308: Bone.125
+    100310: Bone.125_end
+    100312: Bone.126
+    100314: Bone.127
+    100316: Bone.128
+    100318: Bone.129
+    100320: Bone.130
+    100322: Bone.131
+    100324: Bone.132
+    100326: Bone.132_end
+    100328: Bone.133
+    100330: Bone.134
+    100332: Bone.134_end
+    100334: Bone.135
+    100336: Bone.136
+    100338: Bone.137
+    100340: Bone.138
+    100342: Bone.139
+    100344: Bone.140
+    100346: Bone.141
+    100348: Bone.142
+    100350: Bone.143
+    100352: Bone.143_end
+    100354: Bone.144
+    100356: Bone.145
+    100358: Bone.146
+    100360: Bone.147
+    100362: Bone.148
+    100364: Bone.149
+    100366: Bone.150
+    100368: Bone.150_end
+    100370: Bone.151
+    100372: Bone.152
+    100374: Bone.153
+    100376: Bone.154
+    100378: Bone.155
+    100380: Bone.156
+    100382: Bone.156_end
+    100384: Bone.157
+    100386: Bone.158
+    100388: Bone.159
+    100390: Bone.160
+    100392: Bone.161
+    100394: Bone.162
+    100396: Bone.163
+    100398: Bone.163_end
+    100400: Bone.164
+    100402: Bone.165
+    100404: Bone.166
+    100406: Bone.167
+    100408: Bone.168
+    100410: Bone.169
+    100412: Bone.170
+    100414: Bone.170_end
+    100416: Bone.171
+    100418: Bone.172
+    100420: Bone.173
+    100422: Bone.174
+    100424: Bone.175
+    100426: Bone.176
+    100428: Bone.177
+    100430: Bone.178
+    100432: Bone.179
+    100434: Bone.180
+    100436: Bone.181
+    100438: Bone.181_end
+    100440: Bone.182
+    100442: Bone.183
+    100444: Bone.184
+    100446: Bone.185
+    100448: Bone.186
+    100450: Bone.187
+    100452: Bone.188
+    100454: Bone.188_end
+    100456: Bone.189
+    100458: Bone.189_end
+    100460: //RootNode
+    100462: firetree_Armature
+    100464: firetree_trunk
+    400000: Bone
+    400002: Bone.001
+    400004: Bone.001_end
+    400006: Bone.002
+    400008: Bone.003
+    400010: Bone.004
+    400012: Bone.005
+    400014: Bone.006
+    400016: Bone.007
+    400018: Bone.007_end
+    400020: Bone.008
+    400022: Bone.009
+    400024: Bone.010
+    400026: Bone.011
+    400028: Bone.012
+    400030: Bone.012_end
+    400032: Bone.013
+    400034: Bone.014
+    400036: Bone.015
+    400038: Bone.016
+    400040: Bone.017
+    400042: Bone.017_end
+    400044: Bone.018
+    400046: Bone.019
+    400048: Bone.019_end
+    400050: Bone.020
+    400052: Bone.021
+    400054: Bone.022
+    400056: Bone.022_end
+    400058: Bone.023
+    400060: Bone.024
+    400062: Bone.025
+    400064: Bone.025_end
+    400066: Bone.026
+    400068: Bone.026_end
+    400070: Bone.027
+    400072: Bone.027_end
+    400074: Bone.028
+    400076: Bone.028_end
+    400078: Bone.029
+    400080: Bone.029_end
+    400082: Bone.030
+    400084: Bone.030_end
+    400086: Bone.031
+    400088: Bone.031_end
+    400090: Bone.032
+    400092: Bone.032_end
+    400094: Bone.033
+    400096: Bone.033_end
+    400098: Bone.034
+    400100: Bone.034_end
+    400102: Bone.035
+    400104: Bone.035_end
+    400106: Bone.036
+    400108: Bone.036_end
+    400110: Bone.037
+    400112: Bone.038
+    400114: Bone.039
+    400116: Bone.040
+    400118: Bone.041
+    400120: Bone.042
+    400122: Bone.042_end
+    400124: Bone.043
+    400126: Bone.044
+    400128: Bone.045
+    400130: Bone.046
+    400132: Bone.047
+    400134: Bone.048
+    400136: Bone.049
+    400138: Bone.049_end
+    400140: Bone.050
+    400142: Bone.051
+    400144: Bone.052
+    400146: Bone.053
+    400148: Bone.054
+    400150: Bone.055
+    400152: Bone.056
+    400154: Bone.056_end
+    400156: Bone.057
+    400158: Bone.058
+    400160: Bone.059
+    400162: Bone.060
+    400164: Bone.061
+    400166: Bone.062
+    400168: Bone.063
+    400170: Bone.064
+    400172: Bone.065
+    400174: Bone.066
+    400176: Bone.067
+    400178: Bone.067_end
+    400180: Bone.068
+    400182: Bone.069
+    400184: Bone.070
+    400186: Bone.071
+    400188: Bone.072
+    400190: Bone.073
+    400192: Bone.074
+    400194: Bone.074_end
+    400196: Bone.075
+    400198: Bone.076
+    400200: Bone.077
+    400202: Bone.078
+    400204: Bone.079
+    400206: Bone.080
+    400208: Bone.080_end
+    400210: Bone.081
+    400212: Bone.082
+    400214: Bone.083
+    400216: Bone.084
+    400218: Bone.085
+    400220: Bone.086
+    400222: Bone.087
+    400224: Bone.087_end
+    400226: Bone.088
+    400228: Bone.089
+    400230: Bone.090
+    400232: Bone.091
+    400234: Bone.092
+    400236: Bone.093
+    400238: Bone.094
+    400240: Bone.094_end
+    400242: Bone.095
+    400244: Bone.096
+    400246: Bone.097
+    400248: Bone.098
+    400250: Bone.099
+    400252: Bone.100
+    400254: Bone.101
+    400256: Bone.102
+    400258: Bone.103
+    400260: Bone.104
+    400262: Bone.105
+    400264: Bone.105_end
+    400266: Bone.106
+    400268: Bone.107
+    400270: Bone.108
+    400272: Bone.109
+    400274: Bone.110
+    400276: Bone.111
+    400278: Bone.112
+    400280: Bone.112_end
+    400282: Bone.113
+    400284: Bone.114
+    400286: Bone.115
+    400288: Bone.116
+    400290: Bone.117
+    400292: Bone.118
+    400294: Bone.118_end
+    400296: Bone.119
+    400298: Bone.120
+    400300: Bone.121
+    400302: Bone.122
+    400304: Bone.123
+    400306: Bone.124
+    400308: Bone.125
+    400310: Bone.125_end
+    400312: Bone.126
+    400314: Bone.127
+    400316: Bone.128
+    400318: Bone.129
+    400320: Bone.130
+    400322: Bone.131
+    400324: Bone.132
+    400326: Bone.132_end
+    400328: Bone.133
+    400330: Bone.134
+    400332: Bone.134_end
+    400334: Bone.135
+    400336: Bone.136
+    400338: Bone.137
+    400340: Bone.138
+    400342: Bone.139
+    400344: Bone.140
+    400346: Bone.141
+    400348: Bone.142
+    400350: Bone.143
+    400352: Bone.143_end
+    400354: Bone.144
+    400356: Bone.145
+    400358: Bone.146
+    400360: Bone.147
+    400362: Bone.148
+    400364: Bone.149
+    400366: Bone.150
+    400368: Bone.150_end
+    400370: Bone.151
+    400372: Bone.152
+    400374: Bone.153
+    400376: Bone.154
+    400378: Bone.155
+    400380: Bone.156
+    400382: Bone.156_end
+    400384: Bone.157
+    400386: Bone.158
+    400388: Bone.159
+    400390: Bone.160
+    400392: Bone.161
+    400394: Bone.162
+    400396: Bone.163
+    400398: Bone.163_end
+    400400: Bone.164
+    400402: Bone.165
+    400404: Bone.166
+    400406: Bone.167
+    400408: Bone.168
+    400410: Bone.169
+    400412: Bone.170
+    400414: Bone.170_end
+    400416: Bone.171
+    400418: Bone.172
+    400420: Bone.173
+    400422: Bone.174
+    400424: Bone.175
+    400426: Bone.176
+    400428: Bone.177
+    400430: Bone.178
+    400432: Bone.179
+    400434: Bone.180
+    400436: Bone.181
+    400438: Bone.181_end
+    400440: Bone.182
+    400442: Bone.183
+    400444: Bone.184
+    400446: Bone.185
+    400448: Bone.186
+    400450: Bone.187
+    400452: Bone.188
+    400454: Bone.188_end
+    400456: Bone.189
+    400458: Bone.189_end
+    400460: //RootNode
+    400462: firetree_Armature
+    400464: firetree_trunk
+    4300000: firetree_trunk
+    7400000: firetree_Armature|firetree_dying
+    7400002: firetree_Armature|firetree_growing
+    7400004: firetree_trunk|firetree_dying
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: firetree_trunk
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: firetree_Armature|firetree_dying
+      takeName: firetree_Armature|firetree_dying
+      firstFrame: 0
+      lastFrame: 189
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: firetree_Armature
+        weight: 1
+      - path: firetree_Armature/Bone
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002/Bone.001
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002/Bone.001/Bone.001_end
+        weight: 1
+      - path: firetree_Armature/Bone.006
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008/Bone.007
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008/Bone.007/Bone.007_end
+        weight: 1
+      - path: firetree_Armature/Bone.011
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013/Bone.012
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013/Bone.012/Bone.012_end
+        weight: 1
+      - path: firetree_Armature/Bone.016
+        weight: 1
+      - path: firetree_Armature/Bone.016/Bone.017
+        weight: 1
+      - path: firetree_Armature/Bone.016/Bone.017/Bone.017_end
+        weight: 1
+      - path: firetree_Armature/Bone.018
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020/Bone.019
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020/Bone.019/Bone.019_end
+        weight: 1
+      - path: firetree_Armature/Bone.021
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023/Bone.022
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023/Bone.022/Bone.022_end
+        weight: 1
+      - path: firetree_Armature/Bone.024
+        weight: 1
+      - path: firetree_Armature/Bone.024/Bone.026
+        weight: 1
+      - path: firetree_Armature/Bone.024/Bone.026/Bone.026_end
+        weight: 1
+      - path: firetree_Armature/Bone.025
+        weight: 1
+      - path: firetree_Armature/Bone.025/Bone.025_end
+        weight: 1
+      - path: firetree_Armature/Bone.027
+        weight: 1
+      - path: firetree_Armature/Bone.027/Bone.027_end
+        weight: 1
+      - path: firetree_Armature/Bone.028
+        weight: 1
+      - path: firetree_Armature/Bone.028/Bone.028_end
+        weight: 1
+      - path: firetree_Armature/Bone.029
+        weight: 1
+      - path: firetree_Armature/Bone.029/Bone.029_end
+        weight: 1
+      - path: firetree_Armature/Bone.030
+        weight: 1
+      - path: firetree_Armature/Bone.030/Bone.030_end
+        weight: 1
+      - path: firetree_Armature/Bone.031
+        weight: 1
+      - path: firetree_Armature/Bone.031/Bone.031_end
+        weight: 1
+      - path: firetree_Armature/Bone.032
+        weight: 1
+      - path: firetree_Armature/Bone.032/Bone.032_end
+        weight: 1
+      - path: firetree_Armature/Bone.033
+        weight: 1
+      - path: firetree_Armature/Bone.033/Bone.033_end
+        weight: 1
+      - path: firetree_Armature/Bone.034
+        weight: 1
+      - path: firetree_Armature/Bone.034/Bone.034_end
+        weight: 1
+      - path: firetree_Armature/Bone.035
+        weight: 1
+      - path: firetree_Armature/Bone.035/Bone.035_end
+        weight: 1
+      - path: firetree_Armature/Bone.036
+        weight: 1
+      - path: firetree_Armature/Bone.036/Bone.036_end
+        weight: 1
+      - path: firetree_Armature/Bone.037
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041/Bone.042
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041/Bone.042/Bone.042_end
+        weight: 1
+      - path: firetree_Armature/Bone.043
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048/Bone.049
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048/Bone.049/Bone.049_end
+        weight: 1
+      - path: firetree_Armature/Bone.050
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055/Bone.056
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055/Bone.056/Bone.056_end
+        weight: 1
+      - path: firetree_Armature/Bone.057
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066/Bone.067
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066/Bone.067/Bone.067_end
+        weight: 1
+      - path: firetree_Armature/Bone.068
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073/Bone.074
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073/Bone.074/Bone.074_end
+        weight: 1
+      - path: firetree_Armature/Bone.075
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079/Bone.080
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079/Bone.080/Bone.080_end
+        weight: 1
+      - path: firetree_Armature/Bone.081
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086/Bone.087
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086/Bone.087/Bone.087_end
+        weight: 1
+      - path: firetree_Armature/Bone.088
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093/Bone.094
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093/Bone.094/Bone.094_end
+        weight: 1
+      - path: firetree_Armature/Bone.095
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104/Bone.105
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104/Bone.105/Bone.105_end
+        weight: 1
+      - path: firetree_Armature/Bone.106
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111/Bone.112
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111/Bone.112/Bone.112_end
+        weight: 1
+      - path: firetree_Armature/Bone.113
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117/Bone.118
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117/Bone.118/Bone.118_end
+        weight: 1
+      - path: firetree_Armature/Bone.119
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124/Bone.125
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124/Bone.125/Bone.125_end
+        weight: 1
+      - path: firetree_Armature/Bone.126
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131/Bone.132
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131/Bone.132/Bone.132_end
+        weight: 1
+      - path: firetree_Armature/Bone.133
+        weight: 1
+      - path: firetree_Armature/Bone.133/Bone.134
+        weight: 1
+      - path: firetree_Armature/Bone.133/Bone.134/Bone.134_end
+        weight: 1
+      - path: firetree_Armature/Bone.135
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142/Bone.143
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142/Bone.143/Bone.143_end
+        weight: 1
+      - path: firetree_Armature/Bone.144
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149/Bone.150
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149/Bone.150/Bone.150_end
+        weight: 1
+      - path: firetree_Armature/Bone.151
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155/Bone.156
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155/Bone.156/Bone.156_end
+        weight: 1
+      - path: firetree_Armature/Bone.157
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162/Bone.163
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162/Bone.163/Bone.163_end
+        weight: 1
+      - path: firetree_Armature/Bone.164
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169/Bone.170
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169/Bone.170/Bone.170_end
+        weight: 1
+      - path: firetree_Armature/Bone.171
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180/Bone.181
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180/Bone.181/Bone.181_end
+        weight: 1
+      - path: firetree_Armature/Bone.182
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187/Bone.188
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187/Bone.188/Bone.188_end
+        weight: 1
+      - path: firetree_Armature/Bone.189
+        weight: 1
+      - path: firetree_Armature/Bone.189/Bone.189_end
+        weight: 1
+      - path: firetree_trunk
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: firetree_Armature|firetree_growing
+      takeName: firetree_Armature|firetree_growing
+      firstFrame: 0
+      lastFrame: 359
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: firetree_Armature
+        weight: 1
+      - path: firetree_Armature/Bone
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002/Bone.001
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002/Bone.001/Bone.001_end
+        weight: 1
+      - path: firetree_Armature/Bone.006
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008/Bone.007
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008/Bone.007/Bone.007_end
+        weight: 1
+      - path: firetree_Armature/Bone.011
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013/Bone.012
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013/Bone.012/Bone.012_end
+        weight: 1
+      - path: firetree_Armature/Bone.016
+        weight: 1
+      - path: firetree_Armature/Bone.016/Bone.017
+        weight: 1
+      - path: firetree_Armature/Bone.016/Bone.017/Bone.017_end
+        weight: 1
+      - path: firetree_Armature/Bone.018
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020/Bone.019
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020/Bone.019/Bone.019_end
+        weight: 1
+      - path: firetree_Armature/Bone.021
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023/Bone.022
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023/Bone.022/Bone.022_end
+        weight: 1
+      - path: firetree_Armature/Bone.024
+        weight: 1
+      - path: firetree_Armature/Bone.024/Bone.026
+        weight: 1
+      - path: firetree_Armature/Bone.024/Bone.026/Bone.026_end
+        weight: 1
+      - path: firetree_Armature/Bone.025
+        weight: 1
+      - path: firetree_Armature/Bone.025/Bone.025_end
+        weight: 1
+      - path: firetree_Armature/Bone.027
+        weight: 1
+      - path: firetree_Armature/Bone.027/Bone.027_end
+        weight: 1
+      - path: firetree_Armature/Bone.028
+        weight: 1
+      - path: firetree_Armature/Bone.028/Bone.028_end
+        weight: 1
+      - path: firetree_Armature/Bone.029
+        weight: 1
+      - path: firetree_Armature/Bone.029/Bone.029_end
+        weight: 1
+      - path: firetree_Armature/Bone.030
+        weight: 1
+      - path: firetree_Armature/Bone.030/Bone.030_end
+        weight: 1
+      - path: firetree_Armature/Bone.031
+        weight: 1
+      - path: firetree_Armature/Bone.031/Bone.031_end
+        weight: 1
+      - path: firetree_Armature/Bone.032
+        weight: 1
+      - path: firetree_Armature/Bone.032/Bone.032_end
+        weight: 1
+      - path: firetree_Armature/Bone.033
+        weight: 1
+      - path: firetree_Armature/Bone.033/Bone.033_end
+        weight: 1
+      - path: firetree_Armature/Bone.034
+        weight: 1
+      - path: firetree_Armature/Bone.034/Bone.034_end
+        weight: 1
+      - path: firetree_Armature/Bone.035
+        weight: 1
+      - path: firetree_Armature/Bone.035/Bone.035_end
+        weight: 1
+      - path: firetree_Armature/Bone.036
+        weight: 1
+      - path: firetree_Armature/Bone.036/Bone.036_end
+        weight: 1
+      - path: firetree_Armature/Bone.037
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041/Bone.042
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041/Bone.042/Bone.042_end
+        weight: 1
+      - path: firetree_Armature/Bone.043
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048/Bone.049
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048/Bone.049/Bone.049_end
+        weight: 1
+      - path: firetree_Armature/Bone.050
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055/Bone.056
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055/Bone.056/Bone.056_end
+        weight: 1
+      - path: firetree_Armature/Bone.057
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066/Bone.067
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066/Bone.067/Bone.067_end
+        weight: 1
+      - path: firetree_Armature/Bone.068
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073/Bone.074
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073/Bone.074/Bone.074_end
+        weight: 1
+      - path: firetree_Armature/Bone.075
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079/Bone.080
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079/Bone.080/Bone.080_end
+        weight: 1
+      - path: firetree_Armature/Bone.081
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086/Bone.087
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086/Bone.087/Bone.087_end
+        weight: 1
+      - path: firetree_Armature/Bone.088
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093/Bone.094
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093/Bone.094/Bone.094_end
+        weight: 1
+      - path: firetree_Armature/Bone.095
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104/Bone.105
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104/Bone.105/Bone.105_end
+        weight: 1
+      - path: firetree_Armature/Bone.106
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111/Bone.112
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111/Bone.112/Bone.112_end
+        weight: 1
+      - path: firetree_Armature/Bone.113
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117/Bone.118
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117/Bone.118/Bone.118_end
+        weight: 1
+      - path: firetree_Armature/Bone.119
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124/Bone.125
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124/Bone.125/Bone.125_end
+        weight: 1
+      - path: firetree_Armature/Bone.126
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131/Bone.132
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131/Bone.132/Bone.132_end
+        weight: 1
+      - path: firetree_Armature/Bone.133
+        weight: 1
+      - path: firetree_Armature/Bone.133/Bone.134
+        weight: 1
+      - path: firetree_Armature/Bone.133/Bone.134/Bone.134_end
+        weight: 1
+      - path: firetree_Armature/Bone.135
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142/Bone.143
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142/Bone.143/Bone.143_end
+        weight: 1
+      - path: firetree_Armature/Bone.144
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149/Bone.150
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149/Bone.150/Bone.150_end
+        weight: 1
+      - path: firetree_Armature/Bone.151
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155/Bone.156
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155/Bone.156/Bone.156_end
+        weight: 1
+      - path: firetree_Armature/Bone.157
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162/Bone.163
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162/Bone.163/Bone.163_end
+        weight: 1
+      - path: firetree_Armature/Bone.164
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169/Bone.170
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169/Bone.170/Bone.170_end
+        weight: 1
+      - path: firetree_Armature/Bone.171
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180/Bone.181
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180/Bone.181/Bone.181_end
+        weight: 1
+      - path: firetree_Armature/Bone.182
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187/Bone.188
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187/Bone.188/Bone.188_end
+        weight: 1
+      - path: firetree_Armature/Bone.189
+        weight: 1
+      - path: firetree_Armature/Bone.189/Bone.189_end
+        weight: 1
+      - path: firetree_trunk
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: firetree_trunk|firetree_dying
+      takeName: firetree_trunk|firetree_dying
+      firstFrame: 0
+      lastFrame: 189
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: firetree_Armature
+        weight: 1
+      - path: firetree_Armature/Bone
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002/Bone.001
+        weight: 1
+      - path: firetree_Armature/Bone/Bone.004/Bone.005/Bone.003/Bone.002/Bone.001/Bone.001_end
+        weight: 1
+      - path: firetree_Armature/Bone.006
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008/Bone.007
+        weight: 1
+      - path: firetree_Armature/Bone.006/Bone.010/Bone.009/Bone.008/Bone.007/Bone.007_end
+        weight: 1
+      - path: firetree_Armature/Bone.011
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013/Bone.012
+        weight: 1
+      - path: firetree_Armature/Bone.011/Bone.015/Bone.014/Bone.013/Bone.012/Bone.012_end
+        weight: 1
+      - path: firetree_Armature/Bone.016
+        weight: 1
+      - path: firetree_Armature/Bone.016/Bone.017
+        weight: 1
+      - path: firetree_Armature/Bone.016/Bone.017/Bone.017_end
+        weight: 1
+      - path: firetree_Armature/Bone.018
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020/Bone.019
+        weight: 1
+      - path: firetree_Armature/Bone.018/Bone.020/Bone.019/Bone.019_end
+        weight: 1
+      - path: firetree_Armature/Bone.021
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023/Bone.022
+        weight: 1
+      - path: firetree_Armature/Bone.021/Bone.023/Bone.022/Bone.022_end
+        weight: 1
+      - path: firetree_Armature/Bone.024
+        weight: 1
+      - path: firetree_Armature/Bone.024/Bone.026
+        weight: 1
+      - path: firetree_Armature/Bone.024/Bone.026/Bone.026_end
+        weight: 1
+      - path: firetree_Armature/Bone.025
+        weight: 1
+      - path: firetree_Armature/Bone.025/Bone.025_end
+        weight: 1
+      - path: firetree_Armature/Bone.027
+        weight: 1
+      - path: firetree_Armature/Bone.027/Bone.027_end
+        weight: 1
+      - path: firetree_Armature/Bone.028
+        weight: 1
+      - path: firetree_Armature/Bone.028/Bone.028_end
+        weight: 1
+      - path: firetree_Armature/Bone.029
+        weight: 1
+      - path: firetree_Armature/Bone.029/Bone.029_end
+        weight: 1
+      - path: firetree_Armature/Bone.030
+        weight: 1
+      - path: firetree_Armature/Bone.030/Bone.030_end
+        weight: 1
+      - path: firetree_Armature/Bone.031
+        weight: 1
+      - path: firetree_Armature/Bone.031/Bone.031_end
+        weight: 1
+      - path: firetree_Armature/Bone.032
+        weight: 1
+      - path: firetree_Armature/Bone.032/Bone.032_end
+        weight: 1
+      - path: firetree_Armature/Bone.033
+        weight: 1
+      - path: firetree_Armature/Bone.033/Bone.033_end
+        weight: 1
+      - path: firetree_Armature/Bone.034
+        weight: 1
+      - path: firetree_Armature/Bone.034/Bone.034_end
+        weight: 1
+      - path: firetree_Armature/Bone.035
+        weight: 1
+      - path: firetree_Armature/Bone.035/Bone.035_end
+        weight: 1
+      - path: firetree_Armature/Bone.036
+        weight: 1
+      - path: firetree_Armature/Bone.036/Bone.036_end
+        weight: 1
+      - path: firetree_Armature/Bone.037
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041/Bone.042
+        weight: 1
+      - path: firetree_Armature/Bone.037/Bone.038/Bone.039/Bone.040/Bone.041/Bone.042/Bone.042_end
+        weight: 1
+      - path: firetree_Armature/Bone.043
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048/Bone.049
+        weight: 1
+      - path: firetree_Armature/Bone.043/Bone.044/Bone.045/Bone.046/Bone.047/Bone.048/Bone.049/Bone.049_end
+        weight: 1
+      - path: firetree_Armature/Bone.050
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055/Bone.056
+        weight: 1
+      - path: firetree_Armature/Bone.050/Bone.051/Bone.052/Bone.053/Bone.054/Bone.055/Bone.056/Bone.056_end
+        weight: 1
+      - path: firetree_Armature/Bone.057
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066/Bone.067
+        weight: 1
+      - path: firetree_Armature/Bone.057/Bone.058/Bone.059/Bone.060/Bone.061/Bone.062/Bone.063/Bone.064/Bone.065/Bone.066/Bone.067/Bone.067_end
+        weight: 1
+      - path: firetree_Armature/Bone.068
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073/Bone.074
+        weight: 1
+      - path: firetree_Armature/Bone.068/Bone.069/Bone.070/Bone.071/Bone.072/Bone.073/Bone.074/Bone.074_end
+        weight: 1
+      - path: firetree_Armature/Bone.075
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079/Bone.080
+        weight: 1
+      - path: firetree_Armature/Bone.075/Bone.076/Bone.077/Bone.078/Bone.079/Bone.080/Bone.080_end
+        weight: 1
+      - path: firetree_Armature/Bone.081
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086/Bone.087
+        weight: 1
+      - path: firetree_Armature/Bone.081/Bone.082/Bone.083/Bone.084/Bone.085/Bone.086/Bone.087/Bone.087_end
+        weight: 1
+      - path: firetree_Armature/Bone.088
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093/Bone.094
+        weight: 1
+      - path: firetree_Armature/Bone.088/Bone.089/Bone.090/Bone.091/Bone.092/Bone.093/Bone.094/Bone.094_end
+        weight: 1
+      - path: firetree_Armature/Bone.095
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104/Bone.105
+        weight: 1
+      - path: firetree_Armature/Bone.095/Bone.096/Bone.097/Bone.098/Bone.099/Bone.100/Bone.101/Bone.102/Bone.103/Bone.104/Bone.105/Bone.105_end
+        weight: 1
+      - path: firetree_Armature/Bone.106
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111/Bone.112
+        weight: 1
+      - path: firetree_Armature/Bone.106/Bone.107/Bone.108/Bone.109/Bone.110/Bone.111/Bone.112/Bone.112_end
+        weight: 1
+      - path: firetree_Armature/Bone.113
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117/Bone.118
+        weight: 1
+      - path: firetree_Armature/Bone.113/Bone.114/Bone.115/Bone.116/Bone.117/Bone.118/Bone.118_end
+        weight: 1
+      - path: firetree_Armature/Bone.119
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124/Bone.125
+        weight: 1
+      - path: firetree_Armature/Bone.119/Bone.120/Bone.121/Bone.122/Bone.123/Bone.124/Bone.125/Bone.125_end
+        weight: 1
+      - path: firetree_Armature/Bone.126
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131/Bone.132
+        weight: 1
+      - path: firetree_Armature/Bone.126/Bone.127/Bone.128/Bone.129/Bone.130/Bone.131/Bone.132/Bone.132_end
+        weight: 1
+      - path: firetree_Armature/Bone.133
+        weight: 1
+      - path: firetree_Armature/Bone.133/Bone.134
+        weight: 1
+      - path: firetree_Armature/Bone.133/Bone.134/Bone.134_end
+        weight: 1
+      - path: firetree_Armature/Bone.135
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142/Bone.143
+        weight: 1
+      - path: firetree_Armature/Bone.135/Bone.136/Bone.137/Bone.138/Bone.139/Bone.140/Bone.141/Bone.142/Bone.143/Bone.143_end
+        weight: 1
+      - path: firetree_Armature/Bone.144
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149/Bone.150
+        weight: 1
+      - path: firetree_Armature/Bone.144/Bone.145/Bone.146/Bone.147/Bone.148/Bone.149/Bone.150/Bone.150_end
+        weight: 1
+      - path: firetree_Armature/Bone.151
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155/Bone.156
+        weight: 1
+      - path: firetree_Armature/Bone.151/Bone.152/Bone.153/Bone.154/Bone.155/Bone.156/Bone.156_end
+        weight: 1
+      - path: firetree_Armature/Bone.157
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162/Bone.163
+        weight: 1
+      - path: firetree_Armature/Bone.157/Bone.158/Bone.159/Bone.160/Bone.161/Bone.162/Bone.163/Bone.163_end
+        weight: 1
+      - path: firetree_Armature/Bone.164
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169/Bone.170
+        weight: 1
+      - path: firetree_Armature/Bone.164/Bone.165/Bone.166/Bone.167/Bone.168/Bone.169/Bone.170/Bone.170_end
+        weight: 1
+      - path: firetree_Armature/Bone.171
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180/Bone.181
+        weight: 1
+      - path: firetree_Armature/Bone.171/Bone.172/Bone.173/Bone.174/Bone.175/Bone.176/Bone.177/Bone.178/Bone.179/Bone.180/Bone.181/Bone.181_end
+        weight: 1
+      - path: firetree_Armature/Bone.182
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187/Bone.188
+        weight: 1
+      - path: firetree_Armature/Bone.182/Bone.183/Bone.184/Bone.185/Bone.186/Bone.187/Bone.188/Bone.188_end
+        weight: 1
+      - path: firetree_Armature/Bone.189
+        weight: 1
+      - path: firetree_Armature/Bone.189/Bone.189_end
+        weight: 1
+      - path: firetree_trunk
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

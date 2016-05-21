@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: a54f1ec4edc074a758a8f632a544adee
+timeCreated: 1463736452
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: big_redrockA
+    100002: big_redrockB
+    100004: big_redrockC
+    100006: big_redrockD
+    100008: big_redrockE
+    100010: big_redrockF
+    100012: big_redrockG
+    100014: big_redrockH
+    100016: big_redrockI
+    100018: big_redrockJ
+    100020: big_redrockK
+    100022: big_redrockL
+    100024: big_redrockM
+    100026: big_redrockN
+    100028: big_redrockO
+    100030: big_redrockP
+    100032: big_redrockQ
+    100034: big_redrockR
+    100036: big_redrockS
+    100038: //RootNode
+    100040: big_redrockT
+    100042: big_redrockU
+    100044: big_redrockV
+    100046: big_redrockW
+    400000: big_redrockA
+    400002: big_redrockB
+    400004: big_redrockC
+    400006: big_redrockD
+    400008: big_redrockE
+    400010: big_redrockF
+    400012: big_redrockG
+    400014: big_redrockH
+    400016: big_redrockI
+    400018: big_redrockJ
+    400020: big_redrockK
+    400022: big_redrockL
+    400024: big_redrockM
+    400026: big_redrockN
+    400028: big_redrockO
+    400030: big_redrockP
+    400032: big_redrockQ
+    400034: big_redrockR
+    400036: big_redrockS
+    400038: //RootNode
+    400040: big_redrockT
+    400042: big_redrockU
+    400044: big_redrockV
+    400046: big_redrockW
+    2300000: big_redrockA
+    2300002: big_redrockB
+    2300004: big_redrockC
+    2300006: big_redrockD
+    2300008: big_redrockE
+    2300010: big_redrockF
+    2300012: big_redrockG
+    2300014: big_redrockH
+    2300016: big_redrockI
+    2300018: big_redrockJ
+    2300020: big_redrockK
+    2300022: big_redrockL
+    2300024: big_redrockM
+    2300026: big_redrockN
+    2300028: big_redrockO
+    2300030: big_redrockP
+    2300032: big_redrockQ
+    2300034: big_redrockR
+    2300036: big_redrockS
+    2300038: big_redrockT
+    2300040: big_redrockU
+    2300042: big_redrockV
+    2300044: big_redrockW
+    3300000: big_redrockA
+    3300002: big_redrockB
+    3300004: big_redrockC
+    3300006: big_redrockD
+    3300008: big_redrockE
+    3300010: big_redrockF
+    3300012: big_redrockG
+    3300014: big_redrockH
+    3300016: big_redrockI
+    3300018: big_redrockJ
+    3300020: big_redrockK
+    3300022: big_redrockL
+    3300024: big_redrockM
+    3300026: big_redrockN
+    3300028: big_redrockO
+    3300030: big_redrockP
+    3300032: big_redrockQ
+    3300034: big_redrockR
+    3300036: big_redrockS
+    3300038: big_redrockT
+    3300040: big_redrockU
+    3300042: big_redrockV
+    3300044: big_redrockW
+    4300000: big_redrockT
+    4300002: big_redrockU
+    4300004: big_redrockW
+    4300006: big_redrockV
+    4300008: big_redrockJ
+    4300010: big_redrockS
+    4300012: big_redrockF
+    4300014: big_redrockH
+    4300016: big_redrockL
+    4300018: big_redrockR
+    4300020: big_redrockP
+    4300022: big_redrockN
+    4300024: big_redrockM
+    4300026: big_redrockB
+    4300028: big_redrockC
+    4300030: big_redrockQ
+    4300032: big_redrockO
+    4300034: big_redrockK
+    4300036: big_redrockI
+    4300038: big_redrockG
+    4300040: big_redrockE
+    4300042: big_redrockD
+    4300044: big_redrockA
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
