@@ -44,13 +44,10 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 0d66916401b2a9943a811a51905c6139, type: 2}
-  - {fileID: 2100000, guid: 20509700d293b8549978d75f9a259627, type: 2}
   - {fileID: 2100000, guid: 0b61fbf303466c641a4c383a3f103755, type: 2}
   - {fileID: 2100000, guid: 926e309a5ec601b48b3844410ebff98e, type: 2}
-  - {fileID: 2100000, guid: a58d49c801885d343a9641ccca3e0e39, type: 2}
   - {fileID: 2100000, guid: 728b6b92abd87aa47af366dcf9efdda2, type: 2}
   - {fileID: 2100000, guid: 3bc65039d3814b747a77e8009cda5b4a, type: 2}
-  - {fileID: 2100000, guid: 5e9e8072c1f161b43a2b77032314de18, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -127,6 +124,8 @@ MonoBehaviour:
     m_Bits: 0
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
+  playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!136 &13677630
