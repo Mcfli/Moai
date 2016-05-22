@@ -10995,9 +10995,6 @@ GameObject:
   - 33: {fileID: 3349880}
   - 23: {fileID: 2350034}
   - 65: {fileID: 6573194}
-  - 54: {fileID: 5434636}
-  - 114: {fileID: 11421220}
-  - 114: {fileID: 11441620}
   m_Layer: 18
   m_Name: rock14
   m_TagString: Untagged
@@ -11559,9 +11556,6 @@ GameObject:
   - 33: {fileID: 3359108}
   - 23: {fileID: 2396792}
   - 65: {fileID: 6537322}
-  - 54: {fileID: 5486814}
-  - 114: {fileID: 11434570}
-  - 114: {fileID: 11434026}
   m_Layer: 18
   m_Name: rock3
   m_TagString: Untagged
@@ -16664,9 +16658,6 @@ GameObject:
   - 33: {fileID: 3341196}
   - 23: {fileID: 2340782}
   - 65: {fileID: 6555060}
-  - 54: {fileID: 5435762}
-  - 114: {fileID: 11448396}
-  - 114: {fileID: 11426134}
   m_Layer: 18
   m_Name: rock1
   m_TagString: Untagged
@@ -16927,9 +16918,6 @@ GameObject:
   - 33: {fileID: 3360654}
   - 23: {fileID: 2350668}
   - 65: {fileID: 6592148}
-  - 54: {fileID: 5477466}
-  - 114: {fileID: 11428722}
-  - 114: {fileID: 11433548}
   m_Layer: 18
   m_Name: rock8
   m_TagString: Untagged
@@ -16978,9 +16966,6 @@ GameObject:
   - 33: {fileID: 3398412}
   - 23: {fileID: 2355150}
   - 65: {fileID: 6588572}
-  - 54: {fileID: 5448128}
-  - 114: {fileID: 11465664}
-  - 114: {fileID: 11400274}
   m_Layer: 18
   m_Name: rock15
   m_TagString: Untagged
@@ -17946,9 +17931,6 @@ GameObject:
   - 33: {fileID: 3313942}
   - 23: {fileID: 2347008}
   - 65: {fileID: 6574838}
-  - 54: {fileID: 5415256}
-  - 114: {fileID: 11461748}
-  - 114: {fileID: 11421516}
   m_Layer: 18
   m_Name: rock13
   m_TagString: Untagged
@@ -18854,9 +18836,6 @@ GameObject:
   - 33: {fileID: 3347402}
   - 23: {fileID: 2370120}
   - 65: {fileID: 6547270}
-  - 54: {fileID: 5448214}
-  - 114: {fileID: 11439854}
-  - 114: {fileID: 11472550}
   m_Layer: 18
   m_Name: rock14
   m_TagString: Untagged
@@ -25352,7 +25331,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188550}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 574.4623, y: 1406.033, z: -1356.7186}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 448752}
@@ -41667,111 +41646,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177080}
   m_Mesh: {fileID: 4300000, guid: 50e5a4ea1d174cf4a8e3287bd6fee70c, type: 3}
---- !u!54 &5415256
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181482}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5434636
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150620}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5435762
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175900}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5448128
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177080}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5448214
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185532}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5477466
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176902}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5486814
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153312}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &6408574
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -41979,35 +41853,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &11400274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11417768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42028,278 +41873,6 @@ MonoBehaviour:
   - {fileID: 11438872, guid: 1038cd84f14edc14796b953a1f55acec, type: 2}
   - {fileID: 11491708, guid: c4c42456b2efd094c98053bae3832f86, type: 2}
   fadeSpeed: 0.5
---- !u!114 &11421220
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11421516
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11426134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11428722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11433548
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 176902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11434026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11434570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11439854
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11441620
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11448396
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11461748
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11465664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
---- !u!114 &11472550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: rock
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11484556
 MonoBehaviour:
   m_ObjectHideFlags: 1
