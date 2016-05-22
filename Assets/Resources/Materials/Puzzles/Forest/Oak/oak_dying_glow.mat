@@ -89,7 +89,7 @@ Material:
         first:
           name: _Illum
         second:
-          m_Texture: {fileID: 2800000, guid: 009fb0cbfba7f4df68231fb65b713343, type: 3}
+          m_Texture: {fileID: 2800000, guid: bf706c807172e480a9553e6c0e211e3e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
