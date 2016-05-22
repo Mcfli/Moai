@@ -72,7 +72,7 @@ public class WeatherManager : MonoBehaviour {
             int numParticlesAlive = activeParticleSystem.GetParticles(m_Particles);
             for(int i = 0; i < numParticlesAlive; i++)
             {
-                m_Particles[i].velocity = Vector3.down * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
+                m_Particles[i].velocity = Vector3.forward * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
             }
             activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
         }
@@ -110,7 +110,7 @@ public class WeatherManager : MonoBehaviour {
         changeWeather();
         checkIfVisibleParticles();
         lastBiome = Globals.cur_biome;
-        curParticlePosition = new Vector3(0, 0, 0);
+        moveParticles(Globals.Player.transform.position);
     }
 	
 	//public void hideWeather(){visibleParticles = false;}
@@ -155,17 +155,20 @@ public class WeatherManager : MonoBehaviour {
                     cameraAudio.clip = rainAudio;
                     cameraAudio.loop = true;
                     cameraAudio.Play();
-                    windAudio.Stop();                 
-                }
-                else
-                {
+                    windAudio.Stop();
+                } else {
                     cameraAudio.Stop();
                     windAudio.clip = Wind;
                     windAudio.loop = true;
                     windAudio.Play();
                 }
+            } else {
+                cameraAudio.Stop();
+                windAudio.clip = Wind;
+                windAudio.loop = true;
+                windAudio.Play();
             }
-            
+
         }
     }
 

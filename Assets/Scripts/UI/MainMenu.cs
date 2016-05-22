@@ -54,6 +54,7 @@ public class MainMenu : MonoBehaviour {
         
         Camera.main.transform.position = mmback.cameraPosition;
         Camera.main.transform.eulerAngles = mmback.cameraRotation;
+        Globals.WeatherManagerScript.moveParticles(Camera.main.transform.position);
         firstPersonCont.lookLock = true;
         firstPersonCont.getMouseLook().SetCursorLock(false);
         title.anchoredPosition = new Vector2(mmback.titlePosition.x * Screen.width, mmback.titlePosition.y * Screen.height) / 2;

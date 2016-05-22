@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imagespace_name: Snow
   adjust_speed: 1
+  saturation: 0.7
   redChannel:
     serializedVersion: 2
     m_Curve:
@@ -81,8 +82,8 @@ MonoBehaviour:
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 0.2655688
-      value: 0.8114921
+    - time: 0.4030688
+      value: 0.6290559
       inSlope: 1.0874867
       outSlope: 1.0874867
       tangentMode: 0
@@ -94,7 +95,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  saturation: 0.2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

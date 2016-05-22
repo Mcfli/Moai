@@ -13,8 +13,9 @@ public class TooltipDisplay : MonoBehaviour {
     public TooltipDisplay anotherTooltip;
     public float patienceAmount;
     public string componentType;
+    public float secondsOfHover;
 
-    public enum Finish { ButtonPress, PickUpObject, ShrineActivate, Never };
+    public enum Finish { ButtonPress, PickUpObject, ShrineActivate, WaypointActive, Never };
     public Finish finisher;
     public List<string> inputNames;
     public bool AND = true;         // OR if false
@@ -23,6 +24,7 @@ public class TooltipDisplay : MonoBehaviour {
 
     [HideInInspector] public bool finished;
     [HideInInspector] public bool triggered;
+    private float timeHovered;
     private float timeTriggered; // seconds from time triggered
     private float timeWaited;
     private float timePressed;
@@ -54,7 +56,7 @@ public class TooltipDisplay : MonoBehaviour {
         triggered = false;
         timeTriggered = 0;
         timeWaited = 0;
-        timePressed = -1;
+        timePressed = 0;
         holdingSeed = false;
     }
 
@@ -87,14 +89,16 @@ public class TooltipDisplay : MonoBehaviour {
                     }
                 }
 
-                if(buttonPressed && timePressed == -1) timePressed = Time.time;
-                else if(!buttonPressed) timePressed = -1;
-                if(timePressed > -1 && Time.time >= timePressed + secondsToHold) return true;
+                if(buttonPressed) timePressed += Time.deltaTime;
+                else timePressed = 0;
+                if(timePressed >= secondsToHold) return true;
                 return false;
             case Finish.PickUpObject:
                 return Globals.PlayerScript.getHeldObj();
             case Finish.ShrineActivate:
                 return ShrineActivator.firstActivate;
+            case Finish.WaypointActive:
+                return Globals.PlayerScript.waypoint.activeInHierarchy;
         }
         return false;
     }
@@ -117,7 +121,16 @@ public class TooltipDisplay : MonoBehaviour {
                 if(timeWaited > patienceAmount) triggered = true;
                 break;
             case Cause.HoveredGameObjectHasComponent:
-                if(Globals.PlayerScript.GetHover().collider) if(Globals.PlayerScript.GetHover().collider.gameObject.GetComponent(componentType) != null) triggered = true;
+                if(Globals.PlayerScript.GetHover().collider) {
+                    if(Globals.PlayerScript.GetHover().collider.gameObject.GetComponent(componentType) != null) {
+                        timeHovered += Time.deltaTime;
+                    } else {
+                        timeHovered = 0;
+                    }
+                } else {
+                    timeHovered = 0;
+                }
+                if(timeHovered >= secondsOfHover) triggered = true;
                 break;
         }
         return triggered;

@@ -463,7 +463,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2043, y: 2719.072, z: -1192}
+  m_LocalPosition: {x: 0, y: 2668.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 416402}
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   biome: {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
   time: 0
-  cameraPosition: {x: -1230, y: 682.1971, z: -1098}
+  cameraPosition: {x: 813, y: 631.625, z: 94}
   cameraRotation: {x: 330.9513, y: 204.7634, z: 0}
   titlePosition: {x: -0.3, y: 0.4}
   titleScale: 0.33

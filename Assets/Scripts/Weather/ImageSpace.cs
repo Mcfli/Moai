@@ -6,10 +6,10 @@ public class ImageSpace : MonoBehaviour {
     public string imagespace_name;
     public float adjust_speed;
 
+    [Range(0.0f, 5.0f)] public float saturation = 1.0f;
     public AnimationCurve redChannel = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
     public AnimationCurve greenChannel = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
     public AnimationCurve blueChannel = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
-    public float saturation = 1.0f;
 
     private ColorCorrectionCurves main_curves;
 
