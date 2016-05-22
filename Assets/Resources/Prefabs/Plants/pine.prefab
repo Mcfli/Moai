@@ -5057,9 +5057,9 @@ MonoBehaviour:
   - 0.4
   - 0.3
   statePuzzleObjects:
-  - {fileID: 11456332, guid: f6bf715288c11bf42a8f9dbf0c935ce3, type: 2}
-  - {fileID: 11456332, guid: 049d31f3326c33149b2638270d0bc969, type: 2}
-  - {fileID: 11456332, guid: c5ee7cefbede29e4ab8036ff665e6e2f, type: 2}
+  - {fileID: 11456332, guid: b82667738c3b24da1912dda38563b78b, type: 2}
+  - {fileID: 11456332, guid: 1d38ca8e105b3420ea0a1000d185c7af, type: 2}
+  - {fileID: 11456332, guid: a860c8d003e664bcd88fbad54854d8e2, type: 2}
   propogateDuringState: 000101
   heightAxis: 0
   collisionRadiusMinMax: {x: 5, y: 12}
@@ -5115,6 +5115,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   age: 413577.28
   lifeSpan: 1203515.8
+  playerPlanted: 0
 --- !u!136 &13662064
 CapsuleCollider:
   m_ObjectHideFlags: 1
