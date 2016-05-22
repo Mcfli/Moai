@@ -1,51 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &186472
+--- !u!1 &135874
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 498918}
-  - 33: {fileID: 3366386}
-  - 23: {fileID: 2304342}
-  - 114: {fileID: 11453908}
-  - 136: {fileID: 13620998}
-  - 54: {fileID: 5406412}
-  - 114: {fileID: 11460976}
+  - 4: {fileID: 431536}
+  - 33: {fileID: 3301030}
+  - 23: {fileID: 2344634}
+  - 54: {fileID: 5491866}
+  - 114: {fileID: 11443352}
+  - 136: {fileID: 13617994}
+  - 114: {fileID: 11499290}
   m_Layer: 14
-  m_Name: swampMiniFlowerB_004
+  m_Name: daisyOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &498918
+--- !u!4 &431536
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
+  m_GameObject: {fileID: 135874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0.12554555, y: -0.060477883, z: 0.37979126}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2304342
+--- !u!23 &2344634
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
+  m_GameObject: {fileID: 135874}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f2eae34b81d3acf49abb95b0ee9f828b, type: 2}
-  - {fileID: 2100000, guid: f7353f1c25cec624ca2a0043638e28b5, type: 2}
-  - {fileID: 2100000, guid: 458ce0ee9f761dd4fbedf8ed55ad4e29, type: 2}
+  - {fileID: 2100000, guid: 9ed077ff83605f54987b0b93ec70adea, type: 2}
+  - {fileID: 2100000, guid: f4f877c7e2427ee40a1926513810f606, type: 2}
+  - {fileID: 2100000, guid: 389b7b38996a81043a3ced76a661e2b8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -61,19 +61,19 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3366386
+--- !u!33 &3301030
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
-  m_Mesh: {fileID: 4300000, guid: 7aeea0a816b2b8d4f8844aad152ca529, type: 3}
---- !u!54 &5406412
+  m_GameObject: {fileID: 135874}
+  m_Mesh: {fileID: 4300006, guid: 0ee47484fd9c2c84d892a69bb6290f2d, type: 3}
+--- !u!54 &5491866
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
+  m_GameObject: {fileID: 135874}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -83,12 +83,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &11453908
+--- !u!114 &11443352
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
+  m_GameObject: {fileID: 135874}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
@@ -97,12 +97,12 @@ MonoBehaviour:
   ID: flower
   image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
   imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
---- !u!114 &11460976
+--- !u!114 &11499290
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
+  m_GameObject: {fileID: 135874}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
@@ -119,26 +119,26 @@ MonoBehaviour:
   growTimeVariance: 0
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294432712
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
   held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!136 &13620998
+--- !u!136 &13617994
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186472}
+  m_GameObject: {fileID: 135874}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.41
-  m_Height: 1.11
+  m_Radius: 0.5
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 0.38, z: 0}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -148,5 +148,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 186472}
+  m_RootGameObject: {fileID: 135874}
   m_IsPrefabParent: 1
