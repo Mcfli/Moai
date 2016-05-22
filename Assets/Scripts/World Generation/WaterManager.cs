@@ -10,6 +10,7 @@ public class WaterManager : MonoBehaviour {
     // Underwater effects
     public Color fogColor;
     public float fogDensity;
+    public LayerMask clearLayers;
 
     //underwater effects
     private bool defaultFog;

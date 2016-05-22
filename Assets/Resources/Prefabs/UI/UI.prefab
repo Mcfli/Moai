@@ -2976,6 +2976,8 @@ GameObject:
   m_Component:
   - 224: {fileID: 22443342}
   - 114: {fileID: 11431332}
+  - 222: {fileID: 22252944}
+  - 114: {fileID: 11470642}
   m_Layer: 5
   m_Name: StarHUD
   m_TagString: Untagged
@@ -3341,7 +3343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &185620
 GameObject:
   m_ObjectHideFlags: 1
@@ -4477,6 +4479,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 0}
   patienceAmount: 0
   componentType: ShrineActivator
+  secondsOfHover: 0.5
   finisher: 2
   inputNames: []
   AND: 1
@@ -5055,6 +5058,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 0}
   patienceAmount: 15
   componentType: 
+  secondsOfHover: 0
   finisher: 0
   inputNames:
   - Patience
@@ -5377,6 +5381,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 11420038}
   patienceAmount: 0
   componentType: 
+  secondsOfHover: 0
   finisher: 0
   inputNames:
   - Mouse X
@@ -6079,6 +6084,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 11431526}
   patienceAmount: 0
   componentType: 
+  secondsOfHover: 0
   finisher: 0
   inputNames:
   - Vertical
@@ -7517,6 +7523,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 11408490}
   patienceAmount: 0
   componentType: 
+  secondsOfHover: 0
   finisher: 0
   inputNames:
   - Horizontal
@@ -7636,6 +7643,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 11420038}
   patienceAmount: 0
   componentType: 
+  secondsOfHover: 0
   finisher: 0
   inputNames:
   - Patience
@@ -8268,7 +8276,7 @@ MonoBehaviour:
   airStarHUD: {fileID: 199404, guid: 687b2ec2331fda64b929eae80f327420, type: 2}
   earthStarHUD: {fileID: 143302, guid: 49b944a10022c6842b8dbdd150587176, type: 2}
   distanceBetweenIcons: 20
-  firstIconOffset: {x: 10, y: 10}
+  firstIconOffset: {x: 40, y: 10}
 --- !u!114 &11439462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11055,6 +11063,33 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Options
+--- !u!114 &11470642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6666667}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 8f6ed084d085b2449a9f240f44e0c61b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &11471194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11638,6 +11673,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 0}
   patienceAmount: 0
   componentType: InteractableObject
+  secondsOfHover: 0.5
   finisher: 1
   inputNames: []
   AND: 1
@@ -13086,6 +13122,7 @@ MonoBehaviour:
   anotherTooltip: {fileID: 11400952}
   patienceAmount: 0
   componentType: 
+  secondsOfHover: 0
   finisher: 3
   inputNames: []
   AND: 1
@@ -14307,6 +14344,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141988}
+--- !u!222 &22252944
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174510}
 --- !u!222 &22253234
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -16818,7 +16861,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22443378
 RectTransform:

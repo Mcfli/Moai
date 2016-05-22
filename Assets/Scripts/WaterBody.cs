@@ -34,7 +34,7 @@ public class WaterBody : MonoBehaviour {
         center.y = Mathf.Infinity;
         mf = GetComponent<MeshFilter>();
         size = Vector3.right + Vector3.forward;
-        clearMask = LayerMask.GetMask("Tree","Doodad","BigDoodad");
+        clearMask = Globals.WaterManagerScript.clearLayers;
     }
 	
 	// Update is called once per frame

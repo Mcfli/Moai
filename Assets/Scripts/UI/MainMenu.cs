@@ -36,6 +36,8 @@ public class MainMenu : MonoBehaviour {
             prepLoad();
             Globals.loading = true;
             loadStep = 1;
+            Globals.mode = 0;
+            Random.seed = Globals.SeedScript.randomizeSeed();
             StartCoroutine(loadingDelay());
             return;
         }
@@ -70,10 +72,11 @@ public class MainMenu : MonoBehaviour {
 
     private IEnumerator loadingDelay()
     {
-        Globals.mode = 0;
-        Random.seed = Globals.SeedScript.randomizeSeed();
         yield return new WaitForSeconds(8f);
         loadStep = 2;
+        /*if(Globals.GenerationManagerScript.doneLoading) loadStep = 2;
+        else StartCoroutine("loadingDelay");*/
+
     }
 
     private void prepLoad() {
@@ -99,6 +102,8 @@ public class MainMenu : MonoBehaviour {
         firstPersonCont.enabled = true;
         firstPersonCont.lookLock = false;
         firstPersonCont.getMouseLook().SetCursorLock(true);
+        Vector2 randomSpot = Random.insideUnitCircle * Globals.GenerationManagerScript.chunk_size;
+        Globals.Player.transform.position = new Vector3(randomSpot.x, 0, randomSpot.y);
         Globals.PlayerScript.warpToGround(3000, true);
     }
 

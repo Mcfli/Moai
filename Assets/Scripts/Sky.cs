@@ -48,7 +48,6 @@ public class Sky : MonoBehaviour {
     void Start() {
         Halo.SetActive(false);
         listOfStars = new List<GameObject>();
-        //for(int i = 0; i < 100; i++) addStar(); //temp
     }
 
     void Update() {
@@ -199,6 +198,17 @@ public class Sky : MonoBehaviour {
     public int getNumberOfStars(){
 		return listOfStars.Count;
 	}
+
+    public void clearStars() {
+        while(listOfStars.Count > 0) {
+            Destroy(listOfStars[0]);
+            listOfStars.RemoveAt(0);
+        }
+    }
+
+    public void populateSky(int numOfStars) {
+        for(int i = 0; i < numOfStars; i++) Globals.SkyScript.addStar();
+    }
 
     public void removeNulls() {
         for(int i = 0; i < listOfStars.Count; i++) if(!listOfStars[i]) listOfStars.RemoveAt(i);

@@ -16,6 +16,9 @@ public class Seed : MonoBehaviour {
             Random.seed = (int)System.DateTime.Now.Ticks;
             seed = Random.seed;
         }
+        GetComponent<NoiseSynth>().Init();
+        Globals.GenerationManagerScript.EarthAirMap.Init();
+        Globals.GenerationManagerScript.WaterFireMap.Init();
         return seed;
     }
 }

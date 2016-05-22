@@ -19,7 +19,7 @@ public class StarHUD : MonoBehaviour {
     };
 
     public void Update() {
-        StarHUDParent.SetActive((Globals.settings["StarIcons"] == 1));
+        StarHUDParent.SetActive((Globals.settings["StarIcons"] == 1) && Globals.SkyScript.getNumberOfStars() > 0);
     }
 
     public void addStar(string element) {
@@ -50,7 +50,18 @@ public class StarHUD : MonoBehaviour {
 
     public void removeStar(string element) {
         if(!StarIcons.ContainsKey(element)) return;
+        if(StarIcons[element].Count < 1) return;
         Destroy(StarIcons[element][StarIcons[element].Count - 1]);
         StarIcons[element].RemoveAt(StarIcons[element].Count - 1);
+    }
+
+    public void clearStars() {
+        foreach(KeyValuePair<string, List<GameObject>> p in StarIcons) foreach(GameObject g in p.Value) Destroy(g);
+        StarIcons = new Dictionary<string, List<GameObject>>() {
+            { "fire",  new List<GameObject>() },
+            { "water", new List<GameObject>() },
+            { "air",   new List<GameObject>() },
+            { "earth", new List<GameObject>() },
+        };
     }
 }

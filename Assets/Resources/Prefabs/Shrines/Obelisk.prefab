@@ -516,11 +516,11 @@ MonoBehaviour:
   fireIndicatorDull: {fileID: 2100000, guid: 770dc6e2d33da9d42a8605b6811c536c, type: 2}
   fireIndicatorLit: {fileID: 2100000, guid: 04db29f639aed854fad953d44fcabcbc, type: 2}
   airIndicatorDull: {fileID: 2100000, guid: 34431d58fba168b45a0c3d314a167bff, type: 2}
-  airIndicatorLit: {fileID: 2100000, guid: 12fa5a1b6926d644bb97b7a1b9f7cedb, type: 2}
+  airIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
   waterIndicatorDull: {fileID: 2100000, guid: 81cb926be250aad49abe19c9b53388ba, type: 2}
   waterIndicatorLit: {fileID: 2100000, guid: 7489ba324bbadac4f962220f8c694c88, type: 2}
   earthIndicatorDull: {fileID: 2100000, guid: 9db34aed4f7ac5c419836186a934de33, type: 2}
-  earthIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
+  earthIndicatorLit: {fileID: 2100000, guid: 12fa5a1b6926d644bb97b7a1b9f7cedb, type: 2}
   baseMat: {fileID: 2100000, guid: 5d8c1eb0016499d4587f9d6256a7e3a1, type: 2}
   completedMat: {fileID: 2100000, guid: 641667712c21ba846b1027edfc689232, type: 2}
   saved_position: {x: 0, y: 0, z: 0}

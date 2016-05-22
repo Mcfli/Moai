@@ -31,7 +31,7 @@ public class GenerationManager : MonoBehaviour {
     // WaterFire/EarthAir modifiers per chunk.
     // maps chunk -> (delta_WaterFire,delta_EarthAir)
     private Dictionary<Vector2, Vector2> mapChanges;
-    private bool doneLoading = false;
+    [HideInInspector] public bool doneLoading;
 
     //references
     private ChunkGenerator chunkGen;
@@ -50,6 +50,8 @@ public class GenerationManager : MonoBehaviour {
     public System.DateTime endTime;
 
     void Awake() {
+        doneLoading = false;
+
         //lists
         loaded_chunks = new Dictionary<Vector2, GameObject>();
         mapChanges = new Dictionary<Vector2, Vector2>();
@@ -70,9 +72,6 @@ public class GenerationManager : MonoBehaviour {
 
         Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
 
-        EarthAirMap.Init();
-        WaterFireMap.Init();
-
         if(chunk_unload_dist < chunk_load_dist) chunk_unload_dist = chunk_load_dist;
         if(chunk_detail_dist > chunk_load_dist) chunk_detail_dist = chunk_load_dist;
     }
@@ -86,7 +85,6 @@ public class GenerationManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Shader.SetGlobalFloat("_TimeVar", Globals.time / Globals.time_resolution);
         Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
         if(Globals.cur_chunk != current_chunk) {
             Globals.cur_chunk = current_chunk;
@@ -106,11 +104,8 @@ public class GenerationManager : MonoBehaviour {
             
         }
 
-        if (!playerWarped)
-        {
-            playerWarped = Globals.PlayerScript.warpToGround(10000000, true);
-
-        }
+        if(Globals.mode == -1) playerWarped = false;
+        else if(!playerWarped) playerWarped = Globals.PlayerScript.warpToGround(10000000, true);
 
     }
 
@@ -144,6 +139,15 @@ public class GenerationManager : MonoBehaviour {
         WaterManager.waterBodies = new Dictionary<Vector2, List<GameObject>>();
         DoodadManager.loaded_doodads = new Dictionary<Vector2, List<GameObject>>();
         Globals.PlayerScript.waypoint.SetActive(false);
+        Globals.MenusScript.GetComponent<TooltipSystem>().reset();
+        Globals.SkyScript.clearStars();
+        Globals.Stars = new Dictionary<string, List<GameObject>>() {
+            { "fire",  new List<GameObject>() },
+            { "water", new List<GameObject>() },
+            { "air",   new List<GameObject>() },
+            { "earth", new List<GameObject>() },
+        };
+        Globals.MenusScript.GetComponent<StarHUD>().clearStars();
     }
     
     private IEnumerator loadUnload(Vector2 position) {

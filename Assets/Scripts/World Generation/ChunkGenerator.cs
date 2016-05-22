@@ -26,7 +26,6 @@ public class ChunkGenerator : MonoBehaviour {
         //waterManager = GetComponent<WaterManager>();
         
         chunk_size = genManager.chunk_size;
-        synth.Init();
 	}
 
 	

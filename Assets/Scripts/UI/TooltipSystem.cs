@@ -15,4 +15,9 @@ public class TooltipSystem : MonoBehaviour {
             activeTooltip = null;
         }
 	}
+
+    public void reset() {
+        foreach(TooltipDisplay t in tooltips) t.reset();
+        activeTooltip = null;
+    }
 }

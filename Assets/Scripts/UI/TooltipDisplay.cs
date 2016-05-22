@@ -51,9 +51,11 @@ public class TooltipDisplay : MonoBehaviour {
     }
 
     public void reset() {
+        gameObject.SetActive(true);
         tooltip.SetActive(false);
         finished = false;
         triggered = false;
+        timeHovered = 0;
         timeTriggered = 0;
         timeWaited = 0;
         timePressed = 0;
