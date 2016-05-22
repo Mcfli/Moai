@@ -32,6 +32,7 @@ public class TeleportStone : MonoBehaviour {
 			{
 				fader.fadeImage.color = Color.white;
 				Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
+                Globals.PlayerScript.warpToGround(Globals.PlayerScript.transform.position.y, true);
 				fader.fadingClear = true;
 				fader.fadingWhite = false;
 			} 
