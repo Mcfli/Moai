@@ -111,6 +111,8 @@ MonoBehaviour:
     m_Bits: 0
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
+  playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11469216
@@ -136,10 +138,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.21
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.09, z: -0.42}
+  m_Radius: 0.41983148
+  m_Height: 1.76077
+  m_Direction: 1
+  m_Center: {x: -0.08535549, y: 0.73662597, z: -0.09319049}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

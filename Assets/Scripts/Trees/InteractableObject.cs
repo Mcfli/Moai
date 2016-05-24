@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class InteractableObject: MonoBehaviour{
     public static float droppedObjectLifeLength = 300;
 

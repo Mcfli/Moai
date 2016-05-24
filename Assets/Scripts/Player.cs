@@ -31,9 +31,11 @@ public class Player : MonoBehaviour {
     private bool inCinematic = false;
     //public float cinematicTimeScale;
     public float waitCamDistance = 60.0f;
+    public float camZoomOutPerSec = 5;
+    public float camRotateDegreePerSec = 0.5f;
+	public float zoomInSpeed = 5.0f;
     private float camDistance = 60.0f;
     private float theta = 0.0f;
-	public float zoomInSpeed = 5.0f;
 
     public GameObject waypoint;
 
@@ -84,8 +86,8 @@ public class Player : MonoBehaviour {
                     int terrain = LayerMask.GetMask("Terrain");
 
                     if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain)) {
-                        camDistance += 5 * Time.deltaTime;
-                        theta += 0.5f * Time.deltaTime;
+                        camDistance += camZoomOutPerSec * Time.deltaTime;
+                        theta += camRotateDegreePerSec * Time.deltaTime;
                         float targetY = Mathf.Max(hit.point.y - playerModel.transform.position.y + 80, 20);
                         mainCamera.transform.localPosition = new Vector3(camDistance * Mathf.Cos(theta), Mathf.Lerp(mainCamera.transform.localPosition.y, targetY, Time.deltaTime), camDistance * Mathf.Sin(theta));
                     }

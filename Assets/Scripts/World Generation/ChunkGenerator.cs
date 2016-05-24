@@ -13,7 +13,6 @@ public class ChunkGenerator : MonoBehaviour {
    
 
     //references
-    private NoiseSynth synth;
     private GenerationManager genManager;
     //private WaterManager waterManager;
 
@@ -21,7 +20,6 @@ public class ChunkGenerator : MonoBehaviour {
     private float chunk_size;
 
     private void Awake () {
-        synth = GetComponent<NoiseSynth>();
         genManager = GetComponent<GenerationManager>();
         //waterManager = GetComponent<WaterManager>();
         

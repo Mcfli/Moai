@@ -42,6 +42,7 @@ public class TooltipDisplay : MonoBehaviour {
     void Update() {
         if(finishCheck()) finish();
         else if(triggerCheck()) {
+            if(timeTriggered < 0) timeTriggered = 0;
             timeTriggered += Time.deltaTime;
             if(timeTriggered >= timeUntilDisplay) {
                 if(TooltipSystem.activeTooltip && TooltipSystem.activeTooltip != this) TooltipSystem.activeTooltip.finish();
@@ -55,10 +56,10 @@ public class TooltipDisplay : MonoBehaviour {
         tooltip.SetActive(false);
         finished = false;
         triggered = false;
-        timeHovered = 0;
-        timeTriggered = 0;
+        timeHovered = -1;
+        timeTriggered = -1;
         timeWaited = 0;
-        timePressed = 0;
+        timePressed = -1;
         holdingSeed = false;
     }
 
@@ -91,8 +92,10 @@ public class TooltipDisplay : MonoBehaviour {
                     }
                 }
 
-                if(buttonPressed) timePressed += Time.deltaTime;
-                else timePressed = 0;
+                if(buttonPressed) {
+                    if(timePressed < 0) timePressed = 0;
+                    timePressed += Time.deltaTime;
+                } else timePressed = -1;
                 if(timePressed >= secondsToHold) return true;
                 return false;
             case Finish.PickUpObject:
@@ -125,13 +128,10 @@ public class TooltipDisplay : MonoBehaviour {
             case Cause.HoveredGameObjectHasComponent:
                 if(Globals.PlayerScript.GetHover().collider) {
                     if(Globals.PlayerScript.GetHover().collider.gameObject.GetComponent(componentType) != null) {
+                        if(timeHovered < 0) timeHovered = 0;
                         timeHovered += Time.deltaTime;
-                    } else {
-                        timeHovered = 0;
-                    }
-                } else {
-                    timeHovered = 0;
-                }
+                    } else timeHovered = -1;
+                } else timeHovered = -1;
                 if(timeHovered >= secondsOfHover) triggered = true;
                 break;
         }
