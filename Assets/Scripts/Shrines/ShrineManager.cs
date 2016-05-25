@@ -18,8 +18,8 @@ public class ShrineManager : MonoBehaviour {
     public static Dictionary<Vector2, ShrineGrid> shrines;
     public static Dictionary<Vector2, Obelisk> obelisks;
 
-    private List<Vector2> failedShrines;
-    private List<Vector2> failedObelisks;
+    public static List<Vector2> failedShrines;
+    public static List<Vector2> failedObelisks;
 
     // Use this for initialization
     void Awake () {

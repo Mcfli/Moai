@@ -141,6 +141,14 @@ public class WaterBody : MonoBehaviour {
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject == null) continue;
+            if(collider.gameObject.GetComponent<ShrineGrid>()) {
+                ShrineManager.shrines.Remove(GenerationManager.worldToChunk(collider.gameObject.transform.position));
+                ShrineManager.failedShrines.Add(GenerationManager.worldToChunk(collider.gameObject.transform.position));
+            }
+            if(collider.gameObject.GetComponent<Obelisk>()) {
+                ShrineManager.obelisks.Remove(GenerationManager.worldToChunk(collider.gameObject.transform.position));
+                ShrineManager.failedObelisks.Add(GenerationManager.worldToChunk(collider.gameObject.transform.position));
+            }
             Destroy(collider.gameObject);
         }
         
