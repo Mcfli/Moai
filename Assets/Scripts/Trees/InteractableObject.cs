@@ -142,6 +142,7 @@ public class InteractableObject: MonoBehaviour{
         pickupDropAudio.PlayOneShot(PickUp, .2f);
         held = true;
 		DoodadManager.held_object = gameObject;
+        Globals.MenusScript.GetComponent<HUD>().ping();
 
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
         if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) 
