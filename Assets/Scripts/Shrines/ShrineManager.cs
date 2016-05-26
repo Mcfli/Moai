@@ -182,7 +182,8 @@ public class ShrineManager : MonoBehaviour {
 		Vector2 chunk = new Vector2(x, y);
         if (shrines.ContainsKey(chunk))
         {
-			Destroy(shrines[chunk].gameObject);
+            if(shrines[chunk].gameObject != null)
+			    Destroy(shrines[chunk].gameObject);
         }
 	}
 
@@ -191,7 +192,8 @@ public class ShrineManager : MonoBehaviour {
         Vector2 chunk = new Vector2(x, y);
         if (obelisks.ContainsKey(chunk))
         {
-            Destroy(obelisks[chunk].gameObject);
+            if(obelisks[chunk] != null)
+                Destroy(obelisks[chunk].gameObject);
         }
             
     }
