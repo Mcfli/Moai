@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: rock
+  ID: square
   image: {fileID: 2100000, guid: 4f9a51f44bfac294fb289522eab7e516, type: 2}
   imageGlowing: {fileID: 2100000, guid: 0f1dcf009ae51a642ad1b08c53618327, type: 2}
 --- !u!114 &11470582
