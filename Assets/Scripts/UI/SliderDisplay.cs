@@ -30,11 +30,13 @@ public class SliderDisplay: MonoBehaviour {
         else {
             for(int i = 0; i < exceptionValues.Count; i++) {
                 if(slider.value == exceptionValues[i]) {
-                    text.text = head + ": " + exceptionStrings[i];
+                    if(head.Length < 1) text.text = exceptionStrings[i];
+                    else text.text = head + ": " + exceptionStrings[i];
                     return;
                 }
             }
-            text.text = head + ": " + slider.value;
+            if(head.Length < 1) text.text = "" + slider.value;
+            else text.text = head + ": " + slider.value;
         }
     }
 

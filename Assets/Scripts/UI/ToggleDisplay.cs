@@ -26,8 +26,13 @@ public class ToggleDisplay: MonoBehaviour {
 
     private void updateText() {
         if(!toggle.interactable) text.text = head;
-        else if(toggle.isOn) text.text = head + ": " + onText;
-        else text.text = head + ": " + offText;
+        if(head.Length < 1) {
+            if(toggle.isOn) text.text = onText;
+            else text.text = offText;
+        } else {
+            if(toggle.isOn) text.text = head + ": " + onText;
+            else text.text = head + ": " + offText;
+        }
     }
 
     public void updateSetting(bool val) {
