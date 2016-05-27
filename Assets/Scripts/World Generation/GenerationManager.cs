@@ -22,6 +22,7 @@ public class GenerationManager : MonoBehaviour {
     public NoiseGen WaterFireMap;
     public NoiseGen mountainMap;
     public NoiseGen EarthAirMap;
+    public NoiseGen AmplifyMap;
 
     //lists
     private Dictionary<Vector2, GameObject> loaded_chunks;
@@ -286,9 +287,10 @@ public class GenerationManager : MonoBehaviour {
         if(synth.heightAt(chunk.x * chunk_size + transform.position.x + chunk_size / 2, chunk.y * chunk_size + transform.position.z + chunk_size / 2, 0) > alwaysSnowHeight) return snowBiome;
         // Get the WaterFire and EarthAir values at chunk coordinates
         float WaterFire = WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
-        float EarthAir = EarthAirMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0);
-		//float WaterFire = WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + 1, 0);
-		//float EarthAir = EarthAirMap.genPerlin (chunk.x * chunk_size + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
+        float EarthAir = EarthAirMap.genPerlin  (chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0);
+        float amp = AmplifyMap.genPerlin        (chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0);
+        //float WaterFire = WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + 1, 0);
+        //float EarthAir = EarthAirMap.genPerlin (chunk.x * chunk_size + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
 
         if (mapChanges.ContainsKey(chunk))
         {
@@ -304,8 +306,9 @@ public class GenerationManager : MonoBehaviour {
             if (biome == null) Debug.Log("SHIT!");
             float WaterFire_error = Mathf.Abs(biome.WaterFire - WaterFire);
             float EarthAir_error = Mathf.Abs(biome.EarthAir - EarthAir);
-           
-            if (WaterFire_error + EarthAir_error < lowestError)
+            float Amp_error = Mathf.Abs(biome.EarthAir - EarthAir);
+
+            if (WaterFire_error + EarthAir_error + Amp_error < lowestError)
             {
 //                Debug.Log(biome.WaterFire + "," + biome.EarthAir + ": " + WaterFire_error + EarthAir_error);
                 lowestError = WaterFire_error + EarthAir_error;

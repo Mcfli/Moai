@@ -6,6 +6,7 @@ public class Biome : MonoBehaviour {
     // Climate properties
     public float WaterFire;
     public float EarthAir;
+    public float Amplify;
 
     public List<Weather> weatherTypes;
     public List<float> weatherChance; //must be same size as weatherTypes
