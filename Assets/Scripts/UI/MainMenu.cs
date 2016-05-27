@@ -72,7 +72,8 @@ public class MainMenu : MonoBehaviour {
 
     private IEnumerator loadingDelay()
     {
-        yield return new WaitForSeconds(8f);
+        while (!GenerationManager.doneLoading)
+            yield return null;
         loadStep = 2;
         /*if(Globals.GenerationManagerScript.doneLoading) loadStep = 2;
         else StartCoroutine("loadingDelay");*/

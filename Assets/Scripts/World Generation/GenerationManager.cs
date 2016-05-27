@@ -31,7 +31,7 @@ public class GenerationManager : MonoBehaviour {
     // WaterFire/EarthAir modifiers per chunk.
     // maps chunk -> (delta_WaterFire,delta_EarthAir)
     private Dictionary<Vector2, Vector2> mapChanges;
-    [HideInInspector] public bool doneLoading;
+    [HideInInspector] public static bool doneLoading;
 
     //references
     private ChunkGenerator chunkGen;
@@ -153,7 +153,7 @@ public class GenerationManager : MonoBehaviour {
     
     private IEnumerator loadUnload(Vector2 position) {
         bool done = true;
-
+        doneLoading = false;
         // Unload chunks if there are loaded chunks
         if (loaded_chunks.Keys.Count > 0)
         {
@@ -251,9 +251,10 @@ public class GenerationManager : MonoBehaviour {
                     }
                 }
             }
+            if(curDist == 4) doneLoading = true;
             curDist++;
         }
-        doneLoading = done;
+        
 		if(doneLoading){
 			if (ShrineManager.shrines.ContainsKey (Globals.cur_chunk) && ShrineManager.shrines[Globals.cur_chunk] != null)
 			{
@@ -262,6 +263,7 @@ public class GenerationManager : MonoBehaviour {
 		}
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+        
         StopCoroutine("loadUnload");
     }
 
