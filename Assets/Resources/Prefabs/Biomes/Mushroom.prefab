@@ -1,0 +1,270 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &131134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 465556}
+  - 114: {fileID: 11476116}
+  m_Layer: 0
+  m_Name: Mushroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &465556
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11476116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaterFire: 0.35
+  EarthAir: 0.39
+  Amplify: 0
+  weatherTypes:
+  - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
+  - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
+  weatherChance:
+  - 0.8
+  - 0.2
+  SkyGradients:
+  - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
+  - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
+  - {fileID: 2100000, guid: d9740f875626a184e9424a5a2c685945, type: 2}
+  - {fileID: 2100000, guid: 363c6c286e051d94084f2aa392e63ed1, type: 2}
+  - {fileID: 2100000, guid: 90e0d2faedf930a429428fcbd4a70c1c, type: 2}
+  - {fileID: 2100000, guid: ed3d08d6a10926742a4dc8b45e3c8c4e, type: 2}
+  temperatureCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.50700396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.3653157
+      value: 0.98524153
+      inSlope: 0.74294335
+      outSlope: 0.74294335
+      tangentMode: 0
+    - time: 0.6373441
+      value: 0.11687136
+      inSlope: -2.144575
+      outSlope: -2.144575
+      tangentMode: 0
+    - time: 1.0044284
+      value: 0.4849079
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  precipitationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.50700396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.3653157
+      value: 0.98524153
+      inSlope: 0.74294335
+      outSlope: 0.74294335
+      tangentMode: 0
+    - time: 0.6373441
+      value: 0.11687136
+      inSlope: -2.144575
+      outSlope: -2.144575
+      tangentMode: 0
+    - time: 1.0044284
+      value: 0.4849079
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  treeTypes:
+  - {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  - {fileID: 155264, guid: 315a7e48c60329044ab0a87c30150e02, type: 2}
+  bigDoodads:
+  - {fileID: 145722, guid: 05d820987f9e7b34d9b369a883691066, type: 2}
+  - {fileID: 135330, guid: 2e21c1e14494beb4d94acc180832d708, type: 2}
+  - {fileID: 149616, guid: 3635e1867d8bf76498f9a6a056b61f49, type: 2}
+  - {fileID: 137344, guid: 43452567a80bf0d4bb8ac0aac1141c8f, type: 2}
+  - {fileID: 102276, guid: 5d25e09b13b51c542aa0b78a004c0d66, type: 2}
+  - {fileID: 127378, guid: 4554eb0d36f098c4887b913a6c04fd48, type: 2}
+  - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
+  - {fileID: 150136, guid: 1deb94146c380a94daa7ab6431c81459, type: 2}
+  bigDoodadChance:
+  - 5
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 2
+  - 2
+  bigDoodadRadius:
+  - 1
+  - 4
+  - 4
+  - 4
+  - 4
+  - 4
+  - 3
+  - 3
+  smallDoodads:
+  - {fileID: 122762, guid: 76b634e68351db246a01a42fbdb2a1a9, type: 2}
+  - {fileID: 185738, guid: 765f137ab4b60dc4e8cbe913d2add33e, type: 2}
+  - {fileID: 173966, guid: 4b6608859410f484880353f04b938aa5, type: 2}
+  - {fileID: 121766, guid: 06f715c6f5c1f5d4ba0b806ce2cce6bb, type: 2}
+  - {fileID: 114526, guid: 62f245aef34405c4b8a90e3f09780b27, type: 2}
+  - {fileID: 197814, guid: 58e9ee00a93132241bcab2fff23922b2, type: 2}
+  - {fileID: 121328, guid: 70eb339ca4089f149926e2e767f569a4, type: 2}
+  - {fileID: 186472, guid: 6bf12cc75f4694de0bada9417c6f778c, type: 2}
+  - {fileID: 176168, guid: e61efd943506db245beee80bff64d39d, type: 2}
+  - {fileID: 136088, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
+  - {fileID: 108208, guid: de01314f5e41b4936ae202f1a37d14f0, type: 2}
+  - {fileID: 185526, guid: f740df261db13411886cc36b6a68b742, type: 2}
+  - {fileID: 185046, guid: eb75d9e0e001d470482001216efca68f, type: 2}
+  - {fileID: 170008, guid: b2bd44f66003b4580b55fae2b973a28a, type: 2}
+  - {fileID: 150692, guid: 3b833d16e13b44c3bb0fb0fc8cd2919f, type: 2}
+  - {fileID: 118120, guid: db91c7522c04d467694bba986ad1926a, type: 2}
+  - {fileID: 110126, guid: 39f7738f56f136746ab88b2f5adce188, type: 2}
+  smallDoodadChance:
+  - 2
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  numOfSmallDoodads: {x: 10, y: 20}
+  doodadClusterRadius: {x: 10, y: 20}
+  doodadDensity: 4
+  treeDensity: 2
+  forestRadius: 50
+  forestMaxTrees: 16
+  mixedForests: 1
+  colors:
+  - {r: 0.0233564, g: 0.17647058, b: 0.0814342, a: 0}
+  - {r: 0, g: 0.2352941, b: 0.07951321, a: 0}
+  - {r: 0, g: 0.2352941, b: 0.115881145, a: 0}
+  - {r: 0.0045415196, g: 0.102941155, b: 0.070367485, a: 0}
+  - {r: 0.10726642, g: 0.22794116, b: 0.18799366, a: 0}
+  - {r: 0.43533736, g: 0.4852941, b: 0.47909257, a: 0}
+  amplitude: 800
+  colorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  lakeChance: 1
+  lakeCount: 1
+  lakeSize: {x: 200, y: 55, z: 200}
+  lakeMaxLength: 250
+  waterMaterial: {fileID: 2100000, guid: f64afad84f8eedd44bc401c6b84f6e19, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: colors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 195104, guid: 15835ee7341bce64895a94cd8814ac16, type: 2}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[0]
+      value: sunny
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weatherTypes.Array.data[1]
+      value: rain
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[2].r
+      value: 0.36940923
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[2].g
+      value: 0.31709558
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colors.Array.data[2].b
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeDensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeGrowthIterations
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeSpreadMin
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeSpeadRange
+      value: 25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 131134}
+  m_IsPrefabParent: 1
