@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: water
-  ShrineComplete: {fileID: 0}
+  ShrineComplete: {fileID: 8300000, guid: 6f60aedfb82ea9048984553b0ab8c83a, type: 3}
 --- !u!114 &11429334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: fire
-  ShrineComplete: {fileID: 0}
+  ShrineComplete: {fileID: 8300000, guid: 6f60aedfb82ea9048984553b0ab8c83a, type: 3}
 --- !u!114 &11432296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: earth
-  ShrineComplete: {fileID: 0}
+  ShrineComplete: {fileID: 8300000, guid: 6f60aedfb82ea9048984553b0ab8c83a, type: 3}
 --- !u!114 &11449864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -721,7 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: air
-  ShrineComplete: {fileID: 0}
+  ShrineComplete: {fileID: 8300000, guid: 6f60aedfb82ea9048984553b0ab8c83a, type: 3}
 --- !u!137 &13745802
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

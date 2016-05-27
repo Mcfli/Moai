@@ -282,7 +282,6 @@ MonoBehaviour:
   WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
   EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
-  doneLoading: 0
 --- !u!4 &188005511
 Transform:
   m_ObjectHideFlags: 0
@@ -810,6 +809,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fee8b7d5a3738f24cabb576f59c723db, type: 3}
   - {fileID: 8300000, guid: fa182519992ae1c45b57bb0755006b53, type: 3}
   - {fileID: 8300000, guid: 78ce98c4b8d10b146b8687bdbbb2de30, type: 3}
+  - {fileID: 8300000, guid: cab6cf70366fd0646a55c26e6fcfce8c, type: 3}
 --- !u!114 &838583286
 MonoBehaviour:
   m_ObjectHideFlags: 0
