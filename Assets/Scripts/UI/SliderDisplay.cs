@@ -5,14 +5,13 @@ using System.Collections.Generic;
 public class SliderDisplay: MonoBehaviour {
     //attach to button (not text)
     public UnityEngine.UI.Text text;
+    public UnityEngine.UI.Text exceptionText;
     public string settingName;
-    public List<float> exceptionValues;
+    public List<Vector2> exceptionValues;
     public List<string> exceptionStrings;
-    private string head;
     private UnityEngine.UI.Slider slider;
 
 	void Awake() {
-        head = text.text;
         slider = GetComponent<UnityEngine.UI.Slider>();
     }
 
@@ -26,18 +25,11 @@ public class SliderDisplay: MonoBehaviour {
     }
 
     private void updateText() {
-        if(!slider.interactable) text.text = head;
-        else {
-            for(int i = 0; i < exceptionValues.Count; i++) {
-                if(slider.value == exceptionValues[i]) {
-                    if(head.Length < 1) text.text = exceptionStrings[i];
-                    else text.text = head + ": " + exceptionStrings[i];
-                    return;
-                }
-            }
-            if(head.Length < 1) text.text = "" + slider.value;
-            else text.text = head + ": " + slider.value;
-        }
+        text.text = slider.value.ToString();
+        exceptionText.text = "";
+        for(int i = 0; i < exceptionValues.Count; i++)
+            if(slider.value >= exceptionValues[i].x && slider.value <= exceptionValues[i].y)
+                exceptionText.text = exceptionStrings[i];
     }
 
     public void updateSetting(float val) {
