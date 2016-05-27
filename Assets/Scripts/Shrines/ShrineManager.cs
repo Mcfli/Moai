@@ -182,7 +182,7 @@ public class ShrineManager : MonoBehaviour {
 		Vector2 chunk = new Vector2(x, y);
         if (shrines.ContainsKey(chunk))
         {
-            if(shrines[chunk].gameObject != null)
+            if(shrines[chunk] != null)
 			    Destroy(shrines[chunk].gameObject);
         }
 	}
