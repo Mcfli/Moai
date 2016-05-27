@@ -113,6 +113,7 @@ public class GenerationManager : MonoBehaviour {
     public void initiateWorld() {
         Globals.time = 0;
         playerWarped = false;
+        Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
         StartCoroutine("loadUnload", Globals.cur_chunk);
     }
 
@@ -225,6 +226,7 @@ public class GenerationManager : MonoBehaviour {
                     }
                     else
                     {
+                        
                         // If the chunk needs to be detailed, detail it
                         if (inLoadDistance(position, thisChunk, chunk_detail_dist) && !chunkObj.detailed)
                         {
@@ -241,9 +243,8 @@ public class GenerationManager : MonoBehaviour {
                             done = false;
                         }
                     }
-
                     // If the chunk needs to load its objects, continue loading them
-                    if (chunkObj.doneBase && inLoadDistance(position, thisChunk, tree_load_dist) && !chunkObj.doneObjects)
+                    if (inLoadDistance(position, thisChunk, tree_load_dist) && !chunkObj.doneObjects)
                     {
                         chunkObj.loadObjects();
                         done = false;

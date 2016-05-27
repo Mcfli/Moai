@@ -80,9 +80,11 @@ public class ChunkMeshes : MonoBehaviour{
 
     public void loadObjects()
     {
-        if (System.DateTime.Now >= genManager.endTime) return;
-       // unloadedObjects = false;
         loadingObjects = true;
+        if (System.DateTime.Now >= genManager.endTime) return;
+        if (loadingBase) return;
+       // unloadedObjects = false;
+        
         if (!doodadsGenerated) generateDoodads();
         if (doodadsGenerated && !treesGenerated) generateTrees();
         if (doodadsGenerated && treesGenerated && !shrinesGenerated) generateShrines();
