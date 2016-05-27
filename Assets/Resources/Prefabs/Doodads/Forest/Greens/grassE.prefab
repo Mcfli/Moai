@@ -119,6 +119,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11407698
@@ -132,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: grass
-  image: {fileID: 2100000, guid: 012a6ab3baebb9448872f3a9c26a3d8b, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 938ae810f168b924796c39c5c155c4cc, type: 2}
+  ID: pentagon
+  image: {fileID: 2100000, guid: 5443d8f1af25f604394f48352a92856b, type: 2}
+  imageGlowing: {fileID: 2100000, guid: f3e2a956f50a6384f85104b568ce1972, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

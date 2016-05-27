@@ -14,6 +14,7 @@ GameObject:
   - 54: {fileID: 5465464}
   - 75: {fileID: 7574288}
   - 114: {fileID: 11440536}
+  - 114: {fileID: 11418480}
   m_Layer: 10
   m_Name: firetree_seed
   m_TagString: Untagged
@@ -95,6 +96,20 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &11418480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: triangle
+  image: {fileID: 2100000, guid: 4c8f2c18c3f473a479f793f13bf7e100, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 9da6b67cf60f0d74aa3ef7dbc456d4fa, type: 2}
 --- !u!114 &11440536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,6 +136,7 @@ MonoBehaviour:
   dirtMound: {fileID: 168970, guid: 6732175b6a438405795baca9870383f9, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!135 &13583306

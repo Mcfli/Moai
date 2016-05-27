@@ -163,7 +163,11 @@ public class TreeScript : MonoBehaviour {
             for (int i = 0; i < stateMarks.Count - 1; i++){
                 if (age / lifeSpan < (stateMarks[i + 1]) / ratioTotal){
                     state = i;
-                    Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
+                    if(statePuzzleObjects[state]) Globals.CopyComponent<PuzzleObject>(gameObject, statePuzzleObjects[state]);
+                    else {
+                        PuzzleObject po = GetComponent<PuzzleObject>();
+                        if(po) Destroy(po);
+                    }
                     break;
                 }
             }

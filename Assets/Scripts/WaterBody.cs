@@ -39,7 +39,7 @@ public class WaterBody : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!settled || !expanded ||!setBelow || !removedForests || !addedCollider) fitToTerrain();
+        while (!settled || !expanded ||!setBelow || !removedForests || !addedCollider) fitToTerrain();
 	}
 
     // Returns whether this body overlaps another
