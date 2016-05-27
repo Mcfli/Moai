@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour {
     public List<Sprite> loadingWallpapers;
     public RectTransform title;
     public RectTransform buttonsParent;
+    public bool playLogo = true;
+    public GameObject logo;
 
     private MMBackground mmback;
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
@@ -17,10 +19,13 @@ public class MainMenu : MonoBehaviour {
     private Vector3 origCamPos;
     private Vector3 origCamRot;
     private GameObject scene;
+    private FadeInOut fader;
+    private int logoStep = 0;
 
     void Awake() {
         firstPersonCont = Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
         Globals.settings["Screenmode"] = (Screen.fullScreen ? 1 : 0);
+        fader = GetComponent<FadeInOut>();
     }
 
     // Update is called once per frame
@@ -53,7 +58,29 @@ public class MainMenu : MonoBehaviour {
             loadStep = -1;
             return;
         }
-        
+
+        if(playLogo) {
+            if(logoStep == 0) {
+                Globals.WeatherManagerScript.getWeatherAudioSource().volume = 0;
+                Camera.main.GetComponent<MusicManager>().Stop(false);
+                fader.fade(new Color(34f / 255, 44f / 255, 55f / 255, 1), 0f);
+                fader.fade(new Color(255f / 255, 220f / 255, 24f / 255, 1), 1f);
+                logoStep++;
+            }else if(logoStep == 1) {
+                if(!fader.isFading()) {
+                    logo.SetActive(true);
+                    logoStep++;
+                }
+            }else if(logoStep == 2) {
+                if(!logo.activeSelf) {
+                    fader.fade(Color.clear, 1f);
+                    Globals.WeatherManagerScript.getWeatherAudioSource().volume = 1;
+                    Camera.main.GetComponent<MusicManager>().Play();
+                    logoStep++;
+                }
+            }
+        }
+
         Camera.main.transform.position = mmback.cameraPosition;
         Camera.main.transform.eulerAngles = mmback.cameraRotation;
         Globals.WeatherManagerScript.moveParticles(Camera.main.transform.position);

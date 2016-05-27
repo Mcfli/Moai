@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: 19da2615e9ba7824a93d659dc0709210
+timeCreated: 1464339255
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: eggy_0
+    21300002: eggy_1
+    21300004: eggy_2
+    21300006: eggy_3
+    21300008: eggy_4
+    21300010: eggy_5
+    21300012: eggy_6
+    21300014: eggy_7
+    21300016: eggy_8
+    21300018: eggy_9
+    21300020: eggy_10
+    21300022: eggy_11
+    21300024: eggy_12
+    21300026: eggy_13
+    21300028: eggy_14
+    21300030: eggy_15
+    21300032: eggy_16
+    21300034: eggy_17
+    21300036: eggy_18
+    21300038: eggy_19
+    21300040: eggy_20
+    21300042: eggy_21
+    21300044: eggy_22
+    21300046: eggy_23
+    21300048: eggy_24
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 256
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 96, z: 224, w: 0}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: eggy_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 14}
+        - {x: -15, y: 3}
+        - {x: -15, y: -15}
+        - {x: -10, y: -16}
+        - {x: 14, y: -16}
+        - {x: 14, y: 11}
+        - {x: 8, y: 14}
+    - name: eggy_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5, y: 14}
+        - {x: -13, y: 11}
+        - {x: -13, y: -16}
+        - {x: 13, y: -16}
+        - {x: 13, y: 8}
+        - {x: 10, y: 14}
+    - name: eggy_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 14}
+        - {x: -13, y: 11}
+        - {x: -13, y: -7}
+        - {x: -10, y: -16}
+        - {x: 8, y: -16}
+        - {x: 13, y: -7}
+        - {x: 13, y: 11}
+        - {x: 6, y: 14}
+    - name: eggy_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 14}
+        - {x: -10, y: 14}
+        - {x: -13, y: 7}
+        - {x: -13, y: -11}
+        - {x: -8, y: -16}
+        - {x: 7, y: -16}
+        - {x: 12, y: -10}
+        - {x: 13, y: -8}
+        - {x: 13, y: 7}
+    - name: eggy_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 14}
+        - {x: -7, y: 14}
+        - {x: -12, y: 9}
+        - {x: -13, y: 4}
+        - {x: -13, y: -9}
+        - {x: -9, y: -16}
+        - {x: 6, y: -16}
+        - {x: 13, y: -7}
+        - {x: 13, y: 4}
+        - {x: 12, y: 10}
+    - name: eggy_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 14}
+        - {x: -7, y: 14}
+        - {x: -14, y: 3}
+        - {x: -14, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: -4}
+        - {x: 13, y: 8}
+    - name: eggy_8
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: eggy_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

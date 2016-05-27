@@ -24,38 +24,26 @@ public class TeleportStone : MonoBehaviour {
 	{
 		if(fromIsland)
 		{
-			if (fader.fadingWhite) 
-			{
-				fader.fadeToWhite ();
-			}
-			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
-			{
-				fader.fadeImage.color = Color.white;
+            if(!fader.isFading() && fader.targetColor == Color.white)
+            {
 				Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
                 Globals.PlayerScript.warpToGround(Globals.PlayerScript.transform.position.y, true);
-				fader.fadingClear = true;
-				fader.fadingWhite = false;
-			} 
-			else if(fader.fadingClear)
+                fader.fade(Color.clear, 1.5f);
+            } 
+			else if(!fader.isFading() && fader.targetColor == Color.clear)
 			{
-				fader.fadeToClear ();
-				if(fader.fadeImage.color.a <= 0.05f)
-				{
-					fader.fadeImage.color = Color.clear;
-					fader.fadingClear = false;
-                    fromIsland = false;
-				}
-			}
+                fromIsland = false;
+            }
 		}
 	}
 
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fader.fadingWhite && !fader.fadingClear)
+        if (dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fromIsland)
         {
-			fader.fadingWhite = true;
-			fromIsland = true;
+            fader.fade(Color.white, 1.5f);
+            fromIsland = true;
         }
     }
 }
