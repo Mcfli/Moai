@@ -520,11 +520,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 712754677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64dab8f20bdc34f47bdaddda9075045e, type: 3}
+  m_Script: {fileID: 11500000, guid: b8a0dfb1cbba9424d8cfabebf9532996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 0
-  startingOffset: {x: 0, y: 0}
+  animationDuration: 5
+  startingRatio: 0.9
 --- !u!1 &742639687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,6 +1908,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: f4dc6a50b26c4004ba64cf47680494d6,
         type: 3}
+    - target: {fileID: 11445612, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: playLogo
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0

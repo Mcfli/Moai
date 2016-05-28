@@ -34,6 +34,9 @@ public class FadeInOut : MonoBehaviour {
     public void fade(Color target, float speed) {
         if(speed <= 0) {
             fadeImage.color = target;
+            targetColor = target;
+            fadeProgress = 1;
+            fading = false;
             return;
         }
         fadeImage.gameObject.SetActive(true);

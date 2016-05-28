@@ -60,7 +60,13 @@ public class MainMenu : MonoBehaviour {
         }
 
         if(playLogo) {
-            if(logoStep == 0) {
+            if(Input.GetKey(KeyCode.Escape)) {
+                fader.fade(Color.clear, 0);
+                logo.SetActive(false);
+                playLogo = false;
+                Globals.WeatherManagerScript.getWeatherAudioSource().volume = 1;
+                Camera.main.GetComponent<MusicManager>().Play();
+            }else if(logoStep == 0) {
                 Globals.WeatherManagerScript.getWeatherAudioSource().volume = 0;
                 Camera.main.GetComponent<MusicManager>().Stop(false);
                 fader.fade(new Color(34f / 255, 44f / 255, 55f / 255, 1), 0f);
@@ -71,12 +77,13 @@ public class MainMenu : MonoBehaviour {
                     logo.SetActive(true);
                     logoStep++;
                 }
-            }else if(logoStep == 2) {
+            } else if(logoStep == 2) {
                 if(!logo.activeSelf) {
                     fader.fade(Color.clear, 1f);
                     Globals.WeatherManagerScript.getWeatherAudioSource().volume = 1;
                     Camera.main.GetComponent<MusicManager>().Play();
-                    logoStep++;
+                    playLogo = false;
+                    title.gameObject.GetComponent<TitleAnimate>().animate();
                 }
             }
         }
