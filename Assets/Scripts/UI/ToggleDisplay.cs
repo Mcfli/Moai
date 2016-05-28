@@ -7,11 +7,9 @@ public class ToggleDisplay: MonoBehaviour {
     public string settingName;
     public string onText = "ON";
     public string offText = "OFF";
-    private string head;
     private UnityEngine.UI.Toggle toggle;
 
 	void Awake() {
-        head = text.text;
         toggle = GetComponent<UnityEngine.UI.Toggle>();
     }
 
@@ -25,9 +23,8 @@ public class ToggleDisplay: MonoBehaviour {
     }
 
     private void updateText() {
-        if(!toggle.interactable) text.text = head;
-        else if(toggle.isOn) text.text = head + ": " + onText;
-        else text.text = head + ": " + offText;
+        if(toggle.isOn) text.text = onText;
+        else text.text = offText;
     }
 
     public void updateSetting(bool val) {

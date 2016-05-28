@@ -25,8 +25,7 @@ public class WeatherManager : MonoBehaviour {
     private Vector3 curParticlePosition;
 
     // Player for audio source
-    private AudioSource cameraAudio;
-    private AudioSource windAudio;
+    private AudioSource weatherAudioSource;
     private bool wasPlaying = false;
 
     // Weather audio
@@ -38,8 +37,7 @@ public class WeatherManager : MonoBehaviour {
     }
 
     void Start() {
-        cameraAudio = Camera.main.gameObject.AddComponent<AudioSource>();
-        windAudio = Camera.main.gameObject.AddComponent<AudioSource>();
+        weatherAudioSource = Camera.main.gameObject.AddComponent<AudioSource>();
         initializeWeather();
     }
 
@@ -79,20 +77,18 @@ public class WeatherManager : MonoBehaviour {
 
         if (Globals.time_scale > 1)
         {
-            if(cameraAudio.isPlaying)
+            if(weatherAudioSource.isPlaying)
             {
                 wasPlaying = true;
-                cameraAudio.Stop();
-                windAudio.Play();
+                weatherAudioSource.Stop();
             }
         }
         else
         {
-            if(!cameraAudio.isPlaying && wasPlaying && Globals.cur_weather.name == "Rain")
+            if(!weatherAudioSource.isPlaying && wasPlaying)
             {
                 wasPlaying = false;
-                cameraAudio.Play();
-                windAudio.Stop();
+                weatherAudioSource.Play();
             }
         }
     }
@@ -152,21 +148,18 @@ public class WeatherManager : MonoBehaviour {
                 activeParticleSystem.transform.position = curParticlePosition;
                 if (Globals.cur_weather.name == "Rain")
                 {
-                    cameraAudio.clip = rainAudio;
-                    cameraAudio.loop = true;
-                    cameraAudio.Play();
-                    windAudio.Stop();
+                    weatherAudioSource.clip = rainAudio;
+                    weatherAudioSource.loop = true;
+                    weatherAudioSource.Play();
                 } else {
-                    cameraAudio.Stop();
-                    windAudio.clip = Wind;
-                    windAudio.loop = true;
-                    windAudio.Play();
+                    weatherAudioSource.clip = Wind;
+                    weatherAudioSource.loop = true;
+                    weatherAudioSource.Play();
                 }
             } else {
-                cameraAudio.Stop();
-                windAudio.clip = Wind;
-                windAudio.loop = true;
-                windAudio.Play();
+                weatherAudioSource.clip = Wind;
+                weatherAudioSource.loop = true;
+                weatherAudioSource.Play();
             }
 
         }
@@ -239,5 +232,9 @@ public class WeatherManager : MonoBehaviour {
         curParticlePosition = new Vector3(chunkCenter.x, particlesHeight, chunkCenter.z);
         if (activeParticleSystem != null)
             activeParticleSystem.transform.position = curParticlePosition;
+    }
+
+    public AudioSource getWeatherAudioSource() {
+        return weatherAudioSource;
     }
 }
