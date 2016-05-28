@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaterFire: 0.3
   EarthAir: 0.6
+  Amplify: 0
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
@@ -163,7 +164,15 @@ MonoBehaviour:
   - {fileID: 172810, guid: 63ff9b08fe39a504aab9f4840d301060, type: 2}
   - {fileID: 139208, guid: 86c5c794764c77748a0235b992647a66, type: 2}
   - {fileID: 163042, guid: 61aa62e0b8e4602478de01825e69f1b2, type: 2}
+  - {fileID: 153980, guid: 6571b39c85c0a49a980a990469c972b0, type: 2}
+  - {fileID: 120772, guid: 0ea0c55d6b8fd4bc3aa6a47bed6d2cb5, type: 2}
+  - {fileID: 193820, guid: 89aa831b12118468080cc9e8841d344e, type: 2}
+  - {fileID: 175142, guid: 23045cf9f21df420a8ae53055a59f9c6, type: 2}
   smallDoodadChance:
+  - 1
+  - 1
+  - 1
+  - 1
   - 1
   - 1
   - 1

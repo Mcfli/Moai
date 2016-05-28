@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaterFire: 0.35
   EarthAir: 0.39
+  Amplify: 0
   weatherTypes:
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
@@ -107,7 +108,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   - {fileID: 155264, guid: 315a7e48c60329044ab0a87c30150e02, type: 2}
   bigDoodads:
   - {fileID: 145722, guid: 05d820987f9e7b34d9b369a883691066, type: 2}
@@ -116,8 +116,8 @@ MonoBehaviour:
   - {fileID: 137344, guid: 43452567a80bf0d4bb8ac0aac1141c8f, type: 2}
   - {fileID: 102276, guid: 5d25e09b13b51c542aa0b78a004c0d66, type: 2}
   - {fileID: 127378, guid: 4554eb0d36f098c4887b913a6c04fd48, type: 2}
-  - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
-  - {fileID: 150136, guid: 1deb94146c380a94daa7ab6431c81459, type: 2}
+  - {fileID: 141222, guid: 1830f0fbcabcf456881179a5b8993e93, type: 2}
+  - {fileID: 122762, guid: 76b634e68351db246a01a42fbdb2a1a9, type: 2}
   bigDoodadChance:
   - 5
   - 1
@@ -137,26 +137,30 @@ MonoBehaviour:
   - 3
   - 3
   smallDoodads:
-  - {fileID: 122762, guid: 76b634e68351db246a01a42fbdb2a1a9, type: 2}
-  - {fileID: 185738, guid: 765f137ab4b60dc4e8cbe913d2add33e, type: 2}
   - {fileID: 173966, guid: 4b6608859410f484880353f04b938aa5, type: 2}
-  - {fileID: 121766, guid: 06f715c6f5c1f5d4ba0b806ce2cce6bb, type: 2}
   - {fileID: 114526, guid: 62f245aef34405c4b8a90e3f09780b27, type: 2}
-  - {fileID: 197814, guid: 58e9ee00a93132241bcab2fff23922b2, type: 2}
-  - {fileID: 121328, guid: 70eb339ca4089f149926e2e767f569a4, type: 2}
+  - {fileID: 121766, guid: 06f715c6f5c1f5d4ba0b806ce2cce6bb, type: 2}
+  - {fileID: 116512, guid: 9c7d62ea52f0643189fb1be80e098a28, type: 2}
+  - {fileID: 110126, guid: 39f7738f56f136746ab88b2f5adce188, type: 2}
+  - {fileID: 187426, guid: c9e0d03e22f3444f490f76f3729c4efa, type: 2}
+  - {fileID: 195834, guid: b5d66965c04ff4ac0bcc8123a0c30035, type: 2}
   - {fileID: 186472, guid: 6bf12cc75f4694de0bada9417c6f778c, type: 2}
+  - {fileID: 105494, guid: 7afed1340a3b14575af3496c9a732ad0, type: 2}
+  - {fileID: 148448, guid: 321246960ca154469ae877cadf270c8d, type: 2}
   - {fileID: 176168, guid: e61efd943506db245beee80bff64d39d, type: 2}
-  - {fileID: 136088, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
+  - {fileID: 150136, guid: 1deb94146c380a94daa7ab6431c81459, type: 2}
   - {fileID: 108208, guid: de01314f5e41b4936ae202f1a37d14f0, type: 2}
   - {fileID: 185526, guid: f740df261db13411886cc36b6a68b742, type: 2}
   - {fileID: 185046, guid: eb75d9e0e001d470482001216efca68f, type: 2}
   - {fileID: 170008, guid: b2bd44f66003b4580b55fae2b973a28a, type: 2}
-  - {fileID: 150692, guid: 3b833d16e13b44c3bb0fb0fc8cd2919f, type: 2}
   - {fileID: 118120, guid: db91c7522c04d467694bba986ad1926a, type: 2}
-  - {fileID: 110126, guid: 39f7738f56f136746ab88b2f5adce188, type: 2}
+  - {fileID: 136088, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
+  - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
   smallDoodadChance:
   - 2
   - 2
+  - 1
+  - 1
   - 1
   - 1
   - 1
