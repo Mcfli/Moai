@@ -119,7 +119,8 @@ MonoBehaviour:
   - {fileID: 102276, guid: 5d25e09b13b51c542aa0b78a004c0d66, type: 2}
   - {fileID: 127378, guid: 4554eb0d36f098c4887b913a6c04fd48, type: 2}
   - {fileID: 141222, guid: 1830f0fbcabcf456881179a5b8993e93, type: 2}
-  - {fileID: 122762, guid: 76b634e68351db246a01a42fbdb2a1a9, type: 2}
+  - {fileID: 122362, guid: 76b634e68351db246a01a42fbdb2a1a9, type: 2}
+  - {fileID: 109102, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
   bigDoodadChance:
   - 5
   - 1
@@ -129,6 +130,7 @@ MonoBehaviour:
   - 1
   - 2
   - 2
+  - 2
   bigDoodadRadius:
   - 1
   - 4
@@ -136,6 +138,7 @@ MonoBehaviour:
   - 4
   - 4
   - 4
+  - 3
   - 3
   - 3
   smallDoodads:
@@ -156,9 +159,9 @@ MonoBehaviour:
   - {fileID: 185046, guid: eb75d9e0e001d470482001216efca68f, type: 2}
   - {fileID: 170008, guid: b2bd44f66003b4580b55fae2b973a28a, type: 2}
   - {fileID: 118120, guid: db91c7522c04d467694bba986ad1926a, type: 2}
-  - {fileID: 136088, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
   - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
   - {fileID: 178250, guid: 4643fbf432cf34051a950ea9bd4bdfa5, type: 2}
+  - {fileID: 121766, guid: e055184fcdc5348d78563d63939d4be9, type: 2}
   smallDoodadChance:
   - 2
   - 2

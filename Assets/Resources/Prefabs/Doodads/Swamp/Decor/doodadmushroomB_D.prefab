@@ -15,7 +15,7 @@ GameObject:
   - 136: {fileID: 13609740}
   - 114: {fileID: 11410780}
   m_Layer: 15
-  m_Name: doodadmushroomB_B
+  m_Name: doodadmushroomB_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,9 +43,9 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 70a61b99089754e4782955a9bbc50139, type: 2}
-  - {fileID: 2100000, guid: c4f20548b1f364318972d96c42771bb8, type: 2}
-  - {fileID: 2100000, guid: 9a45c02d652794b7283349d3cade93ee, type: 2}
+  - {fileID: 2100000, guid: 11b08420728064fba96b35f7cf06d00b, type: 2}
+  - {fileID: 2100000, guid: 38b399d33fd66474c9c27e286f6ebc25, type: 2}
+  - {fileID: 2100000, guid: 142969de8099846ea93d7d979f1f0aa3, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
