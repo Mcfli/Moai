@@ -1189,6 +1189,30 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11407760, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
+      propertyPath: puzzleFinisher
+      value: 
+      objectReference: {fileID: 189240, guid: 63b055237150d2747b7ef3a71405b1ea, type: 2}
+    - target: {fileID: 116392, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446116, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446116, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 22446116, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475178, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7fa72c68e5b5c84ea519a9bfa917abf, type: 2}
   m_IsPrefabParent: 0

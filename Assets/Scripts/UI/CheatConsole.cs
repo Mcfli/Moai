@@ -3,26 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class CheatConsole : MonoBehaviour
-{
+public class CheatConsole : MonoBehaviour{
     public InputField console;
-
-    private GameObject puzzleFinisher;
+    public GameObject puzzleFinisher;
     private bool active = true;
     private bool speed = false;
 
-    void Start()
-    {
-        puzzleFinisher = Resources.Load("Prefabs/puzzleFinisher") as GameObject;
+    void Start(){
         deactivateConsole();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.BackQuote))
-        {
-            toggleConsole();
-        }
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.BackQuote)) toggleConsole();
         console.gameObject.SetActive(active);
     }
 
@@ -91,33 +83,13 @@ public class CheatConsole : MonoBehaviour
 
     // Cheats
 
-    void addStars()
-    {
-        /*
-        GameObject aStar = Instantiate(airStar, Globals.Player.transform.position, Quaternion.identity) as GameObject;
-        GameObject eStar = Instantiate(earthStar, Globals.Player.transform.position, Quaternion.identity) as GameObject;
-        GameObject fStar = Instantiate(fireStar, Globals.Player.transform.position, Quaternion.identity) as GameObject;
-        GameObject wStar = Instantiate(waterStar, Globals.Player.transform.position, Quaternion.identity) as GameObject;
-
-        Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
-
-        aStar.GetComponent<StarEffect>().setTarget(target);
-        eStar.GetComponent<StarEffect>().setTarget(target);
-        fStar.GetComponent<StarEffect>().setTarget(target);
-        wStar.GetComponent<StarEffect>().setTarget(target);
-        Globals.airStars.Add(aStar);
-        Globals.earthStars.Add(eStar);
-        Globals.fireStars.Add(fStar);
-        Globals.waterStars.Add(wStar);
-        */
-
+    void addStars(){
         foreach(KeyValuePair<string, List<GameObject>> p in Globals.Stars)
             Globals.SkyScript.addStar(p.Key);
     }
 
     // Create a shrine finisher at player
-    void finishShrine()
-    {
+    void finishShrine(){
         Instantiate(puzzleFinisher, Globals.Player.transform.position, Quaternion.identity);
     }
 }
