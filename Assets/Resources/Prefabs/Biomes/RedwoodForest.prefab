@@ -109,6 +109,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes:
   - {fileID: 191514, guid: 11da957ef6c58c44f9ea6408d50c0ea4, type: 2}
+  - {fileID: 123218, guid: 92d761dce3d754451bfff5e86c113091, type: 2}
   bigDoodads:
   - {fileID: 189006, guid: 448152c6bfa7cad4ebae66a3818f1530, type: 2}
   - {fileID: 135330, guid: 2e21c1e14494beb4d94acc180832d708, type: 2}

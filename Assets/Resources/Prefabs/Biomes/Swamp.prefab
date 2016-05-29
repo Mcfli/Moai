@@ -158,9 +158,11 @@ MonoBehaviour:
   - {fileID: 118120, guid: db91c7522c04d467694bba986ad1926a, type: 2}
   - {fileID: 136088, guid: ddc0ace49d2b4f64aabbdd1b33e8a871, type: 2}
   - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
+  - {fileID: 178250, guid: 4643fbf432cf34051a950ea9bd4bdfa5, type: 2}
   smallDoodadChance:
   - 2
   - 2
+  - 1
   - 1
   - 1
   - 1
