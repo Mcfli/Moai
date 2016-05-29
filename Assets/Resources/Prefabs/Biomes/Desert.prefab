@@ -39,8 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.63
-  EarthAir: 0.36
+  WaterFire: 1
+  EarthAir: 0
+  Amplify: 0
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
@@ -113,8 +114,6 @@ MonoBehaviour:
   - {fileID: 193532, guid: 4775558bc9fc348a9abebe9e1c74bf88, type: 2}
   - {fileID: 194280, guid: 1cf99edb641b64bf686f85e02c3c8469, type: 2}
   - {fileID: 198816, guid: 80e70652a8bc746549e81ae36158db7e, type: 2}
-  - {fileID: 171530, guid: 6b8009c6e9ef94aa4a258bb1320739c3, type: 2}
-  - {fileID: 120038, guid: 460e35f7b7b8b42f48fdb86d1ed30850, type: 2}
   - {fileID: 195498, guid: 0f23de361e4154c459864b401da8e1c3, type: 2}
   - {fileID: 177580, guid: 49f10dddfa9b3497e9528becc5f02a7d, type: 2}
   - {fileID: 169434, guid: bed6f4c90102f4e65b86f5e2f92560f0, type: 2}
@@ -168,6 +167,34 @@ MonoBehaviour:
   - 0.2
   - 0.2
   bigDoodadRadius:
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
   - 4.5
   smallDoodads: []
   smallDoodadChance: []

@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2365954}
   - 64: {fileID: 6473098}
   m_Layer: 15
-  m_Name: desertpillar_F
+  m_Name: firepillar_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f5b2f71e92cef469eb58673e47d8683c, type: 2}
+  - {fileID: 2100000, guid: 420bfe3a84e6f4dfdb7819dd6b9f2412, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

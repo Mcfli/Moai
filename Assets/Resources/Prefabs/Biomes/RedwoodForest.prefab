@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.3
-  EarthAir: 0.6
-  Amplify: 0
+  WaterFire: 1
+  EarthAir: 1
+  Amplify: 1
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
@@ -168,6 +168,11 @@ MonoBehaviour:
   - {fileID: 120772, guid: 0ea0c55d6b8fd4bc3aa6a47bed6d2cb5, type: 2}
   - {fileID: 193820, guid: 89aa831b12118468080cc9e8841d344e, type: 2}
   - {fileID: 175142, guid: 23045cf9f21df420a8ae53055a59f9c6, type: 2}
+  - {fileID: 169626, guid: 890bd9f2bd70c4273912e46cb5889d96, type: 2}
+  - {fileID: 135446, guid: 771386f976d0347f8a746652b3c9670b, type: 2}
+  - {fileID: 127070, guid: 4c3d045eaa7454cc994e4309db9460c0, type: 2}
+  - {fileID: 128022, guid: f43a6184b29d9432e886a449ffaf044b, type: 2}
+  - {fileID: 131786, guid: 238037ccc3d5d4b2d83907c3afd07506, type: 2}
   smallDoodadChance:
   - 1
   - 1
@@ -193,10 +198,15 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
