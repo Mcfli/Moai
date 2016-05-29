@@ -152,7 +152,7 @@ public class GenerationManager : MonoBehaviour {
     }
     
     private IEnumerator loadUnload(Vector2 position) {
-        bool done = true;
+        //bool done = true;
         doneLoading = false;
         // Unload chunks if there are loaded chunks
         if (loaded_chunks.Keys.Count > 0)
@@ -168,7 +168,7 @@ public class GenerationManager : MonoBehaviour {
                     ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
                     if ((chunkObj.doneObjects ||chunkObj.loadingObjects) && !chunkObj.unloadedObjects)
                     {
-                        done = false;
+                        //done = false;
                         chunkObj.unloadObjects();
                     }
                 }
@@ -181,7 +181,7 @@ public class GenerationManager : MonoBehaviour {
                     // Unload base stuff
                     if ((chunkObj.doneBase || chunkObj.loadingBase) && !chunkObj.unloadedBase)
                     {
-                        done = false;
+                        //done = false;
                         chunkObj.unloadBase();
                     }
 
@@ -214,7 +214,7 @@ public class GenerationManager : MonoBehaviour {
                     if (!loaded_chunks.ContainsKey(thisChunk))
                     {
                         createChunk(thisChunk);
-                        done = false;
+                        //done = false;
                     }
                     ChunkMeshes chunkObj = loaded_chunks[thisChunk].GetComponent<ChunkMeshes>();
                     
@@ -222,7 +222,7 @@ public class GenerationManager : MonoBehaviour {
                     if (!chunkObj.doneBase)
                     {
                         chunkObj.loadBase();
-                        done = false;
+                        //done = false;
                     }
                     else
                     {
@@ -232,7 +232,7 @@ public class GenerationManager : MonoBehaviour {
                         {
                             chunkObj.mf.mesh = chunkObj.highMesh;
                             chunkObj.detailed = true;
-                            done = false;
+                            //done = false;
                         }
 
                         // If the chunk needs to be undetailed, undetail it
@@ -240,14 +240,14 @@ public class GenerationManager : MonoBehaviour {
                         {
                             chunkObj.mf.mesh = chunkObj.lowMesh;
                             chunkObj.detailed = false;
-                            done = false;
+                            //done = false;
                         }
                     }
                     // If the chunk needs to load its objects, continue loading them
                     if (inLoadDistance(position, thisChunk, tree_load_dist) && !chunkObj.doneObjects)
                     {
                         chunkObj.loadObjects();
-                        done = false;
+                        //done = false;
                     }
                 }
             }
