@@ -985,8 +985,8 @@ MonoBehaviour:
   isDone: 0
   size: 50
   resolution: 3
-  minSolItems: 1
-  maxSolItems: 5
+  minSolItems: 3
+  maxSolItems: 8
   mural: {fileID: 0}
   glow: {fileID: 161888, guid: fa1e6bd9b8e45c248b149ab46c1048d1, type: 2}
   vertexPillar: {fileID: 134560, guid: 7c61f41746725d04a932bd24e91de05f, type: 2}

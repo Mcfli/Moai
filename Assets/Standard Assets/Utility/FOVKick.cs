@@ -47,22 +47,27 @@ namespace UnityStandardAssets.Utility
 
         public IEnumerator FOVKickUp()
         {
-            float t = Mathf.Abs((Camera.fieldOfView - originalFov)/FOVIncrease);
+            float d = Mathf.Abs((Camera.fieldOfView - originalFov)/FOVIncrease);
+            float t = 0;
             while (t < TimeToIncrease)
             {
-                Camera.fieldOfView = originalFov + (IncreaseCurve.Evaluate(t/TimeToIncrease)*FOVIncrease);
+                Camera.fieldOfView = originalFov + (IncreaseCurve.Evaluate(d/TimeToIncrease)*FOVIncrease);
+                d = Mathf.Abs((Camera.fieldOfView - originalFov) / FOVIncrease);
                 t += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
+            Camera.fieldOfView = originalFov + FOVIncrease;
         }
 
 
         public IEnumerator FOVKickDown()
         {
-            float t = Mathf.Abs((Camera.fieldOfView - originalFov)/FOVIncrease);
+            float d = Mathf.Abs((Camera.fieldOfView - originalFov)/FOVIncrease);
+            float t = 0;
             while (t > 0)
             {
-                Camera.fieldOfView = originalFov + (IncreaseCurve.Evaluate(t/TimeToDecrease)*FOVIncrease);
+                Camera.fieldOfView = originalFov + (IncreaseCurve.Evaluate(d/TimeToDecrease)*FOVIncrease);
+                d = Mathf.Abs((Camera.fieldOfView - originalFov) / FOVIncrease);
                 t -= Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }

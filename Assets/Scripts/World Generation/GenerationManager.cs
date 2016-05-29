@@ -86,27 +86,26 @@ public class GenerationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
-        if(Globals.cur_chunk != current_chunk) {
-            Globals.cur_chunk = current_chunk;
-            weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-            Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-            doneLoading = false;
-            curDist = 0;
-            StopCoroutine("loadUnload");
-            StartCoroutine("loadUnload", Globals.cur_chunk);
-            if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null)
-            {
-				ShrineManager.shrines [current_chunk].killTrees ();
-			}
-        }
-        if(Globals.mode > -1) {
-            endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
-            
-        }
+        if(Globals.cur_chunk != current_chunk) changeChunk();
+        if(Globals.mode > -1) endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
 
         if(Globals.mode == -1) playerWarped = false;
         else if(!playerWarped) playerWarped = Globals.PlayerScript.warpToGround(10000000, true);
 
+    }
+
+    public void changeChunk() {
+        Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
+        Globals.cur_chunk = current_chunk;
+        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+        doneLoading = false;
+        curDist = 0;
+        StopCoroutine("loadUnload");
+        StartCoroutine("loadUnload", Globals.cur_chunk);
+        if(ShrineManager.shrines.ContainsKey(current_chunk) && ShrineManager.shrines[current_chunk] != null) {
+            ShrineManager.shrines[current_chunk].killTrees();
+        }
     }
 
     // Called by menu on play

@@ -42,7 +42,6 @@ public class MainMenu : MonoBehaviour {
             Globals.loading = true;
             loadStep = 1;
             Globals.mode = 0;
-            Random.seed = Globals.SeedScript.randomizeSeed();
             StartCoroutine(loadingDelay());
             return;
         }
@@ -118,6 +117,7 @@ public class MainMenu : MonoBehaviour {
         Globals.MenusScript.switchTo(loadingScreen);
         Random.seed = (int)System.DateTime.Now.Ticks;
         loadingBackdrop.sprite = loadingWallpapers[Random.Range(0, loadingWallpapers.Count)];
+        Random.seed = Globals.SeedScript.randomizeSeed();
         Globals.GenerationManagerScript.initiateWorld();
         Globals.WeatherManagerScript.initializeWeather();
         //Camera.main.GetComponent<MusicManager>().Stop(false);
@@ -137,9 +137,15 @@ public class MainMenu : MonoBehaviour {
         firstPersonCont.enabled = true;
         firstPersonCont.lookLock = false;
         firstPersonCont.getMouseLook().SetCursorLock(true);
+
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed;
         Vector2 randomSpot = Random.insideUnitCircle * Globals.GenerationManagerScript.chunk_size;
         Globals.Player.transform.position = new Vector3(randomSpot.x, 0, randomSpot.y);
         Globals.PlayerScript.warpToGround(3000, true);
+        Random.seed = originalSeed;
+
+        Globals.GenerationManagerScript.changeChunk();
     }
 
     public void setupMain() {

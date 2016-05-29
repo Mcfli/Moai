@@ -39,13 +39,13 @@ public class HUD : MonoBehaviour {
 
     void Update() {
         //pause button
-        if(!Globals.loading && Input.GetButtonDown(pauseButton)) {
+        if(!Globals.loading && Input.GetButtonDown(pauseButton) && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) {
             if(Globals.mode == 1) resumeGame();
             else if(Globals.mode == 0) pauseGame();
         }
 
         //toggle HUD
-        if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0) Globals.settings["ShowHUD"] = (Globals.settings["ShowHUD"] == 0) ? 1 : 0;
+        if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0 && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) Globals.settings["ShowHUD"] = (Globals.settings["ShowHUD"] == 0) ? 1 : 0;
         HUDParent.SetActive(Globals.settings["ShowHUD"] == 1 && Globals.mode == 0);
         if(!HUDParent.activeInHierarchy) return;
 
