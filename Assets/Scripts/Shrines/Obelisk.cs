@@ -109,6 +109,7 @@ public class Obelisk : MonoBehaviour {
 
     void OnMouseOver()
     {
+        if(isDone) return;
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
         if (!litUp && Globals.time_scale > 0 && Time.timeScale > 0 && dist < lightUpDistance)
         {
@@ -124,6 +125,7 @@ public class Obelisk : MonoBehaviour {
 
     void OnMouseExit()
     {
+        if(isDone) return;
         if (litUp && Globals.time_scale > 0 && Time.timeScale > 0)
         {
             dullIndicators();
@@ -144,6 +146,7 @@ public class Obelisk : MonoBehaviour {
                 spendStars();
                 // Success sound
                 SuccessAudio.PlayOneShot(ObeliskSuccess, .5F);
+                lightIndicators();
             }
         }
         else
@@ -151,6 +154,11 @@ public class Obelisk : MonoBehaviour {
             // Failure sound
             FailAudio.PlayOneShot(ObeliskFail, .5F);
         }
+        Globals.MenusScript.GetComponent<HUD>().ping();
+    }
+
+    public bool usable() {
+        return isDone || areReqsMet();
     }
 
     private void spendStars()

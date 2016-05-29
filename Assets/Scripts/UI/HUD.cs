@@ -74,7 +74,7 @@ public class HUD : MonoBehaviour {
         else crosshairList[activeCrosshair].color = new Color(initialColor.r, initialColor.g, initialColor.b, idleOpacity);
 
         if(pingNext) {
-            pingCrosshair();
+            pingCrosshair(true);
             pingNext = false;
         }
 

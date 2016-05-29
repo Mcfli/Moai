@@ -33,6 +33,7 @@ public class ShrineActivator : MonoBehaviour {
             //Shrine Completion Sound
             ShrineSuccess.PlayOneShot(ShrineComplete, .5F);
             firstActivate = true;
+            Globals.MenusScript.GetComponent<HUD>().ping();
 
             return true;
         }

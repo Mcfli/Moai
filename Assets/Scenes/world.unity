@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToFadeOut: 1
-  endingSize: {x: 200, y: 200}
+  endingSize: {x: 300, y: 300}
 --- !u!114 &82411919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4823,7 +4823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToFadeOut: 1
-  endingSize: {x: 200, y: 200}
+  endingSize: {x: 300, y: 300}
 --- !u!114 &338804840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6888,11 +6888,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 157798146}
-        m_MethodName: switchTo
-        m_Mode: 2
+        m_MethodName: switchToInitial
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 848850888}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8003,7 +8003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToFadeOut: 1
-  endingSize: {x: 200, y: 200}
+  endingSize: {x: 300, y: 300}
 --- !u!114 &578602606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14487,7 +14487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToFadeOut: 1
-  endingSize: {x: 200, y: 200}
+  endingSize: {x: 300, y: 300}
 --- !u!114 &1080185063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19308,11 +19308,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 157798146}
-        m_MethodName: switchToInitial
-        m_Mode: 1
+        m_MethodName: switchTo
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 848850888}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -21192,7 +21192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secondsToFadeOut: 1
-  endingSize: {x: 200, y: 200}
+  endingSize: {x: 300, y: 300}
 --- !u!114 &1697034418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23225,7 +23225,7 @@ MonoBehaviour:
     MinimumX: -90
     MaximumX: 90
     smooth: 0
-    smoothTime: 0.1
+    smoothTime: 0.5
     lockCursor: 1
     invertY: 0
   m_UseFovKick: 1
@@ -24998,7 +24998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationDuration: 4
   secondsOfFade: 1
-  endingSizeRatio: 1.1
+  endingSizeRatio: 1.25
 --- !u!114 &1978266951
 MonoBehaviour:
   m_ObjectHideFlags: 0

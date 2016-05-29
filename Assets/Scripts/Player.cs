@@ -280,8 +280,12 @@ public class Player : MonoBehaviour {
             if(GetHover().collider) {
                 ShrineActivator sa = GetHover().collider.gameObject.GetComponent<ShrineActivator>();
                 WordWall ww = GetHover().collider.gameObject.GetComponent<WordWall>();
-                if (sa) return !sa.active();
-                else if (ww) return true;
+                Obelisk ob = GetHover().collider.gameObject.GetComponent<Obelisk>();
+                TeleportStone ts = GetHover().collider.gameObject.GetComponent<TeleportStone>();
+                if(sa) return !sa.active();
+                else if(ww) return true;
+                else if(ob) return ob.usable();
+                else if(ts) return true;
             }
         } else return heldObj.canUse(GetHover());
         return false;
