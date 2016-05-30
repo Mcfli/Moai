@@ -109,7 +109,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  - {fileID: 116806, guid: e1a19f7daa3c84763b9cbe216b65ebc1, type: 2}
+  - {fileID: 116806, guid: 7137cb48ca1e8428c8355ba1df7e703a, type: 2}
+  - {fileID: 116806, guid: a377f7aad73e84481b36cdf526c58999, type: 2}
+  - {fileID: 116806, guid: 5421f70d5f7664230915bbeb513db347, type: 2}
+  - {fileID: 154470, guid: 9ab5e8006653b4f8c8dc21cb226ea856, type: 2}
+  - {fileID: 154470, guid: 5c46f3f3c074b45659c715d0ec4fd774, type: 2}
+  - {fileID: 154470, guid: e26e1eab8df7448edbb5d34788132fd4, type: 2}
+  - {fileID: 154470, guid: 19a4c440bcd314c6eaaa40eeaab80386, type: 2}
   bigDoodads:
   - {fileID: 145722, guid: 05d820987f9e7b34d9b369a883691066, type: 2}
   - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
@@ -158,8 +165,8 @@ MonoBehaviour:
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
-  treeDensity: 2
-  forestRadius: 50
+  treeDensity: 3
+  forestRadius: 30
   forestMaxTrees: 16
   mixedForests: 1
   colors:

@@ -41,16 +41,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imagespace_name: Rainy
   adjust_speed: 1
+  saturation: 0.7
   redChannel:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: -0.0062499996
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: 1
+      value: 0.99375
       inSlope: 2
       outSlope: 2
       tangentMode: 0
@@ -89,7 +90,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  saturation: 0.7
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
