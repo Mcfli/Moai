@@ -19,6 +19,7 @@ public class Seed : MonoBehaviour {
         GetComponent<NoiseSynth>().Init();
         Globals.GenerationManagerScript.EarthAirMap.Init();
         Globals.GenerationManagerScript.WaterFireMap.Init();
+        Globals.GenerationManagerScript.AmplifyMap.Init();
         return seed;
     }
 }

@@ -10,22 +10,23 @@ public class NoiseGen : MonoBehaviour
     public float amplitude = 100.0f;
     public int seed = 9647;
 
-    private static int x_o;
-    private static int y_o;
-    private static int z_o;
-    private static int w_o;
+    private int x_o;
+    private int y_o;
+    private int z_o;
+    private int w_o;
 
     private float smoothness_inv;
 
     public void Init()
     {
         smoothness_inv = 1 / smoothness;
-        Random.seed += seed;
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed + seed;
         x_o = Random.Range(2,int.MaxValue);
         y_o = Random.Range(2, int.MaxValue);
         z_o = Random.Range(2, int.MaxValue);
         w_o = Random.Range(2, int.MaxValue);
-        Random.seed -= seed;
+        Random.seed = originalSeed;
     }
 
     // Cubic interpolation
@@ -187,7 +188,7 @@ public class NoiseGen : MonoBehaviour
     }
 
     // Generates an int from an x and a y value
-    public static int hash(int x, int y, int z)
+    public int hash(int x, int y, int z)
     {
         int total = ((x * x_o) ^ (y * y_o) ^ (z * z_o)) % w_o;
 

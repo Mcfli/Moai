@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Biome : MonoBehaviour {
+    public string biomeName;
+
     // Climate properties
     public float WaterFire;
     public float EarthAir;

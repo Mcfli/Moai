@@ -219,6 +219,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 185308, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e25a969be5701c4c9d727322eee84b8, type: 2}
   m_IsPrefabParent: 0
@@ -281,8 +285,8 @@ MonoBehaviour:
   - {fileID: 11476116, guid: 0668d03aa56de4c8fbb5a66577c2bae2, type: 2}
   snowBiome: {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
   alwaysSnowHeight: 700
-  WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   mountainMap: {fileID: 11459648, guid: 6bb084b80283b574d8951bb7694f00b5, type: 2}
+  WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
   AmplifyMap: {fileID: 11434400, guid: 2dd337f2d5356934680b15743266b185, type: 2}
   doneLoading: 0
