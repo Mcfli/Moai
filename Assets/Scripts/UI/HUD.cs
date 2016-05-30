@@ -39,7 +39,7 @@ public class HUD : MonoBehaviour {
 
     void Update() {
         //pause button
-        if(!Globals.loading && Input.GetButtonDown(pauseButton) && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) {
+        if(!Globals.loading && Input.GetButtonDown(pauseButton)) {
             if(Globals.mode == 1) resumeGame();
             else if(Globals.mode == 0) pauseGame();
         }

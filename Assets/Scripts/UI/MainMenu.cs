@@ -37,6 +37,8 @@ public class MainMenu : MonoBehaviour {
     void Update() {
         if(Globals.mode != -1 && loadStep == -1) return;
 
+        if(Input.GetKeyDown(KeyCode.Escape) && loadStep == -1) Globals.MenusScript.switchToInitial();
+
         if(loadStep == 0) {
             prepLoad();
             Globals.loading = true;

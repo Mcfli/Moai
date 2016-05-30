@@ -224,6 +224,10 @@ public class CheatConsole : MonoBehaviour{
                 foreach(Transform c in Globals.PlayerScript.waypoint.transform) c.gameObject.SetActive(!c.gameObject.activeSelf);
                 Log("This is why he calls me the Wandering Eye.");
                 break;
+            case "freemouse":
+                Globals.PlayerScript.firstPersonCont.getMouseLook().ToggleCursorLock();
+                Log("Toggled Cursor Lock");
+                break;
             default:
                 Log("Unknown Command");
                 break;

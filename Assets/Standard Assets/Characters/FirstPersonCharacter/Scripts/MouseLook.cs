@@ -14,7 +14,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float MaximumX = 90F;
         public bool smooth;
         public float smoothTime = 5f;
-        public bool lockCursor = true;
+        //public bool lockCursor = true;
         public bool invertY = false;
 
         private Quaternion m_CharacterTargetRot;
@@ -55,33 +55,34 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCursorLock();
         }
 
+        public void ToggleCursorLock() {
+            //lockCursor = !lockCursor;
+            m_cursorIsLocked = !m_cursorIsLocked;
+        }
+
         public void SetCursorLock(bool value)
         {
-            lockCursor = value;
-            if(!lockCursor)
-            {//we force unlock the cursor if the user disable the cursor locking helper
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            //lockCursor = value;
+            m_cursorIsLocked = value;
         }
 
         public void UpdateCursorLock()
         {
             //if the user set "lockCursor" we check & properly lock the cursos
-            if (lockCursor)
+            //if (lockCursor)
                 InternalLockUpdate();
         }
 
         private void InternalLockUpdate()
         {
-            if(Input.GetKeyUp(KeyCode.Escape))
+            /*if(Input.GetKeyUp(KeyCode.Escape))
             {
                 m_cursorIsLocked = false;
             }
             else if(Input.GetMouseButtonUp(0))
             {
                 m_cursorIsLocked = true;
-            }
+            }*/
 
             if (m_cursorIsLocked)
             {
