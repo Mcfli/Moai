@@ -47,9 +47,21 @@ public class WeatherManager : MonoBehaviour {
     void Update(){
         //if(Globals.mode == -1) return;
 
-        if (Globals.time > lastUpdated + updateTime * Globals.time_resolution || lastBiome != Globals.cur_biome) {
+        if (Globals.time > lastUpdated + updateTime * Globals.time_resolution) {
             lastUpdated = Globals.time;
             changeWeather();
+        }else if(lastBiome != Globals.cur_biome) {
+            bool found = false;
+            foreach(Weather w in Globals.cur_biome.weatherTypes) {
+                if(w.name == Globals.cur_weather.name) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                lastUpdated = Globals.time;
+                changeWeather();
+            }
         }
 
         checkIfVisibleParticles();
