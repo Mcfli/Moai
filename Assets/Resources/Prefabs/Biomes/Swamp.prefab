@@ -159,8 +159,8 @@ MonoBehaviour:
   - {fileID: 185046, guid: eb75d9e0e001d470482001216efca68f, type: 2}
   - {fileID: 170008, guid: b2bd44f66003b4580b55fae2b973a28a, type: 2}
   - {fileID: 118120, guid: db91c7522c04d467694bba986ad1926a, type: 2}
-  - {fileID: 118220, guid: 83330f778032181448cd95c07b9c75e2, type: 2}
-  - {fileID: 178250, guid: 4643fbf432cf34051a950ea9bd4bdfa5, type: 2}
+  - {fileID: 134880, guid: c0250b228b1864dc781ba9b50f589987, type: 2}
+  - {fileID: 151262, guid: 462c036ce941245569819785c709a119, type: 2}
   - {fileID: 121766, guid: e055184fcdc5348d78563d63939d4be9, type: 2}
   smallDoodadChance:
   - 2
