@@ -50,12 +50,12 @@ MonoBehaviour:
   - 0.8
   - 0.2
   SkyGradients:
-  - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
-  - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
-  - {fileID: 2100000, guid: d9740f875626a184e9424a5a2c685945, type: 2}
-  - {fileID: 2100000, guid: 363c6c286e051d94084f2aa392e63ed1, type: 2}
-  - {fileID: 2100000, guid: 90e0d2faedf930a429428fcbd4a70c1c, type: 2}
-  - {fileID: 2100000, guid: ed3d08d6a10926742a4dc8b45e3c8c4e, type: 2}
+  - {fileID: 2100000, guid: 60095de3038b34e67862098e2034c5d7, type: 2}
+  - {fileID: 2100000, guid: a9e4a54ee9c1a409aa4245bc478be361, type: 2}
+  - {fileID: 2100000, guid: e1741f103c30f4bb09f283da638dd30a, type: 2}
+  - {fileID: 2100000, guid: 7acd9ca0f909b471f9eb7f0016fdcaac, type: 2}
+  - {fileID: 2100000, guid: d386276b1e0094a2f914301c79ec7594, type: 2}
+  - {fileID: 2100000, guid: 1f41910bd1d5848539fb47a4ffeb020b, type: 2}
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
