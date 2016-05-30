@@ -25,6 +25,7 @@ public class ShrineActivator : MonoBehaviour {
 
     public bool activate()
     {
+        if(active()) return false;
         if (Time.timeScale > 0 && parentShrine != null && !parentShrine.isDone)
         {
             parentShrine.changeElement(element);
@@ -32,6 +33,7 @@ public class ShrineActivator : MonoBehaviour {
             //Shrine Completion Sound
             ShrineSuccess.PlayOneShot(ShrineComplete, .5F);
             firstActivate = true;
+            Globals.MenusScript.GetComponent<HUD>().ping();
 
             return true;
         }
@@ -40,6 +42,6 @@ public class ShrineActivator : MonoBehaviour {
     }
 
     public bool active() {
-        return parentShrine.getElement() == element;
+        return parentShrine.getElement() == element || parentShrine.isDone;
     }
 }

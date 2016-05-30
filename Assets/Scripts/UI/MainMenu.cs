@@ -10,6 +10,8 @@ public class MainMenu : MonoBehaviour {
     public List<Sprite> loadingWallpapers;
     public RectTransform title;
     public RectTransform buttonsParent;
+    public bool playLogo = true;
+    public GameObject logo;
 
     private MMBackground mmback;
     private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
@@ -17,10 +19,13 @@ public class MainMenu : MonoBehaviour {
     private Vector3 origCamPos;
     private Vector3 origCamRot;
     private GameObject scene;
+    private FadeInOut fader;
+    private int logoStep = 0;
 
     void Awake() {
         firstPersonCont = Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
         Globals.settings["Screenmode"] = (Screen.fullScreen ? 1 : 0);
+        fader = GetComponent<FadeInOut>();
     }
 
     // Update is called once per frame
@@ -32,12 +37,13 @@ public class MainMenu : MonoBehaviour {
     void Update() {
         if(Globals.mode != -1 && loadStep == -1) return;
 
+        if(Input.GetKeyDown(KeyCode.Escape) && loadStep == -1) Globals.MenusScript.switchToInitial();
+
         if(loadStep == 0) {
             prepLoad();
             Globals.loading = true;
             loadStep = 1;
             Globals.mode = 0;
-            Random.seed = Globals.SeedScript.randomizeSeed();
             StartCoroutine(loadingDelay());
             return;
         } else if(loadStep == 1) {
@@ -50,7 +56,36 @@ public class MainMenu : MonoBehaviour {
             loadStep = -1;
             return;
         }
-        
+
+        if(playLogo) {
+            if(Input.GetKey(KeyCode.Escape)) {
+                fader.fade(Color.clear, 0);
+                logo.SetActive(false);
+                playLogo = false;
+                Globals.WeatherManagerScript.getWeatherAudioSource().volume = 1;
+                Camera.main.GetComponent<MusicManager>().Play();
+            }else if(logoStep == 0) {
+                Globals.WeatherManagerScript.getWeatherAudioSource().volume = 0;
+                Camera.main.GetComponent<MusicManager>().Stop(false);
+                fader.fade(new Color(34f / 255, 44f / 255, 55f / 255, 1), 0f);
+                fader.fade(new Color(255f / 255, 220f / 255, 24f / 255, 1), 1f);
+                logoStep++;
+            }else if(logoStep == 1) {
+                if(!fader.isFading()) {
+                    logo.SetActive(true);
+                    logoStep++;
+                }
+            } else if(logoStep == 2) {
+                if(!logo.activeSelf) {
+                    fader.fade(Color.clear, 1f);
+                    Globals.WeatherManagerScript.getWeatherAudioSource().volume = 1;
+                    Camera.main.GetComponent<MusicManager>().Play();
+                    playLogo = false;
+                    title.gameObject.GetComponent<TitleAnimate>().animate();
+                }
+            }
+        }
+
         Camera.main.transform.position = mmback.cameraPosition;
         Camera.main.transform.eulerAngles = mmback.cameraRotation;
         Globals.WeatherManagerScript.moveParticles(Camera.main.transform.position);
@@ -69,7 +104,8 @@ public class MainMenu : MonoBehaviour {
 
     private IEnumerator loadingDelay()
     {
-        yield return new WaitForSeconds(8f);
+        while (!GenerationManager.doneLoading)
+            yield return null;
         loadStep = 2;
         /*if(Globals.GenerationManagerScript.doneLoading) loadStep = 2;
         else StartCoroutine("loadingDelay");*/
@@ -80,6 +116,7 @@ public class MainMenu : MonoBehaviour {
         Globals.MenusScript.switchTo(loadingScreen);
         Random.seed = (int)System.DateTime.Now.Ticks;
         loadingBackdrop.sprite = loadingWallpapers[Random.Range(0, loadingWallpapers.Count)];
+        Random.seed = Globals.SeedScript.randomizeSeed();
         Globals.GenerationManagerScript.initiateWorld();
         Globals.WeatherManagerScript.initializeWeather();
         //Camera.main.GetComponent<MusicManager>().Stop(false);
@@ -99,9 +136,15 @@ public class MainMenu : MonoBehaviour {
         firstPersonCont.enabled = true;
         firstPersonCont.lookLock = false;
         firstPersonCont.getMouseLook().SetCursorLock(true);
+
+        int originalSeed = Random.seed;
+        Random.seed = Globals.SeedScript.seed;
         Vector2 randomSpot = Random.insideUnitCircle * Globals.GenerationManagerScript.chunk_size;
         Globals.Player.transform.position = new Vector3(randomSpot.x, 0, randomSpot.y);
         Globals.PlayerScript.warpToGround(3000, true);
+        Random.seed = originalSeed;
+
+        Globals.GenerationManagerScript.changeChunk();
     }
 
     public void setupMain() {

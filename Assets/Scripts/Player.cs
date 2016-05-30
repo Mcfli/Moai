@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
     AudioSource playerAudio;
     [HideInInspector] public AudioSource pickupDropAudio;
 
-    private UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
+    public UnityStandardAssets.Characters.FirstPerson.FirstPersonController firstPersonCont;
     private GameObject playerModel;
     private UnityStandardAssets.ImageEffects.DepthOfField DOF;
     private MusicManager musicMan;
@@ -57,26 +57,27 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         playerAudio = GetComponent<AudioSource>();
+        waypoint.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         updateSettings();
 
-        if (Globals.mode != 0 || Globals.time_scale > 1) firstPersonCont.lookLock = true;
+        if (Globals.mode != 0 || (Globals.time_scale > 1 && !Globals.chrono)) firstPersonCont.lookLock = true;
         else firstPersonCont.lookLock = false;
 
         if(Globals.mode != 0) return;
         
-        if (!StarEffect.isEffectPlaying && Input.GetButtonDown("Patience") && !playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
+        if (!StarEffect.isEffectPlaying && Input.GetButtonDown("Patience") && !playerAudio.isPlaying && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
         else if (!StarEffect.isEffectPlaying && Input.GetButtonUp("Patience") && playerAudio.isPlaying) playerAudio.Stop();
 
         if (Globals.time_scale > 1) {
             if(!Globals.Player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().flyCheat) warpToGround(transform.position.y);
             if(!playerAudio.isPlaying) playerAudio.PlayOneShot(SpeedUpSFX, .2f);
-            firstPersonCont.enabled = false;
+            firstPersonCont.enabled = Globals.chrono;
 
-            if(Globals.time_scale > Globals.SkyScript.timeScaleThatHaloAppears && Globals.settings["WaitCinematic"] == 1) {
+            if(Globals.time_scale > Globals.SkyScript.timeScaleThatHaloAppears && Globals.settings["WaitCinematic"] == 1 && !Globals.chrono) {
                 if(playerAudio.isPlaying) playerAudio.Stop();
                 if(!playerModel.activeInHierarchy) {
                     playerModel.SetActive(true);
@@ -131,11 +132,13 @@ public class Player : MonoBehaviour {
         // Waypoints
         if (Input.GetButtonDown("Waypoint") && Globals.mode == 0 && Globals.time_scale == 1)
         {
-                if (checkWaypoint().collider != null)
+            if (checkWaypoint().collider != null)
             {
                 if (checkWaypoint().collider.gameObject.layer == LayerMask.NameToLayer("Terrain"))
                 {
-                    waypoint.transform.position = checkWaypoint().point + Vector3.up * (waypoint.transform.localScale.y);
+                    waypoint.transform.position = checkWaypoint().point;
+                    waypoint.transform.LookAt(transform);
+                    waypoint.transform.eulerAngles = new Vector3(0, waypoint.transform.eulerAngles.y, 0);
                     waypoint.SetActive(true);
                 }
                 else if (checkWaypoint().collider.gameObject.layer == LayerMask.NameToLayer("Waypoint"))
@@ -168,6 +171,8 @@ public class Player : MonoBehaviour {
             Camera.main.fieldOfView = Globals.settings["FOV"];
         }
         if(Screen.fullScreen != (Globals.settings["Screenmode"] == 1)) Screen.fullScreen = !Screen.fullScreen;
+        firstPersonCont.useFovKick = (Globals.settings["FOVKick"] == 1);
+        firstPersonCont.getMouseLook().smooth = (Globals.settings["SmoothCamera"] == 1);
     }
 
     private void checkUnderwater()
@@ -275,8 +280,12 @@ public class Player : MonoBehaviour {
             if(GetHover().collider) {
                 ShrineActivator sa = GetHover().collider.gameObject.GetComponent<ShrineActivator>();
                 WordWall ww = GetHover().collider.gameObject.GetComponent<WordWall>();
-                if (sa) return !sa.active();
-                else if (ww) return true;
+                Obelisk ob = GetHover().collider.gameObject.GetComponent<Obelisk>();
+                TeleportStone ts = GetHover().collider.gameObject.GetComponent<TeleportStone>();
+                if(sa) return !sa.active();
+                else if(ww) return true;
+                else if(ob) return ob.usable();
+                else if(ts) return true;
             }
         } else return heldObj.canUse(GetHover());
         return false;

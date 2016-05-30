@@ -132,6 +132,7 @@ MonoBehaviour:
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
   playerPlanted: 0
+  held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11496132
@@ -145,9 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: rock
-  image: {fileID: 2100000, guid: b9792d326af8c1a4196819574ae04497, type: 2}
-  imageGlowing: {fileID: 2100000, guid: d1bd37f40f14fee409b332d0b9139a0a, type: 2}
+  ID: square
+  image: {fileID: 2100000, guid: 4f9a51f44bfac294fb289522eab7e516, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 0f1dcf009ae51a642ad1b08c53618327, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

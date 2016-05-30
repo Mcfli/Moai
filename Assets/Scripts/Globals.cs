@@ -33,6 +33,9 @@ public class Globals : MonoBehaviour {
     public static Seed SeedScript = WorldGen.GetComponent<Seed>();
     public static Menus MenusScript = GameObject.Find("UI").GetComponent<Menus>();
 
+    //cheats
+    public static bool chrono = false;
+
     //Biome Elements
     public static Vector2 WaterFireEarthAirOrigin = new Vector2(0.5f, 0.5f);
     public static Vector2 WaterFireEarthAirVector = Vector2.zero;
@@ -53,6 +56,8 @@ public class Globals : MonoBehaviour {
         { "DOF", 1 },           // bool
         { "WaitCinematic", 1},  // bool
         { "Bobbing", 1 },       // bool
+        { "FOVKick", 1 },       // bool
+        { "SmoothCamera", 0 },  // bool
 
         // HUD
         { "ShowHUD", 1 },       // bool

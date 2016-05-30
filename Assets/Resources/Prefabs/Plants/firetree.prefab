@@ -5595,7 +5595,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 196524}
-  m_LocalRotation: {x: 0.14617082, y: 0.9105336, z: 0.31898087, w: 0.21866407}
+  m_LocalRotation: {x: 0.14617081, y: 0.9105335, z: 0.31898084, w: 0.21866404}
   m_LocalPosition: {x: -1.11758706e-10, y: 0.000505778, z: 2.2351741e-10}
   m_LocalScale: {x: 1, y: 0.9999998, z: 1}
   m_Children:
@@ -6541,9 +6541,9 @@ MonoBehaviour:
   - 0.4
   - 0.3
   statePuzzleObjects:
-  - {fileID: 11456332, guid: e9e7309f7649f4eecb9a58ff0d10a3fb, type: 2}
-  - {fileID: 11456332, guid: 6ab6db5d7594449c3be8bcdd94f9d21b, type: 2}
-  - {fileID: 11456332, guid: b5abb7251b291473d80d6c75f5c34cf0, type: 2}
+  - {fileID: 11456332, guid: 6880bcbb867c49145bbbf764d6b8905e, type: 2}
+  - {fileID: 11456332, guid: e77d6995bf221b4458c4544f9daa911c, type: 2}
+  - {fileID: 11456332, guid: e77d6995bf221b4458c4544f9daa911c, type: 2}
   propogateDuringState: 000101
   heightAxis: 0
   collisionRadiusMinMax: {x: 2, y: 3.8}

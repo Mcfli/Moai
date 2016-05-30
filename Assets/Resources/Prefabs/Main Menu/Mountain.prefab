@@ -1052,8 +1052,8 @@ MonoBehaviour:
   cameraPosition: {x: 813, y: 631.625, z: 94}
   cameraRotation: {x: 330.9513, y: 204.7634, z: 0}
   titlePosition: {x: -0.3, y: 0.4}
-  titleScale: 0.33
-  buttonsPosition: {x: 0.45, y: -0.35}
+  titleScale: 0.5
+  buttonsPosition: {x: 0.5, y: -0.5}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

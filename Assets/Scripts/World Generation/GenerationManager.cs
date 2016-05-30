@@ -32,7 +32,7 @@ public class GenerationManager : MonoBehaviour {
     // WaterFire/EarthAir modifiers per chunk.
     // maps chunk -> (delta_WaterFire,delta_EarthAir)
     private Dictionary<Vector2, Vector2> mapChanges;
-    [HideInInspector] public bool doneLoading;
+    [HideInInspector] public static bool doneLoading;
 
     //references
     private ChunkGenerator chunkGen;
@@ -87,33 +87,33 @@ public class GenerationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
-        if(Globals.cur_chunk != current_chunk) {
-            Globals.cur_chunk = current_chunk;
-            weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
-            Globals.cur_biome = chooseBiome(Globals.cur_chunk);
-            doneLoading = false;
-            curDist = 0;
-            StopCoroutine("loadUnload");
-            StartCoroutine("loadUnload", Globals.cur_chunk);
-            if (ShrineManager.shrines.ContainsKey (current_chunk) && ShrineManager.shrines[current_chunk] != null)
-            {
-				ShrineManager.shrines [current_chunk].killTrees ();
-			}
-        }
-        if(Globals.mode > -1) {
-            endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
-            
-        }
+        if(Globals.cur_chunk != current_chunk) changeChunk();
+        if(Globals.mode > -1) endTime = System.DateTime.Now.AddSeconds(allottedLoadSeconds);
 
         if(Globals.mode == -1) playerWarped = false;
         else if(!playerWarped) playerWarped = Globals.PlayerScript.warpToGround(10000000, true);
 
     }
 
+    public void changeChunk() {
+        Vector2 current_chunk = worldToChunk(Globals.Player.transform.position);
+        Globals.cur_chunk = current_chunk;
+        weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
+        Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+        doneLoading = false;
+        curDist = 0;
+        StopCoroutine("loadUnload");
+        StartCoroutine("loadUnload", Globals.cur_chunk);
+        if(ShrineManager.shrines.ContainsKey(current_chunk) && ShrineManager.shrines[current_chunk] != null) {
+            ShrineManager.shrines[current_chunk].killTrees();
+        }
+    }
+
     // Called by menu on play
     public void initiateWorld() {
         Globals.time = 0;
         playerWarped = false;
+        Globals.cur_chunk = worldToChunk(Globals.Player.transform.position);
         StartCoroutine("loadUnload", Globals.cur_chunk);
     }
 
@@ -152,8 +152,8 @@ public class GenerationManager : MonoBehaviour {
     }
     
     private IEnumerator loadUnload(Vector2 position) {
-        bool done = true;
-
+        //bool done = true;
+        doneLoading = false;
         // Unload chunks if there are loaded chunks
         if (loaded_chunks.Keys.Count > 0)
         {
@@ -168,7 +168,7 @@ public class GenerationManager : MonoBehaviour {
                     ChunkMeshes chunkObj = loaded_chunks[coordinates].GetComponent<ChunkMeshes>();
                     if ((chunkObj.doneObjects ||chunkObj.loadingObjects) && !chunkObj.unloadedObjects)
                     {
-                        done = false;
+                        //done = false;
                         chunkObj.unloadObjects();
                     }
                 }
@@ -181,7 +181,7 @@ public class GenerationManager : MonoBehaviour {
                     // Unload base stuff
                     if ((chunkObj.doneBase || chunkObj.loadingBase) && !chunkObj.unloadedBase)
                     {
-                        done = false;
+                        //done = false;
                         chunkObj.unloadBase();
                     }
 
@@ -214,7 +214,7 @@ public class GenerationManager : MonoBehaviour {
                     if (!loaded_chunks.ContainsKey(thisChunk))
                     {
                         createChunk(thisChunk);
-                        done = false;
+                        //done = false;
                     }
                     ChunkMeshes chunkObj = loaded_chunks[thisChunk].GetComponent<ChunkMeshes>();
                     
@@ -222,16 +222,17 @@ public class GenerationManager : MonoBehaviour {
                     if (!chunkObj.doneBase)
                     {
                         chunkObj.loadBase();
-                        done = false;
+                        //done = false;
                     }
                     else
                     {
+                        
                         // If the chunk needs to be detailed, detail it
                         if (inLoadDistance(position, thisChunk, chunk_detail_dist) && !chunkObj.detailed)
                         {
                             chunkObj.mf.mesh = chunkObj.highMesh;
                             chunkObj.detailed = true;
-                            done = false;
+                            //done = false;
                         }
 
                         // If the chunk needs to be undetailed, undetail it
@@ -239,21 +240,21 @@ public class GenerationManager : MonoBehaviour {
                         {
                             chunkObj.mf.mesh = chunkObj.lowMesh;
                             chunkObj.detailed = false;
-                            done = false;
+                            //done = false;
                         }
                     }
-
                     // If the chunk needs to load its objects, continue loading them
-                    if (chunkObj.doneBase && inLoadDistance(position, thisChunk, tree_load_dist) && !chunkObj.doneObjects)
+                    if (inLoadDistance(position, thisChunk, tree_load_dist) && !chunkObj.doneObjects)
                     {
                         chunkObj.loadObjects();
-                        done = false;
+                        //done = false;
                     }
                 }
             }
+            if(curDist == 4) doneLoading = true;
             curDist++;
         }
-        doneLoading = done;
+        
 		if(doneLoading){
 			if (ShrineManager.shrines.ContainsKey (Globals.cur_chunk) && ShrineManager.shrines[Globals.cur_chunk] != null)
 			{
@@ -262,6 +263,7 @@ public class GenerationManager : MonoBehaviour {
 		}
         weather_manager.moveParticles(chunkToWorld(Globals.cur_chunk) + new Vector3(chunk_size * 0.5f, 0, chunk_size * 0.5f));
         Globals.cur_biome = chooseBiome(Globals.cur_chunk);
+        
         StopCoroutine("loadUnload");
     }
 

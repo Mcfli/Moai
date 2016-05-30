@@ -78,6 +78,7 @@ public class TooltipDisplay : MonoBehaviour {
 
     private bool finishCheck() {
         if(finished) return true;
+        if(Globals.mode != 0 || Globals.loading) return false;
         switch(finisher) {
             case Finish.ButtonPress:
                 bool buttonPressed = AND;
@@ -110,9 +111,10 @@ public class TooltipDisplay : MonoBehaviour {
 
     private bool triggerCheck() {
         if(triggered) return true;
+        if(Globals.mode != 0 || Globals.loading) return false;
         switch(trigger) {
             case Cause.GameStart:
-                if(Globals.mode == 0) triggered = true;
+                if(Globals.mode == 0 && !Globals.loading) triggered = true;
                 break;
             case Cause.AnotherTooltipFinish:
                 if(anotherTooltip.finished) triggered = true;

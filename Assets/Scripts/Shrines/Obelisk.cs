@@ -73,7 +73,7 @@ public class Obelisk : MonoBehaviour {
         m_renderer = GetComponent<Renderer>();
         initMaterials();
         createIsland();
-		fader = GameObject.Find("UI").GetComponent<FadeInOut> ();
+		fader = Globals.MenusScript.GetComponent<FadeInOut> ();
 		telePos = islandInstance.GetComponentInChildren<TeleportStone> ().gameObject.transform.position;
         
         SuccessAudio = GetComponent<AudioSource>();
@@ -88,13 +88,8 @@ public class Obelisk : MonoBehaviour {
         if (!isPlaced) transform.position = snapToTerrain(transform.position);
         if (fromObelisk)
 		{
-			if (fader.fadingWhite) 
+			if (!fader.isFading() && fader.targetColor == Color.white)
 			{
-				fader.fadeToWhite ();
-			}
-			if (fader.fadeImage.color.a >= 0.95f && fader.fadingWhite)
-			{
-				fader.fadeImage.color = Color.white;
                 Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
 
                 RaycastHit hit;
@@ -102,18 +97,11 @@ public class Obelisk : MonoBehaviour {
                 if(Physics.Raycast(rayDown, out hit, Mathf.Infinity, LayerMask.GetMask("Islands")))
                     Globals.Player.transform.position = new Vector3(Globals.Player.transform.position.x, hit.point.y + Camera.main.transform.localPosition.y, Globals.Player.transform.position.z);
 
-                fader.fadingClear = true;
-				fader.fadingWhite = false;
-			} 
-			else if(fader.fadingClear)
+                fader.fade(Color.clear, 1.5f);
+            } 
+			else if(!fader.isFading() && fader.targetColor == Color.clear)
 			{
-				fader.fadeToClear ();
-				if(fader.fadeImage.color.a <= 0.05f)
-				{
-					fader.fadeImage.color = Color.clear;
-					fader.fadingClear = false;
-					fromObelisk = false;
-				}
+			    fromObelisk = false;
 			}	
 		}
 
@@ -121,6 +109,7 @@ public class Obelisk : MonoBehaviour {
 
     void OnMouseOver()
     {
+        if(isDone) return;
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
         if (!litUp && Globals.time_scale > 0 && Time.timeScale > 0 && dist < lightUpDistance)
         {
@@ -136,6 +125,7 @@ public class Obelisk : MonoBehaviour {
 
     void OnMouseExit()
     {
+        if(isDone) return;
         if (litUp && Globals.time_scale > 0 && Time.timeScale > 0)
         {
             dullIndicators();
@@ -147,15 +137,16 @@ public class Obelisk : MonoBehaviour {
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (litUp && dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fader.fadingWhite && !fader.fadingClear && (isDone || areReqsMet()))
+        if (litUp && dist < lightUpDistance && Globals.time_scale == 1 && Time.timeScale == 1 && !fromObelisk && (isDone || areReqsMet()))
         {
-			fader.fadingWhite = true;
+            fader.fade(Color.white, 1.5f);
 			fromObelisk = true;
             if (!isDone)
             {
                 spendStars();
                 // Success sound
                 SuccessAudio.PlayOneShot(ObeliskSuccess, .5F);
+                lightIndicators();
             }
         }
         else
@@ -163,6 +154,11 @@ public class Obelisk : MonoBehaviour {
             // Failure sound
             FailAudio.PlayOneShot(ObeliskFail, .5F);
         }
+        Globals.MenusScript.GetComponent<HUD>().ping();
+    }
+
+    public bool usable() {
+        return isDone || areReqsMet();
     }
 
     private void spendStars()

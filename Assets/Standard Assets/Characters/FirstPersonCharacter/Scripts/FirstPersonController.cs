@@ -45,6 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         [HideInInspector] public bool lookLock;
         [HideInInspector] public bool flyCheat = false;
+        [HideInInspector] public bool playerControl = true;
 
         // Use this for initialization
         private void Start()
@@ -67,7 +68,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
+            if (!m_Jump && playerControl)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
@@ -213,9 +214,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
-            float fly = CrossPlatformInputManager.GetAxis("Fly");
+            float horizontal = playerControl ? CrossPlatformInputManager.GetAxis("Horizontal") : 0;
+            float vertical = playerControl ? CrossPlatformInputManager.GetAxis("Vertical") : 0;
+            float fly = playerControl ? CrossPlatformInputManager.GetAxis("Fly") : 0;
 
             bool waswalking = m_IsWalking;
 
@@ -273,8 +274,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             return m_MouseLook;
         }
 
-        public void setRunSpeed(float speed){
-            m_RunSpeed = speed;
+        public float runSpeed {
+            get { return m_RunSpeed; }
+            set { m_RunSpeed = value; }
+        }
+
+        public bool useFovKick {
+            get { return m_UseFovKick; }
+            set { m_UseFovKick = value; }
         }
 
         public FOVKick getFOVKick() {

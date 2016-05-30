@@ -104,9 +104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: swampgrass
-  image: {fileID: 2100000, guid: 5b3f705e4f7ec428eace30ad30f996ff, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 2b0ad7a3956d74346a07054b18e2cf4c, type: 2}
+  ID: pentagon
+  image: {fileID: 2100000, guid: 5443d8f1af25f604394f48352a92856b, type: 2}
+  imageGlowing: {fileID: 2100000, guid: f3e2a956f50a6384f85104b568ce1972, type: 2}
 --- !u!114 &11477818
 MonoBehaviour:
   m_ObjectHideFlags: 1
