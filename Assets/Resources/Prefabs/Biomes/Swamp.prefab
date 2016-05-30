@@ -163,6 +163,7 @@ MonoBehaviour:
   - {fileID: 134880, guid: c0250b228b1864dc781ba9b50f589987, type: 2}
   - {fileID: 151262, guid: 462c036ce941245569819785c709a119, type: 2}
   - {fileID: 121766, guid: e055184fcdc5348d78563d63939d4be9, type: 2}
+  - {fileID: 128720, guid: f4dd74b93cca64a18be58664239d8f5b, type: 2}
   smallDoodadChance:
   - 2
   - 2
@@ -184,6 +185,7 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  - 3
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
