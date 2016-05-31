@@ -31,7 +31,8 @@ public class Globals : MonoBehaviour {
     public static TreeManager TreeManagerScript = WorldGen.GetComponent<TreeManager>();
     public static WaterManager WaterManagerScript = WorldGen.GetComponent<WaterManager>();
     public static Seed SeedScript = WorldGen.GetComponent<Seed>();
-    public static Menus MenusScript = GameObject.Find("UI").GetComponent<Menus>();
+    public static GameObject UI = GameObject.Find("UI");
+    public static Menus MenusScript = UI.GetComponent<Menus>();
 
     //cheats
     public static bool chrono = false;
@@ -101,4 +102,7 @@ public class Globals : MonoBehaviour {
         return component;
     }
 
+    public static void Log(string message) {
+        UI.GetComponent<CheatConsole>().Log(message);
+    }
 }

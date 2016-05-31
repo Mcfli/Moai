@@ -45,10 +45,10 @@ MonoBehaviour:
   Amplify: 1
   weatherTypes:
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
-  - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
+  - {fileID: 11431138, guid: f0b3b47df503c264380fd92069a4317a, type: 2}
   weatherChance:
-  - 0.8
-  - 0.2
+  - 0.4
+  - 0.6
   SkyGradients:
   - {fileID: 2100000, guid: 7d9b039c478b04278b4ddc635d8c0a2b, type: 2}
   - {fileID: 2100000, guid: 7d30d0e1b25984c678e84ca0542112d2, type: 2}

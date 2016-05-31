@@ -142,7 +142,11 @@ public class InteractableObject: MonoBehaviour{
         pickupDropAudio.PlayOneShot(PickUp, .2f);
         held = true;
 		DoodadManager.held_object = gameObject;
-        Globals.MenusScript.GetComponent<HUD>().ping();
+
+        PuzzleObject po = GetComponent<PuzzleObject>();
+        if(GetComponent<PuzzleObject>())
+            if(po.ID.Equals("sqaure") || po.ID.Equals("pentagon") || po.ID.Equals("octogon") || po.ID.Equals("triangle"))
+                Globals.MenusScript.GetComponent<HUD>().ping();
 
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);
         if(DoodadManager.loaded_doodads.ContainsKey(coordinates)) 
