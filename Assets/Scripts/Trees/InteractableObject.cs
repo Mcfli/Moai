@@ -17,6 +17,8 @@ public class InteractableObject: MonoBehaviour{
     public LayerMask collisionLayer;
     public GameObject dirtMound;     // prefab - instantiates and hides when instatiated
     public Vector3 dirtMoundOffset;
+    public bool bubble;
+    public GameObject pickupParticle;
 
     //references
     private Rigidbody thisRigidbody;
@@ -24,13 +26,16 @@ public class InteractableObject: MonoBehaviour{
 
     private float timeRemain;        // how long until next check
     private bool planted;
-    public bool playerPlanted;
-    public bool held;
+    [HideInInspector] public bool playerPlanted;
+    [HideInInspector] public bool held;
     private int attempts;
 
     public AudioClip PickUp;
+    public AudioClip Popped;
     public AudioClip CorrectSpot;
     private AudioSource pickupDropAudio;
+
+    private ParticleSystem particle;
 
     void Awake() {
         thisRigidbody = GetComponent<Rigidbody>();
@@ -40,7 +45,7 @@ public class InteractableObject: MonoBehaviour{
             dirtMound = Instantiate(dirtMound);
             dirtMound.transform.SetParent(transform, false);
             dirtMound.transform.position += dirtMoundOffset;
-            dirtMound.transform.localScale = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
+            dirtMound.transform.localScale = new Vector3(dirtMound.transform.localScale.x / transform.localScale.x, dirtMound.transform.localScale.y / transform.localScale.y, dirtMound.transform.localScale.z / transform.localScale.z);
             dirtMound.SetActive(false);
         }
         planted = false;
@@ -57,6 +62,8 @@ public class InteractableObject: MonoBehaviour{
 
     // Update is called once per frame
     void Update() {
+        if(particle) if(particle.isStopped) Destroy(particle.gameObject);
+
         if(!held) timeRemain -= Globals.deltaTime / Globals.time_resolution;
 
         if (held) { //held
@@ -139,6 +146,10 @@ public class InteractableObject: MonoBehaviour{
 
     public void pickedUp() {
         unplant();
+        if(!playerPlanted) {
+            if(pickupParticle) particle = (Instantiate(pickupParticle, transform.position, transform.rotation) as GameObject).GetComponent<ParticleSystem>();
+            if(Popped) pickupDropAudio.PlayOneShot(Popped, 1f);
+        }
         pickupDropAudio.PlayOneShot(PickUp, .2f);
         held = true;
 		DoodadManager.held_object = gameObject;
@@ -169,7 +180,7 @@ public class InteractableObject: MonoBehaviour{
         transform.position = place;
         if(!thisRigidbody) thisRigidbody = GetComponent<Rigidbody>();
         thisRigidbody.isKinematic = true;
-        if(dirtMound) dirtMound.SetActive(true);
+        if(dirtMound && (!playerPlanted || (playerPlanted && !bubble))) dirtMound.SetActive(true);
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         timeRemain = growTime;
         if(!playerPlanted) timeRemain *= Random.Range(1 - growTimeVariance, 1 + growTimeVariance);

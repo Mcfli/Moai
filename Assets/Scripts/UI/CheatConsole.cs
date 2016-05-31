@@ -226,7 +226,11 @@ public class CheatConsole : MonoBehaviour{
                 break;
             case "freemouse":
                 Globals.PlayerScript.firstPersonCont.getMouseLook().ToggleCursorLock();
-                Log("Toggled Cursor Lock");
+                Log("Toggled cursor lock");
+                break;
+            case "deejay":
+                Camera.main.GetComponent<MusicManager>().Next();
+                Log("Song changed");
                 break;
             default:
                 Log("Unknown Command");

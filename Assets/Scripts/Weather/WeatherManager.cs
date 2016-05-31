@@ -96,11 +96,13 @@ public class WeatherManager : MonoBehaviour {
             InitializeIfNeeded();
             activeParticleSystem.gravityModifier = 0;
             int numParticlesAlive = activeParticleSystem.GetParticles(m_Particles);
-            for(int i = 0; i < numParticlesAlive; i++)
-            {
-                m_Particles[i].velocity = Vector3.forward * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
+            if(Time.timeScale == 0) activeParticleSystem.Pause();
+            else if(activeParticleSystem.isPaused) activeParticleSystem.Play();
+            else {
+                for(int i = 0; i < numParticlesAlive; i++)
+                    m_Particles[i].velocity = Vector3.forward * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
+                activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
             }
-            activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
         }
 
         if (Globals.time_scale > 1)

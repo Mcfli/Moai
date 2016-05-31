@@ -98,6 +98,14 @@ Material:
         second: 0.02
       data:
         first:
+          name: _Ambient
+        second: 0.75
+      data:
+        first:
+          name: _Animate
+        second: 1
+      data:
+        first:
           name: _ZWrite
         second: 0
       data:
@@ -128,14 +136,6 @@ Material:
         first:
           name: _Mode
         second: 3
-      data:
-        first:
-          name: _Ambient
-        second: 0.75
-      data:
-        first:
-          name: _Animate
-        second: 1
     m_Colors:
       data:
         first:
@@ -148,15 +148,15 @@ Material:
       data:
         first:
           name: _RandomSeed
-        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 0.043}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _XHeightSpeedLengthOffset
-        second: {r: 0.05, g: 1, b: 0.1, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _YHeightSpeedLengthOffset
-        second: {r: 0, g: 0, b: 0, a: 0}
+        second: {r: 0.5, g: 0.8, b: 0.1, a: 6}
       data:
         first:
           name: _ZHeightSpeedLengthOffset

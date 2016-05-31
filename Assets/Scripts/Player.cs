@@ -305,10 +305,10 @@ public class Player : MonoBehaviour {
         if(obj == null || !CanGrab(obj)) return false;
         Physics.IgnoreCollision(obj.GetComponent<Collider>(), thisCollider);
         heldObj = obj.GetComponent<InteractableObject>();
+        heldObj.pickedUp();
         heldObjSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
 		obj.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         heldObjOrigScale = obj.transform.localScale;
-        heldObj.pickedUp();
         return true;
     }
 
