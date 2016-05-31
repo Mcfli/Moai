@@ -217,7 +217,7 @@ MonoBehaviour:
   - 3
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
-  doodadDensity: 6
+  doodadDensity: 4
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 6
