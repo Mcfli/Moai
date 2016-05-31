@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: flower
-  image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
+  ID: octogon
+  image: {fileID: 2100000, guid: 9f2a122674e1d3646ae7f8c2b1a87bb3, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 86d48630313b5c743acfbcea3eac5f75, type: 2}
 --- !u!114 &11449070
 MonoBehaviour:
   m_ObjectHideFlags: 1

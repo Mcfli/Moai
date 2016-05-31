@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 445894}
   - 33: {fileID: 3367062}
   - 23: {fileID: 2376080}
-  - 95: {fileID: 9539474}
   - 54: {fileID: 5411326}
   - 114: {fileID: 11455014}
   - 136: {fileID: 13638492}
@@ -86,23 +85,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &9539474
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193484}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 061e06d7a2a32490d86860674a2a2064, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11455014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: flower
-  image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
+  ID: octogon
+  image: {fileID: 2100000, guid: 9f2a122674e1d3646ae7f8c2b1a87bb3, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 86d48630313b5c743acfbcea3eac5f75, type: 2}
 --- !u!114 &11471434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,9 +124,12 @@ MonoBehaviour:
     m_Bits: 0
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
+  bubble: 0
+  pickupParticle: {fileID: 0}
   playerPlanted: 0
   held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!136 &13638492
 CapsuleCollider:

@@ -11,10 +11,10 @@ GameObject:
   - 33: {fileID: 3376696}
   - 23: {fileID: 2368952}
   - 54: {fileID: 5420956}
-  - 65: {fileID: 6584488}
   - 114: {fileID: 11462466}
   - 114: {fileID: 11445182}
-  m_Layer: 0
+  - 135: {fileID: 13593918}
+  m_Layer: 14
   m_Name: swampLeafC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,18 +81,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6584488
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115066}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.25365007, y: 1.5111451, z: 0.31497055}
-  m_Center: {x: 0.031079926, y: 0.6125479, z: -0.0050810874}
 --- !u!114 &11445182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,9 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: swampgrass
-  image: {fileID: 2100000, guid: 5b3f705e4f7ec428eace30ad30f996ff, type: 2}
-  imageGlowing: {fileID: 2100000, guid: 2b0ad7a3956d74346a07054b18e2cf4c, type: 2}
+  ID: pentagon
+  image: {fileID: 2100000, guid: 5443d8f1af25f604394f48352a92856b, type: 2}
+  imageGlowing: {fileID: 2100000, guid: f3e2a956f50a6384f85104b568ce1972, type: 2}
 --- !u!114 &11462466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -132,10 +120,25 @@ MonoBehaviour:
     m_Bits: 4294432712
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
+  bubble: 0
+  pickupParticle: {fileID: 0}
   playerPlanted: 0
   held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
+--- !u!135 &13593918
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.75
+  m_Center: {x: 0.11906052, y: -0.03961899, z: 0.21731699}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -8,13 +8,26 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 450956}
-  - 33: {fileID: 3379504}
-  - 23: {fileID: 2350334}
-  - 136: {fileID: 13607170}
-  - 114: {fileID: 11478742}
-  - 54: {fileID: 5443476}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: swampPlantA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &110242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 496294}
+  - 33: {fileID: 3389494}
+  - 23: {fileID: 2361922}
+  - 136: {fileID: 13627016}
+  m_Layer: 14
+  m_Name: swampPlantA (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,8 +44,6 @@ GameObject:
   - 33: {fileID: 3314702}
   - 23: {fileID: 2392354}
   - 136: {fileID: 13695530}
-  - 114: {fileID: 11439614}
-  - 54: {fileID: 5471452}
   m_Layer: 14
   m_Name: swampPlantA (2)
   m_TagString: Untagged
@@ -51,8 +62,6 @@ GameObject:
   - 33: {fileID: 3363696}
   - 23: {fileID: 2369802}
   - 136: {fileID: 13636940}
-  - 114: {fileID: 11403916}
-  - 54: {fileID: 5426436}
   m_Layer: 14
   m_Name: swampPlantA (4)
   m_TagString: Untagged
@@ -71,8 +80,6 @@ GameObject:
   - 33: {fileID: 3308876}
   - 23: {fileID: 2368920}
   - 136: {fileID: 13611010}
-  - 114: {fileID: 11406940}
-  - 54: {fileID: 5427896}
   m_Layer: 14
   m_Name: swampPlantA (5)
   m_TagString: Untagged
@@ -91,8 +98,6 @@ GameObject:
   - 33: {fileID: 3341398}
   - 23: {fileID: 2300186}
   - 136: {fileID: 13653362}
-  - 114: {fileID: 11491544}
-  - 54: {fileID: 5456936}
   m_Layer: 14
   m_Name: swampPlantA (1)
   m_TagString: Untagged
@@ -111,8 +116,6 @@ GameObject:
   - 33: {fileID: 3393800}
   - 23: {fileID: 2375106}
   - 136: {fileID: 13662204}
-  - 114: {fileID: 11470542}
-  - 54: {fileID: 5487296}
   m_Layer: 14
   m_Name: swampPlantA (3)
   m_TagString: Untagged
@@ -127,8 +130,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198850}
   m_LocalRotation: {x: 0.036261603, y: 0.976911, z: 0.03691309, w: 0.20728593}
-  m_LocalPosition: {x: -0.036000002, y: -0.28599998, z: -0.028}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.18000007, y: -1.4299998, z: -0.13999999}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 450956}
   m_RootOrder: 2
@@ -139,8 +142,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194614}
   m_LocalRotation: {x: -0.07776622, y: 0.5698788, z: 0.019864988, w: -0.81779945}
-  m_LocalPosition: {x: -0.040000003, y: 0.012, z: 0.034}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 0.6000001}
+  m_LocalPosition: {x: -0.20000005, y: 0.059999943, z: 0.17000002}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 450956}
   m_RootOrder: 0
@@ -152,13 +155,14 @@ Transform:
   m_GameObject: {fileID: 109102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 442530}
   - {fileID: 468748}
   - {fileID: 412050}
   - {fileID: 493692}
   - {fileID: 496204}
+  - {fileID: 496294}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &468748
@@ -168,8 +172,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118768}
   m_LocalRotation: {x: -0.0043549268, y: 0.696859, z: -0.04367347, w: 0.715864}
-  m_LocalPosition: {x: 0.048, y: 0.004, z: -0.004}
-  m_LocalScale: {x: 0.9, y: 0.8999999, z: 0.9000001}
+  m_LocalPosition: {x: 0.24000001, y: 0.01999998, z: -0.01999998}
+  m_LocalScale: {x: 4.5, y: 4.5000014, z: 4.5000005}
   m_Children: []
   m_Father: {fileID: 450956}
   m_RootOrder: 1
@@ -180,8 +184,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130792}
   m_LocalRotation: {x: -0.017275698, y: 0.9416592, z: 0.08148703, w: 0.32609722}
-  m_LocalPosition: {x: -0.022, y: -0.05, z: 0.051999997}
-  m_LocalScale: {x: 0.9, y: 0.90000004, z: 0.90000004}
+  m_LocalPosition: {x: -0.109999895, y: -0.25, z: 0.25999993}
+  m_LocalScale: {x: 4.5, y: 4.5000024, z: 4.5000024}
   m_Children: []
   m_Father: {fileID: 450956}
   m_RootOrder: 3
@@ -192,11 +196,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136088}
   m_LocalRotation: {x: 0.020808965, y: 0.54861456, z: -0.01366045, w: 0.8357048}
-  m_LocalPosition: {x: 0.06600001, y: 0.006, z: 0.051999997}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0.33000016, y: 0.029999971, z: 0.25999993}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 450956}
   m_RootOrder: 4
+--- !u!4 &496294
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 450956}
+  m_RootOrder: 5
 --- !u!23 &2300186
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -228,12 +244,12 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2350334
+--- !u!23 &2361922
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109102}
+  m_GameObject: {fileID: 110242}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -411,12 +427,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130792}
   m_Mesh: {fileID: 4300000, guid: b4f3fd889af9cbb468bd4cc15c165a81, type: 3}
---- !u!33 &3379504
+--- !u!33 &3389494
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109102}
+  m_GameObject: {fileID: 110242}
   m_Mesh: {fileID: 4300000, guid: b4f3fd889af9cbb468bd4cc15c165a81, type: 3}
 --- !u!33 &3393800
 MeshFilter:
@@ -425,276 +441,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198850}
   m_Mesh: {fileID: 4300000, guid: b4f3fd889af9cbb468bd4cc15c165a81, type: 3}
---- !u!54 &5426436
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130792}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5427896
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136088}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5443476
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109102}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5456936
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194614}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5471452
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118768}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!54 &5487296
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198850}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 100
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &11403916
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 130792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: reeds
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294432712
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11406940
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: reeds
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294432712
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11439614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: reeds
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294432712
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11470542
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: reeds
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294432712
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11478742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: reeds
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294432712
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11491544
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeID: reeds
-  spawn_object: {fileID: 0}
-  cull_layer:
-    serializedVersion: 2
-    m_Bits: 0
-  cull_radius: 0
-  growAttempts: 0
-  growTime: 0
-  growTimeVariance: 0
-  collisionLayer:
-    serializedVersion: 2
-    m_Bits: 4294432712
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
-  playerPlanted: 0
-  held: 0
-  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
-  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!136 &13607170
+--- !u!136 &13611010
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 109102}
+  m_GameObject: {fileID: 136088}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -702,12 +454,12 @@ CapsuleCollider:
   m_Height: 1.2150366
   m_Direction: 1
   m_Center: {x: 0.0133767985, y: 0.5860343, z: 0.014831698}
---- !u!136 &13611010
+--- !u!136 &13627016
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136088}
+  m_GameObject: {fileID: 110242}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

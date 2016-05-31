@@ -13,6 +13,7 @@ GameObject:
   - 136: {fileID: 13680034}
   - 54: {fileID: 5461248}
   - 114: {fileID: 11498106}
+  - 114: {fileID: 11461676}
   m_Layer: 14
   m_Name: ruin_F
   m_TagString: Untagged
@@ -80,6 +81,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &11461676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: square
+  image: {fileID: 2100000, guid: 4f9a51f44bfac294fb289522eab7e516, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 0f1dcf009ae51a642ad1b08c53618327, type: 2}
 --- !u!114 &11498106
 MonoBehaviour:
   m_ObjectHideFlags: 1

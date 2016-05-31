@@ -13,6 +13,7 @@ GameObject:
   - 136: {fileID: 13606212}
   - 54: {fileID: 5411646}
   - 114: {fileID: 11450462}
+  - 114: {fileID: 11499244}
   m_Layer: 15
   m_Name: ruin_G
   m_TagString: Untagged
@@ -112,6 +113,20 @@ MonoBehaviour:
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
+--- !u!114 &11499244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: square
+  image: {fileID: 2100000, guid: 4f9a51f44bfac294fb289522eab7e516, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 0f1dcf009ae51a642ad1b08c53618327, type: 2}
 --- !u!136 &13606212
 CapsuleCollider:
   m_ObjectHideFlags: 1

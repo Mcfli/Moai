@@ -687,9 +687,9 @@ MonoBehaviour:
   - 0.4
   - 0.3
   statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
+  - {fileID: 11456332, guid: 6880bcbb867c49145bbbf764d6b8905e, type: 2}
+  - {fileID: 11456332, guid: e77d6995bf221b4458c4544f9daa911c, type: 2}
+  - {fileID: 11456332, guid: e77d6995bf221b4458c4544f9daa911c, type: 2}
   propogateDuringState: 000101
   heightAxis: 0
   collisionRadiusMinMax: {x: 0.3, y: 1.825308}

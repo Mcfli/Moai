@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3332174}
   - 23: {fileID: 2300498}
   - 136: {fileID: 13643088}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: snowSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
