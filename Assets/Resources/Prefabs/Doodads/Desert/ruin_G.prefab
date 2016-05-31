@@ -10,7 +10,10 @@ GameObject:
   - 4: {fileID: 434144}
   - 33: {fileID: 3301044}
   - 23: {fileID: 2334622}
-  - 64: {fileID: 6444114}
+  - 136: {fileID: 13606212}
+  - 54: {fileID: 5411646}
+  - 114: {fileID: 11450462}
+  - 114: {fileID: 11499244}
   m_Layer: 15
   m_Name: ruin_G
   m_TagString: Untagged
@@ -63,8 +66,69 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193938}
   m_Mesh: {fileID: 4300014, guid: 94055c682f5244ff18d43ee3d14a57c6, type: 3}
---- !u!64 &6444114
-MeshCollider:
+--- !u!54 &5411646
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193938}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &11450462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeID: relic
+  spawn_object: {fileID: 0}
+  cull_layer:
+    serializedVersion: 2
+    m_Bits: 0
+  cull_radius: 0
+  growAttempts: 0
+  growTime: 0
+  growTimeVariance: 0
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 4294432712
+  dirtMound: {fileID: 0}
+  dirtMoundOffset: {x: 0, y: 0, z: 0}
+  bubble: 0
+  pickupParticle: {fileID: 0}
+  playerPlanted: 0
+  held: 0
+  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 0}
+  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
+--- !u!114 &11499244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: square
+  image: {fileID: 2100000, guid: 4f9a51f44bfac294fb289522eab7e516, type: 2}
+  imageGlowing: {fileID: 2100000, guid: 0f1dcf009ae51a642ad1b08c53618327, type: 2}
+--- !u!136 &13606212
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -72,9 +136,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300014, guid: 94055c682f5244ff18d43ee3d14a57c6, type: 3}
+  m_Radius: 0.4
+  m_Height: 4.43289
+  m_Direction: 1
+  m_Center: {x: 0.043037504, y: 2.101365, z: -0.0017895103}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

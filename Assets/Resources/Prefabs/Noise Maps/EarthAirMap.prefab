@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   octaves: 1
-  persistence: 0.1
-  smoothness: 1000
+  persistence: 0
+  smoothness: 2000
   amplitude: 1
   seed: 5243
 --- !u!1001 &100100000

@@ -17,11 +17,11 @@ public class GenerationManager : MonoBehaviour {
     public int tree_load_dist = 1;
     public int tree_unload_dist = 1;
     public List<Biome> biomes;
-    public Biome snowBiome;
     public float alwaysSnowHeight;
-    public NoiseGen WaterFireMap;
     public NoiseGen mountainMap;
+    public NoiseGen WaterFireMap;
     public NoiseGen EarthAirMap;
+    public NoiseGen AmplifyMap;
 
     //lists
     private Dictionary<Vector2, GameObject> loaded_chunks;
@@ -285,12 +285,17 @@ public class GenerationManager : MonoBehaviour {
 
     public Biome chooseBiome(Vector2 chunk)
     {
-        if(synth.heightAt(chunk.x * chunk_size + transform.position.x + chunk_size / 2, chunk.y * chunk_size + transform.position.z + chunk_size / 2, 0) > alwaysSnowHeight) return snowBiome;
         // Get the WaterFire and EarthAir values at chunk coordinates
-        float WaterFire = WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
-        float EarthAir = EarthAirMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0);
-		//float WaterFire = WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f + 1, chunk.y * chunk_size + 1, 0);
-		//float EarthAir = EarthAirMap.genPerlin (chunk.x * chunk_size + 1, chunk.y * chunk_size + chunk_size * 0.5f + 1, 0);
+        float WaterFire = (WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0) < 0.5f) ? 0 : 1;
+        float EarthAir = (EarthAirMap.genPerlin  (chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0) < 0.5f) ? 0 : 1;
+        float amp = (AmplifyMap.genPerlin        (chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0) < 0.5f) ? 0 : 1;
+
+        float x = chunk.x * chunk_size + transform.position.x + chunk_size / 2;
+        float y = chunk.y * chunk_size + transform.position.z + chunk_size / 2;
+        if(synth.heightAt(x, y, 0) - (synth.elevation_map.genPerlin(x,y,0) - synth.elevation_map.amplitude * 0.5f) > alwaysSnowHeight) {
+            WaterFire = 0;
+            EarthAir = 1;
+        }
 
         if (mapChanges.ContainsKey(chunk))
         {
@@ -299,19 +304,24 @@ public class GenerationManager : MonoBehaviour {
         }
 
         // Find the most appropriate biome
-        float lowestError = 100000;
+        //float lowestError = 100000;
         Biome ret = biomes[0];
         foreach(Biome biome in biomes)
         {
-            if (biome == null) Debug.Log("SHIT!");
+            /*if (biome == null) Debug.Log("SHIT!");
             float WaterFire_error = Mathf.Abs(biome.WaterFire - WaterFire);
             float EarthAir_error = Mathf.Abs(biome.EarthAir - EarthAir);
-           
-            if (WaterFire_error + EarthAir_error < lowestError)
+            float Amp_error = Mathf.Abs(biome.EarthAir - EarthAir);
+
+            if (WaterFire_error + EarthAir_error + Amp_error < lowestError)
             {
 //                Debug.Log(biome.WaterFire + "," + biome.EarthAir + ": " + WaterFire_error + EarthAir_error);
                 lowestError = WaterFire_error + EarthAir_error;
                 ret = biome;
+            }*/
+            if(biome.WaterFire == WaterFire && biome.EarthAir == EarthAir && biome.Amplify == amp) {
+                ret = biome;
+                break;
             }
                 
         }

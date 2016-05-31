@@ -46,14 +46,11 @@ public class MainMenu : MonoBehaviour {
             Globals.mode = 0;
             StartCoroutine(loadingDelay());
             return;
-        }
-        else if(loadStep == 1)
-        {
-            float rot = Mathf.PingPong(Time.time,2) - 1;
+        } else if(loadStep == 1) {
+            float rot = Mathf.PingPong(Time.time, 2) - 1;
             loadingIcon.rectTransform.localScale = new Vector3(rot,
                 loadingIcon.rectTransform.localScale.y, loadingIcon.rectTransform.localScale.z);
-        }
-        else if(loadStep == 2) {
+        } else if(loadStep == 2) {
             loadGame();
             Globals.loading = false;
             loadStep = -1;
@@ -169,5 +166,44 @@ public class MainMenu : MonoBehaviour {
         Camera.main.transform.position = mmback.cameraPosition;
         Camera.main.transform.eulerAngles = mmback.cameraRotation;
         firstPersonCont.getMouseLook().SetCursorLock(false);
+    }
+
+    public void generateMap(int r) {
+        List<string> names = new List<string> { "Icefield", "Glacier", "Desert", "Inferno", "Forest", "RedwoodForest", "SwampLand", "MushroomLand" };
+        List<int> count = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0 };
+        List<Color> colors = new List<Color> { Color.white, Color.cyan, Color.yellow, Color.red, Color.green, new Color(0, 0.25f, 0, 1), Color.blue, Color.magenta };
+        Texture2D tex = new Texture2D(r * 2, r * 2, TextureFormat.RGB24, false);
+            for(int y = -r; y < r; y++) {
+                for(int x = -r; x < r; x++) {
+                    string biome = Globals.GenerationManagerScript.chooseBiome(new Vector2(x, y)).biomeName;
+                    for(int i = 0; i < names.Count; i++) {
+                        if(biome == names[i]) {
+                            tex.SetPixel(x + r, y + r, colors[i]);
+                            count[i]++;
+                            break;
+                        }
+                    }
+                }
+            }
+            tex.Apply();
+            byte[] bytes = tex.EncodeToPNG();
+            Object.Destroy(tex);
+            System.IO.File.WriteAllBytes(Application.dataPath + "/../SavedScreen.png", bytes);
+            for(int i = 0; i < names.Count; i++) Debug.Log(names[i] + ": " + (((float)count[i] / (r * r * 4)) * 100) + "%");
+
+            float chunk_size = Globals.GenerationManagerScript.chunk_size;
+            Texture2D tex2 = new Texture2D(r * 2, r * 2, TextureFormat.RGB24, false);
+            for(int y = -r; y < r; y++) {
+                for(int x = -r; x < r; x++) {
+                    float WaterFire = Globals.GenerationManagerScript.WaterFireMap.genPerlin((x + 0.5f) * chunk_size, (y + 0.5f) * chunk_size, 0);
+                    float EarthAir = Globals.GenerationManagerScript.EarthAirMap.genPerlin((x + 0.5f) * chunk_size, (y + 0.5f) * chunk_size, 0);
+                    float amp = Globals.GenerationManagerScript.AmplifyMap.genPerlin((x + 0.5f) * chunk_size, (y + 0.5f) * chunk_size, 0);
+                    tex2.SetPixel(x + r, y + r, new Color(WaterFire,EarthAir,amp,1));
+                }
+            }
+            tex2.Apply();
+            byte[] bytes2 = tex2.EncodeToPNG();
+            Object.Destroy(tex2);
+            System.IO.File.WriteAllBytes(Application.dataPath + "/../SavedScreen2.png", bytes2);
     }
 }

@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &118434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 427352}
+  - 114: {fileID: 11486514}
+  m_Layer: 0
+  m_Name: Glacier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &427352
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11486514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeName: Glacier
+  WaterFire: 0
+  EarthAir: 1
+  Amplify: 1
+  weatherTypes:
+  - {fileID: 11431138, guid: 3dc4b1975c90d3b4b9a9dc2a3464decb, type: 2}
+  weatherChance:
+  - 1
+  SkyGradients:
+  - {fileID: 2100000, guid: 5fb4c6f50032a41c490773fcd0e5bc02, type: 2}
+  - {fileID: 2100000, guid: d1c5426f95bf4410b95abbdcc05b4d08, type: 2}
+  - {fileID: 2100000, guid: 00c3c3ab192ca464b9db5c9973b67d1c, type: 2}
+  - {fileID: 2100000, guid: 03ff12a2bc0314b8e97f6782168f7510, type: 2}
+  - {fileID: 2100000, guid: 1b986014071b444719373d4e356525e2, type: 2}
+  - {fileID: 2100000, guid: 029d1b50d36ef46169f5a256d9a5025e, type: 2}
+  temperatureCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.50700396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.3653157
+      value: 0.98524153
+      inSlope: 0.74294335
+      outSlope: 0.74294335
+      tangentMode: 0
+    - time: 0.6373441
+      value: 0.11687136
+      inSlope: -2.144575
+      outSlope: -2.144575
+      tangentMode: 0
+    - time: 1.0044284
+      value: 0.4849079
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  precipitationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0.50700396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.3653157
+      value: 0.98524153
+      inSlope: 0.74294335
+      outSlope: 0.74294335
+      tangentMode: 0
+    - time: 0.6373441
+      value: 0.11687136
+      inSlope: -2.144575
+      outSlope: -2.144575
+      tangentMode: 0
+    - time: 1.0044284
+      value: 0.4849079
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  treeTypes:
+  - {fileID: 142420, guid: 0d9e39619741946499b0f2bed603153f, type: 2}
+  - {fileID: 187382, guid: 20960e1533a1c7245bab5c916fda8ac8, type: 2}
+  bigDoodads:
+  - {fileID: 139662, guid: fb9c4fe546f4743b3a994af9b99f2f77, type: 2}
+  - {fileID: 187564, guid: 41eba104fa1dd4a32969c3e38054fa42, type: 2}
+  bigDoodadChance:
+  - 1
+  - 1
+  bigDoodadRadius:
+  - 4.5
+  - 4.5
+  smallDoodads:
+  - {fileID: 156636, guid: 7b8c9e59e5412d24a85707be74d952ff, type: 2}
+  - {fileID: 163366, guid: 267468faa53237044b764b6422722140, type: 2}
+  - {fileID: 139806, guid: 6bc05ca6c15f0d64cba4e0e75eca6d0b, type: 2}
+  - {fileID: 166160, guid: 5025265de060d0140a74a15b0e6a9970, type: 2}
+  - {fileID: 171222, guid: 496ab5383811b564db9591e14cefe739, type: 2}
+  - {fileID: 172556, guid: 972ba84d0a809134c91e5e2b0252f545, type: 2}
+  - {fileID: 120536, guid: 6f40927c13d22194188a38f631f1ea1b, type: 2}
+  - {fileID: 121420, guid: 17eaeb912897e3344aeb13a34b45e5c1, type: 2}
+  - {fileID: 157472, guid: 4b2ec1562b0591b43be482fad6358d97, type: 2}
+  - {fileID: 166330, guid: 914acd81e18a5c6488c4c1007564ee9f, type: 2}
+  - {fileID: 171698, guid: ae8b06ac5e06f804db9e49764cf9e7dc, type: 2}
+  - {fileID: 129510, guid: 312a8fa5ca1526144acdf2ab24deecbb, type: 2}
+  - {fileID: 110602, guid: 00346f79bbe0634459bc10479a04e66a, type: 2}
+  - {fileID: 190856, guid: 4cedcf4c959015746af64fc40cb6db47, type: 2}
+  - {fileID: 116518, guid: b6a8f759d250dce42a1c8ae8c95060b4, type: 2}
+  - {fileID: 188480, guid: 8413a3471f1474640a1ff38382f6d8e0, type: 2}
+  - {fileID: 150448, guid: f6fc9486bc226c7428d61a9300547679, type: 2}
+  - {fileID: 155200, guid: 488b1cf48fa6a1149ab1115b3bb9d4f1, type: 2}
+  - {fileID: 142536, guid: 26ccd58f7516ad74e801ca84b39beecf, type: 2}
+  - {fileID: 134574, guid: b8d56b591d270514db01c68064cfb22e, type: 2}
+  - {fileID: 183820, guid: 79fe732fc87ef5f4998e50b81cc91d76, type: 2}
+  - {fileID: 141262, guid: 9198c70a361984e18b2867c95d94da0d, type: 2}
+  - {fileID: 185106, guid: 612aee3eb6a0849b08cd0af38b784303, type: 2}
+  smallDoodadChance:
+  - 6
+  - 6
+  - 6
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  numOfSmallDoodads: {x: 5, y: 7}
+  doodadClusterRadius: {x: 10, y: 20}
+  doodadDensity: 4
+  treeDensity: 2
+  forestRadius: 50
+  forestMaxTrees: 8
+  mixedForests: 0
+  colors:
+  - {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 0}
+  - {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0}
+  amplitude: 400
+  colorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  lakeChance: 0
+  lakeCount: 0
+  lakeSize: {x: 0, y: 0, z: 0}
+  lakeMaxLength: 0
+  waterMaterial: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: waterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 12e3ce4e889f93b41a8ca81aa7b4e851, type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 118434}
+  m_IsPrefabParent: 1

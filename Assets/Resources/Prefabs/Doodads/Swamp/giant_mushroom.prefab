@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &139862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489804}
+  - 33: {fileID: 3302066}
+  - 23: {fileID: 2300612}
+  - 95: {fileID: 9559892}
+  - 64: {fileID: 6479554}
+  m_Layer: 0
+  m_Name: giant_mushroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &489804
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139862}
+  m_LocalRotation: {x: -0.000000059604645, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!23 &2300612
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139862}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 6271703ae46d44ad8a33659461b85720, type: 2}
+  - {fileID: 2100000, guid: 4746b0ab0ed6a4342860070a3a1d7970, type: 2}
+  - {fileID: 2100000, guid: 7abad9d5bf3754fe5b0f5ea9c7c4955c, type: 2}
+  - {fileID: 2100000, guid: 825f4a94ae01646b8bc10c3d5532dfb3, type: 2}
+  - {fileID: 2100000, guid: 6bf40f78794c84d6fb3d647c761b0987, type: 2}
+  - {fileID: 2100000, guid: a5ca61c7fa31f482dade82870fc98feb, type: 2}
+  - {fileID: 2100000, guid: 0b0e4fe6e160b4d6bbe0218974b5104f, type: 2}
+  - {fileID: 2100000, guid: ae92a7d8ace15426587145b0a93c08cd, type: 2}
+  - {fileID: 2100000, guid: 20542f58129894641a15d2782730455c, type: 2}
+  - {fileID: 2100000, guid: 8e7cbfb2458174fe8a0c8703baa0ba9a, type: 2}
+  - {fileID: 2100000, guid: eac9d9133ad264d6ca53c1bb74192516, type: 2}
+  - {fileID: 2100000, guid: e1f75e24c781d4ce79555998e5f32ae8, type: 2}
+  - {fileID: 2100000, guid: fbec99a8f86104fa1bd83251ddd69c3b, type: 2}
+  - {fileID: 2100000, guid: 693f4e09911594dc3a3f8edb3dd0f300, type: 2}
+  - {fileID: 2100000, guid: dff13298716f34880957cef6797aa778, type: 2}
+  - {fileID: 2100000, guid: 12f243f10e19342fcae74f93c88f412c, type: 2}
+  - {fileID: 2100000, guid: 49db85a6d94f145499d96d471cfa7ec6, type: 2}
+  - {fileID: 2100000, guid: 85ba65508b88147b291f118d93e992cc, type: 2}
+  - {fileID: 2100000, guid: 8367b3c83dca145ae93ff8472936abcf, type: 2}
+  - {fileID: 2100000, guid: 23b49ed78c91a4611b863905aaf32fb2, type: 2}
+  - {fileID: 2100000, guid: 667d3d5dca1f24fa49d3afda9d56e74b, type: 2}
+  - {fileID: 2100000, guid: 8dd0a834af27f4a82bf18f7eb4591e6d, type: 2}
+  - {fileID: 2100000, guid: c5d027e6acf484c8a8ec0447d50fff25, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3302066
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139862}
+  m_Mesh: {fileID: 4300000, guid: ecb475824de094fe7a499927b7db1d5c, type: 3}
+--- !u!64 &6479554
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: ecb475824de094fe7a499927b7db1d5c, type: 3}
+--- !u!95 &9559892
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ecb475824de094fe7a499927b7db1d5c, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 139862}
+  m_IsPrefabParent: 1

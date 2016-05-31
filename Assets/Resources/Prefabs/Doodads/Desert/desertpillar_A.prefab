@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 485010}
   - 33: {fileID: 3391012}
   - 23: {fileID: 2383962}
-  - 64: {fileID: 6447494}
+  - 65: {fileID: 6525768}
   m_Layer: 15
   m_Name: desertpillar_A
   m_TagString: Untagged
@@ -63,8 +63,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138668}
   m_Mesh: {fileID: 4300012, guid: 592828724ce7b40ed8220a7fee507665, type: 3}
---- !u!64 &6447494
-MeshCollider:
+--- !u!65 &6525768
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -73,8 +73,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300012, guid: 592828724ce7b40ed8220a7fee507665, type: 3}
+  m_Size: {x: 5.56044, y: 18.332859, z: 4.019229}
+  m_Center: {x: 0.124489546, y: 8.113288, z: 0.22069153}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

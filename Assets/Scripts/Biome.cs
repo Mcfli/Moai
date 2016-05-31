@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Biome : MonoBehaviour {
+    public string biomeName;
+
     // Climate properties
     public float WaterFire;
     public float EarthAir;
+    public float Amplify;
 
     public List<Weather> weatherTypes;
     public List<float> weatherChance; //must be same size as weatherTypes

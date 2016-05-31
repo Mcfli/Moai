@@ -10,10 +10,10 @@ GameObject:
   - 4: {fileID: 416720}
   - 33: {fileID: 3359222}
   - 23: {fileID: 2358182}
-  - 136: {fileID: 13696120}
   - 114: {fileID: 11411634}
   - 54: {fileID: 5443490}
   - 114: {fileID: 11445682}
+  - 135: {fileID: 13525160}
   m_Layer: 14
   m_Name: swampWaterFlowerA
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,11 +108,14 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 0
-  dirtMound: {fileID: 0}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
+  dirtMound: {fileID: 175538, guid: 3c0ef4f1c13b33c4c8e10d18b43f6d31, type: 2}
+  dirtMoundOffset: {x: 0, y: 0.4, z: 0}
+  bubble: 1
+  pickupParticle: {fileID: 101708, guid: 8249bb41b56ef814fb5819a647e75c97, type: 2}
   playerPlanted: 0
   held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 8300000, guid: 16568220f439c204e920cee6aa299573, type: 3}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!114 &11445682
 MonoBehaviour:
@@ -125,11 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cb613b0ec0d5243be8168d6ec5a265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: ocotogon
+  ID: octogon
   image: {fileID: 2100000, guid: 9f2a122674e1d3646ae7f8c2b1a87bb3, type: 2}
   imageGlowing: {fileID: 2100000, guid: 86d48630313b5c743acfbcea3eac5f75, type: 2}
---- !u!136 &13696120
-CapsuleCollider:
+--- !u!135 &13525160
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -137,10 +140,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3292358
-  m_Height: 0.58266056
-  m_Direction: 1
-  m_Center: {x: -0.0100709945, y: 0.032803796, z: 0.05053021}
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: -0.05035448, y: 0.565515, z: 0.037672043}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

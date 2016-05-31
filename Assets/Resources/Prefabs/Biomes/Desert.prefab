@@ -39,15 +39,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.63
-  EarthAir: 0.36
+  biomeName: Desert
+  WaterFire: 1
+  EarthAir: 0
+  Amplify: 0
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
   - 1
   SkyGradients:
-  - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
-  - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
+  - {fileID: 2100000, guid: f564336cfda824729bfdc458338d0444, type: 2}
+  - {fileID: 2100000, guid: 2014077689aef42b78c65faea3d4f084, type: 2}
   - {fileID: 2100000, guid: d9740f875626a184e9424a5a2c685945, type: 2}
   - {fileID: 2100000, guid: 363c6c286e051d94084f2aa392e63ed1, type: 2}
   - {fileID: 2100000, guid: 90e0d2faedf930a429428fcbd4a70c1c, type: 2}
@@ -113,8 +115,6 @@ MonoBehaviour:
   - {fileID: 193532, guid: 4775558bc9fc348a9abebe9e1c74bf88, type: 2}
   - {fileID: 194280, guid: 1cf99edb641b64bf686f85e02c3c8469, type: 2}
   - {fileID: 198816, guid: 80e70652a8bc746549e81ae36158db7e, type: 2}
-  - {fileID: 171530, guid: 6b8009c6e9ef94aa4a258bb1320739c3, type: 2}
-  - {fileID: 120038, guid: 460e35f7b7b8b42f48fdb86d1ed30850, type: 2}
   - {fileID: 195498, guid: 0f23de361e4154c459864b401da8e1c3, type: 2}
   - {fileID: 177580, guid: 49f10dddfa9b3497e9528becc5f02a7d, type: 2}
   - {fileID: 169434, guid: bed6f4c90102f4e65b86f5e2f92560f0, type: 2}
@@ -129,13 +129,11 @@ MonoBehaviour:
   - {fileID: 149518, guid: 09ae69f7dd24943678e5d41a4356ed06, type: 2}
   - {fileID: 149300, guid: a973ba15dfa2b416ba407ed879d8079d, type: 2}
   - {fileID: 101934, guid: 28ae6116669aa43b09948ea29fa6d0c3, type: 2}
-  - {fileID: 190886, guid: aa463a58dcfe449368cae16bc8972558, type: 2}
   - {fileID: 191408, guid: 307305b5a1a0448f9a7bba231273039d, type: 2}
   - {fileID: 124522, guid: 95a14a70e96cd437d97a6250ec3e31ca, type: 2}
   - {fileID: 153208, guid: 1b2eef4595e274a4ea97d4073e1dedd0, type: 2}
   - {fileID: 162862, guid: 43996bbcf2c484f31aa3f635b152d6c4, type: 2}
   - {fileID: 157550, guid: 3877bb24860d94323a7b76be6e61fbf6, type: 2}
-  - {fileID: 142810, guid: de5813ecc066a45fb8ec5b6c1e9295c5, type: 2}
   - {fileID: 136224, guid: ccae932a81ad448d5a9b17e60332e731, type: 2}
   bigDoodadChance:
   - 5
@@ -165,9 +163,33 @@ MonoBehaviour:
   - 0.2
   - 0.2
   - 0.2
-  - 0.2
-  - 0.2
   bigDoodadRadius:
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
+  - 4.5
   - 4.5
   smallDoodads: []
   smallDoodadChance: []

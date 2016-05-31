@@ -39,21 +39,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.35
-  EarthAir: 0.6
+  biomeName: RedwoodForest
+  WaterFire: 1
+  EarthAir: 1
+  Amplify: 1
   weatherTypes:
   - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
+  - {fileID: 11431138, guid: f0b3b47df503c264380fd92069a4317a, type: 2}
   - {fileID: 11431138, guid: ea440be2aec8f1d49a59fb6b4503dc0f, type: 2}
   weatherChance:
-  - 0.8
+  - 0.4
+  - 0.4
   - 0.2
   SkyGradients:
-  - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
-  - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
-  - {fileID: 2100000, guid: d9740f875626a184e9424a5a2c685945, type: 2}
-  - {fileID: 2100000, guid: 363c6c286e051d94084f2aa392e63ed1, type: 2}
-  - {fileID: 2100000, guid: 90e0d2faedf930a429428fcbd4a70c1c, type: 2}
-  - {fileID: 2100000, guid: ed3d08d6a10926742a4dc8b45e3c8c4e, type: 2}
+  - {fileID: 2100000, guid: 60095de3038b34e67862098e2034c5d7, type: 2}
+  - {fileID: 2100000, guid: a9e4a54ee9c1a409aa4245bc478be361, type: 2}
+  - {fileID: 2100000, guid: e1741f103c30f4bb09f283da638dd30a, type: 2}
+  - {fileID: 2100000, guid: 7acd9ca0f909b471f9eb7f0016fdcaac, type: 2}
+  - {fileID: 2100000, guid: d386276b1e0094a2f914301c79ec7594, type: 2}
+  - {fileID: 2100000, guid: 1f41910bd1d5848539fb47a4ffeb020b, type: 2}
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
@@ -108,6 +112,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes:
   - {fileID: 191514, guid: 11da957ef6c58c44f9ea6408d50c0ea4, type: 2}
+  - {fileID: 123218, guid: 92d761dce3d754451bfff5e86c113091, type: 2}
   bigDoodads:
   - {fileID: 189006, guid: 448152c6bfa7cad4ebae66a3818f1530, type: 2}
   - {fileID: 135330, guid: 2e21c1e14494beb4d94acc180832d708, type: 2}
@@ -163,6 +168,17 @@ MonoBehaviour:
   - {fileID: 172810, guid: 63ff9b08fe39a504aab9f4840d301060, type: 2}
   - {fileID: 139208, guid: 86c5c794764c77748a0235b992647a66, type: 2}
   - {fileID: 163042, guid: 61aa62e0b8e4602478de01825e69f1b2, type: 2}
+  - {fileID: 153980, guid: 6571b39c85c0a49a980a990469c972b0, type: 2}
+  - {fileID: 120772, guid: 0ea0c55d6b8fd4bc3aa6a47bed6d2cb5, type: 2}
+  - {fileID: 193820, guid: 89aa831b12118468080cc9e8841d344e, type: 2}
+  - {fileID: 175142, guid: 23045cf9f21df420a8ae53055a59f9c6, type: 2}
+  - {fileID: 169626, guid: 890bd9f2bd70c4273912e46cb5889d96, type: 2}
+  - {fileID: 135446, guid: 771386f976d0347f8a746652b3c9670b, type: 2}
+  - {fileID: 127070, guid: 4c3d045eaa7454cc994e4309db9460c0, type: 2}
+  - {fileID: 128022, guid: f43a6184b29d9432e886a449ffaf044b, type: 2}
+  - {fileID: 131786, guid: 238037ccc3d5d4b2d83907c3afd07506, type: 2}
+  - {fileID: 121766, guid: e055184fcdc5348d78563d63939d4be9, type: 2}
+  - {fileID: 128126, guid: 1f77254e840b34f5ba8b3fac275d3604, type: 2}
   smallDoodadChance:
   - 1
   - 1
@@ -188,12 +204,23 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 2
+  - 3
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
   treeDensity: 2
   forestRadius: 50
-  forestMaxTrees: 16
+  forestMaxTrees: 6
   mixedForests: 0
   colors:
   - {r: 0.26105478, g: 0.5294118, b: 0.13235295, a: 0}
