@@ -286,11 +286,17 @@ public class GenerationManager : MonoBehaviour {
 
     public Biome chooseBiome(Vector2 chunk)
     {
-        if(synth.heightAt(chunk.x * chunk_size + transform.position.x + chunk_size / 2, chunk.y * chunk_size + transform.position.z + chunk_size / 2, 0) > alwaysSnowHeight) return snowBiome;
         // Get the WaterFire and EarthAir values at chunk coordinates
         float WaterFire = (WaterFireMap.genPerlin(chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0) < 0.5f) ? 0 : 1;
         float EarthAir = (EarthAirMap.genPerlin  (chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0) < 0.5f) ? 0 : 1;
         float amp = (AmplifyMap.genPerlin        (chunk.x * chunk_size + chunk_size * 0.5f, chunk.y * chunk_size + chunk_size * 0.5f, 0) < 0.5f) ? 0 : 1;
+
+        float x = chunk.x * chunk_size + transform.position.x + chunk_size / 2;
+        float y = chunk.y * chunk_size + transform.position.z + chunk_size / 2;
+        if(synth.heightAt(x, y, 0) - (synth.elevation_map.genPerlin(x,y,0) - synth.elevation_map.amplitude * 0.5f) > alwaysSnowHeight) {
+            WaterFire = 0;
+            EarthAir = 1;
+        }
 
         if (mapChanges.ContainsKey(chunk))
         {

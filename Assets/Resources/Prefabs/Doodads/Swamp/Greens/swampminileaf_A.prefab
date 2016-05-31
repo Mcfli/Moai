@@ -14,7 +14,7 @@ GameObject:
   - 65: {fileID: 6599072}
   - 114: {fileID: 11413976}
   - 114: {fileID: 11433256}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: swampminileaf_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

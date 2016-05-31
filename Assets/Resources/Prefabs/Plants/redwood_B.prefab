@@ -7156,7 +7156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/redwood
+  prefabPath: Prefabs/Plants/redwood_B
   seed_object: {fileID: 133532, guid: 0232217483f1d354e8754b74d3b8ccb3, type: 2}
   baseLifeSpan: 3285000
   lifeSpanVariance: 0.2
