@@ -39,9 +39,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59020e43812612342a1030197611b064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherName: Embers
   particleS: {fileID: 19805386, guid: 283398f9d664bbe43be3d4761a8314d6, type: 2}
-  imageSpace: {fileID: 11468104, guid: 615760a39c10cd54c9caac4d75d11537, type: 2}
+  imageSpace: {fileID: 11499924, guid: 16f191ccec3e2534c84723e85d1833b9, type: 2}
   numberOfClouds: 140
+  skyIntensityMultiplier: 0.75
+  darkClouds: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

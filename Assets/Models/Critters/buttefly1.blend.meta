@@ -21,8 +21,10 @@ ModelImporter:
     400012: Plane
     2300000: Grid_000
     2300002: Grid_001
+    2300004: Plane
     3300000: Grid_000
     3300002: Grid_001
+    3300004: Plane
     4300000: Grid_000
     4300002: Grid_001
     4300004: Plane
@@ -32,7 +34,7 @@ ModelImporter:
     11100000: //RootNode
     13700000: Plane
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -113,10 +115,10 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 0
+    normalImportMode: 1
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -131,7 +133,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

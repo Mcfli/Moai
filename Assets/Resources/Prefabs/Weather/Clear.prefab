@@ -39,9 +39,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59020e43812612342a1030197611b064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherName: Clear
   particleS: {fileID: 0}
   imageSpace: {fileID: 11499924, guid: 16f191ccec3e2534c84723e85d1833b9, type: 2}
-  numberOfClouds: 25
+  numberOfClouds: 0
+  skyIntensityMultiplier: 1
+  darkClouds: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

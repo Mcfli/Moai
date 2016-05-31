@@ -41,8 +41,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weatherName: Rain
   particleS: {fileID: 19887606, guid: 16acd0ab8af54da4cbbc1f2cf3dbab52, type: 2}
-  imageSpace: {fileID: 11428982, guid: dfa51224e1e58e04eb3dbeffc610e2ce, type: 2}
+  imageSpace: {fileID: 11499924, guid: 16f191ccec3e2534c84723e85d1833b9, type: 2}
   numberOfClouds: 100
+  skyIntensityMultiplier: 0.75
+  darkClouds: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

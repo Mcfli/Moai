@@ -167,7 +167,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19843498
 ParticleSystem:
@@ -533,8 +533,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 5
-    radius: 1
+    type: 0
+    radius: 15
     angle: 25
     length: 5
     boxX: 30
@@ -1982,8 +1982,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 5
-    radius: 1
+    type: 0
+    radius: 15
     angle: 25
     length: 5
     boxX: 30
@@ -3431,8 +3431,8 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 2
     enabled: 1
-    type: 5
-    radius: 1
+    type: 0
+    radius: 15
     angle: 25
     length: 5
     boxX: 30

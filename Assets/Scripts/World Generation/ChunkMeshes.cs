@@ -136,7 +136,7 @@ public class ChunkMeshes : MonoBehaviour{
         int originalSeed = Random.seed;
 
         // Generate lakes for this chunk
-        Random.seed = Globals.SeedScript.seed + NoiseGen.hash((int)pos.x, (int)pos.y, (int)pos.z);
+        Random.seed = Globals.SeedScript.seed + new Vector3((int)pos.x, (int)pos.y, (int)pos.z).ToString().GetHashCode();
 
         for (int il = 0; il < biome.lakeCount; il++)
         {

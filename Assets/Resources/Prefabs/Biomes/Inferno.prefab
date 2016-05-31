@@ -39,19 +39,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b8dac894d278346b1530b1ff350101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterFire: 0.72
-  EarthAir: 0.36
+  biomeName: Inferno
+  WaterFire: 1
+  EarthAir: 0
+  Amplify: 1
   weatherTypes:
   - {fileID: 11428496, guid: 7b57ea68e405b434189312c8f16d496f, type: 2}
   weatherChance:
   - 1
   SkyGradients:
-  - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
-  - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
-  - {fileID: 2100000, guid: d9740f875626a184e9424a5a2c685945, type: 2}
-  - {fileID: 2100000, guid: 363c6c286e051d94084f2aa392e63ed1, type: 2}
-  - {fileID: 2100000, guid: 90e0d2faedf930a429428fcbd4a70c1c, type: 2}
-  - {fileID: 2100000, guid: ed3d08d6a10926742a4dc8b45e3c8c4e, type: 2}
+  - {fileID: 2100000, guid: 4edfe5c3eab6a4965b574478ea757cfe, type: 2}
+  - {fileID: 2100000, guid: d47fcc853c54f4d8fabdd558c9d661dd, type: 2}
+  - {fileID: 2100000, guid: 1b86d97bf39a24fabbb6423198377968, type: 2}
+  - {fileID: 2100000, guid: 75f2b704305154d8baac422414e90de7, type: 2}
+  - {fileID: 2100000, guid: e8b660017eea84fb8b8395b537d42600, type: 2}
+  - {fileID: 2100000, guid: 50f31d60255cf4634a2481d423841643, type: 2}
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
@@ -159,6 +161,8 @@ MonoBehaviour:
   - {fileID: 158034, guid: 5310fd09e83614aafa5f67e630ab282b, type: 2}
   - {fileID: 136852, guid: c2665a78d627e4078aa4901b04008311, type: 2}
   - {fileID: 117872, guid: 9c4ccb3dbce254a5db5f01fb151f2fe3, type: 2}
+  - {fileID: 120038, guid: 460e35f7b7b8b42f48fdb86d1ed30850, type: 2}
+  - {fileID: 171530, guid: 6b8009c6e9ef94aa4a258bb1320739c3, type: 2}
   bigDoodadChance:
   - 1
   - 1
@@ -212,6 +216,8 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  - 3
+  - 3
   bigDoodadRadius:
   - 5
   - 5
@@ -264,6 +270,8 @@ MonoBehaviour:
   - 5
   - 5
   - 5
+  - 4.5
+  - 4.5
   - 4.5
   smallDoodads:
   - {fileID: 106908, guid: c724d7720b76a4d6e9836ce026b742bd, type: 2}
@@ -357,10 +365,10 @@ MonoBehaviour:
   forestMaxTrees: 10
   mixedForests: 1
   colors:
-  - {r: 0.49264705, g: 0.2365805, b: 0.03984646, a: 0}
-  - {r: 0.28676468, g: 0.14032856, b: 0.08645111, a: 0}
-  - {r: 0.49264705, g: 0.35209775, b: 0.14127378, a: 0}
-  - {r: 0.44852942, g: 0.17745572, b: 0.11543037, a: 0}
+  - {r: 0.30882353, g: 0.009083053, b: 0.033326827, a: 0}
+  - {r: 0.19117647, g: 0.025487442, b: 0.0028114214, a: 0}
+  - {r: 0.699, g: 0.35209775, b: 0.14127378, a: 0}
+  - {r: 0.47794116, g: 0.11932898, b: 0.07379975, a: 0}
   - {r: 0.21323532, g: 0.21323532, b: 0.21323532, a: 0}
   - {r: 0.50735295, g: 0.50735295, b: 0.50735295, a: 0}
   amplitude: 800

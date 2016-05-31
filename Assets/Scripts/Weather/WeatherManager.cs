@@ -11,9 +11,12 @@ public class WeatherManager : MonoBehaviour {
     public float updateTime; //amount of time weather lasts (may change to same weather)
 
     public List<GameObject> cloudPrefabs;
+    public List<GameObject> darkCloudPrefabs;
     public float cloudPlacementRadius;
     public float cloudHeightVariation;
     public float cloudSizeVariation; //ratio (0.0 - 1.0)
+
+    public float skyIntensityLerpSpeed;
 
     // Internal variables
     private float lastUpdated;
@@ -21,19 +24,20 @@ public class WeatherManager : MonoBehaviour {
     private ParticleSystem.Particle[] m_Particles;
     public float particleVel = 0.0f;
     private List<Cloud> clouds; // holds all currently loaded clouds
+    private List<Cloud> darkClouds;
     private Biome lastBiome;
     private Vector3 curParticlePosition;
+    private float skyIntensityMultipler = 1;
 
     // Player for audio source
     private AudioSource weatherAudioSource;
     private bool wasPlaying = false;
-
-    // Weather audio
     public AudioClip rainAudio;
     public AudioClip Wind;
 
     void Awake(){
         clouds = new List<Cloud>();
+        darkClouds = new List<Cloud>();
     }
 
     void Start() {
@@ -45,10 +49,28 @@ public class WeatherManager : MonoBehaviour {
     void Update(){
         //if(Globals.mode == -1) return;
 
-        if (Globals.time > lastUpdated + updateTime * Globals.time_resolution || lastBiome != Globals.cur_biome) {
-            lastUpdated = Globals.time;
+        if (Globals.time > lastUpdated + updateTime * Globals.time_resolution) {
             changeWeather();
+        }else if(lastBiome != Globals.cur_biome) {
+            bool found = false;
+            foreach(Weather w in Globals.cur_biome.weatherTypes) {
+                if(w.name == Globals.cur_weather.name) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) changeWeather();
         }
+
+        if(skyIntensityMultipler < Globals.cur_weather.skyIntensityMultiplier) {
+            skyIntensityMultipler += skyIntensityLerpSpeed * Globals.deltaTime / Globals.time_resolution;
+            if(skyIntensityMultipler > Globals.cur_weather.skyIntensityMultiplier)
+                skyIntensityMultipler = Globals.cur_weather.skyIntensityMultiplier;
+        } else if(skyIntensityMultipler > Globals.cur_weather.skyIntensityMultiplier) {
+            skyIntensityMultipler -= skyIntensityLerpSpeed * Globals.deltaTime / Globals.time_resolution;
+            if(skyIntensityMultipler < Globals.cur_weather.skyIntensityMultiplier)
+                skyIntensityMultipler = Globals.cur_weather.skyIntensityMultiplier;
+        } // else do nothing
 
         checkIfVisibleParticles();
 
@@ -58,7 +80,13 @@ public class WeatherManager : MonoBehaviour {
             int randomCloud = Random.Range(0, clouds.Count);
             clouds[randomCloud].dissipate();
             clouds.RemoveAt(randomCloud);
-            createCloud();
+            createCloud(false);
+        }
+        if(Random.value < chanceOfCloudFade * Globals.time_scale && darkClouds.Count > 0) {
+            int randomCloud = Random.Range(0, darkClouds.Count);
+            darkClouds[randomCloud].dissipate();
+            darkClouds.RemoveAt(randomCloud);
+            createCloud(true);
         }
 
         lastBiome = Globals.cur_biome;
@@ -68,11 +96,13 @@ public class WeatherManager : MonoBehaviour {
             InitializeIfNeeded();
             activeParticleSystem.gravityModifier = 0;
             int numParticlesAlive = activeParticleSystem.GetParticles(m_Particles);
-            for(int i = 0; i < numParticlesAlive; i++)
-            {
-                m_Particles[i].velocity = Vector3.forward * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
+            if(Time.timeScale == 0) activeParticleSystem.Pause();
+            else if(activeParticleSystem.isPaused) activeParticleSystem.Play();
+            else {
+                for(int i = 0; i < numParticlesAlive; i++)
+                    m_Particles[i].velocity = Vector3.forward * activeParticleSystem.startSpeed * Mathf.Pow(Globals.time_scale, 0.3f);
+                activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
             }
-            activeParticleSystem.SetParticles(m_Particles, numParticlesAlive);
         }
 
         if (Globals.time_scale > 1)
@@ -93,6 +123,10 @@ public class WeatherManager : MonoBehaviour {
         }
     }
 
+    public float getSkyIntensityMultipler() {
+        return skyIntensityMultipler;
+    }
+
     public void InitializeIfNeeded()
     {
         if (m_Particles == null || m_Particles.Length < activeParticleSystem.maxParticles)
@@ -102,7 +136,6 @@ public class WeatherManager : MonoBehaviour {
     }
 	
     public void initializeWeather() {
-        lastUpdated = 0;
         changeWeather();
         checkIfVisibleParticles();
         lastBiome = Globals.cur_biome;
@@ -163,6 +196,7 @@ public class WeatherManager : MonoBehaviour {
             }
 
         }
+        lastUpdated = Globals.time;
     }
 
     private void ApplyImageSpace()
@@ -174,40 +208,61 @@ public class WeatherManager : MonoBehaviour {
     private void changeClouds(int amount) {
         int target = (Globals.time_scale < Globals.SkyScript.timeScaleThatHaloAppears) ? Globals.cur_weather.numberOfClouds : 0;
         for(int i = 0; i < amount; i++) {
-            if(clouds.Count < target) createCloud(); //i want more clouds
-            else if(clouds.Count > target) { //i want less clouds
-                clouds[0].dissipate();
-                clouds.RemoveAt(0);
-            } else break;
+            if(Globals.cur_weather.darkClouds) {
+                if(clouds.Count > 0) {
+                    clouds[0].dissipate();
+                    clouds.RemoveAt(0);
+                }
+                if(darkClouds.Count < target) createCloud(true); //i want more clouds
+                else if(darkClouds.Count > target) { //i want less clouds
+                    darkClouds[0].dissipate();
+                    darkClouds.RemoveAt(0);
+                } else break;
+            } else {
+                if(darkClouds.Count > 0) {
+                    darkClouds[0].dissipate();
+                    darkClouds.RemoveAt(0);
+                }
+                if(clouds.Count < target) createCloud(false); //i want more clouds
+                else if(clouds.Count > target) { //i want less clouds
+                    clouds[0].dissipate();
+                    clouds.RemoveAt(0);
+                } else break;
+            }
         }
     }
 
-    private Cloud createCloud(int prefabNum, Vector3 location, Vector3 rotation, float scale) {
-        GameObject c = Instantiate(cloudPrefabs[prefabNum]);
+    private Cloud createCloud(int prefabNum, Vector3 location, Vector3 rotation, float scale, bool dark) {
+        GameObject c;
+        if(dark) c = Instantiate(darkCloudPrefabs[prefabNum]);
+        else c = Instantiate(cloudPrefabs[prefabNum]);
         c.transform.parent = transform;
         c.transform.eulerAngles = rotation;
         c.transform.localScale *= scale;
         c.transform.position = location;
         Cloud cl = c.GetComponent<Cloud>();
-        clouds.Add(cl);
+        if(dark) darkClouds.Add(cl);
+        else clouds.Add(cl);
         return cl;
     }
 
-    private Cloud createCloud() { //random everything
+    private Cloud createCloud(bool dark) { //random everything
         Vector2 radial_offset = Random.insideUnitCircle * cloudPlacementRadius;
         return createCloud(Random.Range(0, cloudPrefabs.Count),
                            new Vector3(radial_offset.x + Globals.Player.transform.position.x,
                                        Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight,
                                        radial_offset.y + Globals.Player.transform.position.z),
                            new Vector3(0, Random.Range(0f, 360f), 0),
-                           1 + Random.Range(-cloudSizeVariation, cloudSizeVariation)
+                           1 + Random.Range(-cloudSizeVariation, cloudSizeVariation),
+                           dark
                );
     }
 
-    private Cloud createCloud(Vector3 location) { //random everything except location
+    private Cloud createCloud(Vector3 location, bool dark) { //random everything except location
         return createCloud(Random.Range(0, cloudPrefabs.Count),
                            location, new Vector3(0, Random.Range(0f, 360f), 0),
-                           1 + Random.Range(-cloudSizeVariation, cloudSizeVariation)
+                           1 + Random.Range(-cloudSizeVariation, cloudSizeVariation),
+                           dark
                );
     }
 
@@ -220,7 +275,19 @@ public class WeatherManager : MonoBehaviour {
                 clouds[i].dissipate();
                 clouds.RemoveAt(i);
                 Vector2 npos = Vector2.Lerp(playerPos * 2 - cloudPos, playerPos, 0.05f);
-                createCloud(new Vector3(npos.x, Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight, npos.y));
+                createCloud(new Vector3(npos.x, Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight, npos.y), false);
+                i--;
+            }
+        }
+        for(int i = 0; i < darkClouds.Count; i++) {
+            darkClouds[i].gameObject.transform.position += new Vector3(cloudMovement.x, 0, cloudMovement.y) * Globals.time_scale;
+            Vector2 cloudPos = new Vector2(darkClouds[i].gameObject.transform.position.x, darkClouds[i].gameObject.transform.position.z);
+            Vector2 playerPos = new Vector2(Globals.Player.transform.position.x, Globals.Player.transform.position.z);
+            if(Vector2.Distance(cloudPos, playerPos) > cloudPlacementRadius) {
+                darkClouds[i].dissipate();
+                darkClouds.RemoveAt(i);
+                Vector2 npos = Vector2.Lerp(playerPos * 2 - cloudPos, playerPos, 0.05f);
+                createCloud(new Vector3(npos.x, Random.Range(-cloudHeightVariation, cloudHeightVariation) + cloudHeight, npos.y), true);
                 i--;
             }
         }

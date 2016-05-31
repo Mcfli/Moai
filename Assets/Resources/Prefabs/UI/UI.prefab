@@ -8182,7 +8182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationDuration: 4
   secondsOfFade: 1
-  endingSizeRatio: 1.25
+  endingSizeRatio: 1.15
 --- !u!114 &11424324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8262,7 +8262,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 60a0bc44a59d31943b5d020a33d74391, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 338d21d39b7f71b42bf5c361ab51c94d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
