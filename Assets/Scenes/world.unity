@@ -377,7 +377,6 @@ MonoBehaviour:
   WaterFireMap: {fileID: 11434400, guid: 10702199f3ffb984b927dd14c2567d0a, type: 2}
   EarthAirMap: {fileID: 11427602, guid: 0813738b70deb964f81be5ee81bf1824, type: 2}
   AmplifyMap: {fileID: 11434400, guid: 2dd337f2d5356934680b15743266b185, type: 2}
-  doneLoading: 0
 --- !u!4 &188005511
 Transform:
   m_ObjectHideFlags: 0
@@ -1631,6 +1630,7 @@ MonoBehaviour:
     m_Bits: 4294891465
   SpeedUpSFX: {fileID: 8300000, guid: ef0f7a0eb989b304e8f55754eb97e4e7, type: 3}
   pickupDropAudio: {fileID: 0}
+  firstPersonCont: {fileID: 0}
   waitCamDistance: 60
   camZoomOutPerSec: 2.5
   camRotateDegreePerSec: 0.1
@@ -1754,7 +1754,6 @@ MonoBehaviour:
     MaximumX: 90
     smooth: 0
     smoothTime: 5
-    lockCursor: 1
     invertY: 0
   m_UseFovKick: 1
   m_FovKick:
@@ -1826,6 +1825,7 @@ MonoBehaviour:
   m_LandSound: {fileID: 0}
   lookLock: 0
   flyCheat: 0
+  playerControl: 1
 --- !u!143 &1837165591
 CharacterController:
   m_ObjectHideFlags: 0
