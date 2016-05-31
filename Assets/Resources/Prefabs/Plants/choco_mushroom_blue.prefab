@@ -44,7 +44,7 @@ GameObject:
   - 136: {fileID: 13616130}
   - 114: {fileID: 11459924}
   m_Layer: 8
-  m_Name: choco_mushrooom_purple
+  m_Name: choco_mushroom_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,8 +672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushrooom_purple
-  seed_object: {fileID: 190902, guid: 4adbf41059e1c488899d552f8735fca7, type: 2}
+  prefabPath: Prefabs/Plants/choco_mushroom_blue
+  seed_object: {fileID: 190902, guid: d2f9b32652e9842dab0448b314419c9d, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5
   scaleVariance: 0.25
@@ -739,7 +739,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  sapling: {fileID: 133858, guid: 1474c372e307044978fbb0734cb78a03, type: 2}
+  sapling: {fileID: 133858, guid: 752267d46c15b4a9ba7d0d54d995ee6a, type: 2}
   saplingOffset: {x: 0, y: 0.8, z: 0}
   saplingLifeRatio: 0.02
   prefab: {fileID: 0}
@@ -769,9 +769,9 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8e5c21c90eda342378996048e2f27e08, type: 2}
-  - {fileID: 2100000, guid: a928d9b72178b494dbae599cc4d957f5, type: 2}
-  - {fileID: 2100000, guid: a6574c79130fd4a3abb0fef3f0cd423f, type: 2}
+  - {fileID: 2100000, guid: a6c54112cc9cd4c43a94ce6ea6db4fab, type: 2}
+  - {fileID: 2100000, guid: 4c4f05ea10e814409a1f78822efbf8ef, type: 2}
+  - {fileID: 2100000, guid: 7c5097931b88e41598e8d87840e233b2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

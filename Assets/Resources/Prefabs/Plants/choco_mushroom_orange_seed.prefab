@@ -14,7 +14,7 @@ GameObject:
   - 135: {fileID: 13595452}
   - 75: {fileID: 7569788}
   - 114: {fileID: 11481650}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: choco_mushroom_orange_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeID: mushroom_red_seed
-  spawn_object: {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
+  typeID: choco_mushroom_orange_seed
+  spawn_object: {fileID: 116806, guid: 7137cb48ca1e8428c8355ba1df7e703a, type: 2}
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
@@ -119,9 +119,12 @@ MonoBehaviour:
     m_Bits: 4294432713
   dirtMound: {fileID: 161524, guid: c5ae7837e8165ac4480730534ea4c27a, type: 2}
   dirtMoundOffset: {x: 0, y: -0.25, z: 0}
+  bubble: 0
+  pickupParticle: {fileID: 0}
   playerPlanted: 0
   held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!135 &13595452
 SphereCollider:
