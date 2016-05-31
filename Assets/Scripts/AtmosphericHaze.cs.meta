@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: e18adcc9d9bfc134587b84d7c690a7ea
+timeCreated: 1464736856
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - hazeShader: {fileID: 4800000, guid: 2619871e1046c784fb43195a0395378f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
