@@ -7,8 +7,8 @@ public class Sky : MonoBehaviour {
     public float timePerDegree = 5;             //x axis, in seconds (5 is 30 min day)
     public float initialTimeOfDay = 180;        //noon
     public GameObject DayNightSpin;
-    public GameObject SunLight;
-    public GameObject MoonLight;
+    public Light SunLight;
+    public Light MoonLight;
     public GameObject Halo;
     public GameObject StarsParent;
     public GameObject normalStar;
@@ -25,6 +25,7 @@ public class Sky : MonoBehaviour {
     public float daysPerYear = 365;             // z axis
     public float timeScaleThatHaloAppears = 1000;
     public int skyDuringHalo = 3;               //0 for midnight, 3 for noon, etc
+    public float skyLerpSpeed = 0.25f; //ratio per second
 
     //finals
     private GameObject Player;
@@ -35,14 +36,22 @@ public class Sky : MonoBehaviour {
     private SkyGradient skyGoal;
     private SkyGradient skyDelta;
     private float timeRemain;
+    
+    private List<SkyGradient> mixedSkyGradients; //final sky set
+    private List<Biome> biomeSet; //biomes that are in the mix - first one is dominant
+    private List<float> biomeSkyRatios; //amount of each biome that should be put into the skyset
+
     private List<GameObject> listOfStars; //holds all stars
 
     void Awake() { //set finals
         Player = GameObject.FindGameObjectWithTag("Player");
         originalSkyAngle = transform.eulerAngles;
-        sunMaxIntensity = SunLight.GetComponent<Light>().intensity;
-        moonMaxIntensity = MoonLight.GetComponent<Light>().intensity;
+        sunMaxIntensity = SunLight.intensity;
+        moonMaxIntensity = MoonLight.intensity;
         RenderSettings.skybox = Object.Instantiate(RenderSettings.skybox); //comment out when debugging
+        mixedSkyGradients = new List<SkyGradient>();
+        biomeSet = new List<Biome>();
+        biomeSkyRatios = new List<float>();
     }
 
     void Start() {
@@ -58,6 +67,7 @@ public class Sky : MonoBehaviour {
             StarsParent.SetActive(true);
             Halo.SetActive(false);
             updateIntensity();
+            updateMixedSky();
             updateSky();
             updateStarColor();
             //updateSkyByTime();
@@ -69,73 +79,7 @@ public class Sky : MonoBehaviour {
         }
     }
 
-    private void updateTransforms() {
-        DayNightSpin.transform.localEulerAngles = new Vector3(Globals.timeOfDay, 0, 0); //update angle of sun/moon with Globals.timeOfDay - x axis
-        StarsParent.transform.localEulerAngles = new Vector3(ratio(270, 90) * starBufferAngle * 2 - starBufferAngle, 0, 0);
-        float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time / Globals.time_resolution, daysPerYear * 360 * timePerDegree) / (daysPerYear * 360 * timePerDegree)); //tilt of sun/moon - z axis
-        transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z + axis); //update angle of sun/moon ring with time of year
-        transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
-    }
-
-    private void updateStarColor() {
-        if (listOfStars.Count == 0) return;
-        Color newStarColor = listOfStars[0].GetComponent<Renderer>().material.GetColor("_Color");
-        if (timeIsBetween(90 - horizonBufferAngle, 90)) newStarColor.a = maxStarAlpha * (1 - ratio(90 - horizonBufferAngle, 90)); //moonset
-        else if (timeIsBetween(90, 270)) newStarColor.a = 0; //day
-        else if (timeIsBetween(270, 270 + horizonBufferAngle)) newStarColor.a = maxStarAlpha * ratio(270, 270 + horizonBufferAngle); //moonrise
-        else newStarColor.a = 1; //night
-        foreach(GameObject s in listOfStars) s.GetComponent<Renderer>().material.SetColor("_Color", newStarColor);
-    }
-
-    private void updateIntensity() { // Modulate sun/moon intensity
-        if (timeIsBetween(90 - horizonBufferAngle, 90 + horizonBufferAngle)) { //sunrise
-            float r = ratio(90 - horizonBufferAngle, 90 + horizonBufferAngle);
-            SunLight.GetComponent<Light>().intensity = sunMaxIntensity * r;
-            MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * (1 - r);
-        } else if (timeIsBetween(90 + horizonBufferAngle, 270 - horizonBufferAngle)) { //day
-            SunLight.GetComponent<Light>().intensity = sunMaxIntensity;
-            MoonLight.GetComponent<Light>().intensity = 0;
-        } else if (timeIsBetween(270 - horizonBufferAngle, 270 + horizonBufferAngle)) { //sunset
-            float r = ratio(270 - horizonBufferAngle, 270 + horizonBufferAngle);
-            SunLight.GetComponent<Light>().intensity = sunMaxIntensity * (1 - r);
-            MoonLight.GetComponent<Light>().intensity = moonMaxIntensity * r;
-        } else { //night
-            SunLight.GetComponent<Light>().intensity = 0;
-            MoonLight.GetComponent<Light>().intensity = moonMaxIntensity;
-        }
-    }
-
-    private void updateSky() { // gradual sky color change
-        float[] timeMarks = { 0, 90 - horizonBufferAngle, 90 + horizonBufferAngle, 180, 270 - horizonBufferAngle, 270 + horizonBufferAngle };
-        for(int i = 0; i < timeMarks.Length; i++) {
-            int j = i + 1; if (j == timeMarks.Length) j = 0;
-            if (timeIsBetween(timeMarks[i], timeMarks[j])) {
-                float r = ratio(timeMarks[i], timeMarks[j]);
-                setSky(getSkyGradient(Globals.cur_biome.SkyGradients[i]) * (1 - r) + getSkyGradient(Globals.cur_biome.SkyGradients[j]) * r);
-                break;
-            }
-        }
-	}
-
-    // is time between a (inclusive) and b (exclusive)?
-    // a and b should be less than 360
-    private bool timeIsBetween(float a, float b){
-        if (a < b) return Globals.timeOfDay >= a && Globals.timeOfDay < b;
-        else return Globals.timeOfDay >= a || Globals.timeOfDay < b;
-    }
-
-    // returns the progress of timeOfDay through a and b as a ratio.
-    // Will return -1 if timeOfDay is not between a and b or if a or b is more than or equal to 360
-    private float ratio(float a, float b) {
-        if (!timeIsBetween(a, b) || a >= 360 || b >= 360) return -1;
-        if (a == b) return 0.5f;
-        if (a < b) return (Globals.timeOfDay - a) / (b - a);
-        else {
-            float simTime = Globals.timeOfDay + (360 - a);
-            if (simTime >= 360) simTime -= 360;
-            return simTime / (b + 360 - a);
-        }
-    }
+    /***---------- STARS ----------***/
 
     public GameObject addStar() { // puts star in sky, called when shrine complete
         return addStar("normal");
@@ -195,9 +139,9 @@ public class Sky : MonoBehaviour {
         return star;
     }
 
-    public int getNumberOfStars(){
-		return listOfStars.Count;
-	}
+    public int getNumberOfStars() {
+        return listOfStars.Count;
+    }
 
     public void clearStars() {
         while(listOfStars.Count > 0) {
@@ -213,31 +157,131 @@ public class Sky : MonoBehaviour {
     public void removeNulls() {
         for(int i = 0; i < listOfStars.Count; i++) if(!listOfStars[i]) listOfStars.RemoveAt(i);
     }
-	
-	//"time" is number of degrees it takes to finish changing to new sky
-	//if time is 0, change sky immediately; time should not be less than 0
-	//currently unused
-	private void changeSkyByTime(SkyGradient s, float time){
-		skyGoal = s;
-		if(time <= 0){
-			timeRemain = 0;
-			setSky(skyGoal);
-		}else{
-			timeRemain = time * timePerDegree;
-			skyDelta = s - getSkyGradient(RenderSettings.skybox) / timeRemain;
-		}
+
+    private void updateStarColor() {
+        if(listOfStars.Count == 0) return;
+        Color newStarColor = listOfStars[0].GetComponent<Renderer>().material.GetColor("_Color");
+        if(timeIsBetween(90 - horizonBufferAngle, 90)) newStarColor.a = maxStarAlpha * (1 - ratio(90 - horizonBufferAngle, 90)); //moonset
+        else if(timeIsBetween(90, 270)) newStarColor.a = 0; //day
+        else if(timeIsBetween(270, 270 + horizonBufferAngle)) newStarColor.a = maxStarAlpha * ratio(270, 270 + horizonBufferAngle); //moonrise
+        else newStarColor.a = 1; //night
+        foreach(GameObject s in listOfStars) s.GetComponent<Renderer>().material.SetColor("_Color", newStarColor);
+    }
+
+    /***---------- SUN AND MOON ----------***/
+
+    private void updateTransforms() {
+        DayNightSpin.transform.localEulerAngles = new Vector3(Globals.timeOfDay, 0, 0); //update angle of sun/moon with Globals.timeOfDay - x axis
+        StarsParent.transform.localEulerAngles = new Vector3(ratio(270, 90) * starBufferAngle * 2 - starBufferAngle, 0, 0);
+        float axis = sunAxisShift * Mathf.Sin(2 * Mathf.PI * Mathf.Repeat(Globals.time / Globals.time_resolution, daysPerYear * 360 * timePerDegree) / (daysPerYear * 360 * timePerDegree)); //tilt of sun/moon - z axis
+        transform.eulerAngles = new Vector3(originalSkyAngle.x, originalSkyAngle.y, originalSkyAngle.z + axis); //update angle of sun/moon ring with time of year
+        transform.position = new Vector3(Player.transform.position.x, 0, Player.transform.position.z); //follow player
+    }
+
+    private void updateIntensity() { // Modulate sun/moon intensity
+        if (timeIsBetween(90 - horizonBufferAngle, 90 + horizonBufferAngle)) { //sunrise
+            float r = ratio(90 - horizonBufferAngle, 90 + horizonBufferAngle);
+            SunLight.intensity = sunMaxIntensity * r;
+            MoonLight.intensity = moonMaxIntensity * (1 - r);
+        } else if (timeIsBetween(90 + horizonBufferAngle, 270 - horizonBufferAngle)) { //day
+            SunLight.intensity = sunMaxIntensity;
+            MoonLight.intensity = 0;
+        } else if (timeIsBetween(270 - horizonBufferAngle, 270 + horizonBufferAngle)) { //sunset
+            float r = ratio(270 - horizonBufferAngle, 270 + horizonBufferAngle);
+            SunLight.intensity = sunMaxIntensity * (1 - r);
+            MoonLight.intensity = moonMaxIntensity * r;
+        } else { //night
+            SunLight.intensity = 0;
+            MoonLight.intensity = moonMaxIntensity;
+        }
+        SunLight.intensity *= Globals.WeatherManagerScript.getSkyIntensityMultipler();
+        MoonLight.intensity *= Globals.WeatherManagerScript.getSkyIntensityMultipler();
+    }
+
+    /***---------- SKYBOX ----------***/
+
+    private void updateMixedSky() {
+        if(biomeSet.Count == 0) { // if empty, set the gradient to current biome
+            biomeSet.Add(Globals.cur_biome);
+            biomeSkyRatios.Add(1f);
+            for(int i = 0; i < 6; i++) mixedSkyGradients.Add(getSkyGradient(biomeSet[0].SkyGradients[i]));
+            return;
+        }
+
+        if(biomeSet[0] != Globals.cur_biome) { // if current biome is not the dominant one (changed biome)
+            int i = biomeSet.IndexOf(Globals.cur_biome);
+            if(i < 0) { // if current biome is not in the list
+                biomeSet.Insert(0, Globals.cur_biome);
+                biomeSkyRatios.Insert(0, 0);
+            } else { // if it's in the list, but not at the top
+                float temp = biomeSkyRatios[i];
+                biomeSet.RemoveAt(i);
+                biomeSkyRatios.RemoveAt(i);
+                biomeSet.Insert(0, Globals.cur_biome);
+                biomeSkyRatios.Insert(0, temp);
+            }
+        }
+
+        if(biomeSet.Count == 1) return; // if there's only one biome, don't do anything
+
+        // update ratios
+        biomeSkyRatios[0] += skyLerpSpeed * Globals.deltaTime / Globals.time_resolution;
+        if(biomeSkyRatios[0] >= 1) { // if dominant becomes 1
+            biomeSet.RemoveRange(1, biomeSet.Count - 1);
+            biomeSkyRatios[0] = 1;
+            biomeSkyRatios.RemoveRange(1, biomeSkyRatios.Count - 1);
+        } else { //else subtract lerp amount evenly amount other biomes
+            float lerpAmount = skyLerpSpeed / (biomeSet.Count - 1) * Globals.deltaTime / Globals.time_resolution;
+            for(int i = 1; i < biomeSkyRatios.Count; i++) {
+                biomeSkyRatios[i] -= lerpAmount;
+                if(biomeSkyRatios[i] <= 0) {
+                    biomeSet.RemoveAt(i);
+                    biomeSkyRatios.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        //change sky gradient
+        for(int i = 0; i < 6; i++) { // for each time of day
+            mixedSkyGradients[i] = new SkyGradient();
+            for(int j = 0; j < biomeSet.Count; j++) mixedSkyGradients[i] += getSkyGradient(biomeSet[j].SkyGradients[i]) * biomeSkyRatios[j];
+        }
+    }
+
+    private void updateSky() { // gradual sky color change
+        float[] timeMarks = { 0, 90 - horizonBufferAngle, 90 + horizonBufferAngle, 180, 270 - horizonBufferAngle, 270 + horizonBufferAngle };
+        for(int i = 0; i < timeMarks.Length; i++) {
+            int j = i + 1; if (j == timeMarks.Length) j = 0;
+            if (timeIsBetween(timeMarks[i], timeMarks[j])) {
+                float r = ratio(timeMarks[i], timeMarks[j]);
+                SkyGradient s = mixedSkyGradients[i] * (1 - r) + mixedSkyGradients[j] * r;
+                s.intensityAmplifier *= Globals.WeatherManagerScript.getSkyIntensityMultipler();
+                setSky(s);
+                break;
+            }
+        }
 	}
-	
-	//unused ... FOR NOW (dun dun DUUUUUUUUN)
-	private void updateSkyByTime(){
-		if(timeRemain == 0) return;
-		timeRemain -=  Globals.time_scale;
-		
-		if(timeRemain <= 0){ //catch overshooting
-			timeRemain = 0;
-			setSky(skyGoal);
-		}else setSky(getSkyGradient(RenderSettings.skybox) + skyDelta * Globals.time_scale);
-	}
+
+    // is time between a (inclusive) and b (exclusive)?
+    // a and b should be less than 360
+    private bool timeIsBetween(float a, float b){
+        if (a < b) return Globals.timeOfDay >= a && Globals.timeOfDay < b;
+        else return Globals.timeOfDay >= a || Globals.timeOfDay < b;
+    }
+
+    // returns the progress of timeOfDay through a and b as a ratio.
+    // Will return -1 if timeOfDay is not between a and b or if a or b is more than or equal to 360
+    private float ratio(float a, float b) {
+        if (!timeIsBetween(a, b) || a >= 360 || b >= 360) return -1;
+        if (a == b) return 0.5f;
+        if (a < b) return (Globals.timeOfDay - a) / (b - a);
+        else {
+            float simTime = Globals.timeOfDay + (360 - a);
+            if (simTime >= 360) simTime -= 360;
+            return simTime / (b + 360 - a);
+        }
+    }
 
     // turns the sky into the inputed SkyGradient
 	private void setSky(SkyGradient s){
@@ -269,6 +313,15 @@ public class Sky : MonoBehaviour {
         public float exponentFactorForTopHalf;
         public float exponentFactorForBottomHalf;
         public float intensityAmplifier;
+
+        public SkyGradient() {
+            topColor = Color.black;
+            horizonColor = Color.black;
+            bottomColor = Color.black;
+            exponentFactorForTopHalf = 0;
+            exponentFactorForBottomHalf = 0;
+            intensityAmplifier = 0;
+        }
 
         public SkyGradient(Color c1, Color c2, Color c3, float e1, float e2, float i) {
             topColor = c1;

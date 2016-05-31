@@ -45,10 +45,8 @@ MonoBehaviour:
   Amplify: 1
   weatherTypes:
   - {fileID: 11431138, guid: 3dc4b1975c90d3b4b9a9dc2a3464decb, type: 2}
-  - {fileID: 11431138, guid: df1aefcb548bffa4d84fa23fd007fbf5, type: 2}
   weatherChance:
-  - 0.8
-  - 0.2
+  - 1
   SkyGradients:
   - {fileID: 2100000, guid: 029d1b50d36ef46169f5a256d9a5025e, type: 2}
   - {fileID: 2100000, guid: d1c5426f95bf4410b95abbdcc05b4d08, type: 2}
@@ -144,18 +142,10 @@ MonoBehaviour:
   - {fileID: 183820, guid: 79fe732fc87ef5f4998e50b81cc91d76, type: 2}
   - {fileID: 141262, guid: 9198c70a361984e18b2867c95d94da0d, type: 2}
   - {fileID: 185106, guid: 612aee3eb6a0849b08cd0af38b784303, type: 2}
-  - {fileID: 137006, guid: f3aa23bdc815044dd9a3f71cffc6c250, type: 2}
-  - {fileID: 169822, guid: b76bee53b2f184fa7a5e2df383ffb897, type: 2}
-  - {fileID: 158064, guid: db13f0de0fa634bd193f96d7fc0f542a, type: 2}
-  - {fileID: 157140, guid: 380202f1a97224128a21a1ea6975c31a, type: 2}
   smallDoodadChance:
   - 6
   - 6
   - 6
-  - 1
-  - 1
-  - 1
-  - 1
   - 1
   - 1
   - 1
