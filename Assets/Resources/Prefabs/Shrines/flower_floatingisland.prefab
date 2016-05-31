@@ -2809,10 +2809,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 441212}
   - 65: {fileID: 6507544}
-  - 114: {fileID: 11444924}
-  - 82: {fileID: 8289314}
   - 33: {fileID: 3310616}
   - 23: {fileID: 2357212}
+  - 114: {fileID: 11466108}
   m_Layer: 17
   m_Name: ObeliskReturn
   m_TagString: Untagged
@@ -21583,81 +21582,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 13.55, y: 11.47, z: 6.23}
   m_Center: {x: -0.3, y: 2.41, z: 0.07}
---- !u!82 &8289314
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151688}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!114 &11444924
+--- !u!114 &11466108
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -21665,36 +21590,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 151688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b47a34bdbe94e48872fb285c74cd9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 154a4a1dc85846f41917253843970699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightUpDistance: 20
-  possibleIslands:
-  - {fileID: 128172, guid: b3b9c09acc2fcd9418544e5277743224, type: 2}
-  - {fileID: 188550, guid: d49b4d3b26e234946b7ff6a52282d32a, type: 2}
-  - {fileID: 129554, guid: 6a402b5b64419d84497b178aa9558b9d, type: 2}
-  - {fileID: 199530, guid: 71c2aec8f2fafe6428b039c8ec8f8a7c, type: 2}
-  - {fileID: 128172}
-  islandHeight: 1000
-  maxTotalReqs: 4
-  minTotalReqs: 2
-  teleportDelay: 10
-  fireIndicatorDull: {fileID: 2100000, guid: 770dc6e2d33da9d42a8605b6811c536c, type: 2}
-  fireIndicatorLit: {fileID: 2100000, guid: 04db29f639aed854fad953d44fcabcbc, type: 2}
-  airIndicatorDull: {fileID: 2100000, guid: 34431d58fba168b45a0c3d314a167bff, type: 2}
-  airIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
-  waterIndicatorDull: {fileID: 2100000, guid: 81cb926be250aad49abe19c9b53388ba, type: 2}
-  waterIndicatorLit: {fileID: 2100000, guid: 7489ba324bbadac4f962220f8c694c88, type: 2}
-  earthIndicatorDull: {fileID: 2100000, guid: 9db34aed4f7ac5c419836186a934de33, type: 2}
-  earthIndicatorLit: {fileID: 2100000, guid: 12fa5a1b6926d644bb97b7a1b9f7cedb, type: 2}
-  baseMat: {fileID: 2100000, guid: 5d8c1eb0016499d4587f9d6256a7e3a1, type: 2}
-  completedMat: {fileID: 2100000, guid: 641667712c21ba846b1027edfc689232, type: 2}
-  saved_position: {x: 0, y: 0, z: 0}
-  saved_rotation: {x: 0, y: 0, z: 0, w: 0}
-  saved_scale: {x: 0, y: 0, z: 0}
-  ObeliskSuccess: {fileID: 8300000, guid: b905c87097e6f254ab1c7afcd0161035, type: 3}
-  ObeliskFail: {fileID: 8300000, guid: ace688ac69c0ee0429c596946b5947e1, type: 3}
-  cullSize: 75
+  linkedObelisk: {fileID: 0}
+  lightUpDistance: 10
 --- !u!114 &11482402
 MonoBehaviour:
   m_ObjectHideFlags: 1

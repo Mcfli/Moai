@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushrooom_red
+  prefabPath: Prefabs/Plants/choco_mushroom_red
   seed_object: {fileID: 190902, guid: c596f75afc16e4e8295be00a1135360c, type: 2}
   baseLifeSpan: 1314000
   lifeSpanVariance: 0.5

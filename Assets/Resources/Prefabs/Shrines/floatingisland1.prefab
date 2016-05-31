@@ -828,10 +828,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 419664}
   - 65: {fileID: 6559862}
-  - 114: {fileID: 11460250}
-  - 82: {fileID: 8229872}
   - 33: {fileID: 3309946}
   - 23: {fileID: 2346206}
+  - 114: {fileID: 11475994}
   m_Layer: 17
   m_Name: Obelisk
   m_TagString: Untagged
@@ -1140,7 +1139,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 415614}
   - 137: {fileID: 13727782}
-  - 114: {fileID: 11475600}
   - 136: {fileID: 13634036}
   m_Layer: 8
   m_Name: mushroom_yellow
@@ -1309,7 +1307,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 460992}
   - 137: {fileID: 13722028}
-  - 114: {fileID: 11406334}
   - 136: {fileID: 13683982}
   m_Layer: 8
   m_Name: mushroom_pink
@@ -2058,7 +2055,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 460208}
   - 137: {fileID: 13769792}
-  - 114: {fileID: 11407650}
   - 136: {fileID: 13673114}
   m_Layer: 8
   m_Name: mushroom_blue
@@ -2499,7 +2495,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 495496}
   - 137: {fileID: 13786846}
-  - 114: {fileID: 11401290}
   - 136: {fileID: 13618498}
   - 114: {fileID: 11477668}
   m_Layer: 8
@@ -2581,7 +2576,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 445118}
   - 137: {fileID: 13759856}
-  - 114: {fileID: 11496400}
   - 136: {fileID: 13678284}
   - 114: {fileID: 11420654}
   m_Layer: 8
@@ -2633,7 +2627,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 426558}
   - 137: {fileID: 13763000}
-  - 114: {fileID: 11434980}
   - 136: {fileID: 13679848}
   m_Layer: 8
   m_Name: mushroom_purple
@@ -2751,7 +2744,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 471122}
   - 137: {fileID: 13733680}
-  - 114: {fileID: 11421004}
   - 136: {fileID: 13608814}
   - 114: {fileID: 11412280}
   m_Layer: 8
@@ -2885,7 +2877,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 485466}
   - 137: {fileID: 13742620}
-  - 114: {fileID: 11428614}
   - 136: {fileID: 13682430}
   - 114: {fileID: 11408704}
   m_Layer: 8
@@ -3540,7 +3531,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 498772}
   - 137: {fileID: 13788156}
-  - 114: {fileID: 11446360}
   - 136: {fileID: 13662568}
   - 114: {fileID: 11475674}
   m_Layer: 8
@@ -8682,80 +8672,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.5, y: 40.86, z: 7.5}
   m_Center: {x: 0, y: 11.74, z: 0}
---- !u!82 &8229872
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124742}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!95 &9503334
 Animator:
   serializedVersion: 3
@@ -9011,91 +8927,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11401290
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 170632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushrooom_orange
-  seed_object: {fileID: 190902, guid: e61de86afa9bd4785bd9331c36828b8e, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - purple_mushroom_growing
-  - 
-  - purple_mushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 1.825308}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 133858, guid: fb38f6d8924314fdf902a9ebdb7feaec, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 324475.4
-  lifeSpan: 858590.7
-  playerPlanted: 0
 --- !u!114 &11401548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9166,176 +8997,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleVel: 1
---- !u!114 &11406334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/mushroom_pink
-  seed_object: {fileID: 149340, guid: 93a769e1f29d044f6a153f220bfdebeb, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - redMushroom_growing
-  - 
-  - redMushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 0.65}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 165260, guid: 569a40c82a5cc47f0af2569a9e6043dc, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 0
-  lifeSpan: 1314000
-  playerPlanted: 0
---- !u!114 &11407650
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/mushroom_blue
-  seed_object: {fileID: 149340, guid: a75e0363fa0854491b7324bf9a5ad786, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - redMushroom_growing
-  - 
-  - redMushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 0.65}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 165260, guid: b6739d2266edb4e8db95e0b03eea17f6, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 0
-  lifeSpan: 1314000
-  playerPlanted: 0
 --- !u!114 &11408704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9498,91 +9159,6 @@ MonoBehaviour:
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11421004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushroom
-  seed_object: {fileID: 190902, guid: 7bffdacc1f213443a9c77a9f6b6175e5, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - purple_mushroom_growing
-  - 
-  - purple_mushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 1.825308}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 133858, guid: 65979f87927a1425bbf042b0356d37ba, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 324475.4
-  lifeSpan: 858590.7
-  playerPlanted: 0
 --- !u!114 &11421138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9669,91 +9245,6 @@ MonoBehaviour:
   ID: flower
   image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
   imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
---- !u!114 &11428614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushrooom_red
-  seed_object: {fileID: 190902, guid: c596f75afc16e4e8295be00a1135360c, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - purple_mushroom_growing
-  - 
-  - purple_mushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 1.825308}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 133858, guid: 3048f7920a87c4c92bef1f89ccba4d0d, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 324475.4
-  lifeSpan: 858590.7
-  playerPlanted: 0
 --- !u!114 &11429310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9872,91 +9363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleVel: 1
---- !u!114 &11434980
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/mushroom_purple
-  seed_object: {fileID: 149340, guid: 172dc483644e048848e6ee479ba615ee, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - redMushroom_growing
-  - 
-  - redMushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 0.65}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 165260, guid: 2d023279aa4af4e799c33fdd10b9ee1a, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 0
-  lifeSpan: 1314000
-  playerPlanted: 0
 --- !u!114 &11436514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10145,91 +9551,6 @@ MonoBehaviour:
   ID: flower
   image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
   imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
---- !u!114 &11446360
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushroom_blue
-  seed_object: {fileID: 190902, guid: d2f9b32652e9842dab0448b314419c9d, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - purple_mushroom_growing
-  - 
-  - purple_mushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 1.825308}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 133858, guid: 752267d46c15b4a9ba7d0d54d995ee6a, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 324475.4
-  lifeSpan: 858590.7
-  playerPlanted: 0
 --- !u!114 &11448926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10446,44 +9767,6 @@ MonoBehaviour:
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11460250
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b47a34bdbe94e48872fb285c74cd9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightUpDistance: 20
-  possibleIslands:
-  - {fileID: 128172}
-  - {fileID: 188550, guid: d49b4d3b26e234946b7ff6a52282d32a, type: 2}
-  - {fileID: 129554, guid: 6a402b5b64419d84497b178aa9558b9d, type: 2}
-  - {fileID: 199530, guid: 71c2aec8f2fafe6428b039c8ec8f8a7c, type: 2}
-  - {fileID: 128172, guid: 73700c47ac400444db054d2bb6ae0363, type: 2}
-  islandHeight: 1000
-  maxTotalReqs: 4
-  minTotalReqs: 2
-  teleportDelay: 10
-  fireIndicatorDull: {fileID: 2100000, guid: 770dc6e2d33da9d42a8605b6811c536c, type: 2}
-  fireIndicatorLit: {fileID: 2100000, guid: 04db29f639aed854fad953d44fcabcbc, type: 2}
-  airIndicatorDull: {fileID: 2100000, guid: 34431d58fba168b45a0c3d314a167bff, type: 2}
-  airIndicatorLit: {fileID: 2100000, guid: 77403e531a7bc4b49a8bce8e0d5d7c55, type: 2}
-  waterIndicatorDull: {fileID: 2100000, guid: 81cb926be250aad49abe19c9b53388ba, type: 2}
-  waterIndicatorLit: {fileID: 2100000, guid: 7489ba324bbadac4f962220f8c694c88, type: 2}
-  earthIndicatorDull: {fileID: 2100000, guid: 9db34aed4f7ac5c419836186a934de33, type: 2}
-  earthIndicatorLit: {fileID: 2100000, guid: 12fa5a1b6926d644bb97b7a1b9f7cedb, type: 2}
-  baseMat: {fileID: 2100000, guid: 5d8c1eb0016499d4587f9d6256a7e3a1, type: 2}
-  completedMat: {fileID: 2100000, guid: 641667712c21ba846b1027edfc689232, type: 2}
-  saved_position: {x: 0, y: 0, z: 0}
-  saved_rotation: {x: 0, y: 0, z: 0, w: 0}
-  saved_scale: {x: 0, y: 0, z: 0}
-  ObeliskSuccess: {fileID: 8300000, guid: b905c87097e6f254ab1c7afcd0161035, type: 3}
-  ObeliskFail: {fileID: 8300000, guid: ace688ac69c0ee0429c596946b5947e1, type: 3}
-  cullSize: 75
 --- !u!114 &11462162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10792,91 +10075,6 @@ MonoBehaviour:
   ID: flower
   image: {fileID: 2100000, guid: 08c9f19564ea60049b593701bdd41f7a, type: 2}
   imageGlowing: {fileID: 2100000, guid: 4fd8c2048d9f8ef46ab6f2d0203c6746, type: 2}
---- !u!114 &11475600
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/mushroom_yellow
-  seed_object: {fileID: 149340, guid: c1952c148d4a1442b9e015256c7e988c, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - redMushroom_growing
-  - 
-  - redMushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 0.65}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 165260, guid: d88ed7d79bb134d77b9ebbfa1abc9bf6, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 0
-  lifeSpan: 1314000
-  playerPlanted: 0
 --- !u!114 &11475674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10891,6 +10089,19 @@ MonoBehaviour:
   ID: mushroom_red_mature
   image: {fileID: 2100000, guid: 2ebc4faa6c6b357419bc059d5258baec, type: 2}
   imageGlowing: {fileID: 2100000, guid: 46471e39cd3afb94aa38da56f2f7a72a, type: 2}
+--- !u!114 &11475994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154a4a1dc85846f41917253843970699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  linkedObelisk: {fileID: 0}
+  lightUpDistance: 10
 --- !u!114 &11477668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11085,91 +10296,6 @@ MonoBehaviour:
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
   Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
---- !u!114 &11496400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcdc746ffaf92b48b2c14935f305c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: Prefabs/Plants/choco_mushrooom_purple
-  seed_object: {fileID: 190902, guid: 4adbf41059e1c488899d552f8735fca7, type: 2}
-  baseLifeSpan: 1314000
-  lifeSpanVariance: 0.5
-  scaleVariance: 0.25
-  ratioAnimUpdates: 0.001
-  stateAnimationNames:
-  - purple_mushroom_growing
-  - 
-  - purple_mushroom_dying
-  stateRatios:
-  - 0.3
-  - 0.4
-  - 0.3
-  statePuzzleObjects:
-  - {fileID: 11456332, guid: e49a456a34d3518439ee8b34bd9e1367, type: 2}
-  - {fileID: 11456332, guid: fa946a4da1b414a498030e8fabf4cab3, type: 2}
-  - {fileID: 11456332, guid: 1ad6b0f48cf68a543b1d4900fe3347d9, type: 2}
-  propogateDuringState: 000101
-  heightAxis: 0
-  collisionRadiusMinMax: {x: 0.3, y: 1.825308}
-  collisionVSTime:
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  - serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    - time: 1
-      value: 0.5
-      inSlope: -0.5
-      outSlope: -0.5
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  sapling: {fileID: 133858, guid: 1474c372e307044978fbb0734cb78a03, type: 2}
-  saplingOffset: {x: 0, y: 0.8, z: 0}
-  saplingLifeRatio: 0.02
-  prefab: {fileID: 0}
-  age: 324475.4
-  lifeSpan: 858590.7
-  playerPlanted: 0
 --- !u!114 &11497562
 MonoBehaviour:
   m_ObjectHideFlags: 1
