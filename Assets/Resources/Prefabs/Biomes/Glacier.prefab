@@ -48,12 +48,12 @@ MonoBehaviour:
   weatherChance:
   - 1
   SkyGradients:
-  - {fileID: 2100000, guid: 029d1b50d36ef46169f5a256d9a5025e, type: 2}
+  - {fileID: 2100000, guid: 5fb4c6f50032a41c490773fcd0e5bc02, type: 2}
   - {fileID: 2100000, guid: d1c5426f95bf4410b95abbdcc05b4d08, type: 2}
   - {fileID: 2100000, guid: 00c3c3ab192ca464b9db5c9973b67d1c, type: 2}
   - {fileID: 2100000, guid: 03ff12a2bc0314b8e97f6782168f7510, type: 2}
   - {fileID: 2100000, guid: 1b986014071b444719373d4e356525e2, type: 2}
-  - {fileID: 2100000, guid: 5fb4c6f50032a41c490773fcd0e5bc02, type: 2}
+  - {fileID: 2100000, guid: 029d1b50d36ef46169f5a256d9a5025e, type: 2}
   temperatureCurve:
     serializedVersion: 2
     m_Curve:

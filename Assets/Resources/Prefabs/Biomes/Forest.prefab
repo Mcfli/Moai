@@ -53,7 +53,7 @@ MonoBehaviour:
   - 0.2
   SkyGradients:
   - {fileID: 2100000, guid: cccda54982c117648a27e6d94aa4e317, type: 2}
-  - {fileID: 2100000, guid: dcc6d064d9142bf46bb11bb0dd347c16, type: 2}
+  - {fileID: 2100000, guid: d6a9ca3dd82ec484987a7d86e0fc8ad0, type: 2}
   - {fileID: 2100000, guid: d9740f875626a184e9424a5a2c685945, type: 2}
   - {fileID: 2100000, guid: 363c6c286e051d94084f2aa392e63ed1, type: 2}
   - {fileID: 2100000, guid: 90e0d2faedf930a429428fcbd4a70c1c, type: 2}

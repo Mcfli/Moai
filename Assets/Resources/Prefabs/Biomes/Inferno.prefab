@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1b86d97bf39a24fabbb6423198377968, type: 2}
   - {fileID: 2100000, guid: 75f2b704305154d8baac422414e90de7, type: 2}
   - {fileID: 2100000, guid: e8b660017eea84fb8b8395b537d42600, type: 2}
-  - {fileID: 2100000, guid: 75f2b704305154d8baac422414e90de7, type: 2}
+  - {fileID: 2100000, guid: 50f31d60255cf4634a2481d423841643, type: 2}
   temperatureCurve:
     serializedVersion: 2
     m_Curve:
