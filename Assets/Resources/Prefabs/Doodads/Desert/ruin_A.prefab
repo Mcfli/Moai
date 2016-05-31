@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 466114}
   - 33: {fileID: 3320370}
   - 23: {fileID: 2315498}
-  - 64: {fileID: 6462982}
+  - 65: {fileID: 6539090}
   m_Layer: 15
-  m_Name: ruinA
+  m_Name: ruin_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,8 +63,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177580}
   m_Mesh: {fileID: 4300038, guid: 94055c682f5244ff18d43ee3d14a57c6, type: 3}
---- !u!64 &6462982
-MeshCollider:
+--- !u!65 &6539090
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -73,8 +73,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300038, guid: 94055c682f5244ff18d43ee3d14a57c6, type: 3}
+  m_Size: {x: 6.109435, y: 13.912875, z: 3.8035197}
+  m_Center: {x: 0.15772629, y: 5.5880775, z: 0.1281256}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

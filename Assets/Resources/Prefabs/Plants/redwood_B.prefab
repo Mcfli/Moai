@@ -867,8 +867,6 @@ GameObject:
   - 137: {fileID: 13729722}
   - 114: {fileID: 11400392}
   - 136: {fileID: 13603282}
-  - 65: {fileID: 6552074}
-  - 135: {fileID: 13565888}
   m_Layer: 8
   m_Name: redwood_B
   m_TagString: Untagged
@@ -7117,18 +7115,6 @@ Transform:
   - {fileID: 469472}
   m_Father: {fileID: 475872}
   m_RootOrder: 8
---- !u!65 &6552074
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123218}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.75, y: 1.63, z: 7.34}
-  m_Center: {x: 0.28, y: -1.56, z: 0.14}
 --- !u!111 &11105060
 Animation:
   m_ObjectHideFlags: 1
@@ -7235,18 +7221,6 @@ MonoBehaviour:
   age: 0
   lifeSpan: 1314000
   playerPlanted: 0
---- !u!135 &13565888
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123218}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.73
-  m_Center: {x: 0.14, y: 0.47, z: 0}
 --- !u!136 &13603282
 CapsuleCollider:
   m_ObjectHideFlags: 1

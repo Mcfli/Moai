@@ -129,13 +129,11 @@ MonoBehaviour:
   - {fileID: 149518, guid: 09ae69f7dd24943678e5d41a4356ed06, type: 2}
   - {fileID: 149300, guid: a973ba15dfa2b416ba407ed879d8079d, type: 2}
   - {fileID: 101934, guid: 28ae6116669aa43b09948ea29fa6d0c3, type: 2}
-  - {fileID: 190886, guid: aa463a58dcfe449368cae16bc8972558, type: 2}
   - {fileID: 191408, guid: 307305b5a1a0448f9a7bba231273039d, type: 2}
   - {fileID: 124522, guid: 95a14a70e96cd437d97a6250ec3e31ca, type: 2}
   - {fileID: 153208, guid: 1b2eef4595e274a4ea97d4073e1dedd0, type: 2}
   - {fileID: 162862, guid: 43996bbcf2c484f31aa3f635b152d6c4, type: 2}
   - {fileID: 157550, guid: 3877bb24860d94323a7b76be6e61fbf6, type: 2}
-  - {fileID: 142810, guid: de5813ecc066a45fb8ec5b6c1e9295c5, type: 2}
   - {fileID: 136224, guid: ccae932a81ad448d5a9b17e60332e731, type: 2}
   bigDoodadChance:
   - 5
@@ -165,11 +163,7 @@ MonoBehaviour:
   - 0.2
   - 0.2
   - 0.2
-  - 0.2
-  - 0.2
   bigDoodadRadius:
-  - 4.5
-  - 4.5
   - 4.5
   - 4.5
   - 4.5

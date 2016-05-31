@@ -124,6 +124,7 @@ MonoBehaviour:
   - {fileID: 118220, guid: 4c952ed507d8342a080f80244a9e05e4, type: 2}
   - {fileID: 118220, guid: 70dcbc32b012f4345b174f7545dbeb6f, type: 2}
   - {fileID: 118220, guid: 361687ae20caa49c981325ce3c8ed314, type: 2}
+  - {fileID: 111360, guid: 010b63e2b15c0854fab851c31716db4d, type: 2}
   bigDoodadChance:
   - 5
   - 2
@@ -131,13 +132,15 @@ MonoBehaviour:
   - 2
   - 2
   - 2
+  - 5
   bigDoodadRadius:
-  - 1
+  - 0
   - 4
   - 4
   - 4
   - 4
   - 4
+  - 0
   smallDoodads:
   - {fileID: 121766, guid: 06f715c6f5c1f5d4ba0b806ce2cce6bb, type: 2}
   - {fileID: 150136, guid: 1deb94146c380a94daa7ab6431c81459, type: 2}

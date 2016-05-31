@@ -10,8 +10,10 @@ GameObject:
   - 4: {fileID: 470632}
   - 33: {fileID: 3357586}
   - 23: {fileID: 2305442}
-  - 64: {fileID: 6425822}
-  m_Layer: 15
+  - 136: {fileID: 13680034}
+  - 54: {fileID: 5461248}
+  - 114: {fileID: 11498106}
+  m_Layer: 14
   m_Name: ruin_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,8 +65,55 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141570}
   m_Mesh: {fileID: 4300016, guid: 94055c682f5244ff18d43ee3d14a57c6, type: 3}
---- !u!64 &6425822
-MeshCollider:
+--- !u!54 &5461248
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141570}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 100
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &11498106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc680ce8e339f64584d0dc4f60c6244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeID: relic
+  spawn_object: {fileID: 0}
+  cull_layer:
+    serializedVersion: 2
+    m_Bits: 0
+  cull_radius: 0
+  growAttempts: 0
+  growTime: 0
+  growTimeVariance: 0
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 4294432712
+  dirtMound: {fileID: 0}
+  dirtMoundOffset: {x: 0, y: 0, z: 0}
+  bubble: 0
+  pickupParticle: {fileID: 0}
+  playerPlanted: 0
+  held: 0
+  PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 0}
+  CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
+--- !u!136 &13680034
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -72,9 +121,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300016, guid: 94055c682f5244ff18d43ee3d14a57c6, type: 3}
+  m_Radius: 0.4
+  m_Height: 4.43289
+  m_Direction: 1
+  m_Center: {x: -0.004829496, y: 2.0739279, z: -0.005553484}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
