@@ -17,7 +17,6 @@ public class GenerationManager : MonoBehaviour {
     public int tree_load_dist = 1;
     public int tree_unload_dist = 1;
     public List<Biome> biomes;
-    public Biome snowBiome;
     public float alwaysSnowHeight;
     public NoiseGen mountainMap;
     public NoiseGen WaterFireMap;
