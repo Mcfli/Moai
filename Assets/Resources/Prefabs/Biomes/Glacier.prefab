@@ -25,6 +25,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,6 +109,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes:
   - {fileID: 142420, guid: 0d9e39619741946499b0f2bed603153f, type: 2}
+  - {fileID: 142420, guid: 53719eef224334b4491636243c71de46, type: 2}
   - {fileID: 187382, guid: 20960e1533a1c7245bab5c916fda8ac8, type: 2}
   bigDoodads:
   - {fileID: 139662, guid: fb9c4fe546f4743b3a994af9b99f2f77, type: 2}
@@ -172,7 +174,7 @@ MonoBehaviour:
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 8
-  mixedForests: 1
+  mixedForests: 0
   colors:
   - {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 0}
   - {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0}
