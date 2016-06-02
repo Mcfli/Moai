@@ -4,7 +4,8 @@ using System.Collections;
 [ExecuteInEditMode]
 public class AtmosphericHaze : MonoBehaviour
 {
-
+    public Color fadeColor;
+    public float fadeDistance;
     //public float intensity;
     private Material material;
 
@@ -24,7 +25,8 @@ public class AtmosphericHaze : MonoBehaviour
             return;
         }
         */
-        //material.SetFloat("_bwBlend", intensity);
+        material.SetColor("_fadeColor", fadeColor);
+        material.SetFloat("_fadeDistance", fadeDistance);
         Graphics.Blit(source, destination, material);
     }
 }
