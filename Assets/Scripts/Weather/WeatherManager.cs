@@ -47,6 +47,8 @@ public class WeatherManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
+        if(!Globals.cur_weather) return;
+
         //if(Globals.mode == -1) return;
 
         if (Globals.time > lastUpdated + updateTime * Globals.time_resolution) {
