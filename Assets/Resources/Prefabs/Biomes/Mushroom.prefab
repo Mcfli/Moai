@@ -127,11 +127,11 @@ MonoBehaviour:
   - {fileID: 111360, guid: 010b63e2b15c0854fab851c31716db4d, type: 2}
   bigDoodadChance:
   - 5
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
+  - 3
+  - 3
+  - 3
+  - 3
+  - 3
   - 5
   bigDoodadRadius:
   - 0

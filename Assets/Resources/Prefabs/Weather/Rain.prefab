@@ -43,7 +43,7 @@ MonoBehaviour:
   particleS: {fileID: 19887606, guid: 16acd0ab8af54da4cbbc1f2cf3dbab52, type: 2}
   imageSpace: {fileID: 11499924, guid: 16f191ccec3e2534c84723e85d1833b9, type: 2}
   numberOfClouds: 100
-  skyIntensityMultiplier: 0.75
+  skyIntensityMultiplier: 0.85
   darkClouds: 1
 --- !u!1001 &100100000
 Prefab:
