@@ -220,8 +220,8 @@ MonoBehaviour:
   doodadDensity: 4
   treeDensity: 2
   forestRadius: 50
-  forestMaxTrees: 6
-  mixedForests: 0
+  forestMaxTrees: 3
+  mixedForests: 1
   colors:
   - {r: 0.26105478, g: 0.5294118, b: 0.13235295, a: 0}
   - {r: 0.32048678, g: 0.5808823, b: 0.21783087, a: 0}

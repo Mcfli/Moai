@@ -164,7 +164,7 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  - 1
+  - 2
   - 1
   numOfSmallDoodads: {x: 5, y: 7}
   doodadClusterRadius: {x: 10, y: 20}
@@ -172,7 +172,7 @@ MonoBehaviour:
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 8
-  mixedForests: 0
+  mixedForests: 1
   colors:
   - {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 0}
   - {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0}

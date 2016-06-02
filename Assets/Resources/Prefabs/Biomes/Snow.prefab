@@ -111,7 +111,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   treeTypes:
-  - {fileID: 142420, guid: 0d9e39619741946499b0f2bed603153f, type: 2}
+  - {fileID: 142420, guid: 53719eef224334b4491636243c71de46, type: 2}
   - {fileID: 187382, guid: 20960e1533a1c7245bab5c916fda8ac8, type: 2}
   bigDoodads:
   - {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 8
-  mixedForests: 0
+  mixedForests: 1
   colors:
   - {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 0}
   - {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0}
