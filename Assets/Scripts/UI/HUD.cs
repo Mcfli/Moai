@@ -44,14 +44,16 @@ public class HUD : MonoBehaviour {
             else if(Globals.mode == 0) pauseGame();
         }
 
+        if (!crosshairParent.activeInHierarchy) foreach (UnityEngine.UI.Image i in crosshairOutlines) i.gameObject.SetActive(false);
+
         //toggle HUD
-        if(Input.GetButtonDown(crosshairToggle) && Globals.mode == 0 && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) Globals.settings["ShowHUD"] = (Globals.settings["ShowHUD"] == 0) ? 1 : 0;
+        if (Input.GetButtonDown(crosshairToggle) && Globals.mode == 0 && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) Globals.settings["ShowHUD"] = (Globals.settings["ShowHUD"] == 0) ? 1 : 0;
         HUDParent.SetActive(Globals.settings["ShowHUD"] == 1 && Globals.mode == 0);
         if(!HUDParent.activeInHierarchy) return;
 
         //crosshair
         crosshairParent.SetActive(!Globals.PlayerScript.isInCinematic() && Globals.settings["Crosshair"] == 1);
-        if(!crosshairParent.activeInHierarchy) return;
+        if (!crosshairParent.activeInHierarchy) return;
 
         //active crosshair - square, pentagon, triangle, octogon; blank (or anything else) is diamond
         string heldID = "";
@@ -89,7 +91,7 @@ public class HUD : MonoBehaviour {
     }
 
     public void ping() {
-        pingNext = true;
+        if(crosshairParent.activeInHierarchy) pingNext = true;
     }
 
     private void pingCrosshair(bool pingDefaultCrosshair = false) {

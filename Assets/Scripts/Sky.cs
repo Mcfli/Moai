@@ -93,6 +93,7 @@ public class Sky : MonoBehaviour {
 
     public GameObject addStar(string element, Vector2 angle) {
         GameObject star = createStar(element);
+        Vector3 originalRotation = star.transform.eulerAngles;
 
         star.transform.SetParent(StarsParent.transform);
         star.transform.localPosition = Vector3.up * 10000;
@@ -103,6 +104,7 @@ public class Sky : MonoBehaviour {
         star.transform.SetParent(StarsParent.transform);
         StarsParent.transform.localEulerAngles = origRot;
         star.transform.LookAt(StarsParent.transform);
+        star.transform.eulerAngles += originalRotation;
         return star;
     }
 

@@ -156,7 +156,7 @@ public class InteractableObject: MonoBehaviour{
 
         PuzzleObject po = GetComponent<PuzzleObject>();
         if(GetComponent<PuzzleObject>())
-            if(po.ID.Equals("sqaure") || po.ID.Equals("pentagon") || po.ID.Equals("octogon") || po.ID.Equals("triangle"))
+            if(po.ID.Equals("square") || po.ID.Equals("pentagon") || po.ID.Equals("octogon") || po.ID.Equals("triangle"))
                 Globals.MenusScript.GetComponent<HUD>().ping();
 
         Vector2 coordinates = GenerationManager.worldToChunk(transform.position);

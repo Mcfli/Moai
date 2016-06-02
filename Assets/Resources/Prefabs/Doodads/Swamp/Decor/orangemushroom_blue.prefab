@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: -0.00000004894131, y: 0.570786, z: -0.000000034021497, w: 0.8210989}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -139,7 +140,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.17427063
+  m_Radius: 0.97626483
   m_Height: 2.1859748
   m_Direction: 1
   m_Center: {x: 0.0034381151, y: 1.1, z: -0.0020411015}

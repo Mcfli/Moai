@@ -47,7 +47,7 @@ public class TreeScript : MonoBehaviour {
 
     private ForestScript forestParent;
 
-    public bool playerPlanted = false;
+    [HideInInspector] public bool playerPlanted = false;
 
     public enum Axis { XAxis, YAxis, ZAxis}
 

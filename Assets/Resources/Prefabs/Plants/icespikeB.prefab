@@ -119,7 +119,7 @@ GameObject:
   - 114: {fileID: 11450834}
   - 136: {fileID: 13605270}
   m_Layer: 8
-  m_Name: icespike B
+  m_Name: icespikeB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +194,7 @@ Transform:
   m_LocalRotation: {x: 0.50000006, y: 0.49999997, z: -0.49999997, w: 0.50000006}
   m_LocalPosition: {x: 0, y: 0, z: 1.0795312}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 421432}
   m_RootOrder: 1
@@ -206,6 +207,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.21785732, z: 0.000000009522846}
   m_LocalScale: {x: 5.398088, y: 5.398088, z: 5.398088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 428248}
   - {fileID: 405334}
@@ -220,6 +222,7 @@ Transform:
   m_LocalRotation: {x: 0.26217654, y: -0.6567065, z: -0.2621765, w: -0.6567066}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9982798, y: 0.9982799, z: 0.9982799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 468388}
   m_Father: {fileID: 421432}
@@ -233,6 +236,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 421432}
   m_Father: {fileID: 0}
@@ -246,6 +250,7 @@ Transform:
   m_LocalRotation: {x: -0.000000059604645, y: 4.5029495e-15, z: 2.683967e-22, w: 1}
   m_LocalPosition: {x: -0.13875079, y: 0.000000010475418, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 476808}
   m_Father: {fileID: 451306}
@@ -259,6 +264,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: -2.268928e-15, w: 1}
   m_LocalPosition: {x: -0.07810974, y: 0.000000005897164, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 468558}
   m_Father: {fileID: 495308}
@@ -272,6 +278,7 @@ Transform:
   m_LocalRotation: {x: 0.00000005960466, y: -4.5029495e-15, z: -4.1015237e-15, w: 1}
   m_LocalPosition: {x: -0.15320814, y: 0.00000001156689, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 431486}
   m_Father: {fileID: 468388}
@@ -285,6 +292,7 @@ Transform:
   m_LocalRotation: {x: -0.000000059604638, y: 4.502949e-15, z: 4.6338496e-15, w: 1}
   m_LocalPosition: {x: -0.110044025, y: 0.000000008308093, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 451306}
   m_Father: {fileID: 428248}
@@ -298,6 +306,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: -4.721116e-15, w: 1}
   m_LocalPosition: {x: -0.08331299, y: 0.000000006293703, z: 0}
   m_LocalScale: {x: 1.3459445, y: 1.3459446, z: 1.3459448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 489574}
   m_Father: {fileID: 450394}
@@ -311,6 +320,7 @@ Transform:
   m_LocalRotation: {x: 3.551745e-15, y: -1.11271415e-29, z: -3.132866e-15, w: 1}
   m_LocalPosition: {x: -0.097996235, y: 0.000000007398512, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 495308}
   m_Father: {fileID: 431486}
@@ -324,6 +334,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.064160764, y: 0.000000004844008, z: -5e-15}
   m_LocalScale: {x: 0.8693021, y: 0.8693019, z: 0.86930203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 468558}
   m_RootOrder: 0
@@ -336,6 +347,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 3.6128314e-15, w: 1}
   m_LocalPosition: {x: -0.16666412, y: 0.000000012582859, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 450394}
   m_Father: {fileID: 476808}
@@ -387,7 +399,7 @@ MonoBehaviour:
   - {fileID: 11456332, guid: e77d6995bf221b4458c4544f9daa911c, type: 2}
   propogateDuringState: 000101
   heightAxis: 0
-  collisionRadiusMinMax: {x: 0.8, y: 0.85}
+  collisionRadiusMinMax: {x: 0.1, y: 0.85}
   collisionVSTime:
   - serializedVersion: 2
     m_Curve:
@@ -445,7 +457,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   sapling: {fileID: 198440, guid: 89b186f4bd037420eb83a4e9dcb49071, type: 2}
-  saplingOffset: {x: 0, y: 0.1, z: -0.05}
+  saplingOffset: {x: 0, y: 0.02, z: -0.035}
   saplingLifeRatio: 0.02
   prefab: {fileID: 0}
   age: 545044.8
