@@ -42,7 +42,7 @@ public class WordWall : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if(!displaying && Vector3.Distance(transform.position, Globals.Player.transform.position) < 10)
+        if(!displaying && Vector3.Distance(transform.position, Globals.Player.transform.position) < 5 + transform.localScale.x * 0.5f * 10)
         {
             displaying = true;
             StartCoroutine("displayText");

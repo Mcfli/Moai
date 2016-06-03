@@ -111,7 +111,7 @@ public class Obelisk : MonoBehaviour {
     {
         if(isDone) return;
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (!litUp && Globals.time_scale > 0 && Time.timeScale > 0 && dist < lightUpDistance)
+        if (!litUp && Globals.time_scale > 0 && Time.timeScale > 0 && dist < transform.localScale.x * 0.5f * lightUpDistance )
         {
             lightIndicators();
             
@@ -137,7 +137,7 @@ public class Obelisk : MonoBehaviour {
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (litUp && dist < lightUpDistance && Globals.time_scale == 1 && Time.timeScale == 1 && !fromObelisk && (isDone || areReqsMet()))
+        if (litUp && dist < (transform.localScale.x -1 ) * 0.5f * lightUpDistance + lightUpDistance && Globals.time_scale == 1 && Time.timeScale == 1 && !fromObelisk && (isDone || areReqsMet()))
         {
             fader.fade(Color.white, 1.5f);
 			fromObelisk = true;

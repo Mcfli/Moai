@@ -40,7 +40,7 @@ public class TeleportStone : MonoBehaviour {
     void OnMouseDown()
     {
         float dist = Vector3.Distance(Globals.Player.transform.position, transform.position);
-        if (dist < lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fromIsland)
+        if (dist < (transform.localScale.x - 1) * 0.5f * lightUpDistance + lightUpDistance && Globals.time_scale > 0 && Time.timeScale > 0 && !fromIsland)
         {
             fader.fade(Color.white, 1.5f);
             fromIsland = true;
