@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3382948}
   - 23: {fileID: 2343752}
   - 136: {fileID: 13656042}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: swampgiantLeaf 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 483868}
   - 33: {fileID: 3335846}
   - 23: {fileID: 2392816}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: swampBubble_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}

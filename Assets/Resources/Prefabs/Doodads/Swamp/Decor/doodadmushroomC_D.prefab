@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11417832}
   - 114: {fileID: 11452930}
   - 136: {fileID: 13660872}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: doodadmushroomC_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
