@@ -26,7 +26,7 @@ public class TeleportStone : MonoBehaviour {
 		{
             if(!fader.isFading() && fader.targetColor == Color.white)
             {
-				Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
+				Globals.Player.transform.position = telePos + new Vector3(-5, 100000,-5);
                 Globals.PlayerScript.warpToGround(Globals.PlayerScript.transform.position.y, true);
                 fader.fade(Color.clear, 1.5f);
             } 

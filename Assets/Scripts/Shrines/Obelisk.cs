@@ -90,7 +90,7 @@ public class Obelisk : MonoBehaviour {
 		{
 			if (!fader.isFading() && fader.targetColor == Color.white)
 			{
-                Globals.Player.transform.position = telePos + new Vector3(-10, 160,-10) * islandInstance.transform.localScale.x;
+                Globals.Player.transform.position = telePos + new Vector3(-10, 100000,-10) * islandInstance.transform.localScale.x;
 
                 RaycastHit hit;
                 Ray rayDown = new Ray(Globals.Player.transform.position + Vector3.up * 100, Vector3.down);

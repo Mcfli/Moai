@@ -75,7 +75,7 @@ public class ShrineManager : MonoBehaviour {
             for (int j = -obelisk_min_dist; j <= obelisk_min_dist; j++)
             {
                 Vector2 temp = chunk + Vector2.right * i + Vector2.up * j;
-                if (obelisks.ContainsKey(temp) && obelisks[temp] != null || shrines.ContainsKey(temp) && shrines[temp] != null)
+                if (obelisks.ContainsKey(temp) && obelisks[temp] != null)
                 {
                     return;
                 }
