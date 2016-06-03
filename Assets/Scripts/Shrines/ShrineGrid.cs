@@ -145,6 +145,14 @@ public class ShrineGrid : MonoBehaviour
                 if (po != null)
                     enablePlacementItem(po);
             }
+
+            // Add all doodads with puzzleObjects associated with the current biome
+            foreach (GameObject doodad in b.bigDoodads)
+            {
+                PuzzleObject po = doodad.GetComponent<PuzzleObject>();
+                if (po != null)
+                    enablePlacementItem(po);
+            }
         }
     }
 
