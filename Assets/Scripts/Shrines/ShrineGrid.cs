@@ -23,10 +23,10 @@ public class ShrineGrid : MonoBehaviour
     public GameObject waterStar;
     public GameObject earthStar;
     public GameObject airStar;
-	public GameObject fireBeam;
-	public GameObject waterBeam;
-	public GameObject earthBeam;
-	public GameObject airBeam;
+    public GameObject fireBeam;
+    public GameObject waterBeam;
+    public GameObject earthBeam;
+    public GameObject airBeam;
 
     // The element that the shrine will check curState against targetState... for
     private string curElement;
@@ -67,7 +67,7 @@ public class ShrineGrid : MonoBehaviour
         glowLayer = LayerMask.GetMask("Glow");
         mural = GetComponent<Mural>();
 
-        
+
         curElement = "";
 
         populateValidItems();
@@ -79,13 +79,13 @@ public class ShrineGrid : MonoBehaviour
         doneAir.SetActive(false);
         doneFire.SetActive(false);
         doneEarth.SetActive(false);
-		
 
-		transform.position = snapToTerrain(transform.position);
+
+        transform.position = snapToTerrain(transform.position);
         mural.WipeOldMural();
-		createMural();
-		
-		killTrees();
+        createMural();
+
+        killTrees();
     }
 
     // Update is called once per frame
@@ -108,7 +108,7 @@ public class ShrineGrid : MonoBehaviour
 
     public void enablePlacementItem(PuzzleObject item)
     {
-        if(validObjects.IndexOf(item) == -1)
+        if (validObjects.IndexOf(item) == -1)
             validObjects.Add(item);
     }
 
@@ -119,63 +119,31 @@ public class ShrineGrid : MonoBehaviour
 
     }
 
-    public string getElement() {
+    public string getElement()
+    {
         return curElement;
     }
 
     private void populateValidItems()
     {
-        // Find all biomes within our current WaterFire-EarthAir vector box
-        List<Biome> allBiomes = GameObject.Find("WorldGen").GetComponent<GenerationManager>().biomes;
+        // Current biome
+        Biome b = Globals.GenerationManagerScript.chooseBiome(GenerationManager.worldToChunk(transform.position));
 
-        // Calculate the bounding edges of our WaterFire-EarthAir box
-        float EarthAirMin = Globals.WaterFireEarthAirVector.y > 0 ?
-            Globals.WaterFireEarthAirOrigin.y - Globals.WaterFireEarthAirMin :
-            Globals.WaterFireEarthAirOrigin.y + Globals.WaterFireEarthAirVector.y - Globals.WaterFireEarthAirMin;
-        float EarthAirMax = Globals.WaterFireEarthAirVector.y > 0 ?
-            Globals.WaterFireEarthAirOrigin.y + Globals.WaterFireEarthAirVector.y + Globals.WaterFireEarthAirMin :
-            Globals.WaterFireEarthAirOrigin.y + Globals.WaterFireEarthAirMin;
-        float WaterFireMin = Globals.WaterFireEarthAirVector.x > 0 ?
-           Globals.WaterFireEarthAirOrigin.x - Globals.WaterFireEarthAirMin :
-           Globals.WaterFireEarthAirOrigin.x + Globals.WaterFireEarthAirVector.x - Globals.WaterFireEarthAirMin;
-        float WaterFireMax = Globals.WaterFireEarthAirVector.x > 0 ?
-            Globals.WaterFireEarthAirOrigin.x + Globals.WaterFireEarthAirVector.x + Globals.WaterFireEarthAirMin :
-            Globals.WaterFireEarthAirOrigin.x + Globals.WaterFireEarthAirMin;
-
-        // Calculate max distance
-        float maxDist = Vector2.Distance(new Vector2(WaterFireMax, EarthAirMax), Globals.WaterFireEarthAirOrigin);
-
-        foreach (Biome b in allBiomes)
+        // Add all trees with puzzleObjects associated with the current biome
+        foreach (GameObject tree in b.treeTypes)
         {
-            // If the biome is in our box, add it as a valid biome
-            if (b.WaterFire <= WaterFireMax && b.WaterFire >= WaterFireMin &&
-                b.EarthAir <= EarthAirMax && b.EarthAir >= EarthAirMin)
+            foreach (PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
             {
-                float distance = Vector2.Distance(Globals.WaterFireEarthAirOrigin, new Vector2(b.WaterFire, b.EarthAir));
-                float weight = distance / maxDist;
-                weight = Mathf.Sqrt(weight);
+                if (po != null)
+                    enablePlacementItem(po);
+            }
 
-                if (weight > Globals.WaterFireEarthAirDistGuaranteed && Random.value <= weight) continue;
-
-                // Add all trees with puzzleObjects associated with the current biome
-				foreach (GameObject tree in b.treeTypes)
-				{
-					foreach (PuzzleObject po in tree.GetComponent<TreeScript>().statePuzzleObjects)
-					{
-						if (po != null)
-							enablePlacementItem(po);
-					}
-
-				}
-                
-
-                // Add all doodads with puzzleObjects associated with the current biome
-                foreach (GameObject doodad in b.smallDoodads)
-                {
-                    PuzzleObject po = doodad.GetComponent<PuzzleObject>();
-                    if (po != null)
-                        enablePlacementItem(po);
-                }
+            // Add all doodads with puzzleObjects associated with the current biome
+            foreach (GameObject doodad in b.smallDoodads)
+            {
+                PuzzleObject po = doodad.GetComponent<PuzzleObject>();
+                if (po != null)
+                    enablePlacementItem(po);
             }
         }
     }
@@ -215,8 +183,8 @@ public class ShrineGrid : MonoBehaviour
         {
             GameObject go = collider.gameObject;
             InteractableObject io = go.GetComponent<InteractableObject>();
-            if(io) if(Globals.PlayerScript.getHeldObj() == io) continue;
-            if(go.GetComponent<PuzzleObject>() != null)
+            if (io) if (Globals.PlayerScript.getHeldObj() == io) continue;
+            if (go.GetComponent<PuzzleObject>() != null)
                 curState.Add(go);
         }
     }
@@ -225,17 +193,17 @@ public class ShrineGrid : MonoBehaviour
     {
         List<GameObject> itemsCounted = curState;
         Dictionary<int, bool> completed = new Dictionary<int, bool>();
-        
+
         bool done = true;
         // Look at each requirement in each targetState
         int index = 0;
         List<PuzzleObject> targetState;
         if (curElement.Equals("fire")) targetState = targetStateFire;
-        else if (curElement.Equals( "water")) targetState = targetStateWater;
+        else if (curElement.Equals("water")) targetState = targetStateWater;
         else if (curElement.Equals("earth")) targetState = targetStateEarth;
         else if (curElement.Equals("air")) targetState = targetStateAir;
         else return;
-        
+
         foreach (PuzzleObject tarObj in targetState)
         {
             // if we don't currently have the desired item in the box, it can't be complete   
@@ -266,7 +234,7 @@ public class ShrineGrid : MonoBehaviour
             index++;
         }
         isDone = done;
-        if(isDone)
+        if (isDone)
             complete(curElement);
         mural.genMurals(targetStateFire, targetStateWater, targetStateEarth, targetStateAir);
         mural.glowPuzzleObjects(completed, targetState, curElement);
@@ -281,7 +249,7 @@ public class ShrineGrid : MonoBehaviour
         numItems = Random.Range(minSolItems, maxSolItems);
         for (int i = 0; i < numItems; i++)
         {
-            int index = Random.Range(0, validObjects.Count - 1);
+            int index = Random.Range(0, validObjects.Count);
             PuzzleObject placeObj = validObjects[index];
             if (placeObj != null)
                 targetStateFire.Add(placeObj);
@@ -344,7 +312,7 @@ public class ShrineGrid : MonoBehaviour
     public void killTrees()
     {
         Vector3 half_extents = new Vector3(size, 100000, size);
-        LayerMask tree_mask = LayerMask.GetMask("Tree","Doodad","BigDoodad", "Seed");
+        LayerMask tree_mask = LayerMask.GetMask("Tree", "Doodad", "BigDoodad", "Seed");
 
         Collider[] colliders = Physics.OverlapBox(transform.position, half_extents, Quaternion.identity, tree_mask);
         for (int i = 0; i < colliders.Length; i++)
@@ -356,7 +324,7 @@ public class ShrineGrid : MonoBehaviour
                 {
                     Destroy(tree);
                 }
-                    
+
             }
             else if (tree.GetComponent<TreeScript>() != null)
             {
@@ -366,21 +334,21 @@ public class ShrineGrid : MonoBehaviour
                 }
             }
             // should only make it here if it's not interactable
-            else if(tree.layer == LayerMask.NameToLayer("Doodad") || tree.layer == LayerMask.NameToLayer("BigDoodad"))
+            else if (tree.layer == LayerMask.NameToLayer("Doodad") || tree.layer == LayerMask.NameToLayer("BigDoodad"))
             {
                 Destroy(tree);
             }
-			
+
         }
     }
 
 
     private void drawSquare(Color color)
     {
-        Vector3 topleft = gridToReal(Vector2.zero + 3* Vector2.up);
+        Vector3 topleft = gridToReal(Vector2.zero + 3 * Vector2.up);
         Vector3 topright = gridToReal(3 * Vector2.right + 3 * Vector2.up);
         Vector3 botleft = gridToReal(Vector2.zero);
-        Vector3 botright = gridToReal(Vector2.zero + 3* Vector2.right);
+        Vector3 botright = gridToReal(Vector2.zero + 3 * Vector2.right);
 
         // Top
         Debug.DrawLine(topleft, topright, color);
@@ -415,12 +383,12 @@ public class ShrineGrid : MonoBehaviour
         else if (element == "earth") WaterFireEarthAirChange = Vector2.down; //(0,-1)
         else WaterFireEarthAirChange = Vector2.up; //(0,1)
 
-        WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin,WaterFireEarthAirChangeMax);
+        WaterFireEarthAirChange *= Random.Range(WaterFireEarthAirChangeMin, WaterFireEarthAirChangeMax);
         // Change the chunk
         // GameObject.Find("WorldGen").GetComponent<GenerationManager>().modifyChunk(transform.position, WaterFireEarthAirChange);
         // Add a star
         GameObject star;
-        Vector3 target = Globals.Player.transform.position  + Vector3.up * 10000;
+        Vector3 target = Globals.Player.transform.position + Vector3.up * 10000;
         if (element.Equals("fire")) star = Instantiate(fireStar, transform.position, Quaternion.identity) as GameObject;
         else if (element.Equals("water")) star = Instantiate(waterStar, transform.position, Quaternion.identity) as GameObject;
         else if (element.Equals("earth")) star = Instantiate(earthStar, transform.position, Quaternion.identity) as GameObject;
@@ -455,8 +423,8 @@ public class ShrineGrid : MonoBehaviour
         if (Physics.Raycast(rayDown, out hit, Mathf.Infinity, terrain))
         {
 
-                ret = new Vector3(pos.x, hit.point.y, pos.z);
-            
+            ret = new Vector3(pos.x, hit.point.y, pos.z);
+
         }
         return ret;
     }
@@ -492,7 +460,7 @@ public class ShrineGrid : MonoBehaviour
         saved_position = shrine.saved_position;
         saved_rotation = shrine.saved_rotation;
         saved_scale = shrine.saved_scale;
-		changeElement (curElement);
+        changeElement(curElement);
         if (isDone)
             loadCompletedShrine(curElement);
         mural.WipeOldMural();
