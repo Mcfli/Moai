@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11455014}
   - 136: {fileID: 13638492}
   - 114: {fileID: 11471434}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: glowingmushroom_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

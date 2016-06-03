@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 473508}
   - 33: {fileID: 3363614}
   - 23: {fileID: 2387854}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: swampGiantLeafB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
