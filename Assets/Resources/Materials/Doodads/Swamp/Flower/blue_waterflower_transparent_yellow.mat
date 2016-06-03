@@ -7,8 +7,8 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: blue_waterflower_transparent_yellow
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
+  m_Shader: {fileID: 4800000, guid: 707a3cb2eff5fb1448d9852350dec5c1, type: 3}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _ANIMATE_ON
   m_LightmapFlags: 5
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -128,6 +128,14 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _Ambient
+        second: 0.75
+      data:
+        first:
+          name: _Animate
+        second: 1
     m_Colors:
       data:
         first:
@@ -137,3 +145,19 @@ Material:
         first:
           name: _Color
         second: {r: 0.9411765, g: 1, b: 0.7647059, a: 0.284}
+      data:
+        first:
+          name: _RandomSeed
+        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 0.043}
+      data:
+        first:
+          name: _XHeightSpeedLengthOffset
+        second: {r: 0.05, g: 1, b: 0.1, a: 0}
+      data:
+        first:
+          name: _YHeightSpeedLengthOffset
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _ZHeightSpeedLengthOffset
+        second: {r: 0, g: 0, b: 0, a: 0}
