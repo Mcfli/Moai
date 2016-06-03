@@ -110,7 +110,7 @@ public class DoodadManager : MonoBehaviour
             {
                 pos.y = hit.point.y;
                 GameObject d = Instantiate(doodad, pos + doodad.transform.position, doodad.transform.rotation) as GameObject;
-                d.transform.Rotate(Vector3.up * Random.Range(0f, 360f));
+                d.transform.Rotate(Vector3.up * Random.Range(0f, 360f), Space.World);
                 InteractableObject o = d.GetComponent<InteractableObject>();
                 if (o) o.plant(d.transform.position);
                 return d;

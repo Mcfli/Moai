@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747175e20a92af74c9ebd6963e464f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: {fileID: 11486514, guid: 6379c2991b9150641bfb90acb09d8eb6, type: 2}
+  biome: {fileID: 11486514, guid: 66ae20b8835e5408f980355360fc83ac, type: 2}
   time: -1
   cameraPosition: {x: 813, y: 631.625, z: 94}
   cameraRotation: {x: 330.9513, y: 204.7634, z: 0}

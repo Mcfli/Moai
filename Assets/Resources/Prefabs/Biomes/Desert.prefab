@@ -198,7 +198,7 @@ MonoBehaviour:
   doodadDensity: 3
   treeDensity: 4
   forestRadius: 15
-  forestMaxTrees: 1
+  forestMaxTrees: 3
   mixedForests: 1
   colors:
   - {r: 0.80748487, g: 0.8161765, b: 0.18604021, a: 0}
