@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: doodad_swampFlowerA_YellowA
+  m_Name: oakLeafAL
   m_Shader: {fileID: 4800000, guid: 1d2d15bc10e64474d875fbb2dfdea4dc, type: 3}
   m_ShaderKeywords: _ANIMATE_ON
   m_LightmapFlags: 5
@@ -135,6 +135,10 @@ Material:
         first:
           name: _Animate
         second: 1
+      data:
+        first:
+          name: _ShadowIntensity
+        second: 0.6
     m_Colors:
       data:
         first:
@@ -143,7 +147,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.9843137, g: 1, b: 0.60784316, a: 1}
+        second: {r: 0.1764706, g: 0.6431373, b: 0.13333334, a: 1}
       data:
         first:
           name: _RandomSeed
@@ -151,11 +155,11 @@ Material:
       data:
         first:
           name: _XHeightSpeedLengthOffset
-        second: {r: 0.05, g: 1, b: 0.1, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _YHeightSpeedLengthOffset
-        second: {r: 0.05, g: 1, b: 0.1, a: 0}
+        second: {r: 0.3, g: 1, b: 0.1, a: 0}
       data:
         first:
           name: _ZHeightSpeedLengthOffset

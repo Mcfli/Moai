@@ -110,6 +110,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   treeTypes:
   - {fileID: 155264, guid: 315a7e48c60329044ab0a87c30150e02, type: 2}
+  - {fileID: 155264, guid: 315a7e48c60329044ab0a87c30150e02, type: 2}
   - {fileID: 154470, guid: 2227ece9f4e54bf48b2902e9f98b0246, type: 2}
   - {fileID: 116806, guid: 714ac2d2857c34cdebcb72a15f749ad1, type: 2}
   bigDoodads:
@@ -198,7 +199,7 @@ MonoBehaviour:
   - 3
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
-  doodadDensity: 6
+  doodadDensity: 4
   treeDensity: 2
   forestRadius: 50
   forestMaxTrees: 8
