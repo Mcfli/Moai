@@ -51,7 +51,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: a2a5ea5e61ee94aea9c802fe2736616c, type: 2}
   - {fileID: 2100000, guid: c3dd4981bdfa94659ae93614d523a277, type: 2}
   - {fileID: 2100000, guid: 6a9c41c2f16a54b10ab281e7cd3aca83, type: 2}
-  - {fileID: 2100000, guid: fd05e06bd8e254068826aa9ddb6d1743, type: 2}
+  - {fileID: 2100000, guid: ff0697104e1de4ab19a6d2f2b05c2f79, type: 2}
   - {fileID: 2100000, guid: 71a6204d590c54ce382a016255374f27, type: 2}
   - {fileID: 2100000, guid: 7ca4cdba8f1114047b1b68ca04fd208e, type: 2}
   - {fileID: 2100000, guid: 85747f1e1c0b5405b9ac7d18b931425c, type: 2}
@@ -61,6 +61,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 0f7e36062540f4965a3b32ddad263196, type: 2}
   - {fileID: 2100000, guid: 9ccab4f75a6e64a7ab272812a179597f, type: 2}
   - {fileID: 2100000, guid: 1308bbfcbb162453ba3a2437b5a2f19a, type: 2}
+  - {fileID: 2100000, guid: fd05e06bd8e254068826aa9ddb6d1743, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -137,9 +138,12 @@ MonoBehaviour:
     m_Bits: 0
   dirtMound: {fileID: 0}
   dirtMoundOffset: {x: 0, y: 0, z: 0}
+  bubble: 0
+  pickupParticle: {fileID: 0}
   playerPlanted: 0
   held: 0
   PickUp: {fileID: 8300000, guid: b4351b34bc7d986498f84fac9d07acbb, type: 3}
+  Popped: {fileID: 0}
   CorrectSpot: {fileID: 8300000, guid: 07a654e44c2e0514bba0bde52b6a0b33, type: 3}
 --- !u!136 &13665036
 CapsuleCollider:

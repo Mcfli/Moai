@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 409912}
   - 33: {fileID: 3355370}
   - 23: {fileID: 2338860}
-  - 95: {fileID: 9534758}
   - 54: {fileID: 5480386}
   - 114: {fileID: 11497976}
   - 136: {fileID: 13646324}
@@ -87,23 +86,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &9534758
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 135446}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e752b94b199b34c8ea1143daa74f04a4, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11417286
 MonoBehaviour:
   m_ObjectHideFlags: 1
