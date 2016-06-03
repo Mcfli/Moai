@@ -232,6 +232,10 @@ public class CheatConsole : MonoBehaviour{
                 Camera.main.GetComponent<MusicManager>().Next();
                 Log("Song changed");
                 break;
+            //case "extract":
+            //  UnityEditor.AssetDatabase.CreateAsset(GameObject.Find(text.Substring(8)).GetComponent<ChunkMeshes>().highMesh, "Assets/" + text.Substring(8) + ".asset");
+            //  Log("Extracting...");
+            //  break;
             default:
                 Log("Unknown Command");
                 break;

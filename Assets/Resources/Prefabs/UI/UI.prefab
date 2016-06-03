@@ -7925,7 +7925,7 @@ MonoBehaviour:
     m_LineSpacing: 1.2
   m_Text: 'Brian Lin - Designer, Developer
 
-    Yunyi Ding - Art Director
+    Yunyi Ding - Art Director, Artist
 
     Ryan Lima - Lead Developer
 
@@ -12812,8 +12812,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleScreens:
-  - {fileID: 11493710, guid: ebf440f1a564f7945bfa37c9d404fbb4, type: 2}
   - {fileID: 11488918, guid: 20b1f4c013c3ccd44a26da20fbdcacff, type: 2}
+  - {fileID: 11493710, guid: ebf440f1a564f7945bfa37c9d404fbb4, type: 2}
+  - {fileID: 11483552, guid: 3cc1342846db4e54c919132bef368bc5, type: 2}
+  - {fileID: 11476056, guid: 0972dad2983c4c8408d6d90255fb3730, type: 2}
   loadingScreen: 4
   loadingBackdrop: {fileID: 11445244}
   loadingIcon: {fileID: 11441604}

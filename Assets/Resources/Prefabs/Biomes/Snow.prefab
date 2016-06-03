@@ -25,7 +25,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -172,8 +171,8 @@ MonoBehaviour:
   forestMaxTrees: 8
   mixedForests: 0
   colors:
-  - {r: 0.83823526, g: 0.83823526, b: 0.83823526, a: 0}
-  - {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0}
+  - {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 0}
+  - {r: 0.7941176, g: 0.7941176, b: 0.7941176, a: 0}
   amplitude: 400
   colorCurve:
     serializedVersion: 2

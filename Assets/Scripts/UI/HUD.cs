@@ -79,15 +79,6 @@ public class HUD : MonoBehaviour {
             pingCrosshair(true);
             pingNext = false;
         }
-
-        /*
-        if(Input.GetKeyDown(KeyCode.P)) {
-            //UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (0,0)").GetComponent<ChunkMeshes>().highMesh, "Assets/00.asset");
-            for(int x = -19; x <= -15; x++)
-                for(int y = -8; y <= -5; y++)
-                    UnityEditor.AssetDatabase.CreateAsset(GameObject.Find("chunk (" + x + "," + y + ")").GetComponent<ChunkMeshes>().lowMesh, "Assets/" + "chunk (" + x + ", " + y + ")" + ".asset");
-        }
-        */
     }
 
     public void ping() {

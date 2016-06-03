@@ -11,9 +11,9 @@ GameObject:
   - 33: {fileID: 3324196}
   - 23: {fileID: 2319586}
   - 54: {fileID: 5429096}
-  - 65: {fileID: 6517570}
   - 114: {fileID: 11408172}
   - 114: {fileID: 11416072}
+  - 136: {fileID: 13620628}
   m_Layer: 14
   m_Name: swampspecialflowerA
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128720}
   m_LocalRotation: {x: -0.000000059604645, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,18 +82,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6517570
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128720}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.8003302, y: 5.145387, z: 1.1376333}
-  m_Center: {x: -0.82736313, y: 2.4296691, z: 0.08002213}
 --- !u!114 &11408172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,6 +128,19 @@ MonoBehaviour:
   ID: pentagon
   image: {fileID: 2100000, guid: 5443d8f1af25f604394f48352a92856b, type: 2}
   imageGlowing: {fileID: 2100000, guid: f3e2a956f50a6384f85104b568ce1972, type: 2}
+--- !u!136 &13620628
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 5.614536
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.692279, z: 0.0819225}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

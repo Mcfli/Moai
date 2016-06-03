@@ -157,7 +157,8 @@ public class MainMenu : MonoBehaviour {
 
         scene = Instantiate(mmback.gameObject);
         Globals.cur_biome = mmback.biome;
-        Globals.time = mmback.time * Globals.time_resolution;
+        if(mmback.time < 0) Globals.time = Random.Range(0, 1800 * Globals.time_resolution);
+        else Globals.time = mmback.time * Globals.time_resolution;
 
         firstPersonCont.enabled = false;
         firstPersonCont.lookLock = true;
