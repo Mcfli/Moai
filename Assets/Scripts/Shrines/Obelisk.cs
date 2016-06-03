@@ -90,7 +90,7 @@ public class Obelisk : MonoBehaviour {
 		{
 			if (!fader.isFading() && fader.targetColor == Color.white)
 			{
-                Globals.Player.transform.position = telePos + new Vector3(-5, 140,-5);
+                Globals.Player.transform.position = telePos + new Vector3(-10, 160,-10) * islandInstance.transform.localScale.x;
 
                 RaycastHit hit;
                 Ray rayDown = new Ray(Globals.Player.transform.position + Vector3.up * 100, Vector3.down);
@@ -157,6 +157,8 @@ public class Obelisk : MonoBehaviour {
         Globals.MenusScript.GetComponent<HUD>().ping();
     }
 
+
+
     public bool usable() {
         return isDone || areReqsMet();
     }
@@ -208,7 +210,7 @@ public class Obelisk : MonoBehaviour {
     private void createIsland()
     {
         GameObject prefab = possibleIslands[Random.Range(0, possibleIslands.Count)];
-        islandInstance = Instantiate(prefab,transform.position + Vector3.up * islandHeight, Quaternion.Euler(-90, Random.Range(0, 360), 0)) as GameObject;
+        islandInstance = Instantiate(prefab,transform.position + Vector3.up * (islandHeight +prefab.transform.position.y), Quaternion.Euler(-90, Random.Range(0, 360), 0)) as GameObject;
         islandInstance.GetComponentInChildren<TeleportStone>().linkedObelisk = gameObject;
         islandInstance.transform.parent = transform;
     }

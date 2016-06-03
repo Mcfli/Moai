@@ -345,7 +345,7 @@ MonoBehaviour:
   shrine_min_dist: 1
   obeliskPlacementSeed: 0
   obelisk_probability: 0.22
-  obelisk_min_dist: 3
+  obelisk_min_dist: 5
 --- !u!114 &188005519
 MonoBehaviour:
   m_ObjectHideFlags: 0
