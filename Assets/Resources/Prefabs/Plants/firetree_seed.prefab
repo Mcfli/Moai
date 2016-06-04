@@ -126,7 +126,7 @@ MonoBehaviour:
   cull_layer:
     serializedVersion: 2
     m_Bits: 256
-  cull_radius: 15
+  cull_radius: 25
   growAttempts: 5
   growTime: 18000
   growTimeVariance: 0.5
