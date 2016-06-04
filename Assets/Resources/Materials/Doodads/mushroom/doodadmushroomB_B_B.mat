@@ -148,16 +148,16 @@ Material:
       data:
         first:
           name: _RandomSeed
-        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 0.043}
+        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 0.005}
       data:
         first:
           name: _XHeightSpeedLengthOffset
-        second: {r: 0.05, g: 1, b: 0, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _YHeightSpeedLengthOffset
-        second: {r: 0.06, g: 1, b: 0, a: 1}
+        second: {r: 0.2, g: 2, b: 2, a: 1}
       data:
         first:
           name: _ZHeightSpeedLengthOffset
-        second: {r: 0.05, g: 1, b: 0, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 0}
