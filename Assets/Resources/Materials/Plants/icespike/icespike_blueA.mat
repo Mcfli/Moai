@@ -144,7 +144,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.7176471, g: 0.90588236, b: 0.89411765, a: 0.753}
+        second: {r: 0.6838235, g: 0.9150957, b: 1, a: 0.753}
       data:
         first:
           name: _RandomSeed

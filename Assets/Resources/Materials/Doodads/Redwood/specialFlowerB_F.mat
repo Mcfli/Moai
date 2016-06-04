@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: specialFlowerB_F
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 1d2d15bc10e64474d875fbb2dfdea4dc, type: 3}
+  m_ShaderKeywords: _ANIMATE_ON
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -127,6 +127,14 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _Ambient
+        second: 0.75
+      data:
+        first:
+          name: _Animate
+        second: 1
     m_Colors:
       data:
         first:
@@ -136,3 +144,19 @@ Material:
         first:
           name: _Color
         second: {r: 0.5882353, g: 0.05490196, b: 0, a: 1}
+      data:
+        first:
+          name: _RandomSeed
+        second: {r: 12.9898, g: 78.233, b: 45.5432, a: 0.043}
+      data:
+        first:
+          name: _XHeightSpeedLengthOffset
+        second: {r: 0.01, g: 1, b: 0, a: 1.5}
+      data:
+        first:
+          name: _YHeightSpeedLengthOffset
+        second: {r: 0.01, g: 1, b: 0, a: 1}
+      data:
+        first:
+          name: _ZHeightSpeedLengthOffset
+        second: {r: 0.01, g: 1, b: 0, a: 1}

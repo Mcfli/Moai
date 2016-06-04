@@ -171,8 +171,8 @@ MonoBehaviour:
   forestMaxTrees: 8
   mixedForests: 0
   colors:
-  - {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 0}
-  - {r: 0.7941176, g: 0.7941176, b: 0.7941176, a: 0}
+  - {r: 0.782, g: 0.83823526, b: 0.83823526, a: 0}
+  - {r: 0.887, g: 0.9558824, b: 0.9558824, a: 0}
   amplitude: 400
   colorCurve:
     serializedVersion: 2
