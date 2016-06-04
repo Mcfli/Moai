@@ -17,6 +17,7 @@ public class TimeScript : MonoBehaviour {
         //update time
         Globals.deltaTime = Globals.time_resolution * Globals.time_scale * Time.deltaTime;
         Globals.time += Globals.deltaTime;
+        Globals.time = Mathf.Repeat(Globals.time,Globals.maxTime);
         currentTimeReadOnly = Globals.time / Globals.time_resolution;
         currentTimeScaleReadOnly = Globals.time_scale;
         Shader.SetGlobalFloat("_TimeVar", Globals.time / Globals.time_resolution);

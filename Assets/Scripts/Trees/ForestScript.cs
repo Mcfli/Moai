@@ -74,6 +74,7 @@ public class ForestScript : MonoBehaviour {
         createSphereCollider(radius);
         nextPropogationTime = forest.nextPropogationTime;
         foreach(TreeScript.treeStruct t in forest.trees) {
+            //float timePassed
             TreeScript newTree = loadTree(t, (Globals.time - forest.timeUnloaded) / Globals.time_resolution);
             if(!newTree) newTree = createTree(t.prefab, new Vector2(transform.position.x, transform.position.z) + Random.insideUnitCircle * radius); // if too old, replace with new tree
         }
@@ -159,6 +160,7 @@ public class ForestScript : MonoBehaviour {
             
         }
         nextPropogationTime = Globals.time + (Globals.TreeManagerScript.secondsToPropogate + Globals.TreeManagerScript.secondsToPropogate * Random.Range(-Globals.TreeManagerScript.propogationTimeVariance, Globals.TreeManagerScript.propogationTimeVariance)) * Globals.time_resolution;
+        nextPropogationTime = Mathf.Repeat(nextPropogationTime, Globals.maxTime);
         //return numSeeds;
     }
 

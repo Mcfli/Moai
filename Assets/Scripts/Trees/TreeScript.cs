@@ -106,7 +106,7 @@ public class TreeScript : MonoBehaviour {
             return;
         }
 
-        if (Globals.time > lastGrowUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) grow();
+        if (age > lastGrowUpdate + (lifeSpan * ratioAnimUpdates * Globals.time_resolution)) grow();
 
         if(updateBoxes) {
             updateCollision();
@@ -125,7 +125,7 @@ public class TreeScript : MonoBehaviour {
         if(sapling) sapling.SetActive(age/lifeSpan < saplingLifeRatio);
         updateState();
         updateAnimation();
-        lastGrowUpdate = Globals.time;
+        lastGrowUpdate = age;
         animateNext = true;
     }
 

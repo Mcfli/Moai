@@ -6,6 +6,7 @@ public class Globals : MonoBehaviour {
     public static float time = 0.0f; //incremented by TimeScript
     public static float time_scale = 1.0f;
     public static float time_resolution = Mathf.Pow(10, -20.0f);
+    
     public static float deltaTime;
     public static int mode = -1; // -1 main menu, 0 playing, 1 paused
     public static bool loading = false;
@@ -43,6 +44,9 @@ public class Globals : MonoBehaviour {
     public static float WaterFireEarthAirMin = 0.5f;
     public static float WaterFireEarthAirDistGuaranteed = 10f;  // The distance from the center point a biome is guaranteed to have puzzle
                                                                 // FindObjectsOfType added to a shrine
+
+
+    public static float maxTime = SkyScript.timePerDegree * 360 * SkyScript.daysPerYear * time_resolution;
 
     public static Dictionary<string, List<GameObject>> Stars = new Dictionary<string, List<GameObject>>() {
         { "fire",  new List<GameObject>() },
