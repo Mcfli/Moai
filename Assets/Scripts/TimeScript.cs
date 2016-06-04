@@ -9,6 +9,8 @@ public class TimeScript : MonoBehaviour {
     public float sprintWaitMultiplier = 5;
     public float currentTimeReadOnly = 0;
     public float currentTimeScaleReadOnly = 1;
+    public float ShaderTimeVar = 0;
+    public float ShaderTimeVarMaxValue;
 
     private float waitingFor;
 	
@@ -17,9 +19,11 @@ public class TimeScript : MonoBehaviour {
         //update time
         Globals.deltaTime = Globals.time_resolution * Globals.time_scale * Time.deltaTime;
         Globals.time += Globals.deltaTime;
+        ShaderTimeVar += Globals.time_scale * Time.deltaTime;
+        if(ShaderTimeVar > ShaderTimeVarMaxValue) ShaderTimeVar -= ShaderTimeVarMaxValue;
         currentTimeReadOnly = Globals.time / Globals.time_resolution;
         currentTimeScaleReadOnly = Globals.time_scale;
-        Shader.SetGlobalFloat("_TimeVar", Globals.time / Globals.time_resolution);
+        Shader.SetGlobalFloat("_TimeVar", ShaderTimeVar);
 
         if(!StarEffect.isEffectPlaying && Input.GetButton("Patience") && Globals.mode == 0 && !Globals.MenusScript.GetComponent<CheatConsole>().isActive()) { //PATIENCE IS POWER
             if(waitingFor < timeToGetToMaxWait) Globals.time_scale = initialWaitSpeed + waitSpeedGrowth.Evaluate(waitingFor / timeToGetToMaxWait) * (maxWaitSpeed - initialWaitSpeed);

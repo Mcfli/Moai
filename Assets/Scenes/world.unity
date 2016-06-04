@@ -379,6 +379,8 @@ MonoBehaviour:
   sprintWaitMultiplier: 5
   currentTimeReadOnly: 0
   currentTimeScaleReadOnly: 1
+  ShaderTimeVar: 0
+  ShaderTimeVarMaxValue: 657000
 --- !u!114 &188005520
 MonoBehaviour:
   m_ObjectHideFlags: 0
