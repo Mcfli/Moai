@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   dirtMound: {fileID: 166156, guid: 57d05b93d2c35b74a823e04724dd7519, type: 2}
-  dirtMoundOffset: {x: 0, y: 0, z: 0}
+  dirtMoundOffset: {x: 0, y: 0.8, z: 0}
   bubble: 1
   pickupParticle: {fileID: 101708, guid: 8249bb41b56ef814fb5819a647e75c97, type: 2}
   playerPlanted: 0
@@ -140,7 +140,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.9
-  m_Center: {x: 0, y: 0.024363905, z: -0.046622694}
+  m_Center: {x: 0, y: 0.73367524, z: -0.046622694}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -19,5 +19,6 @@ public class TooltipSystem : MonoBehaviour {
     public void reset() {
         foreach(TooltipDisplay t in tooltips) t.reset();
         activeTooltip = null;
+        ShrineActivator.firstActivate = false;
     }
 }
