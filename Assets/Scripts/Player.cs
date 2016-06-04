@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public float grabSphereRadius = 0;
     public float minWarpOnWaitDist = 0.5f; // distance from ground you have to be to warp there
     public LayerMask collisionLayers;
+    public float teleportBackUpLevel = -10000;
 
     private Collider thisCollider;
     private float cameraHeight;
@@ -128,6 +129,9 @@ public class Player : MonoBehaviour {
             else DropObject();
         }
         if(heldObj != null && !inCinematic) followHand(heldObj, heldObjSize);
+
+        //falling through world
+        if(transform.position.y < teleportBackUpLevel) warpToGround(3000, true);
 
         // Waypoints
         if (Input.GetButtonDown("Waypoint") && Globals.mode == 0 && Globals.time_scale == 1)
@@ -309,6 +313,7 @@ public class Player : MonoBehaviour {
         heldObjSize = obj.GetComponent<Renderer>().bounds.size.magnitude;
 		obj.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         heldObjOrigScale = obj.transform.localScale;
+        heldObj.GetComponent<Rigidbody>().isKinematic = true;
         return true;
     }
 
@@ -321,7 +326,8 @@ public class Player : MonoBehaviour {
             Physics.IgnoreCollision(objCollider, thisCollider, false);
         }
         heldObj.transform.localScale = heldObjOrigScale;
-		heldObj.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        heldObj.GetComponent<Rigidbody>().isKinematic = false;
+        heldObj.GetComponent<Renderer> ().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         heldObj.dropped();
         if(!objRigidbody) {
             heldObj.transform.position = mainCamera.transform.position + mainCamera.transform.forward * 1;
