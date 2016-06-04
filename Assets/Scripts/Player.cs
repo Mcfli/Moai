@@ -186,9 +186,10 @@ public class Player : MonoBehaviour {
         float ypos = mainCamera.transform.position.y + 10;
         float zpos = mainCamera.transform.position.z;
         // Check if player is in each lake in current chunk
-        if (Globals.WaterManagerScript == null ||
-            Globals.WaterManagerScript.lakesInChunk(GenerationManager.worldToChunk(transform.position)) == null)
-                return;
+		if (Globals.WaterManagerScript == null || Globals.WaterManagerScript.lakesInChunk (GenerationManager.worldToChunk (transform.position)) == null) {
+			underwater = false;
+			return;
+		}
         foreach(GameObject go in Globals.WaterManagerScript.lakesInChunk(GenerationManager.worldToChunk(transform.position)))
         {
             
