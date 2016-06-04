@@ -52,11 +52,11 @@ public class Sky : MonoBehaviour {
         mixedSkyGradients = new List<SkyGradient>();
         biomeSet = new List<Biome>();
         biomeSkyRatios = new List<float>();
+        listOfStars = new List<GameObject>();
     }
 
     void Start() {
         Halo.SetActive(false);
-        listOfStars = new List<GameObject>();
     }
 
     void Update() {

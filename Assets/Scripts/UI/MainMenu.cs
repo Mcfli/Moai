@@ -117,6 +117,7 @@ public class MainMenu : MonoBehaviour {
         Random.seed = (int)System.DateTime.Now.Ticks;
         loadingBackdrop.sprite = loadingWallpapers[Random.Range(0, loadingWallpapers.Count)];
         Random.seed = Globals.SeedScript.randomizeSeed();
+        Globals.SkyScript.clearStars();
         Globals.GenerationManagerScript.initiateWorld();
         Globals.WeatherManagerScript.initializeWeather();
         //Camera.main.GetComponent<MusicManager>().Stop(false);
@@ -159,6 +160,7 @@ public class MainMenu : MonoBehaviour {
         Globals.cur_biome = mmback.biome;
         if(mmback.time < 0) Globals.time = Random.Range(0, 1800 * Globals.time_resolution);
         else Globals.time = mmback.time * Globals.time_resolution;
+        Globals.SkyScript.populateSky(100);
 
         firstPersonCont.enabled = false;
         firstPersonCont.lookLock = true;
