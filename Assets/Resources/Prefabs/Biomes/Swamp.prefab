@@ -197,6 +197,10 @@ MonoBehaviour:
   - 1
   - 1
   - 3
+  - 3
+  - 3
+  - 3
+  - 3
   numOfSmallDoodads: {x: 10, y: 20}
   doodadClusterRadius: {x: 10, y: 20}
   doodadDensity: 4
